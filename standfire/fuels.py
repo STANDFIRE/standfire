@@ -213,7 +213,10 @@ class Fvsfuels(object):
             
     def set_num_cycles(self, num_cyc):
         """
-        Sets number of cycles for FVs simulation
+        Sets number of cycles for FVS simulation
+        
+        :param num_cyc: number of simulation cycles
+        :type num_cyc: int
         """
         
         self.num_cyc = num_cyc
@@ -221,7 +224,10 @@ class Fvsfuels(object):
         
     def set_time_int(self, time_int):
         """
-        Sets time interval for FVs simulation
+        Sets time interval for FVS simulation
+        
+        :param time_int: length of simulation time step
+        :type time_int: int
         """
         
         self.time_int = time_int
@@ -229,29 +235,60 @@ class Fvsfuels(object):
         
     def set_inv_year(self, inv_year):
         """
-        Sets inventory year for FVs simulation
+        Sets inventory year for FVS simulation
+        
+        :param inv_year: year of the inventory
+        :type inv_year: int
         """
         
         self.inv_year = inv_year
         self.keywords["INVYEAR"] = inv_year
         
     def run_fvs(self):
+        """
+        Runs the FVS simulation
         
+        This method run a FVS simulation using the previously specified keyword
+        file. The simulation will be paused at each time interval and the trees
+        and snag data collected and appended to the fuels attribute of the 
+        Fvsfuels object.
+        
+        **Example:**
+        
+        >>> from standfire.fuels import Fvsfuels
+        >>> stand010 = Fvsfuels("iec")
+        >>> stand010.set_keyword("/Users/standfire/example/test.key")
+        >>> stand010.run_fvs()
+        >>> stand010.fuels["trees"][2010]
+        xloc    yloc    species   dbh     ht    crd    cratio  crownwt0  crownwt1 ...
+        33.49  108.58   PIPO     19.43   68.31  8.77     25    33.46      4.7   
+        24.3    90.4    PIPO     11.46   56.6   5.63     15     6.55     2.33  
+        88.84  162.98   PIPO     18.63   67.76  9.48     45    75.88     6.89
+        ...
+        
+        """
+        cnt = 0
+        print "Simulating..."
         for i in range(self.inv_year, self.inv_year + 
                       (self.num_cyc * self.time_int) + 
                        self.time_int, self.time_int):
+            print "{0}   {1}".format(cnt, i)  
             fvs.fvssetstoppointcodes(6,i)
             fvs.fvs()
-            svs_attr = self.get_obj_data()
-            spcodes = self.get_spcodes()
+            svs_attr = self._get_obj_data()
+            spcodes = self._get_spcodes()
             self.fuels["trees"][i] = self._get_trees(svs_attr, spcodes)
             self.fuels["snags"][i] = self._get_snags(svs_attr, spcodes)
+            cnt += 1
         
         # close fvs simulation (call twice)
         fvs.fvs()
         fvs.fvs()
     
-    def get_obj_data(self):
+    def _get_obj_data(self):
+        """
+        Private method
+        """
         
         # fields to query
         svs_names = ['objindex', 'objtype', 'xloc', 'yloc']
@@ -269,7 +306,10 @@ class Fvsfuels(object):
         
         return svs_attrs
         
-    def get_spcodes(self):
+    def _get_spcodes(self):
+        """
+        Private method
+        """
         
         # get four letter plant codes
         spcd = []
@@ -279,6 +319,9 @@ class Fvsfuels(object):
         return spcd
 
     def _get_trees(self, svsobjdata, spcodes):
+        """
+        Private method
+        """
                 
         # headers
         header = ['xloc', 'yloc', 'species', 'dbh', 'ht', 'crd',\
@@ -345,7 +388,10 @@ class Fvsfuels(object):
         
         return df
         
-    def _get_snags(self, svsobjdata, spcodes):   
+    def _get_snags(self, svsobjdata, spcodes):
+        """
+        Private method
+        """
                 
         # headers
         header = ['xloc', 'yloc', 'snagspp', 'snagdbh', 'snaglen', 'snagfdir',\
@@ -396,10 +442,27 @@ class Fvsfuels(object):
         return df
         
     def get_simulation_years(self):
+        """
+        Returns a list of the simulated years
+        
+        :return: simulated year
+        :rtype: list of integers
+        """
         
         return self.fuels['trees'].keys()
         
     def get_trees(self, year):
+        """
+        Returns pandas data fram of the trees by indexed year
+        
+        :param year: simulation year of the data frame to return
+        :type year: int
+        :return: data frame of trees at indexed year
+        :rtype: pandas dataframe
+        
+        .. note:: If a data frame for the specified year does not exist then
+                  a message will be printed to the console.
+        """
         
         if year in self.fuels["trees"].keys():
             return self.fuels["trees"][year]
@@ -407,16 +470,38 @@ class Fvsfuels(object):
             print "ERROR: the specified year does not exist"
     
     def get_snags(self, year):
+        """
+        Returns pandas data fram of the snags by indexed year
+        
+        :param year: simulation year of the data frame to return
+        :type year: int
+        :return: data frame of snags at indexed year
+        :rtype: pandas dataframe
+        
+        .. note:: If a data frame for the specified year does not exist then
+                  a message will be printed to the console.
+        """
+        
         if year in self.fuels["snags"].keys():
             return self.fuels["snags"][year]
         else:
             print "ERROR: the specified year does not exist"
             
     def get_standid(self):
+        """
+        Returns stand ID as defined in the keyword file of the class instance
+        
+        :return: stand ID value
+        :rtype: string
+        """
         
         return fvs.fvsstandid()[0].split(' ')[0]
         
     def save_all(self):
+        """
+        Writes all data frame in the ``fuels`` attribute of the class to the
+        specified working directory. Output file are .csv.
+        """
         
         standid = self.get_standid()
         
@@ -426,6 +511,9 @@ class Fvsfuels(object):
                           "{0}_{1}_{2}.csv".format(standid, i, e), index=False)
     
     def save_trees_by_year(self, year):
+        """
+        Writes tree data frame at indexed year to .csv in working directory
+        """
         
         standid = self.get_standid()
         
@@ -433,6 +521,9 @@ class Fvsfuels(object):
                  "{0}_{1}_{2}.csv".format(standid, "trees", year), index=False)
     
     def save_snags_by_year(self, year):
+        """
+        Writes snag data frame at indexed year to .csv in working directory
+        """
         
         standid = self.get_standid()
         
