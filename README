@@ -1,39 +1,4 @@
                                                         Welcome to STANDFIRE
 
-What is is?
-===========
 STANDFIRE - yes, all upper case - is a open source platform to facilitate collaborative development of wildland fire modeling tools for scientist and practitioners.
 
-How do I use it?
-================
-
-Tips to keeping everyone happy
-==============================
-
-  Coding conventions
-  ------------------
-
-    Naming
-    
-      Camle case is ugly!!!
-      
-      *variables* - all lower case, separate distinct pieces of the variable name with an underscore if it improves readibility.
-      
-      ```
-      >>> canopy_base_ht = 14.5
-      >>> crwdth = 3.42
-      ```
-      
-      *functions and methods* - 
-      
-      *classes* - the exception to the **camle case is ugly rule**.
-      
-      ```
-      >>> class FvsFuels(object):
-      ```
-      
-      *constants* - all upper case with words separated by an underscore.
-      
-      ```
-      >>> MAX_WIND_SPEED = 20
-      ```
