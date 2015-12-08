@@ -15,7 +15,7 @@ import pandas as pd
 import os
 import pprint
 
-__author__ = "Lucas Wells"
+__authors__ = "Lucas Wells, Greg Cohn, Russell Parsons"
 __copyright__ = "Copyright 2015, STANDFIRE"
 
 
@@ -432,11 +432,11 @@ class Inventory(object):
     
     **Example:**
 
-    >>> from standfire import inventory
-    >>> toDotTree = inventory.Inventory()
-    >>> toDotTree.readInventory("path/to/FVS_TreeInit.csv")
-    >>> toDotTree.formatFvsTreeFile()
-    >>> toDotTree.writeFvsTreeFile()
+    >>> from standfire import fuels
+    >>> toDotTree = fuels.Inventory()
+    >>> toDotTree.read_inventory("path/to/FVS_TreeInit.csv")
+    >>> toDotTree.format_fvs_tree_file()
+    >>> toDotTree.save()
 
     :References:
 
@@ -475,27 +475,27 @@ class Inventory(object):
                     'SitePrep'      : ['IPVARS(5)', 'integer',  [58,58], 'code',    None],
                     'Age'           : ['ABIRTH',    'real',     [59,61], 'years',   0   ]}
 
-    def readInventoryCSV(self, fname):
+    def read_inventory(self, fname):
 
         """
         Reads a .csv file containing tree records.
 
         The csv must be in the correct format as described in ``FMT``.  This
         method check the format of the file by calling a private method
-        ``_isCorrectFormat()`` that raises a value error.
+        ``_is_correct_format()`` that raises a value error.
 
         :param fname: path to and file name of the Fvs_TreeInit.csv file
         :type fname: string
 
         **Example:**
         
-        >>> from standfire import inventory
-        >>> toDotTree = inventory.Inventory()
+        >>> from standfire import fuels
+        >>> toDotTree = fuels.Inventory()
         >>> toDotTree.readInventory("path/to/FVS_TreeInit.csv")
         >>> np.mean(toDotTree.data['DBH'])
         9.0028318584070828
 
-        The ``readInventory()`` method stores the data in a pandas data frame.
+        The ``read_inventory()`` method stores the data in a pandas data frame.
         There are countless operations that can be performed on these objects.
         For example, we can explore the relationship between diameter and
         height by fitting a linear model
@@ -535,9 +535,9 @@ class Inventory(object):
         self.data = pd.read_csv(fname)
 
         # check for correct formating
-        self._isCorrectFormat(self.data)
+        self._is_correct_format(self.data)
 
-    def printFormatStandards(self):
+    def print_format_standards(self):
         """
         Print FVS formating standards
 
@@ -549,7 +549,7 @@ class Inventory(object):
 
         **Example:**
         
-        >>> toDotTree.printFormatStandards()
+        >>> toDotTree.print_format_standards()
         {'Plot_ID'       : ['ITRE',      'integer',  [0,3],   None,      None],
          'Tree_ID'       : ['IDTREE2',   'integer',  [4,6],   None,      None],
          'Tree_Count'    : ['PROB',      'integer',  [7,12],  None,      None],
@@ -582,7 +582,7 @@ class Inventory(object):
                 , unit, decimal places\n"
         pprint.pprint(self.FMT)
 
-    def getFvsColumns(self):
+    def get_fvs_cols(self):
         """
         Get list of FVS standard columns
         """
@@ -591,17 +591,17 @@ class Inventory(object):
             cols.append(i)
         return cols
 
-    def _isCorrectFormat(self, data):
+    def _is_correct_format(self, data):
         """
         Private methods to check for correct inventory file formating
         """
         for i in data.columns:
-            if i not in self.getFvsColumns() and i not in ['Stand_ID'
+            if i not in self.get_fvs_cols() and i not in ['Stand_ID'
                     , 'StandPlot_ID']:
                 raise ValueError("Column heading {0} does not match FVS \
                     standard".format(i))
 
-    def getStands(self):
+    def get_stands(self):
         """
         Returns unique stand IDs
 
@@ -609,12 +609,12 @@ class Inventory(object):
 
         **Example:**
         
-        >>> toDotTree.getStands()
+        >>> toDotTree.get_stands()
         ['BR', 'TM', 'SW', HB']
         """
         return self.data["Stand_ID"].unique()
 
-    def crwratioPercentToCode(self):
+    def crwratio_percent_to_code(self):
         """
         Converts crown ratio from percent to ICR code
 
@@ -643,7 +643,7 @@ class Inventory(object):
         self.data.loc[(self.data["CrRatio"] > 80) & (self.data["CrRatio"] 
             <= 100), "CrRatio"] = 9
 
-    def formatFvsTreeFile(self, cratioToCode = True):
+    def format_fvs_tree_file(self, cratioToCode = True):
         """
         Converts data in FVS_TreeInit.csv to FVS .tre format
 
@@ -657,14 +657,14 @@ class Inventory(object):
         :param cratioToCode: default = True
         :type cratioToCode: boolean
 
-        .. note:: If the ``crwratioPercentToCode()`` methods has
+        .. note:: If the ``crwratio_percent_to_code()`` methods has
                   been called prior to call this methods, then the ``cratioToCode``
                   optional argument must be set to ``False`` to prevent errors in crown
                   ratio values.
 
         **Example:**
         
-        >>> toDotTree.formatFvsTreeFile()
+        >>> toDotTree.format_fvs_tree_file()
         >>> toDotTree.fvsTreeFile['Stand_ID_1']
         5   1  5     0PP 189    65        3                 0 0
         5   2  15    0PP 110    52        2                 0 0
@@ -686,12 +686,12 @@ class Inventory(object):
 
         # convert crown ratios from percent to int values from 0-9
         if cratioToCode:
-            self.crwratioPercentToCode()
+            self.crwratio_percent_to_code()
 
         # replace nan with empty string
         self.data = self.data.fillna(' ')
 
-        for i in self.getStands():
+        for i in self.get_stands():
             df = self.data.set_index(['Stand_ID']).loc[i]
             # TODO: make this a method
             df["Tree_ID"] = range(1, len(df["Tree_ID"]) + 1)
@@ -707,7 +707,7 @@ class Inventory(object):
             self.fvsTreeFile[i] = tmp
 
 
-    def writeFvsTreeFile(self, outputPath):
+    def save(self, outputPath):
         """
         Writes formated fvs tree files to specified location
 
@@ -719,7 +719,7 @@ class Inventory(object):
         :type outputPath: string
 
         .. note:: This method will throw an error if it is called prior to the
-                  ``formatFvsTreeFile()`` method.
+                  ``format_fvs_tree_file()`` method.
         """
         for i in self.fvsTreeFile.keys():
             with open(outputPath + i + '.tre', 'w') as f:
