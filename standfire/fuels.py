@@ -184,6 +184,11 @@ class Fvsfuels(object):
             print "NUMCYCLE not found in keyword file, default is 10 cycles"
         
     def _set_time_int(self):
+        """
+        Private method
+        
+        Sets time interval in years for FVS simulation
+        """
         
         if "TIMEINT" in self.keywords.keys():
             self.time_int = self.keywords["TIMEINT"]
@@ -193,6 +198,11 @@ class Fvsfuels(object):
             print "TIMEINT not found in keyword file, default is 10 years"
         
     def _set_inv_year(self):
+        """
+        Private method
+        
+        Sets inventory year for FVS simulation
+        """
         
         if "INVYEAR" in self.keywords.keys():
             self.inv_year = self.keywords["INVYEAR"]
@@ -202,16 +212,25 @@ class Fvsfuels(object):
             print "INVYEAR not found in keyword file, default is 2015"
             
     def set_num_cycles(self, num_cyc):
+        """
+        Sets number of cycles for FVs simulation
+        """
         
         self.num_cyc = num_cyc
         self.keywords["NUMCYCLE"] = num_cyc
         
     def set_time_int(self, time_int):
+        """
+        Sets time interval for FVs simulation
+        """
         
         self.time_int = time_int
         self.keywords["TIMEINT"] = time_int
         
     def set_inv_year(self, inv_year):
+        """
+        Sets inventory year for FVs simulation
+        """
         
         self.inv_year = inv_year
         self.keywords["INVYEAR"] = inv_year
