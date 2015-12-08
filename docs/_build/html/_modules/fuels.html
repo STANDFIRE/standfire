@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fuels &mdash; standfire  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="standfire  documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">standfire  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for fuels</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Mon Dec  7 17:49:52 2015</span>
+
+<span class="sd">@author: lucas wells</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<div class="viewcode-block" id="Fvsfuels"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels">[docs]</a><span class="k">class</span> <span class="nc">Fvsfuels</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variant</span><span class="p">):</span>
+        
+        <span class="c"># class fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wdir</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_cyc</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;trees&quot;</span> <span class="p">:</span> <span class="p">{},</span> <span class="s">&quot;snags&quot;</span> <span class="p">:</span> <span class="p">{}}</span>
+        
+        <span class="c"># import fvs variant specified by constructor argument</span>
+        <span class="k">global</span> <span class="n">fvs</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">exec</span><span class="p">(</span><span class="s">&quot;from pyfvs import pyfvs</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">variant</span> <span class="o">+</span> <span class="s">&quot; as temp&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;The PyFVS python module or the specified variant does not exist&quot;</span>
+        <span class="n">fvs</span> <span class="o">=</span> <span class="n">temp</span>
+        
+    <span class="k">def</span> <span class="nf">set_keyword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the keyword file to be used in the FVS simulation</span>
+<span class="sd">        </span>
+<span class="sd">        This method will initalize a FVS simulation by registering the</span>
+<span class="sd">        specified keyword file (.key) with FVS. The working directory of a</span>
+<span class="sd">        Fvsfuels object will be set to the folder containing the keyword file. </span>
+<span class="sd">        You can manually change the working directory with Fvsfuels.set_dir(). </span>
+<span class="sd">        This function will also call private methods in this class to extract</span>
+<span class="sd">        information from the keyword file and set class fields accordingly for</span>
+<span class="sd">        use in other methods.</span>
+<span class="sd">        </span>
+<span class="sd">        :param keyfile: path/to/keyword_file. This must have a .key extension</span>
+<span class="sd">        :type keyfile: string</span>
+<span class="sd">        </span>
+<span class="sd">        :Example:</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; from standfire.fuels import Fvsfuels</span>
+<span class="sd">        &gt;&gt;&gt; test = Fvsfuels(&quot;iec&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; test.set_keyword(&quot;/Users/standfire/test/example.key&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s">&quot;--keywordfile=</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">keyfile</span><span class="p">,)</span>
+        
+        <span class="n">fvs</span><span class="o">.</span><span class="n">fvssetcmdline</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        
+        <span class="c"># make this folder default output directory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">keyfile</span><span class="p">))</span>
+        
+        <span class="c"># read keywords</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_read_key</span><span class="p">(</span><span class="n">keyfile</span><span class="p">)</span>
+        
+        <span class="c"># set class fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_num_cycles</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_time_int</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_inv_year</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">set_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wdir</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the working directory of a Fvsfuels object</span>
+<span class="sd">        </span>
+<span class="sd">        This methods is called by Fvsfuels.set_keyword(). Thus, the default</span>
+<span class="sd">        working directory is the folder containing the specified keyword file. </span>
+<span class="sd">        If you wish to store simulation outputs in a different directory then</span>
+<span class="sd">        use this methods to do so.</span>
+<span class="sd">        </span>
+<span class="sd">        :param wdir: path/to/desired_directory</span>
+<span class="sd">        :type wdir: string</span>
+<span class="sd">        </span>
+<span class="sd">        :Example:</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; from standfire.fuel import Fvsfuels</span>
+<span class="sd">        &gt;&gt;&gt; test = Fvsfuels(&quot;emc&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; test.set_keyword(&quot;/Users/standfire/test/example.key&quot;)</span>
+<span class="sd">        </span>
+<span class="sd">        Whoops, I would like to store simulation outputs elsewhere...</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; test.set_dir(&quot;/Users/standfire/outputs/&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">wdir</span> <span class="o">=</span> <span class="n">wdir</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">wdir</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">_read_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyfile</span><span class="p">):</span>
+        
+        <span class="n">keys</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">keyfile</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()]</span>
+        <span class="k">while</span> <span class="n">lines</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        
+        <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;INVYEAR&#39;</span><span class="p">,</span> <span class="s">&#39;NUMCYCLE&#39;</span><span class="p">,</span><span class="s">&#39;TIMEINT&#39;</span><span class="p">,</span><span class="s">&#39;FUELOUT&#39;</span><span class="p">,</span><span class="s">&#39;SVS&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="n">i</span><span class="o">.</span><span class="n">upper</span><span class="p">():</span>                         
+                        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">e</span><span class="o">.</span><span class="n">split</span><span class="p">():</span> 
+                            <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                                <span class="n">keys</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span> <span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                            <span class="k">elif</span> <span class="n">i</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">==</span><span class="s">&#39;FUELOUT&#39;</span><span class="p">:</span> 
+                                <span class="n">keys</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span><span class="o">=</span><span class="mi">1</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">pass</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="o">=</span> <span class="n">keys</span>
+    
+    <span class="k">def</span> <span class="nf">_set_num_cycles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="k">if</span> <span class="s">&quot;NUMCYCLE&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_cyc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="s">&quot;NUMCYCLE&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_cyc</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="k">print</span> <span class="s">&quot;NUMCYCLE not found in keyword file, default is 10 cycles&quot;</span>
+        
+    <span class="k">def</span> <span class="nf">_set_time_int</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="k">if</span> <span class="s">&quot;TIMEINT&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="s">&quot;TIMEINT&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="k">print</span> <span class="s">&quot;TIMEINT not found in keyword file, default is 10 years&quot;</span>
+        
+    <span class="k">def</span> <span class="nf">_set_inv_year</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="k">if</span> <span class="s">&quot;INVYEAR&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="s">&quot;INVYEAR&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span> <span class="o">=</span> <span class="mi">2015</span>
+            <span class="k">print</span> <span class="s">&quot;INVYEAR not found in keyword file, default is 2015&quot;</span>
+            
+    <span class="k">def</span> <span class="nf">set_num_cycles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_cyc</span><span class="p">):</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_cyc</span> <span class="o">=</span> <span class="n">num_cyc</span>
+        
+    <span class="k">def</span> <span class="nf">set_time_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_int</span><span class="p">):</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span> <span class="o">=</span> <span class="n">time_int</span>
+        
+    <span class="k">def</span> <span class="nf">set_inv_year</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inv_year</span><span class="p">):</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span> <span class="o">=</span> <span class="n">inv_year</span>
+        
+    <span class="k">def</span> <span class="nf">run_fvs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span> <span class="o">+</span> 
+                      <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_cyc</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span><span class="p">)</span> <span class="o">+</span> 
+                       <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span><span class="p">):</span>
+            <span class="n">fvs</span><span class="o">.</span><span class="n">fvssetstoppointcodes</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">fvs</span><span class="o">.</span><span class="n">fvs</span><span class="p">()</span>
+            <span class="n">svs_attr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_obj_data</span><span class="p">()</span>
+            <span class="n">spcodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_spcodes</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;trees&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_trees</span><span class="p">(</span><span class="n">svs_attr</span><span class="p">,</span> <span class="n">spcodes</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;snags&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_snags</span><span class="p">(</span><span class="n">svs_attr</span><span class="p">,</span> <span class="n">spcodes</span><span class="p">)</span>
+        
+        <span class="c"># close fvs simulation (call twice)</span>
+        <span class="n">fvs</span><span class="o">.</span><span class="n">fvs</span><span class="p">()</span>
+        <span class="n">fvs</span><span class="o">.</span><span class="n">fvs</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">get_obj_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="c"># fields to query</span>
+        <span class="n">svs_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;objindex&#39;</span><span class="p">,</span> <span class="s">&#39;objtype&#39;</span><span class="p">,</span> <span class="s">&#39;xloc&#39;</span><span class="p">,</span> <span class="s">&#39;yloc&#39;</span><span class="p">]</span>
+        
+        <span class="c"># get dimsize to construct np array to hold values</span>
+        <span class="n">nsvsobjs</span><span class="p">,</span><span class="n">ndeadobjs</span><span class="p">,</span><span class="n">ncwdobjs</span><span class="p">,</span><span class="n">mxsvsobjs</span><span class="p">,</span><span class="n">mxdeadobjs</span><span class="p">,</span><span class="n">mxcwdobjs</span> \
+                <span class="o">=</span> <span class="n">fvs</span><span class="o">.</span><span class="n">fvssvsdimsizes</span><span class="p">()</span>
+        <span class="c"># size the np array</span>
+        <span class="n">svs_attrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">svs_names</span><span class="p">),</span> <span class="n">nsvsobjs</span><span class="p">))</span>
+        
+        <span class="c"># populate array with fields in svs_names</span>
+        <span class="k">for</span> <span class="n">par</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">svs_names</span><span class="p">)):</span>
+            <span class="n">fvs</span><span class="o">.</span><span class="n">fvssvsobjdata</span><span class="p">(</span><span class="n">svs_names</span><span class="p">[</span><span class="n">par</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">svs_names</span><span class="p">[</span><span class="n">par</span><span class="p">]),</span> \
+                <span class="s">&#39;get&#39;</span><span class="p">,</span> <span class="n">svs_attrs</span><span class="p">[</span><span class="n">par</span><span class="p">])</span>
+        
+        <span class="k">return</span> <span class="n">svs_attrs</span>
+        
+    <span class="k">def</span> <span class="nf">get_spcodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="c"># get four letter plant codes</span>
+        <span class="n">spcd</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">fvs</span><span class="o">.</span><span class="n">fvsdimsizes</span><span class="p">()[</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">spcd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fvs</span><span class="o">.</span><span class="n">fvsspeciescode</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        
+        <span class="k">return</span> <span class="n">spcd</span>
+
+    <span class="k">def</span> <span class="nf">_get_trees</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">svsobjdata</span><span class="p">,</span> <span class="n">spcodes</span><span class="p">):</span>
+                
+        <span class="c"># headers</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;xloc&#39;</span><span class="p">,</span> <span class="s">&#39;yloc&#39;</span><span class="p">,</span> <span class="s">&#39;species&#39;</span><span class="p">,</span> <span class="s">&#39;dbh&#39;</span><span class="p">,</span> <span class="s">&#39;ht&#39;</span><span class="p">,</span> <span class="s">&#39;crd&#39;</span><span class="p">,</span>\
+        <span class="s">&#39;cratio&#39;</span><span class="p">,</span> <span class="s">&#39;crownwt0&#39;</span><span class="p">,</span> <span class="s">&#39;crownwt1&#39;</span><span class="p">,</span> <span class="s">&#39;crownwt2&#39;</span><span class="p">,</span> <span class="s">&#39;crownwt3&#39;</span><span class="p">]</span>
+        
+        <span class="c"># fields to query</span>
+        <span class="n">tree_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">,</span><span class="s">&#39;species&#39;</span><span class="p">,</span> <span class="s">&#39;dbh&#39;</span><span class="p">,</span> <span class="s">&#39;ht&#39;</span><span class="p">,</span> <span class="s">&#39;crwdth&#39;</span><span class="p">,</span> <span class="s">&#39;cratio&#39;</span><span class="p">,</span> \
+                      <span class="s">&#39;crownwt0&#39;</span><span class="p">,</span> <span class="s">&#39;crownwt1&#39;</span><span class="p">,</span> <span class="s">&#39;crownwt2&#39;</span><span class="p">,</span> <span class="s">&#39;crownwt3&#39;</span><span class="p">]</span>
+        
+        <span class="c"># get dimsize to construct np array to hold values</span>
+        <span class="n">ntrees</span><span class="p">,</span> <span class="n">ncycles</span><span class="p">,</span> <span class="n">nplots</span><span class="p">,</span> <span class="n">maxtrees</span><span class="p">,</span> <span class="n">maxspecies</span><span class="p">,</span> <span class="n">maxplots</span><span class="p">,</span> \
+            <span class="n">maxcycles</span> <span class="o">=</span> <span class="n">fvs</span><span class="o">.</span><span class="n">fvsdimsizes</span><span class="p">()</span>
+            
+        <span class="c"># size the np array</span>
+        <span class="n">tree_attrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree_names</span><span class="p">),</span> <span class="n">ntrees</span><span class="p">))</span>
+        
+        <span class="c"># populate array with fields in tree_names</span>
+        <span class="k">for</span> <span class="n">par</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree_names</span><span class="p">)):</span>
+            <span class="n">fvs</span><span class="o">.</span><span class="n">fvstreeattr</span><span class="p">(</span><span class="n">tree_names</span><span class="p">[</span><span class="n">par</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree_names</span><span class="p">[</span><span class="n">par</span><span class="p">]),</span> \
+                <span class="s">&#39;get&#39;</span><span class="p">,</span> <span class="n">tree_attrs</span><span class="p">[</span><span class="n">par</span><span class="p">])</span>
+                
+        <span class="c"># get number of rows in tree_attrs where objtype == 1 (tree)</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">svsobjdata</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        
+        <span class="c"># mask array based on objtype == 1</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">svsobjdata</span><span class="p">)</span>
+        <span class="n">mask</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">svsobjdata</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">svsobjdata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="n">svsobjdata</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">compressed</span><span class="p">(),</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">svsobjdata</span><span class="p">),</span> <span class="n">l</span><span class="p">))</span>
+        
+        <span class="c"># shape array to hold tree data</span>
+        <span class="n">lives</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="p">(</span><span class="n">fvs</span><span class="o">.</span><span class="n">fvssvsdimsizes</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span> \
+            <span class="n">fvs</span><span class="o">.</span><span class="n">fvssvsdimsizes</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">fvs</span><span class="o">.</span><span class="n">fvssvsdimsizes</span><span class="p">()[</span><span class="mi">2</span><span class="p">])))</span>
+        
+        <span class="c"># index trees sequentially</span>
+        <span class="n">tree_attrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tree_attrs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">ntrees</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">tree_attrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tree_attrs</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree_names</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">ntrees</span><span class="p">))</span>
+        
+        <span class="c"># merge tree data with svs_attrs</span>
+        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">tree_attrs</span><span class="p">[</span><span class="mi">10</span><span class="p">]:</span>
+            <span class="n">inde</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">svsobjdata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">value</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">inde</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inde</span><span class="p">:</span>
+                    <span class="n">lives</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">svsobjdata</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">lives</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">svsobjdata</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">tree_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">tree_attrs</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">==</span> <span class="n">value</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree_id</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+                            <span class="n">lives</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="n">cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">tree_attrs</span><span class="p">[</span><span class="n">e</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">tree_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                    <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="c"># divide FVS crwdth output by 2 to match SVS &#39;crd&#39;</span>
+        <span class="n">lives</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">lives</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="mf">2.</span><span class="p">)</span>
+        
+        <span class="c"># convert spcd value to plant_code</span>
+        <span class="c"># numpy does not allow multiple dtypes, convert to list of lists</span>
+        <span class="n">lives</span> <span class="o">=</span> <span class="n">lives</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">lives</span> <span class="o">=</span> <span class="p">[</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">elem</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">lives</span> <span class="p">]</span>
+        <span class="k">for</span> <span class="n">tre</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lives</span><span class="p">[</span><span class="mi">2</span><span class="p">])):</span>
+            <span class="n">lives</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">tre</span><span class="p">]</span> <span class="o">=</span> <span class="n">spcodes</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">lives</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">tre</span><span class="p">])]</span>
+            
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lives</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">df</span>
+        
+    <span class="k">def</span> <span class="nf">_get_snags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">svsobjdata</span><span class="p">,</span> <span class="n">spcodes</span><span class="p">):</span>   
+                
+        <span class="c"># headers</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;xloc&#39;</span><span class="p">,</span> <span class="s">&#39;yloc&#39;</span><span class="p">,</span> <span class="s">&#39;snagspp&#39;</span><span class="p">,</span> <span class="s">&#39;snagdbh&#39;</span><span class="p">,</span> <span class="s">&#39;snaglen&#39;</span><span class="p">,</span> <span class="s">&#39;snagfdir&#39;</span><span class="p">,</span>\
+        <span class="s">&#39;snagstat&#39;</span><span class="p">,</span> <span class="s">&#39;snagyear&#39;</span><span class="p">,</span> <span class="s">&#39;snagwt0&#39;</span><span class="p">,</span> <span class="s">&#39;snagwt1&#39;</span><span class="p">,</span> <span class="s">&#39;snagwt2&#39;</span><span class="p">,</span> <span class="s">&#39;snagwt3&#39;</span><span class="p">]</span>
+        
+        <span class="c"># fields to query</span>
+        <span class="n">snag_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;snagspp&#39;</span><span class="p">,</span> <span class="s">&#39;snagdbh&#39;</span><span class="p">,</span>\
+        <span class="s">&#39;snaglen&#39;</span><span class="p">,</span> <span class="s">&#39;snagfdir&#39;</span><span class="p">,</span> <span class="s">&#39;snagstat&#39;</span><span class="p">,</span> <span class="s">&#39;snagyear&#39;</span><span class="p">,</span> <span class="s">&#39;snagwt0&#39;</span><span class="p">,</span>\
+        <span class="s">&#39;snagwt1&#39;</span><span class="p">,</span> <span class="s">&#39;snagwt2&#39;</span><span class="p">,</span> <span class="s">&#39;snagwt3&#39;</span><span class="p">]</span>
+        
+        <span class="c"># get dimsize to construct np array to hold values</span>
+        <span class="n">nsvsobjs</span><span class="p">,</span><span class="n">ndeadobjs</span><span class="p">,</span><span class="n">ncwdobjs</span><span class="p">,</span><span class="n">mxsvsobjs</span><span class="p">,</span><span class="n">mxdeadobjs</span><span class="p">,</span><span class="n">mxcwdobjs</span> \
+                <span class="o">=</span> <span class="n">fvs</span><span class="o">.</span><span class="n">fvssvsdimsizes</span><span class="p">()</span>
+                
+        <span class="c"># size the np array</span>
+        <span class="n">snag_attrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">snag_names</span><span class="p">),</span> <span class="n">ndeadobjs</span><span class="p">))</span>
+        
+        <span class="c"># populate array with fields in tree_names</span>
+        <span class="k">for</span> <span class="n">par</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">snag_names</span><span class="p">)):</span>
+            <span class="n">fvs</span><span class="o">.</span><span class="n">fvssvsobjdata</span><span class="p">(</span><span class="n">snag_names</span><span class="p">[</span><span class="n">par</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">snag_names</span><span class="p">[</span><span class="n">par</span><span class="p">]),</span> \
+                <span class="s">&#39;get&#39;</span><span class="p">,</span> <span class="n">snag_attrs</span><span class="p">[</span><span class="n">par</span><span class="p">])</span>
+        
+        <span class="c"># get number of rows in tree_attrs where objtype == 2 (snag)</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">svsobjdata</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        
+        <span class="c"># mask array based on objtype == 2</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">svsobjdata</span><span class="p">)</span>
+        <span class="n">mask</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">svsobjdata</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">svsobjdata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="n">svsobjdata</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">compressed</span><span class="p">(),</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">svsobjdata</span><span class="p">),</span> <span class="n">l</span><span class="p">))</span>
+        
+        <span class="c"># flip array to match svs_attrs</span>
+        <span class="n">snag_attrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fliplr</span><span class="p">(</span><span class="n">snag_attrs</span><span class="p">)</span>
+        
+        <span class="c"># add svs_attrs</span>
+        <span class="n">snags</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">svsobjdata</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span><span class="n">snag_attrs</span><span class="p">),</span> \
+            <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="n">ndeadobjs</span><span class="p">))</span>
+        
+        <span class="c"># convert spcd value to plant_code</span>
+        <span class="c"># numpy does not allow multiple dtypes, convert to list of lists</span>
+        <span class="n">snags</span> <span class="o">=</span> <span class="n">snags</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">snags</span> <span class="o">=</span> <span class="p">[</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">elem</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">snags</span> <span class="p">]</span>
+        <span class="k">for</span> <span class="n">sng</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">snags</span><span class="p">[</span><span class="mi">2</span><span class="p">])):</span>
+            <span class="n">snags</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">sng</span><span class="p">]</span> <span class="o">=</span> <span class="n">spcodes</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">snags</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">sng</span><span class="p">])]</span>
+        
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">snags</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">df</span>
+        
+    <span class="k">def</span> <span class="nf">get_simulation_years</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&#39;trees&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">get_trees</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+        
+        <span class="k">if</span> <span class="n">year</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;trees&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;trees&quot;</span><span class="p">][</span><span class="n">year</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;ERROR: the specified year does not exist&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">get_snags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">year</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;snags&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;snags&quot;</span><span class="p">][</span><span class="n">year</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;ERROR: the specified year does not exist&quot;</span>
+            
+    <span class="k">def</span> <span class="nf">get_standid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="k">return</span> <span class="n">fvs</span><span class="o">.</span><span class="n">fvsstandid</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        
+    <span class="k">def</span> <span class="nf">save_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="n">standid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_standid</span><span class="p">()</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">e</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wdir</span> <span class="o">+</span> 
+                          <span class="s">&quot;{0}_{1}_{2}.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">standid</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">save_trees_by_year</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+        
+        <span class="n">standid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_standid</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;trees&quot;</span><span class="p">][</span><span class="n">year</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wdir</span> <span class="o">+</span>
+                 <span class="s">&quot;{0}_{1}_{2}.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">standid</span><span class="p">,</span> <span class="s">&quot;trees&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">save_snags_by_year</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+        
+        <span class="n">standid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_standid</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;snags&quot;</span><span class="p">][</span><span class="n">year</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wdir</span> <span class="o">+</span>
+                 <span class="s">&quot;{0}_{1}_{2}.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">standid</span><span class="p">,</span> <span class="s">&quot;snags&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">standfire  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
+    </div>
+  </body>
+</html>
