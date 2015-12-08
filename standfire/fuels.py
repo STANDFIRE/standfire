@@ -170,6 +170,11 @@ class Fvsfuels(object):
         self.keywords = keys
     
     def _set_num_cycles(self):
+        """
+        Private method
+        
+        Sets number of cycles for FVS simulation
+        """
         
         if "NUMCYCLE" in self.keywords.keys():
             self.num_cyc = self.keywords["NUMCYCLE"]
