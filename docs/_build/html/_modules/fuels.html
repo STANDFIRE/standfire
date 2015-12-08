@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fuels &mdash; standfire  documentation</title>
+    <title>fuels &mdash; standfire 1 documentation</title>
     
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '',
+        VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="standfire  documentation" href="../index.html" />
+    <link rel="top" title="standfire 1 documentation" href="../index.html" />
     <link rel="up" title="Module code" href="index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">standfire  documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">standfire 1 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -47,24 +47,383 @@
           <div class="body" role="main">
             
   <h1>Source code for fuels</h1><div class="highlight"><pre>
-<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c">#!/usr/bin/python</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Created on Mon Dec  7 17:49:52 2015</span>
+<span class="sd">The fuels module is a collection of classes that deal with forest fuel</span>
+<span class="sd">calculations.</span>
 
-<span class="sd">@author: lucas wells</span>
+<span class="sd">**Fvsfuels**</span>
+<span class="sd">    Uses FVS and an input inventory to calculate canopy fuels at the</span>
+<span class="sd">    individual tree level</span>
+<span class="sd">**Inventory**</span>
+<span class="sd">    Methods for converting inventory data to FVS tree list format</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
 
-<div class="viewcode-block" id="Fvsfuels"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels">[docs]</a><span class="k">class</span> <span class="nc">Fvsfuels</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
-    
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&quot;Lucas Wells&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s">&quot;Copyright 2015, STANDFIRE&quot;</span>
+
+<span class="c"># module level constant</span>
+<span class="n">FMT</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;Plot_ID&#39;</span>       <span class="p">:</span> <span class="p">[</span><span class="s">&#39;ITRE&#39;</span><span class="p">,</span>      <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>   <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;Tree_ID&#39;</span>       <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IDTREE2&#39;</span><span class="p">,</span>   <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>   <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;Tree_Count&#39;</span>    <span class="p">:</span> <span class="p">[</span><span class="s">&#39;PROB&#39;</span><span class="p">,</span>      <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">12</span><span class="p">],</span>  <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;History&#39;</span>       <span class="p">:</span> <span class="p">[</span><span class="s">&#39;ITH&#39;</span><span class="p">,</span>       <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">13</span><span class="p">,</span><span class="mi">13</span><span class="p">],</span> <span class="s">&#39;trees&#39;</span><span class="p">,</span>   <span class="mi">0</span>   <span class="p">],</span>
+       <span class="s">&#39;Species&#39;</span>       <span class="p">:</span> <span class="p">[</span><span class="s">&#39;ISP&#39;</span><span class="p">,</span>       <span class="s">&#39;alphanum&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">16</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;DBH&#39;</span>           <span class="p">:</span> <span class="p">[</span><span class="s">&#39;DBH&#39;</span><span class="p">,</span>       <span class="s">&#39;real&#39;</span><span class="p">,</span>     <span class="p">[</span><span class="mi">17</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span> <span class="s">&#39;inches&#39;</span><span class="p">,</span>  <span class="mi">1</span>   <span class="p">],</span>
+       <span class="s">&#39;DG&#39;</span>            <span class="p">:</span> <span class="p">[</span><span class="s">&#39;DG&#39;</span><span class="p">,</span>        <span class="s">&#39;real&#39;</span><span class="p">,</span>     <span class="p">[</span><span class="mi">21</span><span class="p">,</span><span class="mi">23</span><span class="p">],</span> <span class="s">&#39;inches&#39;</span><span class="p">,</span>  <span class="mi">1</span>   <span class="p">],</span>
+       <span class="s">&#39;Ht&#39;</span>            <span class="p">:</span> <span class="p">[</span><span class="s">&#39;HT&#39;</span><span class="p">,</span>        <span class="s">&#39;real&#39;</span><span class="p">,</span>     <span class="p">[</span><span class="mi">24</span><span class="p">,</span><span class="mi">26</span><span class="p">],</span> <span class="s">&#39;feet&#39;</span><span class="p">,</span>    <span class="mi">0</span>   <span class="p">],</span>
+       <span class="s">&#39;HtTopK&#39;</span>        <span class="p">:</span> <span class="p">[</span><span class="s">&#39;THT&#39;</span><span class="p">,</span>       <span class="s">&#39;real&#39;</span><span class="p">,</span>     <span class="p">[</span><span class="mi">27</span><span class="p">,</span><span class="mi">29</span><span class="p">],</span> <span class="s">&#39;feet&#39;</span><span class="p">,</span>    <span class="mi">0</span>   <span class="p">],</span>
+       <span class="s">&#39;HTG&#39;</span>           <span class="p">:</span> <span class="p">[</span><span class="s">&#39;HTG&#39;</span><span class="p">,</span>       <span class="s">&#39;real&#39;</span><span class="p">,</span>     <span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">33</span><span class="p">],</span> <span class="s">&#39;feet&#39;</span><span class="p">,</span>    <span class="mi">1</span>   <span class="p">],</span>
+       <span class="s">&#39;CrRatio&#39;</span>       <span class="p">:</span> <span class="p">[</span><span class="s">&#39;ICR&#39;</span><span class="p">,</span>       <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">34</span><span class="p">,</span><span class="mi">34</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;Damage1&#39;</span>       <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IDCD(1)&#39;</span><span class="p">,</span>   <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">35</span><span class="p">,</span><span class="mi">36</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;Severity1&#39;</span>     <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IDCD(2)&#39;</span><span class="p">,</span>   <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">37</span><span class="p">,</span><span class="mi">38</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;Damage2&#39;</span>       <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IDCD(3)&#39;</span><span class="p">,</span>   <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">39</span><span class="p">,</span><span class="mi">40</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;Severity2&#39;</span>     <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IDCD(4)&#39;</span><span class="p">,</span>   <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">41</span><span class="p">,</span><span class="mi">42</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;Damage3&#39;</span>       <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IDCD(5)&#39;</span><span class="p">,</span>   <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">43</span><span class="p">,</span><span class="mi">44</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;Severity3&#39;</span>     <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IDCD(6)&#39;</span><span class="p">,</span>   <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">45</span><span class="p">,</span><span class="mi">46</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;TreeValue&#39;</span>     <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IMC&#39;</span><span class="p">,</span>       <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">47</span><span class="p">,</span><span class="mi">47</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;Prescription&#39;</span>  <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IPRSC&#39;</span><span class="p">,</span>     <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">48</span><span class="p">,</span><span class="mi">48</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;Slope&#39;</span>         <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IPVARS(1)&#39;</span><span class="p">,</span> <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">49</span><span class="p">,</span><span class="mi">50</span><span class="p">],</span> <span class="s">&#39;percent&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;Aspect&#39;</span>        <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IPVARS(2)&#39;</span><span class="p">,</span> <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">51</span><span class="p">,</span><span class="mi">53</span><span class="p">],</span> <span class="s">&#39;code&#39;</span><span class="p">,</span>    <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;PV_Code&#39;</span>       <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IPVARS(3)&#39;</span><span class="p">,</span> <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">54</span><span class="p">,</span><span class="mi">56</span><span class="p">],</span> <span class="s">&#39;code&#39;</span><span class="p">,</span>    <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;TopoCode&#39;</span>      <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IPVARS(4)&#39;</span><span class="p">,</span> <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">57</span><span class="p">,</span><span class="mi">59</span><span class="p">],</span> <span class="s">&#39;code&#39;</span><span class="p">,</span>    <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;SitePrep&#39;</span>      <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IPVARS(5)&#39;</span><span class="p">,</span> <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">58</span><span class="p">,</span><span class="mi">58</span><span class="p">],</span> <span class="s">&#39;code&#39;</span><span class="p">,</span>    <span class="bp">None</span><span class="p">],</span>
+       <span class="s">&#39;Age&#39;</span>           <span class="p">:</span> <span class="p">[</span><span class="s">&#39;ABIRTH&#39;</span><span class="p">,</span>    <span class="s">&#39;real&#39;</span><span class="p">,</span>     <span class="p">[</span><span class="mi">59</span><span class="p">,</span><span class="mi">61</span><span class="p">],</span> <span class="s">&#39;years&#39;</span><span class="p">,</span>   <span class="mi">0</span>   <span class="p">]}</span>
+
+
+<div class="viewcode-block" id="Inventory"><a class="viewcode-back" href="../fuels.html#fuels.Inventory">[docs]</a><span class="k">class</span> <span class="nc">Inventory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    This class contains methods for converting inventory data to FVS .tre</span>
+<span class="sd">    format</span>
+
+<span class="sd">    This class currently does not read inventory data from an FVS access</span>
+<span class="sd">    database.  The FVS_TreeInit database first needs to be exported as comma</span>
+<span class="sd">    delimited values. Multiple stands can be exported in the same file, the</span>
+<span class="sd">    ``formatFvsTreeFile()`` function will format a .tre string for each stand.</span>
+<span class="sd">    All column headings must be default headings and unaltered during export.</span>
+<span class="sd">    You can view the default format by importing this class and typing ``FMT``.</span>
+<span class="sd">    See the FVS guide [1]_ for more information regarding the format of .tre</span>
+<span class="sd">    files.</span>
+<span class="sd">    </span>
+<span class="sd">    **Example:**</span>
+
+<span class="sd">    &gt;&gt;&gt; from standfire import inventory</span>
+<span class="sd">    &gt;&gt;&gt; toDotTree = inventory.Inventory()</span>
+<span class="sd">    &gt;&gt;&gt; toDotTree.readInventory(&quot;path/to/FVS_TreeInit.csv&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; toDotTree.formatFvsTreeFile()</span>
+<span class="sd">    &gt;&gt;&gt; toDotTree.writeFvsTreeFile()</span>
+
+<span class="sd">    :References:</span>
+
+<span class="sd">    .. [1] Gary E. Dixon, Essential FVS: A User&#39;s Guide to the Forest</span>
+<span class="sd">        Vegetation Simulator Tech. Rep., U.S. Department of Agriculture , Forest</span>
+<span class="sd">        Service, Forest Management Service Center, Fort Collins, Colo, USA, 2003.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Inventory.readInventoryCSV"><a class="viewcode-back" href="../fuels.html#fuels.Inventory.readInventoryCSV">[docs]</a>    <span class="k">def</span> <span class="nf">readInventoryCSV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span></div>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads a .csv file containing tree records.</span>
+
+<span class="sd">        The csv must be in the correct format as described in ``FMT``.  This</span>
+<span class="sd">        method check the format of the file by calling a private method</span>
+<span class="sd">        ``_isCorrectFormat()`` that raises a value error.</span>
+
+<span class="sd">        :param fname: path to and file name of the Fvs_TreeInit.csv file</span>
+<span class="sd">        :type fname: string</span>
+
+<span class="sd">        **Example:**</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; from standfire import inventory</span>
+<span class="sd">        &gt;&gt;&gt; toDotTree = inventory.Inventory()</span>
+<span class="sd">        &gt;&gt;&gt; toDotTree.readInventory(&quot;path/to/FVS_TreeInit.csv&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; np.mean(toDotTree.data[&#39;DBH&#39;])</span>
+<span class="sd">        9.0028318584070828</span>
+
+<span class="sd">        The ``readInventory()`` method stores the data in a pandas data frame.</span>
+<span class="sd">        There are countless operations that can be performed on these objects.</span>
+<span class="sd">        For example, we can explore the relationship between diameter and</span>
+<span class="sd">        height by fitting a linear model</span>
+
+<span class="sd">        &gt;&gt;&gt; import statsmodels.formula.api as sm</span>
+<span class="sd">        &gt;&gt;&gt; fit = sm.ols(formula=&quot;HT ~ DBH&quot;, data=test.data).fit()</span>
+<span class="sd">        &gt;&gt;&gt; print fit.params</span>
+<span class="sd">        Intercept    19.688167</span>
+<span class="sd">        DBH           2.161420</span>
+<span class="sd">        dtype: float64</span>
+<span class="sd">        &gt;&gt;&gt; print fit.summary()</span>
+<span class="sd">        OLS Regression Results</span>
+<span class="sd">        ==============================================================================</span>
+<span class="sd">        Dep. Variable:                     Ht   R-squared:                       0.738</span>
+<span class="sd">        Model:                            OLS   Adj. R-squared:                  0.736</span>
+<span class="sd">        Method:                 Least Squares   F-statistic:                     351.8</span>
+<span class="sd">        Date:                Tue, 07 Jul 2015   Prob (F-statistic):           3.77e-38</span>
+<span class="sd">        Time:                        08:32:02   Log-Likelihood:                -407.10</span>
+<span class="sd">        No. Observations:                 127   AIC:                             818.2</span>
+<span class="sd">        Df Residuals:                     125   BIC:                             823.9</span>
+<span class="sd">        Df Model:                           1</span>
+<span class="sd">        Covariance Type:            nonrobust</span>
+<span class="sd">        ==============================================================================</span>
+<span class="sd">        coef    std err          t      P&gt;|t|      [95.0% Conf. Int.]</span>
+<span class="sd">        ------------------------------------------------------------------------------</span>
+<span class="sd">        Intercept     19.6882      1.205     16.338      0.000        17.303    22.073</span>
+<span class="sd">        DBH            2.1614      0.115     18.757      0.000         1.933     2.389</span>
+<span class="sd">        ==============================================================================</span>
+<span class="sd">        Omnibus:                        2.658   Durbin-Watson:                   0.995</span>
+<span class="sd">        Prob(Omnibus):                  0.265   Jarque-Bera (JB):                2.115</span>
+<span class="sd">        Skew:                          -0.251   Prob(JB):                        0.347</span>
+<span class="sd">        Kurtosis:                       3.385   Cond. No.                         23.8</span>
+<span class="sd">        ==============================================================================</span>
+
+<span class="sd">        Read more about pandas at http://pandas.pydata.org/</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+
+        <span class="c"># check for correct formating</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_isCorrectFormat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Inventory.printFormatStandards"><a class="viewcode-back" href="../fuels.html#fuels.Inventory.printFormatStandards">[docs]</a>    <span class="k">def</span> <span class="nf">printFormatStandards</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Print FVS formating standards</span>
+
+<span class="sd">        The FVS formating standard for .tre files as described in the Essenital</span>
+<span class="sd">        FVS Guide is stored in ``FMT`` as a class attribute.  This method</span>
+<span class="sd">        is for viewing this format.  The keys of the dictionary are the column</span>
+<span class="sd">        headings and values are as follows: 0 = variable name, 1 = variable</span>
+<span class="sd">        type, 2 = column location, 3 = units, and 4 = implied decimal place.</span>
+
+<span class="sd">        **Example:**</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; toDotTree.printFormatStandards()</span>
+<span class="sd">        {&#39;Plot_ID&#39;       : [&#39;ITRE&#39;,      &#39;integer&#39;,  [0,3],   None,      None],</span>
+<span class="sd">         &#39;Tree_ID&#39;       : [&#39;IDTREE2&#39;,   &#39;integer&#39;,  [4,6],   None,      None],</span>
+<span class="sd">         &#39;Tree_Count&#39;    : [&#39;PROB&#39;,      &#39;integer&#39;,  [7,12],  None,      None],</span>
+<span class="sd">         &#39;History&#39;       : [&#39;ITH&#39;,       &#39;integer&#39;,  [13,13], &#39;trees&#39;,   0   ],</span>
+<span class="sd">         &#39;Species&#39;       : [&#39;ISP&#39;,       &#39;alphanum&#39;, [14,16], None,      None],</span>
+<span class="sd">         &#39;DBH&#39;           : [&#39;DBH&#39;,       &#39;real&#39;,     [17,20], &#39;inches&#39;,  1   ],</span>
+<span class="sd">         &#39;DG&#39;            : [&#39;DG&#39;,        &#39;real&#39;,     [21,23], &#39;inches&#39;,  1   ],</span>
+<span class="sd">         &#39;Ht&#39;            : [&#39;HT&#39;,        &#39;real&#39;,     [24,26], &#39;feet&#39;,    0   ],</span>
+<span class="sd">         &#39;HtTopK&#39;        : [&#39;THT&#39;,       &#39;real&#39;,     [27,29], &#39;feet&#39;,    0   ],</span>
+<span class="sd">         &#39;HTG&#39;           : [&#39;HTG&#39;,       &#39;real&#39;,     [30,33], &#39;feet&#39;,    1   ],</span>
+<span class="sd">         &#39;CrRatio&#39;       : [&#39;ICR&#39;,       &#39;integer&#39;,  [34,34], None,      None],</span>
+<span class="sd">         &#39;Damage1&#39;       : [&#39;IDCD(1)&#39;,   &#39;integer&#39;,  [35,36], None,      None],</span>
+<span class="sd">         &#39;Severity1&#39;     : [&#39;IDCD(2)&#39;,   &#39;integer&#39;,  [37,38], None,      None],</span>
+<span class="sd">         &#39;Damage2&#39;       : [&#39;IDCD(3)&#39;,   &#39;integer&#39;,  [39,40], None,      None],</span>
+<span class="sd">         &#39;Severity2&#39;     : [&#39;IDCD(4)&#39;,   &#39;integer&#39;,  [41,42], None,      None],</span>
+<span class="sd">         &#39;Damage3&#39;       : [&#39;IDCD(5)&#39;,   &#39;integer&#39;,  [43,44], None,      None],</span>
+<span class="sd">         &#39;Severity3&#39;     : [&#39;IDCD(6)&#39;,   &#39;integer&#39;,  [45,46], None,      None],</span>
+<span class="sd">         &#39;TreeValue&#39;     : [&#39;IMC&#39;,       &#39;integer&#39;,  [47,47], None,      None],</span>
+<span class="sd">         &#39;Prescription&#39;  : [&#39;IPRSC&#39;,     &#39;integer&#39;,  [48,48], None,      None],</span>
+<span class="sd">         &#39;Slope&#39;         : [&#39;IPVARS(1)&#39;, &#39;integer&#39;,  [49,50], &#39;percent&#39;, None],</span>
+<span class="sd">         &#39;Aspect&#39;        : [&#39;IPVARS(2)&#39;, &#39;integer&#39;,  [51,53], &#39;code&#39;,    None],</span>
+<span class="sd">         &#39;PV_Code&#39;       : [&#39;IPVARS(3)&#39;, &#39;integer&#39;,  [54,56], &#39;code&#39;,    None],</span>
+<span class="sd">         &#39;TopoCode&#39;      : [&#39;IPVARS(4)&#39;, &#39;integer&#39;,  [57,59], &#39;code&#39;,    None],</span>
+<span class="sd">         &#39;SitePrep&#39;      : [&#39;IPVARS(5)&#39;, &#39;integer&#39;,  [58,58], &#39;code&#39;,    None],</span>
+<span class="sd">         &#39;Age&#39;           : [&#39;ABIRTH&#39;,    &#39;real&#39;,     [59,61], &#39;years&#39;,   0   ]}</span>
+
+<span class="sd">        See page 61 and 62 in the Essential FVS Guide.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span> <span class="s">&quot;column heading, variable name, varible type, column width </span><span class="se">\</span>
+<span class="s">                , unit, decimal places</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">FMT</span><span class="p">)</span></div>
+
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Inventory.getFvsColumns"><a class="viewcode-back" href="../fuels.html#fuels.Inventory.getFvsColumns">[docs]</a>    <span class="k">def</span> <span class="nf">getFvsColumns</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get list of FVS standard columns</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">FMT</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cols</span></div>
+
+    <span class="k">def</span> <span class="nf">_isCorrectFormat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Private methods to check for correct inventory file formating</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getFvsColumns</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;Stand_ID&#39;</span>
+                    <span class="p">,</span> <span class="s">&#39;StandPlot_ID&#39;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Column heading {0} does not match FVS </span><span class="se">\</span>
+<span class="s">                    standard&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Inventory.getStands"><a class="viewcode-back" href="../fuels.html#fuels.Inventory.getStands">[docs]</a>    <span class="k">def</span> <span class="nf">getStands</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns unique stand IDs</span>
+
+<span class="sd">        :return standIDs: list of Strings</span>
+
+<span class="sd">        **Example:**</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; toDotTree.getStands()</span>
+<span class="sd">        [&#39;BR&#39;, &#39;TM&#39;, &#39;SW&#39;, HB&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;Stand_ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Inventory.crwratioPercentToCode"><a class="viewcode-back" href="../fuels.html#fuels.Inventory.crwratioPercentToCode">[docs]</a>    <span class="k">def</span> <span class="nf">crwratioPercentToCode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts crown ratio from percent to ICR code</span>
+
+<span class="sd">        ICR code is described in the Essential FVS Guide on pages 58 and 59.</span>
+<span class="sd">        This method should only be used if crown ratios values are percentages</span>
+<span class="sd">        in the FVS_TreeInit.csv.  If you use this method before calling</span>
+<span class="sd">        `formatFvsTreeFile()` then you must set the optional argument</span>
+<span class="sd">        ``cratioToCode`` to ``False``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> 
+            <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">),</span> <span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> 
+            <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">),</span> <span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> 
+            <span class="o">&lt;=</span> <span class="mi">30</span><span class="p">),</span> <span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> 
+            <span class="o">&lt;=</span> <span class="mi">40</span><span class="p">),</span> <span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">40</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> 
+            <span class="o">&lt;=</span> <span class="mi">50</span><span class="p">),</span> <span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> 
+            <span class="o">&lt;=</span> <span class="mi">60</span><span class="p">),</span> <span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> 
+            <span class="o">&lt;=</span> <span class="mi">70</span><span class="p">),</span> <span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">7</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">70</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> 
+            <span class="o">&lt;=</span> <span class="mi">80</span><span class="p">),</span> <span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> 
+            <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">),</span> <span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9</span></div>
+
+<div class="viewcode-block" id="Inventory.formatFvsTreeFile"><a class="viewcode-back" href="../fuels.html#fuels.Inventory.formatFvsTreeFile">[docs]</a>    <span class="k">def</span> <span class="nf">formatFvsTreeFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cratioToCode</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts data in FVS_TreeInit.csv to FVS .tre format</span>
+
+<span class="sd">        This methods reads entries in the pandas data frame (``self.data``) and</span>
+<span class="sd">        writes them to a formated text string following FVS .tre data formating</span>
+<span class="sd">        standards shown in ``FMT``.  If multiple stands exist in ``self.data``</span>
+<span class="sd">        then each stand will written as a (key,value) pair in</span>
+<span class="sd">        ``self.fvsTreeFile`` where the key is the stand ID and the value is the</span>
+<span class="sd">        formated text string.</span>
+
+<span class="sd">        :param cratioToCode: default = True</span>
+<span class="sd">        :type cratioToCode: boolean</span>
+
+<span class="sd">        .. note:: If the ``crwratioPercentToCode()`` methods has</span>
+<span class="sd">                  been called prior to call this methods, then the ``cratioToCode``</span>
+<span class="sd">                  optional argument must be set to ``False`` to prevent errors in crown</span>
+<span class="sd">                  ratio values.</span>
+
+<span class="sd">        **Example:**</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; toDotTree.formatFvsTreeFile()</span>
+<span class="sd">        &gt;&gt;&gt; toDotTree.fvsTreeFile[&#39;Stand_ID_1&#39;]</span>
+<span class="sd">        5   1  5     0PP 189    65        3                 0 0</span>
+<span class="sd">        5   2  15    0PP 110    52        2                 0 0</span>
+<span class="sd">        5   3  5     0PP 180    64        5                 0 0</span>
+<span class="sd">        5   4  14    0PP 112    56        3                 0 0</span>
+<span class="sd">        5   5  6     0PP 167    60        4                 0 0</span>
+<span class="sd">        5   6  5     0PP 190    60        5                 0 0</span>
+<span class="sd">        5   7  7     0PP 161    62        3                 0 0</span>
+<span class="sd">        5   8  86    0PP 46     37        1                 0 0</span>
+<span class="sd">        5   9  10    0PP 130    50        2                 0 0</span>
+<span class="sd">        5   10 5     0PP 182    60        3                 0 0</span>
+<span class="sd">        5   11 8     9PP 144    50                          0 0</span>
+<span class="sd">        6   1  16    0PP 107    42        4                 0 0</span>
+<span class="sd">        6   2  109   0PP 41     27        2                 0 0</span>
+<span class="sd">        ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fvsTreeFile</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c"># convert crown ratios from percent to int values from 0-9</span>
+        <span class="k">if</span> <span class="n">cratioToCode</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">crwratioPercentToCode</span><span class="p">()</span>
+
+        <span class="c"># replace nan with empty string</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getStands</span><span class="p">():</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;Stand_ID&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="c"># TODO: make this a method</span>
+            <span class="n">df</span><span class="p">[</span><span class="s">&quot;Tree_ID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">&quot;Tree_ID&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">FMT</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">tmp</span> <span class="o">+=</span> <span class="s">&#39;{0:{width}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+                                <span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+                                <span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">))][</span><span class="n">FMT</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+                                <span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="p">(</span><span class="n">FMT</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">FMT</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">tmp</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fvsTreeFile</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span></div>
+
+
+<div class="viewcode-block" id="Inventory.writeFvsTreeFile"><a class="viewcode-back" href="../fuels.html#fuels.Inventory.writeFvsTreeFile">[docs]</a>    <span class="k">def</span> <span class="nf">writeFvsTreeFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputPath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes formated fvs tree files to specified location</span>
+
+<span class="sd">        If multiple stands exist in the FVS_TreeInit then the same number of</span>
+<span class="sd">        files will be created in the specified directory.  The file names</span>
+<span class="sd">        will be the same as the Stand_ID with a ``.tre`` extension.</span>
+
+<span class="sd">        :param outputPath: directory to store output .tre files</span>
+<span class="sd">        :type outputPath: string</span>
+
+<span class="sd">        .. note:: This method will throw an error if it is called prior to the</span>
+<span class="sd">                  ``formatFvsTreeFile()`` method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fvsTreeFile</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outputPath</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&#39;.tre&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fvsTreeFile</span><span class="p">[</span><span class="n">i</span><span class="p">])</span></div></div>
+
+
+
+<div class="viewcode-block" id="Fvsfuels"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels">[docs]</a><span class="k">class</span> <span class="nc">Fvsfuels</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A Fvsfuels object is used to calculate component fuels at the individual </span>
+<span class="sd">    tree level using the Forest Vegetation Simulator. To create an instance</span>
+<span class="sd">    of this class you need two items: a keyword file (.key) and tree list file</span>
+<span class="sd">    (.tre) with the same prefix as the keyword file. If you don&#39;t already have</span>
+<span class="sd">    a tree list file then you can use ```fuels.Inventory``` class to generate</span>
+<span class="sd">    one.</span>
+<span class="sd">    </span>
+<span class="sd">    :param variant: FVS variant to be imported</span>
+<span class="sd">    :type variant: string</span>
+<span class="sd">    </span>
+<span class="sd">    **Example:**</span>
+<span class="sd">    </span>
+<span class="sd">    A basic example to extract live canopy biomass for individual trees during</span>
+<span class="sd">    year of inventory</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; from standfire.fuels import Fvsfuels</span>
+<span class="sd">    &gt;&gt;&gt; stand001 = Fvsfuels(&quot;iec&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; stand001.set_keyword(&quot;/Users/standfire/test/example.key&quot;)</span>
+<span class="sd">    TIMEINT not found in keyword file, default is 10 years</span>
+<span class="sd">    &gt;&gt;&gt; stand001.keywords</span>
+<span class="sd">    {&#39;TIMEINT&#39;: 10, &#39;NUMCYCLE&#39;: 10, &#39;INVYEAR&#39;: 2010, &#39;SVS&#39;: 15, &#39;FUELOUT&#39;: 1}</span>
+<span class="sd">    </span>
+<span class="sd">    The keyword file is setup to simulate 100 years at a time interval of 10</span>
+<span class="sd">    years. Lets change this to only simulate the inventory year.</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; stand001.set_num_cycles(0)</span>
+<span class="sd">    &gt;&gt;&gt; stand001.keywords</span>
+<span class="sd">    {&#39;TIMEINT&#39;: 10, &#39;NUMCYCLE&#39;: 0, &#39;INVYEAR&#39;: 2010, &#39;SVS&#39;: 15, &#39;FUELOUT&#39;: 1}</span>
+<span class="sd">    &gt;&gt;&gt; stand001.run_fvs()</span>
+<span class="sd">    </span>
+<span class="sd">    Now we can write the trees data frame to disk</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; stand001.save_trees_by_year(2010)</span>
+<span class="sd">    </span>
+<span class="sd">    .. note:: The argument must match one of the available variant in the</span>
+<span class="sd">              PyFVS module. Search through standfire/pyfvs/ to see all</span>
+<span class="sd">              variants</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variant</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor&quot;&quot;&quot;</span>
         
         <span class="c"># class fields</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wdir</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_cyc</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span> <span class="o">=</span> <span class="mi">0</span>
@@ -78,9 +437,12 @@
             <span class="k">print</span> <span class="s">&quot;The PyFVS python module or the specified variant does not exist&quot;</span>
         <span class="n">fvs</span> <span class="o">=</span> <span class="n">temp</span>
         
-    <span class="k">def</span> <span class="nf">set_keyword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyfile</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.set_keyword"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.set_keyword">[docs]</a>    <span class="k">def</span> <span class="nf">set_keyword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyfile</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets the keyword file to be used in the FVS simulation</span>
+<span class="sd">        </span>
+<span class="sd">        :Date: 2015-8-12</span>
+<span class="sd">        :Authors: Lucas Wells</span>
 <span class="sd">        </span>
 <span class="sd">        This method will initalize a FVS simulation by registering the</span>
 <span class="sd">        specified keyword file (.key) with FVS. The working directory of a</span>
@@ -93,7 +455,7 @@
 <span class="sd">        :param keyfile: path/to/keyword_file. This must have a .key extension</span>
 <span class="sd">        :type keyfile: string</span>
 <span class="sd">        </span>
-<span class="sd">        :Example:</span>
+<span class="sd">        **Example:**</span>
 <span class="sd">        </span>
 <span class="sd">        &gt;&gt;&gt; from standfire.fuels import Fvsfuels</span>
 <span class="sd">        &gt;&gt;&gt; test = Fvsfuels(&quot;iec&quot;)</span>
@@ -113,13 +475,13 @@
         <span class="c"># set class fields</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_num_cycles</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_time_int</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_set_inv_year</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_inv_year</span><span class="p">()</span></div>
     
-    <span class="k">def</span> <span class="nf">set_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wdir</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.set_dir"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.set_dir">[docs]</a>    <span class="k">def</span> <span class="nf">set_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wdir</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets the working directory of a Fvsfuels object</span>
 <span class="sd">        </span>
-<span class="sd">        This methods is called by Fvsfuels.set_keyword(). Thus, the default</span>
+<span class="sd">        This method is called by Fvsfuels.set_keyword(). Thus, the default</span>
 <span class="sd">        working directory is the folder containing the specified keyword file. </span>
 <span class="sd">        If you wish to store simulation outputs in a different directory then</span>
 <span class="sd">        use this methods to do so.</span>
@@ -139,9 +501,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">wdir</span> <span class="o">=</span> <span class="n">wdir</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">wdir</span><span class="p">)</span>
-        
-    <span class="k">def</span> <span class="nf">_read_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyfile</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">wdir</span><span class="p">)</span></div>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_read_key</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">keyfile</span><span class="p">):</span>
         
         <span class="n">keys</span> <span class="o">=</span> <span class="p">{}</span>
         
@@ -164,45 +527,51 @@
                 <span class="k">except</span><span class="p">:</span>
                     <span class="k">pass</span>
         
-        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="o">=</span> <span class="n">keys</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span> <span class="o">=</span> <span class="n">keys</span>
     
     <span class="k">def</span> <span class="nf">_set_num_cycles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         
-        <span class="k">if</span> <span class="s">&quot;NUMCYCLE&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">num_cyc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="s">&quot;NUMCYCLE&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s">&quot;NUMCYCLE&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_cyc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">[</span><span class="s">&quot;NUMCYCLE&quot;</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">num_cyc</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">[</span><span class="s">&quot;NUMCYCLE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
             <span class="k">print</span> <span class="s">&quot;NUMCYCLE not found in keyword file, default is 10 cycles&quot;</span>
         
     <span class="k">def</span> <span class="nf">_set_time_int</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         
-        <span class="k">if</span> <span class="s">&quot;TIMEINT&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="s">&quot;TIMEINT&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s">&quot;TIMEINT&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">[</span><span class="s">&quot;TIMEINT&quot;</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">[</span><span class="s">&quot;TIMEINT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
             <span class="k">print</span> <span class="s">&quot;TIMEINT not found in keyword file, default is 10 years&quot;</span>
         
     <span class="k">def</span> <span class="nf">_set_inv_year</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         
-        <span class="k">if</span> <span class="s">&quot;INVYEAR&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="s">&quot;INVYEAR&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s">&quot;INVYEAR&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">[</span><span class="s">&quot;INVYEAR&quot;</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span> <span class="o">=</span> <span class="mi">2015</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">[</span><span class="s">&quot;INVYEAR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
             <span class="k">print</span> <span class="s">&quot;INVYEAR not found in keyword file, default is 2015&quot;</span>
             
-    <span class="k">def</span> <span class="nf">set_num_cycles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_cyc</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.set_num_cycles"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.set_num_cycles">[docs]</a>    <span class="k">def</span> <span class="nf">set_num_cycles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_cyc</span><span class="p">):</span></div>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">num_cyc</span> <span class="o">=</span> <span class="n">num_cyc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">[</span><span class="s">&quot;NUMCYCLE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">num_cyc</span>
         
-    <span class="k">def</span> <span class="nf">set_time_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_int</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.set_time_int"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.set_time_int">[docs]</a>    <span class="k">def</span> <span class="nf">set_time_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_int</span><span class="p">):</span></div>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span> <span class="o">=</span> <span class="n">time_int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">[</span><span class="s">&quot;TIMEINT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_int</span>
         
-    <span class="k">def</span> <span class="nf">set_inv_year</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inv_year</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.set_inv_year"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.set_inv_year">[docs]</a>    <span class="k">def</span> <span class="nf">set_inv_year</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inv_year</span><span class="p">):</span></div>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span> <span class="o">=</span> <span class="n">inv_year</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">[</span><span class="s">&quot;INVYEAR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inv_year</span>
         
-    <span class="k">def</span> <span class="nf">run_fvs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.run_fvs"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.run_fvs">[docs]</a>    <span class="k">def</span> <span class="nf">run_fvs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
         
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span> <span class="o">+</span> 
                       <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_cyc</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span><span class="p">)</span> <span class="o">+</span> 
@@ -218,7 +587,7 @@
         <span class="n">fvs</span><span class="o">.</span><span class="n">fvs</span><span class="p">()</span>
         <span class="n">fvs</span><span class="o">.</span><span class="n">fvs</span><span class="p">()</span>
     
-    <span class="k">def</span> <span class="nf">get_obj_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.get_obj_data"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.get_obj_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_obj_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
         
         <span class="c"># fields to query</span>
         <span class="n">svs_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;objindex&#39;</span><span class="p">,</span> <span class="s">&#39;objtype&#39;</span><span class="p">,</span> <span class="s">&#39;xloc&#39;</span><span class="p">,</span> <span class="s">&#39;yloc&#39;</span><span class="p">]</span>
@@ -236,7 +605,7 @@
         
         <span class="k">return</span> <span class="n">svs_attrs</span>
         
-    <span class="k">def</span> <span class="nf">get_spcodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.get_spcodes"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.get_spcodes">[docs]</a>    <span class="k">def</span> <span class="nf">get_spcodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
         
         <span class="c"># get four letter plant codes</span>
         <span class="n">spcd</span> <span class="o">=</span> <span class="p">[]</span>
@@ -362,28 +731,28 @@
         
         <span class="k">return</span> <span class="n">df</span>
         
-    <span class="k">def</span> <span class="nf">get_simulation_years</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.get_simulation_years"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.get_simulation_years">[docs]</a>    <span class="k">def</span> <span class="nf">get_simulation_years</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
         
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&#39;trees&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
         
-    <span class="k">def</span> <span class="nf">get_trees</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.get_trees"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.get_trees">[docs]</a>    <span class="k">def</span> <span class="nf">get_trees</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span></div>
         
         <span class="k">if</span> <span class="n">year</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;trees&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;trees&quot;</span><span class="p">][</span><span class="n">year</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">print</span> <span class="s">&quot;ERROR: the specified year does not exist&quot;</span>
     
-    <span class="k">def</span> <span class="nf">get_snags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.get_snags"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.get_snags">[docs]</a>    <span class="k">def</span> <span class="nf">get_snags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">year</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;snags&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;snags&quot;</span><span class="p">][</span><span class="n">year</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&quot;ERROR: the specified year does not exist&quot;</span>
+            <span class="k">print</span> <span class="s">&quot;ERROR: the specified year does not exist&quot;</span></div>
             
-    <span class="k">def</span> <span class="nf">get_standid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.get_standid"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.get_standid">[docs]</a>    <span class="k">def</span> <span class="nf">get_standid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
         
         <span class="k">return</span> <span class="n">fvs</span><span class="o">.</span><span class="n">fvsstandid</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         
-    <span class="k">def</span> <span class="nf">save_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.save_all"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.save_all">[docs]</a>    <span class="k">def</span> <span class="nf">save_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
         
         <span class="n">standid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_standid</span><span class="p">()</span>
         
@@ -392,19 +761,19 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">e</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wdir</span> <span class="o">+</span> 
                           <span class="s">&quot;{0}_{1}_{2}.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">standid</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="nf">save_trees_by_year</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.save_trees_by_year"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.save_trees_by_year">[docs]</a>    <span class="k">def</span> <span class="nf">save_trees_by_year</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span></div>
         
         <span class="n">standid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_standid</span><span class="p">()</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;trees&quot;</span><span class="p">][</span><span class="n">year</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wdir</span> <span class="o">+</span>
                  <span class="s">&quot;{0}_{1}_{2}.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">standid</span><span class="p">,</span> <span class="s">&quot;trees&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="nf">save_snags_by_year</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+<div class="viewcode-block" id="Fvsfuels.save_snags_by_year"><a class="viewcode-back" href="../fuels.html#fuels.Fvsfuels.save_snags_by_year">[docs]</a>    <span class="k">def</span> <span class="nf">save_snags_by_year</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span></div>
         
         <span class="n">standid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_standid</span><span class="p">()</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;snags&quot;</span><span class="p">][</span><span class="n">year</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wdir</span> <span class="o">+</span>
-                 <span class="s">&quot;{0}_{1}_{2}.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">standid</span><span class="p">,</span> <span class="s">&quot;snags&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                 <span class="s">&quot;{0}_{1}_{2}.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">standid</span><span class="p">,</span> <span class="s">&quot;snags&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
@@ -438,12 +807,12 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">standfire  documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">standfire 1 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2015, Author.
+        &copy; Copyright 2015, STANDFIRE.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
