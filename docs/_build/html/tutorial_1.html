@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>STANDFIRE User Guide &mdash; STANDFIRE  documentation</title>
+    <title>Tutorial 1: Interfacing with FVS &mdash; STANDFIRE  documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,8 +24,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="STANDFIRE  documentation" href="index.html" />
-    <link rel="next" title="Overview of STANDFIRE" href="overview.html" />
-    <link rel="prev" title="Welcome to STANDFIRE" href="index.html" /> 
+    <link rel="up" title="STANDFIRE User Guide" href="user_guide.html" />
+    <link rel="next" title="STANDFIRE API Reference" href="api_ref.html" />
+    <link rel="prev" title="Basic Usage" href="basic_usage.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -38,12 +39,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="overview.html" title="Overview of STANDFIRE"
+          <a href="api_ref.html" title="STANDFIRE API Reference"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to STANDFIRE"
+          <a href="basic_usage.html" title="Basic Usage"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">STANDFIRE  documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">STANDFIRE  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="user_guide.html" accesskey="U">STANDFIRE User Guide</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -52,17 +54,54 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="standfire-user-guide">
-<h1>STANDFIRE User Guide<a class="headerlink" href="#standfire-user-guide" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of STANDFIRE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basic_usage.html">Basic Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advance_topics.html">Advance Topics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_1.html">Tutorial 1: Interfacing with FVS</a></li>
-</ul>
+  <div class="section" id="tutorial-1-interfacing-with-fvs">
+<h1>Tutorial 1: Interfacing with FVS<a class="headerlink" href="#tutorial-1-interfacing-with-fvs" title="Permalink to this headline">¶</a></h1>
+<p>Use Suppose to generate a keyword file. Or use the following example .key:</p>
+<div class="highlight-python"><div class="highlight"><pre>NOSCREEN
+RANNSEED           0
+!STATS
+STDIDENT
+STANDFIRE_example
+DESIGN           -10       500         5         9
+STDINFO          103       140      60.0       0.0       0.0      36.0
+INVYEAR         2010
+NUMCYCLE          10
+TREEDATA
+FMIN
+END
+STATS
+SVS                0                   0         0        15
+FMIn
+Potfire
+FuelOut
+BurnRept
+MortRept
+FuelRept
+SnagSum
+End
+PROCESS
+STOP
+</pre></div>
+</div>
+<p>If don&#8217;t have a FVS tree list file, then copy and paste the following text and save  it to the same directory where the keyword file lives, give it the same prefix as the <code class="docutils literal"><span class="pre">.key</span></code> but with a <code class="docutils literal"><span class="pre">.tre</span></code> extension.:</p>
+<div class="highlight-python"><div class="highlight"><pre>1   95       9PP 105    35                          0 0
+1   96       0PP 43     17        1                 0 0
+1   97       0PP 148    43        2                 0 0
+1   98       0PP 49     30        1                 0 0
+1   99       9PP 54     30                          0 0
+1   100      0PP 100    40        3                 0 0
+1   101      0PP 42     30        2                 0 0
+1   102      0PP 53     34        1                 0 0
+1   103      0PP 97     42        3                 0 0
+1   104      0PP 61     35        1                 0 0
+1   105      0PP 81     40        1                 0 0
+1   106      9PP 80     33                          0 0
+1   107      0PP 41     32        2                 0 0
+1   108      9PP 71     40                          0 0
+1   109      9PP 73     41                          0 0
+1   110      9PP 94     35                          0 0
+1   111      9PP 103    32                          0 0
+</pre></div>
 </div>
 </div>
 
@@ -73,15 +112,15 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Welcome to STANDFIRE</a></p>
+  <p class="topless"><a href="basic_usage.html"
+                        title="previous chapter">Basic Usage</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="overview.html"
-                        title="next chapter">Overview of STANDFIRE</a></p>
+  <p class="topless"><a href="api_ref.html"
+                        title="next chapter">STANDFIRE API Reference</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/user_guide.txt"
+      <li><a href="_sources/tutorial_1.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -112,12 +151,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="overview.html" title="Overview of STANDFIRE"
+          <a href="api_ref.html" title="STANDFIRE API Reference"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to STANDFIRE"
+          <a href="basic_usage.html" title="Basic Usage"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">STANDFIRE  documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">STANDFIRE  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="user_guide.html" >STANDFIRE User Guide</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
