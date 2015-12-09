@@ -48,3 +48,42 @@ If don't have a FVS tree list file, then copy and paste the following text and s
 	1   109      9PP 73     41                          0 0         
 	1   110      9PP 94     35                          0 0         
 	1   111      9PP 103    32                          0 0
+
+Once you have a keyword file and a tree list file in the same directory we can start to build a script to do some work.::
+
+	$ cd /Users/standfire/fvs_exp
+	$ ls
+	example.key    example.tre
+
+We will use python interactively here for demonstration purposes then present the entire script below.::
+ 
+	$ python
+	Python 2.7.10 (default, Jul 14 2015, 19:46:27) 
+	[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.39)] on darwin
+	Type "help", "copyright", "credits" or "license" for more information.
+	>>>
+
+First we import the Fvsfuels class from the fuels module.::
+
+	>>> from standfire.fuels import Fvsfuels
+
+Next create an instance of the class passes the desired variant as an argument and register the keyword file.::
+
+	>>> stand_1 = Fvsfuel("iec")
+	>>> stand_1.set_keyword("/Users/standfire/fvs_exp/example.key")
+	TIMEINT not found in keyword file, default is 10 years
+
+We get a message telling us that the TIMEINT keyword was not found in the keyword file. No problem, STANDFIRE automatically sets this value to 10 years.::
+
+	>>> stand_1.keywords
+	{'TIMEINT': 10, 'NUMCYCLE': 10, 'INVYEAR': 2010, 'SVS': 15, 'FUELOUT': 1}
+
+Notice the keys in the keywords dictionary.  ``TIMEINT`` is the time interval of the FVS simulation in year, ``NUMCYCLE`` is the number of cycles, ``INVYEAR`` is the year of the inventory, and ``SVS`` and ``FUELOUT`` are there to check if these keywords are in the keyword file. If the ``SVS`` and ``FUELOUT`` keywords are not defined the keyword file then FVS will not calculate tree positions or fuel attributes. So be sure you add these to your keyword file before registering the .key with FVS. You can use *post processors** in Suppose to do so.  ``TIMEINT``, ``NUMCYCLE``, and ``INVYEAR`` can be manually changed by calling setters for each. For instance, if you only want to calculate fuel attributes for trees during the year of the inventory then simply change the ``NUMCYCLE`` value in the keyword dictionary.::
+
+	>>> stand_1.set_num_cycle(0)
+	>>> stand_1.keywords
+	{'TIMEINT': 10, 'NUMCYCLE': 0, 'INVYEAR': 2010, 'SVS': 15, 'FUELOUT': 1}
+
+Now that we have our simulation parameters established, we startup FVS.::
+
+	>>> stand_1.run_fvs()
