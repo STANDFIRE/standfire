@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  7 DEC 2015 22:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  8 DEC 2015 16:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -903,9 +903,15 @@ LaTeX Font Info:    Font shape `T1/phv/b/it' in size <17.28> not available
 (Font)              Font shape `T1/phv/b/sl' tried instead on input line 129.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 129.
-<<ot1.cmap>><<oml.cmap>><<oms.cmap>><<omx.cmap>> [1
+<<ot1.cmap>><<oml.cmap>><<oms.cmap>><<omx.cmap>>
+Overfull \hbox (8.26378pt too wide) in paragraph at lines 129--129
+ [][]
+ []
 
-{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
+[1
+
+{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2
 
 ] (./standfire.toc
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
@@ -932,49 +938,66 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 136.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 136.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 144.
+[3] [4
+
+]
+Chapter 2.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 164.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 168.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 144.
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 168.
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 218.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 177.
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <9> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 224.
- [3] [4]
-Chapter 2.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 290.
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 187.
+LaTeX Font Info:    Try loading font information for TS1+pcr on input line 192.
+
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ts1pcr.fd
+File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
+) [5] [6]
+[7] [8] [9] [10] [11] [12]
+Chapter 3.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 785.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [5
+) [13
 
-] [6
-
-]
-[7
-
+] [14
 
 ]
-No file standfire.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 311.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 311.
-(./standfire.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 311.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 311.
+[15
+
+
+] (./standfire.ind [16
+
+
+] [17
+
+
+])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 806.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 806.
+ (./standfire.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 806.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 806.
 Package rerunfilecheck Info: File `standfire.out' has not changed.
-(rerunfilecheck)             Checksum: 520317C14B404B79292C3D1307C3BA96;156.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 311.
+(rerunfilecheck)             Checksum: 2156E5F14D2E83448B308A5AC50A8C2A;376.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 806.
  ) 
 Here is how much of TeX's memory you used:
- 9159 strings out of 493315
- 128138 string characters out of 6137904
- 227163 words of memory out of 5000000
- 12320 multiletter control sequences out of 15000+600000
- 57115 words of font info for 67 fonts, out of 8000000 for 9000
+ 9315 strings out of 493315
+ 130733 string characters out of 6137904
+ 230821 words of memory out of 5000000
+ 12405 multiletter control sequences out of 15000+600000
+ 72313 words of font info for 85 fonts, out of 8000000 for 9000
  958 hyphenation exceptions out of 8191
- 36i,12n,45p,251b,492s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,12n,45p,747b,499s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2013/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2
 013/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2013/texm
@@ -984,10 +1007,10 @@ ype1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/u
 rw/helvetic/uhvr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/time
 s/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.p
 fb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on standfire.pdf (11 pages, 92501 bytes).
+Output written on standfire.pdf (21 pages, 125612 bytes).
 PDF statistics:
- 139 PDF objects out of 1000 (max. 8388607)
- 110 compressed objects within 2 object streams
- 33 named destinations out of 1000 (max. 500000)
- 45 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 263 PDF objects out of 1000 (max. 8388607)
+ 223 compressed objects within 3 object streams
+ 74 named destinations out of 1000 (max. 500000)
+ 77 words of extra memory for PDF output out of 10000 (max. 10000000)
 

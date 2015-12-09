@@ -1,0 +1,46 @@
+\begin{theindex}
+\def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
+
+  \bigletter C
+  \item crwratio\_percent\_to\_code() (fuels.Inventory method), \hyperpage{11}
+
+  \indexspace
+  \bigletter F
+  \item format\_fvs\_tree\_file() (fuels.Inventory method), \hyperpage{11}
+  \item fuels (module), \hyperpage{5}
+  \item Fvsfuels (class in fuels), \hyperpage{5}
+
+  \indexspace
+  \bigletter G
+  \item get\_fvs\_cols() (fuels.Inventory method), \hyperpage{10}
+  \item get\_simulation\_years() (fuels.Fvsfuels method), \hyperpage{7}
+  \item get\_snags() (fuels.Fvsfuels method), \hyperpage{8}
+  \item get\_standid() (fuels.Fvsfuels method), \hyperpage{8}
+  \item get\_stands() (fuels.Inventory method), \hyperpage{11}
+  \item get\_trees() (fuels.Fvsfuels method), \hyperpage{7}
+
+  \indexspace
+  \bigletter I
+  \item Inventory (class in fuels), \hyperpage{8}
+
+  \indexspace
+  \bigletter P
+  \item print\_format\_standards() (fuels.Inventory method), \hyperpage{10}
+
+  \indexspace
+  \bigletter R
+  \item read\_inventory() (fuels.Inventory method), \hyperpage{9}
+  \item run\_fvs() (fuels.Fvsfuels method), \hyperpage{7}
+
+  \indexspace
+  \bigletter S
+  \item save() (fuels.Inventory method), \hyperpage{12}
+  \item save\_snags\_by\_year() (fuels.Fvsfuels method), \hyperpage{8}
+  \item save\_trees\_by\_year() (fuels.Fvsfuels method), \hyperpage{8}
+  \item set\_dir() (fuels.Fvsfuels method), \hyperpage{6}
+  \item set\_inv\_year() (fuels.Fvsfuels method), \hyperpage{7}
+  \item set\_keyword() (fuels.Fvsfuels method), \hyperpage{6}
+  \item set\_num\_cycles() (fuels.Fvsfuels method), \hyperpage{6}
+  \item set\_time\_int() (fuels.Fvsfuels method), \hyperpage{7}
+
+\end{theindex}

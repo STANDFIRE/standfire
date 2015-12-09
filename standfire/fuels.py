@@ -700,6 +700,9 @@ class Inventory(object):
     def get_fvs_cols(self):
         """
         Get list of FVS standard columns
+        
+        :return: FVS standard columns
+        :rtype: list of strings
         """
         cols = []
         for i in self.FMT.keys():
@@ -720,7 +723,8 @@ class Inventory(object):
         """
         Returns unique stand IDs
 
-        :return standIDs: list of Strings
+        :return: stand IDs
+        :rtype: list of strings
 
         **Example:**
         
@@ -758,7 +762,7 @@ class Inventory(object):
         self.data.loc[(self.data["CrRatio"] > 80) & (self.data["CrRatio"] 
             <= 100), "CrRatio"] = 9
 
-    def format_fvs_tree_file(self, cratioToCode = True):
+    def format_fvs_tree_file(self, cratio_to_code = True):
         """
         Converts data in FVS_TreeInit.csv to FVS .tre format
 
@@ -769,11 +773,11 @@ class Inventory(object):
         ``self.fvsTreeFile`` where the key is the stand ID and the value is the
         formated text string.
 
-        :param cratioToCode: default = True
-        :type cratioToCode: boolean
+        :param cratio_to_code: default = True
+        :type cratio_to_code: boolean
 
         .. note:: If the ``crwratio_percent_to_code()`` methods has
-                  been called prior to call this methods, then the ``cratioToCode``
+                  been called prior to call this methods, then the ``cratio_to_code``
                   optional argument must be set to ``False`` to prevent errors in crown
                   ratio values.
 
@@ -800,7 +804,7 @@ class Inventory(object):
         self.fvsTreeFile = {}
 
         # convert crown ratios from percent to int values from 0-9
-        if cratioToCode:
+        if cratio_to_code:
             self.crwratio_percent_to_code()
 
         # replace nan with empty string

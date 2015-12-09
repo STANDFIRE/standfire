@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fuels module &mdash; standfire 1 documentation</title>
+    <title>fuels module &mdash; standfire  documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1',
+        VERSION:     '',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,10 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="standfire 1 documentation" href="index.html" />
-    <link rel="prev" title="Welcome to standfire’s documentation!" href="index.html" /> 
+    <link rel="top" title="standfire  documentation" href="index.html" />
+    <link rel="up" title="STANDFIRE API Reference" href="api_ref.html" />
+    <link rel="next" title="Fvsfuels" href="Fvsfuels.html" />
+    <link rel="prev" title="STANDFIRE API Reference" href="api_ref.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -37,9 +39,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to standfire’s documentation!"
+          <a href="Fvsfuels.html" title="Fvsfuels"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api_ref.html" title="STANDFIRE API Reference"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">standfire 1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">standfire  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="api_ref.html" accesskey="U">STANDFIRE API Reference</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -59,433 +65,36 @@ individual tree level</dd>
 <dt><strong>Inventory</strong></dt>
 <dd>Methods for converting inventory data to FVS tree list format</dd>
 </dl>
-<dl class="class">
-<dt id="fuels.Fvsfuels">
-<em class="property">class </em><code class="descclassname">fuels.</code><code class="descname">Fvsfuels</code><span class="sig-paren">(</span><em>variant</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>A Fvsfuels object is used to calculate component fuels at the individual 
-tree level using the Forest Vegetation Simulator. To create an instance
-of this class you need two items: a keyword file (.key) and tree list file
-(.tre) with the same prefix as the keyword file. If you don&#8217;t already have
-a tree list file then you can use <code class="docutils literal"><span class="pre">`fuels.Inventory`</span></code> class to generate
-one.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>variant</strong> (<em>string</em>) &#8211; FVS variant to be imported</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Example:</strong></p>
-<p>A basic example to extract live canopy biomass for individual trees during
-year of inventory</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuels</span> <span class="kn">import</span> <span class="n">Fvsfuels</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stand001</span> <span class="o">=</span> <span class="n">Fvsfuels</span><span class="p">(</span><span class="s">&quot;iec&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stand001</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s">&quot;/Users/standfire/test/example.key&quot;</span><span class="p">)</span>
-<span class="go">TIMEINT not found in keyword file, default is 10 years</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stand001</span><span class="o">.</span><span class="n">keywords</span>
-<span class="go">{&#39;TIMEINT&#39;: 10, &#39;NUMCYCLE&#39;: 10, &#39;INVYEAR&#39;: 2010, &#39;SVS&#39;: 15, &#39;FUELOUT&#39;: 1}</span>
-</pre></div>
+<p>Contens:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Fvsfuels.html">Fvsfuels</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Fvsfuels.html#set-keyword">set_keyword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fvsfuels.html#set-dir">set_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fvsfuels.html#set-num-cycles">set_num_cycles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fvsfuels.html#set-time-int">set_time_int</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fvsfuels.html#set-inv-year">set_inv_year</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fvsfuels.html#run-fvs">run_fvs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fvsfuels.html#get-simulation-years">get_simulation_years</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fvsfuels.html#get-trees">get_trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fvsfuels.html#get-snags">get_snags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fvsfuels.html#get-standid">get_standid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fvsfuels.html#save-trees-by-year">save_trees_by_year</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fvsfuels.html#save-snags-by-year">save_snags_by_year</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Inventory.html">Inventory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Inventory.html#read-inventory">read_inventory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Inventory.html#print-format-standards">print_format_standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Inventory.html#get-fvs-cols">get_fvs_cols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Inventory.html#get-stands">get_stands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Inventory.html#crwratio-percent-to-code">crwratio_percent_to_code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Inventory.html#format-fvs-tree-file">format_fvs_tree_file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Inventory.html#save">save</a></li>
+</ul>
+</li>
+</ul>
 </div>
-<p>The keyword file is setup to simulate 100 years at a time interval of 10
-years. Lets change this to only simulate the inventory year.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">stand001</span><span class="o">.</span><span class="n">set_num_cycles</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stand001</span><span class="o">.</span><span class="n">keywords</span>
-<span class="go">{&#39;TIMEINT&#39;: 10, &#39;NUMCYCLE&#39;: 0, &#39;INVYEAR&#39;: 2010, &#39;SVS&#39;: 15, &#39;FUELOUT&#39;: 1}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stand001</span><span class="o">.</span><span class="n">run_fvs</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Now we can write the trees data frame to disk</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">stand001</span><span class="o">.</span><span class="n">save_trees_by_year</span><span class="p">(</span><span class="mi">2010</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The argument must match one of the available variant in the
-PyFVS module. Search through standfire/pyfvs/ to see all
-variants</p>
-</div>
-<dl class="method">
-<dt id="fuels.Fvsfuels.get_obj_data">
-<code class="descname">get_obj_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_obj_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_obj_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.get_simulation_years">
-<code class="descname">get_simulation_years</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_simulation_years"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_simulation_years" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.get_snags">
-<code class="descname">get_snags</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_snags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_snags" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.get_spcodes">
-<code class="descname">get_spcodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_spcodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_spcodes" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.get_standid">
-<code class="descname">get_standid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_standid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_standid" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.get_trees">
-<code class="descname">get_trees</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_trees"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_trees" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.run_fvs">
-<code class="descname">run_fvs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.run_fvs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.run_fvs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.save_all">
-<code class="descname">save_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.save_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.save_all" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.save_snags_by_year">
-<code class="descname">save_snags_by_year</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.save_snags_by_year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.save_snags_by_year" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.save_trees_by_year">
-<code class="descname">save_trees_by_year</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.save_trees_by_year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.save_trees_by_year" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.set_dir">
-<code class="descname">set_dir</code><span class="sig-paren">(</span><em>wdir</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_dir" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the working directory of a Fvsfuels object</p>
-<p>This method is called by Fvsfuels.set_keyword(). Thus, the default
-working directory is the folder containing the specified keyword file. 
-If you wish to store simulation outputs in a different directory then
-use this methods to do so.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wdir</strong> (<em>string</em>) &#8211; path/to/desired_directory</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuel</span> <span class="kn">import</span> <span class="n">Fvsfuels</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">test</span> <span class="o">=</span> <span class="n">Fvsfuels</span><span class="p">(</span><span class="s">&quot;emc&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s">&quot;/Users/standfire/test/example.key&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Whoops, I would like to store simulation outputs elsewhere...</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="o">.</span><span class="n">set_dir</span><span class="p">(</span><span class="s">&quot;/Users/standfire/outputs/&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.set_inv_year">
-<code class="descname">set_inv_year</code><span class="sig-paren">(</span><em>inv_year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_inv_year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_inv_year" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.set_keyword">
-<code class="descname">set_keyword</code><span class="sig-paren">(</span><em>keyfile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_keyword"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_keyword" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the keyword file to be used in the FVS simulation</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">2015-8-12</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Authors:</th><td class="field-body">Lucas Wells</td>
-</tr>
-</tbody>
-</table>
-<p>This method will initalize a FVS simulation by registering the
-specified keyword file (.key) with FVS. The working directory of a
-Fvsfuels object will be set to the folder containing the keyword file. 
-You can manually change the working directory with Fvsfuels.set_dir(). 
-This function will also call private methods in this class to extract
-information from the keyword file and set class fields accordingly for
-use in other methods.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>keyfile</strong> (<em>string</em>) &#8211; path/to/keyword_file. This must have a .key extension</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Example:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuels</span> <span class="kn">import</span> <span class="n">Fvsfuels</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">test</span> <span class="o">=</span> <span class="n">Fvsfuels</span><span class="p">(</span><span class="s">&quot;iec&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s">&quot;/Users/standfire/test/example.key&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.set_num_cycles">
-<code class="descname">set_num_cycles</code><span class="sig-paren">(</span><em>num_cyc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_num_cycles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_num_cycles" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.set_time_int">
-<code class="descname">set_time_int</code><span class="sig-paren">(</span><em>time_int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_time_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_time_int" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="fuels.Inventory">
-<em class="property">class </em><code class="descclassname">fuels.</code><code class="descname">Inventory</code><a class="reference internal" href="_modules/fuels.html#Inventory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Inventory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>This class contains methods for converting inventory data to FVS .tre
-format</p>
-<p>This class currently does not read inventory data from an FVS access
-database.  The FVS_TreeInit database first needs to be exported as comma
-delimited values. Multiple stands can be exported in the same file, the
-<code class="docutils literal"><span class="pre">formatFvsTreeFile()</span></code> function will format a .tre string for each stand.
-All column headings must be default headings and unaltered during export.
-You can view the default format by importing this class and typing <code class="docutils literal"><span class="pre">FMT</span></code>.
-See the FVS guide <a class="footnote-reference" href="#id2" id="id1">[1]</a> for more information regarding the format of .tre
-files.</p>
-<p><strong>Example:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire</span> <span class="kn">import</span> <span class="n">inventory</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">toDotTree</span> <span class="o">=</span> <span class="n">inventory</span><span class="o">.</span><span class="n">Inventory</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">toDotTree</span><span class="o">.</span><span class="n">readInventory</span><span class="p">(</span><span class="s">&quot;path/to/FVS_TreeInit.csv&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">toDotTree</span><span class="o">.</span><span class="n">formatFvsTreeFile</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">toDotTree</span><span class="o">.</span><span class="n">writeFvsTreeFile</span><span class="p">()</span>
-</pre></div>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">References:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Gary E. Dixon, Essential FVS: A User&#8217;s Guide to the Forest
-Vegetation Simulator Tech. Rep., U.S. Department of Agriculture , Forest
-Service, Forest Management Service Center, Fort Collins, Colo, USA, 2003.</td></tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="fuels.Inventory.crwratioPercentToCode">
-<code class="descname">crwratioPercentToCode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Inventory.crwratioPercentToCode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Inventory.crwratioPercentToCode" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts crown ratio from percent to ICR code</p>
-<p>ICR code is described in the Essential FVS Guide on pages 58 and 59.
-This method should only be used if crown ratios values are percentages
-in the FVS_TreeInit.csv.  If you use this method before calling
-<cite>formatFvsTreeFile()</cite> then you must set the optional argument
-<code class="docutils literal"><span class="pre">cratioToCode</span></code> to <code class="docutils literal"><span class="pre">False</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fuels.Inventory.formatFvsTreeFile">
-<code class="descname">formatFvsTreeFile</code><span class="sig-paren">(</span><em>cratioToCode=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Inventory.formatFvsTreeFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Inventory.formatFvsTreeFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts data in FVS_TreeInit.csv to FVS .tre format</p>
-<p>This methods reads entries in the pandas data frame (<code class="docutils literal"><span class="pre">self.data</span></code>) and
-writes them to a formated text string following FVS .tre data formating
-standards shown in <code class="docutils literal"><span class="pre">FMT</span></code>.  If multiple stands exist in <code class="docutils literal"><span class="pre">self.data</span></code>
-then each stand will written as a (key,value) pair in
-<code class="docutils literal"><span class="pre">self.fvsTreeFile</span></code> where the key is the stand ID and the value is the
-formated text string.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cratioToCode</strong> (<em>boolean</em>) &#8211; default = True</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If the <code class="docutils literal"><span class="pre">crwratioPercentToCode()</span></code> methods has
-been called prior to call this methods, then the <code class="docutils literal"><span class="pre">cratioToCode</span></code>
-optional argument must be set to <code class="docutils literal"><span class="pre">False</span></code> to prevent errors in crown
-ratio values.</p>
-</div>
-<p><strong>Example:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">toDotTree</span><span class="o">.</span><span class="n">formatFvsTreeFile</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">toDotTree</span><span class="o">.</span><span class="n">fvsTreeFile</span><span class="p">[</span><span class="s">&#39;Stand_ID_1&#39;</span><span class="p">]</span>
-<span class="go">5   1  5     0PP 189    65        3                 0 0</span>
-<span class="go">5   2  15    0PP 110    52        2                 0 0</span>
-<span class="go">5   3  5     0PP 180    64        5                 0 0</span>
-<span class="go">5   4  14    0PP 112    56        3                 0 0</span>
-<span class="go">5   5  6     0PP 167    60        4                 0 0</span>
-<span class="go">5   6  5     0PP 190    60        5                 0 0</span>
-<span class="go">5   7  7     0PP 161    62        3                 0 0</span>
-<span class="go">5   8  86    0PP 46     37        1                 0 0</span>
-<span class="go">5   9  10    0PP 130    50        2                 0 0</span>
-<span class="go">5   10 5     0PP 182    60        3                 0 0</span>
-<span class="go">5   11 8     9PP 144    50                          0 0</span>
-<span class="go">6   1  16    0PP 107    42        4                 0 0</span>
-<span class="go">6   2  109   0PP 41     27        2                 0 0</span>
-<span class="gp">...</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="fuels.Inventory.getFvsColumns">
-<em class="property">classmethod </em><code class="descname">getFvsColumns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Inventory.getFvsColumns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Inventory.getFvsColumns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get list of FVS standard columns</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fuels.Inventory.getStands">
-<code class="descname">getStands</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Inventory.getStands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Inventory.getStands" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns unique stand IDs</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">Return standIDs:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">list of Strings</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Example:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">toDotTree</span><span class="o">.</span><span class="n">getStands</span><span class="p">()</span>
-<span class="go">[&#39;BR&#39;, &#39;TM&#39;, &#39;SW&#39;, HB&#39;]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="fuels.Inventory.printFormatStandards">
-<em class="property">classmethod </em><code class="descname">printFormatStandards</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Inventory.printFormatStandards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Inventory.printFormatStandards" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print FVS formating standards</p>
-<p>The FVS formating standard for .tre files as described in the Essenital
-FVS Guide is stored in <code class="docutils literal"><span class="pre">FMT</span></code> as a class attribute.  This method
-is for viewing this format.  The keys of the dictionary are the column
-headings and values are as follows: 0 = variable name, 1 = variable
-type, 2 = column location, 3 = units, and 4 = implied decimal place.</p>
-<p><strong>Example:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">toDotTree</span><span class="o">.</span><span class="n">printFormatStandards</span><span class="p">()</span>
-<span class="go">{&#39;Plot_ID&#39;       : [&#39;ITRE&#39;,      &#39;integer&#39;,  [0,3],   None,      None],</span>
-<span class="go"> &#39;Tree_ID&#39;       : [&#39;IDTREE2&#39;,   &#39;integer&#39;,  [4,6],   None,      None],</span>
-<span class="go"> &#39;Tree_Count&#39;    : [&#39;PROB&#39;,      &#39;integer&#39;,  [7,12],  None,      None],</span>
-<span class="go"> &#39;History&#39;       : [&#39;ITH&#39;,       &#39;integer&#39;,  [13,13], &#39;trees&#39;,   0   ],</span>
-<span class="go"> &#39;Species&#39;       : [&#39;ISP&#39;,       &#39;alphanum&#39;, [14,16], None,      None],</span>
-<span class="go"> &#39;DBH&#39;           : [&#39;DBH&#39;,       &#39;real&#39;,     [17,20], &#39;inches&#39;,  1   ],</span>
-<span class="go"> &#39;DG&#39;            : [&#39;DG&#39;,        &#39;real&#39;,     [21,23], &#39;inches&#39;,  1   ],</span>
-<span class="go"> &#39;Ht&#39;            : [&#39;HT&#39;,        &#39;real&#39;,     [24,26], &#39;feet&#39;,    0   ],</span>
-<span class="go"> &#39;HtTopK&#39;        : [&#39;THT&#39;,       &#39;real&#39;,     [27,29], &#39;feet&#39;,    0   ],</span>
-<span class="go"> &#39;HTG&#39;           : [&#39;HTG&#39;,       &#39;real&#39;,     [30,33], &#39;feet&#39;,    1   ],</span>
-<span class="go"> &#39;CrRatio&#39;       : [&#39;ICR&#39;,       &#39;integer&#39;,  [34,34], None,      None],</span>
-<span class="go"> &#39;Damage1&#39;       : [&#39;IDCD(1)&#39;,   &#39;integer&#39;,  [35,36], None,      None],</span>
-<span class="go"> &#39;Severity1&#39;     : [&#39;IDCD(2)&#39;,   &#39;integer&#39;,  [37,38], None,      None],</span>
-<span class="go"> &#39;Damage2&#39;       : [&#39;IDCD(3)&#39;,   &#39;integer&#39;,  [39,40], None,      None],</span>
-<span class="go"> &#39;Severity2&#39;     : [&#39;IDCD(4)&#39;,   &#39;integer&#39;,  [41,42], None,      None],</span>
-<span class="go"> &#39;Damage3&#39;       : [&#39;IDCD(5)&#39;,   &#39;integer&#39;,  [43,44], None,      None],</span>
-<span class="go"> &#39;Severity3&#39;     : [&#39;IDCD(6)&#39;,   &#39;integer&#39;,  [45,46], None,      None],</span>
-<span class="go"> &#39;TreeValue&#39;     : [&#39;IMC&#39;,       &#39;integer&#39;,  [47,47], None,      None],</span>
-<span class="go"> &#39;Prescription&#39;  : [&#39;IPRSC&#39;,     &#39;integer&#39;,  [48,48], None,      None],</span>
-<span class="go"> &#39;Slope&#39;         : [&#39;IPVARS(1)&#39;, &#39;integer&#39;,  [49,50], &#39;percent&#39;, None],</span>
-<span class="go"> &#39;Aspect&#39;        : [&#39;IPVARS(2)&#39;, &#39;integer&#39;,  [51,53], &#39;code&#39;,    None],</span>
-<span class="go"> &#39;PV_Code&#39;       : [&#39;IPVARS(3)&#39;, &#39;integer&#39;,  [54,56], &#39;code&#39;,    None],</span>
-<span class="go"> &#39;TopoCode&#39;      : [&#39;IPVARS(4)&#39;, &#39;integer&#39;,  [57,59], &#39;code&#39;,    None],</span>
-<span class="go"> &#39;SitePrep&#39;      : [&#39;IPVARS(5)&#39;, &#39;integer&#39;,  [58,58], &#39;code&#39;,    None],</span>
-<span class="go"> &#39;Age&#39;           : [&#39;ABIRTH&#39;,    &#39;real&#39;,     [59,61], &#39;years&#39;,   0   ]}</span>
-</pre></div>
-</div>
-<p>See page 61 and 62 in the Essential FVS Guide.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fuels.Inventory.readInventoryCSV">
-<code class="descname">readInventoryCSV</code><span class="sig-paren">(</span><em>fname</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Inventory.readInventoryCSV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Inventory.readInventoryCSV" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads a .csv file containing tree records.</p>
-<p>The csv must be in the correct format as described in <code class="docutils literal"><span class="pre">FMT</span></code>.  This
-method check the format of the file by calling a private method
-<code class="docutils literal"><span class="pre">_isCorrectFormat()</span></code> that raises a value error.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fname</strong> (<em>string</em>) &#8211; path to and file name of the Fvs_TreeInit.csv file</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Example:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire</span> <span class="kn">import</span> <span class="n">inventory</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">toDotTree</span> <span class="o">=</span> <span class="n">inventory</span><span class="o">.</span><span class="n">Inventory</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">toDotTree</span><span class="o">.</span><span class="n">readInventory</span><span class="p">(</span><span class="s">&quot;path/to/FVS_TreeInit.csv&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">toDotTree</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;DBH&#39;</span><span class="p">])</span>
-<span class="go">9.0028318584070828</span>
-</pre></div>
-</div>
-<p>The <code class="docutils literal"><span class="pre">readInventory()</span></code> method stores the data in a pandas data frame.
-There are countless operations that can be performed on these objects.
-For example, we can explore the relationship between diameter and
-height by fitting a linear model</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">as</span> <span class="nn">sm</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fit</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s">&quot;HT ~ DBH&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">test</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">fit</span><span class="o">.</span><span class="n">params</span>
-<span class="go">Intercept    19.688167</span>
-<span class="go">DBH           2.161420</span>
-<span class="go">dtype: float64</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">fit</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
-<span class="go">OLS Regression Results</span>
-<span class="go">==============================================================================</span>
-<span class="go">Dep. Variable:                     Ht   R-squared:                       0.738</span>
-<span class="go">Model:                            OLS   Adj. R-squared:                  0.736</span>
-<span class="go">Method:                 Least Squares   F-statistic:                     351.8</span>
-<span class="go">Date:                Tue, 07 Jul 2015   Prob (F-statistic):           3.77e-38</span>
-<span class="go">Time:                        08:32:02   Log-Likelihood:                -407.10</span>
-<span class="go">No. Observations:                 127   AIC:                             818.2</span>
-<span class="go">Df Residuals:                     125   BIC:                             823.9</span>
-<span class="go">Df Model:                           1</span>
-<span class="go">Covariance Type:            nonrobust</span>
-<span class="go">==============================================================================</span>
-<span class="go">coef    std err          t      P&gt;|t|      [95.0% Conf. Int.]</span>
-<span class="go">------------------------------------------------------------------------------</span>
-<span class="go">Intercept     19.6882      1.205     16.338      0.000        17.303    22.073</span>
-<span class="go">DBH            2.1614      0.115     18.757      0.000         1.933     2.389</span>
-<span class="go">==============================================================================</span>
-<span class="go">Omnibus:                        2.658   Durbin-Watson:                   0.995</span>
-<span class="go">Prob(Omnibus):                  0.265   Jarque-Bera (JB):                2.115</span>
-<span class="go">Skew:                          -0.251   Prob(JB):                        0.347</span>
-<span class="go">Kurtosis:                       3.385   Cond. No.                         23.8</span>
-<span class="go">==============================================================================</span>
-</pre></div>
-</div>
-<p>Read more about pandas at <a class="reference external" href="http://pandas.pydata.org/">http://pandas.pydata.org/</a></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fuels.Inventory.writeFvsTreeFile">
-<code class="descname">writeFvsTreeFile</code><span class="sig-paren">(</span><em>outputPath</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Inventory.writeFvsTreeFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Inventory.writeFvsTreeFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes formated fvs tree files to specified location</p>
-<p>If multiple stands exist in the FVS_TreeInit then the same number of
-files will be created in the specified directory.  The file names
-will be the same as the Stand_ID with a <code class="docutils literal"><span class="pre">.tre</span></code> extension.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>outputPath</strong> (<em>string</em>) &#8211; directory to store output .tre files</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This method will throw an error if it is called prior to the
-<code class="docutils literal"><span class="pre">formatFvsTreeFile()</span></code> method.</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 
 
@@ -495,8 +104,11 @@ will be the same as the Stand_ID with a <code class="docutils literal"><span cla
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Welcome to standfire&#8217;s documentation!</a></p>
+  <p class="topless"><a href="api_ref.html"
+                        title="previous chapter">STANDFIRE API Reference</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Fvsfuels.html"
+                        title="next chapter">Fvsfuels</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -531,9 +143,13 @@ will be the same as the Stand_ID with a <code class="docutils literal"><span cla
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to standfire’s documentation!"
+          <a href="Fvsfuels.html" title="Fvsfuels"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="api_ref.html" title="STANDFIRE API Reference"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">standfire 1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">standfire  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="api_ref.html" >STANDFIRE API Reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

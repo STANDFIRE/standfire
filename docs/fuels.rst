@@ -2,6 +2,15 @@ fuels module
 ============
 
 .. automodule:: fuels
-    :members:
-    :undoc-members:
-    :show-inheritance:
+
+Contens:
+
+.. toctree::
+   :maxdepth: 4
+
+   Fvsfuels
+   Inventory
+
+
+
+

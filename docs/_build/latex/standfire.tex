@@ -19,10 +19,10 @@
 
 
 
-\title{standfire Documentation}
-\date{December 07, 2015}
+\title{STANDFIRE}
+\date{December 08, 2015}
 \release{}
-\author{Author}
+\author{Lucas Wells, Greg Cohn, Russell Parsons, and Matt Jolly}
 \newcommand{\sphinxlogo}{}
 \renewcommand{\releasename}{Release}
 \makeindex
@@ -133,83 +133,139 @@
 Contents:
 
 
-\chapter{fuels module}
-\label{fuels:welcome-to-standfire-s-documentation}\label{fuels:module-fuels}\label{fuels::doc}\label{fuels:fuels-module}\index{fuels (module)}
-Created on Mon Dec  7 17:49:52 2015
+\chapter{STANDFIRE User Guide}
+\label{user_guide:standfire-user-guide}\label{user_guide::doc}\label{user_guide:welcome-to-standfire}
 
-@author: lucas wells
-\index{Fvsfuels (class in fuels)}
+\section{Examples}
+\label{user_guide:examples}
+
+\chapter{STANDFIRE API Reference}
+\label{api_ref:standfire-api-reference}\label{api_ref::doc}
+Contents:
+
+
+\section{fuels module}
+\label{fuels:module-fuels}\label{fuels::doc}\label{fuels:fuels-module}\index{fuels (module)}
+The fuels module is a collection of classes that deal with forest fuel
+calculations.
+\begin{description}
+\item[{\textbf{Fvsfuels}}] \leavevmode
+Uses FVS and an input inventory to calculate canopy fuels at the
+individual tree level
+
+\item[{\textbf{Inventory}}] \leavevmode
+Methods for converting inventory data to FVS tree list format
+
+\end{description}
+
+Contens:
+
+
+\subsection{Fvsfuels}
+\label{Fvsfuels::doc}\label{Fvsfuels:fvsfuels}\index{Fvsfuels (class in fuels)}
 
 \begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels}\pysiglinewithargsret{\strong{class }\code{fuels.}\bfcode{Fvsfuels}}{\emph{variant}}{}
-Bases: \code{object}
-\index{get\_obj\_data() (fuels.Fvsfuels method)}
+\phantomsection\label{Fvsfuels:fuels.Fvsfuels}\pysiglinewithargsret{\strong{class }\code{fuels.}\bfcode{Fvsfuels}}{\emph{variant}}{}
+A Fvsfuels object is used to calculate component fuels at the individual 
+tree level using the Forest Vegetation Simulator. To create an instance
+of this class you need two items: a keyword file (.key) and tree list file
+(.tre) with the same prefix as the keyword file. If you don't already have
+a tree list file then you can use \code{{}`fuels.Inventory{}`} class to generate
+one.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\textbf{\texttt{variant}} (\emph{\texttt{string}}) -- FVS variant to be imported
 
-\begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.get_obj_data}\pysiglinewithargsret{\bfcode{get\_obj\_data}}{}{}
+\end{description}\end{quote}
+
+\textbf{Example:}
+
+A basic example to extract live canopy biomass for individual trees during
+year of inventory
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{standfire.fuels} \PYG{k+kn}{import} \PYG{n}{Fvsfuels}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand001} \PYG{o}{=} \PYG{n}{Fvsfuels}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{iec}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand001}\PYG{o}{.}\PYG{n}{set\PYGZus{}keyword}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{/Users/standfire/test/example.key}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\PYG{g+go}{TIMEINT not found in keyword file, default is 10 years}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand001}\PYG{o}{.}\PYG{n}{keywords}
+\PYG{g+go}{\PYGZob{}\PYGZsq{}TIMEINT\PYGZsq{}: 10, \PYGZsq{}NUMCYCLE\PYGZsq{}: 10, \PYGZsq{}INVYEAR\PYGZsq{}: 2010, \PYGZsq{}SVS\PYGZsq{}: 15, \PYGZsq{}FUELOUT\PYGZsq{}: 1\PYGZcb{}}
+\end{Verbatim}
+
+The keyword file is setup to simulate 100 years at a time interval of 10
+years. Lets change this to only simulate the inventory year.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand001}\PYG{o}{.}\PYG{n}{set\PYGZus{}num\PYGZus{}cycles}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand001}\PYG{o}{.}\PYG{n}{keywords}
+\PYG{g+go}{\PYGZob{}\PYGZsq{}TIMEINT\PYGZsq{}: 10, \PYGZsq{}NUMCYCLE\PYGZsq{}: 0, \PYGZsq{}INVYEAR\PYGZsq{}: 2010, \PYGZsq{}SVS\PYGZsq{}: 15, \PYGZsq{}FUELOUT\PYGZsq{}: 1\PYGZcb{}}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand001}\PYG{o}{.}\PYG{n}{run\PYGZus{}fvs}\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+Now we can write the trees data frame to disk
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand001}\PYG{o}{.}\PYG{n}{save\PYGZus{}trees\PYGZus{}by\PYGZus{}year}\PYG{p}{(}\PYG{l+m+mi}{2010}\PYG{p}{)}
+\end{Verbatim}
+
+\begin{notice}{note}{Note:}
+The argument must match one of the available variant in the
+PyFVS module. Search through standfire/pyfvs/ to see all
+variants
+\end{notice}
+
 \end{fulllineitems}
 
-\index{get\_simulation\_years() (fuels.Fvsfuels method)}
+
+
+\subsubsection{set\_keyword}
+\label{Fvsfuels:set-keyword}\index{set\_keyword() (fuels.Fvsfuels method)}
 
 \begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.get_simulation_years}\pysiglinewithargsret{\bfcode{get\_simulation\_years}}{}{}
+\phantomsection\label{Fvsfuels:fuels.Fvsfuels.set_keyword}\pysiglinewithargsret{\code{Fvsfuels.}\bfcode{set\_keyword}}{\emph{keyfile}}{}
+Sets the keyword file to be used in the FVS simulation
+\begin{quote}\begin{description}
+\item[{Date}] \leavevmode
+2015-8-12
+
+\item[{Authors}] \leavevmode
+Lucas Wells
+
+\end{description}\end{quote}
+
+This method will initalize a FVS simulation by registering the
+specified keyword file (.key) with FVS. The working directory of a
+Fvsfuels object will be set to the folder containing the keyword file. 
+You can manually change the working directory with Fvsfuels.set\_dir(). 
+This function will also call private methods in this class to extract
+information from the keyword file and set class fields accordingly for
+use in other methods.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\textbf{\texttt{keyfile}} (\emph{\texttt{string}}) -- path/to/keyword\_file. This must have a .key extension
+
+\end{description}\end{quote}
+
+\textbf{Example:}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{standfire.fuels} \PYG{k+kn}{import} \PYG{n}{Fvsfuels}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{test} \PYG{o}{=} \PYG{n}{Fvsfuels}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{iec}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{test}\PYG{o}{.}\PYG{n}{set\PYGZus{}keyword}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{/Users/standfire/test/example.key}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\end{Verbatim}
+
 \end{fulllineitems}
 
-\index{get\_snags() (fuels.Fvsfuels method)}
+
+
+\subsubsection{set\_dir}
+\label{Fvsfuels:set-dir}\index{set\_dir() (fuels.Fvsfuels method)}
 
 \begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.get_snags}\pysiglinewithargsret{\bfcode{get\_snags}}{\emph{year}}{}
-\end{fulllineitems}
-
-\index{get\_spcodes() (fuels.Fvsfuels method)}
-
-\begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.get_spcodes}\pysiglinewithargsret{\bfcode{get\_spcodes}}{}{}
-\end{fulllineitems}
-
-\index{get\_standid() (fuels.Fvsfuels method)}
-
-\begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.get_standid}\pysiglinewithargsret{\bfcode{get\_standid}}{}{}
-\end{fulllineitems}
-
-\index{get\_trees() (fuels.Fvsfuels method)}
-
-\begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.get_trees}\pysiglinewithargsret{\bfcode{get\_trees}}{\emph{year}}{}
-\end{fulllineitems}
-
-\index{run\_fvs() (fuels.Fvsfuels method)}
-
-\begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.run_fvs}\pysiglinewithargsret{\bfcode{run\_fvs}}{}{}
-\end{fulllineitems}
-
-\index{save\_all() (fuels.Fvsfuels method)}
-
-\begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.save_all}\pysiglinewithargsret{\bfcode{save\_all}}{}{}
-\end{fulllineitems}
-
-\index{save\_snags\_by\_year() (fuels.Fvsfuels method)}
-
-\begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.save_snags_by_year}\pysiglinewithargsret{\bfcode{save\_snags\_by\_year}}{\emph{year}}{}
-\end{fulllineitems}
-
-\index{save\_trees\_by\_year() (fuels.Fvsfuels method)}
-
-\begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.save_trees_by_year}\pysiglinewithargsret{\bfcode{save\_trees\_by\_year}}{\emph{year}}{}
-\end{fulllineitems}
-
-\index{set\_dir() (fuels.Fvsfuels method)}
-
-\begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.set_dir}\pysiglinewithargsret{\bfcode{set\_dir}}{\emph{wdir}}{}
+\phantomsection\label{Fvsfuels:fuels.Fvsfuels.set_dir}\pysiglinewithargsret{\code{Fvsfuels.}\bfcode{set\_dir}}{\emph{wdir}}{}
 Sets the working directory of a Fvsfuels object
 
-This methods is called by Fvsfuels.set\_keyword(). Thus, the default
+This method is called by \code{Fvsfuels.set\_keyword()}. Thus, the default
 working directory is the folder containing the specified keyword file. 
 If you wish to store simulation outputs in a different directory then
 use this methods to do so.
@@ -234,52 +290,491 @@ Whoops, I would like to store simulation outputs elsewhere...
 
 \end{fulllineitems}
 
-\index{set\_inv\_year() (fuels.Fvsfuels method)}
+
+
+\subsubsection{set\_num\_cycles}
+\label{Fvsfuels:set-num-cycles}\index{set\_num\_cycles() (fuels.Fvsfuels method)}
 
 \begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.set_inv_year}\pysiglinewithargsret{\bfcode{set\_inv\_year}}{\emph{inv\_year}}{}
-\end{fulllineitems}
-
-\index{set\_keyword() (fuels.Fvsfuels method)}
-
-\begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.set_keyword}\pysiglinewithargsret{\bfcode{set\_keyword}}{\emph{keyfile}}{}
-Sets the keyword file to be used in the FVS simulation
-
-This method will initalize a FVS simulation by registering the
-specified keyword file (.key) with FVS. The working directory of a
-Fvsfuels object will be set to the folder containing the keyword file. 
-You can manually change the working directory with Fvsfuels.set\_dir(). 
-This function will also call private methods in this class to extract
-information from the keyword file and set class fields accordingly for
-use in other methods.
+\phantomsection\label{Fvsfuels:fuels.Fvsfuels.set_num_cycles}\pysiglinewithargsret{\code{Fvsfuels.}\bfcode{set\_num\_cycles}}{\emph{num\_cyc}}{}
+Sets number of cycles for FVS simulation
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\textbf{\texttt{keyfile}} (\emph{\texttt{string}}) -- path/to/keyword\_file. This must have a .key extension
+\textbf{\texttt{num\_cyc}} (\emph{\texttt{int}}) -- number of simulation cycles
 
-\item[{Example}] \leavevmode
 \end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+
+\subsubsection{set\_time\_int}
+\label{Fvsfuels:set-time-int}\index{set\_time\_int() (fuels.Fvsfuels method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Fvsfuels:fuels.Fvsfuels.set_time_int}\pysiglinewithargsret{\code{Fvsfuels.}\bfcode{set\_time\_int}}{\emph{time\_int}}{}
+Sets time interval for FVS simulation
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\textbf{\texttt{time\_int}} (\emph{\texttt{int}}) -- length of simulation time step
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+
+\subsubsection{set\_inv\_year}
+\label{Fvsfuels:set-inv-year}\index{set\_inv\_year() (fuels.Fvsfuels method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Fvsfuels:fuels.Fvsfuels.set_inv_year}\pysiglinewithargsret{\code{Fvsfuels.}\bfcode{set\_inv\_year}}{\emph{inv\_year}}{}
+Sets inventory year for FVS simulation
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\textbf{\texttt{inv\_year}} (\emph{\texttt{int}}) -- year of the inventory
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+
+\subsubsection{run\_fvs}
+\label{Fvsfuels:run-fvs}\index{run\_fvs() (fuels.Fvsfuels method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Fvsfuels:fuels.Fvsfuels.run_fvs}\pysiglinewithargsret{\code{Fvsfuels.}\bfcode{run\_fvs}}{}{}
+Runs the FVS simulation
+
+This method run a FVS simulation using the previously specified keyword
+file. The simulation will be paused at each time interval and the trees
+and snag data collected and appended to the fuels attribute of the 
+Fvsfuels object.
+
+\textbf{Example:}
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{standfire.fuels} \PYG{k+kn}{import} \PYG{n}{Fvsfuels}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{test} \PYG{o}{=} \PYG{n}{Fvsfuels}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{iec}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{test}\PYG{o}{.}\PYG{n}{set\PYGZus{}keyword}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{/Users/standfire/test/example.key}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand010} \PYG{o}{=} \PYG{n}{Fvsfuels}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{iec}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand010}\PYG{o}{.}\PYG{n}{set\PYGZus{}keyword}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{/Users/standfire/example/test.key}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand010}\PYG{o}{.}\PYG{n}{run\PYGZus{}fvs}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand010}\PYG{o}{.}\PYG{n}{fuels}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{trees}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{2010}\PYG{p}{]}
+\PYG{g+go}{xloc    yloc    species   dbh     ht    crd    cratio  crownwt0  crownwt1 ...}
+\PYG{g+go}{33.49  108.58   PIPO     19.43   68.31  8.77     25    33.46      4.7   }
+\PYG{g+go}{24.3    90.4    PIPO     11.46   56.6   5.63     15     6.55     2.33  }
+\PYG{g+go}{88.84  162.98   PIPO     18.63   67.76  9.48     45    75.88     6.89}
+\PYG{g+gp}{...}
 \end{Verbatim}
 
 \end{fulllineitems}
 
-\index{set\_num\_cycles() (fuels.Fvsfuels method)}
+
+
+\subsubsection{get\_simulation\_years}
+\label{Fvsfuels:get-simulation-years}\index{get\_simulation\_years() (fuels.Fvsfuels method)}
 
 \begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.set_num_cycles}\pysiglinewithargsret{\bfcode{set\_num\_cycles}}{\emph{num\_cyc}}{}
+\phantomsection\label{Fvsfuels:fuels.Fvsfuels.get_simulation_years}\pysiglinewithargsret{\code{Fvsfuels.}\bfcode{get\_simulation\_years}}{}{}
+Returns a list of the simulated years
+\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+simulated year
+
+\item[{Return type}] \leavevmode
+list of integers
+
+\end{description}\end{quote}
+
 \end{fulllineitems}
 
-\index{set\_time\_int() (fuels.Fvsfuels method)}
+
+
+\subsubsection{get\_trees}
+\label{Fvsfuels:get-trees}\index{get\_trees() (fuels.Fvsfuels method)}
 
 \begin{fulllineitems}
-\phantomsection\label{fuels:fuels.Fvsfuels.set_time_int}\pysiglinewithargsret{\bfcode{set\_time\_int}}{\emph{time\_int}}{}
+\phantomsection\label{Fvsfuels:fuels.Fvsfuels.get_trees}\pysiglinewithargsret{\code{Fvsfuels.}\bfcode{get\_trees}}{\emph{year}}{}
+Returns pandas data fram of the trees by indexed year
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\textbf{\texttt{year}} (\emph{\texttt{int}}) -- simulation year of the data frame to return
+
+\item[{Returns}] \leavevmode
+data frame of trees at indexed year
+
+\item[{Return type}] \leavevmode
+pandas dataframe
+
+\end{description}\end{quote}
+
+\begin{notice}{note}{Note:}
+If a data frame for the specified year does not exist then
+a message will be printed to the console.
+\end{notice}
+
 \end{fulllineitems}
 
+
+
+\subsubsection{get\_snags}
+\label{Fvsfuels:get-snags}\index{get\_snags() (fuels.Fvsfuels method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Fvsfuels:fuels.Fvsfuels.get_snags}\pysiglinewithargsret{\code{Fvsfuels.}\bfcode{get\_snags}}{\emph{year}}{}
+Returns pandas data fram of the snags by indexed year
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\textbf{\texttt{year}} (\emph{\texttt{int}}) -- simulation year of the data frame to return
+
+\item[{Returns}] \leavevmode
+data frame of snags at indexed year
+
+\item[{Return type}] \leavevmode
+pandas dataframe
+
+\end{description}\end{quote}
+
+\begin{notice}{note}{Note:}
+If a data frame for the specified year does not exist then
+a message will be printed to the console.
+\end{notice}
+
+\end{fulllineitems}
+
+
+
+\subsubsection{get\_standid}
+\label{Fvsfuels:get-standid}\index{get\_standid() (fuels.Fvsfuels method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Fvsfuels:fuels.Fvsfuels.get_standid}\pysiglinewithargsret{\code{Fvsfuels.}\bfcode{get\_standid}}{}{}
+Returns stand ID as defined in the keyword file of the class instance
+\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+stand ID value
+
+\item[{Return type}] \leavevmode
+string
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+
+\subsubsection{save\_trees\_by\_year}
+\label{Fvsfuels:save-trees-by-year}\index{save\_trees\_by\_year() (fuels.Fvsfuels method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Fvsfuels:fuels.Fvsfuels.save_trees_by_year}\pysiglinewithargsret{\code{Fvsfuels.}\bfcode{save\_trees\_by\_year}}{\emph{year}}{}
+Writes tree data frame at indexed year to .csv in working directory
+
+\end{fulllineitems}
+
+
+
+\subsubsection{save\_snags\_by\_year}
+\label{Fvsfuels:save-snags-by-year}\index{save\_snags\_by\_year() (fuels.Fvsfuels method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Fvsfuels:fuels.Fvsfuels.save_snags_by_year}\pysiglinewithargsret{\code{Fvsfuels.}\bfcode{save\_snags\_by\_year}}{\emph{year}}{}
+Writes snag data frame at indexed year to .csv in working directory
+
+\end{fulllineitems}
+
+
+
+\subsection{Inventory}
+\label{Inventory::doc}\label{Inventory:inventory}\index{Inventory (class in fuels)}
+
+\begin{fulllineitems}
+\phantomsection\label{Inventory:fuels.Inventory}\pysigline{\strong{class }\code{fuels.}\bfcode{Inventory}}
+This class contains methods for converting inventory data to FVS .tre
+format
+
+This class currently does not read inventory data from an FVS access
+database.  The FVS\_TreeInit database first needs to be exported as comma
+delimited values. Multiple stands can be exported in the same file, the
+\code{formatFvsTreeFile()} function will format a .tre string for each stand.
+All column headings must be default headings and unaltered during export.
+You can view the default format by importing this class and typing \code{FMT}.
+See the FVS guide \footnote[1]{
+Gary E. Dixon, Essential FVS: A User's Guide to the Forest
+Vegetation Simulator Tech. Rep., U.S. Department of Agriculture , Forest
+Service, Forest Management Service Center, Fort Collins, Colo, USA, 2003.
+} for more information regarding the format of .tre
+files.
+
+\textbf{Example:}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{standfire} \PYG{k+kn}{import} \PYG{n}{fuels}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{toDotTree} \PYG{o}{=} \PYG{n}{fuels}\PYG{o}{.}\PYG{n}{Inventory}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{toDotTree}\PYG{o}{.}\PYG{n}{read\PYGZus{}inventory}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{path/to/FVS\PYGZus{}TreeInit.csv}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{toDotTree}\PYG{o}{.}\PYG{n}{format\PYGZus{}fvs\PYGZus{}tree\PYGZus{}file}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{toDotTree}\PYG{o}{.}\PYG{n}{save}\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+\begin{quote}\begin{description}
+\item[{References}] \leavevmode
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+
+\subsubsection{read\_inventory}
+\label{Inventory:read-inventory}\index{read\_inventory() (fuels.Inventory method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Inventory:fuels.Inventory.read_inventory}\pysiglinewithargsret{\code{Inventory.}\bfcode{read\_inventory}}{\emph{fname}}{}
+Reads a .csv file containing tree records.
+
+The csv must be in the correct format as described in \code{FMT}.  This
+method check the format of the file by calling a private method
+\code{\_is\_correct\_format()} that raises a value error.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\textbf{\texttt{fname}} (\emph{\texttt{string}}) -- path to and file name of the Fvs\_TreeInit.csv file
+
+\end{description}\end{quote}
+
+\textbf{Example:}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{standfire} \PYG{k+kn}{import} \PYG{n}{fuels}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{toDotTree} \PYG{o}{=} \PYG{n}{fuels}\PYG{o}{.}\PYG{n}{Inventory}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{toDotTree}\PYG{o}{.}\PYG{n}{readInventory}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{path/to/FVS\PYGZus{}TreeInit.csv}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{np}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{n}{toDotTree}\PYG{o}{.}\PYG{n}{data}\PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{DBH}\PYG{l+s}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+go}{9.0028318584070828}
+\end{Verbatim}
+
+The \code{read\_inventory()} method stores the data in a pandas data frame.
+There are countless operations that can be performed on these objects.
+For example, we can explore the relationship between diameter and
+height by fitting a linear model
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{import} \PYG{n+nn}{statsmodels.formula.api} \PYG{k+kn}{as} \PYG{n+nn}{sm}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fit} \PYG{o}{=} \PYG{n}{sm}\PYG{o}{.}\PYG{n}{ols}\PYG{p}{(}\PYG{n}{formula}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{HT \PYGZti{} DBH}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{data}\PYG{o}{=}\PYG{n}{test}\PYG{o}{.}\PYG{n}{data}\PYG{p}{)}\PYG{o}{.}\PYG{n}{fit}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{print} \PYG{n}{fit}\PYG{o}{.}\PYG{n}{params}
+\PYG{g+go}{Intercept    19.688167}
+\PYG{g+go}{DBH           2.161420}
+\PYG{g+go}{dtype: float64}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{print} \PYG{n}{fit}\PYG{o}{.}\PYG{n}{summary}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{OLS Regression Results}
+\PYG{g+go}{==============================================================================}
+\PYG{g+go}{Dep. Variable:                     Ht   R\PYGZhy{}squared:                       0.738}
+\PYG{g+go}{Model:                            OLS   Adj. R\PYGZhy{}squared:                  0.736}
+\PYG{g+go}{Method:                 Least Squares   F\PYGZhy{}statistic:                     351.8}
+\PYG{g+go}{Date:                Tue, 07 Jul 2015   Prob (F\PYGZhy{}statistic):           3.77e\PYGZhy{}38}
+\PYG{g+go}{Time:                        08:32:02   Log\PYGZhy{}Likelihood:                \PYGZhy{}407.10}
+\PYG{g+go}{No. Observations:                 127   AIC:                             818.2}
+\PYG{g+go}{Df Residuals:                     125   BIC:                             823.9}
+\PYG{g+go}{Df Model:                           1}
+\PYG{g+go}{Covariance Type:            nonrobust}
+\PYG{g+go}{==============================================================================}
+\PYG{g+go}{coef    std err          t      P\PYGZgt{}\textbar{}t\textbar{}      [95.0\PYGZpc{} Conf. Int.]}
+\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{Intercept     19.6882      1.205     16.338      0.000        17.303    22.073}
+\PYG{g+go}{DBH            2.1614      0.115     18.757      0.000         1.933     2.389}
+\PYG{g+go}{==============================================================================}
+\PYG{g+go}{Omnibus:                        2.658   Durbin\PYGZhy{}Watson:                   0.995}
+\PYG{g+go}{Prob(Omnibus):                  0.265   Jarque\PYGZhy{}Bera (JB):                2.115}
+\PYG{g+go}{Skew:                          \PYGZhy{}0.251   Prob(JB):                        0.347}
+\PYG{g+go}{Kurtosis:                       3.385   Cond. No.                         23.8}
+\PYG{g+go}{==============================================================================}
+\end{Verbatim}
+
+Read more about pandas at \href{http://pandas.pydata.org/}{http://pandas.pydata.org/}
+
+\end{fulllineitems}
+
+
+
+\subsubsection{print\_format\_standards}
+\label{Inventory:print-format-standards}\index{print\_format\_standards() (fuels.Inventory method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Inventory:fuels.Inventory.print_format_standards}\pysiglinewithargsret{\code{Inventory.}\bfcode{print\_format\_standards}}{}{}
+Print FVS formating standards
+
+The FVS formating standard for .tre files as described in the Essenital
+FVS Guide is stored in \code{FMT} as a class attribute.  This method
+is for viewing this format.  The keys of the dictionary are the column
+headings and values are as follows: 0 = variable name, 1 = variable
+type, 2 = column location, 3 = units, and 4 = implied decimal place.
+
+\textbf{Example:}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{toDotTree}\PYG{o}{.}\PYG{n}{print\PYGZus{}format\PYGZus{}standards}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{\PYGZob{}\PYGZsq{}Plot\PYGZus{}ID\PYGZsq{}       : [\PYGZsq{}ITRE\PYGZsq{},      \PYGZsq{}integer\PYGZsq{},  [0,3],   None,      None],}
+\PYG{g+go}{ \PYGZsq{}Tree\PYGZus{}ID\PYGZsq{}       : [\PYGZsq{}IDTREE2\PYGZsq{},   \PYGZsq{}integer\PYGZsq{},  [4,6],   None,      None],}
+\PYG{g+go}{ \PYGZsq{}Tree\PYGZus{}Count\PYGZsq{}    : [\PYGZsq{}PROB\PYGZsq{},      \PYGZsq{}integer\PYGZsq{},  [7,12],  None,      None],}
+\PYG{g+go}{ \PYGZsq{}History\PYGZsq{}       : [\PYGZsq{}ITH\PYGZsq{},       \PYGZsq{}integer\PYGZsq{},  [13,13], \PYGZsq{}trees\PYGZsq{},   0   ],}
+\PYG{g+go}{ \PYGZsq{}Species\PYGZsq{}       : [\PYGZsq{}ISP\PYGZsq{},       \PYGZsq{}alphanum\PYGZsq{}, [14,16], None,      None],}
+\PYG{g+go}{ \PYGZsq{}DBH\PYGZsq{}           : [\PYGZsq{}DBH\PYGZsq{},       \PYGZsq{}real\PYGZsq{},     [17,20], \PYGZsq{}inches\PYGZsq{},  1   ],}
+\PYG{g+go}{ \PYGZsq{}DG\PYGZsq{}            : [\PYGZsq{}DG\PYGZsq{},        \PYGZsq{}real\PYGZsq{},     [21,23], \PYGZsq{}inches\PYGZsq{},  1   ],}
+\PYG{g+go}{ \PYGZsq{}Ht\PYGZsq{}            : [\PYGZsq{}HT\PYGZsq{},        \PYGZsq{}real\PYGZsq{},     [24,26], \PYGZsq{}feet\PYGZsq{},    0   ],}
+\PYG{g+go}{ \PYGZsq{}HtTopK\PYGZsq{}        : [\PYGZsq{}THT\PYGZsq{},       \PYGZsq{}real\PYGZsq{},     [27,29], \PYGZsq{}feet\PYGZsq{},    0   ],}
+\PYG{g+go}{ \PYGZsq{}HTG\PYGZsq{}           : [\PYGZsq{}HTG\PYGZsq{},       \PYGZsq{}real\PYGZsq{},     [30,33], \PYGZsq{}feet\PYGZsq{},    1   ],}
+\PYG{g+go}{ \PYGZsq{}CrRatio\PYGZsq{}       : [\PYGZsq{}ICR\PYGZsq{},       \PYGZsq{}integer\PYGZsq{},  [34,34], None,      None],}
+\PYG{g+go}{ \PYGZsq{}Damage1\PYGZsq{}       : [\PYGZsq{}IDCD(1)\PYGZsq{},   \PYGZsq{}integer\PYGZsq{},  [35,36], None,      None],}
+\PYG{g+go}{ \PYGZsq{}Severity1\PYGZsq{}     : [\PYGZsq{}IDCD(2)\PYGZsq{},   \PYGZsq{}integer\PYGZsq{},  [37,38], None,      None],}
+\PYG{g+go}{ \PYGZsq{}Damage2\PYGZsq{}       : [\PYGZsq{}IDCD(3)\PYGZsq{},   \PYGZsq{}integer\PYGZsq{},  [39,40], None,      None],}
+\PYG{g+go}{ \PYGZsq{}Severity2\PYGZsq{}     : [\PYGZsq{}IDCD(4)\PYGZsq{},   \PYGZsq{}integer\PYGZsq{},  [41,42], None,      None],}
+\PYG{g+go}{ \PYGZsq{}Damage3\PYGZsq{}       : [\PYGZsq{}IDCD(5)\PYGZsq{},   \PYGZsq{}integer\PYGZsq{},  [43,44], None,      None],}
+\PYG{g+go}{ \PYGZsq{}Severity3\PYGZsq{}     : [\PYGZsq{}IDCD(6)\PYGZsq{},   \PYGZsq{}integer\PYGZsq{},  [45,46], None,      None],}
+\PYG{g+go}{ \PYGZsq{}TreeValue\PYGZsq{}     : [\PYGZsq{}IMC\PYGZsq{},       \PYGZsq{}integer\PYGZsq{},  [47,47], None,      None],}
+\PYG{g+go}{ \PYGZsq{}Prescription\PYGZsq{}  : [\PYGZsq{}IPRSC\PYGZsq{},     \PYGZsq{}integer\PYGZsq{},  [48,48], None,      None],}
+\PYG{g+go}{ \PYGZsq{}Slope\PYGZsq{}         : [\PYGZsq{}IPVARS(1)\PYGZsq{}, \PYGZsq{}integer\PYGZsq{},  [49,50], \PYGZsq{}percent\PYGZsq{}, None],}
+\PYG{g+go}{ \PYGZsq{}Aspect\PYGZsq{}        : [\PYGZsq{}IPVARS(2)\PYGZsq{}, \PYGZsq{}integer\PYGZsq{},  [51,53], \PYGZsq{}code\PYGZsq{},    None],}
+\PYG{g+go}{ \PYGZsq{}PV\PYGZus{}Code\PYGZsq{}       : [\PYGZsq{}IPVARS(3)\PYGZsq{}, \PYGZsq{}integer\PYGZsq{},  [54,56], \PYGZsq{}code\PYGZsq{},    None],}
+\PYG{g+go}{ \PYGZsq{}TopoCode\PYGZsq{}      : [\PYGZsq{}IPVARS(4)\PYGZsq{}, \PYGZsq{}integer\PYGZsq{},  [57,59], \PYGZsq{}code\PYGZsq{},    None],}
+\PYG{g+go}{ \PYGZsq{}SitePrep\PYGZsq{}      : [\PYGZsq{}IPVARS(5)\PYGZsq{}, \PYGZsq{}integer\PYGZsq{},  [58,58], \PYGZsq{}code\PYGZsq{},    None],}
+\PYG{g+go}{ \PYGZsq{}Age\PYGZsq{}           : [\PYGZsq{}ABIRTH\PYGZsq{},    \PYGZsq{}real\PYGZsq{},     [59,61], \PYGZsq{}years\PYGZsq{},   0   ]\PYGZcb{}}
+\end{Verbatim}
+
+See page 61 and 62 in the Essential FVS Guide.
+
+\end{fulllineitems}
+
+
+
+\subsubsection{get\_fvs\_cols}
+\label{Inventory:get-fvs-cols}\index{get\_fvs\_cols() (fuels.Inventory method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Inventory:fuels.Inventory.get_fvs_cols}\pysiglinewithargsret{\code{Inventory.}\bfcode{get\_fvs\_cols}}{}{}
+Get list of FVS standard columns
+\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+FVS standard columns
+
+\item[{Return type}] \leavevmode
+list of strings
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+
+\subsubsection{get\_stands}
+\label{Inventory:get-stands}\index{get\_stands() (fuels.Inventory method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Inventory:fuels.Inventory.get_stands}\pysiglinewithargsret{\code{Inventory.}\bfcode{get\_stands}}{}{}
+Returns unique stand IDs
+\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+stand IDs
+
+\item[{Return type}] \leavevmode
+list of strings
+
+\end{description}\end{quote}
+
+\textbf{Example:}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{toDotTree}\PYG{o}{.}\PYG{n}{get\PYGZus{}stands}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{[\PYGZsq{}BR\PYGZsq{}, \PYGZsq{}TM\PYGZsq{}, \PYGZsq{}SW\PYGZsq{}, HB\PYGZsq{}]}
+\end{Verbatim}
+
+\end{fulllineitems}
+
+
+
+\subsubsection{crwratio\_percent\_to\_code}
+\label{Inventory:crwratio-percent-to-code}\index{crwratio\_percent\_to\_code() (fuels.Inventory method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Inventory:fuels.Inventory.crwratio_percent_to_code}\pysiglinewithargsret{\code{Inventory.}\bfcode{crwratio\_percent\_to\_code}}{}{}
+Converts crown ratio from percent to ICR code
+
+ICR code is described in the Essential FVS Guide on pages 58 and 59.
+This method should only be used if crown ratios values are percentages
+in the FVS\_TreeInit.csv.  If you use this method before calling
+\emph{formatFvsTreeFile()} then you must set the optional argument
+\code{cratioToCode} to \code{False}.
+
+\end{fulllineitems}
+
+
+
+\subsubsection{format\_fvs\_tree\_file}
+\label{Inventory:format-fvs-tree-file}\index{format\_fvs\_tree\_file() (fuels.Inventory method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Inventory:fuels.Inventory.format_fvs_tree_file}\pysiglinewithargsret{\code{Inventory.}\bfcode{format\_fvs\_tree\_file}}{\emph{cratio\_to\_code=True}}{}
+Converts data in FVS\_TreeInit.csv to FVS .tre format
+
+This methods reads entries in the pandas data frame (\code{self.data}) and
+writes them to a formated text string following FVS .tre data formating
+standards shown in \code{FMT}.  If multiple stands exist in \code{self.data}
+then each stand will written as a (key,value) pair in
+\code{self.fvsTreeFile} where the key is the stand ID and the value is the
+formated text string.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\textbf{\texttt{cratio\_to\_code}} (\emph{\texttt{boolean}}) -- default = True
+
+\end{description}\end{quote}
+
+\begin{notice}{note}{Note:}
+If the \code{crwratio\_percent\_to\_code()} methods has
+been called prior to call this methods, then the \code{cratio\_to\_code}
+optional argument must be set to \code{False} to prevent errors in crown
+ratio values.
+\end{notice}
+
+\textbf{Example:}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{toDotTree}\PYG{o}{.}\PYG{n}{format\PYGZus{}fvs\PYGZus{}tree\PYGZus{}file}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{toDotTree}\PYG{o}{.}\PYG{n}{fvsTreeFile}\PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Stand\PYGZus{}ID\PYGZus{}1}\PYG{l+s}{\PYGZsq{}}\PYG{p}{]}
+\PYG{g+go}{5   1  5     0PP 189    65        3                 0 0}
+\PYG{g+go}{5   2  15    0PP 110    52        2                 0 0}
+\PYG{g+go}{5   3  5     0PP 180    64        5                 0 0}
+\PYG{g+go}{5   4  14    0PP 112    56        3                 0 0}
+\PYG{g+go}{5   5  6     0PP 167    60        4                 0 0}
+\PYG{g+go}{5   6  5     0PP 190    60        5                 0 0}
+\PYG{g+go}{5   7  7     0PP 161    62        3                 0 0}
+\PYG{g+go}{5   8  86    0PP 46     37        1                 0 0}
+\PYG{g+go}{5   9  10    0PP 130    50        2                 0 0}
+\PYG{g+go}{5   10 5     0PP 182    60        3                 0 0}
+\PYG{g+go}{5   11 8     9PP 144    50                          0 0}
+\PYG{g+go}{6   1  16    0PP 107    42        4                 0 0}
+\PYG{g+go}{6   2  109   0PP 41     27        2                 0 0}
+\PYG{g+gp}{...}
+\end{Verbatim}
+
+\end{fulllineitems}
+
+
+
+\subsubsection{save}
+\label{Inventory:save}\index{save() (fuels.Inventory method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Inventory:fuels.Inventory.save}\pysiglinewithargsret{\code{Inventory.}\bfcode{save}}{\emph{outputPath}}{}
+Writes formated fvs tree files to specified location
+
+If multiple stands exist in the FVS\_TreeInit then the same number of
+files will be created in the specified directory.  The file names
+will be the same as the Stand\_ID with a \code{.tre} extension.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\textbf{\texttt{outputPath}} (\emph{\texttt{string}}) -- directory to store output .tre files
+
+\end{description}\end{quote}
+
+\begin{notice}{note}{Note:}
+This method will throw an error if it is called prior to the
+\code{format\_fvs\_tree\_file()} method.
+\end{notice}
 
 \end{fulllineitems}
 

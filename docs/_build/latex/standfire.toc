@@ -1,4 +1,29 @@
 \select@language {english}
-\contentsline {chapter}{\numberline {1}fuels module}{3}{chapter.1}
-\contentsline {chapter}{\numberline {2}Indices and tables}{5}{chapter.2}
-\contentsline {chapter}{Python Module Index}{7}{section*.19}
+\contentsline {chapter}{\numberline {1}STANDFIRE User Guide}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Examples}{3}{section.1.1}
+\contentsline {chapter}{\numberline {2}STANDFIRE API Reference}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}fuels module}{5}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Fvsfuels}{5}{subsection.2.1.1}
+\contentsline {subsubsection}{set\_keyword}{6}{subsubsection*.4}
+\contentsline {subsubsection}{set\_dir}{6}{subsubsection*.6}
+\contentsline {subsubsection}{set\_num\_cycles}{6}{subsubsection*.8}
+\contentsline {subsubsection}{set\_time\_int}{7}{subsubsection*.10}
+\contentsline {subsubsection}{set\_inv\_year}{7}{subsubsection*.12}
+\contentsline {subsubsection}{run\_fvs}{7}{subsubsection*.14}
+\contentsline {subsubsection}{get\_simulation\_years}{7}{subsubsection*.16}
+\contentsline {subsubsection}{get\_trees}{7}{subsubsection*.18}
+\contentsline {subsubsection}{get\_snags}{8}{subsubsection*.20}
+\contentsline {subsubsection}{get\_standid}{8}{subsubsection*.22}
+\contentsline {subsubsection}{save\_trees\_by\_year}{8}{subsubsection*.24}
+\contentsline {subsubsection}{save\_snags\_by\_year}{8}{subsubsection*.26}
+\contentsline {subsection}{\numberline {2.1.2}Inventory}{8}{subsection.2.1.2}
+\contentsline {subsubsection}{read\_inventory}{9}{subsubsection*.29}
+\contentsline {subsubsection}{print\_format\_standards}{10}{subsubsection*.31}
+\contentsline {subsubsection}{get\_fvs\_cols}{10}{subsubsection*.33}
+\contentsline {subsubsection}{get\_stands}{11}{subsubsection*.35}
+\contentsline {subsubsection}{crwratio\_percent\_to\_code}{11}{subsubsection*.37}
+\contentsline {subsubsection}{format\_fvs\_tree\_file}{11}{subsubsection*.39}
+\contentsline {subsubsection}{save}{12}{subsubsection*.41}
+\contentsline {chapter}{\numberline {3}Indices and tables}{13}{chapter.3}
+\contentsline {chapter}{Python Module Index}{15}{section*.43}
+\contentsline {chapter}{Index}{17}{section*.44}
