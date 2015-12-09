@@ -82,24 +82,11 @@
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="fuels.html">fuels module</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="">Fvsfuels</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#set-keyword">set_keyword</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#set-dir">set_dir</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#set-num-cycles">set_num_cycles</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#set-time-int">set_time_int</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#set-inv-year">set_inv_year</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#run-fvs">run_fvs</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-simulation-years">get_simulation_years</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-trees">get_trees</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-snags">get_snags</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-standid">get_standid</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#save-trees-by-year">save_trees_by_year</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#save-snags-by-year">save_snags_by_year</a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Fvsfuels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Inventory.html">Inventory</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="intervene.html">intervene module</a></li>
 </ul>
 </li>
 </ul>
@@ -155,7 +142,8 @@
 <dl class="class">
 <dt id="fuels.Fvsfuels">
 <em class="property">class </em><code class="descclassname">fuels.</code><code class="descname">Fvsfuels</code><span class="sig-paren">(</span><em>variant</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels" title="Permalink to this definition">¶</a></dt>
-<dd><p>A Fvsfuels object is used to calculate component fuels at the individual 
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>A Fvsfuels object is used to calculate component fuels at the individual 
 tree level using the Forest Vegetation Simulator. To create an instance
 of this class you need two items: a keyword file (.key) and tree list file
 (.tre) with the same prefix as the keyword file. If you don&#8217;t already have
@@ -198,13 +186,172 @@ years. Lets change this to only simulate the inventory year.</p>
 PyFVS module. Search through standfire/pyfvs/ to see all
 variants</p>
 </div>
+<dl class="method">
+<dt id="fuels.Fvsfuels.get_simulation_years">
+<code class="descname">get_simulation_years</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_simulation_years"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_simulation_years" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the simulated years</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">simulated year</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of integers</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<div class="section" id="set-keyword">
-<h2>set_keyword<a class="headerlink" href="#set-keyword" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="fuels.Fvsfuels.get_snags">
+<code class="descname">get_snags</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_snags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_snags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns pandas data fram of the snags by indexed year</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>year</strong> (<em>int</em>) &#8211; simulation year of the data frame to return</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">data frame of snags at indexed year</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pandas dataframe</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If a data frame for the specified year does not exist then
+a message will be printed to the console.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.Fvsfuels.get_standid">
+<code class="descname">get_standid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_standid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_standid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns stand ID as defined in the keyword file of the class instance</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">stand ID value</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.Fvsfuels.get_trees">
+<code class="descname">get_trees</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_trees"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_trees" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns pandas data fram of the trees by indexed year</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>year</strong> (<em>int</em>) &#8211; simulation year of the data frame to return</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">data frame of trees at indexed year</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pandas dataframe</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If a data frame for the specified year does not exist then
+a message will be printed to the console.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.Fvsfuels.run_fvs">
+<code class="descname">run_fvs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.run_fvs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.run_fvs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the FVS simulation</p>
+<p>This method run a FVS simulation using the previously specified keyword
+file. The simulation will be paused at each time interval and the trees
+and snag data collected and appended to the fuels attribute of the 
+Fvsfuels object.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuels</span> <span class="kn">import</span> <span class="n">Fvsfuels</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stand010</span> <span class="o">=</span> <span class="n">Fvsfuels</span><span class="p">(</span><span class="s">&quot;iec&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stand010</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s">&quot;/Users/standfire/example/test.key&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stand010</span><span class="o">.</span><span class="n">run_fvs</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stand010</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;trees&quot;</span><span class="p">][</span><span class="mi">2010</span><span class="p">]</span>
+<span class="go">xloc    yloc    species   dbh     ht    crd    cratio  crownwt0  crownwt1 ...</span>
+<span class="go">33.49  108.58   PIPO     19.43   68.31  8.77     25    33.46      4.7   </span>
+<span class="go">24.3    90.4    PIPO     11.46   56.6   5.63     15     6.55     2.33  </span>
+<span class="go">88.84  162.98   PIPO     18.63   67.76  9.48     45    75.88     6.89</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.Fvsfuels.save_all">
+<code class="descname">save_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.save_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.save_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes all data frame in the <code class="docutils literal"><span class="pre">fuels</span></code> attribute of the class to the
+specified working directory. Output file are .csv.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.Fvsfuels.save_snags_by_year">
+<code class="descname">save_snags_by_year</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.save_snags_by_year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.save_snags_by_year" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes snag data frame at indexed year to .csv in working directory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.Fvsfuels.save_trees_by_year">
+<code class="descname">save_trees_by_year</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.save_trees_by_year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.save_trees_by_year" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes tree data frame at indexed year to .csv in working directory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.Fvsfuels.set_dir">
+<code class="descname">set_dir</code><span class="sig-paren">(</span><em>wdir</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the working directory of a Fvsfuels object</p>
+<p>This method is called by <code class="docutils literal"><span class="pre">Fvsfuels.set_keyword()</span></code>. Thus, the default
+working directory is the folder containing the specified keyword file. 
+If you wish to store simulation outputs in a different directory then
+use this methods to do so.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wdir</strong> (<em>string</em>) &#8211; path/to/desired_directory</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuel</span> <span class="kn">import</span> <span class="n">Fvsfuels</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test</span> <span class="o">=</span> <span class="n">Fvsfuels</span><span class="p">(</span><span class="s">&quot;emc&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s">&quot;/Users/standfire/test/example.key&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Whoops, I would like to store simulation outputs elsewhere...</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="o">.</span><span class="n">set_dir</span><span class="p">(</span><span class="s">&quot;/Users/standfire/outputs/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.Fvsfuels.set_inv_year">
+<code class="descname">set_inv_year</code><span class="sig-paren">(</span><em>inv_year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_inv_year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_inv_year" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets inventory year for FVS simulation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inv_year</strong> (<em>int</em>) &#8211; year of the inventory</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="fuels.Fvsfuels.set_keyword">
-<code class="descclassname">Fvsfuels.</code><code class="descname">set_keyword</code><span class="sig-paren">(</span><em>keyfile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_keyword"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_keyword" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_keyword</code><span class="sig-paren">(</span><em>keyfile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_keyword"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_keyword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the keyword file to be used in the FVS simulation</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -239,44 +386,9 @@ use in other methods.</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="set-dir">
-<h2>set_dir<a class="headerlink" href="#set-dir" title="Permalink to this headline">¶</a></h2>
-<dl class="method">
-<dt id="fuels.Fvsfuels.set_dir">
-<code class="descclassname">Fvsfuels.</code><code class="descname">set_dir</code><span class="sig-paren">(</span><em>wdir</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_dir" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the working directory of a Fvsfuels object</p>
-<p>This method is called by <code class="docutils literal"><span class="pre">Fvsfuels.set_keyword()</span></code>. Thus, the default
-working directory is the folder containing the specified keyword file. 
-If you wish to store simulation outputs in a different directory then
-use this methods to do so.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wdir</strong> (<em>string</em>) &#8211; path/to/desired_directory</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuel</span> <span class="kn">import</span> <span class="n">Fvsfuels</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">test</span> <span class="o">=</span> <span class="n">Fvsfuels</span><span class="p">(</span><span class="s">&quot;emc&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s">&quot;/Users/standfire/test/example.key&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Whoops, I would like to store simulation outputs elsewhere...</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="o">.</span><span class="n">set_dir</span><span class="p">(</span><span class="s">&quot;/Users/standfire/outputs/&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</div>
-<div class="section" id="set-num-cycles">
-<h2>set_num_cycles<a class="headerlink" href="#set-num-cycles" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
 <dt id="fuels.Fvsfuels.set_num_cycles">
-<code class="descclassname">Fvsfuels.</code><code class="descname">set_num_cycles</code><span class="sig-paren">(</span><em>num_cyc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_num_cycles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_num_cycles" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_num_cycles</code><span class="sig-paren">(</span><em>num_cyc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_num_cycles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_num_cycles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets number of cycles for FVS simulation</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -288,12 +400,9 @@ use this methods to do so.</p>
 </table>
 </dd></dl>
 
-</div>
-<div class="section" id="set-time-int">
-<h2>set_time_int<a class="headerlink" href="#set-time-int" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
 <dt id="fuels.Fvsfuels.set_time_int">
-<code class="descclassname">Fvsfuels.</code><code class="descname">set_time_int</code><span class="sig-paren">(</span><em>time_int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_time_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_time_int" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_time_int</code><span class="sig-paren">(</span><em>time_int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_time_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_time_int" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets time interval for FVS simulation</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -305,158 +414,8 @@ use this methods to do so.</p>
 </table>
 </dd></dl>
 
-</div>
-<div class="section" id="set-inv-year">
-<h2>set_inv_year<a class="headerlink" href="#set-inv-year" title="Permalink to this headline">¶</a></h2>
-<dl class="method">
-<dt id="fuels.Fvsfuels.set_inv_year">
-<code class="descclassname">Fvsfuels.</code><code class="descname">set_inv_year</code><span class="sig-paren">(</span><em>inv_year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_inv_year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_inv_year" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets inventory year for FVS simulation</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inv_year</strong> (<em>int</em>) &#8211; year of the inventory</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
-</div>
-<div class="section" id="run-fvs">
-<h2>run_fvs<a class="headerlink" href="#run-fvs" title="Permalink to this headline">¶</a></h2>
-<dl class="method">
-<dt id="fuels.Fvsfuels.run_fvs">
-<code class="descclassname">Fvsfuels.</code><code class="descname">run_fvs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.run_fvs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.run_fvs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Runs the FVS simulation</p>
-<p>This method run a FVS simulation using the previously specified keyword
-file. The simulation will be paused at each time interval and the trees
-and snag data collected and appended to the fuels attribute of the 
-Fvsfuels object.</p>
-<p><strong>Example:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuels</span> <span class="kn">import</span> <span class="n">Fvsfuels</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stand010</span> <span class="o">=</span> <span class="n">Fvsfuels</span><span class="p">(</span><span class="s">&quot;iec&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stand010</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s">&quot;/Users/standfire/example/test.key&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stand010</span><span class="o">.</span><span class="n">run_fvs</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stand010</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;trees&quot;</span><span class="p">][</span><span class="mi">2010</span><span class="p">]</span>
-<span class="go">xloc    yloc    species   dbh     ht    crd    cratio  crownwt0  crownwt1 ...</span>
-<span class="go">33.49  108.58   PIPO     19.43   68.31  8.77     25    33.46      4.7   </span>
-<span class="go">24.3    90.4    PIPO     11.46   56.6   5.63     15     6.55     2.33  </span>
-<span class="go">88.84  162.98   PIPO     18.63   67.76  9.48     45    75.88     6.89</span>
-<span class="gp">...</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</div>
-<div class="section" id="get-simulation-years">
-<h2>get_simulation_years<a class="headerlink" href="#get-simulation-years" title="Permalink to this headline">¶</a></h2>
-<dl class="method">
-<dt id="fuels.Fvsfuels.get_simulation_years">
-<code class="descclassname">Fvsfuels.</code><code class="descname">get_simulation_years</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_simulation_years"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_simulation_years" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of the simulated years</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">simulated year</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of integers</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</div>
-<div class="section" id="get-trees">
-<h2>get_trees<a class="headerlink" href="#get-trees" title="Permalink to this headline">¶</a></h2>
-<dl class="method">
-<dt id="fuels.Fvsfuels.get_trees">
-<code class="descclassname">Fvsfuels.</code><code class="descname">get_trees</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_trees"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_trees" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns pandas data fram of the trees by indexed year</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>year</strong> (<em>int</em>) &#8211; simulation year of the data frame to return</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">data frame of trees at indexed year</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pandas dataframe</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If a data frame for the specified year does not exist then
-a message will be printed to the console.</p>
-</div>
-</dd></dl>
-
-</div>
-<div class="section" id="get-snags">
-<h2>get_snags<a class="headerlink" href="#get-snags" title="Permalink to this headline">¶</a></h2>
-<dl class="method">
-<dt id="fuels.Fvsfuels.get_snags">
-<code class="descclassname">Fvsfuels.</code><code class="descname">get_snags</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_snags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_snags" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns pandas data fram of the snags by indexed year</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>year</strong> (<em>int</em>) &#8211; simulation year of the data frame to return</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">data frame of snags at indexed year</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pandas dataframe</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If a data frame for the specified year does not exist then
-a message will be printed to the console.</p>
-</div>
-</dd></dl>
-
-</div>
-<div class="section" id="get-standid">
-<h2>get_standid<a class="headerlink" href="#get-standid" title="Permalink to this headline">¶</a></h2>
-<dl class="method">
-<dt id="fuels.Fvsfuels.get_standid">
-<code class="descclassname">Fvsfuels.</code><code class="descname">get_standid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_standid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_standid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns stand ID as defined in the keyword file of the class instance</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">stand ID value</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</div>
-<div class="section" id="save-trees-by-year">
-<h2>save_trees_by_year<a class="headerlink" href="#save-trees-by-year" title="Permalink to this headline">¶</a></h2>
-<dl class="method">
-<dt id="fuels.Fvsfuels.save_trees_by_year">
-<code class="descclassname">Fvsfuels.</code><code class="descname">save_trees_by_year</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.save_trees_by_year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.save_trees_by_year" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes tree data frame at indexed year to .csv in working directory</p>
-</dd></dl>
-
-</div>
-<div class="section" id="save-snags-by-year">
-<h2>save_snags_by_year<a class="headerlink" href="#save-snags-by-year" title="Permalink to this headline">¶</a></h2>
-<dl class="method">
-<dt id="fuels.Fvsfuels.save_snags_by_year">
-<code class="descclassname">Fvsfuels.</code><code class="descname">save_snags_by_year</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.save_snags_by_year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.save_snags_by_year" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes snag data frame at indexed year to .csv in working directory</p>
-</dd></dl>
-
-</div>
 </div>
 
 

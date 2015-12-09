@@ -1,0 +1,274 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>intervene &mdash; STANDFIRE  documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="STANDFIRE  documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> STANDFIRE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide.html">STANDFIRE User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_ref.html">STANDFIRE API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">STANDFIRE</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      
+    <li>intervene</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for intervene</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">__authors__</span> <span class="o">=</span> <span class="s">&quot;Lucas Wells&quot;</span>
+<span class="n">__Copyright__</span> <span class="o">=</span> <span class="s">&quot;Copyright 2015, STANDFIRE&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">BaseSilv</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c"># class attributes</span>
+    <span class="n">treatemnt_collection</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trees</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor&quot;&quot;&quot;</span>
+        
+        <span class="c"># type check and handle accordingly</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">trees</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateFrame</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span> <span class="o">=</span> <span class="n">trees</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">trees</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">trees</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;ERROR: input trees must be either a .csv file or an instacne of Pandas.DataFrame()&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">add_to_treatment_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">treatment</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds treatment to static class attribute in intervene.BaseSilv()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">treatment_collection</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">treatment</span>
+
+
+<div class="viewcode-block" id="SpaceCrowns"><a class="viewcode-back" href="../SpaceCrowns.html#intervene.SpaceCrowns">[docs]</a><span class="k">class</span> <span class="nc">SpaceCrowns</span><span class="p">(</span><span class="n">BaseSilv</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trees</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor&quot;&quot;&quot;</span>
+        
+        <span class="c"># call parent class constructor</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SpaceCrowns</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">trees</span><span class="p">)</span>
+        
+        <span class="c"># instance attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">crown_space</span> <span class="o">=</span> <span class="mi">0</span>
+    
+<div class="viewcode-block" id="SpaceCrowns.set_crown_space"><a class="viewcode-back" href="../SpaceCrowns.html#intervene.SpaceCrowns.set_crown_space">[docs]</a>    <span class="k">def</span> <span class="nf">set_crown_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">crown_space</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets spacing between crowns for the treatment</span>
+<span class="sd">        </span>
+<span class="sd">        :param crown_space: crown spacing in units of input data frame</span>
+<span class="sd">        :type crown_space: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">crown_space</span> <span class="o">=</span> <span class="n">crown_space</span></div>
+        
+<div class="viewcode-block" id="SpaceCrowns.get_distance"><a class="viewcode-back" href="../SpaceCrowns.html#intervene.SpaceCrowns.get_distance">[docs]</a>    <span class="k">def</span> <span class="nf">get_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_a</span><span class="p">,</span> <span class="n">tree_b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the distance between two trees</span>
+<span class="sd">        </span>
+<span class="sd">        Uses Pythagoras&#39; theorem to calculate distance between two tree crowns</span>
+<span class="sd">        in units of input data frame</span>
+<span class="sd">        </span>
+<span class="sd">        :param tree_a: indexed row of tree a in Pandas data frame</span>
+<span class="sd">        :type tree_a: int</span>
+<span class="sd">        :param tree_b: indexed row of tree b in Pandas data frame</span>
+<span class="sd">        :type tree_b: int</span>
+<span class="sd">        :return: distance between two crowns in units of input data frame</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="c"># get x,y coordinates of tree_a and tree_b</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;xloc&#39;</span><span class="p">][</span><span class="n">tree_a</span><span class="p">]</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;xloc&#39;</span><span class="p">][</span><span class="n">tree_b</span><span class="p">]</span>
+        <span class="n">y1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;yloc&#39;</span><span class="p">][</span><span class="n">tree_a</span><span class="p">]</span>
+        <span class="n">y2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;yloc&#39;</span><span class="p">][</span><span class="n">tree_b</span><span class="p">]</span>
+        
+        <span class="c"># get crown radii of tree_a and tree_b</span>
+        <span class="n">crad_a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;cradius&#39;</span><span class="p">][</span><span class="n">tree_a</span><span class="p">]</span>
+        <span class="n">crad_b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;cradius&#39;</span><span class="p">][</span><span class="n">tree_b</span><span class="p">]</span>
+        
+        <span class="c"># return the distance between trees (Pythagoras&#39; theorem)</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">crad_a</span> <span class="o">+</span> <span class="n">crad_b</span><span class="p">)</span></div></div>
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, STANDFIRE.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SpaceCrowns &mdash; STANDFIRE  documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="STANDFIRE  documentation" href="index.html"/>
+        <link rel="up" title="intervene module" href="intervene.html"/>
+        <link rel="prev" title="intervene module" href="intervene.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> STANDFIRE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="fuels.html">fuels module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="intervene.html">intervene module</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">SpaceCrowns</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">STANDFIRE</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="api_ref.html">STANDFIRE API Reference</a> &raquo;</li>
+      
+          <li><a href="intervene.html">intervene module</a> &raquo;</li>
+      
+    <li>SpaceCrowns</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/SpaceCrowns.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="spacecrowns">
+<h1>SpaceCrowns<a class="headerlink" href="#spacecrowns" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="intervene.SpaceCrowns">
+<em class="property">class </em><code class="descclassname">intervene.</code><code class="descname">SpaceCrowns</code><span class="sig-paren">(</span><em>trees</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/intervene.html#SpaceCrowns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#intervene.SpaceCrowns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">intervene.BaseSilv</span></code></p>
+<dl class="method">
+<dt id="intervene.SpaceCrowns.add_to_treatment_collection">
+<code class="descname">add_to_treatment_collection</code><span class="sig-paren">(</span><em>treatment</em><span class="sig-paren">)</span><a class="headerlink" href="#intervene.SpaceCrowns.add_to_treatment_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds treatment to static class attribute in intervene.BaseSilv()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="intervene.SpaceCrowns.get_distance">
+<code class="descname">get_distance</code><span class="sig-paren">(</span><em>tree_a</em>, <em>tree_b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/intervene.html#SpaceCrowns.get_distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#intervene.SpaceCrowns.get_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the distance between two trees</p>
+<p>Uses Pythagoras&#8217; theorem to calculate distance between two tree crowns
+in units of input data frame</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>tree_a</strong> (<em>int</em>) &#8211; indexed row of tree a in Pandas data frame</li>
+<li><strong>tree_b</strong> (<em>int</em>) &#8211; indexed row of tree b in Pandas data frame</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">distance between two crowns in units of input data frame</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="intervene.SpaceCrowns.set_crown_space">
+<code class="descname">set_crown_space</code><span class="sig-paren">(</span><em>crown_space</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/intervene.html#SpaceCrowns.set_crown_space"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#intervene.SpaceCrowns.set_crown_space" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets spacing between crowns for the treatment</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>crown_space</strong> (<em>float</em>) &#8211; crown spacing in units of input data frame</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="intervene.SpaceCrowns.treatemnt_collection">
+<code class="descname">treatemnt_collection</code><em class="property"> = {}</em><a class="headerlink" href="#intervene.SpaceCrowns.treatemnt_collection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="intervene.html" class="btn btn-neutral" title="intervene module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, STANDFIRE.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
