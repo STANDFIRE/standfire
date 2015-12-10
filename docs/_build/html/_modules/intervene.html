@@ -141,28 +141,42 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="c"># class attributes</span>
-    <span class="n">treatemnt_collection</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">treatment_collection</span> <span class="o">=</span> <span class="p">{}</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trees</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Constructor&quot;&quot;&quot;</span>
         
         <span class="c"># type check and handle accordingly</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">trees</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateFrame</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">trees</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">trees</span> <span class="o">=</span> <span class="n">trees</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">trees</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">trees</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">trees</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">trees</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;String argument must point to .csv file&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&quot;ERROR: input trees must be either a .csv file or an instacne of Pandas.DataFrame()&quot;</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;argument type must be either an instance of &quot;</span>
+                            <span class="s">&quot;Pandas.DataFrame() or a string indicating a path &quot;</span>
+                            <span class="s">&quot;to a comma-delimted file&quot;</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="nf">add_to_treatment_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">treatment</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add_to_treatment_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">treatment</span><span class="p">,</span> <span class="n">ID</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds treatment to static class attribute in intervene.BaseSilv()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">treatment_collection</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">treatment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">treatment_collection</span><span class="p">[</span><span class="n">ID</span><span class="p">]</span> <span class="o">=</span> <span class="n">treatment</span>
+        
+    <span class="k">def</span> <span class="nf">clear_treatment_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes all treatment currently in the treatment collection class</span>
+<span class="sd">        attribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">treatment_collection</span> <span class="o">=</span> <span class="p">{}</span>
 
 
 <div class="viewcode-block" id="SpaceCrowns"><a class="viewcode-back" href="../SpaceCrowns.html#intervene.SpaceCrowns">[docs]</a><span class="k">class</span> <span class="nc">SpaceCrowns</span><span class="p">(</span><span class="n">BaseSilv</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :ivar crown_space: instance variable for crown spacing; initial value = 0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trees</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Constructor&quot;&quot;&quot;</span>
@@ -205,11 +219,60 @@
         <span class="n">y2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;yloc&#39;</span><span class="p">][</span><span class="n">tree_b</span><span class="p">]</span>
         
         <span class="c"># get crown radii of tree_a and tree_b</span>
-        <span class="n">crad_a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;cradius&#39;</span><span class="p">][</span><span class="n">tree_a</span><span class="p">]</span>
-        <span class="n">crad_b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;cradius&#39;</span><span class="p">][</span><span class="n">tree_b</span><span class="p">]</span>
+        <span class="n">crad_a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">][</span><span class="n">tree_a</span><span class="p">]</span>
+        <span class="n">crad_b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">][</span><span class="n">tree_b</span><span class="p">]</span>
         
         <span class="c"># return the distance between trees (Pythagoras&#39; theorem)</span>
-        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">crad_a</span> <span class="o">+</span> <span class="n">crad_b</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">crad_a</span> <span class="o">+</span> <span class="n">crad_b</span><span class="p">)</span></div>
+        
+<div class="viewcode-block" id="SpaceCrowns.treat"><a class="viewcode-back" href="../SpaceCrowns.html#intervene.SpaceCrowns.treat">[docs]</a>    <span class="k">def</span> <span class="nf">treat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Treatment algorithm for removing trees based on input crown spacing</span>
+<span class="sd">        </span>
+<span class="sd">        .. todo:: Optimize algorithm by incorporating ``searrch_rad``.</span>
+<span class="sd">        .. todo:: split this function into 3</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">connect</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">trees</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span>
+
+        <span class="n">search_rad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crown_space</span> <span class="o">+</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">crown_space</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span>
+            <span class="k">print</span> <span class="s">&quot;WARNING: no trees were remove because crown spacing = 0&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">trees</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+                <span class="n">connect</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">trees</span><span class="o">.</span><span class="n">index</span><span class="p">[(</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;xloc&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">trees</span><span class="p">[</span><span class="s">&#39;xloc&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">15</span><span class="p">)</span> <span class="o">&amp;</span>
+                                     <span class="p">(</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;xloc&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">trees</span><span class="p">[</span><span class="s">&#39;xloc&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">15</span><span class="p">)</span> <span class="o">&amp;</span>
+                                     <span class="p">(</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;yloc&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">trees</span><span class="p">[</span><span class="s">&#39;yloc&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">15</span><span class="p">)</span> <span class="o">&amp;</span>
+                                     <span class="p">(</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;yloc&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">trees</span><span class="p">[</span><span class="s">&#39;yloc&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">15</span><span class="p">)]:</span>
+                    <span class="k">if</span> <span class="n">e</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
+                        <span class="n">space</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_distance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">space</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">crown_space</span><span class="p">:</span>
+                            <span class="n">connect</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+            <span class="n">dbh_dsc</span> <span class="o">=</span> <span class="n">trees</span><span class="o">.</span><span class="n">sort</span><span class="p">([</span><span class="s">&#39;dbh&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+            <span class="n">indx</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dbh_dsc</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">indx</span><span class="p">:</span>
+                    <span class="c"># only thin trees to the right of the burner</span>
+                    <span class="k">if</span> <span class="n">dbh_dsc</span><span class="p">[</span><span class="s">&#39;xloc&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">connect</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                            <span class="n">vals</span> <span class="o">=</span> <span class="n">connect</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">:</span>
+                                <span class="n">indx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                                <span class="k">try</span><span class="p">:</span>
+                                    <span class="n">connect</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                                <span class="k">except</span><span class="p">:</span>
+                                    <span class="k">pass</span>
+
+            <span class="n">thinned</span> <span class="o">=</span> <span class="n">dbh_dsc</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">indx</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">thinned</span></div></div>
         
 </pre></div>
 
@@ -253,6 +316,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

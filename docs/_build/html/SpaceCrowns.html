@@ -141,10 +141,25 @@
 <dt id="intervene.SpaceCrowns">
 <em class="property">class </em><code class="descclassname">intervene.</code><code class="descname">SpaceCrowns</code><span class="sig-paren">(</span><em>trees</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/intervene.html#SpaceCrowns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#intervene.SpaceCrowns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">intervene.BaseSilv</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>crown_space</strong> &#8211; instance variable for crown spacing; initial value = 0</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="intervene.SpaceCrowns.add_to_treatment_collection">
-<code class="descname">add_to_treatment_collection</code><span class="sig-paren">(</span><em>treatment</em><span class="sig-paren">)</span><a class="headerlink" href="#intervene.SpaceCrowns.add_to_treatment_collection" title="Permalink to this definition">¶</a></dt>
+<code class="descname">add_to_treatment_collection</code><span class="sig-paren">(</span><em>treatment</em>, <em>ID</em><span class="sig-paren">)</span><a class="headerlink" href="#intervene.SpaceCrowns.add_to_treatment_collection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds treatment to static class attribute in intervene.BaseSilv()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="intervene.SpaceCrowns.clear_treatment_collection">
+<code class="descname">clear_treatment_collection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#intervene.SpaceCrowns.clear_treatment_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes all treatment currently in the treatment collection class
+attribute</p>
 </dd></dl>
 
 <dl class="method">
@@ -187,9 +202,23 @@ in units of input data frame</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="intervene.SpaceCrowns.treat">
+<code class="descname">treat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/intervene.html#SpaceCrowns.treat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#intervene.SpaceCrowns.treat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Treatment algorithm for removing trees based on input crown spacing</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Optimize algorithm by incorporating <code class="docutils literal"><span class="pre">searrch_rad</span></code>.</p>
+</div>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">split this function into 3</p>
+</div>
+</dd></dl>
+
 <dl class="attribute">
-<dt id="intervene.SpaceCrowns.treatemnt_collection">
-<code class="descname">treatemnt_collection</code><em class="property"> = {}</em><a class="headerlink" href="#intervene.SpaceCrowns.treatemnt_collection" title="Permalink to this definition">¶</a></dt>
+<dt id="intervene.SpaceCrowns.treatment_collection">
+<code class="descname">treatment_collection</code><em class="property"> = {}</em><a class="headerlink" href="#intervene.SpaceCrowns.treatment_collection" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -244,6 +273,7 @@ in units of input data frame</p>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

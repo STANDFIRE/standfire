@@ -1,13 +1,6 @@
 #!/usr/bin/python
 """
-The fuels module is a collection of classes that deal with forest fuel
-calculations.
 
-**Fvsfuels**
-    Uses FVS and an input inventory to calculate canopy fuels at the
-    individual tree level
-**Inventory**
-    Methods for converting inventory data to FVS tree list format
 """
 
 import numpy as np
