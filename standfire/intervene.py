@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """
+The intervene module is a collection of treatment algorithms
 """
 
 import pandas as pd
@@ -11,7 +12,11 @@ __Copyright__ = "Copyright 2015, STANDFIRE"
 
 class BaseSilv(object):
     """
+    Collector class for treatments.
     
+    :ivar trees: Pandas data frame of trees 
+    
+    ..note:: All treatment class should inherit BaseSilv
     """
     
     # class attributes
@@ -32,6 +37,15 @@ class BaseSilv(object):
             raise TypeError("argument type must be either an instance of "
                             "Pandas.DataFrame() or a string indicating a path "
                             "to a comma-delimted file")
+                            
+    def get_trees(self):
+        """
+        Returns the trees data frame of the object
+        
+        :return: trees data frame
+        :rtype: Pandas.DataFrame
+        """
+        return self.trees
     
     def add_to_treatment_collection(self, treatment, ID):
         """
@@ -60,6 +74,9 @@ class SpaceCrowns(BaseSilv):
         
         # instance attributes
         self.crown_space = 0
+        self.treatment_options = {1 : "thin from below to crown spacing",
+                                  2 : "thin from above to crown spacing",
+                                  3 : "random thin to crown spacing"}
     
     def set_crown_space(self, crown_space):
         """
@@ -70,6 +87,15 @@ class SpaceCrowns(BaseSilv):
         """
         
         self.crown_space = crown_space
+        
+    def get_treatment_options(self):
+        """
+        Returns dictionary of treatment options
+        
+        :return: treatment option codes and description
+        :rtype: dictionary
+        """
+        return self.treatment_options
         
     def get_distance(self, tree_a, tree_b):
         """
@@ -103,7 +129,7 @@ class SpaceCrowns(BaseSilv):
         """
         Treatment algorithm for removing trees based on input crown spacing
         
-        .. todo:: Optimize algorithm by incorporating ``searrch_rad``.
+        .. todo:: Optimize algorithm by incorporating ``search_rad``.
         .. todo:: split this function into 3
         
         """
