@@ -1,22 +1,33 @@
-\indexentry{fuels (module)|hyperpage}{5}
-\indexentry{Fvsfuels (class in fuels)|hyperpage}{5}
-\indexentry{set\_keyword() (fuels.Fvsfuels method)|hyperpage}{6}
-\indexentry{set\_dir() (fuels.Fvsfuels method)|hyperpage}{6}
-\indexentry{set\_num\_cycles() (fuels.Fvsfuels method)|hyperpage}{6}
-\indexentry{set\_time\_int() (fuels.Fvsfuels method)|hyperpage}{7}
-\indexentry{set\_inv\_year() (fuels.Fvsfuels method)|hyperpage}{7}
-\indexentry{run\_fvs() (fuels.Fvsfuels method)|hyperpage}{7}
-\indexentry{get\_simulation\_years() (fuels.Fvsfuels method)|hyperpage}{7}
-\indexentry{get\_trees() (fuels.Fvsfuels method)|hyperpage}{7}
+\indexentry{fuels (module)|hyperpage}{7}
+\indexentry{Fvsfuels (class in fuels)|hyperpage}{7}
+\indexentry{get\_simulation\_years() (fuels.Fvsfuels method)|hyperpage}{8}
 \indexentry{get\_snags() (fuels.Fvsfuels method)|hyperpage}{8}
 \indexentry{get\_standid() (fuels.Fvsfuels method)|hyperpage}{8}
-\indexentry{save\_trees\_by\_year() (fuels.Fvsfuels method)|hyperpage}{8}
-\indexentry{save\_snags\_by\_year() (fuels.Fvsfuels method)|hyperpage}{8}
-\indexentry{Inventory (class in fuels)|hyperpage}{8}
-\indexentry{read\_inventory() (fuels.Inventory method)|hyperpage}{9}
-\indexentry{print\_format\_standards() (fuels.Inventory method)|hyperpage}{10}
-\indexentry{get\_fvs\_cols() (fuels.Inventory method)|hyperpage}{10}
+\indexentry{get\_trees() (fuels.Fvsfuels method)|hyperpage}{8}
+\indexentry{run\_fvs() (fuels.Fvsfuels method)|hyperpage}{8}
+\indexentry{save\_all() (fuels.Fvsfuels method)|hyperpage}{8}
+\indexentry{save\_snags\_by\_year() (fuels.Fvsfuels method)|hyperpage}{9}
+\indexentry{save\_trees\_by\_year() (fuels.Fvsfuels method)|hyperpage}{9}
+\indexentry{set\_dir() (fuels.Fvsfuels method)|hyperpage}{9}
+\indexentry{set\_inv\_year() (fuels.Fvsfuels method)|hyperpage}{9}
+\indexentry{set\_keyword() (fuels.Fvsfuels method)|hyperpage}{9}
+\indexentry{set\_num\_cycles() (fuels.Fvsfuels method)|hyperpage}{9}
+\indexentry{set\_time\_int() (fuels.Fvsfuels method)|hyperpage}{9}
+\indexentry{Inventory (class in fuels)|hyperpage}{10}
+\indexentry{crwratio\_percent\_to\_code() (fuels.Inventory method)|hyperpage}{10}
+\indexentry{format\_fvs\_tree\_file() (fuels.Inventory method)|hyperpage}{10}
+\indexentry{get\_fvs\_cols() (fuels.Inventory method)|hyperpage}{11}
 \indexentry{get\_stands() (fuels.Inventory method)|hyperpage}{11}
-\indexentry{crwratio\_percent\_to\_code() (fuels.Inventory method)|hyperpage}{11}
-\indexentry{format\_fvs\_tree\_file() (fuels.Inventory method)|hyperpage}{11}
+\indexentry{print\_format\_standards() (fuels.Inventory method)|hyperpage}{11}
+\indexentry{read\_inventory() (fuels.Inventory method)|hyperpage}{12}
 \indexentry{save() (fuels.Inventory method)|hyperpage}{12}
+\indexentry{intervene (module)|hyperpage}{13}
+\indexentry{SpaceCrowns (class in intervene)|hyperpage}{13}
+\indexentry{add\_to\_treatment\_collection() (intervene.SpaceCrowns method)|hyperpage}{13}
+\indexentry{clear\_treatment\_collection() (intervene.SpaceCrowns method)|hyperpage}{13}
+\indexentry{get\_distance() (intervene.SpaceCrowns method)|hyperpage}{13}
+\indexentry{get\_treatment\_options() (intervene.SpaceCrowns method)|hyperpage}{13}
+\indexentry{get\_trees() (intervene.SpaceCrowns method)|hyperpage}{13}
+\indexentry{set\_crown\_space() (intervene.SpaceCrowns method)|hyperpage}{13}
+\indexentry{treat() (intervene.SpaceCrowns method)|hyperpage}{13}
+\indexentry{treatment\_collection (intervene.SpaceCrowns attribute)|hyperpage}{14}
