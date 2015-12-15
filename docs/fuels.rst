@@ -3,7 +3,7 @@ fuels module
 
 .. automodule:: fuels
 
-Contens:
+Contents:
 
 .. toctree::
    :maxdepth: 4
