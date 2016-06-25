@@ -1,0 +1,2904 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module pyfvsktc ! in 
+    interface  ! in :pyfvsktc
+        subroutine fvsdimsizes(ntrees,ncycles,nplots,maxtrees,maxspecies,maxplots,maxcycles) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            integer intent(out) :: ntrees
+            integer intent(out) :: ncycles
+            integer intent(out) :: nplots
+            integer intent(out) :: maxtrees
+            integer intent(out) :: maxspecies
+            integer intent(out) :: maxplots
+            integer intent(out) :: maxcycles
+            real :: aspect
+            real :: avh
+            real :: ba
+            real :: baf
+            real :: brk
+            real :: atavd
+            real :: atavh
+            real :: atba
+            real :: atccf
+            real :: attpa
+            real :: covyr
+            real :: covmlt
+            real :: elev
+            real :: fint
+            real :: fpa
+            real :: grospc
+            real :: pi
+            integer :: iptinv
+            integer :: nonstk
+            real :: relden
+            real :: reldm1
+            real dimension(11) :: reldsp
+            real :: rmsqd
+            real :: slope
+            real :: samwt
+            real :: tfpa
+            real :: rmai
+            real :: tprob
+            integer :: iage
+            integer :: ifint
+            integer :: ifor
+            integer :: igl
+            integer dimension(500) :: ipvec
+            integer :: ismall
+            integer :: itype
+            integer dimension(122) :: jtype
+            real :: oldtpa
+            real :: oldba
+            real dimension(11) :: sitear
+            integer :: isisp
+            real :: oldavh
+            real :: ormsqd
+            real :: sdimax
+            real dimension(11) :: sdidef
+            real dimension(11) :: barank
+            integer :: islop
+            integer :: iaspec
+            real :: tlat
+            real :: tlong
+            real :: pmsdil
+            real :: pmsdiu
+            real :: vmlt
+            real :: vmltyr
+            integer :: kodtyp
+            integer :: kodfor
+            integer :: managd
+            real :: btsdix
+            real :: atsdix
+            integer :: imodty
+            integer :: iphreg
+            integer :: ifortp
+            integer :: iszcl
+            integer :: istcl
+            real :: sdibc
+            real :: sdiac
+            integer :: istate
+            integer :: icnty
+            integer :: icage
+            real dimension(20,6) :: sitetr
+            integer :: nsitet
+            integer dimension(11) :: jspin
+            real :: stndsi
+            real :: sdibc2
+            real :: sdiac2
+            integer :: jspindef
+            character*160 :: trefmt
+            character dimension(11,4),intent(c) :: iused
+            character*250 :: kwdfil
+            character dimension(10,10),intent(c) :: namgrp
+            real :: autmax
+            real :: autmin
+            real :: auteff
+            real :: dgsd
+            real :: eff
+            real :: trm
+            real :: yr
+            integer :: iccode
+            integer :: icflag
+            integer :: icl1
+            integer :: icl2
+            integer :: icl3
+            integer :: icl4
+            integer :: icl5
+            integer :: icl6
+            real :: fintm
+            integer :: icyc
+            integer :: idg
+            integer :: ifst
+            integer dimension(6) :: ins
+            integer dimension(11) :: ibegin
+            integer :: iread
+            integer :: irec1
+            integer :: irec2
+            integer :: irecnt
+            integer :: irecrd
+            integer dimension(11) :: iref
+            integer dimension(11,2) :: isct
+            integer :: istdat
+            integer :: itrn
+            integer dimension(11) :: kptr
+            integer dimension(41) :: iy
+            integer :: jolist
+            integer :: jostnd
+            integer :: josum
+            integer :: jotree
+            integer :: jocalb
+            integer dimension(11) :: kount
+            logical :: ldcor2
+            logical dimension(11) :: ldgcal
+            logical dimension(11) :: lhtdrg
+            logical :: ldubdg
+            logical :: lflag
+            logical :: lstart
+            integer :: lstknt
+            logical :: lmort
+            logical :: lsumry
+            integer :: nstknt
+            logical :: ltrip
+            logical :: mordat
+            integer :: ncyc
+            logical :: notrip
+            integer :: numsp
+            real :: bamax
+            real :: d0mult
+            real :: d0
+            logical :: lbkden
+            logical :: lauton
+            real dimension(11) :: topd
+            real dimension(11) :: dbhmin
+            real dimension(11) :: stmp
+            real :: tcwt
+            real :: cfmin
+            real :: bfmin
+            real :: bamin
+            logical :: lrcor2
+            real dimension(11) :: rcor2
+            real dimension(11) :: frmcls
+            integer dimension(11) :: methc
+            integer dimension(11) :: methb
+            logical :: lbvols
+            logical :: lcvols
+            logical :: lsite
+            integer dimension(7) :: itable
+            real :: spclwt
+            logical :: lfia
+            real :: tcfmin
+            logical :: lfire
+            real dimension(11,4) :: sizcap
+            integer dimension(10,52) :: ispgrp
+            integer :: nspgrp
+            real :: pbawt
+            real :: pccfwt
+            real :: ptpawt
+            integer :: ithnpi
+            integer :: ithnpn
+            integer :: ithnpa
+            logical :: lzeide
+            real :: dr016
+            real :: dbhstage
+            real :: dbhzeide
+            real :: dbhsdi
+            character*4 :: mgmid
+            character dimension(11,4),intent(c) :: jsp
+            character dimension(11,3,4),intent(c) :: nsp
+            character*26 :: nplt
+            character dimension(11,4),intent(c) :: fiajsp
+            character dimension(11,6),intent(c) :: plnjsp
+            character*40 :: dbcn
+            character*10 :: cpvref
+            common /plot/ aspect,avh,ba,baf,brk,atavd,atavh,atba,atccf,attpa,covyr,covmlt,elev,fint,fpa,grospc,pi,iptinv,nonstk,relden,reldm1,reldsp,rmsqd,slope,samwt,tfpa,rmai,tprob,iage,ifint,ifor,igl,ipvec,ismall,itype,jtype,oldtpa,oldba,sitear,isisp,oldavh,ormsqd,sdimax,sdidef,barank,islop,iaspec,tlat,tlong,pmsdil,pmsdiu,vmlt,vmltyr,kodtyp,kodfor,managd,btsdix,atsdix,imodty,iphreg,ifortp,iszcl,istcl,sdibc,sdiac,istate,icnty,icage,sitetr,nsitet,jspin,stndsi,sdibc2,sdiac2,jspindef
+            common /conchr/ trefmt,iused,kwdfil,namgrp
+            common /contrl/ autmax,autmin,auteff,dgsd,eff,trm,yr,iccode,icflag,icl1,icl2,icl3,icl4,icl5,icl6,fintm,icyc,idg,ifst,ins,ibegin,iread,irec1,irec2,irecnt,irecrd,iref,isct,istdat,itrn,kptr,iy,jolist,jostnd,josum,jotree,jocalb,kount,ldcor2,ldgcal,lhtdrg,ldubdg,lflag,lstart,lstknt,lmort,lsumry,nstknt,ltrip,mordat,ncyc,notrip,numsp,bamax,d0mult,d0,lbkden,lauton,topd,dbhmin,stmp,tcwt,cfmin,bfmin,bamin,lrcor2,rcor2,frmcls,methc,methb,lbvols,lcvols,lsite,itable,spclwt,lfia,tcfmin,lfire,sizcap,ispgrp,nspgrp,pbawt,pccfwt,ptpawt,ithnpi,ithnpn,ithnpa,lzeide,dr016,dbhstage,dbhzeide,dbhsdi
+            common /pltchr/ mgmid,jsp,nsp,nplt,fiajsp,plnjsp,dbcn,cpvref
+        end subroutine fvsdimsizes
+        subroutine fvssummary(summary,icycle,ncycles,maxrow,maxcol,rtncode) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            integer dimension(20),intent(inout) :: summary
+            integer intent(in) :: icycle
+            integer intent(hide) :: ncycles
+            integer intent(hide) :: maxrow
+            integer intent(hide) :: maxcol
+            integer intent(out) :: rtncode
+            character dimension(4,3),intent(c) :: iosptt
+            character dimension(4,3),intent(c) :: iospbr
+            character dimension(4,3),intent(c) :: iosptv
+            character dimension(4,3),intent(c) :: iospmr
+            character dimension(4,3),intent(c) :: iospac
+            character dimension(4,3),intent(c) :: iospct
+            character dimension(4,3),intent(c) :: iospcv
+            character dimension(4,3),intent(c) :: iospmc
+            character dimension(4,3),intent(c) :: iospbv
+            character dimension(4,3),intent(c) :: iosprt
+            character dimension(4,3),intent(c) :: iospmo
+            character dimension(6,3),intent(c) :: ionsp
+            character*72 :: ititle
+            character*160 :: trefmt
+            character dimension(11,4),intent(c) :: iused
+            character*250 :: kwdfil
+            character dimension(10,10),intent(c) :: namgrp
+            real :: autmax
+            real :: autmin
+            real :: auteff
+            real :: dgsd
+            real :: eff
+            real :: trm
+            real :: yr
+            integer :: iccode
+            integer :: icflag
+            integer :: icl1
+            integer :: icl2
+            integer :: icl3
+            integer :: icl4
+            integer :: icl5
+            integer :: icl6
+            real :: fintm
+            integer :: icyc
+            integer :: idg
+            integer :: ifst
+            integer dimension(6) :: ins
+            integer dimension(11) :: ibegin
+            integer :: iread
+            integer :: irec1
+            integer :: irec2
+            integer :: irecnt
+            integer :: irecrd
+            integer dimension(11) :: iref
+            integer dimension(11,2) :: isct
+            integer :: istdat
+            integer :: itrn
+            integer dimension(11) :: kptr
+            integer dimension(41) :: iy
+            integer :: jolist
+            integer :: jostnd
+            integer :: josum
+            integer :: jotree
+            integer :: jocalb
+            integer dimension(11) :: kount
+            logical :: ldcor2
+            logical dimension(11) :: ldgcal
+            logical dimension(11) :: lhtdrg
+            logical :: ldubdg
+            logical :: lflag
+            logical :: lstart
+            integer :: lstknt
+            logical :: lmort
+            logical :: lsumry
+            integer :: nstknt
+            logical :: ltrip
+            logical :: mordat
+            integer :: ncyc
+            logical :: notrip
+            integer :: numsp
+            real :: bamax
+            real :: d0mult
+            real :: d0
+            logical :: lbkden
+            logical :: lauton
+            real dimension(11) :: topd
+            real dimension(11) :: dbhmin
+            real dimension(11) :: stmp
+            real :: tcwt
+            real :: cfmin
+            real :: bfmin
+            real :: bamin
+            logical :: lrcor2
+            real dimension(11) :: rcor2
+            real dimension(11) :: frmcls
+            integer dimension(11) :: methc
+            integer dimension(11) :: methb
+            logical :: lbvols
+            logical :: lcvols
+            logical :: lsite
+            integer dimension(7) :: itable
+            real :: spclwt
+            logical :: lfia
+            real :: tcfmin
+            logical :: lfire
+            real dimension(11,4) :: sizcap
+            integer dimension(10,52) :: ispgrp
+            integer :: nspgrp
+            real :: pbawt
+            real :: pccfwt
+            real :: ptpawt
+            integer :: ithnpi
+            integer :: ithnpn
+            integer :: ithnpa
+            logical :: lzeide
+            real :: dr016
+            real :: dbhstage
+            real :: dbhzeide
+            real :: dbhsdi
+            real dimension(7) :: oacc
+            real dimension(7) :: obfcur
+            real dimension(7) :: ocvcur
+            real dimension(7) :: omccur
+            real dimension(7) :: omort
+            real dimension(7) :: ontcur
+            real dimension(7) :: ontres
+            real dimension(4) :: ospac
+            real dimension(4) :: ospct
+            real dimension(4) :: ospcv
+            real dimension(4) :: ospmo
+            real dimension(7) :: obfrem
+            real dimension(7) :: ocvrem
+            real dimension(7) :: omcrem
+            real dimension(7) :: ontrem
+            real dimension(4) :: osprt
+            real dimension(4) :: osptt
+            real dimension(4) :: ospbv
+            real dimension(4) :: ospmc
+            real dimension(4) :: ospbr
+            real dimension(4) :: ospmr
+            real dimension(4) :: osptv
+            real dimension(6) :: dbhio
+            real dimension(6) :: htio
+            integer dimension(6) :: ioicr
+            real dimension(6) :: dgio
+            real dimension(6) :: pctio
+            real dimension(6) :: prbio
+            integer*4 dimension(20,41) :: iosum
+            common /outchr/ iosptt,iospbr,iosptv,iospmr,iospac,iospct,iospcv,iospmc,iospbv,iosprt,iospmo,ionsp,ititle
+            common /conchr/ trefmt,iused,kwdfil,namgrp
+            common /contrl/ autmax,autmin,auteff,dgsd,eff,trm,yr,iccode,icflag,icl1,icl2,icl3,icl4,icl5,icl6,fintm,icyc,idg,ifst,ins,ibegin,iread,irec1,irec2,irecnt,irecrd,iref,isct,istdat,itrn,kptr,iy,jolist,jostnd,josum,jotree,jocalb,kount,ldcor2,ldgcal,lhtdrg,ldubdg,lflag,lstart,lstknt,lmort,lsumry,nstknt,ltrip,mordat,ncyc,notrip,numsp,bamax,d0mult,d0,lbkden,lauton,topd,dbhmin,stmp,tcwt,cfmin,bfmin,bamin,lrcor2,rcor2,frmcls,methc,methb,lbvols,lcvols,lsite,itable,spclwt,lfia,tcfmin,lfire,sizcap,ispgrp,nspgrp,pbawt,pccfwt,ptpawt,ithnpi,ithnpn,ithnpa,lzeide,dr016,dbhstage,dbhzeide,dbhsdi
+            common /outcom/ oacc,obfcur,ocvcur,omccur,omort,ontcur,ontres,ospac,ospct,ospcv,ospmo,obfrem,ocvrem,omcrem,ontrem,osprt,osptt,ospbv,ospmc,ospbr,ospmr,osptv,dbhio,htio,ioicr,dgio,pctio,prbio,iosum
+        end subroutine fvssummary
+        subroutine fvstreeattr(name,nch,action,ntrees,attr,rtncode) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            character*10 intent(in) :: name
+            integer intent(in) :: nch
+            character*4 intent(in) :: action
+            integer, optional,intent(in),check(len(attr)>=ntrees),depend(attr) :: ntrees=len(attr)
+            real(kind=8) dimension(ntrees),intent(inout) :: attr
+            integer intent(out) :: rtncode
+            real dimension(3000) :: abirth
+            real dimension(3000) :: bfv
+            real dimension(3000) :: cfv
+            real dimension(3000) :: dbh
+            real dimension(3000) :: dg
+            real dimension(3000) :: ht
+            real dimension(3000) :: htg
+            real dimension(3000) :: oldrn
+            real dimension(3000) :: oldpct
+            real dimension(3000) :: pct
+            real dimension(3000) :: prob
+            real dimension(3000) :: wk1
+            real dimension(3000) :: wk2
+            real dimension(3000) :: wk3
+            real dimension(3000) :: wk4
+            real dimension(3000) :: wk5
+            real dimension(3000) :: wk6
+            real dimension(3000) :: zrand
+            integer dimension(3000) :: idtree
+            integer dimension(3000) :: icr
+            integer dimension(3000) :: imc
+            integer dimension(3000) :: ind
+            integer dimension(3000) :: ind1
+            integer dimension(3000) :: normht
+            integer dimension(3000) :: itrunc
+            integer dimension(3000) :: ind2
+            integer dimension(3000) :: isp
+            integer dimension(3000) :: itre
+            integer dimension(3000) :: kutkod
+            integer dimension(3000) :: defect
+            integer dimension(3000) :: ispecl
+            real dimension(3000) :: pltsiz
+            real dimension(3000) :: crwdth
+            real dimension(3000) :: yrdlos
+            integer dimension(6,3000) :: damsev
+            real dimension(3000,2) :: ht2td
+            character*160 :: trefmt
+            character dimension(11,4),intent(c) :: iused
+            character*250 :: kwdfil
+            character dimension(10,10),intent(c) :: namgrp
+            real :: autmax
+            real :: autmin
+            real :: auteff
+            real :: dgsd
+            real :: eff
+            real :: trm
+            real :: yr
+            integer :: iccode
+            integer :: icflag
+            integer :: icl1
+            integer :: icl2
+            integer :: icl3
+            integer :: icl4
+            integer :: icl5
+            integer :: icl6
+            real :: fintm
+            integer :: icyc
+            integer :: idg
+            integer :: ifst
+            integer dimension(6) :: ins
+            integer dimension(11) :: ibegin
+            integer :: iread
+            integer :: irec1
+            integer :: irec2
+            integer :: irecnt
+            integer :: irecrd
+            integer dimension(11) :: iref
+            integer dimension(11,2) :: isct
+            integer :: istdat
+            integer :: itrn
+            integer dimension(11) :: kptr
+            integer dimension(41) :: iy
+            integer :: jolist
+            integer :: jostnd
+            integer :: josum
+            integer :: jotree
+            integer :: jocalb
+            integer dimension(11) :: kount
+            logical :: ldcor2
+            logical dimension(11) :: ldgcal
+            logical dimension(11) :: lhtdrg
+            logical :: ldubdg
+            logical :: lflag
+            logical :: lstart
+            integer :: lstknt
+            logical :: lmort
+            logical :: lsumry
+            integer :: nstknt
+            logical :: ltrip
+            logical :: mordat
+            integer :: ncyc
+            logical :: notrip
+            integer :: numsp
+            real :: bamax
+            real :: d0mult
+            real :: d0
+            logical :: lbkden
+            logical :: lauton
+            real dimension(11) :: topd
+            real dimension(11) :: dbhmin
+            real dimension(11) :: stmp
+            real :: tcwt
+            real :: cfmin
+            real :: bfmin
+            real :: bamin
+            logical :: lrcor2
+            real dimension(11) :: rcor2
+            real dimension(11) :: frmcls
+            integer dimension(11) :: methc
+            integer dimension(11) :: methb
+            logical :: lbvols
+            logical :: lcvols
+            logical :: lsite
+            integer dimension(7) :: itable
+            real :: spclwt
+            logical :: lfia
+            real :: tcfmin
+            logical :: lfire
+            real dimension(11,4) :: sizcap
+            integer dimension(10,52) :: ispgrp
+            integer :: nspgrp
+            real :: pbawt
+            real :: pccfwt
+            real :: ptpawt
+            integer :: ithnpi
+            integer :: ithnpn
+            integer :: ithnpa
+            logical :: lzeide
+            real :: dr016
+            real :: dbhstage
+            real :: dbhzeide
+            real :: dbhsdi
+            real dimension(11) :: alldwn
+            integer :: burnyr
+            real :: canmht
+            real :: cbhcut
+            integer :: covtyp
+            real :: crburn
+            real dimension(3000,6) :: crownw
+            real dimension(3000) :: curkil
+            real dimension(3,11,2,5) :: cwd
+            real dimension(4,6,60) :: cwd2b
+            real dimension(4,6,60) :: cwd2b2
+            real :: cwdcut
+            real dimension(2,11) :: cwdnew
+            real dimension(3,10,2,5) :: cwdvol
+            real dimension(3,10,2,5) :: cwdcov
+            real dimension(2000) :: dbhs
+            real dimension(11) :: decayx
+            real dimension(2000) :: denih
+            real dimension(2000) :: denis
+            real dimension(2000) :: dend
+            real dimension(11,4) :: dkr
+            integer dimension(11) :: dkrcls
+            real dimension(4) :: dkrdef
+            real dimension(11,19) :: dspdbh
+            real dimension(11) :: fallx
+            real dimension(2) :: flive
+            real dimension(3000) :: firkil
+            real :: folmc
+            real dimension(3000) :: fmprob
+            real dimension(11) :: fmtba
+            integer :: nfmsvpx
+            integer dimension(3000) :: fmicr
+            integer :: fmkod
+            real :: fmslop
+            integer :: ftreat
+            real dimension(5,4) :: fuarea
+            integer dimension(3000) :: grow
+            logical dimension(2000) :: hard
+            integer :: hartyp
+            integer :: harvyr
+            real dimension(2000) :: htdead
+            real dimension(2000) :: htih
+            real dimension(2000) :: htis
+            real :: htr1
+            real :: htr2
+            real dimension(11,4) :: htx
+            real :: htxsft
+            integer :: icansp
+            integer :: icbhmt
+            integer :: ifmyr1
+            integer :: ifmyr2
+            integer :: iftyr
+            integer :: isalvc
+            integer :: isalvs
+            integer :: isngsm
+            integer :: jcout
+            integer dimension(3) :: jfrout
+            integer dimension(3) :: jlout
+            logical :: lanhed
+            real dimension(11) :: leaflf
+            logical :: lfmon
+            logical :: lfmon2
+            logical dimension(3) :: lfrout
+            logical :: ldynfm
+            real :: limbrk
+            logical :: ldhead
+            logical :: lshead
+            logical :: lvwest
+            real dimension(11,19) :: maxht
+            real dimension(11,19) :: minht
+            integer :: nsnag
+            integer :: nyrs
+            real :: nzero
+            integer :: oldcovtyp
+            real dimension(3000) :: oldcrl
+            real dimension(3000) :: oldht
+            real dimension(3000,6) :: oldcrw
+            integer :: oldict
+            integer :: oldict2
+            real dimension(2) :: oldictwt
+            real dimension(2000) :: pbfrih
+            real dimension(2000) :: pbfris
+            real :: pbscor
+            real :: pbsoft
+            real :: pbsize
+            real :: pbsmal
+            real :: pbtime
+            integer :: pburnyr
+            real :: percov
+            real dimension(11,4) :: prduff
+            real :: prsnag
+            real dimension(11) :: psoft
+            real dimension(11) :: prpile
+            real dimension(2000,2) :: salvspa
+            real :: sccf
+            real dimension(11,4) :: setdecay
+            real dimension(3000) :: sngnew
+            real dimension(6) :: snprcl
+            integer dimension(2000) :: sps
+            real dimension(6) :: tcwd
+            real dimension(6) :: tcwd2
+            real dimension(11,6) :: tfall
+            real dimension(11,4) :: toduff
+            real :: tonrmc
+            real :: tonrms
+            real :: tonrmh
+            real :: totacr
+            real dimension(11) :: v2t
+            integer dimension(2000) :: yrdead
+            logical :: lremt
+            integer :: nsnagsalv
+            real dimension(2000) :: htdeadsalv
+            integer dimension(2000) :: spssalv
+            real dimension(2000) :: dbhssalv
+            real dimension(2000) :: htihsalv
+            real dimension(2000) :: htissalv
+            logical dimension(2000) :: hardsalv
+            real dimension(3000) :: premst
+            real dimension(3000) :: premcr
+            integer dimension(3000) :: ispcc
+            real dimension(3000) :: dbhc
+            real dimension(3000) :: htc
+            real dimension(3000,6) :: crownwc
+            common /arrays/ abirth,bfv,cfv,dbh,dg,ht,htg,oldrn,oldpct,pct,prob,wk1,wk2,wk3,wk4,wk5,wk6,zrand,idtree,icr,imc,ind,ind1,normht,itrunc,ind2,isp,itre,kutkod,defect,ispecl,pltsiz,crwdth,yrdlos,damsev,ht2td
+            common /conchr/ trefmt,iused,kwdfil,namgrp
+            common /contrl/ autmax,autmin,auteff,dgsd,eff,trm,yr,iccode,icflag,icl1,icl2,icl3,icl4,icl5,icl6,fintm,icyc,idg,ifst,ins,ibegin,iread,irec1,irec2,irecnt,irecrd,iref,isct,istdat,itrn,kptr,iy,jolist,jostnd,josum,jotree,jocalb,kount,ldcor2,ldgcal,lhtdrg,ldubdg,lflag,lstart,lstknt,lmort,lsumry,nstknt,ltrip,mordat,ncyc,notrip,numsp,bamax,d0mult,d0,lbkden,lauton,topd,dbhmin,stmp,tcwt,cfmin,bfmin,bamin,lrcor2,rcor2,frmcls,methc,methb,lbvols,lcvols,lsite,itable,spclwt,lfia,tcfmin,lfire,sizcap,ispgrp,nspgrp,pbawt,pccfwt,ptpawt,ithnpi,ithnpn,ithnpa,lzeide,dr016,dbhstage,dbhzeide,dbhsdi
+            common /fmcom/ alldwn,burnyr,canmht,cbhcut,covtyp,crburn,crownw,curkil,cwd,cwd2b,cwd2b2,cwdcut,cwdnew,cwdvol,cwdcov,dbhs,decayx,denih,denis,dend,dkr,dkrcls,dkrdef,dspdbh,fallx,flive,firkil,folmc,fmprob,fmtba,nfmsvpx,fmicr,fmkod,fmslop,ftreat,fuarea,grow,hard,hartyp,harvyr,htdead,htih,htis,htr1,htr2,htx,htxsft,icansp,icbhmt,ifmyr1,ifmyr2,iftyr,isalvc,isalvs,isngsm,jcout,jfrout,jlout,lanhed,leaflf,lfmon,lfmon2,lfrout,ldynfm,limbrk,ldhead,lshead,lvwest,maxht,minht,nsnag,nyrs,nzero,oldcovtyp,oldcrl,oldht,oldcrw,oldict,oldict2,oldictwt,pbfrih,pbfris,pbscor,pbsoft,pbsize,pbsmal,pbtime,pburnyr,percov,prduff,prsnag,psoft,prpile,salvspa,sccf,setdecay,sngnew,snprcl,sps,tcwd,tcwd2,tfall,toduff,tonrmc,tonrms,tonrmh,totacr,v2t,yrdead,lremt,nsnagsalv,htdeadsalv,spssalv,dbhssalv,htihsalv,htissalv,hardsalv,premst,premcr,ispcc,dbhc,htc,crownwc
+        end subroutine fvstreeattr
+        subroutine fvsspeciesattr(name,nch,action,attr,rtncode) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            character*10 intent(in) :: name
+            integer intent(in) :: nch
+            character*4 intent(in) :: action
+            real(kind=8) dimension(11),intent(inout) :: attr
+            integer intent(out) :: rtncode
+            real :: aspect
+            real :: avh
+            real :: ba
+            real :: baf
+            real :: brk
+            real :: atavd
+            real :: atavh
+            real :: atba
+            real :: atccf
+            real :: attpa
+            real :: covyr
+            real :: covmlt
+            real :: elev
+            real :: fint
+            real :: fpa
+            real :: grospc
+            real :: pi
+            integer :: iptinv
+            integer :: nonstk
+            real :: relden
+            real :: reldm1
+            real dimension(11) :: reldsp
+            real :: rmsqd
+            real :: slope
+            real :: samwt
+            real :: tfpa
+            real :: rmai
+            real :: tprob
+            integer :: iage
+            integer :: ifint
+            integer :: ifor
+            integer :: igl
+            integer dimension(500) :: ipvec
+            integer :: ismall
+            integer :: itype
+            integer dimension(122) :: jtype
+            real :: oldtpa
+            real :: oldba
+            real dimension(11) :: sitear
+            integer :: isisp
+            real :: oldavh
+            real :: ormsqd
+            real :: sdimax
+            real dimension(11) :: sdidef
+            real dimension(11) :: barank
+            integer :: islop
+            integer :: iaspec
+            real :: tlat
+            real :: tlong
+            real :: pmsdil
+            real :: pmsdiu
+            real :: vmlt
+            real :: vmltyr
+            integer :: kodtyp
+            integer :: kodfor
+            integer :: managd
+            real :: btsdix
+            real :: atsdix
+            integer :: imodty
+            integer :: iphreg
+            integer :: ifortp
+            integer :: iszcl
+            integer :: istcl
+            real :: sdibc
+            real :: sdiac
+            integer :: istate
+            integer :: icnty
+            integer :: icage
+            real dimension(20,6) :: sitetr
+            integer :: nsitet
+            integer dimension(11) :: jspin
+            real :: stndsi
+            real :: sdibc2
+            real :: sdiac2
+            integer :: jspindef
+            character*4 :: mgmid
+            character dimension(11,4),intent(c) :: jsp
+            character dimension(11,3,4),intent(c) :: nsp
+            character*26 :: nplt
+            character dimension(11,4),intent(c) :: fiajsp
+            character dimension(11,6),intent(c) :: plnjsp
+            character*40 :: dbcn
+            character*10 :: cpvref
+            common /plot/ aspect,avh,ba,baf,brk,atavd,atavh,atba,atccf,attpa,covyr,covmlt,elev,fint,fpa,grospc,pi,iptinv,nonstk,relden,reldm1,reldsp,rmsqd,slope,samwt,tfpa,rmai,tprob,iage,ifint,ifor,igl,ipvec,ismall,itype,jtype,oldtpa,oldba,sitear,isisp,oldavh,ormsqd,sdimax,sdidef,barank,islop,iaspec,tlat,tlong,pmsdil,pmsdiu,vmlt,vmltyr,kodtyp,kodfor,managd,btsdix,atsdix,imodty,iphreg,ifortp,iszcl,istcl,sdibc,sdiac,istate,icnty,icage,sitetr,nsitet,jspin,stndsi,sdibc2,sdiac2,jspindef
+            common /pltchr/ mgmid,jsp,nsp,nplt,fiajsp,plnjsp,dbcn,cpvref
+        end subroutine fvsspeciesattr
+        subroutine fvsevmonattr(name,nch,action,attr,rtncode) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            character*9 intent(in) :: name
+            integer intent(in) :: nch
+            character*4 intent(in) :: action
+            double precision intent(inout) :: attr
+            integer intent(out) :: rtncode
+            real dimension(3000) :: abirth
+            real dimension(3000) :: bfv
+            real dimension(3000) :: cfv
+            real dimension(3000) :: dbh
+            real dimension(3000) :: dg
+            real dimension(3000) :: ht
+            real dimension(3000) :: htg
+            real dimension(3000) :: oldrn
+            real dimension(3000) :: oldpct
+            real dimension(3000) :: pct
+            real dimension(3000) :: prob
+            real dimension(3000) :: wk1
+            real dimension(3000) :: wk2
+            real dimension(3000) :: wk3
+            real dimension(3000) :: wk4
+            real dimension(3000) :: wk5
+            real dimension(3000) :: wk6
+            real dimension(3000) :: zrand
+            integer dimension(3000) :: idtree
+            integer dimension(3000) :: icr
+            integer dimension(3000) :: imc
+            integer dimension(3000) :: ind
+            integer dimension(3000) :: ind1
+            integer dimension(3000) :: normht
+            integer dimension(3000) :: itrunc
+            integer dimension(3000) :: ind2
+            integer dimension(3000) :: isp
+            integer dimension(3000) :: itre
+            integer dimension(3000) :: kutkod
+            integer dimension(3000) :: defect
+            integer dimension(3000) :: ispecl
+            real dimension(3000) :: pltsiz
+            real dimension(3000) :: crwdth
+            real dimension(3000) :: yrdlos
+            integer dimension(6,3000) :: damsev
+            real dimension(3000,2) :: ht2td
+            logical :: lopevn
+            integer :: img1
+            integer :: img2
+            integer :: imgl
+            integer :: iept
+            integer :: impl
+            integer :: icod
+            integer :: ievt
+            integer :: ieva
+            integer :: ilgnum
+            integer dimension(2000) :: iseq
+            real dimension(5999) :: parms
+            integer dimension(2000,5) :: iact
+            logical :: levuse
+            integer dimension(2000) :: iopsrt
+            integer dimension(2000) :: idate
+            integer dimension(6000) :: ievcod
+            integer dimension(2000) :: iopcyc
+            integer dimension(40,2) :: imgpts
+            integer dimension(150,3) :: ievnts
+            integer dimension(160,6) :: ievact
+            integer :: itoprm
+            real dimension(50) :: tstv1
+            real dimension(32) :: tstv2
+            real dimension(20) :: tstv3
+            real dimension(50) :: tstv4
+            logical dimension(50) :: ltstv4
+            integer :: ktodo
+            real dimension(199) :: tstv5
+            logical dimension(199) :: ltstv5
+            integer :: itst5
+            integer dimension(500) :: iptodo
+            logical :: lbsets
+            integer :: lensls
+            integer dimension(160) :: lenagl
+            integer :: iphase
+            real dimension(400) :: xreg
+            logical dimension(400) :: lreg
+            real dimension(11) :: bccfsp
+            real dimension(11) :: accfsp
+            integer :: icact
+            integer :: iseqdn
+            character*250 :: slset
+            character dimension(160,250),intent(c) :: aglset
+            character*250 :: wkstr1
+            character*250 :: wkstr2
+            character*250 :: wkstr3
+            character dimension(199,8),intent(c) :: ctstv5
+            character dimension(2000) :: cexprs
+            character dimension(10000,1),intent(c) :: cact
+            real dimension(11) :: alldwn
+            integer :: burnyr
+            real :: canmht
+            real :: cbhcut
+            integer :: covtyp
+            real :: crburn
+            real dimension(3000,6) :: crownw
+            real dimension(3000) :: curkil
+            real dimension(3,11,2,5) :: cwd
+            real dimension(4,6,60) :: cwd2b
+            real dimension(4,6,60) :: cwd2b2
+            real :: cwdcut
+            real dimension(2,11) :: cwdnew
+            real dimension(3,10,2,5) :: cwdvol
+            real dimension(3,10,2,5) :: cwdcov
+            real dimension(2000) :: dbhs
+            real dimension(11) :: decayx
+            real dimension(2000) :: denih
+            real dimension(2000) :: denis
+            real dimension(2000) :: dend
+            real dimension(11,4) :: dkr
+            integer dimension(11) :: dkrcls
+            real dimension(4) :: dkrdef
+            real dimension(11,19) :: dspdbh
+            real dimension(11) :: fallx
+            real dimension(2) :: flive
+            real dimension(3000) :: firkil
+            real :: folmc
+            real dimension(3000) :: fmprob
+            real dimension(11) :: fmtba
+            integer :: nfmsvpx
+            integer dimension(3000) :: fmicr
+            integer :: fmkod
+            real :: fmslop
+            integer :: ftreat
+            real dimension(5,4) :: fuarea
+            integer dimension(3000) :: grow
+            logical dimension(2000) :: hard
+            integer :: hartyp
+            integer :: harvyr
+            real dimension(2000) :: htdead
+            real dimension(2000) :: htih
+            real dimension(2000) :: htis
+            real :: htr1
+            real :: htr2
+            real dimension(11,4) :: htx
+            real :: htxsft
+            integer :: icansp
+            integer :: icbhmt
+            integer :: ifmyr1
+            integer :: ifmyr2
+            integer :: iftyr
+            integer :: isalvc
+            integer :: isalvs
+            integer :: isngsm
+            integer :: jcout
+            integer dimension(3) :: jfrout
+            integer dimension(3) :: jlout
+            logical :: lanhed
+            real dimension(11) :: leaflf
+            logical :: lfmon
+            logical :: lfmon2
+            logical dimension(3) :: lfrout
+            logical :: ldynfm
+            real :: limbrk
+            logical :: ldhead
+            logical :: lshead
+            logical :: lvwest
+            real dimension(11,19) :: maxht
+            real dimension(11,19) :: minht
+            integer :: nsnag
+            integer :: nyrs
+            real :: nzero
+            integer :: oldcovtyp
+            real dimension(3000) :: oldcrl
+            real dimension(3000) :: oldht
+            real dimension(3000,6) :: oldcrw
+            integer :: oldict
+            integer :: oldict2
+            real dimension(2) :: oldictwt
+            real dimension(2000) :: pbfrih
+            real dimension(2000) :: pbfris
+            real :: pbscor
+            real :: pbsoft
+            real :: pbsize
+            real :: pbsmal
+            real :: pbtime
+            integer :: pburnyr
+            real :: percov
+            real dimension(11,4) :: prduff
+            real :: prsnag
+            real dimension(11) :: psoft
+            real dimension(11) :: prpile
+            real dimension(2000,2) :: salvspa
+            real :: sccf
+            real dimension(11,4) :: setdecay
+            real dimension(3000) :: sngnew
+            real dimension(6) :: snprcl
+            integer dimension(2000) :: sps
+            real dimension(6) :: tcwd
+            real dimension(6) :: tcwd2
+            real dimension(11,6) :: tfall
+            real dimension(11,4) :: toduff
+            real :: tonrmc
+            real :: tonrms
+            real :: tonrmh
+            real :: totacr
+            real dimension(11) :: v2t
+            integer dimension(2000) :: yrdead
+            logical :: lremt
+            integer :: nsnagsalv
+            real dimension(2000) :: htdeadsalv
+            integer dimension(2000) :: spssalv
+            real dimension(2000) :: dbhssalv
+            real dimension(2000) :: htihsalv
+            real dimension(2000) :: htissalv
+            logical dimension(2000) :: hardsalv
+            real dimension(3000) :: premst
+            real dimension(3000) :: premcr
+            integer dimension(3000) :: ispcc
+            real dimension(3000) :: dbhc
+            real dimension(3000) :: htc
+            real dimension(3000,6) :: crownwc
+            common /arrays/ abirth,bfv,cfv,dbh,dg,ht,htg,oldrn,oldpct,pct,prob,wk1,wk2,wk3,wk4,wk5,wk6,zrand,idtree,icr,imc,ind,ind1,normht,itrunc,ind2,isp,itre,kutkod,defect,ispecl,pltsiz,crwdth,yrdlos,damsev,ht2td
+            common /opcom/ lopevn,img1,img2,imgl,iept,impl,icod,ievt,ieva,ilgnum,iseq,parms,iact,levuse,iopsrt,idate,ievcod,iopcyc,imgpts,ievnts,ievact,itoprm,tstv1,tstv2,tstv3,tstv4,ltstv4,ktodo,tstv5,ltstv5,itst5,iptodo,lbsets,lensls,lenagl,iphase,xreg,lreg,bccfsp,accfsp,icact,iseqdn
+            common /opchr/ slset,aglset,wkstr1,wkstr2,wkstr3,ctstv5,cexprs,cact
+            common /fmcom/ alldwn,burnyr,canmht,cbhcut,covtyp,crburn,crownw,curkil,cwd,cwd2b,cwd2b2,cwdcut,cwdnew,cwdvol,cwdcov,dbhs,decayx,denih,denis,dend,dkr,dkrcls,dkrdef,dspdbh,fallx,flive,firkil,folmc,fmprob,fmtba,nfmsvpx,fmicr,fmkod,fmslop,ftreat,fuarea,grow,hard,hartyp,harvyr,htdead,htih,htis,htr1,htr2,htx,htxsft,icansp,icbhmt,ifmyr1,ifmyr2,iftyr,isalvc,isalvs,isngsm,jcout,jfrout,jlout,lanhed,leaflf,lfmon,lfmon2,lfrout,ldynfm,limbrk,ldhead,lshead,lvwest,maxht,minht,nsnag,nyrs,nzero,oldcovtyp,oldcrl,oldht,oldcrw,oldict,oldict2,oldictwt,pbfrih,pbfris,pbscor,pbsoft,pbsize,pbsmal,pbtime,pburnyr,percov,prduff,prsnag,psoft,prpile,salvspa,sccf,setdecay,sngnew,snprcl,sps,tcwd,tcwd2,tfall,toduff,tonrmc,tonrms,tonrmh,totacr,v2t,yrdead,lremt,nsnagsalv,htdeadsalv,spssalv,dbhssalv,htihsalv,htissalv,hardsalv,premst,premcr,ispcc,dbhc,htc,crownwc
+        end subroutine fvsevmonattr
+        subroutine fvsaddtrees(in_dbh,in_species,in_ht,in_cratio,in_plot,in_tpa,ntrees,rtncode) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            real(kind=8) dimension(ntrees),intent(in) :: in_dbh
+            real(kind=8) dimension(ntrees),intent(in),depend(ntrees) :: in_species
+            real(kind=8) dimension(ntrees),intent(in),depend(ntrees) :: in_ht
+            real(kind=8) dimension(ntrees),intent(in),depend(ntrees) :: in_cratio
+            real(kind=8) dimension(ntrees),intent(in),depend(ntrees) :: in_plot
+            real(kind=8) dimension(ntrees),intent(in),depend(ntrees) :: in_tpa
+            integer, optional,intent(in),check(len(in_dbh)>=ntrees),depend(in_dbh) :: ntrees=len(in_dbh)
+            integer intent(out) :: rtncode
+            real dimension(11) :: aa
+            real dimension(11) :: bb
+            integer dimension(11) :: iabflg
+            real dimension(11) :: b0accf
+            real dimension(11) :: b1accf
+            real dimension(11) :: b0bccf
+            real dimension(11) :: b1bccf
+            real dimension(11) :: b0astd
+            real dimension(11) :: b1bstd
+            real dimension(11,9) :: htt1
+            real dimension(11,9) :: htt2
+            real dimension(11) :: bb0
+            real dimension(11) :: bb1
+            real dimension(11) :: bb2
+            real dimension(11) :: bb3
+            real dimension(11) :: bb4
+            real dimension(11) :: bb5
+            real dimension(11) :: bb6
+            real dimension(11) :: bb7
+            real dimension(11) :: bb8
+            real dimension(11) :: bb9
+            real dimension(11) :: bb10
+            real dimension(11) :: bb11
+            real dimension(11) :: bb12
+            real dimension(11) :: bb13
+            real dimension(3000) :: ptbalt
+            real dimension(500) :: ptbaa
+            integer dimension(11) :: istagf
+            integer dimension(11) :: maxsdi
+            real :: cepmrt
+            real :: slpmrt
+            real :: tpamrt
+            logical :: lbamax
+            logical :: lflagv
+            logical :: lfixsd
+            integer :: isilft
+            real :: qmdmsb
+            real :: slpmsb
+            real :: cepmsb
+            real :: effmsb
+            real :: dlomsb
+            real :: dhimsb
+            integer :: mflmsb
+            integer :: ibasp
+            real :: aspect
+            real :: avh
+            real :: ba
+            real :: baf
+            real :: brk
+            real :: atavd
+            real :: atavh
+            real :: atba
+            real :: atccf
+            real :: attpa
+            real :: covyr
+            real :: covmlt
+            real :: elev
+            real :: fint
+            real :: fpa
+            real :: grospc
+            real :: pi
+            integer :: iptinv
+            integer :: nonstk
+            real :: relden
+            real :: reldm1
+            real dimension(11) :: reldsp
+            real :: rmsqd
+            real :: slope
+            real :: samwt
+            real :: tfpa
+            real :: rmai
+            real :: tprob
+            integer :: iage
+            integer :: ifint
+            integer :: ifor
+            integer :: igl
+            integer dimension(500) :: ipvec
+            integer :: ismall
+            integer :: itype
+            integer dimension(122) :: jtype
+            real :: oldtpa
+            real :: oldba
+            real dimension(11) :: sitear
+            integer :: isisp
+            real :: oldavh
+            real :: ormsqd
+            real :: sdimax
+            real dimension(11) :: sdidef
+            real dimension(11) :: barank
+            integer :: islop
+            integer :: iaspec
+            real :: tlat
+            real :: tlong
+            real :: pmsdil
+            real :: pmsdiu
+            real :: vmlt
+            real :: vmltyr
+            integer :: kodtyp
+            integer :: kodfor
+            integer :: managd
+            real :: btsdix
+            real :: atsdix
+            integer :: imodty
+            integer :: iphreg
+            integer :: ifortp
+            integer :: iszcl
+            integer :: istcl
+            real :: sdibc
+            real :: sdiac
+            integer :: istate
+            integer :: icnty
+            integer :: icage
+            real dimension(20,6) :: sitetr
+            integer :: nsitet
+            integer dimension(11) :: jspin
+            real :: stndsi
+            real :: sdibc2
+            real :: sdiac2
+            integer :: jspindef
+            character*160 :: trefmt
+            character dimension(11,4),intent(c) :: iused
+            character*250 :: kwdfil
+            character dimension(10,10),intent(c) :: namgrp
+            real dimension(3000) :: abirth
+            real dimension(3000) :: bfv
+            real dimension(3000) :: cfv
+            real dimension(3000) :: dbh
+            real dimension(3000) :: dg
+            real dimension(3000) :: ht
+            real dimension(3000) :: htg
+            real dimension(3000) :: oldrn
+            real dimension(3000) :: oldpct
+            real dimension(3000) :: pct
+            real dimension(3000) :: prob
+            real dimension(3000) :: wk1
+            real dimension(3000) :: wk2
+            real dimension(3000) :: wk3
+            real dimension(3000) :: wk4
+            real dimension(3000) :: wk5
+            real dimension(3000) :: wk6
+            real dimension(3000) :: zrand
+            integer dimension(3000) :: idtree
+            integer dimension(3000) :: icr
+            integer dimension(3000) :: imc
+            integer dimension(3000) :: ind
+            integer dimension(3000) :: ind1
+            integer dimension(3000) :: normht
+            integer dimension(3000) :: itrunc
+            integer dimension(3000) :: ind2
+            integer dimension(3000) :: isp
+            integer dimension(3000) :: itre
+            integer dimension(3000) :: kutkod
+            integer dimension(3000) :: defect
+            integer dimension(3000) :: ispecl
+            real dimension(3000) :: pltsiz
+            real dimension(3000) :: crwdth
+            real dimension(3000) :: yrdlos
+            integer dimension(6,3000) :: damsev
+            real dimension(3000,2) :: ht2td
+            character*8 :: pcom
+            character*8 :: pcomx
+            character dimension(4,3),intent(c) :: iosptt
+            character dimension(4,3),intent(c) :: iospbr
+            character dimension(4,3),intent(c) :: iosptv
+            character dimension(4,3),intent(c) :: iospmr
+            character dimension(4,3),intent(c) :: iospac
+            character dimension(4,3),intent(c) :: iospct
+            character dimension(4,3),intent(c) :: iospcv
+            character dimension(4,3),intent(c) :: iospmc
+            character dimension(4,3),intent(c) :: iospbv
+            character dimension(4,3),intent(c) :: iosprt
+            character dimension(4,3),intent(c) :: iospmo
+            character dimension(6,3),intent(c) :: ionsp
+            character*72 :: ititle
+            real dimension(7) :: oacc
+            real dimension(7) :: obfcur
+            real dimension(7) :: ocvcur
+            real dimension(7) :: omccur
+            real dimension(7) :: omort
+            real dimension(7) :: ontcur
+            real dimension(7) :: ontres
+            real dimension(4) :: ospac
+            real dimension(4) :: ospct
+            real dimension(4) :: ospcv
+            real dimension(4) :: ospmo
+            real dimension(7) :: obfrem
+            real dimension(7) :: ocvrem
+            real dimension(7) :: omcrem
+            real dimension(7) :: ontrem
+            real dimension(4) :: osprt
+            real dimension(4) :: osptt
+            real dimension(4) :: ospbv
+            real dimension(4) :: ospmc
+            real dimension(4) :: ospbr
+            real dimension(4) :: ospmr
+            real dimension(4) :: osptv
+            real dimension(6) :: dbhio
+            real dimension(6) :: htio
+            integer dimension(6) :: ioicr
+            real dimension(6) :: dgio
+            real dimension(6) :: pctio
+            real dimension(6) :: prbio
+            integer*4 dimension(20,41) :: iosum
+            real dimension(3000) :: ptocfv
+            real dimension(3000) :: pmrcfv
+            real dimension(3000) :: pmrbfv
+            integer dimension(3000) :: ncfdef
+            integer dimension(3000) :: nbfdef
+            real dimension(3000) :: pdbh
+            real dimension(3000) :: pht
+            character*4 :: mgmid
+            character dimension(11,4),intent(c) :: jsp
+            character dimension(11,3,4),intent(c) :: nsp
+            character*26 :: nplt
+            character dimension(11,4),intent(c) :: fiajsp
+            character dimension(11,6),intent(c) :: plnjsp
+            character*40 :: dbcn
+            character*10 :: cpvref
+            integer dimension(3000) :: iestat
+            real :: autmax
+            real :: autmin
+            real :: auteff
+            real :: dgsd
+            real :: eff
+            real :: trm
+            real :: yr
+            integer :: iccode
+            integer :: icflag
+            integer :: icl1
+            integer :: icl2
+            integer :: icl3
+            integer :: icl4
+            integer :: icl5
+            integer :: icl6
+            real :: fintm
+            integer :: icyc
+            integer :: idg
+            integer :: ifst
+            integer dimension(6) :: ins
+            integer dimension(11) :: ibegin
+            integer :: iread
+            integer :: irec1
+            integer :: irec2
+            integer :: irecnt
+            integer :: irecrd
+            integer dimension(11) :: iref
+            integer dimension(11,2) :: isct
+            integer :: istdat
+            integer :: itrn
+            integer dimension(11) :: kptr
+            integer dimension(41) :: iy
+            integer :: jolist
+            integer :: jostnd
+            integer :: josum
+            integer :: jotree
+            integer :: jocalb
+            integer dimension(11) :: kount
+            logical :: ldcor2
+            logical dimension(11) :: ldgcal
+            logical dimension(11) :: lhtdrg
+            logical :: ldubdg
+            logical :: lflag
+            logical :: lstart
+            integer :: lstknt
+            logical :: lmort
+            logical :: lsumry
+            integer :: nstknt
+            logical :: ltrip
+            logical :: mordat
+            integer :: ncyc
+            logical :: notrip
+            integer :: numsp
+            real :: bamax
+            real :: d0mult
+            real :: d0
+            logical :: lbkden
+            logical :: lauton
+            real dimension(11) :: topd
+            real dimension(11) :: dbhmin
+            real dimension(11) :: stmp
+            real :: tcwt
+            real :: cfmin
+            real :: bfmin
+            real :: bamin
+            logical :: lrcor2
+            real dimension(11) :: rcor2
+            real dimension(11) :: frmcls
+            integer dimension(11) :: methc
+            integer dimension(11) :: methb
+            logical :: lbvols
+            logical :: lcvols
+            logical :: lsite
+            integer dimension(7) :: itable
+            real :: spclwt
+            logical :: lfia
+            real :: tcfmin
+            logical :: lfire
+            real dimension(11,4) :: sizcap
+            integer dimension(10,52) :: ispgrp
+            integer :: nspgrp
+            real :: pbawt
+            real :: pccfwt
+            real :: ptpawt
+            integer :: ithnpi
+            integer :: ithnpn
+            integer :: ithnpa
+            logical :: lzeide
+            real :: dr016
+            real :: dbhstage
+            real :: dbhzeide
+            real :: dbhsdi
+            common /varcom/ aa,bb,iabflg,b0accf,b1accf,b0bccf,b1bccf,b0astd,b1bstd,htt1,htt2,bb0,bb1,bb2,bb3,bb4,bb5,bb6,bb7,bb8,bb9,bb10,bb11,bb12,bb13,ptbalt,ptbaa,istagf,maxsdi,cepmrt,slpmrt,tpamrt,lbamax,lflagv,lfixsd,isilft,qmdmsb,slpmsb,cepmsb,effmsb,dlomsb,dhimsb,mflmsb,ibasp
+            common /plot/ aspect,avh,ba,baf,brk,atavd,atavh,atba,atccf,attpa,covyr,covmlt,elev,fint,fpa,grospc,pi,iptinv,nonstk,relden,reldm1,reldsp,rmsqd,slope,samwt,tfpa,rmai,tprob,iage,ifint,ifor,igl,ipvec,ismall,itype,jtype,oldtpa,oldba,sitear,isisp,oldavh,ormsqd,sdimax,sdidef,barank,islop,iaspec,tlat,tlong,pmsdil,pmsdiu,vmlt,vmltyr,kodtyp,kodfor,managd,btsdix,atsdix,imodty,iphreg,ifortp,iszcl,istcl,sdibc,sdiac,istate,icnty,icage,sitetr,nsitet,jspin,stndsi,sdibc2,sdiac2,jspindef
+            common /conchr/ trefmt,iused,kwdfil,namgrp
+            common /arrays/ abirth,bfv,cfv,dbh,dg,ht,htg,oldrn,oldpct,pct,prob,wk1,wk2,wk3,wk4,wk5,wk6,zrand,idtree,icr,imc,ind,ind1,normht,itrunc,ind2,isp,itre,kutkod,defect,ispecl,pltsiz,crwdth,yrdlos,damsev,ht2td
+            common /varchr/ pcom,pcomx
+            common /outchr/ iosptt,iospbr,iosptv,iospmr,iospac,iospct,iospcv,iospmc,iospbv,iosprt,iospmo,ionsp,ititle
+            common /outcom/ oacc,obfcur,ocvcur,omccur,omort,ontcur,ontres,ospac,ospct,ospcv,ospmo,obfrem,ocvrem,omcrem,ontrem,osprt,osptt,ospbv,ospmc,ospbr,ospmr,osptv,dbhio,htio,ioicr,dgio,pctio,prbio,iosum
+            common /stdstk/ ptocfv,pmrcfv,pmrbfv,ncfdef,nbfdef,pdbh,pht
+            common /pltchr/ mgmid,jsp,nsp,nplt,fiajsp,plnjsp,dbcn,cpvref
+            common /estree/ iestat
+            common /contrl/ autmax,autmin,auteff,dgsd,eff,trm,yr,iccode,icflag,icl1,icl2,icl3,icl4,icl5,icl6,fintm,icyc,idg,ifst,ins,ibegin,iread,irec1,irec2,irecnt,irecrd,iref,isct,istdat,itrn,kptr,iy,jolist,jostnd,josum,jotree,jocalb,kount,ldcor2,ldgcal,lhtdrg,ldubdg,lflag,lstart,lstknt,lmort,lsumry,nstknt,ltrip,mordat,ncyc,notrip,numsp,bamax,d0mult,d0,lbkden,lauton,topd,dbhmin,stmp,tcwt,cfmin,bfmin,bamin,lrcor2,rcor2,frmcls,methc,methb,lbvols,lcvols,lsite,itable,spclwt,lfia,tcfmin,lfire,sizcap,ispgrp,nspgrp,pbawt,pccfwt,ptpawt,ithnpi,ithnpn,ithnpa,lzeide,dr016,dbhstage,dbhzeide,dbhsdi
+        end subroutine fvsaddtrees
+        subroutine fvsspeciescode(fvs_code,fia_code,plant_code,indx,nchfvs,nchfia,nchplant,rtncode) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            character*4 intent(out) :: fvs_code
+            character*4 intent(out) :: fia_code
+            character*6 intent(out) :: plant_code
+            integer intent(in) :: indx
+            integer intent(out) :: nchfvs
+            integer intent(out) :: nchfia
+            integer intent(out) :: nchplant
+            integer intent(out) :: rtncode
+            real :: aspect
+            real :: avh
+            real :: ba
+            real :: baf
+            real :: brk
+            real :: atavd
+            real :: atavh
+            real :: atba
+            real :: atccf
+            real :: attpa
+            real :: covyr
+            real :: covmlt
+            real :: elev
+            real :: fint
+            real :: fpa
+            real :: grospc
+            real :: pi
+            integer :: iptinv
+            integer :: nonstk
+            real :: relden
+            real :: reldm1
+            real dimension(11) :: reldsp
+            real :: rmsqd
+            real :: slope
+            real :: samwt
+            real :: tfpa
+            real :: rmai
+            real :: tprob
+            integer :: iage
+            integer :: ifint
+            integer :: ifor
+            integer :: igl
+            integer dimension(500) :: ipvec
+            integer :: ismall
+            integer :: itype
+            integer dimension(122) :: jtype
+            real :: oldtpa
+            real :: oldba
+            real dimension(11) :: sitear
+            integer :: isisp
+            real :: oldavh
+            real :: ormsqd
+            real :: sdimax
+            real dimension(11) :: sdidef
+            real dimension(11) :: barank
+            integer :: islop
+            integer :: iaspec
+            real :: tlat
+            real :: tlong
+            real :: pmsdil
+            real :: pmsdiu
+            real :: vmlt
+            real :: vmltyr
+            integer :: kodtyp
+            integer :: kodfor
+            integer :: managd
+            real :: btsdix
+            real :: atsdix
+            integer :: imodty
+            integer :: iphreg
+            integer :: ifortp
+            integer :: iszcl
+            integer :: istcl
+            real :: sdibc
+            real :: sdiac
+            integer :: istate
+            integer :: icnty
+            integer :: icage
+            real dimension(20,6) :: sitetr
+            integer :: nsitet
+            integer dimension(11) :: jspin
+            real :: stndsi
+            real :: sdibc2
+            real :: sdiac2
+            integer :: jspindef
+            character*4 :: mgmid
+            character dimension(11,4),intent(c) :: jsp
+            character dimension(11,3,4),intent(c) :: nsp
+            character*26 :: nplt
+            character dimension(11,4),intent(c) :: fiajsp
+            character dimension(11,6),intent(c) :: plnjsp
+            character*40 :: dbcn
+            character*10 :: cpvref
+            common /plot/ aspect,avh,ba,baf,brk,atavd,atavh,atba,atccf,attpa,covyr,covmlt,elev,fint,fpa,grospc,pi,iptinv,nonstk,relden,reldm1,reldsp,rmsqd,slope,samwt,tfpa,rmai,tprob,iage,ifint,ifor,igl,ipvec,ismall,itype,jtype,oldtpa,oldba,sitear,isisp,oldavh,ormsqd,sdimax,sdidef,barank,islop,iaspec,tlat,tlong,pmsdil,pmsdiu,vmlt,vmltyr,kodtyp,kodfor,managd,btsdix,atsdix,imodty,iphreg,ifortp,iszcl,istcl,sdibc,sdiac,istate,icnty,icage,sitetr,nsitet,jspin,stndsi,sdibc2,sdiac2,jspindef
+            common /pltchr/ mgmid,jsp,nsp,nplt,fiajsp,plnjsp,dbcn,cpvref
+        end subroutine fvsspeciescode
+        subroutine fvscuttrees(ptocut,ntrees,rtncode) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            double precision dimension(ntrees) :: ptocut
+            integer, optional,intent(hide),depend(ptocut) :: ntrees=len(ptocut)
+            integer intent(out) :: rtncode
+            real dimension(3000) :: abirth
+            real dimension(3000) :: bfv
+            real dimension(3000) :: cfv
+            real dimension(3000) :: dbh
+            real dimension(3000) :: dg
+            real dimension(3000) :: ht
+            real dimension(3000) :: htg
+            real dimension(3000) :: oldrn
+            real dimension(3000) :: oldpct
+            real dimension(3000) :: pct
+            real dimension(3000) :: prob
+            real dimension(3000) :: wk1
+            real dimension(3000) :: wk2
+            real dimension(3000) :: wk3
+            real dimension(3000) :: wk4
+            real dimension(3000) :: wk5
+            real dimension(3000) :: wk6
+            real dimension(3000) :: zrand
+            integer dimension(3000) :: idtree
+            integer dimension(3000) :: icr
+            integer dimension(3000) :: imc
+            integer dimension(3000) :: ind
+            integer dimension(3000) :: ind1
+            integer dimension(3000) :: normht
+            integer dimension(3000) :: itrunc
+            integer dimension(3000) :: ind2
+            integer dimension(3000) :: isp
+            integer dimension(3000) :: itre
+            integer dimension(3000) :: kutkod
+            integer dimension(3000) :: defect
+            integer dimension(3000) :: ispecl
+            real dimension(3000) :: pltsiz
+            real dimension(3000) :: crwdth
+            real dimension(3000) :: yrdlos
+            integer dimension(6,3000) :: damsev
+            real dimension(3000,2) :: ht2td
+            character*160 :: trefmt
+            character dimension(11,4),intent(c) :: iused
+            character*250 :: kwdfil
+            character dimension(10,10),intent(c) :: namgrp
+            real :: autmax
+            real :: autmin
+            real :: auteff
+            real :: dgsd
+            real :: eff
+            real :: trm
+            real :: yr
+            integer :: iccode
+            integer :: icflag
+            integer :: icl1
+            integer :: icl2
+            integer :: icl3
+            integer :: icl4
+            integer :: icl5
+            integer :: icl6
+            real :: fintm
+            integer :: icyc
+            integer :: idg
+            integer :: ifst
+            integer dimension(6) :: ins
+            integer dimension(11) :: ibegin
+            integer :: iread
+            integer :: irec1
+            integer :: irec2
+            integer :: irecnt
+            integer :: irecrd
+            integer dimension(11) :: iref
+            integer dimension(11,2) :: isct
+            integer :: istdat
+            integer :: itrn
+            integer dimension(11) :: kptr
+            integer dimension(41) :: iy
+            integer :: jolist
+            integer :: jostnd
+            integer :: josum
+            integer :: jotree
+            integer :: jocalb
+            integer dimension(11) :: kount
+            logical :: ldcor2
+            logical dimension(11) :: ldgcal
+            logical dimension(11) :: lhtdrg
+            logical :: ldubdg
+            logical :: lflag
+            logical :: lstart
+            integer :: lstknt
+            logical :: lmort
+            logical :: lsumry
+            integer :: nstknt
+            logical :: ltrip
+            logical :: mordat
+            integer :: ncyc
+            logical :: notrip
+            integer :: numsp
+            real :: bamax
+            real :: d0mult
+            real :: d0
+            logical :: lbkden
+            logical :: lauton
+            real dimension(11) :: topd
+            real dimension(11) :: dbhmin
+            real dimension(11) :: stmp
+            real :: tcwt
+            real :: cfmin
+            real :: bfmin
+            real :: bamin
+            logical :: lrcor2
+            real dimension(11) :: rcor2
+            real dimension(11) :: frmcls
+            integer dimension(11) :: methc
+            integer dimension(11) :: methb
+            logical :: lbvols
+            logical :: lcvols
+            logical :: lsite
+            integer dimension(7) :: itable
+            real :: spclwt
+            logical :: lfia
+            real :: tcfmin
+            logical :: lfire
+            real dimension(11,4) :: sizcap
+            integer dimension(10,52) :: ispgrp
+            integer :: nspgrp
+            real :: pbawt
+            real :: pccfwt
+            real :: ptpawt
+            integer :: ithnpi
+            integer :: ithnpn
+            integer :: ithnpa
+            logical :: lzeide
+            real :: dr016
+            real :: dbhstage
+            real :: dbhzeide
+            real :: dbhsdi
+            common /arrays/ abirth,bfv,cfv,dbh,dg,ht,htg,oldrn,oldpct,pct,prob,wk1,wk2,wk3,wk4,wk5,wk6,zrand,idtree,icr,imc,ind,ind1,normht,itrunc,ind2,isp,itre,kutkod,defect,ispecl,pltsiz,crwdth,yrdlos,damsev,ht2td
+            common /conchr/ trefmt,iused,kwdfil,namgrp
+            common /contrl/ autmax,autmin,auteff,dgsd,eff,trm,yr,iccode,icflag,icl1,icl2,icl3,icl4,icl5,icl6,fintm,icyc,idg,ifst,ins,ibegin,iread,irec1,irec2,irecnt,irecrd,iref,isct,istdat,itrn,kptr,iy,jolist,jostnd,josum,jotree,jocalb,kount,ldcor2,ldgcal,lhtdrg,ldubdg,lflag,lstart,lstknt,lmort,lsumry,nstknt,ltrip,mordat,ncyc,notrip,numsp,bamax,d0mult,d0,lbkden,lauton,topd,dbhmin,stmp,tcwt,cfmin,bfmin,bamin,lrcor2,rcor2,frmcls,methc,methb,lbvols,lcvols,lsite,itable,spclwt,lfia,tcfmin,lfire,sizcap,ispgrp,nspgrp,pbawt,pccfwt,ptpawt,ithnpi,ithnpn,ithnpa,lzeide,dr016,dbhstage,dbhzeide,dbhsdi
+        end subroutine fvscuttrees
+        subroutine fvsstandid(sid,scn,mid,ncsid,nccn,ncmid) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            character*26 intent(out) :: sid
+            character*40 intent(out) :: scn
+            character*4 intent(out) :: mid
+            integer intent(out) :: ncsid
+            integer intent(out) :: nccn
+            integer intent(out) :: ncmid
+            real :: aspect
+            real :: avh
+            real :: ba
+            real :: baf
+            real :: brk
+            real :: atavd
+            real :: atavh
+            real :: atba
+            real :: atccf
+            real :: attpa
+            real :: covyr
+            real :: covmlt
+            real :: elev
+            real :: fint
+            real :: fpa
+            real :: grospc
+            real :: pi
+            integer :: iptinv
+            integer :: nonstk
+            real :: relden
+            real :: reldm1
+            real dimension(11) :: reldsp
+            real :: rmsqd
+            real :: slope
+            real :: samwt
+            real :: tfpa
+            real :: rmai
+            real :: tprob
+            integer :: iage
+            integer :: ifint
+            integer :: ifor
+            integer :: igl
+            integer dimension(500) :: ipvec
+            integer :: ismall
+            integer :: itype
+            integer dimension(122) :: jtype
+            real :: oldtpa
+            real :: oldba
+            real dimension(11) :: sitear
+            integer :: isisp
+            real :: oldavh
+            real :: ormsqd
+            real :: sdimax
+            real dimension(11) :: sdidef
+            real dimension(11) :: barank
+            integer :: islop
+            integer :: iaspec
+            real :: tlat
+            real :: tlong
+            real :: pmsdil
+            real :: pmsdiu
+            real :: vmlt
+            real :: vmltyr
+            integer :: kodtyp
+            integer :: kodfor
+            integer :: managd
+            real :: btsdix
+            real :: atsdix
+            integer :: imodty
+            integer :: iphreg
+            integer :: ifortp
+            integer :: iszcl
+            integer :: istcl
+            real :: sdibc
+            real :: sdiac
+            integer :: istate
+            integer :: icnty
+            integer :: icage
+            real dimension(20,6) :: sitetr
+            integer :: nsitet
+            integer dimension(11) :: jspin
+            real :: stndsi
+            real :: sdibc2
+            real :: sdiac2
+            integer :: jspindef
+            character*4 :: mgmid
+            character dimension(11,4),intent(c) :: jsp
+            character dimension(11,3,4),intent(c) :: nsp
+            character*26 :: nplt
+            character dimension(11,4),intent(c) :: fiajsp
+            character dimension(11,6),intent(c) :: plnjsp
+            character*40 :: dbcn
+            character*10 :: cpvref
+            common /plot/ aspect,avh,ba,baf,brk,atavd,atavh,atba,atccf,attpa,covyr,covmlt,elev,fint,fpa,grospc,pi,iptinv,nonstk,relden,reldm1,reldsp,rmsqd,slope,samwt,tfpa,rmai,tprob,iage,ifint,ifor,igl,ipvec,ismall,itype,jtype,oldtpa,oldba,sitear,isisp,oldavh,ormsqd,sdimax,sdidef,barank,islop,iaspec,tlat,tlong,pmsdil,pmsdiu,vmlt,vmltyr,kodtyp,kodfor,managd,btsdix,atsdix,imodty,iphreg,ifortp,iszcl,istcl,sdibc,sdiac,istate,icnty,icage,sitetr,nsitet,jspin,stndsi,sdibc2,sdiac2,jspindef
+            common /pltchr/ mgmid,jsp,nsp,nplt,fiajsp,plnjsp,dbcn,cpvref
+        end subroutine fvsstandid
+        subroutine fvsclosefile(filename,nch) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            character*nch intent(in) :: filename
+            integer intent(in) :: nch
+        end subroutine fvsclosefile
+        subroutine fvsaddactivity(idt,iactk,inprms,nprms,rtncode) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            integer intent(in) :: idt
+            integer intent(in) :: iactk
+            real(kind=8) dimension(nprms),intent(in) :: inprms
+            integer, optional,check(len(inprms)>=nprms),depend(inprms) :: nprms=len(inprms)
+            integer intent(out) :: rtncode
+            character*160 :: trefmt
+            character dimension(11,4),intent(c) :: iused
+            character*250 :: kwdfil
+            character dimension(10,10),intent(c) :: namgrp
+            real :: autmax
+            real :: autmin
+            real :: auteff
+            real :: dgsd
+            real :: eff
+            real :: trm
+            real :: yr
+            integer :: iccode
+            integer :: icflag
+            integer :: icl1
+            integer :: icl2
+            integer :: icl3
+            integer :: icl4
+            integer :: icl5
+            integer :: icl6
+            real :: fintm
+            integer :: icyc
+            integer :: idg
+            integer :: ifst
+            integer dimension(6) :: ins
+            integer dimension(11) :: ibegin
+            integer :: iread
+            integer :: irec1
+            integer :: irec2
+            integer :: irecnt
+            integer :: irecrd
+            integer dimension(11) :: iref
+            integer dimension(11,2) :: isct
+            integer :: istdat
+            integer :: itrn
+            integer dimension(11) :: kptr
+            integer dimension(41) :: iy
+            integer :: jolist
+            integer :: jostnd
+            integer :: josum
+            integer :: jotree
+            integer :: jocalb
+            integer dimension(11) :: kount
+            logical :: ldcor2
+            logical dimension(11) :: ldgcal
+            logical dimension(11) :: lhtdrg
+            logical :: ldubdg
+            logical :: lflag
+            logical :: lstart
+            integer :: lstknt
+            logical :: lmort
+            logical :: lsumry
+            integer :: nstknt
+            logical :: ltrip
+            logical :: mordat
+            integer :: ncyc
+            logical :: notrip
+            integer :: numsp
+            real :: bamax
+            real :: d0mult
+            real :: d0
+            logical :: lbkden
+            logical :: lauton
+            real dimension(11) :: topd
+            real dimension(11) :: dbhmin
+            real dimension(11) :: stmp
+            real :: tcwt
+            real :: cfmin
+            real :: bfmin
+            real :: bamin
+            logical :: lrcor2
+            real dimension(11) :: rcor2
+            real dimension(11) :: frmcls
+            integer dimension(11) :: methc
+            integer dimension(11) :: methb
+            logical :: lbvols
+            logical :: lcvols
+            logical :: lsite
+            integer dimension(7) :: itable
+            real :: spclwt
+            logical :: lfia
+            real :: tcfmin
+            logical :: lfire
+            real dimension(11,4) :: sizcap
+            integer dimension(10,52) :: ispgrp
+            integer :: nspgrp
+            real :: pbawt
+            real :: pccfwt
+            real :: ptpawt
+            integer :: ithnpi
+            integer :: ithnpn
+            integer :: ithnpa
+            logical :: lzeide
+            real :: dr016
+            real :: dbhstage
+            real :: dbhzeide
+            real :: dbhsdi
+            common /conchr/ trefmt,iused,kwdfil,namgrp
+            common /contrl/ autmax,autmin,auteff,dgsd,eff,trm,yr,iccode,icflag,icl1,icl2,icl3,icl4,icl5,icl6,fintm,icyc,idg,ifst,ins,ibegin,iread,irec1,irec2,irecnt,irecrd,iref,isct,istdat,itrn,kptr,iy,jolist,jostnd,josum,jotree,jocalb,kount,ldcor2,ldgcal,lhtdrg,ldubdg,lflag,lstart,lstknt,lmort,lsumry,nstknt,ltrip,mordat,ncyc,notrip,numsp,bamax,d0mult,d0,lbkden,lauton,topd,dbhmin,stmp,tcwt,cfmin,bfmin,bamin,lrcor2,rcor2,frmcls,methc,methb,lbvols,lcvols,lsite,itable,spclwt,lfia,tcfmin,lfire,sizcap,ispgrp,nspgrp,pbawt,pccfwt,ptpawt,ithnpi,ithnpn,ithnpa,lzeide,dr016,dbhstage,dbhzeide,dbhsdi
+        end subroutine fvsaddactivity
+        subroutine fvssvsdimsizes(nsvsobjs,ndeadobjs,ncwdobjs,mxsvsobjs,mxdeadobjs,mxcwdobjs) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            integer intent(out) :: nsvsobjs
+            integer intent(out) :: ndeadobjs
+            integer intent(out) :: ncwdobjs
+            integer intent(out) :: mxsvsobjs
+            integer intent(out) :: mxdeadobjs
+            integer intent(out) :: mxcwdobjs
+            integer :: jsvout
+            integer :: jsvpic
+            real dimension(15000) :: xsloc
+            real dimension(15000) :: ysloc
+            integer dimension(15000) :: iobjtp
+            integer :: nimage
+            integer dimension(15000) :: is2f
+            integer :: nsvobj
+            real dimension(500) :: x1r1s
+            real dimension(500) :: x2r2s
+            real dimension(500) :: y1a1s
+            real dimension(500) :: y2a2s
+            integer :: iplgem
+            integer :: isvinv
+            real dimension(3000) :: svmsave
+            integer :: imortcnt
+            integer :: irpoles
+            integer :: idplots
+            integer :: icolidx
+            integer :: igrid
+            integer :: imetric
+            integer dimension(1000) :: isnsp
+            real dimension(1000) :: crndia
+            real dimension(1000) :: crnrto
+            real dimension(1000) :: olen
+            real dimension(1000) :: odia
+            real dimension(1000) :: falldir
+            integer dimension(1000) :: iyrcod
+            integer dimension(1000) :: istatus
+            integer :: ndead
+            integer :: ilyear
+            real dimension(11) :: yhfhts
+            real dimension(11) :: yhfhth
+            real dimension(11) :: hrate
+            real dimension(1000,4) :: sngcnwt
+            integer dimension(1000) :: oidtre
+            real dimension(1000) :: pbfall
+            real dimension(1000,3) :: sprobs
+            real dimension(1000) :: sngdia
+            real dimension(1000) :: snglen
+            integer :: ncwd
+            real dimension(5000) :: cwddia
+            real dimension(5000) :: cwdlen
+            real dimension(5000) :: cwdpil
+            real dimension(5000) :: cwddir
+            real dimension(5000) :: cwdwt
+            common /svdata/ jsvout,jsvpic,xsloc,ysloc,iobjtp,nimage,is2f,nsvobj,x1r1s,x2r2s,y1a1s,y2a2s,iplgem,isvinv,svmsave,imortcnt,irpoles,idplots,icolidx,igrid,imetric
+            common /svdead/ isnsp,crndia,crnrto,olen,odia,falldir,iyrcod,istatus,ndead,ilyear,yhfhts,yhfhth,hrate,sngcnwt,oidtre,pbfall,sprobs,sngdia,snglen,ncwd,cwddia,cwdlen,cwdpil,cwddir,cwdwt
+        end subroutine fvssvsdimsizes
+        subroutine fvssvsobjdata(name,nch,action,nobjs,attr,rtncode) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            character*10 intent(in) :: name
+            integer intent(in) :: nch
+            character*4 intent(in) :: action
+            integer, optional,intent(in),check(len(attr)>=nobjs),depend(attr) :: nobjs=len(attr)
+            real(kind=8) dimension(nobjs),intent(inout) :: attr
+            integer intent(out) :: rtncode
+            real :: aspect
+            real :: avh
+            real :: ba
+            real :: baf
+            real :: brk
+            real :: atavd
+            real :: atavh
+            real :: atba
+            real :: atccf
+            real :: attpa
+            real :: covyr
+            real :: covmlt
+            real :: elev
+            real :: fint
+            real :: fpa
+            real :: grospc
+            real :: pi
+            integer :: iptinv
+            integer :: nonstk
+            real :: relden
+            real :: reldm1
+            real dimension(11) :: reldsp
+            real :: rmsqd
+            real :: slope
+            real :: samwt
+            real :: tfpa
+            real :: rmai
+            real :: tprob
+            integer :: iage
+            integer :: ifint
+            integer :: ifor
+            integer :: igl
+            integer dimension(500) :: ipvec
+            integer :: ismall
+            integer :: itype
+            integer dimension(122) :: jtype
+            real :: oldtpa
+            real :: oldba
+            real dimension(11) :: sitear
+            integer :: isisp
+            real :: oldavh
+            real :: ormsqd
+            real :: sdimax
+            real dimension(11) :: sdidef
+            real dimension(11) :: barank
+            integer :: islop
+            integer :: iaspec
+            real :: tlat
+            real :: tlong
+            real :: pmsdil
+            real :: pmsdiu
+            real :: vmlt
+            real :: vmltyr
+            integer :: kodtyp
+            integer :: kodfor
+            integer :: managd
+            real :: btsdix
+            real :: atsdix
+            integer :: imodty
+            integer :: iphreg
+            integer :: ifortp
+            integer :: iszcl
+            integer :: istcl
+            real :: sdibc
+            real :: sdiac
+            integer :: istate
+            integer :: icnty
+            integer :: icage
+            real dimension(20,6) :: sitetr
+            integer :: nsitet
+            integer dimension(11) :: jspin
+            real :: stndsi
+            real :: sdibc2
+            real :: sdiac2
+            integer :: jspindef
+            character*160 :: trefmt
+            character dimension(11,4),intent(c) :: iused
+            character*250 :: kwdfil
+            character dimension(10,10),intent(c) :: namgrp
+            integer :: jsvout
+            integer :: jsvpic
+            real dimension(15000) :: xsloc
+            real dimension(15000) :: ysloc
+            integer dimension(15000) :: iobjtp
+            integer :: nimage
+            integer dimension(15000) :: is2f
+            integer :: nsvobj
+            real dimension(500) :: x1r1s
+            real dimension(500) :: x2r2s
+            real dimension(500) :: y1a1s
+            real dimension(500) :: y2a2s
+            integer :: iplgem
+            integer :: isvinv
+            real dimension(3000) :: svmsave
+            integer :: imortcnt
+            integer :: irpoles
+            integer :: idplots
+            integer :: icolidx
+            integer :: igrid
+            integer :: imetric
+            integer dimension(1000) :: isnsp
+            real dimension(1000) :: crndia
+            real dimension(1000) :: crnrto
+            real dimension(1000) :: olen
+            real dimension(1000) :: odia
+            real dimension(1000) :: falldir
+            integer dimension(1000) :: iyrcod
+            integer dimension(1000) :: istatus
+            integer :: ndead
+            integer :: ilyear
+            real dimension(11) :: yhfhts
+            real dimension(11) :: yhfhth
+            real dimension(11) :: hrate
+            real dimension(1000,4) :: sngcnwt
+            integer dimension(1000) :: oidtre
+            real dimension(1000) :: pbfall
+            real dimension(1000,3) :: sprobs
+            real dimension(1000) :: sngdia
+            real dimension(1000) :: snglen
+            integer :: ncwd
+            real dimension(5000) :: cwddia
+            real dimension(5000) :: cwdlen
+            real dimension(5000) :: cwdpil
+            real dimension(5000) :: cwddir
+            real dimension(5000) :: cwdwt
+            character*4 :: mgmid
+            character dimension(11,4),intent(c) :: jsp
+            character dimension(11,3,4),intent(c) :: nsp
+            character*26 :: nplt
+            character dimension(11,4),intent(c) :: fiajsp
+            character dimension(11,6),intent(c) :: plnjsp
+            character*40 :: dbcn
+            character*10 :: cpvref
+            real :: autmax
+            real :: autmin
+            real :: auteff
+            real :: dgsd
+            real :: eff
+            real :: trm
+            real :: yr
+            integer :: iccode
+            integer :: icflag
+            integer :: icl1
+            integer :: icl2
+            integer :: icl3
+            integer :: icl4
+            integer :: icl5
+            integer :: icl6
+            real :: fintm
+            integer :: icyc
+            integer :: idg
+            integer :: ifst
+            integer dimension(6) :: ins
+            integer dimension(11) :: ibegin
+            integer :: iread
+            integer :: irec1
+            integer :: irec2
+            integer :: irecnt
+            integer :: irecrd
+            integer dimension(11) :: iref
+            integer dimension(11,2) :: isct
+            integer :: istdat
+            integer :: itrn
+            integer dimension(11) :: kptr
+            integer dimension(41) :: iy
+            integer :: jolist
+            integer :: jostnd
+            integer :: josum
+            integer :: jotree
+            integer :: jocalb
+            integer dimension(11) :: kount
+            logical :: ldcor2
+            logical dimension(11) :: ldgcal
+            logical dimension(11) :: lhtdrg
+            logical :: ldubdg
+            logical :: lflag
+            logical :: lstart
+            integer :: lstknt
+            logical :: lmort
+            logical :: lsumry
+            integer :: nstknt
+            logical :: ltrip
+            logical :: mordat
+            integer :: ncyc
+            logical :: notrip
+            integer :: numsp
+            real :: bamax
+            real :: d0mult
+            real :: d0
+            logical :: lbkden
+            logical :: lauton
+            real dimension(11) :: topd
+            real dimension(11) :: dbhmin
+            real dimension(11) :: stmp
+            real :: tcwt
+            real :: cfmin
+            real :: bfmin
+            real :: bamin
+            logical :: lrcor2
+            real dimension(11) :: rcor2
+            real dimension(11) :: frmcls
+            integer dimension(11) :: methc
+            integer dimension(11) :: methb
+            logical :: lbvols
+            logical :: lcvols
+            logical :: lsite
+            integer dimension(7) :: itable
+            real :: spclwt
+            logical :: lfia
+            real :: tcfmin
+            logical :: lfire
+            real dimension(11,4) :: sizcap
+            integer dimension(10,52) :: ispgrp
+            integer :: nspgrp
+            real :: pbawt
+            real :: pccfwt
+            real :: ptpawt
+            integer :: ithnpi
+            integer :: ithnpn
+            integer :: ithnpa
+            logical :: lzeide
+            real :: dr016
+            real :: dbhstage
+            real :: dbhzeide
+            real :: dbhsdi
+            common /plot/ aspect,avh,ba,baf,brk,atavd,atavh,atba,atccf,attpa,covyr,covmlt,elev,fint,fpa,grospc,pi,iptinv,nonstk,relden,reldm1,reldsp,rmsqd,slope,samwt,tfpa,rmai,tprob,iage,ifint,ifor,igl,ipvec,ismall,itype,jtype,oldtpa,oldba,sitear,isisp,oldavh,ormsqd,sdimax,sdidef,barank,islop,iaspec,tlat,tlong,pmsdil,pmsdiu,vmlt,vmltyr,kodtyp,kodfor,managd,btsdix,atsdix,imodty,iphreg,ifortp,iszcl,istcl,sdibc,sdiac,istate,icnty,icage,sitetr,nsitet,jspin,stndsi,sdibc2,sdiac2,jspindef
+            common /conchr/ trefmt,iused,kwdfil,namgrp
+            common /svdata/ jsvout,jsvpic,xsloc,ysloc,iobjtp,nimage,is2f,nsvobj,x1r1s,x2r2s,y1a1s,y2a2s,iplgem,isvinv,svmsave,imortcnt,irpoles,idplots,icolidx,igrid,imetric
+            common /svdead/ isnsp,crndia,crnrto,olen,odia,falldir,iyrcod,istatus,ndead,ilyear,yhfhts,yhfhth,hrate,sngcnwt,oidtre,pbfall,sprobs,sngdia,snglen,ncwd,cwddia,cwdlen,cwdpil,cwddir,cwdwt
+            common /pltchr/ mgmid,jsp,nsp,nplt,fiajsp,plnjsp,dbcn,cpvref
+            common /contrl/ autmax,autmin,auteff,dgsd,eff,trm,yr,iccode,icflag,icl1,icl2,icl3,icl4,icl5,icl6,fintm,icyc,idg,ifst,ins,ibegin,iread,irec1,irec2,irecnt,irecrd,iref,isct,istdat,itrn,kptr,iy,jolist,jostnd,josum,jotree,jocalb,kount,ldcor2,ldgcal,lhtdrg,ldubdg,lflag,lstart,lstknt,lmort,lsumry,nstknt,ltrip,mordat,ncyc,notrip,numsp,bamax,d0mult,d0,lbkden,lauton,topd,dbhmin,stmp,tcwt,cfmin,bfmin,bamin,lrcor2,rcor2,frmcls,methc,methb,lbvols,lcvols,lsite,itable,spclwt,lfia,tcfmin,lfire,sizcap,ispgrp,nspgrp,pbawt,pccfwt,ptpawt,ithnpi,ithnpn,ithnpa,lzeide,dr016,dbhstage,dbhzeide,dbhsdi
+        end subroutine fvssvsobjdata
+        subroutine fvsffeattrs(name,nch,action,nobjs,attr,rtncode) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/apisubs.f
+            character*10 intent(in) :: name
+            integer intent(in) :: nch
+            character*4 intent(in) :: action
+            integer, optional,intent(in),check(len(attr)>=nobjs),depend(attr) :: nobjs=len(attr)
+            real(kind=8) dimension(nobjs),intent(inout) :: attr
+            integer intent(out) :: rtncode
+            real dimension(11) :: alldwn
+            integer :: burnyr
+            real :: canmht
+            real :: cbhcut
+            integer :: covtyp
+            real :: crburn
+            real dimension(3000,6) :: crownw
+            real dimension(3000) :: curkil
+            real dimension(3,11,2,5) :: cwd
+            real dimension(4,6,60) :: cwd2b
+            real dimension(4,6,60) :: cwd2b2
+            real :: cwdcut
+            real dimension(2,11) :: cwdnew
+            real dimension(3,10,2,5) :: cwdvol
+            real dimension(3,10,2,5) :: cwdcov
+            real dimension(2000) :: dbhs
+            real dimension(11) :: decayx
+            real dimension(2000) :: denih
+            real dimension(2000) :: denis
+            real dimension(2000) :: dend
+            real dimension(11,4) :: dkr
+            integer dimension(11) :: dkrcls
+            real dimension(4) :: dkrdef
+            real dimension(11,19) :: dspdbh
+            real dimension(11) :: fallx
+            real dimension(2) :: flive
+            real dimension(3000) :: firkil
+            real :: folmc
+            real dimension(3000) :: fmprob
+            real dimension(11) :: fmtba
+            integer :: nfmsvpx
+            integer dimension(3000) :: fmicr
+            integer :: fmkod
+            real :: fmslop
+            integer :: ftreat
+            real dimension(5,4) :: fuarea
+            integer dimension(3000) :: grow
+            logical dimension(2000) :: hard
+            integer :: hartyp
+            integer :: harvyr
+            real dimension(2000) :: htdead
+            real dimension(2000) :: htih
+            real dimension(2000) :: htis
+            real :: htr1
+            real :: htr2
+            real dimension(11,4) :: htx
+            real :: htxsft
+            integer :: icansp
+            integer :: icbhmt
+            integer :: ifmyr1
+            integer :: ifmyr2
+            integer :: iftyr
+            integer :: isalvc
+            integer :: isalvs
+            integer :: isngsm
+            integer :: jcout
+            integer dimension(3) :: jfrout
+            integer dimension(3) :: jlout
+            logical :: lanhed
+            real dimension(11) :: leaflf
+            logical :: lfmon
+            logical :: lfmon2
+            logical dimension(3) :: lfrout
+            logical :: ldynfm
+            real :: limbrk
+            logical :: ldhead
+            logical :: lshead
+            logical :: lvwest
+            real dimension(11,19) :: maxht
+            real dimension(11,19) :: minht
+            integer :: nsnag
+            integer :: nyrs
+            real :: nzero
+            integer :: oldcovtyp
+            real dimension(3000) :: oldcrl
+            real dimension(3000) :: oldht
+            real dimension(3000,6) :: oldcrw
+            integer :: oldict
+            integer :: oldict2
+            real dimension(2) :: oldictwt
+            real dimension(2000) :: pbfrih
+            real dimension(2000) :: pbfris
+            real :: pbscor
+            real :: pbsoft
+            real :: pbsize
+            real :: pbsmal
+            real :: pbtime
+            integer :: pburnyr
+            real :: percov
+            real dimension(11,4) :: prduff
+            real :: prsnag
+            real dimension(11) :: psoft
+            real dimension(11) :: prpile
+            real dimension(2000,2) :: salvspa
+            real :: sccf
+            real dimension(11,4) :: setdecay
+            real dimension(3000) :: sngnew
+            real dimension(6) :: snprcl
+            integer dimension(2000) :: sps
+            real dimension(6) :: tcwd
+            real dimension(6) :: tcwd2
+            real dimension(11,6) :: tfall
+            real dimension(11,4) :: toduff
+            real :: tonrmc
+            real :: tonrms
+            real :: tonrmh
+            real :: totacr
+            real dimension(11) :: v2t
+            integer dimension(2000) :: yrdead
+            logical :: lremt
+            integer :: nsnagsalv
+            real dimension(2000) :: htdeadsalv
+            integer dimension(2000) :: spssalv
+            real dimension(2000) :: dbhssalv
+            real dimension(2000) :: htihsalv
+            real dimension(2000) :: htissalv
+            logical dimension(2000) :: hardsalv
+            real dimension(3000) :: premst
+            real dimension(3000) :: premcr
+            integer dimension(3000) :: ispcc
+            real dimension(3000) :: dbhc
+            real dimension(3000) :: htc
+            real dimension(3000,6) :: crownwc
+            common /fmcom/ alldwn,burnyr,canmht,cbhcut,covtyp,crburn,crownw,curkil,cwd,cwd2b,cwd2b2,cwdcut,cwdnew,cwdvol,cwdcov,dbhs,decayx,denih,denis,dend,dkr,dkrcls,dkrdef,dspdbh,fallx,flive,firkil,folmc,fmprob,fmtba,nfmsvpx,fmicr,fmkod,fmslop,ftreat,fuarea,grow,hard,hartyp,harvyr,htdead,htih,htis,htr1,htr2,htx,htxsft,icansp,icbhmt,ifmyr1,ifmyr2,iftyr,isalvc,isalvs,isngsm,jcout,jfrout,jlout,lanhed,leaflf,lfmon,lfmon2,lfrout,ldynfm,limbrk,ldhead,lshead,lvwest,maxht,minht,nsnag,nyrs,nzero,oldcovtyp,oldcrl,oldht,oldcrw,oldict,oldict2,oldictwt,pbfrih,pbfris,pbscor,pbsoft,pbsize,pbsmal,pbtime,pburnyr,percov,prduff,prsnag,psoft,prpile,salvspa,sccf,setdecay,sngnew,snprcl,sps,tcwd,tcwd2,tfall,toduff,tonrmc,tonrms,tonrmh,totacr,v2t,yrdead,lremt,nsnagsalv,htdeadsalv,spssalv,dbhssalv,htihsalv,htissalv,hardsalv,premst,premcr,ispcc,dbhc,htc,crownwc
+        end subroutine fvsffeattrs
+        subroutine fvssetcmdline(thecmdline,lencl,irtncd) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/cmdline.f
+            character*(*) intent(in) :: thecmdline
+            integer, optional,intent(hide),depend(thecmdline) :: lencl=slen(thecmdline)
+            integer intent(out) :: irtncd
+            integer :: fvsrtncode
+            integer :: restartcode
+            integer :: minorstopptcode
+            integer :: minorstopptyear
+            integer :: jstash
+            integer :: jdstash
+            integer :: firstwrite
+            integer :: maxstoppts
+            integer :: originalrestartcode
+            integer :: majorstopptyear
+            integer :: majorstopptcode
+            integer :: oldstopyr
+            integer :: stopstatcd
+            integer :: readfilepos
+            integer :: seekreadpos
+            character(len=250) :: keywordfile
+            character(len=250) :: restartfile
+            character(len=250) :: stopptfile
+            common /glblcntl/ fvsrtncode,restartcode,minorstopptcode,minorstopptyear,jstash,jdstash,firstwrite,maxstoppts,originalrestartcode,majorstopptyear,majorstopptcode,oldstopyr,stopstatcd,readfilepos,seekreadpos
+            common /glblcntlc/ keywordfile,restartfile,stopptfile
+        end subroutine fvssetcmdline
+        block data setglblcntl ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/cmdline.f
+            integer, optional :: fvsrtncode=-1
+            integer :: restartcode
+            integer :: minorstopptcode
+            integer :: minorstopptyear
+            integer :: jstash
+            integer :: jdstash
+            integer :: firstwrite
+            integer :: maxstoppts
+            integer :: originalrestartcode
+            integer :: majorstopptyear
+            integer :: majorstopptcode
+            integer :: oldstopyr
+            integer :: stopstatcd
+            integer :: readfilepos
+            integer :: seekreadpos
+            character(len=250) :: keywordfile
+            character(len=250) :: restartfile
+            character(len=250) :: stopptfile
+            common /glblcntl/ fvsrtncode,restartcode,minorstopptcode,minorstopptyear,jstash,jdstash,firstwrite,maxstoppts,originalrestartcode,majorstopptyear,majorstopptcode,oldstopyr,stopstatcd,readfilepos,seekreadpos
+            common /glblcntlc/ keywordfile,restartfile,stopptfile
+        end block data setglblcntl
+        subroutine fvsgetstoppointcodes(spptcd,spptyr) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/cmdline.f
+            integer intent(out) :: spptcd
+            integer intent(out) :: spptyr
+            integer :: fvsrtncode
+            integer :: restartcode
+            integer :: minorstopptcode
+            integer :: minorstopptyear
+            integer :: jstash
+            integer :: jdstash
+            integer :: firstwrite
+            integer :: maxstoppts
+            integer :: originalrestartcode
+            integer :: majorstopptyear
+            integer :: majorstopptcode
+            integer :: oldstopyr
+            integer :: stopstatcd
+            integer :: readfilepos
+            integer :: seekreadpos
+            character(len=250) :: keywordfile
+            character(len=250) :: restartfile
+            character(len=250) :: stopptfile
+            common /glblcntl/ fvsrtncode,restartcode,minorstopptcode,minorstopptyear,jstash,jdstash,firstwrite,maxstoppts,originalrestartcode,majorstopptyear,majorstopptcode,oldstopyr,stopstatcd,readfilepos,seekreadpos
+            common /glblcntlc/ keywordfile,restartfile,stopptfile
+        end subroutine fvsgetstoppointcodes
+        subroutine fvssetstoppointcodes(spptcd,spptyr) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/cmdline.f
+            integer intent(in) :: spptcd
+            integer intent(in) :: spptyr
+            integer :: fvsrtncode
+            integer :: restartcode
+            integer :: minorstopptcode
+            integer :: minorstopptyear
+            integer :: jstash
+            integer :: jdstash
+            integer :: firstwrite
+            integer :: maxstoppts
+            integer :: originalrestartcode
+            integer :: majorstopptyear
+            integer :: majorstopptcode
+            integer :: oldstopyr
+            integer :: stopstatcd
+            integer :: readfilepos
+            integer :: seekreadpos
+            character(len=250) :: keywordfile
+            character(len=250) :: restartfile
+            character(len=250) :: stopptfile
+            common /glblcntl/ fvsrtncode,restartcode,minorstopptcode,minorstopptyear,jstash,jdstash,firstwrite,maxstoppts,originalrestartcode,majorstopptyear,majorstopptcode,oldstopyr,stopstatcd,readfilepos,seekreadpos
+            common /glblcntlc/ keywordfile,restartfile,stopptfile
+        end subroutine fvssetstoppointcodes
+        subroutine fvsgetrestartcode(restrtcd) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/cmdline.f
+            integer intent(out) :: restrtcd
+            integer :: fvsrtncode
+            integer :: restartcode
+            integer :: minorstopptcode
+            integer :: minorstopptyear
+            integer :: jstash
+            integer :: jdstash
+            integer :: firstwrite
+            integer :: maxstoppts
+            integer :: originalrestartcode
+            integer :: majorstopptyear
+            integer :: majorstopptcode
+            integer :: oldstopyr
+            integer :: stopstatcd
+            integer :: readfilepos
+            integer :: seekreadpos
+            character(len=250) :: keywordfile
+            character(len=250) :: restartfile
+            character(len=250) :: stopptfile
+            common /glblcntl/ fvsrtncode,restartcode,minorstopptcode,minorstopptyear,jstash,jdstash,firstwrite,maxstoppts,originalrestartcode,majorstopptyear,majorstopptcode,oldstopyr,stopstatcd,readfilepos,seekreadpos
+            common /glblcntlc/ keywordfile,restartfile,stopptfile
+            entry clearrestartcode()
+        end subroutine fvsgetrestartcode
+        subroutine fvsrestart(restrtcd) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/cmdline.f
+            integer intent(out) :: restrtcd
+            integer :: fvsrtncode
+            integer :: restartcode
+            integer :: minorstopptcode
+            integer :: minorstopptyear
+            integer :: jstash
+            integer :: jdstash
+            integer :: firstwrite
+            integer :: maxstoppts
+            integer :: originalrestartcode
+            integer :: majorstopptyear
+            integer :: majorstopptcode
+            integer :: oldstopyr
+            integer :: stopstatcd
+            integer :: readfilepos
+            integer :: seekreadpos
+            character(len=250) :: keywordfile
+            character(len=250) :: restartfile
+            character(len=250) :: stopptfile
+            common /glblcntl/ fvsrtncode,restartcode,minorstopptcode,minorstopptyear,jstash,jdstash,firstwrite,maxstoppts,originalrestartcode,majorstopptyear,majorstopptcode,oldstopyr,stopstatcd,readfilepos,seekreadpos
+            common /glblcntlc/ keywordfile,restartfile,stopptfile
+        end subroutine fvsrestart
+        subroutine fvsrestartlaststand(restrtcd) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/cmdline.f
+            integer intent(out) :: restrtcd
+            integer :: fvsrtncode
+            integer :: restartcode
+            integer :: minorstopptcode
+            integer :: minorstopptyear
+            integer :: jstash
+            integer :: jdstash
+            integer :: firstwrite
+            integer :: maxstoppts
+            integer :: originalrestartcode
+            integer :: majorstopptyear
+            integer :: majorstopptcode
+            integer :: oldstopyr
+            integer :: stopstatcd
+            integer :: readfilepos
+            integer :: seekreadpos
+            character(len=250) :: keywordfile
+            character(len=250) :: restartfile
+            character(len=250) :: stopptfile
+            common /glblcntl/ fvsrtncode,restartcode,minorstopptcode,minorstopptyear,jstash,jdstash,firstwrite,maxstoppts,originalrestartcode,majorstopptyear,majorstopptcode,oldstopyr,stopstatcd,readfilepos,seekreadpos
+            common /glblcntlc/ keywordfile,restartfile,stopptfile
+        end subroutine fvsrestartlaststand
+        subroutine fvsgetkeywordfilename(fn,mxch,nch) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/cmdline.f
+            character*mxch intent(out) :: fn
+            integer intent(hide) :: mxch
+            integer intent(hide) :: nch
+            integer :: fvsrtncode
+            integer :: restartcode
+            integer :: minorstopptcode
+            integer :: minorstopptyear
+            integer :: jstash
+            integer :: jdstash
+            integer :: firstwrite
+            integer :: maxstoppts
+            integer :: originalrestartcode
+            integer :: majorstopptyear
+            integer :: majorstopptcode
+            integer :: oldstopyr
+            integer :: stopstatcd
+            integer :: readfilepos
+            integer :: seekreadpos
+            character(len=250) :: keywordfile
+            character(len=250) :: restartfile
+            character(len=250) :: stopptfile
+            common /glblcntl/ fvsrtncode,restartcode,minorstopptcode,minorstopptyear,jstash,jdstash,firstwrite,maxstoppts,originalrestartcode,majorstopptyear,majorstopptcode,oldstopyr,stopstatcd,readfilepos,seekreadpos
+            common /glblcntlc/ keywordfile,restartfile,stopptfile
+        end subroutine fvsgetkeywordfilename
+        subroutine fvssetrtncode(rtncode) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/cmdline.f
+            integer intent(out) :: rtncode
+            integer :: fvsrtncode
+            integer :: restartcode
+            integer :: minorstopptcode
+            integer :: minorstopptyear
+            integer :: jstash
+            integer :: jdstash
+            integer :: firstwrite
+            integer :: maxstoppts
+            integer :: originalrestartcode
+            integer :: majorstopptyear
+            integer :: majorstopptcode
+            integer :: oldstopyr
+            integer :: stopstatcd
+            integer :: readfilepos
+            integer :: seekreadpos
+            character(len=250) :: keywordfile
+            character(len=250) :: restartfile
+            character(len=250) :: stopptfile
+            common /glblcntl/ fvsrtncode,restartcode,minorstopptcode,minorstopptyear,jstash,jdstash,firstwrite,maxstoppts,originalrestartcode,majorstopptyear,majorstopptcode,oldstopyr,stopstatcd,readfilepos,seekreadpos
+            common /glblcntlc/ keywordfile,restartfile,stopptfile
+        end subroutine fvssetrtncode
+        subroutine fvsgetrtncode(rtncode) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/cmdline.f
+            integer intent(out) :: rtncode
+            integer :: fvsrtncode
+            integer :: restartcode
+            integer :: minorstopptcode
+            integer :: minorstopptyear
+            integer :: jstash
+            integer :: jdstash
+            integer :: firstwrite
+            integer :: maxstoppts
+            integer :: originalrestartcode
+            integer :: majorstopptyear
+            integer :: majorstopptcode
+            integer :: oldstopyr
+            integer :: stopstatcd
+            integer :: readfilepos
+            integer :: seekreadpos
+            character(len=250) :: keywordfile
+            character(len=250) :: restartfile
+            character(len=250) :: stopptfile
+            common /glblcntl/ fvsrtncode,restartcode,minorstopptcode,minorstopptyear,jstash,jdstash,firstwrite,maxstoppts,originalrestartcode,majorstopptyear,majorstopptcode,oldstopyr,stopstatcd,readfilepos,seekreadpos
+            common /glblcntlc/ keywordfile,restartfile,stopptfile
+        end subroutine fvsgetrtncode
+        subroutine fvsstoppoint(locode,istopdone) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/cmdline.f
+            integer intent(in) :: locode
+            integer intent(out) :: istopdone
+            real :: autmax
+            real :: autmin
+            real :: auteff
+            real :: dgsd
+            real :: eff
+            real :: trm
+            real :: yr
+            integer :: iccode
+            integer :: icflag
+            integer :: icl1
+            integer :: icl2
+            integer :: icl3
+            integer :: icl4
+            integer :: icl5
+            integer :: icl6
+            real :: fintm
+            integer :: icyc
+            integer :: idg
+            integer :: ifst
+            integer dimension(6) :: ins
+            integer dimension(11) :: ibegin
+            integer :: iread
+            integer :: irec1
+            integer :: irec2
+            integer :: irecnt
+            integer :: irecrd
+            integer dimension(11) :: iref
+            integer dimension(11,2) :: isct
+            integer :: istdat
+            integer :: itrn
+            integer dimension(11) :: kptr
+            integer dimension(41) :: iy
+            integer :: jolist
+            integer :: jostnd
+            integer :: josum
+            integer :: jotree
+            integer :: jocalb
+            integer dimension(11) :: kount
+            logical :: ldcor2
+            logical dimension(11) :: ldgcal
+            logical dimension(11) :: lhtdrg
+            logical :: ldubdg
+            logical :: lflag
+            logical :: lstart
+            integer :: lstknt
+            logical :: lmort
+            logical :: lsumry
+            integer :: nstknt
+            logical :: ltrip
+            logical :: mordat
+            integer :: ncyc
+            logical :: notrip
+            integer :: numsp
+            real :: bamax
+            real :: d0mult
+            real :: d0
+            logical :: lbkden
+            logical :: lauton
+            real dimension(11) :: topd
+            real dimension(11) :: dbhmin
+            real dimension(11) :: stmp
+            real :: tcwt
+            real :: cfmin
+            real :: bfmin
+            real :: bamin
+            logical :: lrcor2
+            real dimension(11) :: rcor2
+            real dimension(11) :: frmcls
+            integer dimension(11) :: methc
+            integer dimension(11) :: methb
+            logical :: lbvols
+            logical :: lcvols
+            logical :: lsite
+            integer dimension(7) :: itable
+            real :: spclwt
+            logical :: lfia
+            real :: tcfmin
+            logical :: lfire
+            real dimension(11,4) :: sizcap
+            integer dimension(10,52) :: ispgrp
+            integer :: nspgrp
+            real :: pbawt
+            real :: pccfwt
+            real :: ptpawt
+            integer :: ithnpi
+            integer :: ithnpn
+            integer :: ithnpa
+            logical :: lzeide
+            real :: dr016
+            real :: dbhstage
+            real :: dbhzeide
+            real :: dbhsdi
+            character*160 :: trefmt
+            character dimension(11,4),intent(c) :: iused
+            character*250 :: kwdfil
+            character dimension(10,10),intent(c) :: namgrp
+            integer :: fvsrtncode
+            integer :: restartcode
+            integer :: minorstopptcode
+            integer :: minorstopptyear
+            integer :: jstash
+            integer :: jdstash
+            integer :: firstwrite
+            integer :: maxstoppts
+            integer :: originalrestartcode
+            integer :: majorstopptyear
+            integer :: majorstopptcode
+            integer :: oldstopyr
+            integer :: stopstatcd
+            integer :: readfilepos
+            integer :: seekreadpos
+            character(len=250) :: keywordfile
+            character(len=250) :: restartfile
+            character(len=250) :: stopptfile
+            common /contrl/ autmax,autmin,auteff,dgsd,eff,trm,yr,iccode,icflag,icl1,icl2,icl3,icl4,icl5,icl6,fintm,icyc,idg,ifst,ins,ibegin,iread,irec1,irec2,irecnt,irecrd,iref,isct,istdat,itrn,kptr,iy,jolist,jostnd,josum,jotree,jocalb,kount,ldcor2,ldgcal,lhtdrg,ldubdg,lflag,lstart,lstknt,lmort,lsumry,nstknt,ltrip,mordat,ncyc,notrip,numsp,bamax,d0mult,d0,lbkden,lauton,topd,dbhmin,stmp,tcwt,cfmin,bfmin,bamin,lrcor2,rcor2,frmcls,methc,methb,lbvols,lcvols,lsite,itable,spclwt,lfia,tcfmin,lfire,sizcap,ispgrp,nspgrp,pbawt,pccfwt,ptpawt,ithnpi,ithnpn,ithnpa,lzeide,dr016,dbhstage,dbhzeide,dbhsdi
+            common /conchr/ trefmt,iused,kwdfil,namgrp
+            common /glblcntl/ fvsrtncode,restartcode,minorstopptcode,minorstopptyear,jstash,jdstash,firstwrite,maxstoppts,originalrestartcode,majorstopptyear,majorstopptcode,oldstopyr,stopstatcd,readfilepos,seekreadpos
+            common /glblcntlc/ keywordfile,restartfile,stopptfile
+            entry getamstopping(istopdone)
+        end subroutine fvsstoppoint
+        subroutine filopn ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/filopn.f
+            integer :: jsvout
+            integer :: jsvpic
+            real dimension(15000) :: xsloc
+            real dimension(15000) :: ysloc
+            integer dimension(15000) :: iobjtp
+            integer :: nimage
+            integer dimension(15000) :: is2f
+            integer :: nsvobj
+            real dimension(500) :: x1r1s
+            real dimension(500) :: x2r2s
+            real dimension(500) :: y1a1s
+            real dimension(500) :: y2a2s
+            integer :: iplgem
+            integer :: isvinv
+            real dimension(3000) :: svmsave
+            integer :: imortcnt
+            integer :: irpoles
+            integer :: idplots
+            integer :: icolidx
+            integer :: igrid
+            integer :: imetric
+            integer :: josume
+            logical :: lecon
+            logical :: lecbug
+            character*160 :: trefmt
+            character dimension(11,4),intent(c) :: iused
+            character*250 :: kwdfil
+            character dimension(10,10),intent(c) :: namgrp
+            real :: autmax
+            real :: autmin
+            real :: auteff
+            real :: dgsd
+            real :: eff
+            real :: trm
+            real :: yr
+            integer :: iccode
+            integer :: icflag
+            integer :: icl1
+            integer :: icl2
+            integer :: icl3
+            integer :: icl4
+            integer :: icl5
+            integer :: icl6
+            real :: fintm
+            integer :: icyc
+            integer :: idg
+            integer :: ifst
+            integer dimension(6) :: ins
+            integer dimension(11) :: ibegin
+            integer :: iread
+            integer :: irec1
+            integer :: irec2
+            integer :: irecnt
+            integer :: irecrd
+            integer dimension(11) :: iref
+            integer dimension(11,2) :: isct
+            integer :: istdat
+            integer :: itrn
+            integer dimension(11) :: kptr
+            integer dimension(41) :: iy
+            integer :: jolist
+            integer :: jostnd
+            integer :: josum
+            integer :: jotree
+            integer :: jocalb
+            integer dimension(11) :: kount
+            logical :: ldcor2
+            logical dimension(11) :: ldgcal
+            logical dimension(11) :: lhtdrg
+            logical :: ldubdg
+            logical :: lflag
+            logical :: lstart
+            integer :: lstknt
+            logical :: lmort
+            logical :: lsumry
+            integer :: nstknt
+            logical :: ltrip
+            logical :: mordat
+            integer :: ncyc
+            logical :: notrip
+            integer :: numsp
+            real :: bamax
+            real :: d0mult
+            real :: d0
+            logical :: lbkden
+            logical :: lauton
+            real dimension(11) :: topd
+            real dimension(11) :: dbhmin
+            real dimension(11) :: stmp
+            real :: tcwt
+            real :: cfmin
+            real :: bfmin
+            real :: bamin
+            logical :: lrcor2
+            real dimension(11) :: rcor2
+            real dimension(11) :: frmcls
+            integer dimension(11) :: methc
+            integer dimension(11) :: methb
+            logical :: lbvols
+            logical :: lcvols
+            logical :: lsite
+            integer dimension(7) :: itable
+            real :: spclwt
+            logical :: lfia
+            real :: tcfmin
+            logical :: lfire
+            real dimension(11,4) :: sizcap
+            integer dimension(10,52) :: ispgrp
+            integer :: nspgrp
+            real :: pbawt
+            real :: pccfwt
+            real :: ptpawt
+            integer :: ithnpi
+            integer :: ithnpn
+            integer :: ithnpa
+            logical :: lzeide
+            real :: dr016
+            real :: dbhstage
+            real :: dbhzeide
+            real :: dbhsdi
+            integer :: kolist
+            logical :: fstopen
+            common /svdata/ jsvout,jsvpic,xsloc,ysloc,iobjtp,nimage,is2f,nsvobj,x1r1s,x2r2s,y1a1s,y2a2s,iplgem,isvinv,svmsave,imortcnt,irpoles,idplots,icolidx,igrid,imetric
+            common /econ/ josume,lecon,lecbug
+            common /conchr/ trefmt,iused,kwdfil,namgrp
+            common /contrl/ autmax,autmin,auteff,dgsd,eff,trm,yr,iccode,icflag,icl1,icl2,icl3,icl4,icl5,icl6,fintm,icyc,idg,ifst,ins,ibegin,iread,irec1,irec2,irecnt,irecrd,iref,isct,istdat,itrn,kptr,iy,jolist,jostnd,josum,jotree,jocalb,kount,ldcor2,ldgcal,lhtdrg,ldubdg,lflag,lstart,lstknt,lmort,lsumry,nstknt,ltrip,mordat,ncyc,notrip,numsp,bamax,d0mult,d0,lbkden,lauton,topd,dbhmin,stmp,tcwt,cfmin,bfmin,bamin,lrcor2,rcor2,frmcls,methc,methb,lbvols,lcvols,lsite,itable,spclwt,lfia,tcfmin,lfire,sizcap,ispgrp,nspgrp,pbawt,pccfwt,ptpawt,ithnpi,ithnpn,ithnpa,lzeide,dr016,dbhstage,dbhzeide,dbhsdi
+            common /fvsstdcm/ kolist,fstopen
+            entry filclose()
+        end subroutine filopn
+        subroutine openifclosed(ifileref,sufx,lok) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/filopn.f
+            integer :: ifileref
+            character*(*) :: sufx
+            logical :: lok
+        end subroutine openifclosed
+        subroutine fvs(irtncd) ! in :pyfvsktc:/Users/lucaswells/open-fvs/branches/PyFVS/base/src/fvs.f
+            integer intent(out) :: irtncd
+            real :: aspect
+            real :: avh
+            real :: ba
+            real :: baf
+            real :: brk
+            real :: atavd
+            real :: atavh
+            real :: atba
+            real :: atccf
+            real :: attpa
+            real :: covyr
+            real :: covmlt
+            real :: elev
+            real :: fint
+            real :: fpa
+            real :: grospc
+            real :: pi
+            integer :: iptinv
+            integer :: nonstk
+            real :: relden
+            real :: reldm1
+            real dimension(11) :: reldsp
+            real :: rmsqd
+            real :: slope
+            real :: samwt
+            real :: tfpa
+            real :: rmai
+            real :: tprob
+            integer :: iage
+            integer :: ifint
+            integer :: ifor
+            integer :: igl
+            integer dimension(500) :: ipvec
+            integer :: ismall
+            integer :: itype
+            integer dimension(122) :: jtype
+            real :: oldtpa
+            real :: oldba
+            real dimension(11) :: sitear
+            integer :: isisp
+            real :: oldavh
+            real :: ormsqd
+            real :: sdimax
+            real dimension(11) :: sdidef
+            real dimension(11) :: barank
+            integer :: islop
+            integer :: iaspec
+            real :: tlat
+            real :: tlong
+            real :: pmsdil
+            real :: pmsdiu
+            real :: vmlt
+            real :: vmltyr
+            integer :: kodtyp
+            integer :: kodfor
+            integer :: managd
+            real :: btsdix
+            real :: atsdix
+            integer :: imodty
+            integer :: iphreg
+            integer :: ifortp
+            integer :: iszcl
+            integer :: istcl
+            real :: sdibc
+            real :: sdiac
+            integer :: istate
+            integer :: icnty
+            integer :: icage
+            real dimension(20,6) :: sitetr
+            integer :: nsitet
+            integer dimension(11) :: jspin
+            real :: stndsi
+            real :: sdibc2
+            real :: sdiac2
+            integer :: jspindef
+            real dimension(11,500) :: over
+            real dimension(500) :: baaa
+            real dimension(500) :: pccf
+            real :: oldfnt
+            real :: regnbk
+            real dimension(500) :: ptpa
+            real dimension(3000) :: abirth
+            real dimension(3000) :: bfv
+            real dimension(3000) :: cfv
+            real dimension(3000) :: dbh
+            real dimension(3000) :: dg
+            real dimension(3000) :: ht
+            real dimension(3000) :: htg
+            real dimension(3000) :: oldrn
+            real dimension(3000) :: oldpct
+            real dimension(3000) :: pct
+            real dimension(3000) :: prob
+            real dimension(3000) :: wk1
+            real dimension(3000) :: wk2
+            real dimension(3000) :: wk3
+            real dimension(3000) :: wk4
+            real dimension(3000) :: wk5
+            real dimension(3000) :: wk6
+            real dimension(3000) :: zrand
+            integer dimension(3000) :: idtree
+            integer dimension(3000) :: icr
+            integer dimension(3000) :: imc
+            integer dimension(3000) :: ind
+            integer dimension(3000) :: ind1
+            integer dimension(3000) :: normht
+            integer dimension(3000) :: itrunc
+            integer dimension(3000) :: ind2
+            integer dimension(3000) :: isp
+            integer dimension(3000) :: itre
+            integer dimension(3000) :: kutkod
+            integer dimension(3000) :: defect
+            integer dimension(3000) :: ispecl
+            real dimension(3000) :: pltsiz
+            real dimension(3000) :: crwdth
+            real dimension(3000) :: yrdlos
+            integer dimension(6,3000) :: damsev
+            real dimension(3000,2) :: ht2td
+            integer :: josume
+            logical :: lecon
+            logical :: lecbug
+            character dimension(4,3),intent(c) :: iosptt
+            character dimension(4,3),intent(c) :: iospbr
+            character dimension(4,3),intent(c) :: iosptv
+            character dimension(4,3),intent(c) :: iospmr
+            character dimension(4,3),intent(c) :: iospac
+            character dimension(4,3),intent(c) :: iospct
+            character dimension(4,3),intent(c) :: iospcv
+            character dimension(4,3),intent(c) :: iospmc
+            character dimension(4,3),intent(c) :: iospbv
+            character dimension(4,3),intent(c) :: iosprt
+            character dimension(4,3),intent(c) :: iospmo
+            character dimension(6,3),intent(c) :: ionsp
+            character*72 :: ititle
+            character*160 :: trefmt
+            character dimension(11,4),intent(c) :: iused
+            character*250 :: kwdfil
+            character dimension(10,10),intent(c) :: namgrp
+            real dimension(7) :: oacc
+            real dimension(7) :: obfcur
+            real dimension(7) :: ocvcur
+            real dimension(7) :: omccur
+            real dimension(7) :: omort
+            real dimension(7) :: ontcur
+            real dimension(7) :: ontres
+            real dimension(4) :: ospac
+            real dimension(4) :: ospct
+            real dimension(4) :: ospcv
+            real dimension(4) :: ospmo
+            real dimension(7) :: obfrem
+            real dimension(7) :: ocvrem
+            real dimension(7) :: omcrem
+            real dimension(7) :: ontrem
+            real dimension(4) :: osprt
+            real dimension(4) :: osptt
+            real dimension(4) :: ospbv
+            real dimension(4) :: ospmc
+            real dimension(4) :: ospbr
+            real dimension(4) :: ospmr
+            real dimension(4) :: osptv
+            real dimension(6) :: dbhio
+            real dimension(6) :: htio
+            integer dimension(6) :: ioicr
+            real dimension(6) :: dgio
+            real dimension(6) :: pctio
+            real dimension(6) :: prbio
+            integer*4 dimension(20,41) :: iosum
+            character*4 :: mgmid
+            character dimension(11,4),intent(c) :: jsp
+            character dimension(11,3,4),intent(c) :: nsp
+            character*26 :: nplt
+            character dimension(11,4),intent(c) :: fiajsp
+            character dimension(11,6),intent(c) :: plnjsp
+            character*40 :: dbcn
+            character*10 :: cpvref
+            real dimension(3000) :: work1
+            real dimension(11) :: work2
+            real dimension(3000) :: work3
+            integer dimension(3000) :: iwork1
+            real :: autmax
+            real :: autmin
+            real :: auteff
+            real :: dgsd
+            real :: eff
+            real :: trm
+            real :: yr
+            integer :: iccode
+            integer :: icflag
+            integer :: icl1
+            integer :: icl2
+            integer :: icl3
+            integer :: icl4
+            integer :: icl5
+            integer :: icl6
+            real :: fintm
+            integer :: icyc
+            integer :: idg
+            integer :: ifst
+            integer dimension(6) :: ins
+            integer dimension(11) :: ibegin
+            integer :: iread
+            integer :: irec1
+            integer :: irec2
+            integer :: irecnt
+            integer :: irecrd
+            integer dimension(11) :: iref
+            integer dimension(11,2) :: isct
+            integer :: istdat
+            integer :: itrn
+            integer dimension(11) :: kptr
+            integer dimension(41) :: iy
+            integer :: jolist
+            integer :: jostnd
+            integer :: josum
+            integer :: jotree
+            integer :: jocalb
+            integer dimension(11) :: kount
+            logical :: ldcor2
+            logical dimension(11) :: ldgcal
+            logical dimension(11) :: lhtdrg
+            logical :: ldubdg
+            logical :: lflag
+            logical :: lstart
+            integer :: lstknt
+            logical :: lmort
+            logical :: lsumry
+            integer :: nstknt
+            logical :: ltrip
+            logical :: mordat
+            integer :: ncyc
+            logical :: notrip
+            integer :: numsp
+            real :: bamax
+            real :: d0mult
+            real :: d0
+            logical :: lbkden
+            logical :: lauton
+            real dimension(11) :: topd
+            real dimension(11) :: dbhmin
+            real dimension(11) :: stmp
+            real :: tcwt
+            real :: cfmin
+            real :: bfmin
+            real :: bamin
+            logical :: lrcor2
+            real dimension(11) :: rcor2
+            real dimension(11) :: frmcls
+            integer dimension(11) :: methc
+            integer dimension(11) :: methb
+            logical :: lbvols
+            logical :: lcvols
+            logical :: lsite
+            integer dimension(7) :: itable
+            real :: spclwt
+            logical :: lfia
+            real :: tcfmin
+            logical :: lfire
+            real dimension(11,4) :: sizcap
+            integer dimension(10,52) :: ispgrp
+            integer :: nspgrp
+            real :: pbawt
+            real :: pccfwt
+            real :: ptpawt
+            integer :: ithnpi
+            integer :: ithnpn
+            integer :: ithnpa
+            logical :: lzeide
+            real :: dr016
+            real :: dbhstage
+            real :: dbhzeide
+            real :: dbhsdi
+            common /plot/ aspect,avh,ba,baf,brk,atavd,atavh,atba,atccf,attpa,covyr,covmlt,elev,fint,fpa,grospc,pi,iptinv,nonstk,relden,reldm1,reldsp,rmsqd,slope,samwt,tfpa,rmai,tprob,iage,ifint,ifor,igl,ipvec,ismall,itype,jtype,oldtpa,oldba,sitear,isisp,oldavh,ormsqd,sdimax,sdidef,barank,islop,iaspec,tlat,tlong,pmsdil,pmsdiu,vmlt,vmltyr,kodtyp,kodfor,managd,btsdix,atsdix,imodty,iphreg,ifortp,iszcl,istcl,sdibc,sdiac,istate,icnty,icage,sitetr,nsitet,jspin,stndsi,sdibc2,sdiac2,jspindef
+            common /pden/ over,baaa,pccf,oldfnt,regnbk,ptpa
+            common /arrays/ abirth,bfv,cfv,dbh,dg,ht,htg,oldrn,oldpct,pct,prob,wk1,wk2,wk3,wk4,wk5,wk6,zrand,idtree,icr,imc,ind,ind1,normht,itrunc,ind2,isp,itre,kutkod,defect,ispecl,pltsiz,crwdth,yrdlos,damsev,ht2td
+            common /econ/ josume,lecon,lecbug
+            common /outchr/ iosptt,iospbr,iosptv,iospmr,iospac,iospct,iospcv,iospmc,iospbv,iosprt,iospmo,ionsp,ititle
+            common /conchr/ trefmt,iused,kwdfil,namgrp
+            common /outcom/ oacc,obfcur,ocvcur,omccur,omort,ontcur,ontres,ospac,ospct,ospcv,ospmo,obfrem,ocvrem,omcrem,ontrem,osprt,osptt,ospbv,ospmc,ospbr,ospmr,osptv,dbhio,htio,ioicr,dgio,pctio,prbio,iosum
+            common /pltchr/ mgmid,jsp,nsp,nplt,fiajsp,plnjsp,dbcn,cpvref
+            common /workcm/ work1,work2,work3,iwork1
+            common /contrl/ autmax,autmin,auteff,dgsd,eff,trm,yr,iccode,icflag,icl1,icl2,icl3,icl4,icl5,icl6,fintm,icyc,idg,ifst,ins,ibegin,iread,irec1,irec2,irecnt,irecrd,iref,isct,istdat,itrn,kptr,iy,jolist,jostnd,josum,jotree,jocalb,kount,ldcor2,ldgcal,lhtdrg,ldubdg,lflag,lstart,lstknt,lmort,lsumry,nstknt,ltrip,mordat,ncyc,notrip,numsp,bamax,d0mult,d0,lbkden,lauton,topd,dbhmin,stmp,tcwt,cfmin,bfmin,bamin,lrcor2,rcor2,frmcls,methc,methb,lbvols,lcvols,lsite,itable,spclwt,lfia,tcfmin,lfire,sizcap,ispgrp,nspgrp,pbawt,pccfwt,ptpawt,ithnpi,ithnpn,ithnpa,lzeide,dr016,dbhstage,dbhzeide,dbhsdi
+        end subroutine fvs
+    end interface 
+end python module pyfvsktc
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/

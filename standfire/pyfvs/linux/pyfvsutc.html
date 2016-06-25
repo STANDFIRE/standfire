@@ -1,0 +1,142 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module pyfvsutc</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>pyfvsutc</strong></big></big> (version )</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/gcohn/Documents/pyfvs_lnx3.1_229/src/open-fvs_wmjMake/branches/PyFVS/bin/Open-FVS/bin/pyfvsutc.so">/home/gcohn/Documents/pyfvs_lnx3.1_229/src/open-fvs_wmjMake/branches/PyFVS/bin/Open-FVS/bin/pyfvsutc.so</a></font></td></tr></table>
+    <p><tt>This&nbsp;module&nbsp;'pyfvsutc'&nbsp;is&nbsp;auto-generated&nbsp;with&nbsp;f2py&nbsp;(version:2).<br>
+Functions:<br>
+&nbsp;&nbsp;ntrees,ncycles,nplots,maxtrees,maxspecies,maxplots,maxcycles&nbsp;=&nbsp;fvsdimsizes()<br>
+&nbsp;&nbsp;summary&nbsp;=&nbsp;fvssummary(icycle)<br>
+&nbsp;&nbsp;rtncode&nbsp;=&nbsp;fvstreeattr(name,nch,action,attr,ntrees=len(attr))<br>
+&nbsp;&nbsp;rtncode&nbsp;=&nbsp;fvsspeciesattr(name,nch,action,attr)<br>
+&nbsp;&nbsp;rtncode&nbsp;=&nbsp;fvsevmonattr(name,nch,action,attr)<br>
+&nbsp;&nbsp;rtncode&nbsp;=&nbsp;fvsaddtrees(in_dbh,in_species,in_ht,in_cratio,in_plot,in_tpa,ntrees=len(in_dbh))<br>
+&nbsp;&nbsp;fvs_code,fia_code,plant_code&nbsp;=&nbsp;fvsspeciescode(indx)<br>
+&nbsp;&nbsp;rtncode&nbsp;=&nbsp;fvscuttrees(ptocut)<br>
+&nbsp;&nbsp;sid,scn,mid,ncsid,nccn,ncmid&nbsp;=&nbsp;fvsstandid()<br>
+&nbsp;&nbsp;fvsclosefile(filename,nch)<br>
+&nbsp;&nbsp;rtncode&nbsp;=&nbsp;fvsaddactivity(idt,iactk,inprms,nprms=len(inprms))<br>
+&nbsp;&nbsp;nsvsobjs,ndeadobjs,ncwdobjs,mxsvsobjs,mxdeadobjs,mxcwdobjs&nbsp;=&nbsp;fvssvsdimsizes()<br>
+&nbsp;&nbsp;rtncode&nbsp;=&nbsp;fvssvsobjdata(name,nch,action,attr,nobjs=len(attr))<br>
+&nbsp;&nbsp;rtncode&nbsp;=&nbsp;fvsffeattrs(name,nch,action,attr,nobjs=len(attr))<br>
+&nbsp;&nbsp;rtncode&nbsp;=&nbsp;fvsunitconversion(name,nch,value)<br>
+&nbsp;&nbsp;irtncd&nbsp;=&nbsp;fvssetcmdline(thecmdline)<br>
+&nbsp;&nbsp;spptcd,spptyr&nbsp;=&nbsp;fvsgetstoppointcodes()<br>
+&nbsp;&nbsp;fvssetstoppointcodes(spptcd,spptyr)<br>
+&nbsp;&nbsp;restrtcd&nbsp;=&nbsp;fvsgetrestartcode()<br>
+&nbsp;&nbsp;clearrestartcode()<br>
+&nbsp;&nbsp;restrtcd&nbsp;=&nbsp;fvsrestart()<br>
+&nbsp;&nbsp;restrtcd&nbsp;=&nbsp;fvsrestartlaststand()<br>
+&nbsp;&nbsp;fvsgetkeywordfilename(fn)<br>
+&nbsp;&nbsp;rtncode&nbsp;=&nbsp;fvssetrtncode()<br>
+&nbsp;&nbsp;rtncode&nbsp;=&nbsp;fvsgetrtncode()<br>
+&nbsp;&nbsp;istopdone&nbsp;=&nbsp;fvsstoppoint(locode)<br>
+&nbsp;&nbsp;istopdone&nbsp;=&nbsp;getamstopping()<br>
+&nbsp;&nbsp;filopn()<br>
+&nbsp;&nbsp;filclose()<br>
+&nbsp;&nbsp;openifclosed(ifileref,sufx,lok)<br>
+&nbsp;&nbsp;irtncd&nbsp;=&nbsp;fvs()<br>
+&nbsp;&nbsp;sel&nbsp;=&nbsp;rann()<br>
+&nbsp;&nbsp;passs0&nbsp;=&nbsp;rannget(passs0)<br>
+&nbsp;&nbsp;ransed(lset,seed)<br>
+&nbsp;&nbsp;passs0&nbsp;=&nbsp;rannput(passs0)<br>
+COMMON&nbsp;blocks:<br>
+&nbsp;&nbsp;/plot/&nbsp;aspect,avh,ba,baf,brk,atavd,atavh,atba,atccf,attpa,covyr,covmlt,elev,fint,fpa,grospc,pi,iptinv,nonstk,relden,reldm1,reldsp(24),rmsqd,slope,samwt,tfpa,rmai,tprob,iage,ifint,ifor,igl,ipvec(500),ismall,itype,jtype(122),oldtpa,oldba,sitear(24),isisp,oldavh,ormsqd,sdimax,sdidef(24),barank(24),islop,iaspec,tlat,tlong,pmsdil,pmsdiu,vmlt,vmltyr,kodtyp,kodfor,managd,btsdix,atsdix,imodty,iphreg,ifortp,iszcl,istcl,sdibc,sdiac,istate,icnty,icage,sitetr(20,6),nsitet,jspin(24),stndsi,sdibc2,sdiac2,jspindef<br>
+&nbsp;&nbsp;/conchr/&nbsp;trefmt(160),iused(24,4),kwdfil(250),namgrp(30,10),ptgname(30,10)<br>
+&nbsp;&nbsp;/contrl/&nbsp;autmax,autmin,auteff,dgsd,eff,trm,yr,iccode,icflag,icl1,icl2,icl3,icl4,icl5,icl6,fintm,icyc,idg,ifst,ins(6),ibegin(24),iread,irec1,irec2,irecnt,irecrd,iref(24),isct(24,2),istdat,itrn,kptr(24),iy(41),jolist,jostnd,josum,jotree,jocalb,kount(24),ldcor2,ldgcal(24),lhtdrg(24),ldubdg,lflag,lstart,lstknt,lmort,lsumry,nstknt,ltrip,mordat,ncyc,notrip,numsp,bamax,d0mult,d0,lbkden,lauton,topd(24),dbhmin(24),stmp(24),tcwt,cfmin,bfmin,bamin,lrcor2,rcor2(24),frmcls(24),methc(24),methb(24),lbvols,lcvols,lsite,itable(7),spclwt,lfia,tcfmin,lfire,sizcap(24,4),ispgrp(30,52),nspgrp,pbawt,pccfwt,ptpawt,ithnpi,ithnpn,ithnpa,lzeide,dr016,dbhstage,dbhzeide,dbhsdi,nptgrp,iptgrp(30,52)<br>
+&nbsp;&nbsp;/pltchr/&nbsp;mgmid(4),jsp(24,4),nsp(24,3,4),nplt(26),fiajsp(24,4),plnjsp(24,6),dbcn(40),cpvref(10)<br>
+&nbsp;&nbsp;/outchr/&nbsp;iosptt(4,3),iospbr(4,3),iosptv(4,3),iospmr(4,3),iospac(4,3),iospct(4,3),iospcv(4,3),iospmc(4,3),iospbv(4,3),iosprt(4,3),iospmo(4,3),ionsp(6,3),ititle(72)<br>
+&nbsp;&nbsp;/outcom/&nbsp;oacc(7),obfcur(7),ocvcur(7),omccur(7),omort(7),ontcur(7),ontres(7),ospac(4),ospct(4),ospcv(4),ospmo(4),obfrem(7),ocvrem(7),omcrem(7),ontrem(7),osprt(4),osptt(4),ospbv(4),ospmc(4),ospbr(4),ospmr(4),osptv(4),dbhio(6),htio(6),ioicr(6),dgio(6),pctio(6),prbio(6),iosum(20,41)<br>
+&nbsp;&nbsp;/varcom/&nbsp;aa(24),bb(24),iabflg(24),b0accf(24),b1accf(24),b0bccf(24),b1bccf(24),b0astd(24),b1bstd(24),htt1(24,9),htt2(24,9),bb0(24),bb1(24),bb2(24),bb3(24),bb4(24),bb5(24),bb6(24),bb7(24),bb8(24),bb9(24),bb10(24),bb11(24),bb12(24),bb13(24),ptbalt(3000),ptbaa(500),istagf(24),maxsdi(24),cepmrt,slpmrt,tpamrt,lbamax,lflagv,lfixsd,isilft,qmdmsb,slpmsb,cepmsb,effmsb,dlomsb,dhimsb,mflmsb,ibasp<br>
+&nbsp;&nbsp;/arrays/&nbsp;abirth(3000),bfv(3000),cfv(3000),dbh(3000),dg(3000),ht(3000),htg(3000),oldrn(3000),oldpct(3000),pct(3000),prob(3000),wk1(3000),wk2(3000),wk3(3000),wk4(3000),wk5(3000),wk6(3000),zrand(3000),idtree(3000),icr(3000),imc(3000),ind(3000),ind1(3000),normht(3000),itrunc(3000),ind2(3000),isp(3000),itre(3000),kutkod(3000),defect(3000),ispecl(3000),pltsiz(3000),crwdth(3000),yrdlos(3000),damsev(6,3000),ht2td(3000,2)<br>
+&nbsp;&nbsp;/varchr/&nbsp;pcom(8),pcomx(8)<br>
+&nbsp;&nbsp;/fmcom/&nbsp;alldwn(24),burnyr,canmht,cbhcut,covtyp,crburn,crownw(3000,6),curkil(3000),cwd(3,11,2,5),cwd2b(4,6,60),cwd2b2(4,6,60),cwdcut,cwdnew(2,11),cwdvol(3,10,2,5),cwdcov(3,10,2,5),dbhs(2000),decayx(24),denih(2000),denis(2000),dend(2000),dkr(11,4),dkrcls(24),dkrdef(4),dspdbh(24,19),fallx(24),flive(2),firkil(3000),folmc,fmprob(3000),fmtba(24),nfmsvpx,fmicr(3000),fmkod,fmslop,ftreat,fuarea(5,4),grow(3000),hard(2000),hartyp,harvyr,htdead(2000),htih(2000),htis(2000),htr1,htr2,htx(24,4),htxsft,icansp,icbhmt,icycrm,ifmyr1,ifmyr2,iftyr,isalvc,isalvs,isngsm,itrnl,jcout,jfrout(3),jlout(3),lanhed,leaflf(24),lfmon,lfmon2,lfrout(3),ldynfm,limbrk,ldhead,lshead,lvwest,maxht(24,19),minht(24,19),nsnag,nyrs,nzero,oldcovtyp,oldcrl(3000),oldht(3000),oldcrw(3000,6),oldict,oldict2,oldictwt(2),pbfrih(2000),pbfris(2000),pbscor,pbsoft,pbsize,pbsmal,pbtime,pburnyr,percov,prduff(11,4),prsnag,psoft(24),prpile(11),salvspa(2000,2),sccf,setdecay(11,4),sngnew(3000),snprcl(6),sps(2000),tcwd(6),tcwd2(6),tfall(24,6),toduff(11,4),tonrmc,tonrms,tonrmh,totacr,v2t(24),yrdead(2000),lremt,nsnagsalv,htdeadsalv(2000),spssalv(2000),dbhssalv(2000),htihsalv(2000),htissalv(2000),hardsalv(2000),premst(3000),premcr(3000),ispcc(3000),dbhc(3000),htc(3000),crownwc(3000,6)<br>
+&nbsp;&nbsp;/opcom/&nbsp;lopevn,img1,img2,imgl,iept,impl,icod,ievt,ieva,ilgnum,iseq(2000),parms(5999),iact(2000,5),levuse,iopsrt(2000),idate(2000),ievcod(6000),iopcyc(2000),imgpts(40,2),ievnts(150,3),ievact(160,6),itoprm,tstv1(50),tstv2(32),tstv3(20),tstv4(50),ltstv4(50),ktodo,tstv5(199),ltstv5(199),itst5,iptodo(500),lbsets,lensls,lenagl(160),iphase,xreg(400),lreg(400),bccfsp(24),accfsp(24),icact,iseqdn<br>
+&nbsp;&nbsp;/opchr/&nbsp;slset(250),aglset(160,250),wkstr1(250),wkstr2(250),wkstr3(250),ctstv5(199,8),cexprs(2000),cact(10000,1)<br>
+&nbsp;&nbsp;/stdstk/&nbsp;ptocfv(3000),pmrcfv(3000),pmrbfv(3000),ncfdef(3000),nbfdef(3000),pdbh(3000),pht(3000)<br>
+&nbsp;&nbsp;/estree/&nbsp;iestat(3000)<br>
+&nbsp;&nbsp;/svdata/&nbsp;jsvout,jsvpic,xsloc(15000),ysloc(15000),iobjtp(15000),nimage,is2f(15000),nsvobj,x1r1s(500),x2r2s(500),y1a1s(500),y2a2s(500),iplgem,isvinv,svmsave(3000),imortcnt,irpoles,idplots,icolidx,igrid,imetric<br>
+&nbsp;&nbsp;/svdead/&nbsp;isnsp(1000),crndia(1000),crnrto(1000),olen(1000),odia(1000),falldir(1000),iyrcod(1000),istatus(1000),ndead,ilyear,yhfhts(24),yhfhth(24),hrate(24),sngcnwt(1000,4),oidtre(1000),pbfall(1000),sprobs(1000,3),sngdia(1000),snglen(1000),ncwd,cwddia(5000),cwdlen(5000),cwdpil(5000),cwddir(5000),cwdwt(5000)<br>
+&nbsp;&nbsp;/metric/&nbsp;lmtric<br>
+&nbsp;&nbsp;/glblcntl/&nbsp;fvsrtncode,restartcode,minorstopptcode,minorstopptyear,jstash,jdstash,firstwrite,maxstoppts,originalrestartcode,majorstopptyear,majorstopptcode,oldstopyr,stopstatcd,readfilepos,seekreadpos<br>
+&nbsp;&nbsp;/glblcntlc/&nbsp;keywordfile(250),restartfile(250),stopptfile(250)<br>
+&nbsp;&nbsp;/econ/&nbsp;josume,lecon,lecbug<br>
+&nbsp;&nbsp;/fvsstdcm/&nbsp;kolist,fstopen<br>
+&nbsp;&nbsp;/pden/&nbsp;over(24,500),baaa(500),pccf(500),oldfnt,regnbk,ptpa(500)<br>
+&nbsp;&nbsp;/workcm/&nbsp;work1(3000),work2(24),work3(3000),iwork1(3000)<br>
+&nbsp;&nbsp;/rancom/&nbsp;s0,s1,ss<br>
+.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__version__</strong> = '$Revision: $'<br>
+<strong>arrays</strong> = &lt;fortran object&gt;<br>
+<strong>clearrestartcode</strong> = &lt;fortran object&gt;<br>
+<strong>conchr</strong> = &lt;fortran object&gt;<br>
+<strong>contrl</strong> = &lt;fortran object&gt;<br>
+<strong>econ</strong> = &lt;fortran object&gt;<br>
+<strong>estree</strong> = &lt;fortran object&gt;<br>
+<strong>filclose</strong> = &lt;fortran object&gt;<br>
+<strong>filopn</strong> = &lt;fortran object&gt;<br>
+<strong>fmcom</strong> = &lt;fortran object&gt;<br>
+<strong>fvs</strong> = &lt;fortran object&gt;<br>
+<strong>fvsaddactivity</strong> = &lt;fortran object&gt;<br>
+<strong>fvsaddtrees</strong> = &lt;fortran object&gt;<br>
+<strong>fvsclosefile</strong> = &lt;fortran object&gt;<br>
+<strong>fvscuttrees</strong> = &lt;fortran object&gt;<br>
+<strong>fvsdimsizes</strong> = &lt;fortran object&gt;<br>
+<strong>fvsevmonattr</strong> = &lt;fortran object&gt;<br>
+<strong>fvsffeattrs</strong> = &lt;fortran object&gt;<br>
+<strong>fvsgetkeywordfilename</strong> = &lt;fortran object&gt;<br>
+<strong>fvsgetrestartcode</strong> = &lt;fortran object&gt;<br>
+<strong>fvsgetrtncode</strong> = &lt;fortran object&gt;<br>
+<strong>fvsgetstoppointcodes</strong> = &lt;fortran object&gt;<br>
+<strong>fvsrestart</strong> = &lt;fortran object&gt;<br>
+<strong>fvsrestartlaststand</strong> = &lt;fortran object&gt;<br>
+<strong>fvssetcmdline</strong> = &lt;fortran object&gt;<br>
+<strong>fvssetrtncode</strong> = &lt;fortran object&gt;<br>
+<strong>fvssetstoppointcodes</strong> = &lt;fortran object&gt;<br>
+<strong>fvsspeciesattr</strong> = &lt;fortran object&gt;<br>
+<strong>fvsspeciescode</strong> = &lt;fortran object&gt;<br>
+<strong>fvsstandid</strong> = &lt;fortran object&gt;<br>
+<strong>fvsstdcm</strong> = &lt;fortran object&gt;<br>
+<strong>fvsstoppoint</strong> = &lt;fortran object&gt;<br>
+<strong>fvssummary</strong> = &lt;fortran object&gt;<br>
+<strong>fvssvsdimsizes</strong> = &lt;fortran object&gt;<br>
+<strong>fvssvsobjdata</strong> = &lt;fortran object&gt;<br>
+<strong>fvstreeattr</strong> = &lt;fortran object&gt;<br>
+<strong>fvsunitconversion</strong> = &lt;fortran object&gt;<br>
+<strong>getamstopping</strong> = &lt;fortran object&gt;<br>
+<strong>glblcntl</strong> = &lt;fortran object&gt;<br>
+<strong>glblcntlc</strong> = &lt;fortran object&gt;<br>
+<strong>metric</strong> = &lt;fortran object&gt;<br>
+<strong>opchr</strong> = &lt;fortran object&gt;<br>
+<strong>opcom</strong> = &lt;fortran object&gt;<br>
+<strong>openifclosed</strong> = &lt;fortran object&gt;<br>
+<strong>outchr</strong> = &lt;fortran object&gt;<br>
+<strong>outcom</strong> = &lt;fortran object&gt;<br>
+<strong>pden</strong> = &lt;fortran object&gt;<br>
+<strong>plot</strong> = &lt;fortran object&gt;<br>
+<strong>pltchr</strong> = &lt;fortran object&gt;<br>
+<strong>rancom</strong> = &lt;fortran object&gt;<br>
+<strong>rann</strong> = &lt;fortran object&gt;<br>
+<strong>rannget</strong> = &lt;fortran object&gt;<br>
+<strong>rannput</strong> = &lt;fortran object&gt;<br>
+<strong>ransed</strong> = &lt;fortran object&gt;<br>
+<strong>stdstk</strong> = &lt;fortran object&gt;<br>
+<strong>svdata</strong> = &lt;fortran object&gt;<br>
+<strong>svdead</strong> = &lt;fortran object&gt;<br>
+<strong>varchr</strong> = &lt;fortran object&gt;<br>
+<strong>varcom</strong> = &lt;fortran object&gt;<br>
+<strong>workcm</strong> = &lt;fortran object&gt;</td></tr></table>
+</body></html>

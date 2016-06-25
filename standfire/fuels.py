@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 import os
 import pprint
+import platform
 
 __authors__ = "Lucas Wells, Greg Cohn, Russell Parsons"
 __copyright__ = "Copyright 2015, STANDFIRE"
@@ -14,47 +15,47 @@ __copyright__ = "Copyright 2015, STANDFIRE"
 
 class Fvsfuels(object):
     """
-    A Fvsfuels object is used to calculate component fuels at the individual 
+    A Fvsfuels object is used to calculate component fuels at the individual
     tree level using the Forest Vegetation Simulator. To create an instance
     of this class you need two items: a keyword file (.key) and tree list file
     (.tre) with the same prefix as the keyword file. If you don't already have
     a tree list file then you can use ```fuels.Inventory``` class to generate
     one.
-    
+
     :param variant: FVS variant to be imported
     :type variant: string
-    
+
     **Example:**
-    
+
     A basic example to extract live canopy biomass for individual trees during
     year of inventory
-    
+
     >>> from standfire.fuels import Fvsfuels
     >>> stand001 = Fvsfuels("iec")
     >>> stand001.set_keyword("/Users/standfire/test/example.key")
     TIMEINT not found in keyword file, default is 10 years
     >>> stand001.keywords
     {'TIMEINT': 10, 'NUMCYCLE': 10, 'INVYEAR': 2010, 'SVS': 15, 'FUELOUT': 1}
-    
+
     The keyword file is setup to simulate 100 years at a time interval of 10
     years. Lets change this to only simulate the inventory year.
-    
+
     >>> stand001.set_num_cycles(0)
     >>> stand001.keywords
     {'TIMEINT': 10, 'NUMCYCLE': 0, 'INVYEAR': 2010, 'SVS': 15, 'FUELOUT': 1}
     >>> stand001.run_fvs()
-    
+
     Now we can write the trees data frame to disk
-    
+
     >>> stand001.save_trees_by_year(2010)
-    
+
     .. note:: The argument must match one of the available variant in the
               PyFVS module. Search through standfire/pyfvs/ to see all
               variants
     """
     def __init__(self, variant):
         """Constructor"""
-        
+
         # class fields
         self.wdir = ""
         self.keywords = {}
@@ -62,210 +63,214 @@ class Fvsfuels(object):
         self.time_int = 0
         self.inv_year = 0
         self.fuels = {"trees" : {}, "snags" : {}}
-        
+
+        # detect operating system
+        opt_sys = platform.system()
+
         # import fvs variant specified by constructor argument
         global fvs
         try:
-            exec("from pyfvs import pyfvs%s" % variant + " as temp")
+            if opt_sys == "Linux":
+                exec("from pyfvs.linux import pyfvs%s" % variant + " as temp")
         except ValueError:
             print "The PyFVS python module or the specified variant does not exist"
         fvs = temp
-        
+
     def set_keyword(self, keyfile):
         """
         Sets the keyword file to be used in the FVS simulation
-        
+
         :Date: 2015-8-12
         :Authors: Lucas Wells
-        
+
         This method will initalize a FVS simulation by registering the
         specified keyword file (.key) with FVS. The working directory of a
-        Fvsfuels object will be set to the folder containing the keyword file. 
-        You can manually change the working directory with Fvsfuels.set_dir(). 
+        Fvsfuels object will be set to the folder containing the keyword file.
+        You can manually change the working directory with Fvsfuels.set_dir().
         This function will also call private methods in this class to extract
         information from the keyword file and set class fields accordingly for
         use in other methods.
-        
+
         :param keyfile: path/to/keyword_file. This must have a .key extension
         :type keyfile: string
-        
+
         **Example:**
-        
+
         >>> from standfire.fuels import Fvsfuels
         >>> test = Fvsfuels("iec")
         >>> test.set_keyword("/Users/standfire/test/example.key")
         """
-        
+
         cmd = "--keywordfile=%s" % (keyfile,)
-        
+
         fvs.fvssetcmdline(cmd)
-        
+
         # make this folder default output directory
         self.set_dir(os.path.dirname(keyfile))
-        
+
         # read keywords
         self._read_key(keyfile)
-        
+
         # set class fields
         self._set_num_cycles()
         self._set_time_int()
         self._set_inv_year()
-    
+
     def set_dir(self, wdir):
         """
         Sets the working directory of a Fvsfuels object
-        
+
         This method is called by ``Fvsfuels.set_keyword()``. Thus, the default
-        working directory is the folder containing the specified keyword file. 
+        working directory is the folder containing the specified keyword file.
         If you wish to store simulation outputs in a different directory then
         use this methods to do so.
-        
+
         :param wdir: path/to/desired_directory
         :type wdir: string
-        
+
         :Example:
-        
+
         >>> from standfire.fuel import Fvsfuels
         >>> test = Fvsfuels("emc")
         >>> test.set_keyword("/Users/standfire/test/example.key")
-        
+
         Whoops, I would like to store simulation outputs elsewhere...
-        
+
         >>> test.set_dir("/Users/standfire/outputs/")
         """
-        
+
         self.wdir = wdir + "/"
         os.chdir(wdir)
-    
+
     def _read_key(self, keyfile):
-        
+
         keys = {}
-        
+
         f = open(keyfile, 'r')
         lines = [f.readline()]
         while lines[-1] != '':
             lines.append(f.readline())
         lines.pop()
-        
+
         names = ['INVYEAR', 'NUMCYCLE','TIMEINT','FUELOUT','SVS']
         for i in names:
             for e in lines:
                 try:
-                    if e[0:len(i)].upper() == i.upper():                         
-                        for s in e.split(): 
+                    if e[0:len(i)].upper() == i.upper():
+                        for s in e.split():
                             if s.isdigit():
                                 keys[i.upper()] =int(s)
-                            elif i.upper()=='FUELOUT': 
+                            elif i.upper()=='FUELOUT':
                                 keys[i.upper()]=1
                 except:
                     pass
-        
+
         self.keywords = keys
-    
+
     def _set_num_cycles(self):
         """
         Private method
-        
+
         Sets number of cycles for FVS simulation
         """
-        
+
         if "NUMCYCLE" in self.keywords.keys():
             self.num_cyc = self.keywords["NUMCYCLE"]
         else:
             self.num_cyc = 10
             self.keywords["NUMCYCLE"] = 10
             print "NUMCYCLE not found in keyword file, default is 10 cycles"
-        
+
     def _set_time_int(self):
         """
         Private method
-        
+
         Sets time interval in years for FVS simulation
         """
-        
+
         if "TIMEINT" in self.keywords.keys():
             self.time_int = self.keywords["TIMEINT"]
         else:
             self.time_int = 10
             self.keywords["TIMEINT"] = 10
             print "TIMEINT not found in keyword file, default is 10 years"
-        
+
     def _set_inv_year(self):
         """
         Private method
-        
+
         Sets inventory year for FVS simulation
         """
-        
+
         if "INVYEAR" in self.keywords.keys():
             self.inv_year = self.keywords["INVYEAR"]
         else:
             self.inv_year = 2015
             self.keywords["INVYEAR"] = 10
             print "INVYEAR not found in keyword file, default is 2015"
-            
+
     def set_num_cycles(self, num_cyc):
         """
         Sets number of cycles for FVS simulation
-        
+
         :param num_cyc: number of simulation cycles
         :type num_cyc: int
         """
-        
+
         self.num_cyc = num_cyc
         self.keywords["NUMCYCLE"] = num_cyc
-        
+
     def set_time_int(self, time_int):
         """
         Sets time interval for FVS simulation
-        
+
         :param time_int: length of simulation time step
         :type time_int: int
         """
-        
+
         self.time_int = time_int
         self.keywords["TIMEINT"] = time_int
-        
+
     def set_inv_year(self, inv_year):
         """
         Sets inventory year for FVS simulation
-        
+
         :param inv_year: year of the inventory
         :type inv_year: int
         """
-        
+
         self.inv_year = inv_year
         self.keywords["INVYEAR"] = inv_year
-        
+
     def run_fvs(self):
         """
         Runs the FVS simulation
-        
+
         This method run a FVS simulation using the previously specified keyword
         file. The simulation will be paused at each time interval and the trees
-        and snag data collected and appended to the fuels attribute of the 
+        and snag data collected and appended to the fuels attribute of the
         Fvsfuels object.
-        
+
         **Example:**
-        
+
         >>> from standfire.fuels import Fvsfuels
         >>> stand010 = Fvsfuels("iec")
         >>> stand010.set_keyword("/Users/standfire/example/test.key")
         >>> stand010.run_fvs()
         >>> stand010.fuels["trees"][2010]
         xloc    yloc    species   dbh     ht    crd    cratio  crownwt0  crownwt1 ...
-        33.49  108.58   PIPO     19.43   68.31  8.77     25    33.46      4.7   
-        24.3    90.4    PIPO     11.46   56.6   5.63     15     6.55     2.33  
+        33.49  108.58   PIPO     19.43   68.31  8.77     25    33.46      4.3
+        24.3    90.4    PIPO     11.46   56.6   5.63     15     6.55     2.33
         88.84  162.98   PIPO     18.63   67.76  9.48     45    75.88     6.89
         ...
-        
+
         """
         cnt = 0
         print "Simulating..."
-        for i in range(self.inv_year, self.inv_year + 
-                      (self.num_cyc * self.time_int) + 
+        for i in range(self.inv_year, self.inv_year +
+                      (self.num_cyc * self.time_int) +
                        self.time_int, self.time_int):
-            print "{0}   {1}".format(cnt, i)  
+            print "{0}   {1}".format(cnt, i)
             fvs.fvssetstoppointcodes(6,i)
             fvs.fvs()
             svs_attr = self._get_obj_data()
@@ -273,86 +278,86 @@ class Fvsfuels(object):
             self.fuels["trees"][i] = self._get_trees(svs_attr, spcodes)
             self.fuels["snags"][i] = self._get_snags(svs_attr, spcodes)
             cnt += 1
-        
+
         # close fvs simulation (call twice)
         fvs.fvs()
         fvs.fvs()
-    
+
     def _get_obj_data(self):
         """
         Private method
         """
-        
+
         # fields to query
         svs_names = ['objindex', 'objtype', 'xloc', 'yloc']
-        
+
         # get dimsize to construct np array to hold values
         nsvsobjs,ndeadobjs,ncwdobjs,mxsvsobjs,mxdeadobjs,mxcwdobjs \
                 = fvs.fvssvsdimsizes()
         # size the np array
         svs_attrs = np.zeros(shape = (len(svs_names), nsvsobjs))
-        
+
         # populate array with fields in svs_names
         for par in range(0, len(svs_names)):
             fvs.fvssvsobjdata(svs_names[par], len(svs_names[par]), \
                 'get', svs_attrs[par])
-        
+
         return svs_attrs
-        
+
     def _get_spcodes(self):
         """
         Private method
         """
-        
+
         # get four letter plant codes
         spcd = []
         for i in range(0, fvs.fvsdimsizes()[4]+1):
             spcd.append(fvs.fvsspeciescode(i)[2].split(' ')[0])
-        
+
         return spcd
 
     def _get_trees(self, svsobjdata, spcodes):
         """
         Private method
         """
-                
+
         # headers
         header = ['xloc', 'yloc', 'species', 'dbh', 'ht', 'crd',\
         'cratio', 'crownwt0', 'crownwt1', 'crownwt2', 'crownwt3']
-        
+
         # fields to query
         tree_names = ['id','species', 'dbh', 'ht', 'crwdth', 'cratio', \
                       'crownwt0', 'crownwt1', 'crownwt2', 'crownwt3']
-        
+
         # get dimsize to construct np array to hold values
         ntrees, ncycles, nplots, maxtrees, maxspecies, maxplots, \
             maxcycles = fvs.fvsdimsizes()
-            
+
         # size the np array
         tree_attrs = np.zeros(shape = (len(tree_names), ntrees))
-        
+
         # populate array with fields in tree_names
         for par in range(0, len(tree_names)):
             fvs.fvstreeattr(tree_names[par], len(tree_names[par]), \
                 'get', tree_attrs[par])
-                
+
         # get number of rows in tree_attrs where objtype == 1 (tree)
         l = len(np.where(svsobjdata[1] == 1)[0])
-        
+
         # mask array based on objtype == 1
         mask = np.zeros_like(svsobjdata)
         mask[:,np.where(svsobjdata[1] != 1)] = 1
         svsobjdata = np.reshape(np.ma.masked_array(svsobjdata, mask)\
         .compressed(), (len(svsobjdata), l))
-        
+
         # shape array to hold tree data
         lives = np.zeros(shape = (11, (fvs.fvssvsdimsizes()[0]- \
             fvs.fvssvsdimsizes()[1]-fvs.fvssvsdimsizes()[2])))
-        
+
         # index trees sequentially
         tree_attrs = np.append(tree_attrs, np.arange(1,ntrees+1))
         tree_attrs = np.reshape(tree_attrs, (len(tree_names)+1, ntrees))
-        
+
         # merge tree data with svs_attrs
         cnt = 0
         for value in tree_attrs[10]:
@@ -366,166 +371,166 @@ class Fvsfuels(object):
                         for e in range(2,11,1):
                             lives[e][cnt] = tree_attrs[e-1][tree_id[0]]
                     cnt += 1
-        
+
         # divide FVS crwdth output by 2 to match SVS 'crd'
         lives[5] = np.divide(lives[5], 2.)
-        
+
         # convert spcd value to plant_code
         # numpy does not allow multiple dtypes, convert to list of lists
         lives = lives.tolist()
         lives = [ map(lambda x: round(x, 2), elem) for elem in lives ]
         for tre in range(0, len(lives[2])):
             lives[2][tre] = spcodes[int(lives[2][tre])]
-            
+
         df = pd.DataFrame(lives, header).transpose()
-        
+
         return df
-        
+
     def _get_snags(self, svsobjdata, spcodes):
         """
         Private method
         """
-                
+
         # headers
         header = ['xloc', 'yloc', 'snagspp', 'snagdbh', 'snaglen', 'snagfdir',\
         'snagstat', 'snagyear', 'snagwt0', 'snagwt1', 'snagwt2', 'snagwt3']
-        
+
         # fields to query
         snag_names = ['snagspp', 'snagdbh',\
         'snaglen', 'snagfdir', 'snagstat', 'snagyear', 'snagwt0',\
         'snagwt1', 'snagwt2', 'snagwt3']
-        
+
         # get dimsize to construct np array to hold values
         nsvsobjs,ndeadobjs,ncwdobjs,mxsvsobjs,mxdeadobjs,mxcwdobjs \
                 = fvs.fvssvsdimsizes()
-                
+
         # size the np array
         snag_attrs = np.zeros(shape = (len(snag_names), ndeadobjs))
-        
+
         # populate array with fields in tree_names
         for par in range(0, len(snag_names)):
             fvs.fvssvsobjdata(snag_names[par], len(snag_names[par]), \
                 'get', snag_attrs[par])
-        
+
         # get number of rows in tree_attrs where objtype == 2 (snag)
         l = len(np.where(svsobjdata[1] == 2)[0])
-        
+
         # mask array based on objtype == 2
         mask = np.zeros_like(svsobjdata)
         mask[:,np.where(svsobjdata[1] != 2)] = 1
         svsobjdata = np.reshape(np.ma.masked_array(svsobjdata, mask)\
         .compressed(), (len(svsobjdata), l))
-        
+
         # flip array to match svs_attrs
         snag_attrs = np.fliplr(snag_attrs)
-        
+
         # add svs_attrs
         snags = np.reshape(np.append(svsobjdata[2:],snag_attrs), \
             (12,ndeadobjs))
-        
+
         # convert spcd value to plant_code
         # numpy does not allow multiple dtypes, convert to list of lists
         snags = snags.tolist()
         snags = [ map(lambda x: round(x, 2), elem) for elem in snags ]
         for sng in range(0, len(snags[2])):
             snags[2][sng] = spcodes[int(snags[2][sng])]
-        
+
         df = pd.DataFrame(snags, header).transpose()
-        
+
         return df
-        
+
     def get_simulation_years(self):
         """
         Returns a list of the simulated years
-        
+
         :return: simulated year
         :rtype: list of integers
         """
-        
+
         return self.fuels['trees'].keys()
-        
+
     def get_trees(self, year):
         """
         Returns pandas data fram of the trees by indexed year
-        
+
         :param year: simulation year of the data frame to return
         :type year: int
         :return: data frame of trees at indexed year
         :rtype: pandas dataframe
-        
+
         .. note:: If a data frame for the specified year does not exist then
                   a message will be printed to the console.
         """
-        
+
         if year in self.fuels["trees"].keys():
             return self.fuels["trees"][year]
         else:
             print "ERROR: the specified year does not exist"
-    
+
     def get_snags(self, year):
         """
         Returns pandas data fram of the snags by indexed year
-        
+
         :param year: simulation year of the data frame to return
         :type year: int
         :return: data frame of snags at indexed year
         :rtype: pandas dataframe
-        
+
         .. note:: If a data frame for the specified year does not exist then
                   a message will be printed to the console.
         """
-        
+
         if year in self.fuels["snags"].keys():
             return self.fuels["snags"][year]
         else:
             print "ERROR: the specified year does not exist"
-            
+
     def get_standid(self):
         """
         Returns stand ID as defined in the keyword file of the class instance
-        
+
         :return: stand ID value
         :rtype: string
         """
-        
+
         return fvs.fvsstandid()[0].split(' ')[0]
-        
+
     def save_all(self):
         """
         Writes all data frame in the ``fuels`` attribute of the class to the
         specified working directory. Output file are .csv.
         """
-        
+
         standid = self.get_standid()
-        
+
         for i in self.fuels.keys():
             for e in self.fuels[i]:
-                self.fuels[i][e].to_csv(self.wdir + 
+                self.fuels[i][e].to_csv(self.wdir +
                           "{0}_{1}_{2}.csv".format(standid, i, e), index=False)
-    
+
     def save_trees_by_year(self, year):
         """
         Writes tree data frame at indexed year to .csv in working directory
         """
-        
+
         standid = self.get_standid()
-        
+
         self.fuels["trees"][year].to_csv(self.wdir +
                  "{0}_{1}_{2}.csv".format(standid, "trees", year), index=False)
-    
+
     def save_snags_by_year(self, year):
         """
         Writes snag data frame at indexed year to .csv in working directory
         """
-        
+
         standid = self.get_standid()
-        
+
         self.fuels["snags"][year].to_csv(self.wdir +
                  "{0}_{1}_{2}.csv".format(standid, "snags", year), index=False)
 
 
 class Inventory(object):
-    """ 
+    """
     This class contains methods for converting inventory data to FVS .tre
     format
 
@@ -537,7 +542,7 @@ class Inventory(object):
     You can view the default format by importing this class and typing ``FMT``.
     See the FVS guide [1]_ for more information regarding the format of .tre
     files.
-    
+
     **Example:**
 
     >>> from standfire import fuels
@@ -552,10 +557,10 @@ class Inventory(object):
         Vegetation Simulator Tech. Rep., U.S. Department of Agriculture , Forest
         Service, Forest Management Service Center, Fort Collins, Colo, USA, 2003.
     """
-    
+
     def __init__(self):
         """Constructor"""
-        
+
         # constant
         self.FMT = {'Plot_ID'       : ['ITRE',      'integer',  [0,3],   None,      None],
                     'Tree_ID'       : ['IDTREE2',   'integer',  [4,6],   None,      None],
@@ -596,7 +601,7 @@ class Inventory(object):
         :type fname: string
 
         **Example:**
-        
+
         >>> from standfire import fuels
         >>> toDotTree = fuels.Inventory()
         >>> toDotTree.readInventory("path/to/FVS_TreeInit.csv")
@@ -656,7 +661,7 @@ class Inventory(object):
         type, 2 = column location, 3 = units, and 4 = implied decimal place.
 
         **Example:**
-        
+
         >>> toDotTree.print_format_standards()
         {'Plot_ID'       : ['ITRE',      'integer',  [0,3],   None,      None],
          'Tree_ID'       : ['IDTREE2',   'integer',  [4,6],   None,      None],
@@ -693,7 +698,7 @@ class Inventory(object):
     def get_fvs_cols(self):
         """
         Get list of FVS standard columns
-        
+
         :return: FVS standard columns
         :rtype: list of strings
         """
@@ -720,7 +725,7 @@ class Inventory(object):
         :rtype: list of strings
 
         **Example:**
-        
+
         >>> toDotTree.get_stands()
         ['BR', 'TM', 'SW', HB']
         """
@@ -735,24 +740,24 @@ class Inventory(object):
         in the FVS_TreeInit.csv.  If you use this method before calling
         `formatFvsTreeFile()` then you must set the optional argument
         ``cratioToCode`` to ``False``.
-        """        
-        self.data.loc[(self.data["CrRatio"] >= 0) & (self.data["CrRatio"] 
+        """
+        self.data.loc[(self.data["CrRatio"] >= 0) & (self.data["CrRatio"]
             <= 10), "CrRatio"] = 1
-        self.data.loc[(self.data["CrRatio"] > 10) & (self.data["CrRatio"] 
+        self.data.loc[(self.data["CrRatio"] > 10) & (self.data["CrRatio"]
             <= 20), "CrRatio"] = 2
-        self.data.loc[(self.data["CrRatio"] > 20) & (self.data["CrRatio"] 
+        self.data.loc[(self.data["CrRatio"] > 20) & (self.data["CrRatio"]
             <= 30), "CrRatio"] = 3
-        self.data.loc[(self.data["CrRatio"] > 30) & (self.data["CrRatio"] 
+        self.data.loc[(self.data["CrRatio"] > 30) & (self.data["CrRatio"]
             <= 40), "CrRatio"] = 4
-        self.data.loc[(self.data["CrRatio"] > 40) & (self.data["CrRatio"] 
+        self.data.loc[(self.data["CrRatio"] > 40) & (self.data["CrRatio"]
             <= 50), "CrRatio"] = 5
-        self.data.loc[(self.data["CrRatio"] > 50) & (self.data["CrRatio"] 
+        self.data.loc[(self.data["CrRatio"] > 50) & (self.data["CrRatio"]
             <= 60), "CrRatio"] = 6
-        self.data.loc[(self.data["CrRatio"] > 60) & (self.data["CrRatio"] 
+        self.data.loc[(self.data["CrRatio"] > 60) & (self.data["CrRatio"]
             <= 70), "CrRatio"] = 7
-        self.data.loc[(self.data["CrRatio"] > 70) & (self.data["CrRatio"] 
+        self.data.loc[(self.data["CrRatio"] > 70) & (self.data["CrRatio"]
             <= 80), "CrRatio"] = 8
-        self.data.loc[(self.data["CrRatio"] > 80) & (self.data["CrRatio"] 
+        self.data.loc[(self.data["CrRatio"] > 80) & (self.data["CrRatio"]
             <= 100), "CrRatio"] = 9
 
     def format_fvs_tree_file(self, cratio_to_code = True):
@@ -775,7 +780,7 @@ class Inventory(object):
                   ratio values.
 
         **Example:**
-        
+
         >>> toDotTree.format_fvs_tree_file()
         >>> toDotTree.fvsTreeFile['Stand_ID_1']
         5   1  5     0PP 189    65        3                 0 0
