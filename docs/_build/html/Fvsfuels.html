@@ -143,7 +143,7 @@
 <dt id="fuels.Fvsfuels">
 <em class="property">class </em><code class="descclassname">fuels.</code><code class="descname">Fvsfuels</code><span class="sig-paren">(</span><em>variant</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>A Fvsfuels object is used to calculate component fuels at the individual 
+<p>A Fvsfuels object is used to calculate component fuels at the individual
 tree level using the Forest Vegetation Simulator. To create an instance
 of this class you need two items: a keyword file (.key) and tree list file
 (.tre) with the same prefix as the keyword file. If you don&#8217;t already have
@@ -270,7 +270,7 @@ a message will be printed to the console.</p>
 <dd><p>Runs the FVS simulation</p>
 <p>This method run a FVS simulation using the previously specified keyword
 file. The simulation will be paused at each time interval and the trees
-and snag data collected and appended to the fuels attribute of the 
+and snag data collected and appended to the fuels attribute of the
 Fvsfuels object.</p>
 <p><strong>Example:</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuels</span> <span class="kn">import</span> <span class="n">Fvsfuels</span>
@@ -279,8 +279,8 @@ Fvsfuels object.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stand010</span><span class="o">.</span><span class="n">run_fvs</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stand010</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;trees&quot;</span><span class="p">][</span><span class="mi">2010</span><span class="p">]</span>
 <span class="go">xloc    yloc    species   dbh     ht    crd    cratio  crownwt0  crownwt1 ...</span>
-<span class="go">33.49  108.58   PIPO     19.43   68.31  8.77     25    33.46      4.7   </span>
-<span class="go">24.3    90.4    PIPO     11.46   56.6   5.63     15     6.55     2.33  </span>
+<span class="go">33.49  108.58   PIPO     19.43   68.31  8.77     25    33.46      4.3</span>
+<span class="go">24.3    90.4    PIPO     11.46   56.6   5.63     15     6.55     2.33</span>
 <span class="go">88.84  162.98   PIPO     18.63   67.76  9.48     45    75.88     6.89</span>
 <span class="gp">...</span>
 </pre></div>
@@ -311,7 +311,7 @@ specified working directory. Output file are .csv.</p>
 <code class="descname">set_dir</code><span class="sig-paren">(</span><em>wdir</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the working directory of a Fvsfuels object</p>
 <p>This method is called by <code class="docutils literal"><span class="pre">Fvsfuels.set_keyword()</span></code>. Thus, the default
-working directory is the folder containing the specified keyword file. 
+working directory is the folder containing the specified keyword file.
 If you wish to store simulation outputs in a different directory then
 use this methods to do so.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -365,8 +365,8 @@ use this methods to do so.</p>
 </table>
 <p>This method will initalize a FVS simulation by registering the
 specified keyword file (.key) with FVS. The working directory of a
-Fvsfuels object will be set to the folder containing the keyword file. 
-You can manually change the working directory with Fvsfuels.set_dir(). 
+Fvsfuels object will be set to the folder containing the keyword file.
+You can manually change the working directory with Fvsfuels.set_dir().
 This function will also call private methods in this class to extract
 information from the keyword file and set class fields accordingly for
 use in other methods.</p>

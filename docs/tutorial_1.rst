@@ -2,7 +2,7 @@
 Tutorial 1: Interfacing with FVS
 ================================
 
-Use Suppose to generate a keyword file. Or use the following example .key::
+Use Suppose to generate a keyword file. Or use the following example .key:
 
 	NOSCREEN
 	RANNSEED           0

@@ -189,6 +189,65 @@ in units of input data frame</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="intervene.SpaceCrowns.get_extent">
+<code class="descname">get_extent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#intervene.SpaceCrowns.get_extent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns bounding box of tree coordinates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">[min_x, min_y, max_x, max_y]</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list of floats</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Examples:</th><td class="field-body"><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.intervene</span> <span class="kn">import</span> <span class="n">SpaceCrowns</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">space</span> <span class="o">=</span> <span class="n">SpaceCrowns</span><span class="p">(</span><span class="s">&quot;/Users/standfire/test_trees.csv&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bbox</span> <span class="o">=</span> <span class="n">space</span><span class="o">.</span><span class="n">get_extent</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bbox</span>
+<span class="go">[1.3, 3.5, 63.1, 61.4]</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="intervene.SpaceCrowns.get_treatment_options">
+<code class="descname">get_treatment_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/intervene.html#SpaceCrowns.get_treatment_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#intervene.SpaceCrowns.get_treatment_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns dictionary of treatment options</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">treatment option codes and description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dictionary</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="intervene.SpaceCrowns.get_trees">
+<code class="descname">get_trees</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#intervene.SpaceCrowns.get_trees" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the trees data frame of the object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">trees data frame</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Pandas.DataFrame</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="intervene.SpaceCrowns.set_crown_space">
 <code class="descname">set_crown_space</code><span class="sig-paren">(</span><em>crown_space</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/intervene.html#SpaceCrowns.set_crown_space"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#intervene.SpaceCrowns.set_crown_space" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets spacing between crowns for the treatment</p>
@@ -203,12 +262,37 @@ in units of input data frame</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="intervene.SpaceCrowns.set_extent">
+<code class="descname">set_extent</code><span class="sig-paren">(</span><em>min_x</em>, <em>min_y</em>, <em>max_x</em>, <em>max_y</em><span class="sig-paren">)</span><a class="headerlink" href="#intervene.SpaceCrowns.set_extent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets extent instance variable</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>min_x</strong> (<em>float</em>) &#8211; minimum x coordinate</li>
+<li><strong>min_y</strong> (<em>float</em>) &#8211; minimum y coordinate</li>
+<li><strong>max_x</strong> (<em>float</em>) &#8211; maximum x coordinate</li>
+<li><strong>max_y</strong> (<em>float</em>) &#8211; maximum y coordinate</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">set_extent</span></code> is automatically called by <code class="docutils literal"><span class="pre">BaseSilv()</span></code>
+constructor</p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="intervene.SpaceCrowns.treat">
 <code class="descname">treat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/intervene.html#SpaceCrowns.treat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#intervene.SpaceCrowns.treat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Treatment algorithm for removing trees based on input crown spacing</p>
 <div class="admonition-todo admonition" id="index-0">
 <p class="first admonition-title">Todo</p>
-<p class="last">Optimize algorithm by incorporating <code class="docutils literal"><span class="pre">searrch_rad</span></code>.</p>
+<p class="last">Optimize algorithm by incorporating <code class="docutils literal"><span class="pre">search_rad</span></code>.</p>
 </div>
 <div class="admonition-todo admonition" id="index-1">
 <p class="first admonition-title">Todo</p>
