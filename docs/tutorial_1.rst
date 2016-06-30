@@ -4,7 +4,7 @@ Tutorial 1: Interfacing with FVS
 
 Use Suppose to generate a keyword file. Or use the following example .key
 
-.. code-block::
+.. code-block:: none
 
 	NOSCREEN
 	RANNSEED           0
@@ -33,7 +33,7 @@ Use Suppose to generate a keyword file. Or use the following example .key
 
 If don't have a FVS tree list file, then copy and paste the following text and save  it to the same directory where the keyword file lives, give it the same prefix as the ``.key`` but with a ``.tre`` extension.
 
-.. code-block::
+.. code-block:: none
 
 	1   95       9PP 105    35                          0 0
 	1   96       0PP 43     17        1                 0 0
@@ -61,15 +61,6 @@ Once you have a keyword file and a tree list file in the same directory we can s
 	$ ls
 	example.key    example.tre
 
-We will use python interactively here for demonstration purposes then present the entire script below.
-
-.. code-block::
-
-	$ python
-	Python 2.7.10 (default, Jul 14 2015, 19:46:27)
-	[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.39)] on darwin
-	Type "help", "copyright", "credits" or "license" for more information.
-	>>>
 
 First we import the Fvsfuels class from the fuels module.
 

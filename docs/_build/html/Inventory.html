@@ -178,6 +178,21 @@ Service, Forest Management Service Center, Fort Collins, Colo, USA, 2003.</td></
 </tbody>
 </table>
 <dl class="method">
+<dt id="fuels.Inventory.convert_sp_codes">
+<code class="descname">convert_sp_codes</code><span class="sig-paren">(</span><em>method='2to4'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Inventory.convert_sp_codes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Inventory.convert_sp_codes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts species codes from 4 letter codes to 2 letter codes
+or vise versa</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>method</strong> (<em>string</em>) &#8211; must be either &#8220;2to4&#8221; or &#8220;4to2&#8221;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="fuels.Inventory.crwratio_percent_to_code">
 <code class="descname">crwratio_percent_to_code</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Inventory.crwratio_percent_to_code"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Inventory.crwratio_percent_to_code" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts crown ratio from percent to ICR code</p>
@@ -186,6 +201,21 @@ This method should only be used if crown ratios values are percentages
 in the FVS_TreeInit.csv.  If you use this method before calling
 <cite>formatFvsTreeFile()</cite> then you must set the optional argument
 <code class="docutils literal"><span class="pre">cratioToCode</span></code> to <code class="docutils literal"><span class="pre">False</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.Inventory.filter_by_stand">
+<code class="descname">filter_by_stand</code><span class="sig-paren">(</span><em>stand_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Inventory.filter_by_stand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Inventory.filter_by_stand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters data by a list of stand IDs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stand_list</strong> (<em>python list</em>) &#8211; List of stand ID to retain in the data. All other
+stands will be removed</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -393,6 +423,22 @@ will be the same as the Stand_ID with a <code class="docutils literal"><span cla
 <p class="last">This method will throw an error if it is called prior to the
 <code class="docutils literal"><span class="pre">format_fvs_tree_file()</span></code> method.</p>
 </div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.Inventory.set_FVS_variant">
+<code class="descname">set_FVS_variant</code><span class="sig-paren">(</span><em>var</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Inventory.set_FVS_variant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Inventory.set_FVS_variant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets FVS variant. This is need if converting from USDA plant symbols
+(PSME) to alpha codes (DF). If so, then all stand you wish to process
+must be of the same FVS variant</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>var</strong> (<em>string</em>) &#8211; FVS variant (&#8216;iec&#8217;, &#8216;emc&#8217; ...)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>

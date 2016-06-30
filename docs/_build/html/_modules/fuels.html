@@ -134,10 +134,15 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pprint</span>
 <span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">import</span> <span class="nn">cPickle</span>
 
 <span class="n">__authors__</span> <span class="o">=</span> <span class="s">&quot;Lucas Wells, Greg Cohn, Russell Parsons&quot;</span>
 <span class="n">__copyright__</span> <span class="o">=</span> <span class="s">&quot;Copyright 2015, STANDFIRE&quot;</span>
 
+<span class="c"># FVS variants</span>
+<span class="n">eastern</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;CS&#39;</span><span class="p">,</span> <span class="s">&#39;LS&#39;</span><span class="p">,</span> <span class="s">&#39;NE&#39;</span><span class="p">,</span> <span class="s">&#39;SN&#39;</span><span class="p">}</span>
+<span class="n">western</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;AK&#39;</span><span class="p">,</span> <span class="s">&#39;BM&#39;</span><span class="p">,</span> <span class="s">&#39;CA&#39;</span><span class="p">,</span> <span class="s">&#39;CI&#39;</span><span class="p">,</span> <span class="s">&#39;CR&#39;</span><span class="p">,</span> <span class="s">&#39;EC&#39;</span><span class="p">,</span> <span class="s">&#39;ID&#39;</span><span class="p">,</span> <span class="s">&#39;NC&#39;</span><span class="p">,</span> <span class="s">&#39;KT&#39;</span><span class="p">,</span> <span class="s">&#39;NI&#39;</span><span class="p">,</span> <span class="s">&#39;PN&#39;</span>
+        <span class="p">,</span> <span class="s">&#39;SO&#39;</span><span class="p">,</span> <span class="s">&#39;TT&#39;</span><span class="p">,</span> <span class="s">&#39;UT&#39;</span><span class="p">,</span> <span class="s">&#39;WC&#39;</span><span class="p">,</span> <span class="s">&#39;WS&#39;</span><span class="p">}</span>
 
 <div class="viewcode-block" id="Fvsfuels"><a class="viewcode-back" href="../Fvsfuels.html#fuels.Fvsfuels">[docs]</a><span class="k">class</span> <span class="nc">Fvsfuels</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -179,6 +184,7 @@
 <span class="sd">              PyFVS module. Search through standfire/pyfvs/ to see all</span>
 <span class="sd">              variants</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variant</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Constructor&quot;&quot;&quot;</span>
 
@@ -198,6 +204,10 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">opt_sys</span> <span class="o">==</span> <span class="s">&quot;Linux&quot;</span><span class="p">:</span>
                 <span class="k">exec</span><span class="p">(</span><span class="s">&quot;from pyfvs.linux import pyfvs</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">variant</span> <span class="o">+</span> <span class="s">&quot; as temp&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">opt_sys</span> <span class="o">==</span> <span class="s">&quot;Windows&quot;</span><span class="p">:</span>
+                <span class="k">exec</span><span class="p">(</span><span class="s">&quot;from pyfvs.windows import pyfvs</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">variant</span> <span class="o">+</span> <span class="s">&quot; as temp&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">opt_sys</span> <span class="o">==</span> <span class="s">&quot;Osx&quot;</span><span class="p">:</span>
+                <span class="k">exec</span><span class="p">(</span><span class="s">&quot;from pyfvs.osx import pyfvs</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">variant</span> <span class="o">+</span> <span class="s">&quot;as temp&quot;</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="k">print</span> <span class="s">&quot;The PyFVS python module or the specified variant does not exist&quot;</span>
         <span class="n">fvs</span> <span class="o">=</span> <span class="n">temp</span>
@@ -687,6 +697,9 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Constructor&quot;&quot;&quot;</span>
 
+        <span class="c"># FVS variant</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variant</span> <span class="o">=</span> <span class="bp">None</span>
+
         <span class="c"># constant</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">FMT</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;Plot_ID&#39;</span>       <span class="p">:</span> <span class="p">[</span><span class="s">&#39;ITRE&#39;</span><span class="p">,</span>      <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>   <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
                     <span class="s">&#39;Tree_ID&#39;</span>       <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IDTREE2&#39;</span><span class="p">,</span>   <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>   <span class="bp">None</span><span class="p">,</span>      <span class="bp">None</span><span class="p">],</span>
@@ -713,6 +726,19 @@
                     <span class="s">&#39;TopoCode&#39;</span>      <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IPVARS(4)&#39;</span><span class="p">,</span> <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">57</span><span class="p">,</span><span class="mi">59</span><span class="p">],</span> <span class="s">&#39;code&#39;</span><span class="p">,</span>    <span class="bp">None</span><span class="p">],</span>
                     <span class="s">&#39;SitePrep&#39;</span>      <span class="p">:</span> <span class="p">[</span><span class="s">&#39;IPVARS(5)&#39;</span><span class="p">,</span> <span class="s">&#39;integer&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="mi">58</span><span class="p">,</span><span class="mi">58</span><span class="p">],</span> <span class="s">&#39;code&#39;</span><span class="p">,</span>    <span class="bp">None</span><span class="p">],</span>
                     <span class="s">&#39;Age&#39;</span>           <span class="p">:</span> <span class="p">[</span><span class="s">&#39;ABIRTH&#39;</span><span class="p">,</span>    <span class="s">&#39;real&#39;</span><span class="p">,</span>     <span class="p">[</span><span class="mi">59</span><span class="p">,</span><span class="mi">61</span><span class="p">],</span> <span class="s">&#39;years&#39;</span><span class="p">,</span>   <span class="mi">0</span>   <span class="p">]}</span>
+
+<div class="viewcode-block" id="Inventory.set_FVS_variant"><a class="viewcode-back" href="../Inventory.html#fuels.Inventory.set_FVS_variant">[docs]</a>    <span class="k">def</span> <span class="nf">set_FVS_variant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets FVS variant. This is need if converting from USDA plant symbols</span>
+<span class="sd">        (PSME) to alpha codes (DF). If so, then all stand you wish to process</span>
+<span class="sd">        must be of the same FVS variant</span>
+
+<span class="sd">        :param var: FVS variant (&#39;iec&#39;, &#39;emc&#39; ...)</span>
+<span class="sd">        :type var: string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">variant</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">upper</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Inventory.read_inventory"><a class="viewcode-back" href="../Inventory.html#fuels.Inventory.read_inventory">[docs]</a>    <span class="k">def</span> <span class="nf">read_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span></div>
 
@@ -838,8 +864,8 @@
 <span class="sd">        Private methods to check for correct inventory file formating</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_fvs_cols</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;Stand_ID&#39;</span>
-                    <span class="p">,</span> <span class="s">&#39;StandPlot_ID&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_fvs_cols</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;Stand_CN&#39;</span><span class="p">,</span> <span class="s">&#39;Stand_ID&#39;</span>
+                    <span class="p">,</span> <span class="s">&#39;StandPlot_CN&#39;</span><span class="p">,</span> <span class="s">&#39;StandPlot_ID&#39;</span><span class="p">]:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Column heading {0} does not match FVS </span><span class="se">\</span>
 <span class="s">                    standard&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
 
@@ -856,6 +882,18 @@
 <span class="sd">        [&#39;BR&#39;, &#39;TM&#39;, &#39;SW&#39;, HB&#39;]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;Stand_ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Inventory.filter_by_stand"><a class="viewcode-back" href="../Inventory.html#fuels.Inventory.filter_by_stand">[docs]</a>    <span class="k">def</span> <span class="nf">filter_by_stand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stand_list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filters data by a list of stand IDs</span>
+
+<span class="sd">        :param stand_list: List of stand ID to retain in the data. All other</span>
+<span class="sd">                           stands will be removed</span>
+<span class="sd">        :type stand_list: python list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;Stand_ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">stand_list</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Inventory.crwratio_percent_to_code"><a class="viewcode-back" href="../Inventory.html#fuels.Inventory.crwratio_percent_to_code">[docs]</a>    <span class="k">def</span> <span class="nf">crwratio_percent_to_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -885,6 +923,40 @@
             <span class="o">&lt;=</span> <span class="mi">80</span><span class="p">),</span> <span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;CrRatio&quot;</span><span class="p">]</span>
             <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">),</span> <span class="s">&quot;CrRatio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9</span></div>
+
+<div class="viewcode-block" id="Inventory.convert_sp_codes"><a class="viewcode-back" href="../Inventory.html#fuels.Inventory.convert_sp_codes">[docs]</a>    <span class="k">def</span> <span class="nf">convert_sp_codes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;2to4&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts species codes from 4 letter codes to 2 letter codes</span>
+<span class="sd">        or vise versa</span>
+
+<span class="sd">        :param method: must be either &quot;2to4&quot; or &quot;4to2&quot;</span>
+<span class="sd">        :type method: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c"># check if variant has been set</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variant</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span><span class="p">(</span><span class="s">&quot;You must set the FVS variant before converting to alpha codes&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">variant</span> <span class="ow">in</span> <span class="n">eastern</span><span class="p">:</span>
+            <span class="n">side</span> <span class="o">=</span> <span class="s">&#39;eastern&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">side</span> <span class="o">=</span> <span class="s">&#39;western&#39;</span>
+
+        <span class="c"># get relative path to this module</span>
+        <span class="n">this_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
+
+        <span class="c"># load species crosswalk database</span>
+        <span class="n">crosswalk</span> <span class="o">=</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">this_dir</span> <span class="o">+</span> <span class="s">&#39;/data/species_crosswalk.p&#39;</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">))</span>
+
+        <span class="c"># get all species in all stands</span>
+        <span class="n">uniq_sp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;Species&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">uniq_sp</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">crosswalk</span><span class="p">[</span><span class="n">side</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;Species&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="s">&quot;Species&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">crosswalk</span><span class="p">[</span><span class="n">side</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">variant</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;{0} is not recognized by FVS as a {1} species</span><span class="se">\n</span><span class="s">defaulting to unknown species&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">side</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;Species&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="s">&quot;Species&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;OT&#39;</span></div>
 
 <div class="viewcode-block" id="Inventory.format_fvs_tree_file"><a class="viewcode-back" href="../Inventory.html#fuels.Inventory.format_fvs_tree_file">[docs]</a>    <span class="k">def</span> <span class="nf">format_fvs_tree_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cratio_to_code</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
