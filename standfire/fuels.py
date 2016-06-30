@@ -78,6 +78,10 @@ class Fvsfuels(object):
         try:
             if opt_sys == "Linux":
                 exec("from pyfvs.linux import pyfvs%s" % variant + " as temp")
+            if opt_sys == "Windows":
+                exec("from pyfvs.windows import pyfvs%s" % variant + " as temp")
+            if opt_sys == "Osx":
+                exec("from pyfvs.osx import pyfvs%s" % variant + "as temp")
         except ValueError:
             print "The PyFVS python module or the specified variant does not exist"
         fvs = temp
