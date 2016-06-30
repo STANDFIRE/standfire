@@ -12,6 +12,7 @@
 \usepackage{sphinx}
 \usepackage{multirow}
 
+
 \addto\captionsenglish{\renewcommand{\figurename}{Fig. }}
 \addto\captionsenglish{\renewcommand{\tablename}{Table }}
 \floatname{literal-block}{Listing }
@@ -19,9 +20,9 @@
 
 
 \title{STANDFIRE}
-\date{December 11, 2015}
+\date{June 30, 2016}
 \release{}
-\author{Lucas Wells, Greg Cohn, Russell Parsons, and Matt Jolly}
+\author{}
 \newcommand{\sphinxlogo}{}
 \renewcommand{\releasename}{Release}
 \makeindex
@@ -151,7 +152,7 @@ Contents:
 
 \section{Tutorial 1: Interfacing with FVS}
 \label{tutorial_1:tutorial-1-interfacing-with-fvs}\label{tutorial_1::doc}
-Use Suppose to generate a keyword file. Or use the following example .key:
+Use Suppose to generate a keyword file. Or use the following example .key
 
 \begin{Verbatim}[commandchars=\\\{\}]
 NOSCREEN
@@ -180,7 +181,7 @@ PROCESS
 STOP
 \end{Verbatim}
 
-If don't have a FVS tree list file, then copy and paste the following text and save  it to the same directory where the keyword file lives, give it the same prefix as the \code{.key} but with a \code{.tre} extension.:
+If don't have a FVS tree list file, then copy and paste the following text and save  it to the same directory where the keyword file lives, give it the same prefix as the \code{.key} but with a \code{.tre} extension.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 1   95       9PP 105    35                          0 0
@@ -202,31 +203,15 @@ If don't have a FVS tree list file, then copy and paste the following text and s
 1   111      9PP 103    32                          0 0
 \end{Verbatim}
 
-Once you have a keyword file and a tree list file in the same directory we can start to build a script to do some work.:
+Once you have a keyword file and a tree list file in the same directory we can start to build a script to do some work.
 
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYGZdl{} cd /Users/standfire/fvs\PYGZus{}exp
-\PYGZdl{} ls
-example.key    example.tre
-\end{Verbatim}
-
-We will use python interactively here for demonstration purposes then present the entire script below.:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYGZdl{} python
-Python 2.7.10 (default, Jul 14 2015, 19:46:27)
-[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang\PYGZhy{}600.0.39)] on darwin
-Type \PYGZdq{}help\PYGZdq{}, \PYGZdq{}copyright\PYGZdq{}, \PYGZdq{}credits\PYGZdq{} or \PYGZdq{}license\PYGZdq{} for more information.
-\PYGZgt{}\PYGZgt{}\PYGZgt{}
-\end{Verbatim}
-
-First we import the Fvsfuels class from the fuels module.:
+First we import the Fvsfuels class from the fuels module.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{standfire.fuels} \PYG{k+kn}{import} \PYG{n}{Fvsfuels}
 \end{Verbatim}
 
-Next create an instance of the class passes the desired variant as an argument and register the keyword file.:
+Next create an instance of the class passes the desired variant as an argument and register the keyword file.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand\PYGZus{}1} \PYG{o}{=} \PYG{n}{Fvsfuel}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{iec}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
@@ -234,14 +219,14 @@ Next create an instance of the class passes the desired variant as an argument a
 \PYG{g+go}{TIMEINT not found in keyword file, default is 10 years}
 \end{Verbatim}
 
-We get a message telling us that the TIMEINT keyword was not found in the keyword file. No problem, STANDFIRE automatically sets this value to 10 years.:
+We get a message telling us that the TIMEINT keyword was not found in the keyword file. No problem, STANDFIRE automatically sets this value to 10 years.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand\PYGZus{}1}\PYG{o}{.}\PYG{n}{keywords}
 \PYG{g+go}{\PYGZob{}\PYGZsq{}TIMEINT\PYGZsq{}: 10, \PYGZsq{}NUMCYCLE\PYGZsq{}: 10, \PYGZsq{}INVYEAR\PYGZsq{}: 2010, \PYGZsq{}SVS\PYGZsq{}: 15, \PYGZsq{}FUELOUT\PYGZsq{}: 1\PYGZcb{}}
 \end{Verbatim}
 
-Notice the keys in the keywords dictionary.  \code{TIMEINT} is the time interval of the FVS simulation in year, \code{NUMCYCLE} is the number of cycles, \code{INVYEAR} is the year of the inventory, and \code{SVS} and \code{FUELOUT} are there to check if these keywords are in the keyword file. If the \code{SVS} and \code{FUELOUT} keywords are not defined the keyword file then FVS will not calculate tree positions or fuel attributes. So be sure you add these to your keyword file before registering the .key with FVS. You can use \emph{post processors*} in Suppose to do so.  \code{TIMEINT}, \code{NUMCYCLE}, and \code{INVYEAR} can be manually changed by calling setters for each. For instance, if you only want to calculate fuel attributes for trees during the year of the inventory then simply change the \code{NUMCYCLE} value in the keyword dictionary.:
+Notice the keys in the keywords dictionary.  \code{TIMEINT} is the time interval of the FVS simulation in year, \code{NUMCYCLE} is the number of cycles, \code{INVYEAR} is the year of the inventory, and \code{SVS} and \code{FUELOUT} are there to check if these keywords are in the keyword file. If the \code{SVS} and \code{FUELOUT} keywords are not defined the keyword file then FVS will not calculate tree positions or fuel attributes. So be sure you add these to your keyword file before registering the .key with FVS. You can use \emph{post processors*} in Suppose to do so.  \code{TIMEINT}, \code{NUMCYCLE}, and \code{INVYEAR} can be manually changed by calling setters for each. For instance, if you only want to calculate fuel attributes for trees during the year of the inventory then simply change the \code{NUMCYCLE} value in the keyword dictionary.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand\PYGZus{}1}\PYG{o}{.}\PYG{n}{set\PYGZus{}num\PYGZus{}cycle}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
@@ -249,7 +234,7 @@ Notice the keys in the keywords dictionary.  \code{TIMEINT} is the time interval
 \PYG{g+go}{\PYGZob{}\PYGZsq{}TIMEINT\PYGZsq{}: 10, \PYGZsq{}NUMCYCLE\PYGZsq{}: 0, \PYGZsq{}INVYEAR\PYGZsq{}: 2010, \PYGZsq{}SVS\PYGZsq{}: 15, \PYGZsq{}FUELOUT\PYGZsq{}: 1\PYGZcb{}}
 \end{Verbatim}
 
-Now that we have our simulation parameters established, we startup FVS.:
+Now that we have our simulation parameters established, we startup FVS.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand\PYGZus{}1}\PYG{o}{.}\PYG{n}{run\PYGZus{}fvs}\PYG{p}{(}\PYG{p}{)}
@@ -263,7 +248,7 @@ Contents:
 
 \section{fuels module}
 \label{fuels:module-fuels}\label{fuels::doc}\label{fuels:fuels-module}\index{fuels (module)}
-Contens:
+Contents:
 
 
 \subsection{Fvsfuels}
@@ -273,7 +258,7 @@ Contens:
 \phantomsection\label{Fvsfuels:fuels.Fvsfuels}\pysiglinewithargsret{\strong{class }\code{fuels.}\bfcode{Fvsfuels}}{\emph{variant}}{}
 Bases: \code{object}
 
-A Fvsfuels object is used to calculate component fuels at the individual 
+A Fvsfuels object is used to calculate component fuels at the individual
 tree level using the Forest Vegetation Simulator. To create an instance
 of this class you need two items: a keyword file (.key) and tree list file
 (.tre) with the same prefix as the keyword file. If you don't already have
@@ -281,7 +266,7 @@ a tree list file then you can use \code{{}`fuels.Inventory{}`} class to generate
 one.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\textbf{\texttt{variant}} (\emph{string}) -- FVS variant to be imported
+\textbf{\texttt{variant}} (\emph{\texttt{string}}) -- FVS variant to be imported
 
 \end{description}\end{quote}
 
@@ -343,7 +328,7 @@ list of integers
 Returns pandas data fram of the snags by indexed year
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\textbf{\texttt{year}} (\emph{int}) -- simulation year of the data frame to return
+\textbf{\texttt{year}} (\emph{\texttt{int}}) -- simulation year of the data frame to return
 
 \item[{Returns}] \leavevmode
 data frame of snags at indexed year
@@ -383,7 +368,7 @@ string
 Returns pandas data fram of the trees by indexed year
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\textbf{\texttt{year}} (\emph{int}) -- simulation year of the data frame to return
+\textbf{\texttt{year}} (\emph{\texttt{int}}) -- simulation year of the data frame to return
 
 \item[{Returns}] \leavevmode
 data frame of trees at indexed year
@@ -408,7 +393,7 @@ Runs the FVS simulation
 
 This method run a FVS simulation using the previously specified keyword
 file. The simulation will be paused at each time interval and the trees
-and snag data collected and appended to the fuels attribute of the 
+and snag data collected and appended to the fuels attribute of the
 Fvsfuels object.
 
 \textbf{Example:}
@@ -420,8 +405,8 @@ Fvsfuels object.
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand010}\PYG{o}{.}\PYG{n}{run\PYGZus{}fvs}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{stand010}\PYG{o}{.}\PYG{n}{fuels}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{trees}\PYG{l+s}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{2010}\PYG{p}{]}
 \PYG{g+go}{xloc    yloc    species   dbh     ht    crd    cratio  crownwt0  crownwt1 ...}
-\PYG{g+go}{33.49  108.58   PIPO     19.43   68.31  8.77     25    33.46      4.7   }
-\PYG{g+go}{24.3    90.4    PIPO     11.46   56.6   5.63     15     6.55     2.33  }
+\PYG{g+go}{33.49  108.58   PIPO     19.43   68.31  8.77     25    33.46      4.3}
+\PYG{g+go}{24.3    90.4    PIPO     11.46   56.6   5.63     15     6.55     2.33}
 \PYG{g+go}{88.84  162.98   PIPO     18.63   67.76  9.48     45    75.88     6.89}
 \PYG{g+gp}{...}
 \end{Verbatim}
@@ -460,12 +445,12 @@ Writes tree data frame at indexed year to .csv in working directory
 Sets the working directory of a Fvsfuels object
 
 This method is called by \code{Fvsfuels.set\_keyword()}. Thus, the default
-working directory is the folder containing the specified keyword file. 
+working directory is the folder containing the specified keyword file.
 If you wish to store simulation outputs in a different directory then
 use this methods to do so.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\textbf{\texttt{wdir}} (\emph{string}) -- path/to/desired\_directory
+\textbf{\texttt{wdir}} (\emph{\texttt{string}}) -- path/to/desired\_directory
 
 \item[{Example}] \leavevmode
 \end{description}\end{quote}
@@ -491,7 +476,7 @@ Whoops, I would like to store simulation outputs elsewhere...
 Sets inventory year for FVS simulation
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\textbf{\texttt{inv\_year}} (\emph{int}) -- year of the inventory
+\textbf{\texttt{inv\_year}} (\emph{\texttt{int}}) -- year of the inventory
 
 \end{description}\end{quote}
 
@@ -513,14 +498,14 @@ Lucas Wells
 
 This method will initalize a FVS simulation by registering the
 specified keyword file (.key) with FVS. The working directory of a
-Fvsfuels object will be set to the folder containing the keyword file. 
-You can manually change the working directory with Fvsfuels.set\_dir(). 
+Fvsfuels object will be set to the folder containing the keyword file.
+You can manually change the working directory with Fvsfuels.set\_dir().
 This function will also call private methods in this class to extract
 information from the keyword file and set class fields accordingly for
 use in other methods.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\textbf{\texttt{keyfile}} (\emph{string}) -- path/to/keyword\_file. This must have a .key extension
+\textbf{\texttt{keyfile}} (\emph{\texttt{string}}) -- path/to/keyword\_file. This must have a .key extension
 
 \end{description}\end{quote}
 
@@ -541,7 +526,7 @@ use in other methods.
 Sets number of cycles for FVS simulation
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\textbf{\texttt{num\_cyc}} (\emph{int}) -- number of simulation cycles
+\textbf{\texttt{num\_cyc}} (\emph{\texttt{int}}) -- number of simulation cycles
 
 \end{description}\end{quote}
 
@@ -554,7 +539,7 @@ Sets number of cycles for FVS simulation
 Sets time interval for FVS simulation
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\textbf{\texttt{time\_int}} (\emph{int}) -- length of simulation time step
+\textbf{\texttt{time\_int}} (\emph{\texttt{int}}) -- length of simulation time step
 
 \end{description}\end{quote}
 
@@ -581,7 +566,7 @@ delimited values. Multiple stands can be exported in the same file, the
 \code{formatFvsTreeFile()} function will format a .tre string for each stand.
 All column headings must be default headings and unaltered during export.
 You can view the default format by importing this class and typing \code{FMT}.
-See the FVS guide \footnote{
+See the FVS guide \footnote[1]{
 Gary E. Dixon, Essential FVS: A User's Guide to the Forest
 Vegetation Simulator Tech. Rep., U.S. Department of Agriculture , Forest
 Service, Forest Management Service Center, Fort Collins, Colo, USA, 2003.
@@ -600,6 +585,20 @@ files.
 \begin{quote}\begin{description}
 \item[{References}] \leavevmode
 \end{description}\end{quote}
+\index{convert\_sp\_codes() (fuels.Inventory method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Inventory:fuels.Inventory.convert_sp_codes}\pysiglinewithargsret{\bfcode{convert\_sp\_codes}}{\emph{method=`2to4'}}{}
+Converts species codes from 4 letter codes to 2 letter codes
+or vise versa
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\textbf{\texttt{method}} (\emph{\texttt{string}}) -- must be either ``2to4'' or ``4to2''
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
 \index{crwratio\_percent\_to\_code() (fuels.Inventory method)}
 
 \begin{fulllineitems}
@@ -611,6 +610,20 @@ This method should only be used if crown ratios values are percentages
 in the FVS\_TreeInit.csv.  If you use this method before calling
 \emph{formatFvsTreeFile()} then you must set the optional argument
 \code{cratioToCode} to \code{False}.
+
+\end{fulllineitems}
+
+\index{filter\_by\_stand() (fuels.Inventory method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Inventory:fuels.Inventory.filter_by_stand}\pysiglinewithargsret{\bfcode{filter\_by\_stand}}{\emph{stand\_list}}{}
+Filters data by a list of stand IDs
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\textbf{\texttt{stand\_list}} (\emph{\texttt{python list}}) -- List of stand ID to retain in the data. All other
+stands will be removed
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -628,7 +641,7 @@ then each stand will written as a (key,value) pair in
 formated text string.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\textbf{\texttt{cratio\_to\_code}} (\emph{boolean}) -- default = True
+\textbf{\texttt{cratio\_to\_code}} (\emph{\texttt{boolean}}) -- default = True
 
 \end{description}\end{quote}
 
@@ -759,7 +772,7 @@ method check the format of the file by calling a private method
 \code{\_is\_correct\_format()} that raises a value error.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\textbf{\texttt{fname}} (\emph{string}) -- path to and file name of the Fvs\_TreeInit.csv file
+\textbf{\texttt{fname}} (\emph{\texttt{string}}) -- path to and file name of the Fvs\_TreeInit.csv file
 
 \end{description}\end{quote}
 
@@ -825,7 +838,7 @@ files will be created in the specified directory.  The file names
 will be the same as the Stand\_ID with a \code{.tre} extension.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\textbf{\texttt{outputPath}} (\emph{string}) -- directory to store output .tre files
+\textbf{\texttt{outputPath}} (\emph{\texttt{string}}) -- directory to store output .tre files
 
 \end{description}\end{quote}
 
@@ -833,6 +846,21 @@ will be the same as the Stand\_ID with a \code{.tre} extension.
 This method will throw an error if it is called prior to the
 \code{format\_fvs\_tree\_file()} method.
 \end{notice}
+
+\end{fulllineitems}
+
+\index{set\_FVS\_variant() (fuels.Inventory method)}
+
+\begin{fulllineitems}
+\phantomsection\label{Inventory:fuels.Inventory.set_FVS_variant}\pysiglinewithargsret{\bfcode{set\_FVS\_variant}}{\emph{var}}{}
+Sets FVS variant. This is need if converting from USDA plant symbols
+(PSME) to alpha codes (DF). If so, then all stand you wish to process
+must be of the same FVS variant
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\textbf{\texttt{var}} (\emph{\texttt{string}}) -- FVS variant (`iec', `emc' ...)
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -887,10 +915,10 @@ in units of input data frame
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
-\textbf{\texttt{tree\_a}} (\emph{int}) -- indexed row of tree a in Pandas data frame
+\textbf{\texttt{tree\_a}} (\emph{\texttt{int}}) -- indexed row of tree a in Pandas data frame
 
 \item {} 
-\textbf{\texttt{tree\_b}} (\emph{int}) -- indexed row of tree b in Pandas data frame
+\textbf{\texttt{tree\_b}} (\emph{\texttt{int}}) -- indexed row of tree b in Pandas data frame
 
 \end{itemize}
 
@@ -899,6 +927,31 @@ distance between two crowns in units of input data frame
 
 \item[{Return type}] \leavevmode
 float
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{get\_extent() (intervene.SpaceCrowns method)}
+
+\begin{fulllineitems}
+\phantomsection\label{SpaceCrowns:intervene.SpaceCrowns.get_extent}\pysiglinewithargsret{\bfcode{get\_extent}}{}{}
+Returns bounding box of tree coordinates
+\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+{[}min\_x, min\_y, max\_x, max\_y{]}
+
+\item[{Return type}] \leavevmode
+list of floats
+
+\item[{Examples}] \leavevmode
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{standfire.intervene} \PYG{k+kn}{import} \PYG{n}{SpaceCrowns}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{space} \PYG{o}{=} \PYG{n}{SpaceCrowns}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{/Users/standfire/test\PYGZus{}trees.csv}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bbox} \PYG{o}{=} \PYG{n}{space}\PYG{o}{.}\PYG{n}{get\PYGZus{}extent}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bbox}
+\PYG{g+go}{[1.3, 3.5, 63.1, 61.4]}
+\end{Verbatim}
 
 \end{description}\end{quote}
 
@@ -943,9 +996,39 @@ Pandas.DataFrame
 Sets spacing between crowns for the treatment
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\textbf{\texttt{crown\_space}} (\emph{float}) -- crown spacing in units of input data frame
+\textbf{\texttt{crown\_space}} (\emph{\texttt{float}}) -- crown spacing in units of input data frame
 
 \end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{set\_extent() (intervene.SpaceCrowns method)}
+
+\begin{fulllineitems}
+\phantomsection\label{SpaceCrowns:intervene.SpaceCrowns.set_extent}\pysiglinewithargsret{\bfcode{set\_extent}}{\emph{min\_x}, \emph{min\_y}, \emph{max\_x}, \emph{max\_y}}{}
+Sets extent instance variable
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\textbf{\texttt{min\_x}} (\emph{\texttt{float}}) -- minimum x coordinate
+
+\item {} 
+\textbf{\texttt{min\_y}} (\emph{\texttt{float}}) -- minimum y coordinate
+
+\item {} 
+\textbf{\texttt{max\_x}} (\emph{\texttt{float}}) -- maximum x coordinate
+
+\item {} 
+\textbf{\texttt{max\_y}} (\emph{\texttt{float}}) -- maximum y coordinate
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\begin{notice}{note}{Note:}
+\code{set\_extent} is automatically called by \code{BaseSilv()}
+constructor
+\end{notice}
 
 \end{fulllineitems}
 

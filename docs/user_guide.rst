@@ -11,4 +11,4 @@ Contents:
    installation
    basic_usage
    advance_topics
-   tutorial_1
+   tutorials
