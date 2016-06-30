@@ -8,10 +8,15 @@ import pandas as pd
 import os
 import pprint
 import platform
+import cPickle
 
 __authors__ = "Lucas Wells, Greg Cohn, Russell Parsons"
 __copyright__ = "Copyright 2015, STANDFIRE"
 
+# FVS variants
+eastern = {'CS', 'LS', 'NE', 'SN'}
+western = {'AK', 'BM', 'CA', 'CI', 'CR', 'EC', 'ID', 'NC', 'KT', 'NI', 'PN'
+        , 'SO', 'TT', 'UT', 'WC', 'WS'}
 
 class Fvsfuels(object):
     """
@@ -53,6 +58,7 @@ class Fvsfuels(object):
               PyFVS module. Search through standfire/pyfvs/ to see all
               variants
     """
+
     def __init__(self, variant):
         """Constructor"""
 
@@ -561,6 +567,9 @@ class Inventory(object):
     def __init__(self):
         """Constructor"""
 
+        # FVS variant
+        self.variant = None
+
         # constant
         self.FMT = {'Plot_ID'       : ['ITRE',      'integer',  [0,3],   None,      None],
                     'Tree_ID'       : ['IDTREE2',   'integer',  [4,6],   None,      None],
@@ -587,6 +596,19 @@ class Inventory(object):
                     'TopoCode'      : ['IPVARS(4)', 'integer',  [57,59], 'code',    None],
                     'SitePrep'      : ['IPVARS(5)', 'integer',  [58,58], 'code',    None],
                     'Age'           : ['ABIRTH',    'real',     [59,61], 'years',   0   ]}
+
+    def set_FVS_variant(self, var):
+        """
+        Sets FVS variant. This is need if converting from USDA plant symbols
+        (PSME) to alpha codes (DF). If so, then all stand you wish to process
+        must be of the same FVS variant
+
+        :param var: FVS variant ('iec', 'emc' ...)
+        :type var: string
+
+        """
+
+        self.variant = var.upper()[:2]
 
     def read_inventory(self, fname):
 
@@ -712,8 +734,8 @@ class Inventory(object):
         Private methods to check for correct inventory file formating
         """
         for i in data.columns:
-            if i not in self.get_fvs_cols() and i not in ['Stand_ID'
-                    , 'StandPlot_ID']:
+            if i not in self.get_fvs_cols() and i not in ['Stand_CN', 'Stand_ID'
+                    , 'StandPlot_CN', 'StandPlot_ID']:
                 raise ValueError("Column heading {0} does not match FVS \
                     standard".format(i))
 
@@ -730,6 +752,18 @@ class Inventory(object):
         ['BR', 'TM', 'SW', HB']
         """
         return self.data["Stand_ID"].unique()
+
+    def filter_by_stand(self, stand_list):
+        """
+        Filters data by a list of stand IDs
+
+        :param stand_list: List of stand ID to retain in the data. All other
+                           stands will be removed
+        :type stand_list: python list
+        """
+
+        mask = self.data["Stand_ID"].isin(stand_list)
+        self.data = self.data.loc[mask]
 
     def crwratio_percent_to_code(self):
         """
@@ -759,6 +793,40 @@ class Inventory(object):
             <= 80), "CrRatio"] = 8
         self.data.loc[(self.data["CrRatio"] > 80) & (self.data["CrRatio"]
             <= 100), "CrRatio"] = 9
+
+    def convert_sp_codes(self, method='2to4'):
+        """
+        Converts species codes from 4 letter codes to 2 letter codes
+        or vise versa
+
+        :param method: must be either "2to4" or "4to2"
+        :type method: string
+        """
+
+        # check if variant has been set
+        if self.variant == None:
+            raise("You must set the FVS variant before converting to alpha codes")
+
+        if self.variant in eastern:
+            side = 'eastern'
+        else:
+            side = 'western'
+
+        # get relative path to this module
+        this_dir = os.path.dirname(__file__)
+
+        # load species crosswalk database
+        crosswalk = cPickle.load(open(this_dir + '/data/species_crosswalk.p', 'rb'))
+
+        # get all species in all stands
+        uniq_sp = self.data["Species"].unique()
+
+        for i in uniq_sp:
+            if i in crosswalk[side]:
+                self.data.loc[self.data["Species"] == i, "Species"] = crosswalk[side][i][self.variant]
+            else:
+                print("{0} is not recognized by FVS as a {1} species\ndefaulting to unknown species".format(i, side))
+                self.data.loc[self.data["Species"] == i, "Species"] = 'OT'
 
     def format_fvs_tree_file(self, cratio_to_code = True):
         """
