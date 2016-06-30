@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Interfacing with FVS &mdash; STANDFIRE  documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="STANDFIRE  documentation" href="index.html"/>
+        <link rel="up" title="Tutorials" href="tutorials.html"/>
+        <link rel="next" title="STANDFIRE API Reference" href="api_ref.html"/>
+        <link rel="prev" title="Tutorials" href="tutorials.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> STANDFIRE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of STANDFIRE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_usage.html">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advance_topics.html">Advance Topics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">Interfacing with FVS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">STANDFIRE</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="user_guide.html">STANDFIRE User Guide</a> &raquo;</li>
+      
+          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
+      
+    <li>Interfacing with FVS</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/interfacing_with_fvs.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="interfacing-with-fvs">
+<h1>Interfacing with FVS<a class="headerlink" href="#interfacing-with-fvs" title="Permalink to this headline">¶</a></h1>
+<p>Use Suppose to generate a keyword file. Or use the following example .key</p>
+<div class="highlight-none"><div class="highlight"><pre>NOSCREEN
+RANNSEED           0
+!STATS
+STDIDENT
+STANDFIRE_example
+DESIGN           -10       500         5         9
+STDINFO          103       140      60.0       0.0       0.0      36.0
+INVYEAR         2010
+NUMCYCLE          10
+TREEDATA
+FMIN
+END
+STATS
+SVS                0                   0         0        15
+FMIn
+Potfire
+FuelOut
+BurnRept
+MortRept
+FuelRept
+SnagSum
+End
+PROCESS
+STOP
+</pre></div>
+</div>
+<p>If don&#8217;t have a FVS tree list file, then copy and paste the following text and save  it to the same directory where the keyword file lives, give it the same prefix as the <code class="docutils literal"><span class="pre">.key</span></code> but with a <code class="docutils literal"><span class="pre">.tre</span></code> extension.</p>
+<div class="highlight-none"><div class="highlight"><pre>1   95       9PP 105    35                          0 0
+1   96       0PP 43     17        1                 0 0
+1   97       0PP 148    43        2                 0 0
+1   98       0PP 49     30        1                 0 0
+1   99       9PP 54     30                          0 0
+1   100      0PP 100    40        3                 0 0
+1   101      0PP 42     30        2                 0 0
+1   102      0PP 53     34        1                 0 0
+1   103      0PP 97     42        3                 0 0
+1   104      0PP 61     35        1                 0 0
+1   105      0PP 81     40        1                 0 0
+1   106      9PP 80     33                          0 0
+1   107      0PP 41     32        2                 0 0
+1   108      9PP 71     40                          0 0
+1   109      9PP 73     41                          0 0
+1   110      9PP 94     35                          0 0
+1   111      9PP 103    32                          0 0
+</pre></div>
+</div>
+<p>Once you have a keyword file and a tree list file in the same directory we can start to build a script to do some work.</p>
+<p>First we import the Fvsfuels class from the fuels module.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuels</span> <span class="kn">import</span> <span class="n">Fvsfuels</span>
+</pre></div>
+</div>
+<p>Next create an instance of the class passes the desired variant as an argument and register the keyword file.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span> <span class="o">=</span> <span class="n">Fvsfuel</span><span class="p">(</span><span class="s">&quot;iec&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s">&quot;/Users/standfire/fvs_exp/example.key&quot;</span><span class="p">)</span>
+<span class="go">TIMEINT not found in keyword file, default is 10 years</span>
+</pre></div>
+</div>
+<p>We get a message telling us that the TIMEINT keyword was not found in the keyword file. No problem, STANDFIRE automatically sets this value to 10 years.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">keywords</span>
+<span class="go">{&#39;TIMEINT&#39;: 10, &#39;NUMCYCLE&#39;: 10, &#39;INVYEAR&#39;: 2010, &#39;SVS&#39;: 15, &#39;FUELOUT&#39;: 1}</span>
+</pre></div>
+</div>
+<p>Notice the keys in the keywords dictionary.  <code class="docutils literal"><span class="pre">TIMEINT</span></code> is the time interval of the FVS simulation in year, <code class="docutils literal"><span class="pre">NUMCYCLE</span></code> is the number of cycles, <code class="docutils literal"><span class="pre">INVYEAR</span></code> is the year of the inventory, and <code class="docutils literal"><span class="pre">SVS</span></code> and <code class="docutils literal"><span class="pre">FUELOUT</span></code> are there to check if these keywords are in the keyword file. If the <code class="docutils literal"><span class="pre">SVS</span></code> and <code class="docutils literal"><span class="pre">FUELOUT</span></code> keywords are not defined the keyword file then FVS will not calculate tree positions or fuel attributes. So be sure you add these to your keyword file before registering the .key with FVS. You can use <em>post processors*</em> in Suppose to do so.  <code class="docutils literal"><span class="pre">TIMEINT</span></code>, <code class="docutils literal"><span class="pre">NUMCYCLE</span></code>, and <code class="docutils literal"><span class="pre">INVYEAR</span></code> can be manually changed by calling setters for each. For instance, if you only want to calculate fuel attributes for trees during the year of the inventory then simply change the <code class="docutils literal"><span class="pre">NUMCYCLE</span></code> value in the keyword dictionary.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">set_num_cycle</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">keywords</span>
+<span class="go">{&#39;TIMEINT&#39;: 10, &#39;NUMCYCLE&#39;: 0, &#39;INVYEAR&#39;: 2010, &#39;SVS&#39;: 15, &#39;FUELOUT&#39;: 1}</span>
+</pre></div>
+</div>
+<p>Now that we have our simulation parameters established, we startup FVS.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">run_fvs</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api_ref.html" class="btn btn-neutral float-right" title="STANDFIRE API Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tutorials.html" class="btn btn-neutral" title="Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, STANDFIRE.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
