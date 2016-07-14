@@ -140,7 +140,7 @@ class Fvsfuels(object):
         :param wdir: path/to/desired_directory
         :type wdir: string
 
-        :Example:
+        **Example:**
 
         >>> from standfire.fuel import Fvsfuels
         >>> test = Fvsfuels("emc")
@@ -276,7 +276,7 @@ class Fvsfuels(object):
         4                  Stop just after second call to Event Monitor
         5                  Stop after growth and mort has been computed, but before applied
         6                  Stop just before the ESTAB routine is called
-        ==============     ================================================================
+        ===============    ===============================================================
         """
 
         print "Not implemented"
@@ -598,6 +598,9 @@ class FuelCalc(object):
         self.get_crown_base_ht()
         self.get_crown_ht()
 
+        # conversion code for double unit conversion check
+        self.cvt_code = None
+
     def get_crown_ht(self):
         """
         Calculates crown height for each trees based on crown ratio. This
@@ -709,7 +712,7 @@ class FuelCalc(object):
         :return: volume
         :rtype: float
 
-        .. math:: \frac{\pi h}{3}(R^2+rR+r^2
+        .. math:: \frac{\pi h}{3}(R^2+rR+r^2)
 
         """
 
@@ -765,6 +768,81 @@ class FuelCalc(object):
         """
 
         return w*w*h
+
+    def convert_units(self, from_to=1):
+        """
+        Convert all units in data frame
+
+        :param from_to: 1 = english to metric; 2 = metric to english (default=1)
+        :type from_to: integer
+
+        .. note:: if this method is called more than once on the same instance
+                  of a data frame with the same conversion code a warning will
+                  be printed to the console
+
+        """
+
+        if self.cvt_code == from_to:
+            print "This data was previously coverted using the same coversion code"
+        else:
+            self.cvt_code = from_to
+
+        if from_to == 1:
+            self.trees['dbh'] = self.trees['dbh'] * 2.54
+            self.trees['ht'] = self.trees['ht'] * 0.3048
+            self.trees['crd'] = self.trees['crd'] * 0.3048
+            self.trees['crownwt0'] = self.trees['crownwt0'] * 0.453592
+            self.trees['crownwt1'] = self.trees['crownwt1'] * 0.453592
+            self.trees['crownwt2'] = self.trees['crownwt2'] * 0.453592
+            self.trees['crownwt3'] = self.trees['crownwt3'] * 0.453592
+            if 'base_ht' in self.trees:
+                self.trees['base_ht'] = self.trees['base_ht'] * 0.3048
+            if 'crown_ht' in self.trees:
+                self.trees['crown_ht'] = self.trees['crown_ht'] * 0.3048
+            if 'vol' in self.trees:
+                self.trees['vol'] = self.trees['vol'] * 0.0283168
+            if 'bd_foliage' in self.trees:
+                self.trees['bd_foliage'] = self.trees['bd_foliage'] * 16.1085
+                self.trees['bd_1hr'] = self.trees['bd_1hr'] * 16.1085
+                self.trees['bd_10hr'] = self.trees['bd_10hr'] * 16.1085
+                self.trees['bd_100hr'] = self.trees['bd_100hr'] * 16.1085
+
+        elif from_to == 2:
+            self.trees['dbh'] = self.trees['dbh'] * 0.0328084
+            self.trees['ht'] = self.trees['ht'] * 3.28084
+            self.trees['crd'] = self.trees['crd'] * 3.28084
+            self.trees['crownwt0'] = self.trees['crownwt0'] * 2.20462
+            self.trees['crownwt1'] = self.trees['crownwt1'] * 2.20462
+            self.trees['crownwt2'] = self.trees['crownwt2'] * 2.20462
+            self.trees['crownwt3'] = self.trees['crownwt3'] * 2.20462
+            if 'base_ht' in self.trees:
+                self.trees['base_ht'] = self.trees['base_ht'] * 3.28084
+            if 'crown_ht' in self.trees:
+                self.trees['crown_ht'] = self.trees['crown_ht'] * 3.28084
+            if 'vol' in self.trees:
+                self.trees['vol'] = self.trees['vol'] * 35.3147
+            if 'bd_foliage' in self.trees:
+                self.trees['bd_foliage'] = self.trees['bd_foliage'] * 0.062428
+                self.trees['bd_1hr'] = self.trees['bd_1hr'] * 0.062428
+                self.trees['bd_10hr'] = self.trees['bd_10hr'] * 0.062428
+                self.trees['bd_100hr'] = self.trees['bd_100hr'] * 0.062428
+
+        else:
+            print "The conversion code '{0}' is not recognized".format(from_to)
+
+
+
+
+    def save_trees(self, save_to):
+        """
+        Write trees data frame to specified directory
+
+        :param save_to: directory and filename of file to save
+        :type save_to: string
+
+        """
+
+        self.trees.to_csv(save_to, index=False)
 
 class Inventory(object):
     """

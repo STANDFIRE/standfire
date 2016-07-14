@@ -84,6 +84,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="fuels.html">fuels module</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="">Fvsfuels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Inventory.html">Inventory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FuelCalc.html">FuelCalc</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="intervene.html">intervene module</a></li>
@@ -320,10 +321,9 @@ use this methods to do so.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wdir</strong> (<em>string</em>) &#8211; path/to/desired_directory</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
 </tbody>
 </table>
+<p><strong>Example:</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuel</span> <span class="kn">import</span> <span class="n">Fvsfuels</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">test</span> <span class="o">=</span> <span class="n">Fvsfuels</span><span class="p">(</span><span class="s">&quot;emc&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s">&quot;/Users/standfire/test/example.key&quot;</span><span class="p">)</span>
@@ -420,6 +420,43 @@ use in other methods.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">year=0 means never stop and year=-1 means stop every cycle</p>
 </div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">stop point code</th>
+<th class="head">Definition</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Never stop</td>
+</tr>
+<tr class="row-odd"><td>-1</td>
+<td>Stop at every location</td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td>Stop just before first call to Event Monitor</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>Stop just after first call to Event Monitor</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>Stop just before second call to Event Monitor</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>Stop just after second call to Event Monitor</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>Stop after growth and mort has been computed, but before applied</td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>Stop just before the ESTAB routine is called</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">

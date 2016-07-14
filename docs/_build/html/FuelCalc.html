@@ -184,6 +184,26 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="fuels.FuelCalc.convert_units">
+<code class="descname">convert_units</code><span class="sig-paren">(</span><em>from_to=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.convert_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.convert_units" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert all units in data frame</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>from_to</strong> (<em>integer</em>) &#8211; 1 = english to metric; 2 = metric to english (default=1)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">if this method is called more than once on the same instance
+of a data frame with the same conversion code a warning will
+be printed to the console</p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="fuels.FuelCalc.cylinder_volume">
 <code class="descname">cylinder_volume</code><span class="sig-paren">(</span><em>r</em>, <em>h</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.cylinder_volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.cylinder_volume" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the volume of a cylinder</p>
@@ -239,7 +259,7 @@
 <div class="math">
 </div>
 </div></blockquote>
-<p>rac{pi h}{3}(R^2+rR+r^2</p>
+<p>rac{pi h}{3}(R^2+rR+r^2)</p>
 </dd></dl>
 
 <dl class="method">
@@ -306,6 +326,20 @@ assigne crown geometries</p>
 </table>
 <div class="math">
 \[wwh\]</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.FuelCalc.save_trees">
+<code class="descname">save_trees</code><span class="sig-paren">(</span><em>save_to</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.save_trees"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.save_trees" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write trees data frame to specified directory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>save_to</strong> (<em>string</em>) &#8211; directory and filename of file to save</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">

@@ -66,4 +66,7 @@ test.calc_crown_volume()
 test.calc_bulk_density()
 print test.trees
 
+test.convert_units()
+test.save_trees(os.getcwd() + '/test_trees.csv')
+
 

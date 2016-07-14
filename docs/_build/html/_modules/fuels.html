@@ -266,7 +266,7 @@
 <span class="sd">        :param wdir: path/to/desired_directory</span>
 <span class="sd">        :type wdir: string</span>
 
-<span class="sd">        :Example:</span>
+<span class="sd">        **Example:**</span>
 
 <span class="sd">        &gt;&gt;&gt; from standfire.fuel import Fvsfuels</span>
 <span class="sd">        &gt;&gt;&gt; test = Fvsfuels(&quot;emc&quot;)</span>
@@ -402,7 +402,7 @@
 <span class="sd">        4                  Stop just after second call to Event Monitor</span>
 <span class="sd">        5                  Stop after growth and mort has been computed, but before applied</span>
 <span class="sd">        6                  Stop just before the ESTAB routine is called</span>
-<span class="sd">        ==============     ================================================================</span>
+<span class="sd">        ===============    ===============================================================</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">print</span> <span class="s">&quot;Not implemented&quot;</span></div>
@@ -724,6 +724,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">get_crown_base_ht</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_crown_ht</span><span class="p">()</span>
 
+        <span class="c"># conversion code for double unit conversion check</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cvt_code</span> <span class="o">=</span> <span class="bp">None</span>
+
 <div class="viewcode-block" id="FuelCalc.get_crown_ht"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc.get_crown_ht">[docs]</a>    <span class="k">def</span> <span class="nf">get_crown_ht</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates crown height for each trees based on crown ratio. This</span>
@@ -835,7 +838,7 @@
 <span class="sd">        :return: volume</span>
 <span class="sd">        :rtype: float</span>
 
-<span class="sd">        .. math:: \frac{\pi h}{3}(R^2+rR+r^2</span>
+<span class="sd">        .. math:: \frac{\pi h}{3}(R^2+rR+r^2)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -890,7 +893,82 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="n">w</span><span class="o">*</span><span class="n">w</span><span class="o">*</span><span class="n">h</span></div></div>
+        <span class="k">return</span> <span class="n">w</span><span class="o">*</span><span class="n">w</span><span class="o">*</span><span class="n">h</span></div>
+
+<div class="viewcode-block" id="FuelCalc.convert_units"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc.convert_units">[docs]</a>    <span class="k">def</span> <span class="nf">convert_units</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_to</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert all units in data frame</span>
+
+<span class="sd">        :param from_to: 1 = english to metric; 2 = metric to english (default=1)</span>
+<span class="sd">        :type from_to: integer</span>
+
+<span class="sd">        .. note:: if this method is called more than once on the same instance</span>
+<span class="sd">                  of a data frame with the same conversion code a warning will</span>
+<span class="sd">                  be printed to the console</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cvt_code</span> <span class="o">==</span> <span class="n">from_to</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;This data was previously coverted using the same coversion code&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cvt_code</span> <span class="o">=</span> <span class="n">from_to</span>
+
+        <span class="k">if</span> <span class="n">from_to</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;dbh&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;dbh&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">2.54</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;ht&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.3048</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.3048</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt0&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.453592</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt1&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.453592</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt2&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.453592</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt3&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.453592</span>
+            <span class="k">if</span> <span class="s">&#39;base_ht&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;base_ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;base_ht&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.3048</span>
+            <span class="k">if</span> <span class="s">&#39;crown_ht&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.3048</span>
+            <span class="k">if</span> <span class="s">&#39;vol&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.0283168</span>
+            <span class="k">if</span> <span class="s">&#39;bd_foliage&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_foliage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_foliage&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">16.1085</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_1hr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_1hr&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">16.1085</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_10hr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_10hr&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">16.1085</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_100hr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_100hr&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">16.1085</span>
+
+        <span class="k">elif</span> <span class="n">from_to</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;dbh&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;dbh&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.0328084</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;ht&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">3.28084</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">3.28084</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt0&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">2.20462</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt1&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">2.20462</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt2&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">2.20462</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt3&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">2.20462</span>
+            <span class="k">if</span> <span class="s">&#39;base_ht&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;base_ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;base_ht&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">3.28084</span>
+            <span class="k">if</span> <span class="s">&#39;crown_ht&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">3.28084</span>
+            <span class="k">if</span> <span class="s">&#39;vol&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">35.3147</span>
+            <span class="k">if</span> <span class="s">&#39;bd_foliage&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_foliage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_foliage&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.062428</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_1hr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_1hr&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.062428</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_10hr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_10hr&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.062428</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_100hr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_100hr&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.062428</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;The conversion code &#39;{0}&#39; is not recognized&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">from_to</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="FuelCalc.save_trees"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc.save_trees">[docs]</a>    <span class="k">def</span> <span class="nf">save_trees</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save_to</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Write trees data frame to specified directory</span>
+
+<span class="sd">        :param save_to: directory and filename of file to save</span>
+<span class="sd">        :type save_to: string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">save_to</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span></div></div>
 
 <div class="viewcode-block" id="Inventory"><a class="viewcode-back" href="../Inventory.html#fuels.Inventory">[docs]</a><span class="k">class</span> <span class="nc">Inventory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
