@@ -10,6 +10,7 @@ Contents:
 
    Fvsfuels
    Inventory
+   FuelCalc
 
 
 

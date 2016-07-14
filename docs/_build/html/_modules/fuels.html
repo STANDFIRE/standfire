@@ -698,7 +698,7 @@
                  <span class="s">&quot;{0}_{1}_{2}.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">standid</span><span class="p">,</span> <span class="s">&quot;snags&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">FuelCalc</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="FuelCalc"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc">[docs]</a><span class="k">class</span> <span class="nc">FuelCalc</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -724,7 +724,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">get_crown_base_ht</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_crown_ht</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">get_crown_ht</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FuelCalc.get_crown_ht"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc.get_crown_ht">[docs]</a>    <span class="k">def</span> <span class="nf">get_crown_ht</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates crown height for each trees based on crown ratio. This</span>
 <span class="sd">        value is added to the data frame</span>
@@ -736,10 +736,10 @@
         <span class="k">if</span> <span class="s">&#39;crown_ht&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;cratio&#39;</span><span class="p">]</span><span class="o">/</span><span class="mf">100.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;ht&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;cratio&#39;</span><span class="p">]</span><span class="o">/</span><span class="mf">100.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;ht&#39;</span><span class="p">]</span></div>
 
 
-    <span class="k">def</span> <span class="nf">get_crown_base_ht</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FuelCalc.get_crown_base_ht"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc.get_crown_base_ht">[docs]</a>    <span class="k">def</span> <span class="nf">get_crown_base_ht</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates crown base height for each tree based on crown ratio and</span>
 <span class="sd">        tree height. This value is added to the data frame</span>
@@ -752,9 +752,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;base_ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;base_ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;ht&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;cratio&#39;</span><span class="p">]</span><span class="o">/</span><span class="mf">100.</span><span class="p">)</span>
-                <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;ht&#39;</span><span class="p">])</span>
+                <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;ht&#39;</span><span class="p">])</span></div>
 
-    <span class="k">def</span> <span class="nf">set_crown_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sp_geom_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="FuelCalc.set_crown_geometry"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc.set_crown_geometry">[docs]</a>    <span class="k">def</span> <span class="nf">set_crown_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sp_geom_dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Appends crown geometry to each tree in the data frame conditional on</span>
 <span class="sd">        species.</span>
@@ -775,10 +775,10 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_species_list</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">sp_geom_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;rectangle&#39;</span><span class="p">,</span> <span class="s">&#39;cylinder&#39;</span><span class="p">,</span> <span class="s">&#39;cone&#39;</span><span class="p">,</span> <span class="s">&#39;frustum&#39;</span><span class="p">]:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;The specified geometry &#39;{0}&#39; is not valid&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sp_geom_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;geom&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;species&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp_geom_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;geom&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;species&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp_geom_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span></div>
 
 
-    <span class="k">def</span> <span class="nf">get_species_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FuelCalc.get_species_list"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc.get_species_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_species_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return set of species existing in trees file supplied to constructor</span>
 
@@ -791,9 +791,9 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;species&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;species&#39;</span><span class="p">])</span></div>
 
-    <span class="k">def</span> <span class="nf">calc_crown_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FuelCalc.calc_crown_volume"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc.calc_crown_volume">[docs]</a>    <span class="k">def</span> <span class="nf">calc_crown_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -803,9 +803,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;geom&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;rectangle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rectangle_volume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;geom&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;cylinder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cylinder_volume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;geom&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;cone&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cone_volume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;geom&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;frustum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">frustum_volume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;geom&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;frustum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">frustum_volume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">])</span></div>
 
-    <span class="k">def</span> <span class="nf">calc_bulk_density</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FuelCalc.calc_bulk_density"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc.calc_bulk_density">[docs]</a>    <span class="k">def</span> <span class="nf">calc_bulk_density</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -818,11 +818,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_foliage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt0&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_1hr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt1&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_10hr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt2&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_100hr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt3&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_100hr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt3&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span></div>
 
 
 
-    <span class="k">def</span> <span class="nf">frustum_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<div class="viewcode-block" id="FuelCalc.frustum_volume"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc.frustum_volume">[docs]</a>    <span class="k">def</span> <span class="nf">frustum_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the volume of a frustum</span>
 
@@ -839,9 +839,9 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">R</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">r</span><span class="o">*</span><span class="n">R</span> <span class="o">+</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">R</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">r</span><span class="o">*</span><span class="n">R</span> <span class="o">+</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">cone_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+<div class="viewcode-block" id="FuelCalc.cone_volume"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc.cone_volume">[docs]</a>    <span class="k">def</span> <span class="nf">cone_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the volume of a cone</span>
 
@@ -856,9 +856,9 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">cylinder_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+<div class="viewcode-block" id="FuelCalc.cylinder_volume"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc.cylinder_volume">[docs]</a>    <span class="k">def</span> <span class="nf">cylinder_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the volume of a cylinder</span>
 
@@ -873,9 +873,9 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">rectangle_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+<div class="viewcode-block" id="FuelCalc.rectangle_volume"><a class="viewcode-back" href="../FuelCalc.html#fuels.FuelCalc.rectangle_volume">[docs]</a>    <span class="k">def</span> <span class="nf">rectangle_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the volume of a rectangle</span>
 
@@ -890,7 +890,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="n">w</span><span class="o">*</span><span class="n">w</span><span class="o">*</span><span class="n">h</span>
+        <span class="k">return</span> <span class="n">w</span><span class="o">*</span><span class="n">w</span><span class="o">*</span><span class="n">h</span></div></div>
 
 <div class="viewcode-block" id="Inventory"><a class="viewcode-back" href="../Inventory.html#fuels.Inventory">[docs]</a><span class="k">class</span> <span class="nc">Inventory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
