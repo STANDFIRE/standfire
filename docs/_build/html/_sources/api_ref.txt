@@ -8,4 +8,5 @@ Contents:
    :maxdepth: 4
 
    fuels
+   placer
    intervene

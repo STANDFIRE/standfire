@@ -1,4 +1,4 @@
-fuels module
+Fuels module
 ============
 
 .. automodule:: fuels

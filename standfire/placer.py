@@ -1,13 +1,23 @@
+
+
+import pandas as pd
+import random
+
 class Extender(object):
+    """
+    Base class for Stamper
+    """
 
     def __init__(self, domain, aoa):
         """
         Constructor
 
-        :param domain:
-        :param aoa:
-        :return:
+        :param domain: origin and spatial bounds for domain
+        :type domain: list
+        :param aoa: origin and spatial bound for aoa
+        :type aoa: list
         """
+
         self.aoa = aoa
         self.domain = domain
         self.aoa_vertices = []
@@ -21,12 +31,14 @@ class Extender(object):
 
     def _extract_vertices(self):
         """
-        :return:
+        Private method
+
+        extracts vertices from domain and aoa instance variables
         """
 
-        self.aoa_vertices = [(self.aoa[0], self.aoa[1]), (self.aoa[0] + 
+        self.aoa_vertices = [(self.aoa[0], self.aoa[1]), (self.aoa[0] +
                               self.aoa[2], self.aoa[1]), (self.aoa[0],
-                              self.aoa[1] + self.aoa[3]), (self.aoa[0] + 
+                              self.aoa[1] + self.aoa[3]), (self.aoa[0] +
                               self.aoa[2], self.aoa[1] + self.aoa[3])]
 
         self.domain_vertices = [(self.domain[0], self.domain[1]),
@@ -38,8 +50,9 @@ class Extender(object):
 
     def _extract_extent(self):
         """
+        Private method
 
-        :return:
+        extracts extent from domain and aoa instance variables
         """
 
         self.aoa_extent = {'xmin': min([x[0] for x in self.aoa_vertices])
@@ -55,9 +68,7 @@ class Extender(object):
     @classmethod
     def get_extent(cls, shape_verts):
         """
-
-        :param shape_verts:
-        :return:
+        This method is useless now
         """
 
         xmin = min([v[0] for v in shape_verts])
@@ -70,12 +81,20 @@ class Extender(object):
         return extent
 
     def get_adj_order(self):
+        """
+        Returns the adjacency order required to fill the requested domain size.
+        Adjacency order refers to the number of nested adjacency surrounding the
+        aoa required to cover the domain.
+
+        :return: adjacency order
+        :rtype: integer
+        """
 
         shape1 = self.domain_extent
         shape2 = self.aoa_extent
 
         order = 0
-        while not self.__is_within(shape1, shape2):
+        while not self._is_within(shape1, shape2):
             shape2['xmin'] = shape2['xmin'] - self.aoa[2]
             shape2['xmax'] = shape2['xmax'] + self.aoa[2]
             shape2['ymin'] = shape2['ymin'] - self.aoa[3]
@@ -87,14 +106,14 @@ class Extender(object):
     @classmethod
     def _is_within(cls, shape1, shape2):
         """
-        is the extent of shape 1 within the extent of shape 2
+        Private method
 
-        :return:
+        Is the extent of shape 1 within the extent of shape 2
         """
 
-        if ((shape1['xmin'] > shape2['xmin']) and 
-                   (shape1['xmax'] < shape2['xmax']) and 
-                   (shape1['ymin'] > shape2['ymin']) and 
+        if ((shape1['xmin'] > shape2['xmin']) and
+                   (shape1['xmax'] < shape2['xmax']) and
+                   (shape1['ymin'] > shape2['ymin']) and
                    (shape1['ymax'] < shape2['ymax'])):
             return True
         else:
@@ -103,11 +122,13 @@ class Extender(object):
     @classmethod
     def permutate_order(cls, order):
         """
-        Calculate all translation positions for extending SVS acre 
+        Calculate all translation positions for extending SVS acre
         to the extent of the domain
 
         :param order: adjacency order required to extend SVS acre to domain
-        :return: list of tuples indicating position of translation
+        :type order: integer
+        :return: coordinates indicating position of translation
+        :rtype: list of tuples
         """
 
         init_lst = [0]
@@ -127,8 +148,12 @@ class Extender(object):
 
     def translate_geom(self, trans_map):
         """
+        Calculates geometric translations for all SVS tiles
 
-        :return:
+        :param trans_map: coordinates indicating positions of translations
+        :type trans_map: list of tuples
+        :return: translation coordinates
+        :rtype: dictionary of tile extents
         """
         x_side = self.aoa[2]
         y_side = self.aoa[3]
@@ -152,12 +177,14 @@ class Extender(object):
 
     def trim_trans(self, trans_coords):
         """
+        Method trims any tiles that are completely outside of the domain
 
-        :return:
+        :param trans_coords: dictionary of tile extents
+        :return: final tile for tree placement
         """
         for i in trans_coords.keys():
             extent = self.get_extent(trans_coords[i])
-            if ((extent['xmin'] > self.domain_extent['xmax']) or 
+            if ((extent['xmin'] > self.domain_extent['xmax']) or
                     (extent['xmax'] < self.domain_extent['xmin']) or
                     (extent['ymin'] > self.domain_extent['ymax']) or
                     (extent['ymax'] < self.domain_extent['ymin'])):
@@ -166,15 +193,17 @@ class Extender(object):
         return trans_coords
 
 
-class Placer(Extender):
+class SvsStamper(Extender):
+    """
+    """
 
-    def __init__(self, domain, xoffset, treelst):
+    def __init__(self, domain, xoffset, treelist):
         """
         Constructor
 
         :param domain:
         :param aoa:
-        :param treelst:
+        :param treelist:
         :return:
         """
 
@@ -193,37 +222,35 @@ class Placer(Extender):
         # call super class constructor
         super(self.__class__, self).__init__(domain, aoa)
 
-        # read tree list
-        self.trees = pd.read_csv(treelst)
+        # type check the tree list and handle accordingly
+        if isinstance(treelist, pd.DataFrame):
+            self.trees = treelist
+        elif type(treelist) == str:
+            try:
+                self.trees = pd.read_csv(treelist)
+            except:
+                raise TypeError("String argument must point to .csv file")
+        else:
+            raise TypeError("argument type must be either an instance of "
+                            "Pandas.DataFrame() or a stirng indicating a path "
+                            "to a comma-delimted file")
 
-    def extend_tile(self):
+        self.tiles = self.extend()
+
+    def extend(self):
+        """
+        Calls methods from 'Extender' inheirited class to build domain
+
+        :return: tree placement tiles
+        :rtype: dictionary of lists of 2-tuple coordinates
         """
 
-        :return:
-        """
         order = super(self.__class__, self).get_adj_order()
         trans_map = super(self.__class__, self).permutate_order(order)
         tile_coords = super(self.__class__, self).translate_geom(trans_map)
         trimed_tiles = super(self.__class__, self).trim_trans(tile_coords)
 
-        self.tiles = trimed_tiles
-
-    def convert_to_metric(self):
-        """
-
-        :return:
-        """
-
-        self.trees['xloc']     *= 0.3048
-        self.trees['yloc']     *= 0.3048
-        self.trees['dbh']      *= 0.0254
-        self.trees['ht']       *= 0.3048
-        self.trees['crwdth']   *= 0.3048
-        self.trees['crwdth']   /= 2
-        self.trees['crownwt0'] *= 0.453592
-        self.trees['crownwt1'] *= 0.453592
-        self.trees['crownwt2'] *= 0.453592
-        self.trees['crownwt3'] *= 0.453592
+        return trimed_tiles
 
     @classmethod
     def _flip_a(cls, x, y):
@@ -281,11 +308,17 @@ class Placer(Extender):
 
         return xf, yf
 
-    def place_trees(self):
+    def place_trees(self, rand_seed=None):
+        """
+        Places treelist though the extented domain. Trees are placed by repeated
+        the SVS square. Use the `rand_seed` parameter for reproducible simulations
+
+        :param rand_seed: sets a random seed to reproducible runs
+        :type rand_seed: integer
         """
 
-        :return:
-        """
+        if rand_seed:
+            random.seed(rand_seed)
 
         # add column to designate trees as in or out of AOA
         self.trees['svs'] = 1
@@ -312,8 +345,7 @@ class Placer(Extender):
 
     def trim_trees(self):
         """
-
-        :return:
+        Trims the trees to the specified domain extent
         """
 
         # trim x values
@@ -324,11 +356,11 @@ class Placer(Extender):
         self.trees = self.trees[(self.trees['yloc'] < self.domain_extent['ymax'])
                                 & (self.trees['yloc'] > self.domain_extent['ymin'])]
 
-    def write_trees(self, fname):
+    def write_trees(self, save_to):
         """
 
         :param fname:
         :return:
         """
 
-        self.trees.to_csv(fname, ',')
+        self.trees.to_csv(save_to, ',')

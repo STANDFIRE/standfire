@@ -265,9 +265,9 @@ class Fvsfuels(object):
 
         .. note:: year=0 means never stop and year=-1 means stop every cycle
 
-        ===============    ===============================================================
+        ===============    ==========
         stop point code    Definition
-        ===============    ===============================================================
+        ===============    ==========
         0                  Never stop
         -1                 Stop at every location
         1                  Stop just before first call to Event Monitor
@@ -276,7 +276,7 @@ class Fvsfuels(object):
         4                  Stop just after second call to Event Monitor
         5                  Stop after growth and mort has been computed, but before applied
         6                  Stop just before the ESTAB routine is called
-        ===============    ===============================================================
+        ===============    ==========
         """
 
         print "Not implemented"
