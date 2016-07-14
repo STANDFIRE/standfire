@@ -1,7 +1,7 @@
 Fvsfuels
 --------
 
-.. image:: images/svs_acre.gif
+.. image:: images/fvsfuels.png
 
 .. autoclass:: fuels.Fvsfuels
    :members:
