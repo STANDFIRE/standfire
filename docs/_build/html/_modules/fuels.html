@@ -124,9 +124,8 @@
            <div itemprop="articleBody">
             
   <h1>Source code for fuels</h1><div class="highlight"><pre>
-<span class="c">#!/usr/bin/python</span>
 <span class="sd">&quot;&quot;&quot;</span>
-
+<span class="sd">This module is the entry point to the STANDFIRE process.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -135,9 +134,12 @@
 <span class="kn">import</span> <span class="nn">pprint</span>
 <span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">import</span> <span class="nn">cPickle</span>
+<span class="kn">import</span> <span class="nn">math</span>
 
-<span class="n">__authors__</span> <span class="o">=</span> <span class="s">&quot;Lucas Wells, Greg Cohn, Russell Parsons&quot;</span>
+<span class="n">__authors__</span> <span class="o">=</span> <span class="s">&quot;Team STANDFIRE&quot;</span>
 <span class="n">__copyright__</span> <span class="o">=</span> <span class="s">&quot;Copyright 2015, STANDFIRE&quot;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s">&quot;Development&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s">&#39;1.0.0a&#39;</span>
 
 <span class="c"># FVS variants</span>
 <span class="n">eastern</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;CS&#39;</span><span class="p">,</span> <span class="s">&#39;LS&#39;</span><span class="p">,</span> <span class="s">&#39;NE&#39;</span><span class="p">,</span> <span class="s">&#39;SN&#39;</span><span class="p">}</span>
@@ -378,6 +380,34 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span> <span class="o">=</span> <span class="n">inv_year</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">[</span><span class="s">&quot;INVYEAR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inv_year</span></div>
 
+<div class="viewcode-block" id="Fvsfuels.set_stop_point"><a class="viewcode-back" href="../Fvsfuels.html#fuels.Fvsfuels.set_stop_point">[docs]</a>    <span class="k">def</span> <span class="nf">set_stop_point</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">year</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the FVS stop point code and year</span>
+
+<span class="sd">        :param code: stop point code (default=5)</span>
+<span class="sd">        :type code: integer</span>
+<span class="sd">        :param year: stop point year (default=-1)</span>
+<span class="sd">        :type year: integer</span>
+
+<span class="sd">        .. note:: year=0 means never stop and year=-1 means stop every cycle</span>
+
+<span class="sd">        ===============    ===============================================================</span>
+<span class="sd">        stop point code    Definition</span>
+<span class="sd">        ===============    ===============================================================</span>
+<span class="sd">        0                  Never stop</span>
+<span class="sd">        -1                 Stop at every location</span>
+<span class="sd">        1                  Stop just before first call to Event Monitor</span>
+<span class="sd">        2                  Stop just after first call to Event Monitor</span>
+<span class="sd">        3                  Stop just before second call to Event Monitor</span>
+<span class="sd">        4                  Stop just after second call to Event Monitor</span>
+<span class="sd">        5                  Stop after growth and mort has been computed, but before applied</span>
+<span class="sd">        6                  Stop just before the ESTAB routine is called</span>
+<span class="sd">        ==============     ================================================================</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">print</span> <span class="s">&quot;Not implemented&quot;</span></div>
+        <span class="c">#fvs.fvssetstoppointcodes(code, year)</span>
+
 <div class="viewcode-block" id="Fvsfuels.run_fvs"><a class="viewcode-back" href="../Fvsfuels.html#fuels.Fvsfuels.run_fvs">[docs]</a>    <span class="k">def</span> <span class="nf">run_fvs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Runs the FVS simulation</span>
@@ -401,13 +431,16 @@
 <span class="sd">        ...</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c"># set fvs stop point codes</span>
+        <span class="n">fvs</span><span class="o">.</span><span class="n">fvssetstoppointcodes</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
         <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">print</span> <span class="s">&quot;Simulating...&quot;</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_year</span> <span class="o">+</span>
                       <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_cyc</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span><span class="p">)</span> <span class="o">+</span>
                        <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_int</span><span class="p">):</span>
             <span class="k">print</span> <span class="s">&quot;{0}   {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cnt</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-            <span class="n">fvs</span><span class="o">.</span><span class="n">fvssetstoppointcodes</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
             <span class="n">fvs</span><span class="o">.</span><span class="n">fvs</span><span class="p">()</span>
             <span class="n">svs_attr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_obj_data</span><span class="p">()</span>
             <span class="n">spcodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_spcodes</span><span class="p">()</span>
@@ -416,8 +449,8 @@
             <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="c"># close fvs simulation (call twice)</span>
-        <span class="n">fvs</span><span class="o">.</span><span class="n">fvs</span><span class="p">()</span>
-        <span class="n">fvs</span><span class="o">.</span><span class="n">fvs</span><span class="p">()</span></div>
+        <span class="n">fvs</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">fvs</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">_get_obj_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -664,6 +697,200 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">fuels</span><span class="p">[</span><span class="s">&quot;snags&quot;</span><span class="p">][</span><span class="n">year</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wdir</span> <span class="o">+</span>
                  <span class="s">&quot;{0}_{1}_{2}.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">standid</span><span class="p">,</span> <span class="s">&quot;snags&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span></div></div>
 
+
+<span class="k">class</span> <span class="nc">FuelCalc</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trees</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c"># type check and handle accordingly</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">trees</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span> <span class="o">=</span> <span class="n">trees</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">trees</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">trees</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;String argument must point to .csv file&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;argument type must be either an instance of &quot;</span>
+                            <span class="s">&quot;Pandas.DataFrame() or a string indicating a path &quot;</span>
+                            <span class="s">&quot;to a comma-delimted file&quot;</span><span class="p">)</span>
+
+        <span class="c"># calculate crown base height and crown height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_crown_base_ht</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_crown_ht</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_crown_ht</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates crown height for each trees based on crown ratio. This</span>
+<span class="sd">        value is added to the data frame</span>
+
+<span class="sd">        .. math:: c_{ratio}h</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="s">&#39;crown_ht&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;cratio&#39;</span><span class="p">]</span><span class="o">/</span><span class="mf">100.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;ht&#39;</span><span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="nf">get_crown_base_ht</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates crown base height for each tree based on crown ratio and</span>
+<span class="sd">        tree height. This value is added to the data frame</span>
+
+<span class="sd">        .. math:: h - (c_{ratio} h)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="s">&#39;base_ht&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;base_ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;base_ht&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;ht&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;cratio&#39;</span><span class="p">]</span><span class="o">/</span><span class="mf">100.</span><span class="p">)</span>
+                <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;ht&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">set_crown_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sp_geom_dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends crown geometry to each tree in the data frame conditional on</span>
+<span class="sd">        species.</span>
+
+<span class="sd">        :param sp_geom_dict: dictionary of species specific crown geometries</span>
+<span class="sd">        :type sp_geom_dict: python dictionary</span>
+
+<span class="sd">        :Example:</span>
+
+<span class="sd">            &gt;&gt;&gt; sp_dict = {&#39;PIPO&#39; : &#39;cylinder&#39;, &#39;PSME&#39; : &#39;frustum&#39;}</span>
+<span class="sd">            &gt;&gt;&gt; fuels.set_crown_geometry(sp_dict)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="s">&#39;geom&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
+           <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;geom&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_species_list</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">sp_geom_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;rectangle&#39;</span><span class="p">,</span> <span class="s">&#39;cylinder&#39;</span><span class="p">,</span> <span class="s">&#39;cone&#39;</span><span class="p">,</span> <span class="s">&#39;frustum&#39;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;The specified geometry &#39;{0}&#39; is not valid&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sp_geom_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;geom&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;species&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp_geom_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="nf">get_species_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return set of species existing in trees file supplied to constructor</span>
+
+<span class="sd">        :return: unique list of species</span>
+<span class="sd">        :rtype: list</span>
+
+<span class="sd">        .. note:: This methods is useful when assigning geometries by species.</span>
+<span class="sd">                  A user can first retrieve the species list then use it to</span>
+<span class="sd">                  assigne crown geometries</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;species&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">calc_crown_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="s">&#39;vol&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;geom&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;rectangle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rectangle_volume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;geom&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;cylinder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cylinder_volume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;geom&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;cone&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cone_volume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;geom&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;frustum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">frustum_volume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crd&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crown_ht&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">calc_bulk_density</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;bd_foliage&#39;</span><span class="p">,</span> <span class="s">&#39;bd_1hr&#39;</span><span class="p">,</span> <span class="s">&#39;bd_10hr&#39;</span><span class="p">,</span> <span class="s">&#39;bd_100hr&#39;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_foliage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt0&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_1hr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt1&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_10hr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt2&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;bd_100hr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;crownwt3&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">trees</span><span class="p">[</span><span class="s">&#39;vol&#39;</span><span class="p">]</span>
+
+
+
+    <span class="k">def</span> <span class="nf">frustum_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the volume of a frustum</span>
+
+<span class="sd">        :param r: small (top) radius</span>
+<span class="sd">        :type r: float</span>
+<span class="sd">        :param h: height</span>
+<span class="sd">        :type h: float</span>
+<span class="sd">        :param R: big (bottom) radius</span>
+<span class="sd">        :type R: float</span>
+<span class="sd">        :return: volume</span>
+<span class="sd">        :rtype: float</span>
+
+<span class="sd">        .. math:: \frac{\pi h}{3}(R^2+rR+r^2</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">R</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">r</span><span class="o">*</span><span class="n">R</span> <span class="o">+</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">cone_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the volume of a cone</span>
+
+<span class="sd">        :param r: radius</span>
+<span class="sd">        :type r: float</span>
+<span class="sd">        :param h: height</span>
+<span class="sd">        :type h: float</span>
+<span class="sd">        :return: volume</span>
+<span class="sd">        :rtype: float</span>
+
+<span class="sd">        .. math:: \pi r^2 \frac{h}{3}</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">cylinder_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the volume of a cylinder</span>
+
+<span class="sd">        :param r: radius</span>
+<span class="sd">        :type r: float</span>
+<span class="sd">        :param h: height</span>
+<span class="sd">        :type h: float</span>
+<span class="sd">        :return: volume</span>
+<span class="sd">        :rtype: float</span>
+
+<span class="sd">        .. math:: \pi r^2 h</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">rectangle_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the volume of a rectangle</span>
+
+<span class="sd">        :param w: width</span>
+<span class="sd">        :type w: float</span>
+<span class="sd">        :param h: height</span>
+<span class="sd">        :type h: float</span>
+<span class="sd">        :return: volume</span>
+<span class="sd">        :rtype: float</span>
+
+<span class="sd">        .. math:: wwh</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">w</span><span class="o">*</span><span class="n">w</span><span class="o">*</span><span class="n">h</span>
 
 <div class="viewcode-block" id="Inventory"><a class="viewcode-back" href="../Inventory.html#fuels.Inventory">[docs]</a><span class="k">class</span> <span class="nc">Inventory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -953,9 +1180,11 @@
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">uniq_sp</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">crosswalk</span><span class="p">[</span><span class="n">side</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;Species&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="s">&quot;Species&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">crosswalk</span><span class="p">[</span><span class="n">side</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">variant</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;Species&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span>
+			         <span class="p">,</span> <span class="s">&quot;Species&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">crosswalk</span><span class="p">[</span><span class="n">side</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">variant</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s">&quot;{0} is not recognized by FVS as a {1} species</span><span class="se">\n</span><span class="s">defaulting to unknown species&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">side</span><span class="p">))</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;{0} is not recognized by FVS as a {1} species</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> 
+                                <span class="s">&quot;defaulting to unknown species&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">side</span><span class="p">))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;Species&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="s">&quot;Species&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;OT&#39;</span></div>
 
 <div class="viewcode-block" id="Inventory.format_fvs_tree_file"><a class="viewcode-back" href="../Inventory.html#fuels.Inventory.format_fvs_tree_file">[docs]</a>    <span class="k">def</span> <span class="nf">format_fvs_tree_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cratio_to_code</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
@@ -1039,6 +1268,7 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fvsTreeFile</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outputPath</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&#39;.tre&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fvsTreeFile</span><span class="p">[</span><span class="n">i</span><span class="p">])</span></div></div>
+
 </pre></div>
 
            </div>
