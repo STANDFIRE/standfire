@@ -1,0 +1,29 @@
+# Extension Veto file for fireparadox
+#
+# Extensions in this file will be set NOT compatible
+# with the fireparadox module
+
+capsis.extension.objectviewer.View3D
+
+capsis.extension.dataextractor.DEDynamicsAnalysis
+capsis.extension.dataextractor.DETimeCE12
+capsis.extension.dataextractor.DEEnumPropertyClassN
+capsis.extension.datarenderer.drcurves.DRTable
+capsis.extension.dataextractor.DEAgeClassN
+capsis.extension.dataextractor.DEDbhHeight
+capsis.extension.dataextractor.DETimeCE
+capsis.extension.dataextractor.DETimeAge
+capsis.extension.dataextractor.DETimeAL
+capsis.extension.dataextractor.DEDbhClassN
+capsis.extension.dataextractor.DETimeDbh
+capsis.extension.dataextractor.DETimeGirth
+capsis.extension.dataextractor.DETimeN
+capsis.extension.filter.general.FQualitativeProperty
+capsis.extension.dataextractor.DEGirthClassN
+capsis.extension.dataextractor.DEHeightAge
+capsis.extension.dataextractor.DEDistanceClassN
+capsis.extension.dataextractor.DETimeRecruitDead
+capsis.extension.dataextractor.DESlendernessClassN
+capsis.extension.dataextractor.DETimeH
+capsis.extension.dataextractor.DETimeDCI
+capsis.extension.filter.gtree.FBiggestTrees

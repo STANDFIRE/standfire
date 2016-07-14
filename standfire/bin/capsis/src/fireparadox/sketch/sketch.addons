@@ -1,0 +1,14 @@
+
+fireparadox.extension.editor.LayerSetEditor=enabled
+fireparadox.extension.itemchooser.FiPlantChooser=enabled
+fireparadox.extension.itemchooser.FiLayerSetChooser=enabled
+fireparadox.extension.itemchooser.FiLocalTreeChooser=enabled
+fireparadox.extension.itemchooser.FiLocalLayerSetChooser=enabled
+fireparadox.extension.sketcher.FirePatternSketcher=enabled
+capsis.lib.fire.sketcher.FiLayerSetSketcher=enabled
+fireparadox.extension.ioformat.FireDBFileLoader=enabled
+fireparadox.extension.ioformat.FireDVOLoader=enabled
+fireparadox.extension.ioformat.FireDVOLoader2=enabled
+fireparadox.extension.ioformat.FireExportScene=enabled
+
+

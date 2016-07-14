@@ -1,0 +1,48 @@
+#Example of dynamic kermes oak garrigue with initial step defined from individual layer definition
+
+#Terrain						
+#name	cellWidth(m)	altitude(m)	xMin	yMin	xMax	yMax
+Terrain0	10	0	0	0	300	200
+
+#Polygons (optionnal)						
+#fileId	"{(x1,y1);(x2,y2)...}"
+# Here we have four polygons					
+1	{(0,0);(120,0);(120,200);(0,200)}
+2	{(120,0);(166,0);(166,200);(120,200)}
+3	{(174,0);(220,0);(220,200);(174,200)}
+4	{(220,0);(300,0);(300,200);(220,200)}
+
+#LayerSet
+#LayerSetId polygonId	Color
+1	1	-1,-1,-1
+2	2	-1,-1,-1
+3	3	-1,-1,-1
+4	4	-1,-1,-1
+
+
+#Dynamical properties for LayerSet (understorey)
+# These properties are required when a temporal evolution is requested
+#LayerSetId	age	fertility	lastClearingType treatmentEffect
+#					(year)	(0 (best) to 3)	1-3	(0-1)
+1	10	1.0	1	0.0
+2	10	1.0	1	0.0
+3	10	1.0	1	0.0
+4	10	1.0	1	0.0	
+								
+#Complementary properties required for the succession model
+#layerSetId	shrubCover  ShrubCharacteristicSize (m)	shrubLiveFraction (between 0 and 1) herbCover herbCharacteristicSize liveMoistureContent DeadMoistureContent
+1	0.80	4.0	0.8	0.30	1.0	70	10.0
+2	0.80	4.0	0.8	0.30	1.0	70	10.0
+3	0.80	4.0	0.8	0.30	1.0	70	10.0
+4	0.80	4.0	0.8	0.30	1.0	70	10.0
+
+
+#TreeGroups2											
+#fileId	speciesName	polygonId	hDom50	ageTot	stemDensity(stem/ha)	gHaETFactor Gibbs MCNeedles	MCLiveTwigs	MCDeadTwigs
+# gHaETfactor is the number of gHa st deviation for basal area computation from tree space index (from -2 to 2..)		
+1	Pinus halepensis	1	12	60	300	1	0.0	90	70	10
+2	Pinus halepensis	2	12	60	300	1	0.0	90	70	10
+3	Pinus halepensis	3	12	60	300	1	0.0	90	70	10
+4	Pinus halepensis	4	12	60	300	1	0.0	90	70	10
+
+

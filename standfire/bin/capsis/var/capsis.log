@@ -1,0 +1,3582 @@
+INFO [2016.07.13 11:12:22 MDT] 
+Capsis booting...
+
+INFO [2016.07.13 11:12:22 MDT] Settings.loadPropertyFile ()
+Property file loaded: /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc/capsis.options
+
+INFO [2016.07.13 11:12:22 MDT] Settings.loadPropertyFile ()
+Property file loaded: /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc/capsis.properties
+
+INFO [2016.07.13 11:12:22 MDT] 
+Settings properties...
+     R_HOME_DIR = /program files/r/rw1090/bin
+     R_HOME_UNIT = c:
+     apple.laf.useScreenMenuBar = true
+     auto.mode.mosaic = true
+     capsis.ctrl.key = CTRL
+     capsis.download.offline.help.freq = 2
+     capsis.etc = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc
+     capsis.gui.MainFrame.location = 880x448
+     capsis.gui.MainFrame.size = 800x600
+     capsis.gui.WhatDoYouWantToDo.size = 390x250
+     capsis.main.toolbar.visible = true
+     capsis.positioner = capsis.gui.ReportPositioner
+     capsis.selector.selected.tab = 0
+     capsis.tmp = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/tmp
+     capsis.url = http://capsis.cirad.fr
+     capsis.var = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/var
+     capsis.viewers.visible = true
+     capsis.what.do.you.want.to.do = true
+     crash.recovery = true
+     debug.extension.manager = true
+     default.property.file = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc/capsis.options
+     memo.sketcher.for.BuiltinType.GRID = jeeb.lib.sketch.extension.sketcher.GridSketcher
+     memo.sketcher.for.BuiltinType.TERRAIN = jeeb.lib.sketch.scene.extension.sketcher.DTMSketcher
+     memo.sketcher.for.BuiltinType.TREE_WITH_CROWN_PROFILE = jeeb.lib.sketch.scene.extension.sketcher.TreeWithCrownProfileSketcher
+     memo.sketcher.for.Vegetation Layers = capsis.lib.fire.sketcher.FiLayerSetSketcher
+     sketch.panel3D.anti.aliasing = false
+     sketch.panel3D.debug.gl = false
+     standfire.last.memorizer = DefaultMemorizer
+     standfire.myscripts.StandFireFrame.location = 852x725
+     standfire.myscripts.StandFireFrame.size = 845x600
+     translator.warning.log = false
+     veto.dialog.location.memorization = false
+     veto.dialog.size.memorization = false
+
+INFO [2016.07.13 11:12:22 MDT] 
+System properties...
+     awt.toolkit = sun.awt.X11.XToolkit
+     file.encoding = UTF-8
+     file.encoding.pkg = sun.io
+     file.separator = /
+     java.awt.graphicsenv = sun.awt.X11GraphicsEnvironment
+     java.awt.printerjob = sun.print.PSPrinterJob
+     java.class.path = ./class:./ext/j3d-core-utils.jar:./ext/gt-epsg-hsql-2.7.5.jar:./ext/gt-metadata-2.7.5.jar:./ext/jogl-all-natives-windows-amd64.jar:./ext/toniclf.jar:./ext/hsqldb.jar:./ext/mrnf-foresttools.jar:./ext/jfreechart-1.0.13-swt.jar:./ext/jogl-all-natives-windows-i586.jar:./ext/gluegen-rt.jar:./ext/gt-referencing-2.7.5.jar:./ext/xmlpull-1.1.3.1.jar:./ext/jdom.jar:./ext/xstream-1.4.7.jar:./ext/jeeb-util.jar:./ext/gt-opengis-2.7.5.jar:./ext/gt-api-2.7.5.jar:./ext/gluegen-rt-natives-linux-amd64.jar:./ext/commons-math-2.2.jar:./ext/gluegen-rt-natives-windows-i586.jar:./ext/gluegen-rt-natives-windows-amd64.jar:./ext/jts-1.11.jar:./ext/xpp3_min.jar:./ext/lerfob-foresttools.jar:./ext/kunststoff.jar:./ext/slimplot.jar:./ext/gluegen-rt-natives-linux-i586.jar:./ext/jogl-all-natives-linux-amd64.jar:./ext/junit.jar:./ext/vecmath-1_5_2.jar:./ext/phutil.jar:./ext/jsci-core.jar:./ext/jeeb-sketch.jar:./ext/jna-4.1.0.jar:./ext/jcommon.jar:./ext/j3d-core.jar:./ext/commons-math3-3.2.jar:./ext/jogl-all-natives-linux-i586.jar:./ext/jepp.jar:./ext/phreeqc-29oct2015.jar:./ext/gt-main-2.7.5.jar:./ext/gt-shapefile-2.7.5.jar:./ext/groovy-all-1.7.1.jar:./ext/args4j.jar:./ext/quickhull3d.jar:./ext/MirStretch.jar:./ext/flanagan.jar:./ext/opencsv-1.8.jar:./ext/jep-2.4.1.jar:./ext/repicea.jar:./ext/jogl-all-natives-macosx-universal.jar:./ext/jogl-all.jar:./ext/gluegen-rt-natives-macosx-universal.jar:./ext/jfreechart-1.0.13.jar:./ext/gt-data-2.7.5.jar
+     java.class.version = 52.0
+     java.endorsed.dirs = /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/endorsed
+     java.ext.dirs = /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext
+     java.home = /usr/lib/jvm/java-8-openjdk-amd64/jre
+     java.io.tmpdir = /tmp
+     java.library.path = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/ext/linux64::/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+     java.runtime.name = OpenJDK Runtime Environment
+     java.runtime.version = 1.8.0_91-8u91-b14-0ubuntu4~16.04.1-b14
+     java.specification.name = Java Platform API Specification
+     java.specification.vendor = Oracle Corporation
+     java.specification.version = 1.8
+     java.vendor = Oracle Corporation
+     java.vendor.url = http://java.oracle.com/
+     java.vendor.url.bug = http://bugreport.sun.com/bugreport/
+     java.version = 1.8.0_91
+     java.vm.info = mixed mode
+     java.vm.name = OpenJDK 64-Bit Server VM
+     java.vm.specification.name = Java Virtual Machine Specification
+     java.vm.specification.vendor = Oracle Corporation
+     java.vm.specification.version = 1.8
+     java.vm.vendor = Oracle Corporation
+     java.vm.version = 25.91-b14
+     line.separator = 
+
+     os.arch = amd64
+     os.name = Linux
+     os.version = 4.4.0-28-generic
+     path.separator = :
+     sun.arch.data.model = 64
+     sun.boot.class.path = /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/classes
+     sun.boot.library.path = /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64
+     sun.cpu.endian = little
+     sun.cpu.isalist = 
+     sun.desktop = gnome
+     sun.io.unicode.encoding = UnicodeLittle
+     sun.java.command = capsis.app.Starter -p script standfire.myscripts.SFScript ../../tests/capsis/input/test_param.txt
+     sun.java.launcher = SUN_STANDARD
+     sun.jnu.encoding = UTF-8
+     sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+     sun.os.patch.level = unknown
+     user.country = US
+     user.dir = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis
+     user.home = /home/lawells
+     user.language = en
+     user.name = lawells
+     user.timezone = America/Boise
+
+INFO [2016.07.13 11:12:22 MDT] 
+Default encoding: UTF-8 (Aliases: [unicode-1-1-utf-8, UTF8])
+
+INFO [2016.07.13 11:12:22 MDT] 
+CapsisExtensionManager knows 1200 active extensions:
+   abccedrus.extension.standviewer.AbcSceneViewer
+   abccedrus.model.AbcInventoryLoader
+   alisier.extension.ioformat.AlsExport
+   alisier.extension.ioformat.AlsInventory
+   amapsim.extension.ioformat.SimInventory
+   amapsim.extension.ioformat.SimInventoryFromIFN
+   artemis.extension.ioformat.ArtExportWrapper
+   artemis2014.extension.ioformat.ArtExportWrapper
+   bidasoa.extension.dataextractor.FishWatershedTable
+   bidasoa.extension.intervener.FishAddition
+   bidasoa.extension.intervener.FishRemoval
+   bidasoa.extension.intervener.GeneticFishAddition
+   bidasoa.extension.intervener.WeirModification
+   bidasoa.extension.ioformat.BidInventory
+   bidasoa.extension.ioformat.GeneticFishAdditionFile
+   bidasoa.extension.standviewer.SVBidasoa
+   capsis.extension.DECalibration
+   capsis.extension.dataextractor.BillBookIRRSensitivity
+   capsis.extension.dataextractor.BillBookNPVISensitivity
+   capsis.extension.dataextractor.BillBookNPVSensitivity
+   capsis.extension.dataextractor.DEALClassN
+   capsis.extension.dataextractor.DEAgeClassN
+   capsis.extension.dataextractor.DEAgeLeafSurface
+   capsis.extension.dataextractor.DEAlleleFrequencies
+   capsis.extension.dataextractor.DECdomDeadWood
+   capsis.extension.dataextractor.DECdomN
+   capsis.extension.dataextractor.DECellLightClassN
+   capsis.extension.dataextractor.DECgN
+   capsis.extension.dataextractor.DECrownBaseHeightDistrib
+   capsis.extension.dataextractor.DECrownRatioClassN
+   capsis.extension.dataextractor.DEDbhClassN
+   capsis.extension.dataextractor.DEDbhDbhIncrement
+   capsis.extension.dataextractor.DEDbhHeight
+   capsis.extension.dataextractor.DEDbhIncrementClassN
+   capsis.extension.dataextractor.DEDbhInterception
+   capsis.extension.dataextractor.DEDbhLeafSurface
+   capsis.extension.dataextractor.DEDbhTrunkVolume
+   capsis.extension.dataextractor.DEDdom01Nha01
+   capsis.extension.dataextractor.DEDg2_SecBrDg
+   capsis.extension.dataextractor.DEDiamDistrib
+   capsis.extension.dataextractor.DEDistanceClassLoiselle
+   capsis.extension.dataextractor.DEDistanceClassN
+   capsis.extension.dataextractor.DEDynamicsAnalysis
+   capsis.extension.dataextractor.DEEconTable
+   capsis.extension.dataextractor.DEEnumPropertyClassN
+   capsis.extension.dataextractor.DEGenotypeFrequencies
+   capsis.extension.dataextractor.DEGhaSecBrDg_x_Nha
+   capsis.extension.dataextractor.DEGirthClassN
+   capsis.extension.dataextractor.DEGirthDistrib
+   capsis.extension.dataextractor.DEGirthDistrib2
+   capsis.extension.dataextractor.DEHIncrementClassN
+   capsis.extension.dataextractor.DEHdomDeadWood
+   capsis.extension.dataextractor.DEHdomN
+   capsis.extension.dataextractor.DEHeightAge
+   capsis.extension.dataextractor.DEHeightClassN
+   capsis.extension.dataextractor.DEHeightCrownBaseHeight
+   capsis.extension.dataextractor.DEHeightG
+   capsis.extension.dataextractor.DEHeightHeightIncrement
+   capsis.extension.dataextractor.DEHeightInterception
+   capsis.extension.dataextractor.DEHeightInterceptionIndex
+   capsis.extension.dataextractor.DEInterceptionIndexClassN
+   capsis.extension.dataextractor.DEIntertype
+   capsis.extension.dataextractor.DEIrradianceArea
+   capsis.extension.dataextractor.DELargeDbhClassN
+   capsis.extension.dataextractor.DELayersCover
+   capsis.extension.dataextractor.DELayersInterception
+   capsis.extension.dataextractor.DELevelClassN
+   capsis.extension.dataextractor.DELightSummaryTable
+   capsis.extension.dataextractor.DELightTable
+   capsis.extension.dataextractor.DEListOfXYSeries
+   capsis.extension.dataextractor.DELogNLogMeanV
+   capsis.extension.dataextractor.DELogNhaLogDg
+   capsis.extension.dataextractor.DERipley
+   capsis.extension.dataextractor.DESlendernessClassN
+   capsis.extension.dataextractor.DEStandTable
+   capsis.extension.dataextractor.DEStandTable$1
+   capsis.extension.dataextractor.DEStructureType
+   capsis.extension.dataextractor.DEThinTable
+   capsis.extension.dataextractor.DETimeABOVEGB
+   capsis.extension.dataextractor.DETimeACG
+   capsis.extension.dataextractor.DETimeACGAMG
+   capsis.extension.dataextractor.DETimeACVAMV
+   capsis.extension.dataextractor.DETimeAL
+   capsis.extension.dataextractor.DETimeAMG
+   capsis.extension.dataextractor.DETimeAMV
+   capsis.extension.dataextractor.DETimeAge
+   capsis.extension.dataextractor.DETimeAmapsimVol
+   capsis.extension.dataextractor.DETimeAverageProducedV
+   capsis.extension.dataextractor.DETimeAverageTreeV
+   capsis.extension.dataextractor.DETimeBARKB
+   capsis.extension.dataextractor.DETimeBARKNC
+   capsis.extension.dataextractor.DETimeBELOWGB
+   capsis.extension.dataextractor.DETimeBIOMAER
+   capsis.extension.dataextractor.DETimeBIOMRAC
+   capsis.extension.dataextractor.DETimeBIOMTOT
+   capsis.extension.dataextractor.DETimeBiomass
+   capsis.extension.dataextractor.DETimeCE
+   capsis.extension.dataextractor.DETimeCE12
+   capsis.extension.dataextractor.DETimeCOARSERB
+   capsis.extension.dataextractor.DETimeCanCovAU
+   capsis.extension.dataextractor.DETimeCanopyCover
+   capsis.extension.dataextractor.DETimeCarbon
+   capsis.extension.dataextractor.DETimeCdomCg
+   capsis.extension.dataextractor.DETimeCover
+   capsis.extension.dataextractor.DETimeCrobasBiomass
+   capsis.extension.dataextractor.DETimeCrownInterceptionIndex
+   capsis.extension.dataextractor.DETimeCrownRadius
+   capsis.extension.dataextractor.DETimeCrownRatio
+   capsis.extension.dataextractor.DETimeCumulatedBasalArea
+   capsis.extension.dataextractor.DETimeCumulatedHarvest
+   capsis.extension.dataextractor.DETimeCumulatedVolume
+   capsis.extension.dataextractor.DETimeDCI
+   capsis.extension.dataextractor.DETimeDEADBB
+   capsis.extension.dataextractor.DETimeDEADBNC
+   capsis.extension.dataextractor.DETimeDbh
+   capsis.extension.dataextractor.DETimeDbhIncrement
+   capsis.extension.dataextractor.DETimeDbhIncrementVariationCoefficient
+   capsis.extension.dataextractor.DETimeDdomDg
+   capsis.extension.dataextractor.DETimeDeadWood
+   capsis.extension.dataextractor.DETimeDeadWoodVolume
+   capsis.extension.dataextractor.DETimeDgByHdom
+   capsis.extension.dataextractor.DETimeEconValues
+   capsis.extension.dataextractor.DETimeEmerge
+   capsis.extension.dataextractor.DETimeForestGalesProbabilityValues
+   capsis.extension.dataextractor.DETimeForestGalesReturnPeriodValues
+   capsis.extension.dataextractor.DETimeForestGalesWindSpeedValues
+   capsis.extension.dataextractor.DETimeFormFact
+   capsis.extension.dataextractor.DETimeG
+   capsis.extension.dataextractor.DETimeG2
+   capsis.extension.dataextractor.DETimeG3
+   capsis.extension.dataextractor.DETimeGProd
+   capsis.extension.dataextractor.DETimeGiniG
+   capsis.extension.dataextractor.DETimeGirth
+   capsis.extension.dataextractor.DETimeH
+   capsis.extension.dataextractor.DETimeHCrownBaseH
+   capsis.extension.dataextractor.DETimeHdom
+   capsis.extension.dataextractor.DETimeHdomAU
+   capsis.extension.dataextractor.DETimeHdomHg
+   capsis.extension.dataextractor.DETimeHdomHm
+   capsis.extension.dataextractor.DETimeHeightIncrement
+   capsis.extension.dataextractor.DETimeHgCrownBaseHeightg
+   capsis.extension.dataextractor.DETimeInterCrown
+   capsis.extension.dataextractor.DETimeInterceptionIndex
+   capsis.extension.dataextractor.DETimeInterceptionIndexRank
+   capsis.extension.dataextractor.DETimeIrradianceArea
+   capsis.extension.dataextractor.DETimeLAI
+   capsis.extension.dataextractor.DETimeLEAVESB
+   capsis.extension.dataextractor.DETimeLEAVESNC
+   capsis.extension.dataextractor.DETimeLFINERB
+   capsis.extension.dataextractor.DETimeLIVINGBB
+   capsis.extension.dataextractor.DETimeLIVINGBNC
+   capsis.extension.dataextractor.DETimeLitterFall
+   capsis.extension.dataextractor.DETimeMEDRB
+   capsis.extension.dataextractor.DETimeMeanDbhIncrement
+   capsis.extension.dataextractor.DETimeMeanDbhIncrement2
+   capsis.extension.dataextractor.DETimeMeanHMeanCrownBaseH
+   capsis.extension.dataextractor.DETimeMeanHarvest
+   capsis.extension.dataextractor.DETimeMeanIrradiance
+   capsis.extension.dataextractor.DETimeMeanRatePMoth
+   capsis.extension.dataextractor.DETimeMeanSLLight
+   capsis.extension.dataextractor.DETimeMultiG
+   capsis.extension.dataextractor.DETimeN
+   capsis.extension.dataextractor.DETimeProducedG
+   capsis.extension.dataextractor.DETimeProducedV
+   capsis.extension.dataextractor.DETimeRDINoIndividualTrees
+   capsis.extension.dataextractor.DETimeRW
+   capsis.extension.dataextractor.DETimeRadiationInterception
+   capsis.extension.dataextractor.DETimeRatioN6N4
+   capsis.extension.dataextractor.DETimeRatioV6
+   capsis.extension.dataextractor.DETimeRatioV6V4
+   capsis.extension.dataextractor.DETimeRatiocomV6V4
+   capsis.extension.dataextractor.DETimeRdi
+   capsis.extension.dataextractor.DETimeRecruitDead
+   capsis.extension.dataextractor.DETimeRockfornetPRRH
+   capsis.extension.dataextractor.DETimeRootCarbon
+   capsis.extension.dataextractor.DETimeSDI2
+   capsis.extension.dataextractor.DETimeSFINERB
+   capsis.extension.dataextractor.DETimeSHB
+   capsis.extension.dataextractor.DETimeSMALLBB
+   capsis.extension.dataextractor.DETimeSTEMB
+   capsis.extension.dataextractor.DETimeSTEMNC
+   capsis.extension.dataextractor.DETimeSTUMPB
+   capsis.extension.dataextractor.DETimeSdbr_totale_m2_ha
+   capsis.extension.dataextractor.DETimeSecBrDg
+   capsis.extension.dataextractor.DETimeSecBrDg_x_Nha
+   capsis.extension.dataextractor.DETimeShannonG
+   capsis.extension.dataextractor.DETimeSizeDispersion
+   capsis.extension.dataextractor.DETimeSlenderness
+   capsis.extension.dataextractor.DETimeSlendernessRatio
+   capsis.extension.dataextractor.DETimeTOTALB
+   capsis.extension.dataextractor.DETimeTotalAccumulationQuantityC
+   capsis.extension.dataextractor.DETimeTotalAccumulationQuantityN
+   capsis.extension.dataextractor.DETimeTotalAccumulationQuantityNendo
+   capsis.extension.dataextractor.DETimeTotalAccumulationQuantityNexo
+   capsis.extension.dataextractor.DETimeTotalResidualQuantityC
+   capsis.extension.dataextractor.DETimeTotalResidualQuantityN
+   capsis.extension.dataextractor.DETimeTotalV
+   capsis.extension.dataextractor.DETimeTreeVolume
+   capsis.extension.dataextractor.DETimeV
+   capsis.extension.dataextractor.DETimeV2
+   capsis.extension.dataextractor.DETimeVDeadwood
+   capsis.extension.dataextractor.DETimeVHoner
+   capsis.extension.dataextractor.DETimeVPerron
+   capsis.extension.dataextractor.DETimeVProd2
+   capsis.extension.dataextractor.DETimeVg
+   capsis.extension.dataextractor.DETimeVg2
+   capsis.extension.dataextractor.DETimeVolumeByEndUseProducts
+   capsis.extension.dataextractor.DETimeVolumeByLogCategories
+   capsis.extension.dataextractor.DETimeVolumeInd
+   capsis.extension.dataextractor.DETimeWilsonFactor
+   capsis.extension.dataextractor.DETimeYield
+   capsis.extension.dataextractor.DEVolumeClassN
+   capsis.extension.dataextractor.FishAgeClassN
+   capsis.extension.dataextractor.FishForkLengthAge
+   capsis.extension.dataextractor.FishForkLengthClassN
+   capsis.extension.dataextractor.FishSurvivalProbaClassN
+   capsis.extension.dataextractor.FishTimeIndividualForkLength
+   capsis.extension.dataextractor.FishTimeMeanFIS
+   capsis.extension.dataextractor.FishWatershedTable
+   capsis.extension.dataextractor.Mu2TimeCrobasBiomass
+   capsis.extension.dataextractor.MuTimeDdom
+   capsis.extension.dataextractor.MuTimeDg
+   capsis.extension.dataextractor.MuTimeG
+   capsis.extension.dataextractor.MuTimeHdom
+   capsis.extension.dataextractor.MuTimeMerchantVolume
+   capsis.extension.dataextractor.MuTimeN
+   capsis.extension.dataextractor.MuTimeSpecificProperty
+   capsis.extension.dataextractor.MuTimeTotalVolume
+   capsis.extension.dataextractor.ReachConnectivity
+   capsis.extension.dataextractor.ReachMeanWidthClassN
+   capsis.extension.dataextractor.ReachOrderClassN
+   capsis.extension.dataextractor.ReachSlopeClassN
+   capsis.extension.datarenderer.DRTables
+   capsis.extension.datarenderer.barchart.BarChart
+   capsis.extension.datarenderer.drcurves.DRCurves
+   capsis.extension.datarenderer.drcurves.DRHistogram
+   capsis.extension.datarenderer.drcurves.DRScatterPlot
+   capsis.extension.datarenderer.drcurves.DRTable
+   capsis.extension.datarenderer.drgraph.DRBarGraph
+   capsis.extension.datarenderer.drgraph.DRGraph
+   capsis.extension.datarenderer.drgraph.DRScatterGraph
+   capsis.extension.datarenderer.jfreechart.JFCBarChart
+   capsis.extension.datarenderer.jfreechart.JFCLineChart
+   capsis.extension.datarenderer.jfreechart.JFCScatterPlot
+   capsis.extension.economicfunction.ExpenseConstant
+   capsis.extension.economicfunction.ExpensePerHectare
+   capsis.extension.economicfunction.IncomeConstant
+   capsis.extension.economicfunction.IncomeFunction
+   capsis.extension.economicfunction.IncomePerCircumferenceRange
+   capsis.extension.economicfunction.IncomePerDiameterRange
+   capsis.extension.economicfunction.IncomePerVolume
+   capsis.extension.extractorgroup.ExtractorGroup1
+   capsis.extension.filter.gcell.FCellGridSelector
+   capsis.extension.filter.general.FBooleans
+   capsis.extension.filter.general.FIndividualSelector
+   capsis.extension.filter.general.FIntegers
+   capsis.extension.filter.general.FNumericThresholds
+   capsis.extension.filter.general.FQualitativeProperty
+   capsis.extension.filter.gfish.FishInReachGroup
+   capsis.extension.filter.gfish.FishThreshold
+   capsis.extension.filter.gtree.FBiggestTrees
+   capsis.extension.filter.gtree.FThreshold
+   capsis.extension.filter.gtree.FTreeGridSelector
+   capsis.extension.filter.gtree.FTreeMouseSelector
+   capsis.extension.generictool.CsvFileViewerExt
+   capsis.extension.generictool.GraphicalExtensionManagerExt
+   capsis.extension.generictool.GroovyConsole
+   capsis.extension.generictool.InspectorExt
+   capsis.extension.generictool.LogBrowserExt
+   capsis.extension.generictool.MethodProviderDocumenterExt
+   capsis.extension.generictool.ReloadModules
+   capsis.extension.generictool.assistant.AutomationEditorExt
+   capsis.extension.generictool.assistant.SettingsEditorExt
+   capsis.extension.generictool.assistant.TranslationAssistantExt
+   capsis.extension.generictool.memoryview.MemoryMonitorExt
+   capsis.extension.generictool.memoryview.MemoryViewExt
+   capsis.extension.grouperdisplay.CellsDisplay
+   capsis.extension.grouperdisplay.InspectorDisplay
+   capsis.extension.grouperdisplay.MaddDisplay
+   capsis.extension.intervener.C2Thinner
+   capsis.extension.intervener.DHAThinner
+   capsis.extension.intervener.EconomicIntervention
+   capsis.extension.intervener.HistoThinner
+   capsis.extension.intervener.MarteloThinner
+   capsis.extension.intervener.NrgThinner2
+   capsis.extension.intervener.RdiAutoThinner
+   capsis.extension.intervener.RdiThinner
+   capsis.extension.intervener.SapThinner
+   capsis.extension.intervener.SardinUnevenThinner
+   capsis.extension.intervener.UnevenAgedManager
+   capsis.extension.intervener.albrechtwindstormmodel.AWSIntervener
+   capsis.extension.intervener.filterthinner.FilterThinner
+   capsis.extension.intervener.foreoledisturbance.ForeoleDisturbance
+   capsis.extension.intervener.individualthinner.IndividualThinner
+   capsis.extension.intervener.simcopintervener.SimcopSizeClassSpatialIntervener
+   capsis.extension.intervener.simcopintervener.SizeClassSpatialIntervener
+   capsis.extension.ioformat.AMAPsimExport
+   capsis.extension.ioformat.AMAPsimExportForIFN
+   capsis.extension.ioformat.CompatibleExtensions
+   capsis.extension.ioformat.GenePopExport
+   capsis.extension.ioformat.JaegerBlobFormat
+   capsis.extension.ioformat.LubHierFstatExport
+   capsis.extension.ioformat.LubSpagediExport
+   capsis.extension.ioformat.OneVariableRelationsSetFile
+   capsis.extension.ioformat.ScenarioReportExport
+   capsis.extension.ioformat.SpagediExport
+   capsis.extension.ioformat.StandTableExport
+   capsis.extension.lollypop.GenericLollypop
+   capsis.extension.memorizer.CompactMemorizer
+   capsis.extension.memorizer.DefaultMemorizer
+   capsis.extension.memorizer.FrequencyMemorizer
+   capsis.extension.modeltool.GeneticsGeneration
+   capsis.extension.modeltool.amapsim2.AMAPsim
+   capsis.extension.modeltool.carbonstorageinra.CarbonAccountingTool
+   capsis.extension.modeltool.castaneaclimateviewer.CastaneaClimateViewer
+   capsis.extension.modeltool.economicbalance.EconomicBalance
+   capsis.extension.modeltool.emerge.BioMineraloMass
+   capsis.extension.modeltool.emerge.DBTool
+   capsis.extension.modeltool.forestgales.ForestGales
+   capsis.extension.modeltool.forestgales2013.FGDamageCalculatorDialog
+   capsis.extension.modeltool.forestgalestree.ForestGalesTree
+   capsis.extension.modeltool.historychecker.HistoryChecker
+   capsis.extension.modeltool.optimizer.OptimizerTool
+   capsis.extension.modeltool.rivermaker.RiverMaker
+   capsis.extension.modeltool.rockfornet.RockfornetDialog
+   capsis.extension.modeltool.scenariorecorder.ScenarioRecorderTool
+   capsis.extension.modeltool.temporalwindsensitivityanalyser.TemporalWindSensitivityAnalyser
+   capsis.extension.modeltool.viewertoolkit.ViewerToolKit
+   capsis.extension.modeltool.woodqualityworkshop.WoodQualityWorkshop
+   capsis.extension.objectviewer.Boolean2DArrayViewer
+   capsis.extension.objectviewer.Byte2DArrayViewer
+   capsis.extension.objectviewer.CellInspectorViewer
+   capsis.extension.objectviewer.Char2DArrayViewer
+   capsis.extension.objectviewer.Double2DArrayViewer
+   capsis.extension.objectviewer.Float2DArrayViewer
+   capsis.extension.objectviewer.InspectorViewer
+   capsis.extension.objectviewer.Int2DArrayViewer
+   capsis.extension.objectviewer.Long2DArrayViewer
+   capsis.extension.objectviewer.MaskTester
+   capsis.extension.objectviewer.NZ1SideViewer
+   capsis.extension.objectviewer.OVDiameterGrowth
+   capsis.extension.objectviewer.PieceViewer2D
+   capsis.extension.objectviewer.Short2DArrayViewer
+   capsis.extension.objectviewer.SketchOV
+   capsis.extension.objectviewer.TreeInspectorViewer
+   capsis.extension.objectviewer.TreeSideViewer
+   capsis.extension.objectviewer.Viewer2DHalf
+   capsis.extension.objectviewer.WatershedViewer
+   capsis.extension.spatializer.IdentitySpatializer
+   capsis.extension.spatializer.LineSpatializer
+   capsis.extension.standviewer.MultipartSceneViewer
+   capsis.extension.standviewer.SVAvatars
+   capsis.extension.standviewer.SVBillBook
+   capsis.extension.standviewer.SVController
+   capsis.extension.standviewer.SVFinancialReport
+   capsis.extension.standviewer.SVInspector
+   capsis.extension.standviewer.SVLox
+   capsis.extension.standviewer.SVMaid
+   capsis.extension.standviewer.SVPolygons
+   capsis.extension.standviewer.SVQuergus
+   capsis.extension.standviewer.SVSamsara
+   capsis.extension.standviewer.SVSapin
+   capsis.extension.standviewer.SVSimple
+   capsis.extension.standviewer.SVTables
+   capsis.extension.standviewer.SVText
+   capsis.extension.treelogger.geolog.GeoLog
+   capsis.extension.treelogger.log2job.Log2Job
+   capsis.extension.treelogger.pp3treelogger.Pp3Logging
+   capsis.extension.workingprocess.Bundling
+   capsis.extension.workingprocess.Chipping
+   capsis.extension.workingprocess.ChippingRoadSide
+   capsis.extension.workingprocess.Forwarding
+   capsis.extension.workingprocess.LogTransporting
+   capsis.extension.workingprocess.MechanicalHarvesting
+   capsis.extensiontype.ExtractorGroup
+   capsis.lib.economics2.gui.EconomicModelTool
+   capsis.lib.economics2.gui.EconomicTextViewer
+   capsis.lib.fire.exporter.PhysExporter
+   capsis.lib.fire.exporter.commons.PhysExporter
+   capsis.lib.fire.exporter.firetec.Firetec
+   capsis.lib.fire.exporter.wfds.WFDS
+   capsis.lib.fire.importer.SVSLoader
+   capsis.lib.fire.intervener.FiTreePruning
+   capsis.lib.fire.intervener.FuelMoistureAdjuster
+   capsis.lib.fire.intervener.LayerSetThinner
+   capsis.lib.fire.intervener.empiricalfireeffect.FiEmpiricalFireEffect
+   capsis.lib.fire.intervener.physicalfireeffect.FiPhysicalFireEffect
+   capsis.lib.fire.sketcher.FiLayerSetSketcher
+   capsis.lib.fire.standviewer.FiStandViewer3D
+   capsis.lib.quest.knotviewer.QuestKnotViewer
+   capsis.lib.quest.ringviewer.QuestRingViewer
+   capsis.util.extendeddefaulttype.dataextractor.DEBasalAreaComposition
+   capsis.util.extendeddefaulttype.dataextractor.DEDbhClassN2
+   capsis.util.extendeddefaulttype.dataextractor.DEHeightClassN2
+   capsis.util.extendeddefaulttype.dataextractor.DEIncrementComponents
+   capsis.util.extendeddefaulttype.dataextractor.DETimeDWithCI
+   capsis.util.extendeddefaulttype.dataextractor.DETimeGWithCI
+   capsis.util.extendeddefaulttype.dataextractor.DETimeHWithCI
+   capsis.util.extendeddefaulttype.dataextractor.DETimeNWithCI
+   capsis.util.extendeddefaulttype.dataextractor.DETimeRingWidth
+   capsis.util.extendeddefaulttype.dataextractor.DETimeVWithCI
+   castaneaonly.model.CastInventoryLoader
+   croireplant.extension.dataextractor.CPlantGrowthTimeDbh
+   croireplant.extension.dataextractor.CPlantGrowthTimeG
+   croireplant.extension.dataextractor.CPlantGrowthTimeHd
+   croireplant.extension.dataextractor.CPlantGrowthTimeIncr
+   croireplant.extension.dataextractor.CPlantGrowthTimeN
+   croireplant.extension.dataextractor.CPlantGrowthTimeV
+   croireplant.extension.intervener.CPlantThinner
+   croireplant.extension.ioformat.CPlantExportPlacette
+   croireplant.extension.ioformat.CPlantExportTool
+   croireplant.extension.ioformat.CPlantInventoryLoader
+   cytisus.extension.dataextractor.CytDistanceClassN
+   cytisus.extension.dataextractor.CytTimeSeedNumber
+   cytisus.extension.dataextractor.DETimeFlowerNumber
+   cytisus.extension.dataextractor.DETimeGrassCover
+   cytisus.extension.dataextractor.DETimeResource
+   cytisus.extension.ioformat.CytExport
+   cytisus.extension.ioformat.CytGrassExport
+   cytisus.extension.ioformat.CytInventory
+   cytisus.extension.objectviewer.CytViewer
+   cytisus.extension.standviewer.SVCytisus
+   deesses.extension.dataextractor.DesTimeDg
+   deesses.extension.dataextractor.DesTimeG
+   deesses.extension.dataextractor.DesTimeN
+   deesses.extension.dataextractor.DesTimeProducedG
+   deesses.extension.dataextractor.DesTimeRDI
+   deesses.extension.dataextractor.DesTimeTxSpecies
+   deesses.extension.intervener.DesThinner
+   deesses.extension.intervener.DesThinner_PV
+   deesses.model.DesInventoryLoader
+   dynaclim.extension.ioformat.DcInventory
+   dynaclim.extension.ioformat.FmInventory
+   dynet.extension.dataextractor.FishGrowthRate
+   dynet.extension.dataextractor.FishPairwiseFST
+   dynet.extension.dataextractor.FishPatchExtinction
+   dynet.extension.dataextractor.FishPatchOccupancy
+   dynet.extension.dataextractor.FishTimeAlleleN
+   dynet.extension.dataextractor.FishTimeAllelicDiversity
+   dynet.extension.dataextractor.FishTimeN
+   dynet.extension.ioformat.DynInventory
+   dynet.extension.standviewer.SVDynet
+   economics.extension.intervener.EcoThinner
+   economics.extension.ioformat.BalanceSheet
+   economics.extension.standviewer.SVEconomicBalance
+   economics.model.EcoDendroFileLoader
+   eucalypt.extension.intervener.EptusCutPlant
+   eucalypt.extension.intervener.EptusSimpleThinner
+   eucalypt.extension.intervener.EptusThinner
+   eucalypt.extension.ioformat.EptusCellExport
+   eucalypt.extension.ioformat.EptusGISExport
+   eucalypt.extension.ioformat.EptusGISExportTree
+   eucalypt.extension.ioformat.EptusIOModel
+   eucalypt.extension.ioformat.EptusInventory
+   eucalypt.extension.standviewer.sveucalypt.SVEucalypt
+   fasy.extension.dataextractor.FasyTimeHdom
+   fasy.extension.intervener.FasyThinner
+   fasy.extension.ioformat.FasyInventory
+   fcba.piceaabies.extension.dataextractor.DETimeDead
+   fcba.piceaabies.extension.dataextractor.DETimeDg
+   fcba.piceaabies.extension.dataextractor.DETimeG
+   fcba.piceaabies.extension.dataextractor.DETimeHg
+   fcba.piceaabies.extension.export.FpaExport
+   fcba.piceaabies.extension.intervener.FpaThinner
+   fcba.piceaabies.model.FpaInventoryLoader
+   fcba.pseudotsugamenziesii.extension.dataextractor.DETimeDead
+   fcba.pseudotsugamenziesii.extension.dataextractor.DETimeDg
+   fcba.pseudotsugamenziesii.extension.dataextractor.DETimeG
+   fcba.pseudotsugamenziesii.extension.dataextractor.DETimeHg
+   fcba.pseudotsugamenziesii.extension.export.FpmExport
+   fcba.pseudotsugamenziesii.extension.intervener.FpmThinner
+   fcba.pseudotsugamenziesii.model.FpmInventoryLoader
+   fiesta.extension.intervener.NrgThinner
+   fiesta.extension.ioformat.FtaInventory
+   fiesta.extension.standviewer.SVFta
+   fireparadox.extension.editor.LayerSetEditor
+   fireparadox.extension.intervener.BeetleInitialization
+   fireparadox.extension.intervener.FiTreePruning
+   fireparadox.extension.intervener.FuelMoistureAdjuster
+   fireparadox.extension.intervener.LayerSetThinner
+   fireparadox.extension.ioformat.FireDBFileLoader
+   fireparadox.extension.ioformat.FireDVOLoader
+   fireparadox.extension.ioformat.FireDVOLoader2
+   fireparadox.extension.ioformat.FireDVOLoaderFromFieldParameters
+   fireparadox.extension.ioformat.FireDVOLoaderICFME
+   fireparadox.extension.ioformat.FireExportScene
+   fireparadox.extension.ioformat.FireSVSLoader
+   fireparadox.extension.ioformat.SVSLoader2
+   fireparadox.extension.itemchooser.FiLayerSetChooser
+   fireparadox.extension.itemchooser.FiLocalLayerSetChooser
+   fireparadox.extension.itemchooser.FiLocalTreeChooser
+   fireparadox.extension.itemchooser.FiPlantChooser
+   fireparadox.extension.objectviewer.FiSeverityOV
+   fireparadox.extension.objectviewer.FireSelectionState
+   fireparadox.extension.sketcher.FiLayerSetSketcher
+   fireparadox.extension.sketcher.FirePatternSketcher
+   fireparadox.extension.standviewer.SVFireParadox
+   fompine.extension.intervener.FomThinner
+   fompine.extension.standviewer.SVFompine
+   fompine.model.FomInventoryLoader
+   forceps.extension.dataextractor.CepsTimeN
+   forceps.extension.dataextractor.CepsTimeSpeciesBasalArea
+   forceps.extension.dataextractor.CepsTimeSpeciesBiomass
+   forceps.extension.dataextractor.DETimeN
+   forceps.extension.ioformat.CepsExport
+   forceps.extension.ioformat.CepsGrowingIncrement
+   forceps.extension.ioformat.CepsMeanStandExport
+   forceps.extension.ioformat.CepsPpMothCompleteExport
+   forceps.extension.ioformat.CepsProductivity
+   forceps.extension.ioformat.CepsProductivityScene
+   forceps.extension.ioformat.CepsProductivitySceneGenotype
+   forceps.extension.ioformat.CepsSpeciesExport
+   forceps.extension.standviewer.SVForceps
+   genloader.extension.ioformat.GenExport
+   genloader.extension.ioformat.GenInventory
+   gpmf.pinmars0.extension.intervener.PM0Thinner
+   gpmf.pinmars0.model.PM0InventoryLoader
+   guppy.extension.dataextractor.FishColourClassN
+   guppy.extension.dataextractor.FishColourSurvival
+   guppy.extension.dataextractor.FishFecundity
+   guppy.extension.dataextractor.FishFemaleChoice
+   guppy.extension.dataextractor.FishGeneticLinkage
+   guppy.extension.dataextractor.FishPrefClassN
+   guppy.extension.dataextractor.FishPrefColourPlot
+   guppy.extension.dataextractor.FishTimeExpectedMatingProba
+   guppy.extension.dataextractor.FishTimeExpectedSurvival
+   guppy.extension.dataextractor.FishTimeGenericMeanTheta
+   guppy.extension.dataextractor.FishTimeHaldanes
+   guppy.extension.dataextractor.FishTimeLinkage
+   guppy.extension.dataextractor.FishTimeMatingSuccess
+   guppy.extension.dataextractor.FishTimeMeanColour
+   guppy.extension.dataextractor.FishTimeMeanPref
+   guppy.extension.dataextractor.FishTimePredationN
+   guppy.extension.dataextractor.FishTimeRelativeColour
+   guppy.extension.dataextractor.FishTimeSurvival
+   guppy.extension.ioformat.GupInventory
+   guppy.extension.standviewer.SVGuppy
+   gymnos.extension.dataextractor.GymnoDdomRdi
+   gymnos.extension.dataextractor.GymnoTimeWoodType
+   gymnos.extension.intervener.GymnoBarkPeelingRDIThinner
+   gymnos.extension.intervener.GymnoDeerProtection
+   gymnos.extension.intervener.GymnoGHAThinner
+   gymnos.extension.intervener.GymnoGHAThinner2
+   gymnos.extension.intervener.GymnoGlobalThinner
+   gymnos.extension.intervener.GymnoNHAThinner
+   gymnos.extension.intervener.GymnoNHAThinner2
+   gymnos.extension.intervener.GymnoRDIThinner
+   gymnos.extension.intervener.GymnoRDIThinner2
+   gymnos.extension.intervener.GymnoSelectTargetTrees
+   gymnos.extension.intervener.GymnosDeerProtection
+   gymnos.extension.ioformat.GymnoExport
+   gymnos.extension.ioformat.GymnoStandTableExport
+   gymnos.extension.ioformat.GymnosTreeDataExport
+   gymnos.model.GymnoInventoryLoader
+   heterofor.extension.dataextractor.DETimeBiomass
+   heterofor.extension.intervener.HetThinner
+   heterofor.extension.ioformat.HetExport
+   heterofor.extension.ioformat.HetLitterNutrientFlux
+   heterofor.extension.ioformat.HetNutrientCyclingExport
+   heterofor.extension.ioformat.HetThinnedTreeNutrientStock
+   heterofor.extension.ioformat.HetTreeNutrientDemand
+   heterofor.extension.ioformat.HetTreeNutrientStock
+   heterofor.extension.modeltool.paruseefficiencyestimationtool.PUEEstimationTool
+   heterofor.extension.modeltool.predictionassessmenttool.PredictionAssessmentTool
+   heterofor.model.HetInventoryLoader
+   ifnca.extension.dataextractor.DEAgeClassA
+   ifnca.extension.dataextractor.DEAgeClassV
+   ifnca.extension.ioformat.IfnCaInventory
+   isgm.extension.dataextractor.DEIsgmAgeAverageTreeDbh
+   isgm.extension.dataextractor.DEIsgmAgeDensityIndex
+   isgm.extension.dataextractor.DEIsgmAgeNumberOfTrees
+   isgm.extension.dataextractor.DEIsgmAgeTotalBasalArea
+   isgm.extension.dataextractor.DEIsgmAgeTreeHeight
+   isgm.extension.dataextractor.DEIsgmAgeVolume
+   isgm.extension.dataextractor.DEIsgmAgeVolumeGrowthRate
+   isgm.extension.dataextractor.DEIsgmStandTable
+   isgm.extension.ioformat.IsgmStandTableExport
+   isgm.extension.modeltool.IsgmDensityControlDialog
+   ivy.extension.ioformat.IvInventory
+   jeeb.lib.sketch.extension.editor.GridEditor
+   jeeb.lib.sketch.extension.editor.ItemEditor
+   jeeb.lib.sketch.extension.objectviewer.GlanceWrapper
+   jeeb.lib.sketch.extension.objectviewer.InspectorViewer
+   jeeb.lib.sketch.extension.objectviewer.SelectionTable
+   jeeb.lib.sketch.extension.sketcher.AnchorSketcher
+   jeeb.lib.sketch.extension.sketcher.BoundingBoxSketcher
+   jeeb.lib.sketch.extension.sketcher.GridSketcher
+   jeeb.lib.sketch.extension.sketcher.MeshItemSketcher
+   jeeb.lib.sketch.scene.extension.editor.LineEditor
+   jeeb.lib.sketch.scene.extension.itemchooser.FileChooser
+   jeeb.lib.sketch.scene.extension.itemchooser.Frequency
+   jeeb.lib.sketch.scene.extension.itempattern.AlongLine
+   jeeb.lib.sketch.scene.extension.itempattern.ClickPattern
+   jeeb.lib.sketch.scene.extension.itempattern.LinePattern
+   jeeb.lib.sketch.scene.extension.itempattern.RandomPattern
+   jeeb.lib.sketch.scene.extension.itempattern.SelectionPattern
+   jeeb.lib.sketch.scene.extension.sketcher.ContourSketcher
+   jeeb.lib.sketch.scene.extension.sketcher.DTMSketcher
+   jeeb.lib.sketch.scene.extension.sketcher.SelectionSketcher
+   jeeb.lib.sketch.scene.extension.sketcher.TreeSketcher
+   jeeb.lib.sketch.scene.extension.sketcher.TreeWithCrownProfileSketcher
+   jeeb.xplo.extension.sketcher.grid_xyz_sketcher.GridXYZSketcher
+   karite.extension.ioformat.KariteInventory
+   karite.extension.standviewer.SVKarite
+   kerguelen.extension.ioformat.KerInventory
+   kerguelen.extension.standviewer.SVKerguelen
+   lemoine.extension.intervener.LemThinner
+   lemoine.extension.ioformat.LemIFNInventory
+   lerfob.abial.extension.dataextractor.DETimeModelHdom
+   lerfob.abial.extension.ioformat.AbialInventory
+   lerfob.fagacees.extension.dataextractor.DEDbhHeight2
+   lerfob.fagacees.extension.dataextractor.DETimeFgBiomass
+   lerfob.fagacees.extension.dataextractor.DETimeMineralElement
+   lerfob.fagacees.extension.dataextractor.DETimeStandCalcium
+   lerfob.fagacees.extension.dataextractor.DETimeStandMagnesium
+   lerfob.fagacees.extension.dataextractor.DETimeStandManganese
+   lerfob.fagacees.extension.dataextractor.DETimeStandNitrogen
+   lerfob.fagacees.extension.dataextractor.DETimeStandPhosphorus
+   lerfob.fagacees.extension.dataextractor.DETimeStandPotassium
+   lerfob.fagacees.extension.dataextractor.DETimeStandSulfur
+   lerfob.fagacees.extension.dataextractor.DETimeStandingTimberValue
+   lerfob.fagacees.extension.ioformat.FgExportTool
+   lerfob.fagacees.extension.ioformat.FgInventory
+   lerfob.fagacees.extension.ioformat.FgStandTableExport
+   lerfob.fagacees.extension.ioformat.FgSumSteps
+   lerfob.fagacees.extension.ioformat.FgSumStepsWithMasses
+   lerfob.fagacees.extension.ioformat.FgSumStepsWithTrees
+   lerfob.fagacees.extension.objectviewer.FgTreeTaper
+   loxodonta.extension.ioformat.LoxInventory
+   lsfmgm.extension.dataextractor.DEDiameterClassBasalArea
+   lsfmgm.extension.dataextractor.DEDiameterClassBiomass
+   lsfmgm.extension.dataextractor.DEDiameterClassN
+   lsfmgm.extension.dataextractor.DEDiameterClassSpeciesClassN
+   lsfmgm.extension.dataextractor.DEDiameterClassVolume
+   lsfmgm.extension.dataextractor.DESpeciesClassBasalArea
+   lsfmgm.extension.dataextractor.DESpeciesClassBiomass
+   lsfmgm.extension.dataextractor.DESpeciesClassN
+   lsfmgm.extension.dataextractor.DESpeciesClassVolume
+   lsfmgm.extension.dataextractor.DETimeBasalArea
+   lsfmgm.extension.dataextractor.DETimeBiomass
+   lsfmgm.extension.dataextractor.DETimeChange
+   lsfmgm.extension.dataextractor.DETimeDiameterClassBasalArea
+   lsfmgm.extension.dataextractor.DETimeDiameterClassBiomass
+   lsfmgm.extension.dataextractor.DETimeDiameterClassN
+   lsfmgm.extension.dataextractor.DETimeDiameterClassVolume
+   lsfmgm.extension.dataextractor.DETimeN
+   lsfmgm.extension.dataextractor.DETimeSpeciesClassBasalArea
+   lsfmgm.extension.dataextractor.DETimeSpeciesClassBiomass
+   lsfmgm.extension.dataextractor.DETimeSpeciesClassN
+   lsfmgm.extension.dataextractor.DETimeSpeciesClassVolume
+   lsfmgm.extension.dataextractor.DETimeSpeciesDiversity
+   lsfmgm.extension.dataextractor.DETimeTreeSizeDivesity
+   lsfmgm.extension.dataextractor.DETimeVolume
+   lsfmgm.extension.modeltool.LSFMMultiObjectiveTool
+   luberon.extension.ioformat.LubExportAdult
+   luberon.extension.ioformat.LubExportG0
+   luberon.extension.ioformat.LubExportG1
+   luberon.extension.ioformat.LubExportG2
+   luberon.extension.ioformat.LubInventory
+   luberon.extension.ioformat.LubSpagediExportAdult
+   maddmodule.extension.dataextractor.DESpeciesClassN
+   maddmodule.extension.dataextractor.DESpeciesN
+   maddmodule.extension.dataextractor.DESpeciesTimeN
+   maddmodule.extension.dataextractor.DETestColoredCurves
+   maddmodule.extension.dataextractor.DETimeN
+   mangrove.extension.ioformat.ManInventory
+   mangrove.extension.standviewer.svmangrove.SVMangrove
+   matapedia.extension.ioformat.MatapExportWrapper
+   mathilde.extension.ioformat.MathildeExportWrapper
+   mediterranea.extension.dataextractor.FishIntrogressionClassN
+   mediterranea.extension.dataextractor.FishPairwiseTheta
+   mediterranea.extension.dataextractor.FishTimeIntrogression
+   mediterranea.extension.dataextractor.MedFishTimeN
+   mediterranea.extension.dataextractor.MedWatershedTable
+   mediterranea.extension.dataextractor.ReachAltitudeClassN
+   mediterranea.extension.dataextractor.ReachMeanWinterTempN
+   mediterranea.extension.dataextractor.ThetaTable
+   mediterranea.extension.intervener.AgeHistoFisher
+   mediterranea.extension.intervener.FishAddition
+   mediterranea.extension.intervener.FishRemoval
+   mediterranea.extension.intervener.FishTranslocation
+   mediterranea.extension.intervener.GeneticFishAddition
+   mediterranea.extension.intervener.HatchRemoval
+   mediterranea.extension.intervener.HistoFisher
+   mediterranea.extension.intervener.IntrogressionHistoFisher
+   mediterranea.extension.intervener.WeirModification
+   mediterranea.extension.ioformat.GeneticFishAdditionFile
+   mediterranea.extension.ioformat.MedInventory
+   mediterranea.extension.standviewer.SVMediterranea
+   melies.extension.dataextractor.MesTimeDg
+   melies.extension.dataextractor.MesTimeG
+   melies.extension.dataextractor.MesTimeN
+   melies.extension.dataextractor.MesTimeProducedG
+   melies.extension.dataextractor.MesTimeRDI
+   melies.extension.dataextractor.MesTimeTxSpecies
+   melies.extension.intervener.MesThinner
+   melies.extension.intervener.MesThinner_PV
+   melies.model.MesInventoryLoader
+   migration.extension.dataextractor.DEHorDistanceN
+   migration.extension.dataextractor.DEVerDistanceN
+   migration.extension.dataextractor.MigSynthesisTable
+   migration.extension.intervener.MigThinner
+   migration.extension.ioformat.MigExportCell
+   migration.extension.ioformat.MigExportCohort
+   migration.extension.ioformat.MigInventory
+   migration.extension.standviewer.SVMigration
+   modispinaster.extension.dataextractor.ModisBiomassBalboa
+   modispinaster.extension.dataextractor.ModisBiomassLopes
+   modispinaster.extension.dataextractor.ModisBiomassRuiz
+   modispinaster.extension.dataextractor.ModisBiomassViana
+   modispinaster.extension.dataextractor.ModisDiameterClassBiomass
+   modispinaster.extension.dataextractor.ModisDiameterClassN
+   modispinaster.extension.dataextractor.ModisDiameterClassV
+   modispinaster.extension.dataextractor.ModisKeltoyerCBD
+   modispinaster.extension.dataextractor.ModisKeltoyerCBH
+   modispinaster.extension.dataextractor.ModisKeltoyerCL
+   modispinaster.extension.dataextractor.ModisKeltoyerHBLC
+   modispinaster.extension.dataextractor.ModisStandTable
+   modispinaster.extension.dataextractor.ModisTimeDebris
+   modispinaster.extension.dataextractor.ModisTimeSlenderness
+   modispinaster.extension.dataextractor.ModisTimeVolumeIncrement
+   mountain.extension.ioformat.MountASCIIFileforSVSExport
+   mountain.extension.ioformat.MountCellLightExport
+   mountain.extension.ioformat.MountCustom
+   mountain.extension.ioformat.MountInventory2
+   mountain.extension.ioformat.MountSVSExport
+   mountain.extension.ioformat.MountTotalExport
+   mountain.extension.ioformat.MountWinEpiFn
+   mountain.extension.standviewer.SVMountain
+   mpb.extension.ioformat.MpbExport
+   mpb.extension.ioformat.MpbExportShapefile
+   mpb.extension.ioformat.MpbInventory
+   mpb.extension.standviewer.SVMpb
+   mustard.extension.dataextractor.DEAgeManagementUnitClassN
+   mustard.extension.dataextractor.DEGClassN
+   mustard.extension.dataextractor.DEHdomClassN
+   mustard.extension.dataextractor.DEManagementUnitStatusClassN
+   mustard.extension.dataextractor.DENClassN
+   mustard.extension.dataextractor.DETimeAfforestedArea
+   mustard.extension.dataextractor.DETimeForestWorksAmount
+   mustard.extension.dataextractor.DETimeIncVProd
+   mustard.extension.dataextractor.DETimeVProd
+   mustard.extension.ioformat.MustInventory
+   natura.extension.dataextractor.DETimePepEssNGVD
+   natura.extension.dataextractor.DETimePepPEssNGVD
+   natura.extension.dataextractor.DETimePepPTotNGVD
+   natura.extension.dataextractor.DETimePepTotNGVD
+   natura.extension.ioformat.PepExportData
+   natura.extension.ioformat.PepInventoryA
+   natura2014.extension.dataextractor.PepGrowthTimeDq
+   natura2014.extension.dataextractor.PepGrowthTimeG
+   natura2014.extension.dataextractor.PepGrowthTimeN
+   natura2014.extension.dataextractor.PepGrowthTimeV
+   natura2014.extension.ioformat.PepExportTool
+   nrg.extension.intervener.NrgThinner3
+   nrg.extension.ioformat.NrgExportTreeList
+   nrg.extension.ioformat.NrgInventory
+   nrg.extension.standviewer.SVNrg
+   nrg.extension.standviewer.SVNrg2
+   nz1.extension.ioformat.NZ1Inventory
+   nz1.extension.treelogger.nz1treelogger.NZ1LogMaker
+   oakpine1.extension.grouperdisplay.OakPineDisplay
+   oakpine1.extension.ioformat.Opi1Inventory
+   oakpine2.extension.dataextractor.DEOpi2DistributionChecker
+   oakpine2.extension.ioformat.Opi2Inventory
+   optimist.extension.dataextractor.OptimTimeBiomass
+   optimist.extension.dataextractor.OptimTimeDdomDmean
+   optimist.extension.dataextractor.OptimTimeG
+   optimist.extension.dataextractor.OptimTimeMah
+   optimist.extension.dataextractor.OptimTimeVolume
+   optimist.extension.intervener.OptimClearCut
+   optimist.extension.intervener.OptimGlobalThinner
+   optimist.extension.standviewer.SVOptimist
+   optimist.model.brutiaea.BrutiaeaFileLoader
+   optimist.model.brutiaua.BrutiauaFileLoader
+   organon.extension.dataextractor.OrgBasalAreaPerHectare
+   organon.extension.dataextractor.OrgBoardFootVolumePerHectare
+   organon.extension.dataextractor.OrgCubicMetersVolumePerHectare
+   organon.extension.dataextractor.OrgImperialBasalAreaPerAcre
+   organon.extension.dataextractor.OrgImperialBoardFootVolumePerAcre
+   organon.extension.dataextractor.OrgImperialCubicFootVolumePerAcre
+   organon.extension.dataextractor.OrgImperialQuadraticMeanDiameterInches
+   organon.extension.dataextractor.OrgImperialTreesPerAcre
+   organon.extension.dataextractor.OrgRelativeDensity
+   organon.extension.dataextractor.OrgStandDensityIndex
+   organon.extension.dataextractor.OrgTreesPerHectare
+   organon.extension.dataextractor.QuadraticMeanDiameterCm
+   organon.extension.extractorgroup.ImperialPlots
+   organon.extension.extractorgroup.MetricPlots
+   organon.extension.standviewer.OrgViewer
+   organon.extension.standviewer.OrgViewerMetric
+   paletuviers.extension.standviewer.SVPaletuviers
+   phenofit.extension.dataextractor.FitCarbonSurvival
+   phenofit.extension.dataextractor.FitDroughtSurvival
+   phenofit.extension.dataextractor.FitFitness
+   phenofit.extension.dataextractor.FitFlowerDormancyBreakDate
+   phenofit.extension.dataextractor.FitFloweringDate
+   phenofit.extension.dataextractor.FitFruitGrowthInitDate
+   phenofit.extension.dataextractor.FitFruitIndex
+   phenofit.extension.dataextractor.FitFruitMaturationDate
+   phenofit.extension.dataextractor.FitLeafDormancyBreakDate
+   phenofit.extension.dataextractor.FitLeafIndex
+   phenofit.extension.dataextractor.FitLeafSenescenceDate
+   phenofit.extension.dataextractor.FitLeafUnfoldingDate
+   phenofit.extension.dataextractor.FitMaturationIndex
+   phenofit.extension.dataextractor.FitSurvival
+   phenofit.extension.dataextractor.FitTempSurvival
+   phenofit.extension.intervener.FitThinner
+   phenofit.extension.ioformat.FitExport
+   phenofit.extension.standviewer.FitViewer
+   phenofit5.extension.ioformat.Fit5Export
+   phenofit5.extension.standviewer.Fit5Viewer
+   physiodemogenetics.extension.ioformat.PDGExportAdult
+   physiodemogenetics.extension.ioformat.PDGExportArlequin
+   physiodemogenetics.extension.ioformat.PDGExportBayescan
+   physiodemogenetics.extension.ioformat.PDGExportInventory
+   physiodemogenetics.extension.ioformat.PDGExportPhenotype
+   physiodemogenetics.extension.ioformat.PDGExportRealisedDispersal
+   physiodemogenetics.extension.ioformat.PDGExportRelatedness
+   physiodemogenetics.extension.ioformat.PDGInventory
+   physiodemogenetics.extension.ioformat.PDGSpagediExport
+   pinuspinaster.extension.dataextractor.DEBarkBiomassDistrib
+   pinuspinaster.extension.dataextractor.DEBiomassDistrib
+   pinuspinaster.extension.dataextractor.DECgNFCBA1
+   pinuspinaster.extension.dataextractor.DECgNFCBA2
+   pinuspinaster.extension.dataextractor.DECgNFCBA3
+   pinuspinaster.extension.dataextractor.DECgNMauge
+   pinuspinaster.extension.dataextractor.DEDbhBiomass
+   pinuspinaster.extension.dataextractor.DEDefoliationClassDistrib
+   pinuspinaster.extension.dataextractor.DEFomPineStandTable
+   pinuspinaster.extension.dataextractor.DEFungusInfectionDistrib
+   pinuspinaster.extension.dataextractor.DELivingBranchBiomassDistrib
+   pinuspinaster.extension.dataextractor.DEStemBiomassDistrib
+   pinuspinaster.extension.dataextractor.DEStumpFungusInfectionDistrib
+   pinuspinaster.extension.dataextractor.DEThinStandCompartmentDeadWood
+   pinuspinaster.extension.dataextractor.DETimeMeanRatePMoth
+   pinuspinaster.extension.dataextractor.DETimeNDefoliationClass
+   pinuspinaster.extension.dataextractor.DETimeNFungusInfectionClass
+   pinuspinaster.extension.dataextractor.DETimeStandBiomass
+   pinuspinaster.extension.dataextractor.DETimeStandCompartmentBiomass
+   pinuspinaster.extension.dataextractor.DETimeStandCompartmentDeadWood
+   pinuspinaster.extension.dataextractor.DETotalNeedleBiomassDistrib
+   pinuspinaster.extension.intervener.C2Thinner
+   pinuspinaster.extension.intervener.FomThinner
+   pinuspinaster.extension.ioformat.CPFAScenarioReportExport
+   pinuspinaster.extension.ioformat.PPFirstThinningPlotInventory
+   pinuspinaster.extension.ioformat.PPIFNInventory
+   pinuspinaster.extension.ioformat.PPLogExport
+   pinuspinaster.extension.ioformat.PPLogWJWWCMExport
+   pinuspinaster.extension.ioformat.PPLogWithJuvenileWoodExport
+   pinuspinaster.extension.ioformat.PPSampledInventory
+   pinuspinaster.extension.ioformat.PPStandCarbonWithBiomassExport
+   pinuspinaster.extension.ioformat.PPStandCarbonWithVolumeExport
+   pinuspinaster.extension.ioformat.PPStandDeadWoodExport
+   pinuspinaster.extension.ioformat.PPStandTableExportForInventoryFile
+   pinuspinaster.extension.ioformat.PPThinTreeCarbonExport
+   pinuspinaster.extension.ioformat.PPThinTreeCarbonWithBiomassExport
+   pinuspinaster.extension.objectviewer.PPTreeTaperViewer
+   pinuspinaster.extension.standviewer.SVFompine
+   pinuspinaster.extension.standviewer.SVPP
+   pinuspinaster.extension.standviewer.SVPPScenario
+   plantabsl.extension.dataextractor.PlantaLogDensityLogVolume2
+   plantabsl.extension.dataextractor.PlantaSpeciesClassN
+   plantabsl.extension.dataextractor.PlantaTimeBa
+   plantabsl.extension.dataextractor.PlantaTimeBa10
+   plantabsl.extension.dataextractor.PlantaTimeDbh
+   plantabsl.extension.dataextractor.PlantaTimeDdom
+   plantabsl.extension.dataextractor.PlantaTimeDqm0
+   plantabsl.extension.dataextractor.PlantaTimeDqm10
+   plantabsl.extension.dataextractor.PlantaTimeHdom
+   plantabsl.extension.dataextractor.PlantaTimeNha
+   plantabsl.extension.dataextractor.PlantaTimeV0ha
+   plantabsl.extension.dataextractor.PlantaTimeV10ha
+   plantabsl.extension.extractorgroup.PlantaExtractors
+   plantabsl.extension.filter.PlantaTreeMouseSelector
+   plantabsl.extension.intervener.PlantaThinner
+   plantabsl.extension.ioformat.PlantaCompleteExport
+   plantabsl.model.PlantaInventoryLoader
+   pnn2.extension.intervener.Pnn2Thinner
+   pnn2.extension.ioformat.Pnn2ExportGSM
+   pnn2.extension.ioformat.Pnn2Inventory
+   pnn2.extension.ioformat.Pnn2TreeExport
+   pnn2.extension.lollypop.Pnn2Lollypop
+   pnn2.extension.objectviewer.OVPnn2CellNGVEvolution
+   pnn2.extension.objectviewer.OVPnn2Management
+   pnn2.extension.objectviewer.OVPnn2PieChart
+   pnn2.extension.objectviewer.Pnn22DHalf
+   pnn2.extension.standviewer.SVPnn2
+   pnn2.extension.standviewer.SVPnn2Branches
+   pp3.extension.dataextractor.DEBarkBiomassDistrib
+   pp3.extension.dataextractor.DEBiomassDistrib
+   pp3.extension.dataextractor.DEDbhBiomass
+   pp3.extension.dataextractor.DELivingBranchBiomassDistrib
+   pp3.extension.dataextractor.DEStemBiomassDistrib
+   pp3.extension.dataextractor.DEThinStandCompartmentDeadWood
+   pp3.extension.dataextractor.DETimeStandBiomass
+   pp3.extension.dataextractor.DETimeStandCompartmentBiomass
+   pp3.extension.dataextractor.DETimeStandCompartmentDeadWood
+   pp3.extension.dataextractor.DETotalNeedleBiomassDistrib
+   pp3.extension.ioformat.Pp3IFNInventory
+   pp3.extension.ioformat.Pp3LogExport
+   pp3.extension.ioformat.Pp3LogWJWWCMExport
+   pp3.extension.ioformat.Pp3LogWithJuvenileWoodExport
+   pp3.extension.ioformat.Pp3SampledInventory
+   pp3.extension.ioformat.Pp3StandCarbonWithBiomassExport
+   pp3.extension.ioformat.Pp3StandCarbonWithVolumeExport
+   pp3.extension.ioformat.Pp3StandDeadWoodExport
+   pp3.extension.ioformat.Pp3StandTableExportForInventoryFile
+   pp3.extension.ioformat.Pp3ThinTreeCarbonExport
+   pp3.extension.ioformat.Pp3ThinTreeCarbonWithBiomassExport
+   pp3.extension.ioformat.Pp3WoudyforExport
+   pp3.extension.objectviewer.Pp3TreeTaperViewer
+   pp3.extension.standviewer.SVPp3
+   pp3.extension.standviewer.SVPp3Scenario
+   pradiata.extension.ioformat.PrInventory
+   presage.extension.dataextractor.DESOMPothPresage
+   presage.extension.dataextractor.DETimeAreaPresage
+   presage.extension.dataextractor.DETimeIQSPresage
+   presage.extension.dataextractor.DETimePreDbhCNInter
+   presage.extension.dataextractor.DETimePreDbhCSInter
+   presage.extension.dataextractor.DETimePreGInter
+   presage.extension.dataextractor.DETimePresageAL
+   presage.extension.dataextractor.DETimePresageArea
+   presage.extension.dataextractor.DETimePresageIQS
+   presage.extension.dataextractor.DETimePresageIQST
+   presage.extension.dataextractor.DETimePresageLAI
+   presage.extension.dataextractor.DETimePresageSOMPoth
+   presage.extension.intervener.PreRecolt
+   presage.extension.intervener.PreRecoltScript
+   presage.extension.intervener.PreThinner
+   presage.extension.intervener.PreThinnerRadClear
+   presage.extension.intervener.PreThinnerWithGoal
+   presage.extension.ioformat.PreExport
+   presage.extension.ioformat.PreInventory
+   presage.extension.ioformat.PreInventoryDBF
+   presage.extension.ioformat.PresageADAGEExport
+   presage.extension.ioformat.PresagePOVRAYExport
+   presage.extension.ioformat.PresageSVSExport
+   presage.extension.objectviewer.Viewer3D
+   presage.extension.standviewer.SVPresage
+   prunus.extension.ioformat.PruInventory
+   prunus.extension.ioformat.PruSeedlingsExport
+   prunus.extension.ioformat.PruSeedsExport
+   prunus.extension.objectviewer.ParentageViewer
+   prunus.extension.standviewer.SVPrunus
+   quebecmrnf.extension.dataextractor.DEBasalAreaComposition
+   quebecmrnf.extension.dataextractor.DEBasalAreaIncrementComponents
+   quebecmrnf.extension.dataextractor.DEDbhClassN2
+   quebecmrnf.extension.dataextractor.DEHeightClassN2
+   quebecmrnf.extension.dataextractor.DETimeVolumeByPetroLogCategories
+   quebecmrnf.extension.dataextractor.DETimeVolumeBySybilleLogCategories
+   quebecmrnf.extension.intervener.MRNFIndividualThinner
+   quebecmrnf.extension.intervener.automatedharvester.AutomatedHarvestThinner
+   quercus.extension.ioformat.QuerExport
+   quercus.extension.ioformat.QuerInventory
+   quergus.extension.dataextractor.DEEnergyDistribution
+   quergus.extension.dataextractor.DELightOnCellAndSensor
+   quergus.extension.dataextractor.DELightSummaryTable
+   quergus.extension.dataextractor.DEQuergusFutureRegeTable
+   quergus.extension.dataextractor.DEQuergusRegeTable
+   quergus.extension.dataextractor.DEQuergusStandTable
+   quergus.extension.dataextractor.DETimeFutureRegenerationComposition
+   quergus.extension.dataextractor.DETimeFutureRegenerationHeight
+   quergus.extension.dataextractor.DETimeRegenerationHeight
+   quergus.extension.intervener.GQThinner
+   quergus.extension.intervener.QGGapCreationIntervener
+   quergus.extension.intervener.QGGapGHAThinner
+   quergus.extension.intervener.QGRegenerationReleaseThinner
+   quergus.extension.intervener.QGRegenerationTreatment
+   quergus.extension.intervener.QGSpeciesGHAThinner
+   quergus.extension.intervener.QGThinner
+   quergus.model.QGInventoryLoader
+   quergus.model.QGLiloInventoryLoader
+   quergus.model.QGSortieInventoryLoader
+   regelight.extension.intervener.RegCrownRadiiNbIncrease
+   regelight.extension.intervener.RegCrownsCreator
+   regelight.extension.intervener.RegCrownsGenerator
+   regelight.extension.intervener.RegCrownsGenerator2
+   regelight.extension.intervener.RegCrownsGeneratorNoAllo
+   regelight.extension.intervener.RegCrownsReduction
+   regelight.extension.intervener.RegPolygonalThinner
+   regelight.extension.intervener.RegTreesCreator
+   regelight.extension.intervener.RegTreesCreator_RemoveTrees
+   regelight.extension.ioformat.RegCellInventory
+   regelight.extension.ioformat.RegCrownsInventory
+   regelight.extension.ioformat.RegExportDxfCrowns
+   regelight.extension.ioformat.RegExportRefPos
+   regelight.extension.ioformat.RegExportTest
+   regelight.extension.ioformat.RegExportTrunks
+   regelight.extension.ioformat.RegHeightsInventory
+   regelight.extension.ioformat.RegInventory
+   regelight.extension.ioformat.RegInventoryFilesInventory
+   regelight.extension.ioformat.RegLightPointsFile
+   regelight.extension.ioformat.RegPolygons
+   regelight.extension.ioformat.RegRegeCellInventory
+   regelight.extension.ioformat.RegRetroInventory
+   regelight.extension.ioformat.RegSeedlingsInventory
+   regelight.extension.ioformat.RegSpeciesInventory
+   regelight.extension.ioformat.RegStandInventory
+   regelight.extension.ioformat.RegTRayciParFile
+   regelight.extension.ioformat.RegTRayciPtc_Ptl
+   regelight.extension.ioformat.RegTRayciTrees
+   regelight.extension.modeltool.LightPointsImportation
+   regelight.extension.modeltool.TRayciExport
+   regelight.extension.modeltool.TRayciLADOptimization
+   regelight.extension.standviewer.SVRegeLight
+   rreshar.extension.dataextractor.RRSSoilWaterContent
+   rreshar.extension.ioformat.RRSCellExport
+   rreshar.extension.ioformat.RRSCohortExport
+   rreshar.extension.ioformat.RRSInventory
+   rreshar.extension.ioformat.RRSUnderstoreyExport
+   rreshar.extension.standviewer.SVRReShar
+   runaway.extension.dataextractor.FishFitnessDistribution
+   runaway.extension.dataextractor.FishGeneticLinkageR2
+   runaway.extension.dataextractor.FishGeneticLinkageR3
+   runaway.extension.dataextractor.FishInvestmentDistribution
+   runaway.extension.dataextractor.FishPhenotypeDistribution
+   runaway.extension.dataextractor.FishPreferenceDistribution
+   runaway.extension.dataextractor.FishResourceDistribution
+   runaway.extension.dataextractor.FishViabilityDistribution
+   runaway.extension.dataextractor.FitnessAgePlot
+   runaway.extension.dataextractor.FitnessPreferencePlot
+   runaway.extension.dataextractor.InvestmentPreferencePlot
+   runaway.extension.dataextractor.LDTable
+   runaway.extension.dataextractor.MeanFitnessTime
+   runaway.extension.dataextractor.PhenotypeFitnessPlot
+   runaway.extension.dataextractor.PhenotypeHandlingPlot
+   runaway.extension.dataextractor.PhenotypeInvestmentPlot
+   runaway.extension.dataextractor.PhenotypePreferencePlot
+   runaway.extension.dataextractor.PreferenceHandlingPlot
+   runaway.extension.dataextractor.RunTimeCorrelation
+   runaway.extension.dataextractor.RunTimeHaldanes
+   runaway.extension.dataextractor.RunTimeIndividualCorrelation
+   runaway.extension.dataextractor.RunTimeMatingPoolSize
+   runaway.extension.dataextractor.RunTimeSurvival
+   runaway.extension.dataextractor.RunTimeTraits
+   runaway.extension.standviewer.GenomeViewer
+   safe.extension.intervener.safepruning.SafePruning
+   safe.extension.ioformat.SafeInventory
+   safe.extension.ioformat.safeExport.SafeExport
+   safe.extension.ioformat.safeSticsEdit.SafeSticsEdit
+   safe.extension.modeltool.safestatistics.SafeStatistics
+   safe.extension.modeltool.safevalidation.SafeValidation
+   safe.extension.standviewer.safe.SVSafe
+   safe.extension.standviewer.safeclusteringviewer.SafeClusteringViewer
+   samare.extension.dataextractor.DETimeSamareDbh
+   samare.extension.dataextractor.DETimeSamareDbhAccM
+   samare.extension.dataextractor.DETimeSamareDbhCN
+   samare.extension.dataextractor.DETimeSamareDbhCNInter
+   samare.extension.dataextractor.DETimeSamareDbhCS
+   samare.extension.dataextractor.DETimeSamareDbhCSInter
+   samare.extension.dataextractor.DETimeSamareG
+   samare.extension.dataextractor.DETimeSamareGAccL
+   samare.extension.dataextractor.DETimeSamareGAccM
+   samare.extension.dataextractor.DETimeSamareGAccSV
+   samare.extension.dataextractor.DETimeSamareGAccSd
+   samare.extension.dataextractor.DETimeSamareGCS
+   samare.extension.dataextractor.DETimeSamareGDeath
+   samare.extension.dataextractor.DETimeSamareGInter
+   samare.extension.dataextractor.DETimeSamareSuccessRate
+   samare.extension.dataextractor.DETimeSamareV
+   samare.extension.intervener.SamareRecolt
+   samare.extension.intervener.SamareRecoltScript
+   samare.extension.ioformat.SamareADAGEExport
+   samare.extension.ioformat.SamareExport
+   samare.extension.ioformat.SamareInventory
+   samare.extension.ioformat.SamareInventoryDBF
+   samare.extension.ioformat.SamarePOVRAYExport
+   samare.extension.ioformat.SamareSVSExport
+   samare2014.extension.intervener.SmaIntervener
+   samare2014.extension.ioformat.SmaExportWrapper
+   samsara.extension.ioformat.SamsaInventory
+   samsara.extension.ioformat.SamsaSVSExport
+   samsara.extension.ioformat.SamsaTotalExport
+   samsara2.extension.dataextractor.CumulatedHarvestedDbhDistribution
+   samsara2.extension.dataextractor.DECWDVolumePerDecompositionClass
+   samsara2.extension.dataextractor.DEDeadWoodVolumePerDecompositionClass
+   samsara2.extension.dataextractor.DETimeCWDVolume
+   samsara2.extension.dataextractor.DETimeCWDVolumePerDecompositionClass
+   samsara2.extension.dataextractor.DETimeDeadWoodDiversityIndex
+   samsara2.extension.dataextractor.DETimeDeadWoodVolume
+   samsara2.extension.dataextractor.DETimeDeadWoodVolumePerDecompositionClass
+   samsara2.extension.dataextractor.DETimeDendroHabitats
+   samsara2.extension.dataextractor.DETimeGiniG
+   samsara2.extension.dataextractor.DETimeShannonDWVperDC
+   samsara2.extension.dataextractor.Samsa2CutTreesDiamDistrib
+   samsara2.extension.filter.Samsa2TreeMouseSelector
+   samsara2.extension.grouperdisplay.Samsa2ThinningDisplay
+   samsara2.extension.intervener.NVThinner
+   samsara2.extension.intervener.PolygonGapMaker
+   samsara2.extension.intervener.unevenagedmanager.UnevenAgedManager
+   samsara2.extension.ioformat.Samsa2Inventory
+   samsara2.extension.ioformat.Samsa2TotalExport
+   samsara2.extension.standviewer.SVSamsara2Controller
+   samsara2.pgms.inventory_creator.RegenerationInstallation
+   samsara2.pgms.inventory_creator.RegenerationManager
+   samsara2.pgms.inventory_creator.StandSpatializer
+   samsara2.pgms.util.RegenerationInstallation
+   samsara2.pgms.util.RegenerationManager
+   samsara2.pgms.util.StandSpatializer
+   sapin.extension.ioformat.SapInventory
+   silmar.silmars.extension.intervener.MarsThinner
+   silmar.silmars.model.MarsInventoryLoader
+   simcop.extension.filter.FilterSizeClassSpatialPicker
+   simcop.extension.intervener.SimcopCrownMapIntervener
+   simcop.extension.intervener.SimcopSizeClassSpatialIntervener
+   simcop.extension.standviewer.SVPlotYield
+   simcop.extension.standviewer.SVPlotYield_OLD
+   simcop.extension.standviewer.SVSimcop
+   simcop.extension.standviewer.SimcopCrownMapViewer
+   simcop.model.SimcopInventoryLoader
+   simmem.extension.dataextractor.SimDistributionBasalArea
+   simmem.extension.dataextractor.SimDistributionDdom
+   simmem.extension.dataextractor.SimDistributionHdom
+   simmem.extension.dataextractor.SimTimeDdom
+   simmem.extension.dataextractor.SimTimeDensity
+   simmem.extension.dataextractor.SimTimeDg
+   simmem.extension.dataextractor.SimTimeG
+   simmem.extension.dataextractor.SimTimeHdom
+   simmem.extension.dataextractor.SimTimeN
+   simmem.extension.dataextractor.SimTimeRelativeDdom
+   simmem.extension.dataextractor.SimTimeVC22
+   simmem.extension.intervener.SimThinner
+   simmem.extension.ioformat.SimCommonExport
+   simmem.extension.ioformat.SimCommonExport2
+   simmem.extension.ioformat.SimGymnoExport
+   simmem.model.SimInventoryLoader
+   standfire.extension.intervener.SFThinner
+   standfire.extension.ioformat.SFSVSextTreesLoader
+   standfire.model.SFSVSextTreesLoader
+   stretch.extension.dataextractor.DECellLightClassN
+   stretch.extension.dataextractor.DECpLgr
+   stretch.extension.dataextractor.DETimeCF
+   stretch.extension.dataextractor.DETimeCP
+   stretch.extension.dataextractor.DETimeCrownDepth
+   stretch.extension.dataextractor.DETimeCrownSurface
+   stretch.extension.dataextractor.DETimeStemVolume
+   stretch.extension.dataextractor.StretchInterpolators
+   stretch.extension.intervener.StretchManualLight
+   stretch.extension.intervener.StretchSelfPruning
+   stretch.extension.ioformat.SfsLightExport
+   stretch.extension.ioformat.SfsStepExport
+   stretch.extension.ioformat.SfsStepExport2
+   stretch.extension.sketchaddon.sketcher.StretchSketcher
+   stretch.extension.standviewer.SVStretch
+   stretch.model.SfsInventoryLoader
+   stretch2.extension.intervener.St2Thinner
+   stretch2.extension.sketcher.St2Sketcher
+   stretch2.model.St2InventoryLoader
+   succes.extension.ioformat.SuccesExport
+   succes.extension.ioformat.SuccesExportWrapper
+   template.extension.dataextractor.DESpeciesClassN
+   template.extension.dataextractor.DETestColoredCurves
+   template.extension.dataextractor.DETimeData1
+   template.extension.intervener.TplInterverner
+   template.extension.ioformat.TplIOFormat
+   training.extension.intervener.TraThinner
+   training.model.TraInventoryLoader
+   transpop.extension.ioformat.TransExport
+   transpop.extension.ioformat.TransInventory
+   transpoprege.extension.ioformat.TransRegInventory
+   twoe.extension.dataextractor.TwoeTimeC
+   twoe.extension.dataextractor.TwoeTimeG
+   twoe.extension.dataextractor.TwoeTimeN
+   twoe.extension.intervener.TwoeThinner
+   twoe.extension.ioformat.TwoeExportG
+   twoe.model.TwoeInventoryLoader
+   uqar.jackpine.extension.ioformat.JackPineBranchExport
+   uqar.jackpine.extension.ioformat.JackPineSimExport
+   uqar.jackpine.extension.ioformat.JackPineTaperExport
+   uqar.jackpine.extension.ioformat.JpInventory
+   uqar.jackpine.extension.ioformat.JpInventoryForBlackSpruce
+   uqar.jackpine.extension.ioformat.JpInventoryForScotsPine
+   uqar.jackpine.extension.ioformat.JpInventoryForWhiteSpruce
+   uqar.jackpine.extension.objectviewer.JackPineTreeViewer
+   uqar.jackpine.extension.standviewer.JpViewer
+   uqar.jackpine.model.JpInventoryLoader
+   ventoug.extension.ioformat.VtgExport
+   ventoug.extension.ioformat.VtgExportL
+   ventoug.extension.ioformat.VtgInventory
+   ventoug.extension.objectviewer.OVCellNGEvolution
+   ventoug.extension.standviewer.SVVentoug
+   ventoux.extension.dataextractor.DETimeThinnedV
+   ventoux.extension.intervener.VtxThinner
+   ventoux.extension.ioformat.VtxExport
+   ventoux.extension.ioformat.VtxExport2
+   ventoux.extension.ioformat.VtxExportShapefile
+   ventoux.extension.ioformat.VtxInventory
+   ventoux.extension.lollypop.VtxLollypop
+   ventoux.extension.objectviewer.OVVentouxManagement
+   ventoux.extension.objectviewer.OVVentouxPieChart
+   ventoux.extension.objectviewer.Vtx2DHalf
+   ventoux.extension.standviewer.SVVentoux
+   ventoux.extension.standviewer.SVVentoux2
+   woudyfor.extension.dataextractor.WoudyTimeSeedN
+   woudyfor.extension.dataextractor.WoudyTimeSeedlingMortalityProba
+   woudyfor.extension.dataextractor.WoudyTimeSeedlingN
+   woudyfor.extension.dataextractor.WoudyTimeShrubN
+   woudyfor.extension.intervener.WoudyThinner
+   woudyfor.model.WoudyShrubFilter
+
+
+INFO [2016.07.13 11:12:22 MDT] Engine.init ()
+Capsis 4.2.4 with pilot capsis.script.Pilot: correct boot at 13 Jul 2016 11:12:22 MDT
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for prunus
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for transpoprege
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for pp3
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for gymnos
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for organon
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for lerfob/abial
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for groovytest
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for samsara
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for mangrove
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for genloader
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for transpop
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for mustard
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for lemoine
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for amapsim
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for lsfmgm
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for simsys
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for fcba/piceaabies
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for plantabsl
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for quergus
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for artemis
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for afocelpp
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for samsaraLightLoader
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for samare2014
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for natura
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for kerguelen
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for regix
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for afocelpa
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for forceps
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for lerfob/commons
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for simcop
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for quercus
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for deesses
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for uqar/jackpine
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for silmar/silmars
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for guppy
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for fasy
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for modispinaster
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for training
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for sydy
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for abccedrus
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for pnn2
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for migration
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for succes
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for pinuspinaster
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for stretch
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for ftchene
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for woudyfor
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for samare
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for laricio
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for optimist
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for alisier
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for nz1
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for phenofit5
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for bidasoa
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for nrg
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for melies
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for physiodemogenetics
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for presage
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for fcba/pseudotsugamenziesii
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for lerfob/fagacees
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for castaneaonly
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for stretch2
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for idf/castaneatables
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for dynaclim
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for pradiata
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for loxodonta
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for heterofor
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for simcap
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for sexibridge
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for mathilde
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for matapedia
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for runaway
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for simmem
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for regelight
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for mediterranea
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for eucalypt
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for samsara2
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for QS1
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for oakpine2
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for tagada
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for oakpine1
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for karite
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for twoe
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for sylvestris
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for phenofit
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for fiesta
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for rreshar
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for fompine
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for ifnca
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for isgm
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for bimodal
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for ventoux
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for dynet
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for safe
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for economics
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for mpb
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for maddmodule
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for artemis2014
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for ca1
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for cytisus
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for selva
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for ivy
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for luberon
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for ventoug
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for natura2014
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for croireplant
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for paletuviers
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+WARNING [2016.07.13 11:12:22 MDT] ModelManager.getIdCards ()
+Could not load idcard.properties for mountain
+-> java.lang.NullPointerException
+   at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
+   at capsis.kernel.ModelManager.initMaps(ModelManager.java:260)
+   at capsis.kernel.ModelManager.getIdCardMap(ModelManager.java:272)
+   at capsis.kernel.ModelManager.loadModel(ModelManager.java:344)
+   at capsis.kernel.Engine.loadModel(Engine.java:648)
+   at capsis.script.GScript.loadModel(GScript.java:72)
+   at capsis.script.GScript2.<init>(GScript2.java:50)
+   at capsis.app.C4Script.<init>(C4Script.java:71)
+   at standfire.myscripts.SFScript.main(SFScript.java:60)
+   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.lang.reflect.Method.invoke(Method.java:498)
+   at capsis.script.Pilot.runC4Script(Pilot.java:122)
+   at capsis.script.Pilot.start(Pilot.java:111)
+   at capsis.app.Starter.start(Starter.java:133)
+   at capsis.app.Starter.main(Starter.java:161)
+
+INFO [2016.07.13 11:12:22 MDT] 
+Model [standfire.model.SFModel] was correctly loaded
+

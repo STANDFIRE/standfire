@@ -1,0 +1,330 @@
+#Scene file of the mixed plot at the ICFME experimental study site						
+
+#Terrain						
+#name	cellWidth(m)	altitude(m)	xMin	yMin	xMax	yMax
+Terrain0	100	0	-1000	-600	700	500
+
+#Polygons (optionnal)						
+#fileId	"{(x1,y1);(x2,y2)...}"					
+1	{(299,-51.5);(463.9,-51.5);(463.9,123.7);(299,123.7)}
+2	{(61.9,-51.5);(232,-51.5);(232,123.7);(61.9,123.7)}
+3	{(299,-113.4);(474.2,-134);(463.9,-309.3);(288.7,-293.8)}
+4	{(46.4,-293.8);(216.5,-304.1);(216.5,-118.6);(46.4,-113.4)}
+5	{(-216.5,-443.3);(-51.5,-443.6);(-41.2,-278.4);(-211.3,-268.0)}
+6	{(-433.0,-82.5);(-273.2,-82.5);(-273.2,-247.4);(-433.0,-247.4)}
+7	{(-525.8,237.1);(-417.5,103.1);(-546.4,-5.2);(-659.8,123.7)}
+8	{(-675.3,-72.2);(-556.7,-195.9);(-680.4,-314.4);(-804.1,-195.9)}
+9	{(-15.5,-329.9);(103.1,-340.2);(97.9,-448.5);(-20.6,-443.3)}
+10	{(-77.3,-72.2);(0.0,-72.2);(0.0,-154.6);(-77.3,-154.6)}
+11	{(299.0,350.5);(474.2,350.5);(474.2,175.3);(299.0,175.3)}
+12	{(61.9,350.5);(237.1,350.5);(237.1,175.3);(61.9,175.3)}
+13	{(-1000,-600);(700,-600);(700,500);(587.14,391.8);(487.98,-368.67);(164.9,-340.2);(144.3,-505.2);(-257.7,-484.5);(-257.7,-309.3);(-484.5,-309.3);(-484.5,-195.9);(-680.4,-391.8);(-876.3,-195.9);(-670.1,10.3);(-757.7,113.4);(-546.4,278.4);(-309.3,0);(0,0);(0,391.8);(587.14,391.8);(700,500);(-1000,500)}
+
+
+#Trees
+
+
+#Trees								
+#fileId	speciesName	x	y	z	height	crownBaseHeight	crownDiameter crownDiameterHeight	openess
+
+
+#Trees								
+#fileId	speciesName	x	y	z	height	crownBaseHeight	crownDiameter crownDiameterHeight	openess
+
+#TreeGroups											
+#fileId	speciesName	polygonId	lowerBoundDBH	upperBoundDBH	groupAge	stemDensity	MCNeedles	MCLiveTwigs	MCDeadTwigs		
+#Plot1											
+3	Pinus banksiana	1	2	3	0.0	0	78.4	73.0	9.8		
+4	Pinus banksiana	1	3	4	0.0	0	78.4	73.0	9.8		
+5	Pinus banksiana	1	4	5	0.0	96	78.4	73.0	9.8		
+6	Pinus banksiana	1	5	6	0.0	0	78.4	73.0	9.8		
+7	Pinus banksiana	1	6	7	0.0	96	78.4	73.0	9.8		
+8	Pinus banksiana	1	7	8	0.0	32	78.4	73.0	9.8		
+9	Pinus banksiana	1	8	9	0.0	255	78.4	73.0	9.8		
+10	Pinus banksiana	1	9	10	0.0	223	78.4	73.0	9.8		
+11	Pinus banksiana	1	10	11	0.0	191	78.4	73.0	9.8		
+12	Pinus banksiana	1	11	12	0.0	223	78.4	73.0	9.8
+13	Pinus banksiana	1	12	13	0.0	128	78.4	73.0	9.8
+14	Pinus banksiana	1	13	14	0.0	319	78.4	73.0	9.8
+15	Pinus banksiana	1	14	15	0.0	160	78.4	73.0	9.8
+16	Pinus banksiana	1	15	16	0.0	223	78.4	73.0	9.8
+17	Pinus banksiana	1	16	17	0.0	96	78.4	73.0	9.8
+18	Pinus banksiana	1	17	18	0.0	64	78.4	73.0	9.8
+19	Pinus banksiana	1	18	19	0.0	0	78.4	73.0	9.8
+20	Pinus banksiana	1	19	20	0.0	0	78.4	73.0	9.8
+21	Pinus banksiana	1	20	21	0.0	32	78.4	73.0	9.8
+24	Pinus banksiana dead	1	2	3	0.0	0	78.4	73.0	9.8
+25	Pinus banksiana dead	1	3	4	0.0	128	78.4	73.0	9.8
+26	Pinus banksiana dead	1	4	5	0.0	160	78.4	73.0	9.8
+27	Pinus banksiana dead	1	5	6	0.0	128	78.4	73.0	9.8
+28	Pinus banksiana dead	1	6	7	0.0	287	78.4	73.0	9.8
+29	Pinus banksiana dead	1	7	8	0.0	32	78.4	73.0	9.8
+30	Pinus banksiana dead	1	8	9	0.0	64	78.4	73.0	9.8
+31	Pinus banksiana dead	1	9	10	0.0	160	78.4	73.0	9.8
+32	Pinus banksiana dead	1	10	11	0.0	64	78.4	73.0	9.8
+33	Pinus banksiana dead	1	11	12	0.0	32	78.4	73.0	9.8
+34	Pinus banksiana dead	1	12	13	0.0	0	78.4	73.0	9.8
+35	Pinus banksiana dead	1	13	14	0.0	32	78.4	73.0	9.8
+36	Pinus banksiana dead	1	14	15	0.0	0	78.4	73.0	9.8
+37	Pinus banksiana dead	1	15	16	0.0	0	78.4	73.0	9.8
+38	Pinus banksiana dead	1	16	17	0.0	0	78.4	73.0	9.8
+39	Pinus banksiana dead	1	17	18	0.0	0	78.4	73.0	9.8
+40	Pinus banksiana dead	1	18	19	0.0	32	78.4	73.0	9.8
+41	Pinus banksiana dead	1	19	20	0.0	0	78.4	73.0	9.8
+42	Pinus banksiana dead	1	20	21	0.0	0	78.4	73.0	9.8
+45	Picea mariana	1	2	3	0.0	1622	69.1	65.4	9.8
+46	Picea mariana	1	3	4	0.0	925	69.1	65.4	9.8
+47	Picea mariana	1	4	5	0.0	542	69.1	65.4	9.8
+48	Picea mariana	1	5	6	0.0	383	69.1	65.4	9.8
+49	Picea mariana	1	6	7	0.0	223	69.1	65.4	9.8
+50	Picea mariana	1	7	8	0.0	160	69.1	65.4	9.8
+51	Picea mariana	1	8	9	0.0	0	69.1	65.4	9.8
+52	Picea mariana	1	9	10	0.0	0	69.1	65.4	9.8
+53	Picea mariana	1	10	11	0.0	0	69.1	65.4	9.8
+54	Picea mariana	1	11	12	0.0	0	69.1	65.4	9.8
+55	Picea mariana	1	12	13	0.0	0	69.1	65.4	9.8
+56	Picea mariana	1	13	14	0.0	0	69.1	65.4	9.8
+57	Picea mariana	1	14	15	0.0	0	69.1	65.4	9.8
+58	Picea mariana	1	15	16	0.0	0	69.1	65.4	9.8
+59	Picea mariana	1	16	17	0.0	0	69.1	65.4	9.8
+60	Picea mariana	1	17	18	0.0	0	69.1	65.4	9.8
+61	Picea mariana	1	18	19	0.0	0	69.1	65.4	9.8
+62	Picea mariana	1	19	20	0.0	0	69.1	65.4	9.8
+63	Picea mariana	1	20	21	0.0	0	69.1	65.4	9.8
+
+#Plot2									
+66	Pinus banksiana	2	2	3	0.0	0	79.0	70.4	14.5
+67	Pinus banksiana	2	3	4	0.0	0	79.0	70.4	14.5
+68	Pinus banksiana	2	4	5	0.0	17	79.0	70.4	14.5
+69	Pinus banksiana	2	5	6	0.0	17	79.0	70.4	14.5
+70	Pinus banksiana	2	6	7	0.0	17	79.0	70.4	14.5
+71	Pinus banksiana	2	7	8	0.0	51	79.0	70.4	14.5
+72	Pinus banksiana	2	8	9	0.0	85	79.0	70.4	14.5
+73	Pinus banksiana	2	9	10	0.0	119	79.0	70.4	14.5
+74	Pinus banksiana	2	10	11	0.0	136	79.0	70.4	14.5
+75	Pinus banksiana	2	11	12	0.0	187	79.0	70.4	14.5
+76	Pinus banksiana	2	12	13	0.0	136	79.0	70.4	14.5
+77	Pinus banksiana	2	13	14	0.0	102	79.0	70.4	14.5
+78	Pinus banksiana	2	14	15	0.0	85	79.0	70.4	14.5
+79	Pinus banksiana	2	15	16	0.0	102	79.0	70.4	14.5
+80	Pinus banksiana	2	16	17	0.0	102	79.0	70.4	14.5
+81	Pinus banksiana	2	17	18	0.0	51	79.0	70.4	14.5
+82	Pinus banksiana	2	18	19	0.0	34	79.0	70.4	14.5
+83	Pinus banksiana	2	19	20	0.0	0	79.0	70.4	14.5
+84	Pinus banksiana	2	20	21	0.0	102	79.0	70.4	14.5
+87	Pinus banksiana dead	2	2	3	0.0	95	79.0	70.4	14.5
+88	Pinus banksiana dead	2	3	4	0.0	17	79.0	70.4	14.5
+89	Pinus banksiana dead	2	4	5	0.0	102	79.0	70.4	14.5
+90	Pinus banksiana dead	2	5	6	0.0	85	79.0	70.4	14.5
+91	Pinus banksiana dead	2	6	7	0.0	34	79.0	70.4	14.5
+92	Pinus banksiana dead	2	7	8	0.0	68	79.0	70.4	14.5
+93	Pinus banksiana dead	2	8	9	0.0	0	79.0	70.4	14.5
+94	Pinus banksiana dead	2	9	10	0.0	119	79.0	70.4	14.5
+95	Pinus banksiana dead	2	10	11	0.0	17	79.0	70.4	14.5
+96	Pinus banksiana dead	2	11	12	0.0	34	79.0	70.4	14.5
+97	Pinus banksiana dead	2	12	13	0.0	17	79.0	70.4	14.5
+98	Pinus banksiana dead	2	13	14	0.0	34	79.0	70.4	14.5
+99	Pinus banksiana dead	2	14	15	0.0	0	79.0	70.4	14.5
+100	Pinus banksiana dead	2	15	16	0.0	17	79.0	70.4	14.5
+101	Pinus banksiana dead	2	16	17	0.0	17	79.0	70.4	14.5
+102	Pinus banksiana dead	2	17	18	0.0	0	79.0	70.4	14.5
+103	Pinus banksiana dead	2	18	19	0.0	0	79.0	70.4	14.5
+104	Pinus banksiana dead	2	19	20	0.0	0	79.0	70.4	14.5
+105	Pinus banksiana dead	2	20	21	0.0	0	79.0	70.4	14.5
+108	Picea mariana	2	2	3	0.0	318	76.3	75.5	14.5
+109	Picea mariana	2	3	4	0.0	458	76.3	75.5	14.5
+110	Picea mariana	2	4	5	0.0	255	76.3	75.5	14.5
+111	Picea mariana	2	5	6	0.0	102	76.3	75.5	14.5
+112	Picea mariana	2	6	7	0.0	85	76.3	75.5	14.5
+113	Picea mariana	2	7	8	0.0	34	76.3	75.5	14.5
+114	Picea mariana	2	8	9	0.0	17	76.3	75.5	14.5
+115	Picea mariana	2	9	10	0.0	17	76.3	75.5	14.5
+116	Picea mariana	2	10	11	0.0	0	76.3	75.5	14.5
+117	Picea mariana	2	11	12	0.0	0	76.3	75.5	14.5
+118	Picea mariana	2	12	13	0.0	17	76.3	75.5	14.5
+119	Picea mariana	2	13	14	0.0	0	76.3	75.5	14.5
+120	Picea mariana	2	14	15	0.0	17	76.3	75.5	14.5
+121	Picea mariana	2	15	16	0.0	0	76.3	75.5	14.5
+122	Picea mariana	2	16	17	0.0	0	76.3	75.5	14.5
+123	Picea mariana	2	17	18	0.0	0	76.3	75.5	14.5
+124	Picea mariana	2	18	19	0.0	0	76.3	75.5	14.5
+125	Picea mariana	2	19	20	0.0	0	76.3	75.5	14.5
+126	Picea mariana	2	20	21	0.0	0	76.3	75.5	14.5
+
+#Plot3									
+129	Pinus banksiana	3	2	3	0.0	0	81.1	64.6	8.8
+130	Pinus banksiana	3	3	4	0.0	106	81.1	64.6	8.8
+131	Pinus banksiana	3	4	5	0.0	248	81.1	64.6	8.8
+132	Pinus banksiana	3	5	6	0.0	389	81.1	64.6	8.8
+133	Pinus banksiana	3	6	7	0.0	496	81.1	64.6	8.8
+134	Pinus banksiana	3	7	8	0.0	814	81.1	64.6	8.8
+135	Pinus banksiana	3	8	9	0.0	708	81.1	64.6	8.8
+136	Pinus banksiana	3	9	10	0.0	496	81.1	64.6	8.8
+137	Pinus banksiana	3	10	11	0.0	354	81.1	64.6	8.8
+138	Pinus banksiana	3	11	12	0.0	460	81.1	64.6	8.8
+139	Pinus banksiana	3	12	13	0.0	248	81.1	64.6	8.8
+140	Pinus banksiana	3	13	14	0.0	71	81.1	64.6	8.8
+141	Pinus banksiana	3	14	15	0.0	71	81.1	64.6	8.8
+142	Pinus banksiana	3	15	16	0.0	0	81.1	64.6	8.8
+143	Pinus banksiana	3	16	17	0.0	0	81.1	64.6	8.8
+144	Pinus banksiana	3	17	18	0.0	0	81.1	64.6	8.8
+145	Pinus banksiana	3	18	19	0.0	0	81.1	64.6	8.8
+146	Pinus banksiana	3	19	20	0.0	0	81.1	64.6	8.8
+147	Pinus banksiana	3	20	21	0.0	0	81.1	64.6	8.8
+150	Pinus banksiana dead	3	2	3	0.0	223	81.1	64.6	8.8
+151	Pinus banksiana dead	3	3	4	0.0	566	81.1	64.6	8.8
+152	Pinus banksiana dead	3	4	5	0.0	637	81.1	64.6	8.8
+153	Pinus banksiana dead	3	5	6	0.0	283	81.1	64.6	8.8
+154	Pinus banksiana dead	3	6	7	0.0	177	81.1	64.6	8.8
+155	Pinus banksiana dead	3	7	8	0.0	71	81.1	64.6	8.8
+156	Pinus banksiana dead	3	8	9	0.0	35	81.1	64.6	8.8
+157	Pinus banksiana dead	3	9	10	0.0	71	81.1	64.6	8.8
+158	Pinus banksiana dead	3	10	11	0.0	0	81.1	64.6	8.8
+159	Pinus banksiana dead	3	11	12	0.0	0	81.1	64.6	8.8
+160	Pinus banksiana dead	3	12	13	0.0	0	81.1	64.6	8.8
+161	Pinus banksiana dead	3	13	14	0.0	0	81.1	64.6	8.8
+162	Pinus banksiana dead	3	14	15	0.0	0	81.1	64.6	8.8
+163	Pinus banksiana dead	3	15	16	0.0	0	81.1	64.6	8.8
+164	Pinus banksiana dead	3	16	17	0.0	0	81.1	64.6	8.8
+165	Pinus banksiana dead	3	17	18	0.0	0	81.1	64.6	8.8
+166	Pinus banksiana dead	3	18	19	0.0	0	81.1	64.6	8.8
+167	Pinus banksiana dead	3	19	20	0.0	0	81.1	64.6	8.8
+168	Pinus banksiana dead	3	20	21	0.0	71	81.1	64.6	8.8
+171	Picea mariana	3	2	3	0.0	0	71.1	77.1	8.8
+172	Picea mariana	3	3	4	0.0	0	71.1	77.1	8.8
+173	Picea mariana	3	4	5	0.0	0	71.1	77.1	8.8
+174	Picea mariana	3	5	6	0.0	0	71.1	77.1	8.8
+175	Picea mariana	3	6	7	0.0	0	71.1	77.1	8.8
+176	Picea mariana	3	7	8	0.0	0	71.1	77.1	8.8
+177	Picea mariana	3	8	9	0.0	0	71.1	77.1	8.8
+178	Picea mariana	3	9	10	0.0	0	71.1	77.1	8.8
+179	Picea mariana	3	10	11	0.0	0	71.1	77.1	8.8
+180	Picea mariana	3	11	12	0.0	0	71.1	77.1	8.8
+181	Picea mariana	3	12	13	0.0	0	71.1	77.1	8.8
+182	Picea mariana	3	13	14	0.0	0	71.1	77.1	8.8
+183	Picea mariana	3	14	15	0.0	0	71.1	77.1	8.8
+184	Picea mariana	3	15	16	0.0	0	71.1	77.1	8.8
+185	Picea mariana	3	16	17	0.0	0	71.1	77.1	8.8
+186	Picea mariana	3	17	18	0.0	0	71.1	77.1	8.8
+187	Picea mariana	3	18	19	0.0	0	71.1	77.1	8.8
+188	Picea mariana	3	19	20	0.0	0	71.1	77.1	8.8
+189	Picea mariana	3	20	21	0.0	0	71.1	77.1	8.8
+
+#Plot4									
+192	Pinus banksiana	4	2	3	0.0	32	81.8	78.5	9.3
+193	Pinus banksiana	4	3	4	0.0	36	81.8	78.5	9.3
+194	Pinus banksiana	4	4	5	0.0	290	81.8	78.5	9.3
+195	Pinus banksiana	4	5	6	0.0	290	81.8	78.5	9.3
+196	Pinus banksiana	4	6	7	0.0	543	81.8	78.5	9.3
+197	Pinus banksiana	4	7	8	0.0	616	81.8	78.5	9.3
+198	Pinus banksiana	4	8	9	0.0	688	81.8	78.5	9.3
+199	Pinus banksiana	4	9	10	0.0	616	81.8	78.5	9.3
+200	Pinus banksiana	4	10	11	0.0	471	81.8	78.5	9.3
+201	Pinus banksiana	4	11	12	0.0	580	81.8	78.5	9.3
+202	Pinus banksiana	4	12	13	0.0	217	81.8	78.5	9.3
+203	Pinus banksiana	4	13	14	0.0	72	81.8	78.5	9.3
+204	Pinus banksiana	4	14	15	0.0	36	81.8	78.5	9.3
+205	Pinus banksiana	4	15	16	0.0	36	81.8	78.5	9.3
+206	Pinus banksiana	4	16	17	0.0	0	81.8	78.5	9.3
+207	Pinus banksiana	4	17	18	0.0	0	81.8	78.5	9.3
+208	Pinus banksiana	4	18	19	0.0	0	81.8	78.5	9.3
+209	Pinus banksiana	4	19	20	0.0	0	81.8	78.5	9.3
+210	Pinus banksiana	4	20	21	0.0	0	81.8	78.5	9.3
+213	Pinus banksiana dead	4	2	3	0.0	254	81.8	78.5	9.3
+214	Pinus banksiana dead	4	3	4	0.0	978	81.8	78.5	9.3
+215	Pinus banksiana dead	4	4	5	0.0	507	81.8	78.5	9.3
+216	Pinus banksiana dead	4	5	6	0.0	145	81.8	78.5	9.3
+217	Pinus banksiana dead	4	6	7	0.0	181	81.8	78.5	9.3
+218	Pinus banksiana dead	4	7	8	0.0	36	81.8	78.5	9.3
+219	Pinus banksiana dead	4	8	9	0.0	0	81.8	78.5	9.3
+220	Pinus banksiana dead	4	9	10	0.0	36	81.8	78.5	9.3
+221	Pinus banksiana dead	4	10	11	0.0	36	81.8	78.5	9.3
+222	Pinus banksiana dead	4	11	12	0.0	36	81.8	78.5	9.3
+223	Pinus banksiana dead	4	12	13	0.0	36	81.8	78.5	9.3
+224	Pinus banksiana dead	4	13	14	0.0	0	81.8	78.5	9.3
+225	Pinus banksiana dead	4	14	15	0.0	0	81.8	78.5	9.3
+226	Pinus banksiana dead	4	15	16	0.0	0	81.8	78.5	9.3
+227	Pinus banksiana dead	4	16	17	0.0	0	81.8	78.5	9.3
+228	Pinus banksiana dead	4	17	18	0.0	0	81.8	78.5	9.3
+229	Pinus banksiana dead	4	18	19	0.0	0	81.8	78.5	9.3
+230	Pinus banksiana dead	4	19	20	0.0	0	81.8	78.5	9.3
+231	Pinus banksiana dead	4	20	21	0.0	0	81.8	78.5	9.3
+234	Picea mariana	4	2	3	0.0	32	69.5	73.1	9.3
+235	Picea mariana	4	3	4	0.0	36	69.5	73.1	9.3
+236	Picea mariana	4	4	5	0.0	0	69.5	73.1	9.3
+237	Picea mariana	4	5	6	0.0	0	69.5	73.1	9.3
+238	Picea mariana	4	6	7	0.0	0	69.5	73.1	9.3
+239	Picea mariana	4	7	8	0.0	0	69.5	73.1	9.3
+240	Picea mariana	4	8	9	0.0	0	69.5	73.1	9.3
+241	Picea mariana	4	9	10	0.0	0	69.5	73.1	9.3
+242	Picea mariana	4	10	11	0.0	0	69.5	73.1	9.3
+243	Picea mariana	4	11	12	0.0	0	69.5	73.1	9.3
+244	Picea mariana	4	12	13	0.0	0	69.5	73.1	9.3
+245	Picea mariana	4	13	14	0.0	0	69.5	73.1	9.3
+246	Picea mariana	4	14	15	0.0	0	69.5	73.1	9.3
+247	Picea mariana	4	15	16	0.0	0	69.5	73.1	9.3
+248	Picea mariana	4	16	17	0.0	0	69.5	73.1	9.3
+249	Picea mariana	4	17	18	0.0	0	69.5	73.1	9.3
+250	Picea mariana	4	18	19	0.0	0	69.5	73.1	9.3
+251	Picea mariana	4	19	20	0.0	0	69.5	73.1	9.3
+252	Picea mariana	4	20	21	0.0	0	69.5	73.1	9.3
+
+
+#Plot10									
+570	Pinus banksiana	10	2	3	0.0	0	77.9	63.8	9.3
+571	Pinus banksiana	10	3	4	0.0	0	77.9	63.8	9.3
+572	Pinus banksiana	10	4	5	0.0	0	77.9	63.8	9.3
+573	Pinus banksiana	10	5	6	0.0	73	77.9	63.8	9.3
+574	Pinus banksiana	10	6	7	0.0	0	77.9	63.8	9.3
+575	Pinus banksiana	10	7	8	0.0	0	77.9	63.8	9.3
+576	Pinus banksiana	10	8	9	0.0	73	77.9	63.8	9.3
+577	Pinus banksiana	10	9	10	0.0	218	77.9	63.8	9.3
+578	Pinus banksiana	10	10	11	0.0	290	77.9	63.8	9.3
+579	Pinus banksiana	10	11	12	0.0	218	77.9	63.8	9.3
+580	Pinus banksiana	10	12	13	0.0	218	77.9	63.8	9.3
+581	Pinus banksiana	10	13	14	0.0	363	77.9	63.8	9.3
+582	Pinus banksiana	10	14	15	0.0	218	77.9	63.8	9.3
+583	Pinus banksiana	10	15	16	0.0	145	77.9	63.8	9.3
+584	Pinus banksiana	10	16	17	0.0	218	77.9	63.8	9.3
+585	Pinus banksiana	10	17	18	0.0	218	77.9	63.8	9.3
+586	Pinus banksiana	10	18	19	0.0	0	77.9	63.8	9.3
+587	Pinus banksiana	10	19	20	0.0	73	77.9	63.8	9.3
+588	Pinus banksiana	10	20	21	0.0	0	77.9	63.8	9.3
+591	Pinus banksiana dead	10	2	3	0.0	0	77.9	63.8	9.3
+592	Pinus banksiana dead	10	3	4	0.0	218	77.9	63.8	9.3
+593	Pinus banksiana dead	10	4	5	0.0	145	77.9	63.8	9.3
+594	Pinus banksiana dead	10	5	6	0.0	145	77.9	63.8	9.3
+595	Pinus banksiana dead	10	6	7	0.0	73	77.9	63.8	9.3
+596	Pinus banksiana dead	10	7	8	0.0	218	77.9	63.8	9.3
+597	Pinus banksiana dead	10	8	9	0.0	145	77.9	63.8	9.3
+598	Pinus banksiana dead	10	9	10	0.0	73	77.9	63.8	9.3
+599	Pinus banksiana dead	10	10	11	0.0	0	77.9	63.8	9.3
+600	Pinus banksiana dead	10	11	12	0.0	0	77.9	63.8	9.3
+601	Pinus banksiana dead	10	12	13	0.0	0	77.9	63.8	9.3
+602	Pinus banksiana dead	10	13	14	0.0	73	77.9	63.8	9.3
+603	Pinus banksiana dead	10	14	15	0.0	0	77.9	63.8	9.3
+604	Pinus banksiana dead	10	15	16	0.0	0	77.9	63.8	9.3
+605	Pinus banksiana dead	10	16	17	0.0	0	77.9	63.8	9.3
+606	Pinus banksiana dead	10	17	18	0.0	0	77.9	63.8	9.3
+607	Pinus banksiana dead	10	18	19	0.0	0	77.9	63.8	9.3
+608	Pinus banksiana dead	10	19	20	0.0	0	77.9	63.8	9.3
+609	Pinus banksiana dead	10	20	21	0.0	0	77.9	63.8	9.3
+612	Picea mariana	10	2	3	0.0	583	79.9	66.7	9.3
+613	Picea mariana	10	3	4	0.0	436	79.9	66.7	9.3
+614	Picea mariana	10	4	5	0.0	218	79.9	66.7	9.3
+615	Picea mariana	10	5	6	0.0	145	79.9	66.7	9.3
+616	Picea mariana	10	6	7	0.0	73	79.9	66.7	9.3
+617	Picea mariana	10	7	8	0.0	0	79.9	66.7	9.3
+618	Picea mariana	10	8	9	0.0	0	79.9	66.7	9.3
+619	Picea mariana	10	9	10	0.0	0	79.9	66.7	9.3
+620	Picea mariana	10	10	11	0.0	0	79.9	66.7	9.3
+621	Picea mariana	10	11	12	0.0	0	79.9	66.7	9.3
+622	Picea mariana	10	12	13	0.0	73	79.9	66.7	9.3
+623	Picea mariana	10	13	14	0.0	0	79.9	66.7	9.3
+624	Picea mariana	10	14	15	0.0	0	79.9	66.7	9.3
+625	Picea mariana	10	15	16	0.0	0	79.9	66.7	9.3
+626	Picea mariana	10	16	17	0.0	0	79.9	66.7	9.3
+627	Picea mariana	10	17	18	0.0	0	79.9	66.7	9.3
+628	Picea mariana	10	18	19	0.0	0	79.9	66.7	9.3
+629	Picea mariana	10	19	20	0.0	0	79.9	66.7	9.3
+630	Picea mariana	10	20	21	0.0	0	79.9	66.7	9.3

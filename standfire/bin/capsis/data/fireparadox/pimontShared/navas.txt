@@ -1,0 +1,21 @@
+#first guess for navas						
+
+#Terrain						
+#name	cellWidth(m)	altitude(m)	xMin	yMin	xMax	yMax
+Terrain0	10	0	0	0	100	100
+
+#Polygons (optionnal)						
+#fileId	"{(x1,y1);(x2,y2)...}"
+# Here we have one polygons					
+1	{(0,0);(100,0);(100,100);(0,100)}
+
+#TreeGroups											
+#fileId	speciesName	polygonId	lowerBoundDBH	upperBoundDBH	groupAge	stemDensity	MCNeedles	MCLiveTwigs	MCDeadTwigs		
+# here we have four tree groups (one in each polygon)
+1	Pinus pinaster navas	1	5	10	40.0	85	100	80	10
+1	Pinus pinaster navas	1	10	15	40.0	800	100	80	10
+1	Pinus pinaster navas	1	15	20	40.0	900	100	80	10
+1	Pinus pinaster navas	1	20	25	40.0	160	100	80	10
+
+
+								

@@ -1,6 +1,5 @@
-#!/usr/bin/python
 """
-
+This module is the entry point to the STANDFIRE process.
 """
 
 import numpy as np
@@ -9,9 +8,12 @@ import os
 import pprint
 import platform
 import cPickle
+import math
 
-__authors__ = "Lucas Wells, Greg Cohn, Russell Parsons"
+__authors__ = "Team STANDFIRE"
 __copyright__ = "Copyright 2015, STANDFIRE"
+__status__ = "Development"
+__version__ = '1.0.0a'
 
 # FVS variants
 eastern = {'CS', 'LS', 'NE', 'SN'}
@@ -252,6 +254,34 @@ class Fvsfuels(object):
         self.inv_year = inv_year
         self.keywords["INVYEAR"] = inv_year
 
+    def set_stop_point(code=5, year=-1):
+        """
+        Set the FVS stop point code and year
+
+        :param code: stop point code (default=5)
+        :type code: integer
+        :param year: stop point year (default=-1)
+        :type year: integer
+
+        .. note:: year=0 means never stop and year=-1 means stop every cycle
+
+        ===============    ===============================================================
+        stop point code    Definition
+        ===============    ===============================================================
+        0                  Never stop
+        -1                 Stop at every location
+        1                  Stop just before first call to Event Monitor
+        2                  Stop just after first call to Event Monitor
+        3                  Stop just before second call to Event Monitor
+        4                  Stop just after second call to Event Monitor
+        5                  Stop after growth and mort has been computed, but before applied
+        6                  Stop just before the ESTAB routine is called
+        ==============     ================================================================
+        """
+
+        print "Not implemented"
+        #fvs.fvssetstoppointcodes(code, year)
+
     def run_fvs(self):
         """
         Runs the FVS simulation
@@ -275,13 +305,16 @@ class Fvsfuels(object):
         ...
 
         """
+
+        # set fvs stop point codes
+        fvs.fvssetstoppointcodes(5,-1)
+
         cnt = 0
         print "Simulating..."
         for i in range(self.inv_year, self.inv_year +
                       (self.num_cyc * self.time_int) +
                        self.time_int, self.time_int):
             print "{0}   {1}".format(cnt, i)
-            fvs.fvssetstoppointcodes(6,i)
             fvs.fvs()
             svs_attr = self._get_obj_data()
             spcodes = self._get_spcodes()
@@ -290,8 +323,8 @@ class Fvsfuels(object):
             cnt += 1
 
         # close fvs simulation (call twice)
-        fvs.fvs()
-        fvs.fvs()
+        fvs.close()
+        fvs.close()
 
     def _get_obj_data(self):
         """
@@ -538,6 +571,200 @@ class Fvsfuels(object):
         self.fuels["snags"][year].to_csv(self.wdir +
                  "{0}_{1}_{2}.csv".format(standid, "snags", year), index=False)
 
+
+class FuelCalc(object):
+    """
+    """
+
+    def __init__(self, trees):
+        """
+        Constructor
+        """
+
+        # type check and handle accordingly
+        if isinstance(trees, pd.DataFrame):
+            self.trees = trees
+        elif type(trees) == str:
+            try:
+                self.trees = pd.read_csv(trees)
+            except:
+                raise TypeError("String argument must point to .csv file")
+        else:
+            raise TypeError("argument type must be either an instance of "
+                            "Pandas.DataFrame() or a string indicating a path "
+                            "to a comma-delimted file")
+
+        # calculate crown base height and crown height
+        self.get_crown_base_ht()
+        self.get_crown_ht()
+
+    def get_crown_ht(self):
+        """
+        Calculates crown height for each trees based on crown ratio. This
+        value is added to the data frame
+
+        .. math:: c_{ratio}h
+
+        """
+
+        if 'crown_ht' not in self.trees:
+            self.trees['crown_ht'] = ''
+
+        self.trees['crown_ht'] = self.trees['cratio']/100. * self.trees['ht']
+
+
+    def get_crown_base_ht(self):
+        """
+        Calculates crown base height for each tree based on crown ratio and
+        tree height. This value is added to the data frame
+
+        .. math:: h - (c_{ratio} h)
+
+        """
+
+        if 'base_ht' not in self.trees:
+            self.trees['base_ht'] = ''
+
+        self.trees['base_ht'] = (self.trees['ht'] - (self.trees['cratio']/100.)
+                * self.trees['ht'])
+
+    def set_crown_geometry(self, sp_geom_dict):
+        """
+        Appends crown geometry to each tree in the data frame conditional on
+        species.
+
+        :param sp_geom_dict: dictionary of species specific crown geometries
+        :type sp_geom_dict: python dictionary
+
+        :Example:
+
+            >>> sp_dict = {'PIPO' : 'cylinder', 'PSME' : 'frustum'}
+            >>> fuels.set_crown_geometry(sp_dict)
+
+        """
+
+        if 'geom' not in self.trees:
+           self.trees['geom'] = ''
+
+        for i in self.get_species_list():
+            if sp_geom_dict[i] not in ['rectangle', 'cylinder', 'cone', 'frustum']:
+                raise ValueError("The specified geometry '{0}' is not valid".format(sp_geom_dict[i]))
+            self.trees['geom'][self.trees['species'] == i] = sp_geom_dict[i]
+
+
+    def get_species_list(self):
+        """
+        Return set of species existing in trees file supplied to constructor
+
+        :return: unique list of species
+        :rtype: list
+
+        .. note:: This methods is useful when assigning geometries by species.
+                  A user can first retrieve the species list then use it to
+                  assigne crown geometries
+
+        """
+
+        return pd.unique(self.trees['species'])
+
+    def calc_crown_volume(self):
+        """
+        """
+
+        if 'vol' not in self.trees:
+            self.trees['vol'] = ''
+
+        self.trees['vol'][self.trees['geom'] == 'rectangle'] = self.rectangle_volume(self.trees['crd']*2, self.trees['crown_ht'])
+        self.trees['vol'][self.trees['geom'] == 'cylinder'] = self.cylinder_volume(self.trees['crd'], self.trees['crown_ht'])
+        self.trees['vol'][self.trees['geom'] == 'cone'] = self.cone_volume(self.trees['crd'], self.trees['crown_ht'])
+        self.trees['vol'][self.trees['geom'] == 'frustum'] = self.frustum_volume(self.trees['crd'], self.trees['crown_ht'])
+
+    def calc_bulk_density(self):
+        """
+        """
+
+        fields = ['bd_foliage', 'bd_1hr', 'bd_10hr', 'bd_100hr']
+
+        for i in fields:
+            if i not in self.trees:
+                self.trees[i] = ''
+
+        self.trees['bd_foliage'] = self.trees['crownwt0'] / self.trees['vol']
+        self.trees['bd_1hr'] = self.trees['crownwt1'] / self.trees['vol']
+        self.trees['bd_10hr'] = self.trees['crownwt2'] / self.trees['vol']
+        self.trees['bd_100hr'] = self.trees['crownwt3'] / self.trees['vol']
+
+
+
+    def frustum_volume(self, R, h, r=0.5):
+        """
+        Returns the volume of a frustum
+
+        :param r: small (top) radius
+        :type r: float
+        :param h: height
+        :type h: float
+        :param R: big (bottom) radius
+        :type R: float
+        :return: volume
+        :rtype: float
+
+        .. math:: \frac{\pi h}{3}(R^2+rR+r^2
+
+        """
+
+        return (1.0/3.0)*math.pi*h*(R**2 + r*R + r**2)
+
+    def cone_volume(self, r, h):
+        """
+        Returns the volume of a cone
+
+        :param r: radius
+        :type r: float
+        :param h: height
+        :type h: float
+        :return: volume
+        :rtype: float
+
+        .. math:: \pi r^2 \frac{h}{3}
+
+        """
+
+        return (math.pi * r**2) * (h/3)
+
+    def cylinder_volume(self, r, h):
+        """
+        Returns the volume of a cylinder
+
+        :param r: radius
+        :type r: float
+        :param h: height
+        :type h: float
+        :return: volume
+        :rtype: float
+
+        .. math:: \pi r^2 h
+
+        """
+
+        return (math.pi * r**2 * h)
+
+    def rectangle_volume(self, w, h):
+        """
+        Returns the volume of a rectangle
+
+        :param w: width
+        :type w: float
+        :param h: height
+        :type h: float
+        :return: volume
+        :rtype: float
+
+        .. math:: wwh
+
+        """
+
+        return w*w*h
 
 class Inventory(object):
     """
@@ -827,9 +1054,11 @@ class Inventory(object):
 
         for i in uniq_sp:
             if i in crosswalk[side]:
-                self.data.loc[self.data["Species"] == i, "Species"] = crosswalk[side][i][self.variant]
+                self.data.loc[self.data["Species"] == i
+			         , "Species"] = crosswalk[side][i][self.variant]
             else:
-                print("{0} is not recognized by FVS as a {1} species\ndefaulting to unknown species".format(i, side))
+                print("{0} is not recognized by FVS as a {1} species\n" + 
+                                "defaulting to unknown species".format(i, side))
                 self.data.loc[self.data["Species"] == i, "Species"] = 'OT'
 
     def format_fvs_tree_file(self, cratio_to_code = True):
@@ -913,3 +1142,4 @@ class Inventory(object):
         for i in self.fvsTreeFile.keys():
             with open(outputPath + i + '.tre', 'w') as f:
                 f.write(self.fvsTreeFile[i])
+

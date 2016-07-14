@@ -1,0 +1,1775 @@
+/*
+ * Capsis 4 - Computer-Aided Projections of Strategies in Silviculture
+ *
+ * Copyright (C) 2001-2003  Francois de Coligny
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+package capsis.extension.standviewer;
+
+import capsis.util.methodprovider.*;
+import capsis.util.diagram2d.*;
+
+import capsis.extension.*;
+import capsis.kernel.*;
+import capsis.gui.*;
+import capsis.util.*;
+import java.text.*;
+import java.util.*;
+import java.io.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.border.*;
+
+/**
+ * SVMaid draws histograms to represent two steps of a project associated to a MAID model.
+ * MAID stands are Distance Independant Tree Models stands. Each tree is
+ * a representative for several. It holds a number of represented individuals.
+ *
+ * @author F. de Coligny - january 2002
+ */
+public class SVMaid extends StandViewer implements ActionListener, Pilotable {
+
+	public static final int MAX_FRACTION_DIGITS = 2;
+	protected Diagram2D dbhDiagram;	// we draw histograms in this component
+	protected Diagram2D heightDiagram;
+	private Drawer dbhHistoDrawer;
+	private Drawer heightHistoDrawer;
+	protected GraduationContext xGradContext;	// step1, X axis (Dbh classes (cm) or Girth (cm))
+	protected GraduationContext yGradContext;	// step1, Y axis (Numbers)
+	protected GraduationContext zGradContext;	// step1, Z axis (Height (m))
+
+	protected Step step1;		// main step
+	protected MaidHisto histo1;
+
+	protected Step step2;		// previous step
+	protected MaidHisto histo2;
+
+	protected SVMaidSettings settings;	// memorized settings for the viewer
+
+	protected JButton settingsButton;
+	private JButton helpButton;
+
+	protected MainPanel mainPanel;
+	protected JPanel optionPanel;
+
+	protected JScrollPane dataScrollPane;
+	protected JComponent dataPanel;
+	protected NumberFormat formater;
+	protected int memoCurveHeight;	// to avoid unneeded repainting
+	protected double memoX;
+	protected double memoY;
+
+	protected double hectareCoefficient;
+		
+	protected Color stepColor;	// fc - 18.11.2004
+
+	static {
+		Translator.addBundle("capsis.extension.standviewer.SVMaid");
+	}
+
+
+	/**
+	 * Phantom constructor.
+	 * Only to ask for extension properties (authorName, version...).
+	 */
+	public SVMaid () {}
+
+	/**
+	 * Official constructor. It uses the standard Extension starter.
+	 */
+	public SVMaid (ExtensionStarter s) {
+		super (s);
+
+		stepColor = stepButton.getColor ();	// fc - 18.11.2004
+		
+		retrieveSettings ();
+		memoCurveHeight = settings.curveHeight;
+
+		resetSegment ();
+
+		//~ step1 = sb.getStep ();
+		step1 = stepButton.getStep ();
+		if (settings.showPreviousStep) {
+			step2 = (Step) step1.getVisibleFather ();	// may be null (root step)
+		} else {
+			step2 = null;
+		}
+
+		// Convention : hectare coefficient is calculated with the area of the stand under step1
+		// Note : area does not change with time
+		hectareCoefficient = 10000 / step1.getStand ().getArea ();
+
+		// Build drawers for every Diagram2D
+		dbhHistoDrawer = new DbhHistoDrawer ();
+		heightHistoDrawer = new HeightHistoDrawer ();
+
+		// Used to format decimal part with 2 digits only
+		//~ formater = NumberFormat.getInstance (Locale.FRANCE);		// fc - 3.2.2004
+		//~ formater.setMaximumFractionDigits (MAX_FRACTION_DIGITS);
+
+		formater = NumberFormat.getInstance (Locale.ENGLISH);		// fc - 18.11.2004
+		formater.setGroupingUsed (false);							// fc - 18.11.2004
+		formater.setMaximumFractionDigits (MAX_FRACTION_DIGITS);	// fc - 18.11.2004
+
+		histo1 = new MaidHisto (getImpliedTrees (step1));
+		applyOptions (histo1);
+		histo1.update ();
+		Rectangle2D.Double nBounds = histo1.getNBounds ();
+		Rectangle2D.Double hBounds = histo1.getHBounds ();
+
+		if (step2 != null) {
+			histo2 = new MaidHisto (getImpliedTrees (step2));
+			applyOptions (histo2);
+
+			// Ensure the two histo have the same classWidth
+			if (settings.aggregateMode == SVMaidSettings.AGGREGATE_CLASS_NUMBER) {
+				histo2.setClassWidth (histo1.getClassWidth ());
+			}
+
+			histo2.update ();
+
+			// Security
+			if (!histo1.isFusionableWith (histo2)) {
+				step2 = null;
+				histo2 = null;
+			} else {
+				nBounds = computeUnion (nBounds, histo2.getNBounds ());
+				hBounds = computeUnion (hBounds, histo2.getHBounds ());
+			}
+		}
+<<<<<<< SVMaid.java
+		
+		String ha = settings.perHectare ? " (ha)" : "";
+		String xName = (histo1.isGirthMode ()) ? Translator.swap ("SVMaid.girth") : Translator.swap ("SVMaid.dbh");
+		prepareGraduationContexts (histo1, histo2, xName, "N"+ha, Translator.swap ("SVMaid.height"));
+=======
+
+		String xName = (histo1.isGirthMode ()) ? "Circ. (cm)" : "Diam. (cm)";
+		prepareGraduationContexts (histo1, histo2, xName, "N", "Hauteur (m)");
+>>>>>>> 1.13
+
+		dbhDiagram = new Diagram2D (dbhHistoDrawer, nBounds, xGradContext, yGradContext);
+		heightDiagram = new Diagram2D (heightHistoDrawer, hBounds, xGradContext, zGradContext);
+		heightDiagram.setDrawXAxis (false);
+
+		optionPanel = new JPanel ();
+		createUI ();
+//~ update (s.getStepButton ());	// ???
+		// Note: location and size are set in ITool
+		revalidate ();
+	}
+
+	/**
+	 * Extension dynamic compatibility mechanism.
+	 * This matchwith method checks if the extension can deal (i.e. is compatible) with the referent.
+	 */
+	public boolean matchWith (Object referent) {
+
+		try {
+			if (!(referent instanceof GModel)) {return false;}
+			GModel m = (GModel) referent;
+			GStand s = ((Step) m.getScenario ().getRoot ()).getStand ();
+			if (!(s instanceof TreeCollection)) {return false;}
+			TreeCollection tc = (TreeCollection) s;
+			if (!tc.isEmpty () && !(tc.getFirstTree () instanceof GTree)) {return false;}
+
+		} catch (Exception e) {
+			Log.println (Log.ERROR, "SVMaid.matchWith ()", "Error in matchWith () (returned false)", e);
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Method to draw a segment within this viewer.
+	 * The segement is drawn from last memorized point to the given point.
+	 * The given point is memorized to be the beginning of next segment to be drawn.
+	 * Only rectangle r is visible (user coordinates) -> do not draw if outside.
+	 * May be redefined in subclasses.
+	 */
+	protected void drawSegment (Graphics2D g2, Rectangle.Double r, double x, double y) {
+		// a point
+		if (y != 0) {
+			Shape sh = new Line2D.Double (x, y, x, y);
+			g2.draw (sh);
+		}
+
+		// a segment
+		if (memoX != MaidHisto.INACTIVE && memoY != MaidHisto.INACTIVE) {
+			if (y != 0) {
+				Shape sh = new Line2D.Double (memoX, memoY, x, y);
+
+				g2.draw (sh);
+			}
+		}
+
+		if (y == 0) {	// do not draw segment next time
+			resetSegment ();
+		} else {	// memo x & y to draw segment next time
+			memoX = x;
+			memoY = y;
+		}
+	}
+
+	protected void resetSegment () {
+		memoX = MaidHisto.INACTIVE;
+
+		memoY = MaidHisto.INACTIVE;
+
+	}
+
+	//
+	// Apply current viewer options on the given MaidHisto.
+	//
+	private void applyOptions (MaidHisto histo) {
+		// init
+		histo.setForcedXMin (MaidHisto.INACTIVE);
+		histo.setForcedXMax (MaidHisto.INACTIVE);
+		histo.setClassWidth (0d);
+
+		histo.setXBeginsAtZero (settings.zeroOnX);	// enlarge bounds
+		histo.setGirthMode (settings.showGirth);	// girth instead of dbh on X axis
+		if (settings.perHectare) {
+			histo.setHectareCoefficient (hectareCoefficient);
+		} else {
+			histo.setHectareCoefficient (1);
+		}
+
+		if (settings.aggregate) {
+
+			if (settings.isAggregateMinThreshold) {
+				histo.setForcedXMin (settings.aggregateMinThreshold);
+			}
+			if (settings.isAggregateMaxThreshold) {
+				histo.setForcedXMax (settings.aggregateMaxThreshold);
+			}
+
+			if (settings.aggregateMode == SVMaidSettings.AGGREGATE_CLASS_WIDTH) {
+				double classWidth = settings.aggregateClassWidth;
+				histo.setClassWidth (classWidth);
+			} else {		// AGGREGATE_CLASS_NUMBER
+				int classNumber = settings.aggregateClassNumber;
+				// compute class width from classNumber
+			//	double currentExtension = histo.getForcedXMax () - histo.getForcedXMin ();
+				double currentExtension = histo.getXMax () - histo.getXMin ();
+				currentExtension *= 1.01d;	// to integrate upper limit
+				double classWidth = currentExtension / classNumber;
+				histo.setClassWidth (classWidth);
+			}
+		}
+
+		if (settings.curveHeight != memoCurveHeight) {
+			heightDiagram.setPreferredSize (new Dimension (200, settings.curveHeight));
+			heightDiagram.revalidate ();	// needed
+			memoCurveHeight = settings.curveHeight;
+		}
+
+	}
+
+	//
+	// Compute graduation contexts after an histo.update and before
+	// a Diagram2D.<init> or set ().
+	//
+	private void prepareGraduationContexts (MaidHisto histo1, MaidHisto histo2,
+			String xAxisName, String yAxisName, String zAxisName) {
+
+		// Graduation context for X axis (Dbh classes (cm))
+		xGradContext = new GraduationContext ();
+		xGradContext.axisName = "";
+		if (settings.showAxisNames) {
+			xGradContext.axisName = xAxisName;
+		}
+		xGradContext.grads = new ArrayList ();
+		double classWidth = histo1.getClassWidth ();
+		Set memo = new HashSet ();
+
+		int k = 0;
+		String[] optLabels = histo1.getXLabels ();	// may be null (optional)
+		if (optLabels != null && optLabels.length != histo1.getNBars ().size ()) {optLabels = null;}	// security
+		for (Iterator i = histo1.getNBars ().iterator (); i.hasNext ();) {
+			Vertex2D bar = (Vertex2D) i.next ();
+			String label = "";
+			try {
+				label = optLabels[k];	// optional case if optLabels not null
+			} catch (Exception e) {
+				label = ""+formater.format (bar.x);	// default case
+			}
+			memo.add (label);
+			Grad grad = new Grad (bar.x, label);
+			xGradContext.grads.add (grad);
+			k++;
+		}
+		xGradContext.begin = histo1.getNBounds ().x;
+		xGradContext.end = xGradContext.begin + histo1.getNBounds ().width;
+
+		// second histo x grads if two steps
+		if (step2 != null) {
+			k = 0;
+			optLabels = histo2.getXLabels ();	// may be null (optional)
+			if (optLabels != null && optLabels.length != histo2.getNBars ().size ()) {optLabels = null;}	// security
+/*
+System.out.println ("SVMaid.pgc (): histo2.getNBars () = "+histo2.getNBars ());
+String str = "[ ";
+for (int i = 0; i < optLabels.length; i++) {str+=optLabels[i]+" ";}
+str+="]";
+System.out.println ("               optLabels2 = "+str);
+*/
+			for (Iterator i = histo2.getNBars ().iterator (); i.hasNext ();) {
+				Vertex2D bar = (Vertex2D) i.next ();
+				String label = "";
+				try {
+					label = optLabels[k];	// optional case if optLabels not null
+				} catch (Exception e) {
+					label = ""+formater.format (bar.x);	// default case
+				}
+				if (!memo.contains (label)) {
+					Grad grad = new Grad (bar.x, label);
+					xGradContext.grads.add (grad);
+					//memo.add (label);	// to uncomment once corrected the erroneous labels construction for Step2
+				}
+				k++;
+			}
+			xGradContext.begin = Math.min (xGradContext.begin, histo2.getNBounds ().x);
+			xGradContext.end = Math.max (xGradContext.end,
+					xGradContext.begin + histo2.getNBounds ().width);
+		}
+
+		// Graduation context for Y axis (Numbers)
+		yGradContext = new GraduationContext ();
+		yGradContext.axisName = "";
+		if (settings.showAxisNames) {
+			yGradContext.axisName = yAxisName;
+		}
+		yGradContext.integersOnly = true;
+		yGradContext.begin = histo1.getNBounds ().y;
+		yGradContext.end = yGradContext.begin + histo1.getNBounds ().height;
+		if (step2 != null) {
+			yGradContext.begin = Math.min (yGradContext.begin, histo2.getNBounds ().y);
+			yGradContext.end = Math.max (yGradContext.end,
+					yGradContext.begin + histo2.getNBounds ().height);
+		}
+
+		// Graduation context for Z axis (Height (m))
+		zGradContext = new GraduationContext ();
+		zGradContext.axisName = "";
+		if (settings.showAxisNames) {
+			zGradContext.axisName = zAxisName;
+		}
+		zGradContext.integersOnly = false;
+		zGradContext.begin = histo1.getHBounds ().y;
+		zGradContext.end = zGradContext.begin + histo1.getHBounds ().height;
+		if (step2 != null) {
+			zGradContext.begin = Math.min (zGradContext.begin, histo2.getHBounds ().y);
+			zGradContext.end = Math.max (zGradContext.end,
+					zGradContext.begin + histo2.getHBounds ().height);
+		}
+
+		// This is to align the two vertical axes of the two Diagram2D (s)
+		String yMin = ""+formater.format (yGradContext.begin);
+		String yMax = ""+formater.format (yGradContext.end);
+		String zMin = ""+formater.format (zGradContext.begin);
+		String zMax = ""+formater.format (zGradContext.end);
+		int maxChars = Math.max (yMin.length (), yMax.length ());
+		maxChars = Math.max (maxChars, zMin.length ());
+		maxChars = Math.max (maxChars, zMax.length ());
+		String longestGrad = "";
+		for (int i = 0; i < maxChars; i++) {longestGrad += "X";}
+
+		yGradContext.longestGrad = longestGrad;
+
+		zGradContext.longestGrad = longestGrad;
+
+	}
+
+	/**
+	 * Refreshes the GUI with another Step.
+	 * or after settings modification.
+	 */
+	public void update (StepButton sb) {
+		super.update (sb);
+		((DbhHistoDrawer) dbhHistoDrawer).resetSelection ();	// Cancel current selection, we change steps
+
+		step1 = sb.getStep ();
+		if (settings.showPreviousStep) {
+			step2 = (Step) step1.getVisibleFather ();	// may be null (root step)
+		} else {
+			step2 = null;
+		}
+
+		// 1. MaidHisto1
+
+		histo1.setTrees (getImpliedTrees (step1));
+		applyOptions (histo1);
+		
+		histo1.update ();
+		Rectangle2D.Double nBounds = histo1.getNBounds ();
+		Rectangle2D.Double hBounds = histo1.getHBounds ();
+
+		if (step2 != null) {
+			if (histo2 == null) {
+				histo2 = new MaidHisto (getImpliedTrees (step2));
+			} else {
+				histo2.setTrees (getImpliedTrees (step2));
+			}
+			applyOptions (histo2);
+
+			// Ensure the two histo have the same classWidth
+			if (settings.aggregateMode == SVMaidSettings.AGGREGATE_CLASS_NUMBER) {
+				histo2.setClassWidth (histo1.getClassWidth ());
+			}
+
+			histo2.update ();	// recalculates
+
+			// Security
+			if (!histo1.isFusionableWith (histo2)) {
+				Log.println (Log.ERROR, "SVMaid.update ()",
+						"Histos are not fusionable. Previous step feature disabled.");
+				step2 = null;
+				histo2 = null;
+			} else {
+				nBounds = computeUnion (nBounds, histo2.getNBounds ());
+				hBounds = computeUnion (hBounds, histo2.getHBounds ());
+			}
+		}
+
+<<<<<<< SVMaid.java
+		String ha = settings.perHectare ? " (ha)" : "";
+		String xName = (histo1.isGirthMode ()) ? Translator.swap ("SVMaid.girth") : Translator.swap ("SVMaid.dbh");
+		prepareGraduationContexts (histo1, histo2, xName, "N"+ha, Translator.swap ("SVMaid.height"));
+=======
+		String xName = (histo1.isGirthMode ()) ? "Circ. (cm)" : "Diam. (cm)";
+		prepareGraduationContexts (histo1, histo2, xName, "N", "Hauteur (m)");
+>>>>>>> 1.13
+		dbhDiagram.set (nBounds, xGradContext, yGradContext);
+		heightDiagram.set (hBounds, xGradContext, zGradContext);
+
+		// 3. Optional variables
+		if (settings.showVariables) {
+			dataPanel = makeDataPanel ();
+			dataScrollPane.getViewport ().setView (dataPanel);
+			dataScrollPane.setPreferredSize (new Dimension (
+					settings.variablesSize,
+					settings.variablesSize
+					));
+			if (settings.variablesPosition == SVMaidSettings.VARIABLES_BOTTOM) {
+				getContentPane ().add (dataScrollPane, BorderLayout.SOUTH);
+				getContentPane ().add (getEmptyPanel (), BorderLayout.EAST);
+			} else {
+
+				getContentPane ().add (dataScrollPane, BorderLayout.EAST);
+				getContentPane ().add (getEmptyPanel (), BorderLayout.SOUTH);
+			}
+
+		} else {
+			dataScrollPane.getViewport ().setView (new JPanel ());	//empty
+			dataScrollPane.setPreferredSize (new Dimension (0, 0));
+		}
+
+		// 3. validate contentPane
+		getContentPane ().validate ();
+		//~ setVisible (!isHidden ());
+
+	}
+
+	//
+	// Creates a collection containing all trees in step in current grouper.
+	//
+	private Collection getImpliedTrees (Step step) {
+		GStand stand = step.getStand ();
+
+		// If group is set, restrict stand to given group
+		Collection trees = ((TreeCollection) stand).getTrees ();
+		if (settings.grouperMode) {
+			String name = settings.grouperName;
+			GrouperManager gm = GrouperManager.getInstance ();
+			Grouper grouper = gm.getGrouper (name);
+			try {
+				trees = grouper.apply (trees, name.toLowerCase ().startsWith ("not "));	// fc - 21.4.2004
+			} catch (Exception e) {
+				Log.println (Log.ERROR, "SVSimple.draw ()",
+						"Exception while applying grouper "+name+" on stand", e);
+				settings.grouperMode = false;
+				settings.grouperName = "";
+			}
+		}
+
+		return Arrays.asList (trees.toArray ());
+	}
+
+	/**
+	 * Needed (StandViewer superclass). Return StandViewer name.
+	 */
+	public String getName () {
+		return Translator.swap ("SVMaid");
+	}
+
+	/**
+	 * From Extension interface.
+	 */
+	public String getVersion () {return VERSION;}
+
+	public static final String VERSION = "1.3";
+
+	/**
+	 * From Extension interface.
+	 */
+	public String getAuthor () {return "F. de Coligny";}
+
+	/**
+	 * From Extension interface.
+	 */
+	public String getDescription () {return Translator.swap ("SVMaid.description");}
+
+	//
+	// Calculate the union of the two rectangles (double precision).
+	//
+	private Rectangle.Double computeUnion (Rectangle.Double a, Rectangle.Double b) {
+
+		Rectangle.Double union = new Rectangle.Double ();
+		double x0 = Math.min (a.x, b.x);
+		double y0 = Math.min (a.y, b.y);
+		double x1 = Math.max (a.x+a.width, b.x+b.width);
+		double y1 = Math.max (a.y+a.height, b.y+b.height);
+		union.x = x0;
+		union.y = y0;
+		union.width = x1 - x0;
+		union.height = y1 - y0;
+		return union;
+	}
+
+	/**
+	 * From Pilotable interface.
+	 */
+	public JComponent getPilot () {
+
+		ImageIcon icon = new IconLoader ().getIcon ("Properties16.gif");
+		settingsButton = new JButton (icon);
+		Tools.setSizeExactly (settingsButton);
+		settingsButton.setToolTipText (Translator.swap ("SVMaid.settings"));
+		settingsButton.addActionListener (this);
+
+		icon = new IconLoader ().getIcon ("Help16.gif");
+		helpButton = new JButton (icon);
+		Tools.setSizeExactly (helpButton);
+		helpButton.setToolTipText (Translator.swap ("Shared.help"));
+		helpButton.addActionListener (this);
+
+		JToolBar toolbar = new JToolBar ();
+		toolbar.add (settingsButton);
+		toolbar.add (helpButton);
+		toolbar.setVisible (true);
+
+		return toolbar;
+	}
+
+	/**
+	 * Retrieve the settings for this viewer as saved the last time they were
+	 * changed.
+	 */
+	protected void retrieveSettings () {
+
+		// Retrieve or create settings for the viewer
+		GSettings memoSettings = ExtensionManager.getSettings (this.getClass ());
+		if (memoSettings != null) {
+			settings = (SVMaidSettings) memoSettings;	// cast from GSettings
+		} else {
+			settings = new SVMaidSettings ();
+		}
+	}
+
+	/**
+	 * Used for the settings and filtering buttons.
+	 */
+	public void actionPerformed (ActionEvent evt) {
+
+		if (evt.getSource ().equals (settingsButton)) {
+			mainPanel = new MainPanel ();
+			DUser dlg = new DUser (mainPanel);
+			if (dlg.isValidDialog ()) {
+
+				settings.showAxisNames = mainPanel.getCkShowAxisNames ().isSelected ();
+				settings.showPreviousStep = mainPanel.getCkShowPreviousStep ().isSelected ();
+				settings.zeroOnX = mainPanel.getCkZeroOnX ().isSelected ();
+				settings.showGirth = mainPanel.getCkShowGirth ().isSelected ();
+				settings.selectUnderlyingTrees = mainPanel.getCkSelectUnderlyingTrees ().isSelected ();
+				settings.perHectare = mainPanel.getCkPerHectare ().isSelected ();
+
+				settings.grouperMode = mainPanel.getGrouperChooser ().isGrouperSelected ();
+				settings.grouperModeNot = mainPanel.getGrouperChooser ().isGrouperNot ();
+				settings.grouperName = mainPanel.getGrouperChooser ().getGrouperName ();
+
+				settings.showVariables = mainPanel.getCkShowVariables ().isSelected ();
+
+				if (mainPanel.isVariablesBottom ()) {
+					settings.variablesPosition = SVMaidSettings.VARIABLES_BOTTOM;
+				} else {
+					settings.variablesPosition = SVMaidSettings.VARIABLES_RIGHT;
+				}
+				settings.variablesSize = mainPanel.getVariablesSize ();
+
+				settings.aggregate = mainPanel.isAggregate ();
+				settings.aggregateClassWidth = mainPanel.getAggregateClassWidth ();
+				settings.aggregateClassNumber = mainPanel.getAggregateClassNumber ();
+				settings.isAggregateMinThreshold = mainPanel.isAggregateMinThreshold ();
+				settings.isAggregateMaxThreshold = mainPanel.isAggregateMaxThreshold ();
+				settings.aggregateMinThreshold = mainPanel.getAggregateMinThreshold ();
+				settings.aggregateMaxThreshold = mainPanel.getAggregateMaxThreshold ();
+				if (mainPanel.isAggregateClassWidth ()) {
+					settings.aggregateMode = SVMaidSettings.AGGREGATE_CLASS_WIDTH;
+				} else {
+					settings.aggregateMode = SVMaidSettings.AGGREGATE_CLASS_NUMBER;
+				}
+
+				settings.enlargeBars = mainPanel.getCkEnlargeBars ().isSelected ();
+				settings.curveHeight = mainPanel.getCurveHeight ();
+				settings.selectionColor = mainPanel.getSelectionColor ();
+				//~ settings.color1 = mainPanel.getColor1 ();
+				settings.color2 = mainPanel.getColor2 ();
+
+				optionAction ();	// hook for subclasses
+
+			}
+
+			mainPanel.dispose ();
+			dlg.dispose ();
+
+			update (getStepButton ());
+
+		} else if (evt.getSource ().equals (helpButton)) {
+			Helper.helpFor (this);
+		}
+
+	}
+
+	/**
+	 * Called when ok on option panel, must be redefined by subclasses
+	 * which use optionPanel
+	 */
+	protected void optionAction () {
+		ExtensionManager.memoNewSettings (this.getClass (), settings);
+	}
+
+	//
+	// Build and return an empty panel..
+	//
+	private JPanel getEmptyPanel () {
+		JPanel emptyPanel = new JPanel ();
+		emptyPanel.setSize (new Dimension (0, 0));
+		emptyPanel.setMinimumSize (new Dimension (0, 0));
+		emptyPanel.setPreferredSize (new Dimension (0, 0));
+		emptyPanel.setMaximumSize (new Dimension (0, 0));
+		return emptyPanel;
+	}
+
+	//
+	// Viewer title definition : reference to current step and considered group.
+	//
+	protected void defineTitle () {
+
+		try {
+			// 1. Step reference
+			String title = step.getScenario ().getName ()+"."+step.getName ();
+
+			// 2. Group name if exists
+			if (settings.grouperMode
+					&& settings.grouperName != null) {
+				// fc - 16.9.2004 - if group has been proposed, it must be compatible
+				//~ Grouper gr = GrouperManager.getInstance ()
+						//~ .getGrouper (settings.grouperName);
+				//~ if (gr.matchWith (step1.getStand ())) {	// <<<<<<<<<<<<<<<<<< nuts, needs Collection
+					title += " / "+settings.grouperName;
+				//~ }
+			}
+
+			// 3. Hectare ?
+			if (settings.perHectare) {
+				title += " /ha";
+			}
+
+			// 4. Viewer name
+			title += " - "+getName ();
+
+			setTitle (title);
+		} catch (Exception e) {
+			setTitle (getName ());
+		}
+	}
+
+	/**
+	 * Make the dataPanel.
+	 * This method can be redefined in subclass to show data differently
+	 */
+	protected JComponent makeDataPanel () {
+
+		Vector rows = refreshData ();		// data under histogram (Co, Ho...)
+		Vector cols = new Vector ();
+		cols.add (Translator.swap ("SVMaid.variable"));
+		if (step2 != null) {
+			cols.add (step2.getScenario ().getName ()+"."+step2.getStand ().getCaption ());	// previous
+			cols.add (step1.getScenario ().getName ()+"."+step1.getStand ().getCaption ());	// current
+		} else {
+			cols.add (Translator.swap ("SVMaid.value"));	// current step
+		}
+
+		JTable table = new JTable (rows, cols);
+		return table;
+	}
+
+	//
+	// Tool method for makeDataPanel ()
+	// Make a component key : value.
+	//
+	private Vector makeRow (String key, double value) {
+		Vector row = new Vector ();
+		row.add (Translator.swap (key));
+		row.add (formater.format (value));
+		return row;
+	}
+
+	//
+	// Tool method for makeDataPanel ()
+	// This is used if previous step is shown : three cols in table.
+	//
+	private Vector makeRow (String key, double valueA, double valueB) {
+		Vector row = new Vector ();
+
+		row.add (Translator.swap (key));
+		row.add (formater.format (valueA));
+		row.add (formater.format (valueB));
+
+		return row;
+	}
+
+	//
+	// Tool method for makeDataPanel ()
+	// Compute the dendrometric data for the underlying stand.
+	//
+	private Vector refreshData () {
+
+		Vector rows = new Vector ();
+		MethodProvider mp = null;
+		try {
+			mp = step1.getScenario ().getModel ().getMethodProvider ();
+		} catch (Exception e) {
+			Log.println (Log.ERROR, "SVMaid.refreshData ()", "Can not find MethodProvider", e);
+			return rows;
+		}
+
+		GStand stand1 = step1.getStand ();
+		// If group is set, restrict stand to given group
+		Collection trees1 = ((TreeCollection) stand1).getTrees ();;
+		if (settings.grouperMode) {
+			String name = settings.grouperName;
+			GrouperManager gm = GrouperManager.getInstance ();
+			Grouper grouper = gm.getGrouper (name);
+			try {
+				trees1 = grouper.apply (trees1, name.toLowerCase ().startsWith ("not "));
+			} catch (Exception e) {
+				Log.println (Log.ERROR, "SVMaid.refreshData ()",
+						"Exception while applying grouper "+name+" on stand1", e);
+				settings.grouperMode = false;
+				settings.grouperName = "";
+			}	// if trouble, subStand is unchanged (= stand)
+		}
+
+		//~ stand1 = (GStand) subStand;
+		//~ Collection trees1 = null;	// fc - 24.3.2004
+		//~ try {trees1 = ((TreeCollection) stand1).getTrees ();} catch (Exception e) {}	// fc - 24.3.2004
+
+		GStand stand2 = null;
+		Collection trees2 = null;	// fc - 24.3.2004
+
+		if (step2 != null) {	// previous step
+			stand2 = step2.getStand ();
+			// If group is set, restrict stand to given group
+			trees2 = ((TreeCollection) stand2).getTrees ();
+			if (settings.grouperMode) {
+				String name = settings.grouperName;
+				GrouperManager gm = GrouperManager.getInstance ();
+				Grouper grouper = gm.getGrouper (name);
+				try {
+					trees2 = grouper.apply (trees2, name.toLowerCase ().startsWith ("not "));
+				} catch (Exception e) {
+					Log.println (Log.ERROR, "SVMaid.refreshData ()",
+							"Exception while applying grouper "+name+" on stand2", e);
+					settings.grouperMode = false;
+					settings.grouperName = "";
+				}
+			}
+			//~ stand2 = (GStand) subStand;
+			//~ try {trees2 = ((TreeCollection) stand2).getTrees ();} catch (Exception e) {}	// fc - 24.3.2004
+		}
+
+		// Hectare processing
+		double haCoef = 1d;
+		if (settings.perHectare) {
+			haCoef = hectareCoefficient;
+		}
+
+		try {
+			int N = (int) ( ((NProvider) mp).getN (stand1, trees1) * haCoef );
+			if (step2 == null) {
+				rows.add (makeRow ("N", N));
+			} else {
+				int N2 = (int) ( ((NProvider) mp).getN (stand2, trees2) * haCoef );
+				rows.add (makeRow ("N", N2, N));
+			}
+		} catch (Exception e) {}
+
+		try {
+			double G = ((GProvider) mp).getG (stand1, trees1) * haCoef;
+			if (step2 == null) {
+				rows.add (makeRow ("G (m2)", G));
+			} else {
+				double G2 = ((GProvider) mp).getG (stand2, trees2) * haCoef;
+				rows.add (makeRow ("G (m2)", G2, G));
+			}
+		} catch (Exception e) {}
+
+		try {
+			double V = ((VProvider) mp).getV (stand1, trees1) * haCoef;
+			if (step2 == null) {
+				rows.add (makeRow ("V (m3)", V));
+			} else {
+				double V2 = ((VProvider) mp).getV (stand2, trees2) * haCoef;
+				rows.add (makeRow ("V (m3)", V2, V));
+			}
+		} catch (Exception e) {}
+
+		try {
+			double Dg = ((DgProvider) mp).getDg (stand1, trees1);
+			if (step2 == null) {
+				rows.add (makeRow ("Dg (cm)", Dg));
+			} else {
+				double Dg2 = ((DgProvider) mp).getDg (stand2, trees2);
+				rows.add (makeRow ("Dg (cm)", Dg2, Dg));
+			}
+		} catch (Exception e) {}
+
+//add by Celine Meredieu - december 2002
+		try {
+			double Ddom = ((DdomProvider) mp).getDdom (stand1, trees1);
+			if (step2 == null) {
+				rows.add (makeRow ("Ddom (cm)", Ddom));
+			} else {
+				double Ddom2 = ((DdomProvider) mp).getDdom (stand2, trees2);
+				rows.add (makeRow ("Ddom (cm)", Ddom2, Ddom));
+			}
+		} catch (Exception e) {}
+
+		try {
+			double Hg = ((HgProvider) mp).getHg (stand1, trees1);
+			if (step2 == null) {
+				rows.add (makeRow ("Hg (m)", Hg));
+			} else {
+				double Hg2 = ((HgProvider) mp).getHg (stand2, trees2);
+				rows.add (makeRow ("Hg (m)", Hg2, Hg));
+			}
+		} catch (Exception e) {}
+
+		try {
+			double Hdom = ((HdomProvider) mp).getHdom (stand1, trees1);
+			if (step2 == null) {
+				rows.add (makeRow ("Hdom (m)", Hdom));
+			} else {
+				double Hdom2 = ((HdomProvider) mp).getHdom (stand2, trees2);
+				rows.add (makeRow ("Hdom (m)", Hdom2, Hdom));
+			}
+		} catch (Exception e) {}
+
+		try {
+			double SHB = ((SHBProvider) mp).getSHB (stand1, trees1);
+			if (step2 == null) {
+				rows.add (makeRow ("SHB (%)", SHB));
+			} else {
+				double SHB2 = ((SHBProvider) mp).getSHB (stand2, trees2);
+				rows.add (makeRow ("SHB (%)", SHB2, SHB));
+			}
+		} catch (Exception e) {}
+
+			// could be added (examples)
+			double Cdom = 0d;
+			double crownRatiodom = 0d;
+			double ratioHdomDdom = 0d;
+			double Vdom = 0d;
+			double Cg = 0d;
+			double crownRatiog = 0d;
+			double ratioHgDg = 0d;
+			double Vg = 0d;
+			double V = 0d;
+			double F = 0d;
+			double CCF = 0d;
+			double SPerCent = 0d;
+			double CvrtPerCent = 0d;
+//			int age = 0;
+
+		return rows;
+	}
+
+	//
+	// Create the GUI.
+	//
+	private void createUI () {
+
+		// 1. Viewer title
+		defineTitle ();
+		//~ try {
+			//~ setSelected (true);
+
+		//~ } catch (java.beans.PropertyVetoException exc) {}
+
+		Dimension minimumSize = new Dimension (200, 100);
+		getContentPane ().setLayout (new BorderLayout ());	// mainBox in the internalFrame
+
+		// 3. A panel for the stand variables
+		dataScrollPane = new JScrollPane (getEmptyPanel ());	//empty
+		dataScrollPane.getViewport().putClientProperty
+			  ("EnableWindowBlit", Boolean.TRUE);	// faster
+		dataScrollPane.setMinimumSize (minimumSize);
+		dataScrollPane.setPreferredSize (new Dimension (
+				settings.variablesSize,
+				settings.variablesSize
+				));
+		
+		// 4. Variables panel is optional
+		if (settings.showVariables) {
+			dataPanel = makeDataPanel ();
+			dataScrollPane.getViewport ().setView (dataPanel);
+		} else {
+			dataScrollPane.getViewport ().setView (getEmptyPanel ());	//empty
+			dataScrollPane.setPreferredSize (new Dimension (0, 0));
+		}
+
+		// 5. Global disposition
+		getContentPane ().add (getPilot (), BorderLayout.NORTH);
+
+		JPanel p = new JPanel (new BorderLayout ());
+//~ JPanel p = new JPanel (new GridLayout (2, 1));
+
+		heightDiagram.setPreferredSize (new Dimension (200, settings.curveHeight));
+		p.add (heightDiagram, BorderLayout.NORTH);
+		p.add (dbhDiagram, BorderLayout.CENTER);
+
+		getContentPane ().add (p, BorderLayout.CENTER);
+		if (settings.variablesPosition == SVMaidSettings.VARIABLES_BOTTOM) {
+			getContentPane ().add (dataScrollPane, BorderLayout.SOUTH);
+		} else {
+			getContentPane ().add (dataScrollPane, BorderLayout.EAST);
+		}
+	}
+
+	/**
+	 * Forget resources.
+	 */
+	public void dispose () {
+		super.dispose ();
+		dbhDiagram.dispose ();
+		settings = null;
+		dbhDiagram = null;
+		settingsButton = null;
+		mainPanel = null;
+		optionPanel = null;
+	//	dbhHisto1ScrollPane = null;
+	//	heightHisto1ScrollPane = null;
+	}
+
+	private void littleCross (Graphics2D g2, double x, double y) {
+		Color c = g2.getColor ();
+		g2.setColor (Color.red);
+		Line2D.Double l1 = new Line2D.Double (x-5, y, x, y);
+		Line2D.Double l2 = new Line2D.Double (x, y, x, y+5);
+		g2.draw (l1);
+		g2.draw (l2);
+		g2.setColor (c);
+	}
+
+	private String traceTransform (AffineTransform t) {
+		return "scale=("+t.getScaleX ()+" "+t.getScaleY ()+") "
+				+"translate=("+t.getTranslateX ()+" "+t.getTranslateY ()+")";
+
+	}
+
+	/**
+	 * Build the component answering to a selection. Can be redefined in
+	 * some subclass to answer differently.
+	 */
+	protected JComponent getSelectionComponent (MaidHisto histo, int index) {
+		if (settings.selectUnderlyingTrees) {
+			
+			return Tools.createInspectorPanel (histo.getUTrees (index));
+			
+			//~ JPanel infoPanel = null;
+			//~ Map panels = new Hashtable ();
+
+			//~ for (Iterator i = histo.getUTrees (index).iterator (); i.hasNext ();) {
+				//~ GTree t = (GTree) i.next ();
+				//~ panels.put (""+t.getId (), Tools.getIntrospectionPanel (t));
+			//~ }
+
+			//~ if (!panels.isEmpty ()) {
+				//~ infoPanel = new JPanel (new BorderLayout ());
+				//~ JTabbedPane tabPane = new JTabbedPane ();
+				//~ tabPane.setTabLayoutPolicy (JTabbedPane.SCROLL_TAB_LAYOUT);	// fc - 2.4.2003
+
+				//~ Iterator keys = panels.keySet ().iterator ();
+				//~ Iterator values = panels.values ().iterator ();
+
+				//~ while (keys.hasNext () && values.hasNext ()) {
+					//~ String key = (String) keys.next ();
+					//~ JComponent value = (JComponent) values.next ();
+					//~ tabPane.addTab (key, value);
+				//~ }
+
+				//~ tabPane.setPreferredSize (new Dimension (200, 200));
+				//~ infoPanel.add (tabPane, BorderLayout.CENTER);
+			//~ }
+
+			//~ return infoPanel;
+
+		} else {
+			Vertex2D nBar = (Vertex2D) histo.getNBars ().get (index);
+			Vertex2D hBar = (Vertex2D) histo.getHBars ().get (index);
+			double d = nBar.x;
+			double h = hBar.y;
+			int n = (int) nBar.y;
+
+			String lab = (settings.showGirth)
+					? Translator.swap ("SVMaid.girth")
+					: Translator.swap ("SVMaid.dbh");
+
+			String[][] rows = {	{lab, 									""+formater.format (d)},
+								{Translator.swap ("SVMaid.height"),		""+formater.format (h)},
+								{Translator.swap ("SVMaid.numbers"),	""+n}						};
+			String[] columnNames = {"Var", "Value"};
+
+			JTable table = new JTable (rows, columnNames);
+			return table;
+		}
+	}
+
+//----------------------------------------------------------------------- Drawers -------------
+//----------------------------------------------------------------------- Drawers -------------
+//----------------------------------------------------------------------- Drawers -------------
+//----------------------------------------------------------------------- Drawers -------------
+//----------------------------------------------------------------------- Drawers -------------
+//----------------------------------------------------------------------- Drawers -------------
+//----------------------------------------------------------------------- Drawers -------------
+	private class DbhHistoDrawer implements Drawer {
+
+		private Collection screenBars;	// bars drawn on screen by last draw () method call
+		private Collection selectedBars1;	// Item collection matching the selected bars
+		private Collection selectedBars2;	// Item collection matching the selected bars
+
+		private class ScreenBar {
+			public double anchor;
+			public int stepNumber;
+			public int histoBarIndex;
+			public Rectangle2D.Double r2;
+			public ScreenBar (double anchor, int stepNumber, int histoBarIndex, Rectangle2D.Double r2) {
+				this.anchor = anchor;
+				this.stepNumber = stepNumber;
+				this.histoBarIndex = histoBarIndex;
+				this.r2 = r2;
+			}
+		}
+
+		/**
+		 * From Drawer interface.
+		 * This method draws in the Diagram2D each time this one must be repainted.
+		 * The given Rectangle is unused (no zoom in Diagram2D).
+		 * The drawBar () methods may be redefined in subclasses
+		 * to draw differently.
+		 */
+		public void draw (Graphics g, Rectangle.Double r) {
+
+			Graphics2D g2 = (Graphics2D) g;
+
+			// Memorize original color
+			Color memoColor = g.getColor ();
+
+			// 1. Ensure title is ok
+			defineTitle ();
+
+			//
+			if (screenBars == null) {screenBars = new ArrayList ();} else {screenBars.clear ();}
+
+			// 2. Draw the bars
+			int w = 3;	// pixels
+			if (settings.enlargeBars) {w = 5;}
+			double userTreeWidth = dbhDiagram.getUserWidth (w);	// bars width  = 3 or more pixels -> in user width
+			double userSinglePixelWidth = dbhDiagram.getUserWidth (1);	// to separate bars
+
+			double xShift = 0d;
+			if (step2 != null) {xShift = userTreeWidth/2 + userSinglePixelWidth/2;}
+
+			if (step2 != null && !histo2.isEmpty ()) {	// empty means no trees
+				g2.setColor (settings.color2);
+				java.util.List nBars = histo2.getNBars ();
+				for (int i = 0; i < nBars.size (); i++) {
+					Vertex2D bar = (Vertex2D) nBars.get (i);
+					if (selectedBars2 != null && selectedBars2.contains (new Double (bar.x))) {g2.setColor (settings.selectionColor);}
+					Rectangle2D.Double r2 = drawBar (g2, r, bar.x - xShift, bar.y, userTreeWidth);
+					screenBars.add (new ScreenBar (bar.x, 2, i, r2));
+					g2.setColor (settings.color2);
+				}
+			}
+
+			if (!histo1.isEmpty ()) {	// empty means no trees
+				g2.setColor (stepColor);	// was settings.color1
+				java.util.List nBars = histo1.getNBars ();
+				for (int i = 0; i < nBars.size (); i++) {
+					Vertex2D bar = (Vertex2D) nBars.get (i);
+					if (selectedBars1 != null && selectedBars1.contains (new Double (bar.x))) {g2.setColor (settings.selectionColor);}
+					Rectangle2D.Double r2 = drawBar (g2, r, bar.x + xShift, bar.y, userTreeWidth);
+					screenBars.add (new ScreenBar (bar.x, 1, i, r2));
+
+					g2.setColor (stepColor);	// was settings.color1
+
+				}
+			}
+
+			// Step1 bars must be before Step2 bars for selection preferences
+			Collections.reverse ((java.util.List) screenBars);
+
+			// Reset original color
+			g.setColor (memoColor);
+
+		}
+
+		/**
+		 * Cancel current selections.
+		 */
+		public void resetSelection () {
+			selectedBars1 = null;
+			selectedBars2 = null;
+		}
+
+		/**
+		 * From Drawer interface.
+		 * We may receive (from Panel2D) a selection rectangle (in user space i.e. meters)
+		 * and return a JPanel containing information about the objects (trees) inside
+		 * the rectangle.
+		 * If no objects are found in the rectangle, return null.
+		 */
+		public JPanel select (Rectangle.Double r, boolean more) {
+
+			JPanel info = null;
+
+			if (selectedBars1 == null) {selectedBars1 = new ArrayList ();} else {selectedBars1.clear ();}
+			if (selectedBars2 == null) {selectedBars2 = new ArrayList ();} else {selectedBars2.clear ();}
+
+			// Scan drawn bars and seek which ones intersect selection rectangle
+			for (Iterator i = screenBars.iterator (); i.hasNext ();) {
+				ScreenBar sb = (ScreenBar) i.next ();
+				if (sb.r2.intersects (r)) {
+					MaidHisto histo = null;
+					if (sb.stepNumber == 1) {
+						selectedBars1.add (new Double (sb.anchor));
+						histo = histo1;
+					} else {
+						selectedBars2.add (new Double (sb.anchor));
+						histo = histo2;
+					}
+
+					info = new JPanel (new BorderLayout ());
+					info.setOpaque (true);
+					info.setBackground (Color.white);
+
+					JComponent answer = getSelectionComponent (histo, sb.histoBarIndex);
+					info.add (answer, BorderLayout.CENTER);
+
+					break;	// only one bar selection
+				}
+			}
+
+			return info;
+		}
+
+		/**
+		 * Method to draw an histogram bar within this viewer.
+		 * This bar may represent several MAID trees, each representing several (y)
+		 * real trees.
+		 * Only rectangle r is visible (user coordinates) -> do not draw if outside.
+		 * May be redefined in subclasses.
+		 */
+		protected Rectangle2D.Double drawBar (Graphics2D g2, Rectangle.Double r, double x, double y, double width) {
+
+			// An histogram vertical bar
+			double halfWidth = width / 2;
+			Rectangle2D.Double r2 = new Rectangle2D.Double (x - halfWidth, 0, width, y);
+			Rectangle2D bBox = r2.getBounds2D ();
+			if (r.intersects (bBox)) {g2.fill (r2);}
+			return r2;
+		}
+
+	}
+
+	private class HeightHistoDrawer implements Drawer {
+		
+		/**
+		 * From Drawer interface.
+		 * This method draws in the Diagram2D each time this one must be repainted.
+		 * The given Rectangle is unused (no zoom in Diagram2D).
+		 */
+		public void draw (Graphics g, Rectangle.Double r) {
+			Graphics2D g2 = (Graphics2D) g;
+			
+			// Memorize original color
+			Color memoColor = g.getColor ();
+
+			// 1. Ensure title is ok
+
+			defineTitle ();
+
+			// 2. Draw the height curves
+
+			if (step2 != null && !histo2.isEmpty ()) {	// empty means no trees
+				g2.setColor (settings.color2);
+
+				resetSegment ();	// needed
+				for (Iterator i = histo2.getHBars ().iterator (); i.hasNext ();) {
+					Vertex2D bar = (Vertex2D) i.next ();
+					drawSegment (g2, r, bar.x, bar.y);	// Draw simply, without added nothing now
+				}
+			}
+
+			if (!histo1.isEmpty ()) {	// empty means no trees
+				g2.setColor (stepColor);	// was settings.color1
+
+				resetSegment ();	// needed
+				for (Iterator i = histo1.getHBars ().iterator (); i.hasNext ();) {
+					Vertex2D bar = (Vertex2D) i.next ();
+					drawSegment (g2, r, bar.x, bar.y);	// Draw simply, without added nothing now
+				}
+			}
+
+			// Reset original color
+			g.setColor (memoColor);
+
+		}
+		
+		/**
+		 * From Drawer interface.
+		 * We may receive (from Panel2D) a selection rectangle (in user space i.e. meters)
+		 * and return a JPanel containing information about the objects (trees) inside
+		 * the rectangle.
+		 * If no objects are found in the rectangle, return null.
+		 */
+		public JPanel select (Rectangle.Double r, boolean more) {
+			return null;	// XXX to be done
+		}
+
+	}
+
+//------------------------------------------------------------------ Main option panel -------------
+//------------------------------------------------------------------ Main option panel -------------
+//------------------------------------------------------------------ Main option panel -------------
+//------------------------------------------------------------------ Main option panel -------------
+//------------------------------------------------------------------ Main option panel -------------
+//------------------------------------------------------------------ Main option panel -------------
+//------------------------------------------------------------------ Main option panel -------------
+	/**
+	 * Main option panel. Secondary option panel may be described in subclasses.
+	 */
+	class MainPanel extends JPanel implements ActionListener, Embedded {
+		private JTabbedPane tabs;
+
+		private JCheckBox ckShowAxisNames;
+		private JCheckBox ckShowPreviousStep;
+		private JCheckBox ckZeroOnX;
+		private JCheckBox ckShowGirth;
+
+		private GrouperChooser grouperChooser;
+		private JCheckBox ckSelectUnderlyingTrees;
+		private JCheckBox ckPerHectare;
+
+		private JCheckBox ckShowVariables;
+
+		private ButtonGroup rdGroup1;
+		private JRadioButton rdVariablesBottom;
+
+		private JRadioButton rdVariablesRight;
+		private JTextField variablesSize;
+
+		private JButton selectionColorButton;
+		private JCheckBox ckAggregate;
+
+		private ButtonGroup rdGroup2;
+		private JRadioButton rdAggregateClassWidth;
+
+		private JRadioButton rdAggregateClassNumber;
+		private JTextField aggregateClassWidth;
+		private JTextField aggregateClassNumber;
+		private JCheckBox ckAggregateMinThreshold;
+		private JCheckBox ckAggregateMaxThreshold;
+		private JTextField aggregateMinThreshold;
+		private JTextField aggregateMaxThreshold;
+		private JCheckBox ckEnlargeBars;
+
+		private JTextField curveHeight;
+		private JButton color1Button;
+
+		private JButton color2Button;
+
+		private JButton exportButton;
+		private Embedder embedder;	// fc - 23.7.2004
+
+
+		public MainPanel () {
+
+			super ();
+			setLayout (new SmartFlowLayout (FlowLayout.CENTER));
+			Border etched = BorderFactory.createEtchedBorder ();
+
+			JPanel part1 = new JPanel ();
+			part1.setLayout (new BoxLayout (part1, BoxLayout.X_AXIS));
+
+			JPanel part2 = new JPanel ();
+			part2.setLayout (new BoxLayout (part2, BoxLayout.Y_AXIS));
+
+			JPanel part3 = new JPanel ();
+			part3.setLayout (new BoxLayout (part3, BoxLayout.Y_AXIS));
+
+			// 1. Common
+			JPanel p1 = new JPanel ();
+			p1.setAlignmentX (Component.LEFT_ALIGNMENT);
+			Border b1 = BorderFactory.createTitledBorder (etched, Translator.swap ("SVMaid.MainPanel.common"));
+			p1.setLayout (new BoxLayout (p1, BoxLayout.Y_AXIS));
+
+			p1.setBorder (b1);
+
+			ckShowAxisNames = new JCheckBox (Translator.swap ("SVMaid.MainPanel.showAxisNames"), settings.showAxisNames);
+			ckShowPreviousStep = new JCheckBox (Translator.swap ("SVMaid.MainPanel.showPreviousStep"), settings.showPreviousStep);
+			ckZeroOnX = new JCheckBox (Translator.swap ("SVMaid.MainPanel.zeroOnX"), settings.zeroOnX);
+			ckShowGirth = new JCheckBox (Translator.swap ("SVMaid.MainPanel.showGirth"), settings.showGirth);
+			
+			ckSelectUnderlyingTrees = new JCheckBox (Translator.swap ("SVMaid.MainPanel.selectUnderlyingTrees"), settings.selectUnderlyingTrees);
+			ckPerHectare = new JCheckBox (Translator.swap ("SVMaid.MainPanel.perHectare"), settings.perHectare);
+
+			exportButton = new JButton (Translator.swap ("Shared.export"));
+			exportButton.addActionListener (this);
+
+			// NEW...
+			boolean checked = settings.grouperMode;
+			boolean not = settings.grouperModeNot;	// fc - 21.4.2004
+			String selectedGrouperName = settings.grouperName;
+			grouperChooser = new GrouperChooser (checked, step1.getStand (), Group.TREE, 	// fc - 16.9.2004 - type
+					selectedGrouperName, not);
+			JPanel l6 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			JPanel l16 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			JPanel l14 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			JPanel l15 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			JPanel l7 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			JPanel l17 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			JPanel l18 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			JPanel l19 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+
+			l6.add (ckShowAxisNames);
+			l16.add (ckShowPreviousStep);
+			l14.add (ckZeroOnX);
+			l15.add (ckShowGirth);
+
+			l7.add (grouperChooser);
+			l17.add (ckSelectUnderlyingTrees);
+			l18.add (ckPerHectare);
+			l19.add (exportButton);
+
+			p1.add (l6);
+			p1.add (l16);
+			p1.add (l14);
+			p1.add (l15);
+			p1.add (l7);
+			p1.add (l17);
+			p1.add (l18);
+			p1.add (l19);
+			
+			p1.setMaximumSize (new Dimension (Integer.MAX_VALUE, Integer.MAX_VALUE));
+			part2.add (p1);
+
+			// 2. Stand variables
+			JPanel p4 = new JPanel ();
+			p4.setAlignmentX (Component.LEFT_ALIGNMENT);
+			Border b4 = BorderFactory.createTitledBorder (etched, Translator.swap ("SVMaid.MainPanel.standVariables"));
+			p4.setLayout (new BoxLayout (p4, BoxLayout.Y_AXIS));
+			p4.setBorder (b4);
+
+			ckShowVariables = new JCheckBox (Translator.swap ("SVMaid.MainPanel.showVariables"), settings.showVariables);
+			ckShowVariables.addActionListener (this);
+			JPanel l8 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+
+			l8.add (ckShowVariables);
+
+			// Radio buttons for variables bottom/right position
+			rdVariablesBottom = new JRadioButton (Translator.swap ("SVMaid.MainPanel.variablesBottom"));
+			rdVariablesRight = new JRadioButton (Translator.swap ("SVMaid.MainPanel.variablesRight"));
+			rdGroup1 = new ButtonGroup ();
+			rdGroup1.add (rdVariablesBottom);
+			rdGroup1.add (rdVariablesRight);
+
+			switch (settings.variablesPosition) {
+				case SVMaidSettings.VARIABLES_BOTTOM :
+					rdGroup1.setSelected (rdVariablesBottom.getModel (), true);
+					break;
+				case SVMaidSettings.VARIABLES_RIGHT :
+					rdGroup1.setSelected (rdVariablesRight.getModel (), true);
+					break;
+			}
+
+			// Variables size in pixels
+
+			variablesSize = new JTextField (5);
+			variablesSize.setText (""+settings.variablesSize);
+			enableVariablesPanel (ckShowVariables.isSelected ());
+
+			JPanel l10 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			JPanel l11 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+
+			JLabel filler1 = new JWidthLabel ("", 20);
+			JLabel filler2 = new JWidthLabel ("", 20);
+			l10.add (filler1);
+
+			l10.add (rdVariablesBottom);
+			l11.add (filler2);
+			l11.add (rdVariablesRight);
+
+			JPanel l30 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+
+			JLabel filler3 = new JWidthLabel ("", 20);
+			l30.add (filler3);
+
+			l30.add (new JWidthLabel (Translator.swap ("SVMaid.MainPanel.variablesSize")+" :", 150));
+			l30.add (variablesSize);
+
+			p4.add (l8);
+			p4.add (l10);
+
+			p4.add (l11);
+			p4.add (l30);
+
+			p4.setMaximumSize (new Dimension (Integer.MAX_VALUE, Integer.MAX_VALUE));
+			part2.add (p4);
+
+			// 3. Aggregate
+			JPanel p3 = new JPanel ();
+			p3.setAlignmentX (Component.LEFT_ALIGNMENT);
+			Border b3 = BorderFactory.createTitledBorder (etched, Translator.swap ("SVMaid.MainPanel.aggregation"));
+			p3.setLayout (new BoxLayout (p3, BoxLayout.Y_AXIS));
+			p3.setBorder (b3);
+
+			ckAggregate = new JCheckBox (Translator.swap ("SVMaid.MainPanel.aggregate"), settings.aggregate);
+			ckAggregate.addActionListener (this);
+			JPanel l20 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+
+			l20.add (ckAggregate);
+
+			// Radio buttons for aggregate mode selection
+			rdAggregateClassWidth = new JRadioButton (Translator.swap ("SVMaid.MainPanel.aggregateClassWidth")+" :");
+
+			rdAggregateClassWidth.addActionListener (this);
+			rdAggregateClassNumber = new JRadioButton (Translator.swap ("SVMaid.MainPanel.aggregateClassNumber")+" :");
+
+			rdAggregateClassNumber.addActionListener (this);
+			rdGroup2 = new ButtonGroup ();
+			rdGroup2.add (rdAggregateClassWidth);
+			rdGroup2.add (rdAggregateClassNumber);
+
+			aggregateClassWidth = new JTextField (5);
+			aggregateClassWidth.setText (""+settings.aggregateClassWidth);
+			aggregateClassNumber = new JTextField (5);
+			aggregateClassNumber.setText (""+settings.aggregateClassNumber);
+
+			switch (settings.aggregateMode) {
+				case SVMaidSettings.AGGREGATE_CLASS_WIDTH :
+					rdGroup2.setSelected (rdAggregateClassWidth.getModel (), true);
+					break;
+				case SVMaidSettings.AGGREGATE_CLASS_NUMBER :
+					rdGroup2.setSelected (rdAggregateClassNumber.getModel (), true);
+					break;
+			}
+
+			rdAggregateAction ();	// enables /disables the radio text fields
+			JPanel l21 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			JPanel l22 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			l21.add (new JWidthLabel ("", 20));
+			l21.add (rdAggregateClassWidth);
+			l21.add (aggregateClassWidth);
+			l22.add (new JWidthLabel ("", 20));
+			l22.add (rdAggregateClassNumber);
+			l22.add (aggregateClassNumber);
+
+			// min threshold
+			boolean minThreshold = settings.isAggregateMinThreshold;
+			ckAggregateMinThreshold = new JCheckBox (Translator.swap ("SVMaid.MainPanel.aggregateMinThreshold")+" :", minThreshold);
+			ckAggregateMinThreshold.addActionListener (this);
+			aggregateMinThreshold = new JTextField (5);
+			aggregateMinThreshold.setText (""+settings.aggregateMinThreshold);
+			JPanel l23 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			l23.add (new JWidthLabel ("", 20));
+			l23.add (ckAggregateMinThreshold);
+			l23.add (aggregateMinThreshold);
+
+			// max threshold
+			boolean maxThreshold = settings.isAggregateMaxThreshold;
+			ckAggregateMaxThreshold = new JCheckBox (Translator.swap ("SVMaid.MainPanel.aggregateMaxThreshold")+" :", maxThreshold);
+			ckAggregateMaxThreshold.addActionListener (this);
+			aggregateMaxThreshold = new JTextField (5);
+			aggregateMaxThreshold.setText (""+settings.aggregateMaxThreshold);
+			JPanel l24 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			l24.add (new JWidthLabel ("", 20));
+			l24.add (ckAggregateMaxThreshold);
+			l24.add (aggregateMaxThreshold);
+
+			ckAggregateMinThresholdAction ();	// enables / disables the checkbox's text field
+			ckAggregateMaxThresholdAction ();	// enables / disables the checkbox's text field
+
+			enableAgregatePanel (ckAggregate.isSelected ());
+			p3.add (l20);
+			p3.add (l21);
+			p3.add (l22);
+			p3.add (l23);
+			p3.add (l24);
+
+			// all JComponents in BoxLayout must have max value maximum size to allow their X extension
+			p3.setMaximumSize (new Dimension (Integer.MAX_VALUE, Integer.MAX_VALUE));
+			part3.add (p3);
+
+			// 4. Colors
+			JPanel p2 = new JPanel ();
+			p2.setAlignmentX (Component.LEFT_ALIGNMENT);
+			Border b2 = BorderFactory.createTitledBorder (etched, Translator.swap ("SVMaid.MainPanel.appearance"));
+			p2.setLayout (new BoxLayout (p2, BoxLayout.Y_AXIS));
+			p2.setBorder (b2);
+
+			// Curve height in pixels
+			curveHeight = new JTextField (5);
+			curveHeight.setText (""+settings.curveHeight);
+			JPanel l25 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			l25.add (new JWidthLabel (Translator.swap ("SVMaid.MainPanel.curveHeight")+" :", 150));
+			l25.add (curveHeight);
+
+			// To enlarge histo bars
+			JPanel l26 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT));
+			ckEnlargeBars = new JCheckBox (Translator.swap ("SVMaid.MainPanel.enlargeBars"), settings.enlargeBars);
+			l26.add (ckEnlargeBars);
+			selectionColorButton = new JButton ();	// empty coloured buttons
+			//~ color1Button = new JButton ();
+			color2Button = new JButton ();
+			selectionColorButton.setBackground (settings.selectionColor);
+			//~ color1Button.setBackground (settings.color1);
+			color2Button.setBackground (settings.color2);
+			selectionColorButton.addActionListener (this);
+			//~ color1Button.addActionListener (this);
+			color2Button.addActionListener (this);
+
+			JPanel l1 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT, 0, 3));
+			l1.add (new JWidthLabel (Translator.swap ("SVMaid.MainPanel.selectionColor")+" :", 150));
+			l1.add (selectionColorButton);
+			//~ JPanel l2 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT, 0, 3));
+			//~ l2.add (new JWidthLabel (Translator.swap ("SVMaid.MainPanel.color1")+" :", 150));
+			//~ l2.add (color1Button);
+			JPanel l3 = new JPanel (new SmartFlowLayout (FlowLayout.LEFT, 0, 1));
+			l3.add (new JWidthLabel (Translator.swap ("SVMaid.MainPanel.color2")+" :", 150));
+			l3.add (color2Button);
+
+			p2.add (l25);
+			p2.add (l26);
+			p2.add (l1);
+			//~ p2.add (l2);
+			p2.add (l3);
+
+			// all JComponents in BoxLayout must have max value maximum size to allow their X extension
+			p2.setMaximumSize (new Dimension (Integer.MAX_VALUE, Integer.MAX_VALUE));
+			part3.add (p2);
+
+			// 5. Correct layout
+			part1.add (part2);
+			part1.add (part3);
+
+			JPanel worker = new JPanel (new BorderLayout ());
+			worker.add (part1, BorderLayout.NORTH);
+			//worker.add (new JLabel (" "), BorderLayout.CENTER);
+			// optional panel (for subclasses)
+
+			if (optionPanel.getComponentCount () != 0) {
+				tabs = new JTabbedPane ();
+				tabs.addTab (Translator.swap ("SVMaid.MainPanel.general"), null, worker);
+				tabs.addTab (Translator.swap ("SVMaid.MainPanel.options"), null, optionPanel);
+				add (tabs);		// if 2 panels, put them in a tabbed pane in MainPanel
+			} else {
+				add (worker);	// else, put directly the only panel in MainPanel.
+			}
+
+		}
+
+		public void actionPerformed (ActionEvent evt) {
+			if (evt.getSource ().equals (selectionColorButton)) {
+				Color newColor = JColorChooser.showDialog(
+						this,
+						Translator.swap ("SVMaid.MainPanel.chooseAColor"),
+                		selectionColorButton.getBackground());
+                selectionColorButton.setBackground (newColor);
+
+			} else if (evt.getSource ().equals (color1Button)) {
+				Color newColor = JColorChooser.showDialog(
+						this,
+						Translator.swap ("SVMaid.MainPanel.chooseAColor"),
+                		color1Button.getBackground());
+                color1Button.setBackground (newColor);
+
+			} else if (evt.getSource ().equals (color2Button)) {
+				Color newColor = JColorChooser.showDialog(
+						this,
+						Translator.swap ("SVMaid.MainPanel.chooseAColor"),
+                		color2Button.getBackground());
+                color2Button.setBackground (newColor);
+			} else if (evt.getSource ().equals (ckShowVariables)) {
+				enableVariablesPanel (ckShowVariables.isSelected ());
+			} else if (evt.getSource ().equals (ckAggregate)) {
+				enableAgregatePanel (ckAggregate.isSelected ());
+			} else if (evt.getSource ().equals (rdAggregateClassWidth)) {
+				rdAggregateAction ();
+			} else if (evt.getSource ().equals (rdAggregateClassNumber)) {
+				rdAggregateAction ();
+			} else if (evt.getSource ().equals (ckAggregateMinThreshold)) {
+				ckAggregateMinThresholdAction ();
+			} else if (evt.getSource ().equals (ckAggregateMaxThreshold)) {
+				ckAggregateMaxThresholdAction ();
+            } else if (evt.getSource ().equals (exportButton)) {	// fc - 23.7.2004
+				if (embedder instanceof JFrame) {
+					new ExportComponent (SVMaid.this, (JFrame) embedder);
+				} else {
+					new ExportComponent (SVMaid.this, (JDialog) embedder);
+				}
+			}
+		}
+
+		private void enableAgregatePanel (boolean yep) {
+			rdAggregateClassWidth.setEnabled (yep);
+			rdAggregateClassNumber.setEnabled (yep);
+			ckAggregateMinThreshold.setEnabled (yep);
+			ckAggregateMaxThreshold.setEnabled (yep);
+			if (yep) {
+				rdAggregateAction ();
+				ckAggregateMinThresholdAction ();
+				ckAggregateMaxThresholdAction ();
+			} else {
+				aggregateClassWidth.setEnabled (false);
+				aggregateClassNumber.setEnabled (false);
+				aggregateMinThreshold.setEnabled (false);
+				aggregateMaxThreshold.setEnabled (false);
+			}
+		}
+
+		//
+		// To be called on action of each of the aggregate radio buttons
+		//
+		private void rdAggregateAction () {
+			boolean itsMin = rdGroup2.getSelection ().equals (rdAggregateClassWidth.getModel ());
+			aggregateClassWidth.setEnabled (itsMin);
+			aggregateClassNumber.setEnabled (!itsMin);
+		}
+
+		//
+		// On min checkbox selection / deselection
+		//
+		private void ckAggregateMinThresholdAction () {
+			aggregateMinThreshold.setEnabled (ckAggregateMinThreshold.isSelected ());
+		}
+
+		//
+		// On max checkbox selection / deselection
+		//
+		private void ckAggregateMaxThresholdAction () {
+			aggregateMaxThreshold.setEnabled (ckAggregateMaxThreshold.isSelected ());
+		}
+
+		private void enableVariablesPanel (boolean yep) {
+			rdVariablesBottom.setEnabled (yep);
+			rdVariablesRight.setEnabled (yep);
+			variablesSize.setEnabled (yep);
+		}
+
+		private GrouperChooser getGrouperChooser () {return grouperChooser;}	// fc - 21.4.2004
+
+		public void dispose () {
+			try {
+				tabs.removeAll ();
+			} catch (Exception e) {}
+		}
+
+		public JCheckBox getCkShowAxisNames () {return ckShowAxisNames;}
+		public JCheckBox getCkShowPreviousStep () {return ckShowPreviousStep;}
+		public JCheckBox getCkZeroOnX () {return ckZeroOnX;}
+		public JCheckBox getCkShowGirth () {return ckShowGirth;}
+		public JCheckBox getCkShowVariables () {return ckShowVariables;}
+
+		public JCheckBox getCkSelectUnderlyingTrees () {return ckSelectUnderlyingTrees;}
+		public JCheckBox getCkPerHectare () {return ckPerHectare;}
+		
+		public boolean isVariablesBottom () {
+			return rdGroup1.getSelection ().equals (rdVariablesBottom.getModel ());
+		}
+
+		public boolean isVariablesRight () {
+			return rdGroup1.getSelection ().equals (rdVariablesRight.getModel ());
+		}
+
+		public int getVariablesSize () {return Check.intValue (variablesSize.getText ());}
+
+		public boolean isAggregate () {return ckAggregate.isSelected ();}
+		public double getAggregateClassWidth () {return Check.doubleValue (aggregateClassWidth.getText ());}
+
+		public int getAggregateClassNumber () {return Check.intValue (aggregateClassNumber.getText ());}
+
+		public boolean isAggregateMinThreshold () {return ckAggregateMinThreshold.isSelected ();}
+		public boolean isAggregateMaxThreshold () {return ckAggregateMaxThreshold.isSelected ();}
+		public double getAggregateMinThreshold () {return Check.doubleValue (aggregateMinThreshold.getText ());}
+
+		public double getAggregateMaxThreshold () {return Check.doubleValue (aggregateMaxThreshold.getText ());}
+
+		public boolean isAggregateClassWidth () {return rdGroup2.getSelection ().equals (rdAggregateClassWidth.getModel ());}
+		public boolean isAggregateClassNumber () {return rdGroup2.getSelection ().equals (rdAggregateClassNumber.getModel ());}
+
+		public int getCurveHeight () {return Check.intValue (curveHeight.getText ());}
+
+		public JCheckBox getCkEnlargeBars () {return ckEnlargeBars;}
+		public Color getSelectionColor () {return new Color (selectionColorButton.getBackground ().getRGB ());}
+		public Color getColor1 () {return new Color (color1Button.getBackground ().getRGB ());}
+		public Color getColor2 () {return new Color (color2Button.getBackground ().getRGB ());}
+
+		public Embedder getEmbedder () {
+			return embedder;
+		}
+		
+		public String getTitle () {
+			return Translator.swap (Tools.getClassLittleName (this.getClass ().getName ()));
+		}
+		
+		public void setEmbedder (Embedder embedder) {
+			this.embedder = embedder;
+		}
+		
+	}
+
+}
+
+
+
+

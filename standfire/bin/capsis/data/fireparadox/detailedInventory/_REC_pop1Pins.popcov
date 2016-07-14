@@ -1,0 +1,20 @@
+#Scene file of the mixed plot at the Lamanon experimental study site
+
+#Terrain
+#name	cellWidth(m)	altitude(m)	xMin	yMin	xMax	yMax
+Terrain0	5	0	-50	-50	50	50
+
+#Polygons (optionnal)
+#fileId	{(x1,y1);(x2,y2)...}
+1	{(-55,-55);(-55,-42);(-30,-40);(-35,-57)}
+
+#Pops
+
+# Gibbs : 0=aléatoire, 1000 -> régulier, <0 -> agrégé
+
+#nopop	Gibbs	radius	distPopi_A	distWeight_A	distPopu_B	distWeight_B	distPopi_B	distPopu_C
+1	0	0	0.001	5	-5	-5	-5	-5
+
+#Trees
+#pop	species	height	crownBH	crownD cover_pct
+1	Pinus halepensis	13.5	-1	4.78	15

@@ -1,0 +1,54 @@
+Notes on current FVS files for STANDFIRE 4/23/2013
+
+
+
+% % FVS generated fuels files
+% 
+% TREES
+% ===================================================================================
+% xloc  yloc    species dbh ht  crwdth  cratio  crownwt0    crownwt1    crownwt2    crownwt3
+% 
+% notes:
+% xloc, yloc: locations within a 1 acre square, measured in feet -- square is 208.7103 feet on a side.
+% species -- 4 letter species code, all caps (PSME, PIPO, LAOC, TSHE, PICO etc)
+% dbh (inches)
+% ht (feet)
+% crwidth  (feet)
+% cratio (percent live crown)
+% crownwt0 :  Foliage wt (lbs)
+% crownwt1 : <0.25"      (lbs)
+% crownwt2 :  0.25" -   1" (lbs)
+% crownwt3 :  1"    -   3" (lbs)
+% 
+% 
+% snags
+% xloc  yloc    snagspp snagdbh snaglen snagfdir    snagstat    snagyear    snagwt0 snagwt1 snagwt2 snagwt3
+% 
+% SNAGS --snags.csv contains information about standing and recently fallen snags:
+% ===================================================================================
+% xloc, yloc: locations within a 1 acre square, measured in feet --  square is 208.7103 feet on a side.
+% species -- 4 letter species code, all caps (PSME, PIPO, LAOC, TSHE, PICO etc)
+% snagdbh (inches)
+% snaglen (feet)
+% snagfdir is the direction of fall, if -1 then the tree is standing.
+% snagstat is a snag status code: I need to look up the codes but they may not be useful. I think 2 is hard and 3 is soft.
+% snagwt0 :  Foliage wt (lbs)
+% snagwt1 : <0.25"      (lbs)
+% snagwt2 :  0.25" -   1" (lbs)
+% snagwt3 :  1"    -   3" (lbs)
+% 
+% 
+% CWD
+% ===================================================================================
+% xloc  yloc    cwddia  cwdlen  cwdpil  cwddir  cwdwt
+% 
+% cwd.csv:
+% xloc, yloc: locations within a 1 acre square, measured in feet --  square is 208.7103 feet on a side.
+% cwddia -- diameter (inches)
+% cwdlen -- length (feet)
+% cwdpil is a code that say if the cwd is in a pile or not (this is a FFE management action), 0 is not piled, I think 1 is piled.
+% cwddir -- direction in degrees
+% cwdwt is the weight -- in tons 
+ 
+ 
+%===================================================================================

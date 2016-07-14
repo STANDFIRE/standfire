@@ -1,0 +1,600 @@
+/*
+ * Capsis 4 - Computer-Aided Projections of Strategies in Silviculture
+ *
+ * Copyright (C) 2000-2001  Francois de Coligny
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
+package capsis.extension.objectviewer;
+
+import capsis.kernel.*;
+import capsis.extension.*;
+import capsis.util.*;
+import capsis.util.methodprovider.*;
+import capsis.gui.*;
+import java.net.*;
+import java.io.*;
+import java.util.*;
+import java.awt.*;
+import java.awt.geom.*;
+import java.awt.event.*;
+
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
+
+import javax.swing.Timer;
+import javax.swing.*;
+import javax.swing.text.*;
+import javax.swing.event.*;
+
+import java.lang.Math;
+import javax.swing.border.*;
+
+/**	A viewer to check diameter growth.
+*	@author Sandrine Chalon - april 2003
+*/
+public class OVDiameterGrowth  extends ObjectViewer implements Drawer, ActionListener, 
+		SelectionListener, Disposable {
+	private Panel2D panel2D;
+
+	private GCell gcell;
+	public static final int X_MARGIN_IN_PIXELS = 20;
+	public static final int Y_MARGIN_IN_PIXELS = 20;
+
+	private Vector trees ;
+	private double x0;
+	private double x1;
+	private double y0;
+	private double y1;
+	private Rectangle.Double r2;
+	private JRadioButton rButtonA;
+	private JRadioButton rButtonN;
+	private JRadioButton rButtonC;
+	private ButtonGroup rButtonGroup;
+	private JTextField text;
+	private JPanel pControl ;
+	private JList outputList;
+	private JScrollPane scroll2 ;
+	private Vector chkItems;
+	private JPanel captionPanel ;
+	private Color [] color;
+	private Step step ;
+	private Vector steps;
+
+	private JScrollPane scroll;
+
+	private SelectionSource source;	// fc - 12.12.2007
+
+	static {
+		Translator.addBundle("capsis.extension.objectviewer.OVDiameterGrowth");
+	}
+
+	/**	Phantom constructor.
+	*	Only to ask for extension properties (authorName, version...).
+	*/
+	public OVDiameterGrowth () {}
+
+	/**	Constructor : we will draw the selected tree.
+	*/
+	public OVDiameterGrowth  (ExtensionStarter s) throws Exception {
+		super (s);
+		try {
+			// fc - 12.12.2007 - Selection listeners
+			source = s.getSelectionSource ();
+			source.addSelectionListener (this);
+			// fc - 12.12.2007 - Selection listeners
+			
+			// fc - 12.12.2007 - OjectViewers now get a Collection
+			Collection candidates = s.getCollection ();
+			gcell = null;
+			if (candidates != null) {
+				for (Iterator i = candidates.iterator (); i.hasNext ();) {
+					Object candidate = i.next ();
+					if (candidate instanceof GCell) {
+						gcell = (GCell) candidate;
+						break;
+					}
+				}
+			}
+
+			// Création du tableau comportant une couleur pour chaque étape
+			color = new Color [10];
+			color [0] = Color.BLACK;
+			color [1] = Color.BLUE;
+			color [2] = Color.RED;
+			color [3] = Color.GREEN;
+			color [4] = Color.PINK;
+			color [5] = Color.YELLOW;
+			color [6] = Color.ORANGE;
+			color [7] = Color.MAGENTA;
+			color [8] = Color.CYAN;
+			color [9] = Color.BLACK;
+
+			createUI ();
+			update ();		// fc - 12.12.2007
+
+		} catch (Exception exc) {
+			Log.println (Log.ERROR, "OVDiameterGrowth.c ()", exc.toString (), exc);
+			throw exc;	// fc - 4.11.2003 - object viewers may throw exception
+		}
+	}
+
+
+    // fc - 2.6.2003
+    // was a GDialog, now a JPanel : no content pane any more -> getContentPane redefinition
+    public Container getContentPane () {return this;}
+
+
+	/**
+	 * Extension dynamic compatibility mechanism.
+	 * This matchwith method checks if the extension can deal (i.e. is compatible) with the referent.
+	 */
+	public boolean matchWith (Object referent) {
+		try {
+			// BEFORE:
+			//~ if (!(referent instanceof GCell)) {return false;}	// si ce n'est pas une cellule : false
+ 			
+			// fc - 12.12.2007 - referent is now always a Collection
+			Collection c = (Collection) referent;
+			if (c.isEmpty ()) {return false;}
+
+			// Possibly several subclasses in the collection
+			Collection reps = Tools.getRepresentatives (c);	// one instance of each class
+			for (Iterator i = reps.iterator (); i.hasNext ();) {
+				Object e = i.next ();
+				if (e instanceof GCell) {return true;}	// we need one GCell
+			}
+			return false;
+		} catch (Exception e) {
+			Log.println (Log.ERROR, "OVDiameterGrowth.matchWith ()", "Error in matchWith () (returned false)", e);
+			return false;
+		}
+	}
+
+	/**	Extension.
+	*/
+	public String getName () {
+		return Translator.swap ("OVDiameterGrowth");
+	}
+
+	/**	Extension.
+	*/
+	public String getVersion () {return VERSION;}
+	public static final String VERSION = "1.1";
+
+	/**	Extension.
+	*/
+	public String getAuthor () {return "Sandrine Chalon";}
+
+	/**	Extension.
+	*/
+	public String getDescription () {return Translator.swap ("OVDiameterGrowth.description");}
+
+
+	/**	ActionListener.
+	*/
+	public void actionPerformed (ActionEvent evt) {
+		if ((evt.getSource ().equals (rButtonA) )
+				|| (evt.getSource ().equals (rButtonN))
+				|| (evt.getSource ().equals (text))) {
+			
+			remove (captionPanel);
+			captionPanel = new JPanel (new GridLayout (steps.size (), 1));
+			captionPanel.setBackground (Color.WHITE);
+			captionPanel.setBorder (new EtchedBorder ());
+
+			Vector selection = new Vector ();
+			int num = 0;
+			for (int i = 0; i < steps.size (); i++) {
+				if (num < (color.length - 1) ) num = num + 1;
+				else num=1;
+				JLabel stepLabel = new JLabel (" ___"+((Step)steps.elementAt (i)).getCaption ());
+				stepLabel.setForeground(color [num]);
+				captionPanel.add (stepLabel);
+				if (rButtonN.isSelected ()) {
+					String st= text.getText ();
+					if ( (st != null) && (st != "")  )  {
+						int in = Integer.parseInt(st);
+						if ( in> 1) i = i + (in- 1);
+					}
+				}
+			}
+
+			remove (captionPanel);
+			add (captionPanel, BorderLayout.WEST);
+
+			captionPanel.revalidate ();
+			captionPanel.repaint ();
+			panel2D.reset ();
+			panel2D.repaint ();
+		}
+
+		if (evt.getSource ().equals (rButtonC)) {
+			remove (captionPanel);
+			captionPanel = new JPanel (new GridLayout (steps.size (), 1));
+			captionPanel.setBackground (Color.white);
+			captionPanel.setBorder (new EtchedBorder ());
+
+			Vector selection = new Vector ();
+			if (rButtonC.isSelected ()) {
+				for (int j = 0 ; j< steps.size(); j++) {
+					if (((CheckableItem)chkItems.elementAt (j)).isSelected ()) selection.addElement (new Integer (j));
+				}
+			}
+
+			int num = 0;
+			for (int i = 0; i < steps.size (); i++) {
+				if (selection.contains (new Integer(i)))  {
+					JLabel stepLabel = new JLabel (" ___"+((Step)steps.elementAt (i)).getCaption ());
+					stepLabel.setForeground(color[i+1]);
+					captionPanel.add (stepLabel);
+				}
+			}
+
+			remove (captionPanel);
+			add (captionPanel, BorderLayout.WEST);
+
+			captionPanel.revalidate ();
+			captionPanel.repaint ();
+			panel2D.reset ();
+			panel2D.repaint ();
+		}
+	}
+
+	/**	We have to redraw the subscene.
+	*/
+	public void draw (Graphics g, Rectangle.Double r) {
+		if (gcell == null) {return;}
+		
+		Graphics2D g2 = (Graphics2D) g;
+
+		this.remove (captionPanel);
+
+		captionPanel = new JPanel (new GridLayout (steps.size (), 1));
+		captionPanel.setBackground (Color.WHITE);
+		captionPanel.setBorder (new EtchedBorder ());
+
+		this.add (captionPanel, BorderLayout.WEST);
+		captionPanel.revalidate ();
+		System.out.println ( "add !!");
+
+		trees = new Vector ();
+		if (gcell.isTreeLevel()) {
+			trees.addAll (gcell.getTrees ());
+		} else {
+			Collection cells = gcell.getCells ();
+			for (Iterator i = cells.iterator (); i.hasNext ();) {
+				GCell cell = (GCell) i.next ();
+				trees.addAll (cell.getTrees ());
+			}
+		}
+
+		// pour récupérer la liste des steps depuis l'étape racine du projet jusqu'à l'étape de référence
+		Step step = gcell.getPlot().getStand().getStep();
+		Vector steps = step.getScenario ().getStepsFromRoot (step);
+
+		int num = 0;
+		int inter = 0;
+		boolean ok = true;
+
+		Vector selection = new Vector ();
+		if (rButtonC.isSelected ()) {
+			pControl.add (scroll2);
+			for (int j = 0 ; j< steps.size(); j++) {
+				if (((CheckableItem)chkItems.elementAt (j)).isSelected ()) selection.addElement (new Integer (j));
+			}
+		}
+
+		for (int j = 0 ; j< steps.size(); j++) {
+			ok = true;
+			if (num < (color.length - 1)) num = num + 1;
+			else num=1;
+			GTCStand stand1 = (GTCStand) ((Step)steps.elementAt(j)).getStand ();
+			//~ String date =Double .toString ( stand1.getCorrectedDate ());
+			String date = Double.toString (stand1.getDate ());	// fc - 15.10.2003
+
+			GPlot plot = stand1.getPlot ();
+			GCell gcell2 = (GCell) plot.getCell (gcell.getId ());
+			Vector trees2 = new Vector ();
+			if (gcell2.isTreeLevel()) {
+					trees2.addAll (gcell2.getTrees ());
+			} else {
+					Collection cells = gcell2.getCells ();
+					for (Iterator i = cells.iterator (); i.hasNext ();) {
+						GCell cell = (GCell) i.next ();
+						trees2.addAll (cell.getTrees ());
+					}
+			}
+			for (int h = 0; h < trees2.size (); h++) {
+				GMaddTree t2 = (GMaddTree ) trees2.elementAt(h);
+				//double radius = (t2.getDbh () / 100d) / 2d;
+				double radius = (t2.getDbh () / 10d) / 2d;
+				double xleftcorner = t2.getX () - radius;
+				double yleftcorner = t2.getY () + radius;
+				Arc2D arc = new Arc2D.Double ();
+				arc.setArcByCenter (t2.getX (), t2.getY (), radius, 180, 360, Arc2D.OPEN);
+
+				ok = true;
+				if (rButtonC.isSelected ()) {
+					ok = false;
+					int[] array = outputList.getSelectedIndices ();
+					for (int index = 0; index < array.length && !ok; index++) {
+						if (array[index] == j) ok = true;
+					}
+				}
+
+				g2.setColor (color [num]);
+				if (rButtonC.isSelected ())  {
+					if (selection.contains (new Integer(j))) {
+						g2.draw (arc);
+						String s = "___ "+((Step)steps.elementAt (j)).getCaption ();
+					}
+				}
+				else {	g2.draw (arc);
+							String s = "___ "+((Step)steps.elementAt (j)).getCaption ();
+						}
+			}
+
+			if (rButtonC.isSelected ())  {
+				if (selection.contains (new Integer(j))) {
+					JLabel stepLabel = new JLabel (" ___"+((Step)steps.elementAt (j)).getCaption ());
+					if (selection.contains (new Integer(j)))  {
+						stepLabel.setForeground(color[num]);
+						captionPanel.add (stepLabel);
+					}
+				}
+			} else {
+				JLabel stepLabel = new JLabel (" ___"+((Step)steps.elementAt (j)).getCaption ());
+				stepLabel.setForeground(color [num]);
+				captionPanel.add (stepLabel);
+			}
+
+			String st = null;
+			int in= 0;
+			inter = inter + 1;
+			if (rButtonN.isSelected ()) {
+				st= text.getText ();
+				if ( (st != null) && (st != "")  )  {
+					in = Integer.parseInt(st);
+					if ( in> 1) j = j + (in- 1);
+				}
+			}
+		}
+	}
+
+	/**	Disposable
+	*/
+	public void dispose () {
+System.out.println ("OVDiameterGrowth.dispose ()...");
+		try {
+			source.removeSelectionListener (this);
+			panel2D.dispose ();		
+		} catch (Exception e) {}	// does not matter very much
+	}
+	
+	/**	SelectionListener
+	*/
+	public void sourceSelectionChanged (SelectionEvent e) {
+System.out.println ("OVDiameterGrowth.sourceSelectionChanged ()...");
+		SelectionSource source = e.getSource ();
+		Collection newSelection = source.getSelection ();
+
+		// fc - 12.12.2007 - OjectViewers now get a Collection
+		gcell = null;
+		for (Iterator i = newSelection.iterator (); i.hasNext ();) {
+			Object candidate = i.next ();
+			if (candidate instanceof GCell) {
+				gcell = (GCell) candidate;
+				break;
+			}
+		}
+		Collection listenerEffectiveSelection = Tools.intoCollection (gcell);	// we select one GCell only
+		
+		// Tell the source what we've selected effectively - fc - 12.12.2007
+		e.setListenerEffectiveSelection (listenerEffectiveSelection);
+		
+		update ();
+		//~ if (panel2D != null) {
+			//~ panel2D.reset ();
+			//~ panel2D.repaint ();
+		//~ }
+	}
+	
+	//	fc - 12.12.2007 - update
+	//	At construction time, referent gcell can be null, we need to be able 
+	//	to rebuild the gui afterwards and to refresh on steps changes
+	private void update () {
+		if (gcell != null) {	// fc - 12.12.2007
+			// pour récupérer la liste des steps depuis l'étape racine du projet jusqu'à l'étape de référence
+			step = gcell.getPlot().getStand().getStep();
+			steps = step.getScenario ().getStepsFromRoot (step);
+
+			//pour récupérer les arbres contenus dans la GCell sélectionnée ou dans ses sous-cellules
+			trees = new Vector ();
+			if (gcell.isTreeLevel()) {
+				trees.addAll (gcell.getTrees ());
+			} else {
+				Collection cells = gcell.getCells ();
+				for (Iterator i = cells.iterator (); i.hasNext ();) {
+					GCell cell = (GCell) i.next ();
+					trees.addAll (cell.getTrees ());
+				}
+			}
+
+			captionPanel = new JPanel (new GridLayout (steps.size (), 1));
+			captionPanel.setBackground (Color.WHITE);
+			captionPanel.setBorder (new EtchedBorder ());
+
+			int num = 0;
+			for (int i = 0; i < steps.size (); i++) {
+				if (num < (color.length - 1) ) num = num + 1;
+				else num=1;
+				JLabel stepLabel = new JLabel (" ___"+((Step)steps.elementAt (i)).getCaption ());
+				stepLabel.setForeground(color [num]);
+				captionPanel.add (stepLabel);
+			}
+
+			x0 = Double.MAX_VALUE;
+			x1 = Double.MIN_VALUE;
+			y0 = Double.MAX_VALUE;
+			y1 = Double.MIN_VALUE;
+			for (int i = 0; i < trees.size (); i++) {
+				GMaddTree t = (GMaddTree ) trees.elementAt(i);
+				double radius = (t.getDbh () / 10) / 2;
+				double x = t.getX ();
+				double y= t.getY ();
+
+				x0 = Math.min (x0, x - radius);
+				x1 = Math.max (x1, x + radius);
+				y0 = Math.min (y0, y - radius);
+				y1 = Math.max (y1, y + radius);
+			}
+
+			r2 = new Rectangle.Double (x0, y0, x1 - x0, y1 - y0);
+			
+			panel2D = new Panel2D (this, 	// when repaint needed, panel2D will call this.draw ()
+					r2,
+					X_MARGIN_IN_PIXELS,
+					Y_MARGIN_IN_PIXELS);
+			
+			scroll.getViewport ().setView (panel2D);
+
+//////////////
+			text = new JTextField ("1",10);
+			text.addActionListener (this);
+			rButtonA = new JRadioButton (Translator.swap ("OVDiameterGrowth.All"));
+			rButtonN= new JRadioButton (Translator.swap ("OVDiameterGrowth.n"));
+			rButtonC= new JRadioButton (Translator.swap ("OVDiameterGrowth.Choice"));
+			rButtonA.addActionListener(this);
+			rButtonN.addActionListener(this);
+			rButtonC.addActionListener(this);
+			text.addActionListener(this);
+			rButtonGroup = new ButtonGroup ();
+			rButtonGroup.add (rButtonA);
+			rButtonGroup.add (rButtonN);
+			rButtonGroup.add (rButtonC);
+			rButtonGroup.setSelected (rButtonA.getModel (), true);
+
+			step = gcell.getPlot().getStand().getStep();
+			steps = step.getScenario ().getStepsFromRoot (step);
+			chkItems = new Vector ();
+			for (int i = 0 ; i < steps.size(); i++) {
+				GTCStand stand1 = (GTCStand) ((Step)steps.elementAt(i)).getStand ();
+				//~ String date =Double .toString ( stand1.getCorrectedDate ());
+				String date = Double.toString (stand1.getDate ());	// fc - 15.10.2003
+				CheckableItem item = new CheckableItem (date, false);
+				chkItems.add (item);
+			}
+
+			outputList = new JList (chkItems);
+			outputList.setCellRenderer (new CheckListRenderer ());
+			outputList.setSelectionMode (ListSelectionModel.SINGLE_SELECTION);
+			outputList.setBorder (new EtchedBorder ());
+			outputList.addMouseListener (new MouseAdapter () {
+				public void mouseClicked (MouseEvent e) {
+					int index = outputList.locationToIndex (e.getPoint ());
+					CheckableItem item = (CheckableItem) outputList.getModel ().getElementAt (index);
+					item.setSelected (!item.isSelected ());
+					Rectangle rect = outputList.getCellBounds (index, index);
+					outputList.repaint (rect);
+
+					if (rButtonC.isSelected ()) {
+						remove (captionPanel);
+
+						captionPanel = new JPanel (new GridLayout (steps.size (), 1));
+						captionPanel.setBackground (Color.white);
+						captionPanel.setBorder (new EtchedBorder ());
+
+						Vector selection = new Vector ();
+						if (rButtonC.isSelected ()) {
+							for (int j = 0 ; j< steps.size(); j++) {
+								if (((CheckableItem)chkItems.elementAt (j)).isSelected ()) selection.addElement (new Integer (j));
+							}
+						}
+
+						int num = 0;
+						for (int i = 0; i < steps.size (); i++) {
+							if (num < (color.length - 1)) num = num + 1;
+							else num=1;
+							if (selection.contains (new Integer(i)))  {
+								JLabel stepLabel = new JLabel (" ___"+((Step)steps.elementAt (i)).getCaption ());
+								stepLabel.setForeground(color [num]);
+								captionPanel.add (stepLabel);
+							}
+						}
+						remove (captionPanel);
+						add (captionPanel, BorderLayout.WEST);
+
+						captionPanel.revalidate ();
+						captionPanel.repaint ();
+						panel2D.reset ();
+						panel2D.repaint ();
+					}
+				}
+			});
+
+			scroll2.getViewport ().setView (outputList);
+
+			pControl.removeAll ();
+			pControl.add (rButtonA);
+			pControl.add (rButtonN);
+			pControl.add (text);
+			pControl.add (rButtonC);
+			pControl.add (scroll2);
+
+
+		}
+	}
+	
+	/**
+	 * From Drawer interface.
+	 * We may receive (from Panel2D) a selection rectangle (in user space i.e. meters)
+	 * and return a JPanel containing information about the objects (trees) inside
+	 * the rectangle.
+	 * If no objects are found in the rectangle, return null.
+	 */
+	public JPanel select (Rectangle.Double r, boolean ctrlIsDown) {
+		return null;
+	}
+
+	/**	Try to dispose panel2D with its own infoDialog
+	*/
+	//~ public void dispose () {
+		//~ panel2D.dispose ();
+	//~ }
+
+	// User interface definition
+	private void createUI () {
+		setLayout (new BorderLayout());
+
+		// 1. Drawing
+		JPanel part1 = new JPanel (new BorderLayout ());
+		scroll = new JScrollPane ();
+		//~ scroll.setPreferredSize (new Dimension (500, 400));
+		part1.add (scroll, BorderLayout.CENTER);
+
+		// 2. Control panel
+		pControl = new JPanel (new FlowLayout (FlowLayout.LEFT));
+		scroll2 = new JScrollPane ();
+		//~ scrollPane2.setPreferredSize (new Dimension(150, 65));
+
+		// Layout parts
+		add (part1, BorderLayout.CENTER);
+		//~ add (captionPanel, BorderLayout.WEST);
+		add (pControl, BorderLayout.NORTH);
+	}
+
+}

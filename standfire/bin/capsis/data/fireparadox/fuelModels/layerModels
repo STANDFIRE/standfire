@@ -1,0 +1,8 @@
+#Here are some information on the layerModels that are defined by default in the code
+
+#LayerModels
+#speciesName	mvr	svr 	isACylinder 	aliveBulkDensity 	deadBulkDensity 
+#String		kg/m3	m3/m2	(flat leave=false; pipeshape=true)	{(height1(m),bd1(kg/m3));(height2,bd2)...}	{(height1(m),bd1(kg/m3));(height2,bd2)...}
+Quercus coccifera	500.0	5000.0	false	{(0.25,3.31);(0.5,2.17);(0.75,1.65)}	{(0.0,0.0)}
+Australian grassland	500.0	10000.0	true	{(0.7,1.0)}	{(0.0,0.0)}
+Brachypodium ramosum	500.0	10000.0	true	{(0.25,0.442)}	{(0.0,0.0)}

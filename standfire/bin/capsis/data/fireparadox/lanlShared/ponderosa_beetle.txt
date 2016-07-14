@@ -1,0 +1,27 @@
+# Scene file to test vegetation template species "Pinus_ponderosa_USFS1" -- Avignon 24 Nov 2010
+# This template species borrows elements from ICFME Pinus banksiana and some from Pipo LANL  
+#4 zones with various Pinus Ponderosa USFS1 pine density and understorey						
+
+#Terrain						
+#name	cellWidth(m)	altitude(m)	xMin	yMin	xMax	yMax
+Terrain0	10	0	0	0	300	200
+
+#Polygons (optionnal)						
+#fileId	"{(x1,y1);(x2,y2)...}"
+# Here we have four polygons					
+1	{(0,0);(120,0);(120,200);(0,200)}
+2	{(120,0);(166,0);(166,200);(120,200)}
+3	{(174,0);(220,0);(220,200);(174,200)}
+4	{(220,0);(300,0);(300,200);(220,200)}
+
+
+# note that columns are tab separated while within spp is spaces
+#TreeGroups											
+#fileId	speciesName	polygonId	lowerBoundDBH	upperBoundDBH	groupAge	stemDensity	MCNeedles	MCLiveTwigs	MCDeadTwigs		
+# here we have four tree groups (one in each polygon)
+1	Pinus ponderosa usfs1	1	10	30	40.0	400	100	80	10
+2	Pinus ponderosa usfs1	2	20	30	40.0	50	100	80	10
+3	Pinus ponderosa usfs1	3	20	30	40.0	50	100	80	10
+4	Pinus ponderosa usfs1	4	10	30	40.0	400	100	80	10		
+
+

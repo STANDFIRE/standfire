@@ -1,0 +1,51 @@
+#Example of dynamic kermes oak garrigue with initial step defined from individual layer definition
+
+#Terrain						
+#name	cellWidth(m)	altitude(m)	xMin	yMin	xMax	yMax
+Terrain0	10	0	0	0	300	200
+
+#Polygons (optionnal)						
+#fileId	"{(x1,y1);(x2,y2)...}"
+# Here we have four polygons					
+1	{(0,0);(120,0);(120,200);(0,200)}
+2	{(120,0);(166,0);(166,200);(120,200)}
+3	{(174,0);(220,0);(220,200);(174,200)}
+4	{(220,0);(300,0);(300,200);(220,200)}
+
+#LayerSet
+#LayerSetId polygonId	Color
+1	1	-1
+2	2	-1
+3	3	-1
+4	4	-1
+
+
+#Dynamical properties for LayerSet (understorey)
+# These properties are required when a temporal evolution is requested
+#LayerSetId	age	fertility	lastClearingType treatmentEffect
+#					(year)	(0 (best) to 3)	1-3	(0-1)
+1	10	1.5	1	0.0
+1	2	1.5	1	0.0
+1	2	1.5	1	0.0
+1	10	1.5	1	0.0	
+								
+# LayerSet properties at present time								
+#LayerSet number speciesName	height	baseHeight	coverFraction	characteristicSize	spatialGroup	aliveMoistureContent aliveBulkDensity deadBulkDensity mvr svr	
+1	Quercus coccifera	0.75	0.0	0.70	2.0	0	70.0	10.0	1.0	0.1	500.0	5000.0
+1	Brachypodium ramosum	0.25	0.0	0.20	2.0	1	10.0	0.0	0.4	0.0	500.0	10000.0
+2	Quercus coccifera	0.25	0.0	0.25	2.0	0	70.0	10.0	1.0	0.1	500.0	5000.0
+2	Brachypodium ramosum	0.25	0.0	0.25	2.0	1	10.0	0.0	0.4	0.0	500.0	10000.0
+3	Quercus coccifera	0.25	0.0	0.25	2.0	0	70.0	10.0	1.0	0.1	500.0	5000.0
+3	Brachypodium ramosum	0.25	0.0	0.25	2.0	1	10.0	0.0	0.4	0.0	500.0	10000.0
+4	Quercus coccifera	0.75	0.0	0.70	2.0	0	70.0	10.0	1.0	0.1	500.0	5000.0
+4	Brachypodium ramosum	0.25	0.0	0.20	2.0	1	10.0	0.0	0.4	0.0	500.0	10000.0
+
+#TreeGroups2											
+#fileId	speciesName	polygonId	hDom50	ageTot	stemDensity(stem/ha)	gHaETFactor Gibbs MCNeedles	MCLiveTwigs	MCDeadTwigs
+# gHaETfactor is the number of gHa st deviation for basal area computation from tree space index (from -2 to 2..)		
+1	Pinus halepensis	1	16	80	400	1	0.0	90	70	10
+2	Pinus halepensis	2	16	80	 50	1	0.0	90	70	10
+3	Pinus halepensis	3	16	80	 50	1	0.0	90	70	10
+4	Pinus halepensis	4	16	80	400	1	0.0	90	70	10
+
+

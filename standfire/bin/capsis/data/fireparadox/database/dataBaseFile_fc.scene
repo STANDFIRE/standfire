@@ -1,0 +1,18 @@
+#Scene file referring to fuelIds in the fuel data base
+
+#Terrain
+#name	cellWidth(m)	altitude(m)	xMin	yMin	xMax	yMax
+Terrain0	5	0	-60	-30	60	30
+
+#Polygons (optionnal)
+#fileId	{(x1,y1);(x2,y2)...}
+1	{(-55,-25);(-55,-12);(-30,-10);(-35,-27)}
+
+#Trees
+#shapeId	x	y	z
+40996278816866304	-4	-4	0
+40996279390470144	-4	4	0
+40996279777361920	4	4	0
+40996279746953216	4	-4	0
+
+
