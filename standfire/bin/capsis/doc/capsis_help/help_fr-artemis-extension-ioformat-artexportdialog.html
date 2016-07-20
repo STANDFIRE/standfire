@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_fr.html>help_fr</a>&nbsp;=>&nbsp;<a href=help_fr-artemis.html>artemis</a></br>
+
+<h1 class="sectionedit20" id="utilitaire_d_exportation_d_artemis">Utilitaire d&#039;exportation d&#039;Artémis</h1>
+<div class="level1">
+
+<p>
+Cet utilitaire vous permet d&#039;exporter les prévisions de la simulation selon trois différents niveaux d&#039;aggrégation : soit le peuplement (ou la strate), la placette ou l&#039;arbre. L&#039;utilitaire crée un fichier .dbf dans lequel l&#039;information sera contenue.
+</p>
+
+</div>
+<!-- EDIT20 SECTION "Utilitaire d'exportation d'Artémis" [1-305] -->
+<h2 class="sectionedit21" id="le_peuplement">Le peuplement</h2>
+<div class="level2">
+
+<p>
+À l&#039;échelle du peuplement, les champs exportés sont les suivants :
+</p>
+<ul>
+<li class="level1"><div class="li"> Année : année de la prévision</div>
+</li>
+<li class="level1"><div class="li"> Résiduel : variable binaire indiquant l&#039;occurrence d&#039;une coupe dans l&#039;intervalle antérieur (1 = oui et 0 = non)</div>
+</li>
+<li class="level1"><div class="li"> Espèce : groupe d&#039;espèces</div>
+</li>
+<li class="level1"><div class="li"> nbTI_HA : densité de tiges marchandes à l&#039;hectare (nb ti/ha)</div>
+</li>
+<li class="level1"><div class="li"> ST_HA : surface terrière marchandes à l&#039;hectare (m<sup>2</sup>/ha)</div>
+</li>
+<li class="level1"><div class="li"> Vol_Ha : volume marchand à l&#039;hectare (m<sup>3</sup>/ha)</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT21 SECTION "Le peuplement" [306-789] -->
+<h2 class="sectionedit22" id="la_placette">La placette</h2>
+<div class="level2">
+
+<p>
+À l&#039;échelle des placettes, les champs exportés sont les suivants :
+</p>
+<ul>
+<li class="level1"><div class="li"> Année : année de la prévision</div>
+</li>
+<li class="level1"><div class="li"> IterMC : identifiant de l&#039;itération Monte Carlo</div>
+</li>
+<li class="level1"><div class="li"> PlacetteID : identifiant de la placette</div>
+</li>
+<li class="level1"><div class="li"> Résiduel : variable binaire indiquant l&#039;occurrence d&#039;une coupe dans l&#039;intervalle antérieur (1 = oui et 0 = non)</div>
+</li>
+<li class="level1"><div class="li"> Espèce : groupe d&#039;espèces</div>
+</li>
+<li class="level1"><div class="li"> nbTI_HA : densité de tiges marchandes à l&#039;hectare (nb ti/ha)</div>
+</li>
+<li class="level1"><div class="li"> ST_HA : surface terrière marchandes à l&#039;hectare (m<sup>2</sup>/ha)</div>
+</li>
+<li class="level1"><div class="li"> Vol_Ha : volume marchand à l&#039;hectare (m<sup>3</sup>/ha)</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT22 SECTION "La placette" [790-1368] -->
+<h2 class="sectionedit23" id="l_arbre">L&#039;arbre</h2>
+<div class="level2">
+
+<p>
+À l&#039;échelle des arbres individuels, les champs exportés sont les suivants :
+</p>
+<ul>
+<li class="level1"><div class="li"> Année : année de la prévision</div>
+</li>
+<li class="level1"><div class="li"> IterMC : identifiant de l&#039;itération Monte Carlo</div>
+</li>
+<li class="level1"><div class="li"> PlacetteID : identifiant de la placette</div>
+</li>
+<li class="level1"><div class="li"> Résiduel : variable binaire indiquant l&#039;occurrence d&#039;une coupe dans l&#039;intervalle antérieur (1 = oui et 0 = non)</div>
+</li>
+<li class="level1"><div class="li"> ArbreID : identifiant de l&#039;arbre</div>
+</li>
+<li class="level1"><div class="li"> Espèce : groupe d&#039;espèces</div>
+</li>
+<li class="level1"><div class="li"> NbVivants : nombre d&#039;arbres vivants ayant ces caractéristiques dans la placette</div>
+</li>
+<li class="level1"><div class="li"> NbMorts : nombre d&#039;arbres morts ayant ces caractéristiques dans la placette</div>
+</li>
+<li class="level1"><div class="li"> DHPcm : diamètre à hauteur de poitrine, 1,30 m (cm)</div>
+</li>
+<li class="level1"><div class="li"> Hautm : hauteur de l&#039;arbre (m)</div>
+</li>
+<li class="level1"><div class="li"> ST_m2 : surface terrière de la tige (m<sup>2</sup>)</div>
+</li>
+<li class="level1"><div class="li"> Vol_dm3 : volume marchand brut de la tige (dm<sup>3</sup>)</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT23 SECTION "L'arbre" [1369-] --></body>
+</html>

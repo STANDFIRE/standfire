@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_fr.html>help_fr</a>&nbsp;=>&nbsp;<a href=help_fr-lerfob-fagacees.html>fagacees</a></br>
+
+<h1 class="sectionedit299" id="faire_evoluer_un_peuplement_abial">Faire évoluer un peuplement AbiAl</h1>
+<div class="level1">
+
+</div>
+
+<h4 id="definition_des_parametres">Définition des paramètres :</h4>
+<div class="level4">
+
+<p>
+<a href="media/help_fr/abial/gui/parametres_de_croissance.png" class="media" target="_blank" title="help_fr:abial:gui:parametres_de_croissance.png"><img src="media/help_fr/abial/gui/parametres_de_croissance.png" class="mediaright" title="" alt="" /></a>
+</p>
+
+</div>
+
+<h5 id="evolution_sans_intervention">Evolution sans intervention :</h5>
+<div class="level5">
+
+<p>
+Indiquer uniquement l&#039;<strong>âge final</strong> à atteindre.
+</p>
+
+</div>
+
+<h5 id="effectuer_une_eclaircie">Effectuer une éclaircie :</h5>
+<div class="level5">
+
+<p>
+Indiquer uniquement le <strong>Rdi final</strong> souhaité.
+</p>
+
+</div>
+
+<h5 id="definir_un_scenario_avec_eclaircies_automatiques">Définir un scénario avec éclaircies automatiques:</h5>
+<div class="level5">
+<ul>
+<li class="level1"><div class="li"> Indiquer l&#039;<strong>âge final</strong> et/ou le <strong>diamètre dominant final</strong>. Si les 2 champs sont remplis, le scénario s&#039;arrêtera lorsque la première condition sera remplie.</div>
+</li>
+</ul>
+<ul>
+<li class="level1"><div class="li"> Indiquer le <strong>Rdi initial</strong> et le <strong>Rdi final</strong>. Une première éclaircie sera pratiquée immédiatement si le Rdi initial est inférieur à la valeur courante affichée. Des éclaircies seront ensuite déclenchées dès que le Rdi courant dépassera le rdi objectif défini par la droite [âge initial, Rdi initial] - [âge final, Rdi final] et que les conditions définies dans le cadre “Intensité des éclaircies” seront remplies.</div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="intensite_des_eclaircies">Intensité des éclaircies</h4>
+<div class="level4">
+
+<p>
+Le <strong>domaine de variation autour du rdi cible</strong> indique la tolérance admise autour du rdi objectif pour les éclaircies automatiques :
+</p>
+<ul>
+<li class="level1"><div class="li"> l&#039;éclaircie sera déclenchée dès que le rdi courant dépassera la valeur “rdi objectif + domaine de variation” ;</div>
+</li>
+<li class="level2"><div class="li"> l&#039;éclaircie ramènera le rdi à la valeur “rdi objectif - domaine de variation”.</div>
+</li>
+</ul>
+
+<p>
+Les éclaircies automatiques ne seront pas déclenchées avant que le <strong>nombre d&#039;années minimal</strong> requis soit atteint.
+</p>
+
+</div>
+
+<h4 id="type_d_eclaircie">Type d&#039;éclaircie</h4>
+<div class="level4">
+
+<p>
+Le type d&#039;éclaircie définit la façon dont seront sélectionnés les arbres à éclaircir pour atteindre le Rdi objectif :
+</p>
+<ul>
+<li class="level1"><div class="li"> dans une éclaircie <strong>standard</strong>, un diamètre dSup est défini (diamètre moyen que l&#039;on obtiendrait en ne coupant que les petits arbres pour obtenir le Rdi objectif) au delà duquel aucun arbre ne sera coupé. Les petits arbres auront une probabilité d&#039;autant plus forte d&#039;être éclaircis que leur diamètre est inférieur à dSup ;</div>
+</li>
+<li class="level1"><div class="li"> dans une éclaircie <strong>par le haut</strong> tous les arbres auront la même probabilité d&#039;être éclaircis.</div>
+</li>
+</ul>
+
+</div>
+</body>
+</html>

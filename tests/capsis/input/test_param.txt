@@ -1,5 +1,5 @@
 # PARAMETERS FOR THE SIMPLE SCRIPT IN STANDFIRE
-path=/home/lawells/Projects/standfire/repo/standfire/standfire/tests/capsis/
+path=/home/lawells/Projects/standfire/repo/standfire/tests/capsis/
 
 # INPUT FILES
 # file containing tree species properties (mass distribution, shape, particle properties...)
@@ -9,7 +9,7 @@ speciesFile=input/speciesFile.txt
 svsBaseFile=input/test
 
 # additional properties : layer details, trees moisture, etc..
-additionalPropertyFile=input/additional_properties.txt
+additionalPropertyFile=input/additionalProperties_multiLayerSet_understorey.txt
 
 # SCENE_SIZE (by default 0,0,200,200)
 sceneOriginX=0.0
@@ -18,19 +18,19 @@ sceneSizeX=80.0
 sceneSizeY=80.0
 
 # 3D VIEWER
-show3Dview=false
+show3Dview=true
 
 # potential extension of the FVSstand (defined on 1ha) and beginning position of this sample in the scene (x in m)
-extendFVSSample=false
+extendFVSSample=true
 xFVSSampleBegin=10.0
 extendFVSSampleSpatialOption=0
 #	(0: random spatialization, 1: repulsive with simple Gibbs pattern, 2:Hardcore that limits crown volume intersections)
 
 # FUEL TREATMENT
-#respace=true
-#respaceDistance=3
-#prune=true
-#pruneHeight=10
+respace=true
+respaceDistance=3
+prune=false
+pruneHeight=10
 
 # SAVE PROJECT
 saveProject=false
@@ -45,7 +45,7 @@ saveProject=false
 # EXPORT
 # 0=none, 1= wfds, 2=firetec, 3=both
 modelChoice=1
-format=64
+format=86
 verboseExport=true
 
 # PARTICLES TO EXPORT
@@ -72,13 +72,13 @@ includeTwig3Dead=false
 # NB when several grids are used the name of the first grid should end with « 1.xyz » and the next ones with « 2.xyz »…
 # canopyFuelRepresentation= RECTANGLE or CYLINDER or HET_RECTANGLE_BIN or HET_RECTANGLE_TEXT
 # canopyFuelRepresentation=RECTANGLE
-canopyFuelRepresentation=RECTANGLE
+canopyFuelRepresentation=CYLINDER
 #canopyFuelRepresentation=HET_RECTANGLE_BIN
 #canopyFuelRepresentation=HET_RECTANGLE_TEXT
 # mandatory parameter for HET_RECTANGLE_TEXT (default value is 0.01 kg/m3) to decide the accuracy of bulk density bins
 #bulkDensityAccuracy=0.1
 
-wfdsFirstGridFile=grid/test_80x_80y_50z_1m_1.xyz
+wfdsFirstGridFile=grid/test_80x_80y_50z_1m.xyz
 wfdsGridNumber=1
 vegetation_cdrag=0.05
 vegetation_char_fraction=0.2
@@ -91,5 +91,5 @@ veg_drag_coefficient = 0.125
 veg_burning_rate_max = 0.4
 veg_dehydratation_rate_max = 0.4
 veg_remove_charred = true
-wfdsOutDir=output/
-wfdsFileName=wfds1
+wfdsOutDir=/output/
+wfdsFileName=wfds1.txt

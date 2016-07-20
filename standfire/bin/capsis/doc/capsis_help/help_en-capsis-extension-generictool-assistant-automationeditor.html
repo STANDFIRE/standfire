@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_en.html>help_en</a>&nbsp;=>&nbsp;<a href=help_en-capsis.html>capsis</a></br>
+
+<!-- including documentation:automation // /var/www/capsis_root/capsis/data/pages/documentation/automation.txt -->
+<div class="include hentry">
+<div class="entry-content">
+
+<h1 class="sectionedit1" id="automation">Automation</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "Automation" [1-26] -->
+<h2 class="sectionedit2" id="what_is_it">What is it ?</h2>
+<div class="level2">
+
+<p>
+An <em>Automation</em> is a mechanism to replay a specific scenario which has been already defined.
+Automation can be used : 
+</p>
+<ul>
+<li class="level1"><div class="li"> as a <strong>replacement of the save</strong> function</div>
+</li>
+<li class="level1"><div class="li"> to do <strong>variations on the model input parameters</strong>. </div>
+</li>
+</ul>
+
+<p>
+Automation supports input variations. This allow to play the same scenario with different parameters combination. This can be usefull to do for instance a sensitivity analysis on a particular model.
+</p>
+
+</div>
+<!-- EDIT2 SECTION "What is it ?" [27-477] -->
+<h2 class="sectionedit3" id="create_an_automation">Create an Automation</h2>
+<div class="level2">
+<ol>
+<li class="level1"><div class="li"> Create your scenario as usual</div>
+</li>
+<li class="level1"><div class="li"> Export your scenario : Menu Project → Automation → Export/Run</div>
+</li>
+</ol>
+
+</div>
+<!-- EDIT3 SECTION "Create an Automation" [478-613] -->
+<h3 class="sectionedit4" id="gui">GUI</h3>
+<div class="level3">
+
+<p>
+Menu Project → Automation → Import
+</p>
+
+<p>
+<a href="/./_detail/documentation/automationeditor.png?id=documentation%3Aautomation" class="media" title="documentation:automationeditor.png"><img src="/./_media/documentation/automationeditor.png?w=500" class="mediacenter" alt="" width="500" /></a>
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>Event</strong> : the list of automation event. Select one to edit the corresponding parameters</div>
+</li>
+<li class="level1"><div class="li"> <strong>Parameters</strong></div>
+<ul>
+<li class="level2"><div class="li"> <em>Value</em> : the default value for a parameter</div>
+</li>
+<li class="level2"><div class="li"> <em>Variation</em> : a comma separated list of value for a parameter. </div>
+</li>
+</ul>
+</li>
+<li class="level1"><div class="li"> <strong>Plan</strong> : the type of parameter combinaison</div>
+</li>
+<li class="level1"><div class="li"> <strong>Threads</strong> : number of threads to use to run the simulations in parallel</div>
+</li>
+<li class="level1"><div class="li"> <strong>Max Simu</strong> : maximum number of simulation to run (used by random plan)</div>
+</li>
+<li class="level1"><div class="li"> <strong>Show project</strong> : show project in the project manager. In this case the project is kept in memory.</div>
+</li>
+<li class="level1"><div class="li"> <strong>Show summary</strong> : show a tab list of output (see model summary)</div>
+</li>
+<li class="level1"><div class="li"> <strong>Save</strong> : save the automation parameters in an <abbr title="Extensible Markup Language">XML</abbr> file</div>
+</li>
+<li class="level1"><div class="li"> <strong>Run</strong> : Execute the simulations</div>
+</li>
+<li class="level1"><div class="li"> <strong>Help</strong> : this page</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT4 SECTION "GUI" [614-1453] -->
+<h3 class="sectionedit5" id="plan">Plan</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <em>OrderedPlan</em> : do the simulation by taking the parameters in the list order. The number of simulation is equal to the largest parameter list.</div>
+</li>
+<li class="level1"><div class="li"> <em>CompletePlan</em> : generate all possible combination with the list of parameters</div>
+</li>
+<li class="level1"><div class="li"> <em>RandomPlan</em> : choose randomly a parameter in the list of values</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT5 SECTION "Plan" [1454-1774] -->
+<h3 class="sectionedit6" id="variable">Variable</h3>
+<div class="level3">
+
+<p>
+You can use <strong>internal variable</strong> in the string values :
+</p>
+<ul>
+<li class="level1"><div class="li"> ${root} : capsis root</div>
+</li>
+<li class="level1"><div class="li"> ${name} : project name</div>
+</li>
+</ul>
+
+<p>
+To generate a list of value at once : use the follwing syntax : <code>[inf:sup:step]</code>
+Example : <code>[2.0:3.0:0.2]</code> will generate 2.0, 2.2, 2.4, 2.6, 2.8
+</p>
+
+</div>
+<!-- EDIT6 SECTION "Variable" [1775-2059] -->
+<h3 class="sectionedit7" id="console_mode">Console mode</h3>
+<div class="level3">
+
+<p>
+To run an automation with 4 threads
+</p>
+
+<p>
+Under linux:
+</p>
+<pre class="code">sh capsis.sh -p automation tmp/test.xml 4 output.txt</pre>
+
+<p>
+Under windows
+</p>
+<pre class="code">capsis -p automation tmp/test.xml 4 output.txt</pre>
+
+</div>
+<!-- EDIT7 SECTION "Console mode" [2060-2260] -->
+<h2 class="sectionedit8" id="convert_a_model_to_support_automation">Convert a model to support automation</h2>
+<div class="level2">
+
+</div>
+<!-- EDIT8 SECTION "Convert a model to support automation" [2261-2311] -->
+<h3 class="sectionedit9" id="adapt_the_model">Adapt the model</h3>
+<div class="level3">
+
+<p>
+See <a href="/./documentation/model_architecture" class="wikilink1" title="documentation:model_architecture">model architecture</a> and  <a href="/./documentation/model_architecture#convert_an_old_architecture_module_to_the_new_architecture" class="wikilink1" title="documentation:model_architecture">Convert an old architecture module to the new architecture</a>
+</p>
+
+</div>
+<!-- EDIT9 SECTION "Adapt the model" [2312-2479] -->
+<h3 class="sectionedit10" id="adapt_the_initialparameters_and_the_evolutionpameters_class">Adapt the InitialParameters and the EvolutionPameters class</h3>
+<div class="level3">
+
+<p>
+The 2 classes should implement the <strong>interface <code>Automatable</code></strong>
+</p>
+
+<p>
+The class fields should be annotated to define how they should be processed.
+</p>
+<ul>
+<li class="level1"><div class="li"> <code>@Ignore</code> : not a parameter</div>
+</li>
+<li class="level1"><div class="li"> <code>@Param</code> : a parameter (facultative)</div>
+</li>
+<li class="level1"><div class="li"> <code>@RecursiveParam</code> : Allow to edit sub object field</div>
+</li>
+<li class="level1"><div class="li"> <code>@ListParam</code> : Allow to change list element</div>
+</li>
+</ul>
+
+<p>
+Use the @Ignore annotation if a class field should not be considered as a parameter.
+</p>
+
+<p>
+You will need to add these imports:
+</p>
+<ul>
+<li class="level1"><div class="li"> import jeeb.lib.util.annotation.*</div>
+</li>
+<li class="level1"><div class="li"> import capsis.kernel.automation.Automatable</div>
+</li>
+</ul>
+
+<p>
+Exemple
+</p>
+<pre class="code java"><span class="kw1">class</span> MyInitParam <span class="kw1">extends</span> AbstractSettings <span class="kw1">implements</span>  InitialParameters, Automatable <span class="br0">&#123;</span>
+&nbsp;
+   @Param
+   <span class="kw1">public</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> filename<span class="sy0">;</span>
+&nbsp;
+   @RecursiveParam
+   <span class="kw1">public</span> PlotDescription plotDesc<span class="sy0">;</span>
+&nbsp;
+   @ListParam
+   <span class="kw1">public</span> List<span class="sy0">&lt;</span>TreePosition<span class="sy0">&gt;</span> treePositions<span class="sy0">;</span>
+&nbsp;
+   @Ignore
+   <span class="kw1">public</span> GScene stand<span class="sy0">;</span>
+&nbsp;
+<span class="br0">&#125;</span></pre>
+
+</div>
+<!-- EDIT10 SECTION "Adapt the InitialParameters and the EvolutionPameters class" [2480-3403] -->
+<h3 class="sectionedit11" id="adapt_the_extensions">Adapt the Extensions</h3>
+<div class="level3">
+
+<p>
+The extension classes should also implement the <strong>interface Automatable</strong>
+Class field should also be annotated.
+</p>
+
+<p>
+<em>Note : PaleoExtension are not supported</em>.
+</p>
+
+</div>
+<!-- EDIT11 SECTION "Adapt the Extensions" [3404-] -->
+</div><!-- .entry-content -->
+<div class="inclmeta">
+	<a href="/./documentation/automation" class="wikilink1 permalink" title="documentation:automation" rel="bookmark">Automation</a>
+	&middot; <abbr class="published" title="2009-12-28T16:53:48Z">2009/12/28 16:53</abbr>
+	&middot; <span class="vcard author"><a href="/./user/samuel_dufour" class="wikilink2 url fn" title="user:samuel_dufour">Samuel Dufour</a></span>
+</div>
+</div>
+
+<!-- /including documentation:automation -->
+</body>
+</html>

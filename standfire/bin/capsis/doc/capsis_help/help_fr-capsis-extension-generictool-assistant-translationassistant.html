@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_fr.html>help_fr</a>&nbsp;=>&nbsp;<a href=help_fr-capsis.html>capsis</a></br>
+
+<h1 class="sectionedit209" id="assistant_de_traduction">Assistant de traduction</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT209 SECTION "Assistant de traduction" [1-38] -->
+<h2 class="sectionedit210" id="presentation">Présentation</h2>
+<div class="level2">
+
+<p>
+L&#039;assistant de traduction peut être ouvert sur les boîtes de dialogues par appui sur la touche de fonction F2. Il facilite la création et la modification des lexiques de traduction de l&#039;application dans des fichiers .properties. Capsis gère le français (_fr) et l&#039;anglais (_en).
+</p>
+
+<p>
+Les dialogues concernés sont les dialogues Capsis, les dialogues des modules et ceux des extensions. Les dialogues techniques comme le FileChooser de java ne sont pas concernés.
+</p>
+
+<p>
+<a href="media/help_fr/capsis/extension/generictool/assistant/translationassistant.png" class="media" target="_blank" title="help_fr:capsis:extension:generictool:assistant:translationassistant.png"><img src="media/help_fr/capsis/extension/generictool/assistant/translationassistant.png" class="mediacenter" title="" alt="" /></a>
+</p>
+
+<p>
+Les fichiers <code>.properties</code> peuvent être issus :
+</p>
+<ul>
+<li class="level1"><div class="li"> du noyau (ex <code>capsis. capsis/Labels_fr.properties</code> et <code>_en</code>) </div>
+</li>
+<li class="level1"><div class="li"> des modules (ex <code>pp3/Pp3Labels_fr.properties</code> et <code>_en</code>)</div>
+</li>
+<li class="level1"><div class="li"> des extensions (ex <code>capsis/extension/intervener/DHAThinner_fr.properties</code> et <code>_en</code>)</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT210 SECTION "Présentation" [39-895] -->
+<h2 class="sectionedit211" id="utilisation">Utilisation</h2>
+<div class="level2">
+
+<p>
+L&#039;assistant de traduction est une table à 4 colonnes. 
+</p>
+<ul>
+<li class="level1"><div class="li"> La première contient le nom de la clé utilisé dans le code source Java de la boite de dialogue</div>
+</li>
+<li class="level1"><div class="li"> Les 2 suivantes contiennent respectivement les traductions en Français et en anglais.</div>
+</li>
+<li class="level1"><div class="li"> La dernière indique le nom du fichier dans lequel la clé est déclarée</div>
+</li>
+</ul>
+
+<p>
+La première colonne contient les clés utilisées dans le code Java de la boîte de dialogue. Les deux autres colonne montrent les traductions respectivements en français et en anglais de ces clés, telle que connues par le traducteur Capsis (classe capsis.util.Translator).
+</p>
+
+<p>
+Chaque lexique correspond à deux fichiers de traductions français et anglais. Par exemple, le lexique alisier.AlsLabels correspond aux deux fichiers alisier/AlsLabels_fr.properties et alisier/AlsLabels_en.properties.
+</p>
+
+<p>
+Une fois les modifications terminées, le bouton Enregistrer permet de modifier les fichiers .properties concernés et de les recharger dans le Traducteur Capsis. Les modifications seront visibles à la prochaine ouverture du dialogue.
+Choix des lexiques pour l&#039;écriture des traductions
+</p>
+
+</div>
+<!-- EDIT211 SECTION "Utilisation" [896-2037] -->
+<h2 class="sectionedit212" id="recherche_des_cles">Recherche des clés</h2>
+<div class="level2">
+
+<p>
+La liste des clés de la première colonne est obtenue en lisant le code source de la boîte de dialogue. On s&#039;assure ainsi que cette liste est bien complète (note technique : recherche des clés utilisées dans des “Translator.swap”). Les traductions dans les deux autres colonnes sont obtenues en interrogeant le traducteur (Translator).
+</p>
+
+<p>
+Les clés dont la traduction est seulement modifiée sont réécrites dans le lexique ou elles ont été lues (interrogation du traducteur).
+</p>
+
+<p>
+Si une traduction n&#039;est pas trouvée (dans aucun fichier .properties), la cellule correspondante est laissée vide et le traducteur ne peut pas donner le lexique de provenance de la clé. Pour déterminer le lexique des clés qui n&#039;avaient pas de traduction on procède dans l&#039;ordre comme suit :
+</p>
+<ol>
+<li class="level1"><div class="li"> recherche d&#039;une référence directe au lexique dans le code source (note technique : en cherchant l&#039;instruction “Translator.addBundle”), </div>
+</li>
+<li class="level1"><div class="li"> dans l&#039;hypothèse ou le dialogue fait partie d&#039;un module Capsis, recherche de la carte d&#039;identité (idCard) du module en suivant les conventions de nommage ad hoc et si trouvée, demande du nom de lexique (par idCard.getModelBundleBaseName ()), </div>
+</li>
+<li class="level1"><div class="li"> création d&#039;un lexique à partir du nom de classe et dans le même répertoire (pour les extensions par exemple).</div>
+</li>
+</ol>
+
+<p>
+<em>Note</em> : Cette méthode de détection permet de traduire les clés une fois le code source Java écrit sans avoir à ouvrir les fichiers .properties à l&#039;aide d&#039;un éditeur de texte.
+</p>
+
+</div>
+<!-- EDIT212 SECTION "Recherche des clés" [2038-3549] -->
+<h2 class="sectionedit213" id="cles_dupliquees">Clés dupliquées</h2>
+<div class="level2">
+
+<p>
+Avant la sauvegarde des modifications; l&#039;assistant verifie si une clé est déclarée dans plusieurs fichiers <code>.properties</code>. Si c&#039;est le cas, l&#039;assistant demande si les doublons doivent être supprimés.
+</p>
+
+</div>
+<!-- EDIT213 SECTION "Clés dupliquées" [3550-3786] -->
+<h2 class="sectionedit214" id="utilisateur_svn">Utilisateur SVN</h2>
+<div class="level2">
+
+<p>
+Quand un lexique est créé, il doit être ajouté et commité sur SVN. Attention à ne commiter que les changements concernant vos modules/extensions.
+</p>
+
+</div>
+<!-- EDIT214 SECTION "Utilisateur SVN" [3787-] --></body>
+</html>

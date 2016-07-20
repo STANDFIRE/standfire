@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_fr.html>help_fr</a>&nbsp;=>&nbsp;<a href=help_fr-capsis.html>capsis</a></br>
+
+<h1 class="sectionedit216" id="gestionnaire_d_extensions_graphique">Gestionnaire d&#039;Extensions Graphique</h1>
+<div class="level1">
+
+</div>
+
+<h4 id="principe">Principe</h4>
+<div class="level4">
+
+<p>
+Consultation de la liste des extensions de la plate-forme (fig. 1). Personnalisation possible de la compatibilité des extensions par vétos ou liste exhaustive d&#039;extensions compatibles pour un modèle considéré. Accès par menu Outils &gt; Gestionnaire d&#039;Extensions.
+</p>
+
+<p>
+Choisissez un type d&#039;extension dans la liste déroulante, cochez les noms de colonnes que vous souhaitez voir apparaître. Cliquez ou Ctrl-cliquez sur l&#039;entête d&#039;une colonne pour trier la liste par ordre croissant / décroissant sur cette colonne.
+</p>
+
+<p>
+Sélectionnez une ligne dans la table pour obtenir la description précise d&#039;une extension, si une aide en ligne est disponible pour cette extension, l&#039;icône verte Aide en haut à droite permet de l&#039;afficher.
+</p>
+
+<p>
+<a href="media/help_fr/capsis/extension/generictool/graphicalextensionmanager.gif" class="media" target="_blank" title="help_fr:capsis:extension:generictool:graphicalextensionmanager.gif"><img src="media/help_fr/capsis/extension/generictool/graphicalextensionmanager.gif" class="mediacenter" title="" alt="" /></a>
+<em>Fig. 1. Le Gestionnaire d&#039;Extensions Graphique montrant les extensions de type “Outil Modèle” (ModelTool), les deux premières sont compatibles avec le modèle Fagacées</em>
+</p>
+
+</div>
+
+<h4 id="colonnes_compatibilite">Colonnes &quot;Compatibilité&quot;</h4>
+<div class="level4">
+
+<p>
+Quand un nouveau projet est chargé dans le gestionnaire de projets, une nouvelle colonne est ajoutée pour le modèle attaché au projet. Si plusieurs projets sont ouverts (fig. 2), il y a une colonne par modèle (ex: 2 projets Ventoux et 1 projet PP3 correspondent à 2 colonnes : Ventoux et PP3).
+</p>
+
+<p>
+<strong>Note :</strong> Si le Gestionnaire d&#039;Extensions Graphique est déjà ouvert lors de l&#039;ouverture / fermeture de projet, utilisez le bouton “Rafraîchir” pour le mettre à jour.
+</p>
+
+<p>
+Les extensions de la plate-forme savent évaluer leur compatibilité par construction avec un objet référent qui leur est communiqué. Le type de cet objet référent dépend du type de l&#039;extension. Ainsi par exemple, les Extracteurs de données et les Mémoriseurs ont un référent de type GModel (compatibles avec un modèle), alors que les Rendeurs de données ont un référent de type Extracteur de données (compatibles avec une autre extension).
+</p>
+<ul>
+<li class="level1"><div class="li"> Pour les extensions dont a compatibilité est de type GModel, la colonne compatibilité contient des cases à cocher, cochées seulement si l&#039;extension est compatible avec le modèle de la colonne.</div>
+</li>
+<li class="level1"><div class="li"> Pour les extensions dont la compatibilité n&#039;est pas de type GModel, la colonne compatibilité est vide.</div>
+</li>
+</ul>
+
+<p>
+<a href="media/help_fr/capsis/extension/generictool/graphicalextensionmanager_withvetoesandlist.gif" class="media" target="_blank" title="help_fr:capsis:extension:generictool:graphicalextensionmanager_withvetoesandlist.gif"><img src="media/help_fr/capsis/extension/generictool/graphicalextensionmanager_withvetoesandlist.gif" class="mediacenter" title=" " alt=" " /></a>
+</p>
+
+<p>
+<em>Fig. 2. Deux colonnes Compatibilité : le modèle Ventoux est géré par Vétos et PP3 est géré par Liste</em>
+</p>
+
+<p>
+Par un clic droit sur la colonne de compatibilité d&#039;un modèle, on accède au menu contextuel Compatibilité qui propose de gérer la compatibilité de façon personnalisée pour ce modèle.
+</p>
+
+<p>
+<strong>Compatibilité automatique :</strong> laisse les extensions évaluer leur compatibilité par construction (option par défaut).
+</p>
+
+<p>
+<strong>Personnalisation par vétos :</strong> permet de poser des vétos sur des extensions qu&#039;on souhaite désactiver pour le modèle considéré. Cette option est valable pour toutes les extensions (compatibles avec tous types de référents). Les extensions avec véto n&#039;apparaitront pas dans les listes d&#039;extensions proposées à l&#039;utilisateur par l&#039;interface graphique pour le modèle considéré.
+</p>
+
+<p>
+Quand cette option est activées, le texte (Vetos) est ajouté dans l&#039;entête de la colonne, il est alors possible d&#039;ajouter / supprimer des vétos avec le menu contextuel Compatibilité. Les vétos sont enregistrés dans un fichier extension.veto dans le répertoire du module (ex: capsis4/bin/pp3/extension.veto). Pour les extensions qui comportent un véto, le texte Veto apparaît dans la colonne Compatibilité.
+</p>
+
+<p>
+<strong>Personnalisation par liste :</strong> permet d&#039;établir une liste exhaustive des extensions compatibles avec un modèle donné. Ce mode de personnalisation garantit que les nouvelles extensions créées par la communauté Capsis ne rentreront pas dans la liste des extensions compatibles avec le modèle. Il peut être intéressant pour la diffusion d&#039;un modèle à des utilisateurs, constituant une sorte de profil stable.
+</p>
+
+<p>
+Une fois l&#039;option activée, le texte (Liste) est ajouté dans l&#039;entête de la colonne, on peut alors utiliser le menu contextuel Compatibilité pour inclure / exclure des extensions dans la liste. La liste est enregistrée dans un fichier extension.list dans le répertoire du module (ex: capsis4/bin/ventoux/extension.list). Pour les extensions qui sont dans la liste, le texte Inclus apparaît dans la colonne Compatibilité.
+</p>
+
+<p>
+<strong>Note :</strong> pour la gestion des vétos et des listes,  il est possible d&#039;agir sur plusieurs lignes à la fois en les sélectionnant préalablement dans la table, utiliser Ctrl-Clic et Shift-Clic, ou encore Ctrl-A pour tout sélectionner.
+</p>
+
+<p>
+Le choix des options de compatibilité (automatique, vétos, liste) est mémorisé à la fermeture de Capsis est rétabli au lancement suivant. En cas de démarrage avec le paramètre -nooptions ou de premier démarrage sur un nouveau poste après installation, les priorités suivantes sont respectées pour déterminer les compatibilités pour chaque modèle : (1) recherche d&#039;un fichier extension.list, (2) si non trouvé, recherche d&#039;un fichier extension.veto, (3) sinon, utilisation du système de compatibilité par défaut des extensions.
+</p>
+
+</div>
+</body>
+</html>

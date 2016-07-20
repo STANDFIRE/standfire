@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_fr.html>help_fr</a>&nbsp;=>&nbsp;<a href=help_fr-artemis.html>artemis</a></br>
+
+<p>
+<strong><a href="help_fr-quebecmrnf-artemis.html" class="wikilink1" title="help_fr-quebecmrnf-artemis.html">Index des pages d&#039;aide du simulateur ARTEMIS</a></strong>
+</p>
+
+<h1 class="sectionedit60" id="creer_son_fichier_de_donnees_pour_artemis_et_succes">Créer son fichier de données pour Artemis et Succès</h1>
+<div class="level1">
+
+<p>
+Artemis et Succes utilisent le même utilitaire d&#039;importation pour lire des fichiers de format ”.dbf” et ”.csv” dont la structure doit être bien définie. Comprendre cette structure est essentiel au bon fonctionnement des deux modules. 
+</p>
+
+<p>
+Le fichier suivant <a href="media/help_fr/artemis/dataex2.zip" class="media" target="_blank" title="help_fr:artemis:dataex2.zip"></a> comprend trois exemples de fichier de données et un fichier .ife qui facilite l&#039;importation :
+</p>
+<ul>
+<li class="level1"><div class="li"> DataEx.csv : un fichier avec seulement une entrée et une placette</div>
+</li>
+<li class="level1"><div class="li"> DataEx2.csv : une fichier avec deux entrées et une placette</div>
+</li>
+<li class="level1"><div class="li"> DataEx3.csv : une fichier avec quatre entrées réparties dans trois placettes et deux strates </div>
+</li>
+<li class="level1"><div class="li"> dataEx.ife : une fichier utilisé par Artemis ou Succes pour faciliter l&#039;importation</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT60 SECTION "Créer son fichier de données pour Artemis et Succès" [82-866] -->
+<h2 class="sectionedit61" id="un_fichier_a_une_entree_et_une_placette_dataexcsv">Un fichier à une entrée et une placette (DataEx.csv)</h2>
+<div class="level2">
+
+<p>
+Si vous ouvrez le fichier DataEx.csv dans Excel, vous observerez la structure suivante :
+</p>
+
+<p>
+<a href="media/help_fr/artemis/capturedataex1.png" class="media" target="_blank" title="help_fr:artemis:capturedataex1.png"><img src="media/help_fr/artemis/capturedataex1.png" class="media" title="" alt="" /></a>
+</p>
+
+<p>
+Les champs sont les suivants:
+</p>
+<ul>
+<li class="level1"><div class="li"> Strate : identifiant de strate</div>
+</li>
+<li class="level1"><div class="li"> PlacID : identifiant de la placette</div>
+</li>
+<li class="level1"><div class="li"> Lat : latitude en degré décimal (entre 45 et 53 degrés)</div>
+</li>
+<li class="level1"><div class="li"> Long : longitude en degré décimal (entre -80 et -58 degrés)</div>
+</li>
+<li class="level1"><div class="li"> Altitude : altitude en m (entre 0 et 1300 m)</div>
+</li>
+<li class="level1"><div class="li"> RegEco : code de la région écologique (un chiffre et un caractère)</div>
+</li>
+<li class="level1"><div class="li"> TypeEco : <a href="help_fr-artemis.html#annexe_1_-_liste_des_vegetations_potentielles" class="wikilink1" title="help_fr-artemis.html">code du type écologique ou de la végétation potentielle (deux caractères et un ou deux chiffres)</a></div>
+</li>
+<li class="level1"><div class="li"> ClDrai : classe de drainage selon la classification du MRNFQ (un chiffre entre 0 et 6)</div>
+</li>
+<li class="level1"><div class="li"> Essence : <a href="help_fr-artemis.html#annexe_3_-_liste_des_especes" class="wikilink1" title="help_fr-artemis.html">code de l&#039;espèce (trois caractères)</a></div>
+</li>
+<li class="level1"><div class="li"> Etat : l&#039;état de l&#039;arbre selon la classification du MRNFQ (e.g. 10 pour vivant)</div>
+</li>
+<li class="level1"><div class="li"> Dhpcm : le dhp en cm</div>
+</li>
+<li class="level1"><div class="li"> Freq : le nombre d&#039;arbres représentés par cette entrée dans la placette <em class="u"><strong>(et non pas à l&#039;hectare)
+</strong></em></div>
+</li>
+</ul>
+
+<p>
+Dans l&#039;exemple précédent, le fichier ne contient qu&#039;un placette qui n&#039;a que deux arbres, soit deux sapins baumiers (SAB) de 14 cm. 
+</p>
+
+<p>
+<strong>IMPORTANT : Conformément aux normes d&#039;inventaire de la Direction des inventaires forestiers du ministère des Ressources naturelles et de la Faune du Québec, la superficie d&#039;une placette d&#039;inventaire est établie à 400 m<sup>2</sup>.
+</strong>
+</p>
+
+</div>
+<!-- EDIT61 SECTION "Un fichier à une entrée et une placette (DataEx.csv)" [867-2403] -->
+<h2 class="sectionedit62" id="un_fichier_a_deux_entrees_et_une_placette_dataex2csv">Un fichier à deux entrées et une placette (DataEx2.csv)</h2>
+<div class="level2">
+
+<p>
+Si vous ouvrez le fichier DataEx2.csv dans Excel, vous observerez la structure suivante :
+</p>
+
+<p>
+<a href="media/help_fr/artemis/capturedataex2.png" class="media" target="_blank" title="help_fr:artemis:capturedataex2.png"><img src="media/help_fr/artemis/capturedataex2.png" class="media" title="" alt="" /></a>
+</p>
+
+<p>
+Dans cet exemple, le fichier ne contient qu&#039;une placette qui n&#039;a que trois arbres, soit deux sapins baumiers (SAB) de 14 cm et un bouleau jaune (BOJ) de 22 cm.
+</p>
+
+</div>
+<!-- EDIT62 SECTION "Un fichier à deux entrées et une placette (DataEx2.csv)" [2404-2768] -->
+<h2 class="sectionedit63" id="un_fichier_a_quatre_entrees_trois_placettes_et_deux_strates_dataex3csv">Un fichier à quatre entrées, trois placettes et deux strates (DataEx3.csv)</h2>
+<div class="level2">
+
+<p>
+Le fichier <strong>DataEx3.csv</strong> a une structure plus complexe :
+</p>
+
+<p>
+<a href="media/help_fr/artemis/capturedataex3.png" class="media" target="_blank" title="help_fr:artemis:capturedataex3.png"><img src="media/help_fr/artemis/capturedataex3.png" class="media" title="" alt="" /></a>
+</p>
+
+<p>
+Le fichier contient donc :
+</p>
+<ol>
+<li class="level1"><div class="li"> Strate 1</div>
+<ol>
+<li class="level2"><div class="li"> Placette 1 (type écologique MJ2)</div>
+<ol>
+<li class="level4"><div class="li"> 2 sapins baumiers (SAB) de 14 cm</div>
+</li>
+<li class="level4"><div class="li"> 1 bouleau jaune (BOJ) de 22 cm </div>
+</li>
+</ol>
+</li>
+<li class="level2"><div class="li"> Placette 2 (type écologique FE3)</div>
+<ol>
+<li class="level4"><div class="li"> 3 érables à sucre (ERS) de 42 cm</div>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="level1"><div class="li"> Strate 2</div>
+<ol>
+<li class="level2"><div class="li"> Placette 1 (type écologique RE2)</div>
+<ol>
+<li class="level4"><div class="li"> 10 épinettes noires (EPN) de 12 cm</div>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+<p>
+La lecture de ce fichier dans le module Artemis mène à ce dialogue:
+</p>
+
+<p>
+<a href="media/help_fr/artemis/capturedataex4.png" class="media" target="_blank" title="help_fr:artemis:capturedataex4.png"><img src="media/help_fr/artemis/capturedataex4.png" class="media" title="" alt="" /></a>
+</p>
+
+<p>
+Pour importer ce fichier dans CAPSIS, il faut associer les champs du fichier de DataEx3.csv avec ceux requis par Artemis comme suit :
+</p>
+
+<p>
+<a href="media/help_fr/artemis/capturedataex5.png" class="media" target="_blank" title="help_fr:artemis:capturedataex5.png"><img src="media/help_fr/artemis/capturedataex5.png" class="media" title="" alt="" /></a>
+</p>
+
+<p>
+Il est également possible d&#039;utiliser le fichier <strong>dataEx.ife</strong> pour parvenir au même résultat. Pour ce faire, cliquer sur “Ouvrir” et sélectionnez le fichier <strong>dataEx.ife</strong>.
+</p>
+
+<p>
+Lorsque vous aurez appuyé sur le bouton “Ok”, vous observerez le dialogue suivant :
+</p>
+
+<p>
+<a href="media/help_fr/artemis/capturedataex6.png" class="media" target="_blank" title="help_fr:artemis:capturedataex6.png"><img src="media/help_fr/artemis/capturedataex6.png" class="media" title="" alt="" /></a>
+</p>
+
+<p>
+Ce dialogue apparaît parce que votre fichier de données comprend plus d&#039;une strate. Il vous offre le choix d&#039;importer l&#039;une ou l&#039;autre des deux strates. Si vous choisissez la strate 1, vous obtiendrez le résultat suivant :
+</p>
+
+<p>
+<a href="media/help_fr/artemis/capturedataex7.png" class="media" target="_blank" title="help_fr:artemis:capturedataex7.png"><img src="media/help_fr/artemis/capturedataex7.png" class="media" title="" alt="" /></a>
+</p>
+
+<p>
+Notez que la superficie échantillonnée de la strate 1 est de 800 m<sup>2</sup> puisque celle-ci contient deux placettes. En passant le curseur de la souris sur l&#039;onglet, vous verrez apparaître une fenêtre qui vous indiquera que la strate a une densité et une surface terrière de 75 tiges/ha et 6,1 m<sup>2</sup>/ha.
+</p>
+
+</div>
+<!-- EDIT63 SECTION "Un fichier à quatre entrées, trois placettes et deux strates (DataEx3.csv)" [2769-] --></body>
+</html>

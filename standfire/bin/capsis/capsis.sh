@@ -32,7 +32,7 @@ if [ "$architecture" != "x86_64" ] && [ "$architecture" != "ia64" ]; then
 else
 
   msgarchi='64 bits architecture'
-  mem="30000"   # 64 bits default value / see setmem.sh to change it
+  mem="10000"   # 64 bits default value / see setmem.sh to change it
   export LD_LIBRARY_PATH=$EXTDIR/linux64:$LD_LIBRARY_PATH
 
 fi

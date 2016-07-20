@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_en.html>help_en</a>&nbsp;=>&nbsp;<a href=help_en-capsis.html>capsis</a></br>
+
+<h1 class="sectionedit176" id="n_v_thinning">N V Thinning</h1>
+<div class="level1">
+
+<p>
+Cutting in the different diameter classes to reach the harvest target values for N and V
+</p>
+
+<p>
+Reference: 
+<strong>Valentine LAFOND, Thomas CORDONNIER, François de COLIGNY, Benoît COURBAUD, 2011
+Reconstructing harvesting diameter distribution from aggregate data
+Annals of Forest Sciences</strong>
+</p>
+
+<p>
+We developed a simple algorithm to reconstruct diameter distribution of selection harvesting from an initial (before cut) diameter distribution and aggregate information on the harvest to be reproduced, namely the number of trees (N, t/ha) and the total volume (V, m3/ha) to be removed. 
+</p>
+
+<p>
+A list of trees is created from the initial diameter distribution and contains only trees with DBH larger than a given threshold (10 cm here). 
+</p>
+
+<p>
+The algorithm consists in randomly selecting the target number of trees (N) from the initial trees list, then iteratively exchanging random pairs of selected vs. unselected trees to converge towards the target volume (V) to be removed. 
+</p>
+
+<p>
+At each step, the exchange is done only if the new volume gets closer to the target one; otherwise the algorithm selects another pair. The algorithm stops when the predicted volume equals the target volume, more or less one percent.
+</p>
+
+<p>
+In Capsis, we can make several replications of the process. Capsis selects the distribution closer to the mean of the different replications using a Chi2 test.
+</p>
+
+</div>
+</body>
+</html>

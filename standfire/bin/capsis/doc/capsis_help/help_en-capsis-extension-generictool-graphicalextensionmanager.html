@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_en.html>help_en</a>&nbsp;=>&nbsp;<a href=help_en-capsis.html>capsis</a></br>
+
+<h1 class="sectionedit179" id="graphical_extension_manager_and_compatibility_tuning_with_vetoes">Graphical Extension Manager and compatibility tuning with vetoes</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT179 SECTION "Graphical Extension Manager and compatibility tuning with vetoes" [1-80] -->
+<h2 class="sectionedit180" id="principle">Principle</h2>
+<div class="level2">
+
+<p>
+Display the list of the platform extensions (fig. 1). Possible customisation of the extensions compatibility by vetoes or with an exhaustive compatibility list for the considered model. Access by menu Tools &gt; Extension Manager.
+</p>
+
+<p>
+Choose the type of extension in the combo box, check the column names you want to see. Click or Ctrl-click on the column header to sort in ascending / descending order.
+</p>
+
+<p>
+Select a line in the table to get the precise description of an extension, if an online help file is available for this extension, the green icon Help in the top right corner can show it.
+</p>
+
+<p>
+<a href="media/help_en/capsis/extension/generictool/graphicalextensionmanager.gif" class="media" target="_blank" title="help_en:capsis:extension:generictool:graphicalextensionmanager.gif"><img src="media/help_en/capsis/extension/generictool/graphicalextensionmanager.gif" class="mediacenter" title="" alt="" /></a>
+<em>Fig. 1. The Graphical Extension Manager showing the extensions of type “Data extractor”, Rdi / Time is compatible with the model Fagacées</em>
+</p>
+
+</div>
+<!-- EDIT180 SECTION "Principle" [81-910] -->
+<h2 class="sectionedit181" id="compatibility_columns_managing_vetoes">Compatibility columns, managing vetoes</h2>
+<div class="level2">
+
+<p>
+When a new project is loaded in the project manager, a new column is added for the model linked to the project. If several projects are opened (fig. 2), there is a column per model (ex: 2 projects Ventoux and 1 project PP3 result in 2 columns: Ventoux and PP3).
+</p>
+
+<p>
+<strong>Note:</strong> If the Graphical Extension Manager is already opened when opening / closing a project, use the “Update” button to refresh it.
+</p>
+
+<p>
+The extensions of the platform can evaluate their compatibility with a built-in system dealing with a referent object. The type of this referent depends on the type of the extension. Thus for example, the Data extractors and the Memorizers have a referent of type GModel (compatible with a model), while the Data renderers have a referent of type Data extractor (compatible with another extension).
+</p>
+<ul>
+<li class="level1"><div class="li"> For the extensions with a referent of type GModel, the compatibility column contains check boxes, selected only if the extension is compatible with the model of the column.</div>
+</li>
+<li class="level1"><div class="li"> For the extensions which compatibility is not of type GModel, the compatibility column is empty.</div>
+</li>
+</ul>
+
+<p>
+<a href="media/help_en/capsis/extension/generictool/graphicalextensionmanager_withvetoesandlist.gif" class="media" target="_blank" title="help_en:capsis:extension:generictool:graphicalextensionmanager_withvetoesandlist.gif"><img src="media/help_en/capsis/extension/generictool/graphicalextensionmanager_withvetoesandlist.gif" class="mediacenter" title="" alt="" /></a>
+<em>Fig. 2. Two compatibility columns: the Ventoux model is managed by Vetoes and PP3 is managed by List</em>
+</p>
+
+<p>
+A right click on the compatibility column of a model opens an <strong>Compatibility contextual menu</strong> to customise the compatibility for this model.
+</p>
+
+<p>
+Built-in compatibility: the extensions evaluate their compatibility with their built-in compatibility evaluation system (default option).
+</p>
+
+<p>
+<strong>Customisation with vetoes:</strong> vetoes can be set to desactivate some extensions for a considered model. This option is available for all the extensions (compatible with all kinds of referents). The extensions with a veto will not appear in the lists of extensions proposed to the end-user by the graphical user interface for the considered model.
+</p>
+
+<p>
+When this option is activated, the text (Vetoes) is added in the column header, it is then possible to add / remove vetoes with the compatibility contextual menu. The vetoes are saved in a file extension.veto in the directory of the module (e.g. capsis4/bin/pp3/extension.veto). For the extensions with a veto, the text Veto appears in the compatibility column.
+</p>
+
+<p>
+<strong>Customisation by list:</strong> creates an exhaustive list of extensions compatible with a given model. This option makes sure that new extensions developed by the community will not be added in the list of extensions for the considered model. This can be useful for distribution to end-users, by making a kind of stable profile.
+</p>
+
+<p>
+When this option is activated, the text (List) is added in the column header and it is possible to use the Compatibility contextual menu to include / exclude extensions in the list. The list is saved in a file extension.list in the directory of the model (e.g. capsis4/bin/ventoux/extension.list). For the extensions in the list, the text Included appears in the compatibility column.
+</p>
+
+<p>
+<strong>Note:</strong> for the vetoes and list management, it is possible to select several lines at the same time in the table by using Ctrl-click, Shift-click or Ctrl-A to select all.
+</p>
+
+<p>
+The choice of the compatibility options (built-in, vetoes, list) is memorized at Capsis closing time and restored at next launch. When booting with the parameter -nooptions or when first booting on a new computer after an install, the following priorities are played for each model: (1) look for a file extension.list, (2) if not found, look for a file extension.veto, (3) otherwise use the built-in compatibility system.
+</p>
+
+</div>
+<!-- EDIT181 SECTION "Compatibility columns, managing vetoes" [911-] --></body>
+</html>

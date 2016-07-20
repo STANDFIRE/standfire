@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_en.html>help_en</a>&nbsp;=>&nbsp;<a href=help_en-capsis.html>capsis</a></br>
+
+<h1 class="sectionedit238" id="inspector">Inspector</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT238 SECTION "Inspector" [1-25] -->
+<h2 class="sectionedit239" id="principle">Principle</h2>
+<div class="level2">
+
+<p>
+This dynamic component can examine the properties of the object on which it is synchronized.
+</p>
+
+</div>
+<!-- EDIT239 SECTION "Principle" [26-142] -->
+<h2 class="sectionedit240" id="vizualisation">Vizualisation</h2>
+<div class="level2">
+
+<p>
+The inspector is opened on a target object. The properties of the object are listed with their value in a table.
+</p>
+
+<p>
+Some properties can be references to other object: double click on them (left button) and the referenced object will become the current target under examination.
+</p>
+
+<p>
+<a href="media/help_en/capsis/util/svinspector_en.gif" class="media" target="_blank" title="help_en:capsis:util:svinspector_en.gif"><img src="media/help_en/capsis/util/svinspector_en.gif" class="mediacenter" title="" alt="" /></a>
+</p>
+
+</div>
+<!-- EDIT240 SECTION "Vizualisation" [143-495] -->
+<h2 class="sectionedit241" id="navigation">Navigation</h2>
+<div class="level2">
+
+<p>
+The buttons in the navigation bar can be used at every time:
+</p>
+<ul>
+<li class="level1"><div class="li"> previous target (i.e. Back):</div>
+</li>
+<li class="level2"><div class="li"> next target (i.e. Forward):</div>
+</li>
+<li class="level2"><div class="li"> back to the first target (i.e. Home):</div>
+</li>
+</ul>
+
+<p>
+The naviation bar also contains the type of the current object (java class name) and a button to open a new view of the object. If several other views are available, you will be able to choose the one you want in a list.
+</p>
+
+</div>
+<!-- EDIT241 SECTION "Navigation" [496-917] -->
+<h2 class="sectionedit242" id="which_properties">Which properties</h2>
+<div class="level2">
+
+<p>
+The shown properties are:
+</p>
+<ul>
+<li class="level1"><div class="li"> the fields of the target object (more exactly: public instance variable)</div>
+</li>
+<li class="level2"><div class="li"> the result of the dynamic invocation of its public accessors (method like <strong>getPropertyName ()</strong> ). In this case, the “get” prefix is removed to build the name of the property in the table (ex: getHeight () → Height)</div>
+</li>
+</ul>
+
+<p>
+The private or protected properties of the objects are not shown.
+</p>
+
+</div>
+<!-- EDIT242 SECTION "Which properties" [918-] --></body>
+</html>

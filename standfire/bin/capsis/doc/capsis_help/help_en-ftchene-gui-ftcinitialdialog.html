@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_en.html>help_en</a></br>
+
+<p>
+The module FTChene (standards/coppice oak) was developed from the IFN (inventaire forestier national = national forest inventory) data to simulate the stands identified as “Futaie Coppice Mix” in the northern half of France.
+</p>
+
+<p>
+Réf : Vallet P., Toigo M., 2012. Un modèle de croissance pour les mélanges futaie-taillis à partir des données de l’IFN. Communication orale aux Journées couplées CAQ15 – CAPSIS14, Nogent-sur-Vernisson, 03 avril 2012 <a href="https://www4.inra.fr/efpa/content/download/3484/34785/version/1/file/Inv9_Vallet.pdf" class="urlextern" target="blank" title="https://www4.inra.fr/efpa/content/download/3484/34785/version/1/file/Inv9_Vallet.pdf"  rel="nofollow">https://www4.inra.fr/efpa/content/download/3484/34785/version/1/file/Inv9_Vallet.pdf</a>
+</p>
+
+<p>
+The simulation offers predefined fertility situations as listed below:
+</p>
+<ul>
+<li class="level1"><div class="li"> Average forest of Orleans</div>
+</li>
+<li class="level1"><div class="li"> Average GRECO A, B, C (broad ecological regions, defined by IFN)</div>
+</li>
+</ul>
+
+<p>
+The evolution step is 5 years, to match the model data calibration. It may however vary between 3 and 6 years for practical reasons, but this generates biases related to the nonlinearity of the models, and must be done knowingly.
+</p>
+
+<p>
+You can change the simulation parameters that appear in the window initialization.
+If you enter a value outside of the range ​​normally usable by the model, a warning will be displayed.
+If you enter an absurd value, another message will appear and you can not continue while the set of values ​​is not corrected.
+</p>
+
+<p>
+When the starting parameters of the simulation are validated, the model generates a list of trees.
+</p>
+
+<h1 class="sectionedit271" id="list_of_parameters">List of parameters</h1>
+<div class="level1">
+
+<p>
+Interval of current value between ”{}”
+</p>
+
+</div>
+<!-- EDIT271 SECTION "List of parameters" [1365-1439] -->
+<h2 class="sectionedit272" id="fertility_index_and_slope_of_the_growth_in_girth">Fertility index and slope of the growth in girth.</h2>
+<div class="level2">
+
+<p>
+Fertility is not a reference height at a given age as in other models (FTChene does not model the tree height). This is an indicator of fertility based on values ​​calculated below.
+</p>
+
+</div>
+
+<h4 id="siliceous_rock_0_1">Siliceous Rock {0, 1}</h4>
+<div class="level4">
+
+<p>
+1 for the source rocks of the siliceous type, 0 in other cases.
+However, in the case of an average over several stations, the value can be a real between 0 and 1. In this case, it corresponds to the proportion of plot with a siliceous rock type for the selected population.
+For example, prerecorded values ​​for the clumps are ratios of siliceous IFN plot in the model base calibration.
+</p>
+
+</div>
+
+<h4 id="cn_ratio_10_263">C / N ratio {10, 26.3}</h4>
+<div class="level4">
+
+<p>
+Practical values ​​represent 95% of the distribution
+</p>
+
+<p>
+<a href="media/help_fr/ftchene/gui/cnratio2.png" class="media" target="_blank" title="help_fr:ftchene:gui:cnratio2.png"><img src="media/help_fr/ftchene/gui/cnratio2.png" class="medialeft" title="" alt="" /></a>
+</p>
+
+</div>
+
+<h4 id="minimum_temperature_in_december_-140_39">Minimum Temperature in December {-1.40, 3.9}</h4>
+<div class="level4">
+
+<p>
+Practical values ​​represent 95% of the distribution
+</p>
+
+<p>
+<a href="media/help_fr/ftchene/gui/tmin122.png" class="media" target="_blank" title="help_fr:ftchene:gui:tmin122.png"><img src="media/help_fr/ftchene/gui/tmin122.png" class="medialeft" title="" alt="" /></a>
+</p>
+
+</div>
+
+<h4 id="index_of_temporary_congestion_-0013_0098">Index of temporary congestion {-0.013, 0.098}</h4>
+<div class="level4">
+
+<p>
+Practical values ​​represent 95% of the distribution
+</p>
+
+<p>
+<a href="media/help_fr/ftchene/gui/floodingindex2.png" class="media" target="_blank" title="help_fr:ftchene:gui:floodingindex2.png"><img src="media/help_fr/ftchene/gui/floodingindex2.png" class="medialeft" title="" alt="" /></a>
+</p>
+
+</div>
+<!-- EDIT272 SECTION "Fertility index and slope of the growth in girth." [1440-2566] -->
+<h2 class="sectionedit273" id="standards">Standards</h2>
+<div class="level2">
+
+<p>
+Standards trees are individualized on the hectare basis and represent a number of trees proportional to the total area of ​​the plot.
+</p>
+
+</div>
+
+<h4 id="surface_plot_in_ha_001_50">Surface plot in Ha {0.01, 50}</h4>
+<div class="level4">
+
+</div>
+
+<h4 id="relative_density_index_rdi_0_1">Relative density Index (RDI) {0, 1}</h4>
+<div class="level4">
+
+</div>
+
+<h4 id="mean_square_diameter_dg_10_40">mean square Diameter (Dg) {10, 40}</h4>
+<div class="level4">
+
+</div>
+<!-- EDIT273 SECTION "Standards" [2567-2855] -->
+<h2 class="sectionedit274" id="coppice">Coppice</h2>
+<div class="level2">
+
+<p>
+The Coppice is not individualized.
+</p>
+
+</div>
+
+<h4 id="basal_area_g_m2ha_0_20">Basal area (G) m2/ha {0, 20}</h4>
+<div class="level4">
+
+</div>
+<!-- EDIT274 SECTION "Coppice" [2856-] --></body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_fr.html>help_fr</a></br>
+
+<h1 class="sectionedit307" id="module_maddmodel">Module MaddModel</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT307 SECTION "Module MaddModel" [1-32] -->
+<h2 class="sectionedit308" id="auteur">Auteur</h2>
+<div class="level2">
+
+<p>
+François de Coligny (INRA), UMR AMAP, botAnique et bioinforMatique de l&#039;Architecture des Plantes, TA 40 / PS2 - Boulevard de la Lironde, 34398 Montpellier Cedex 5
+</p>
+
+</div>
+<!-- EDIT308 SECTION "Auteur" [33-217] -->
+<h2 class="sectionedit309" id="objectifs">Objectifs</h2>
+<div class="level2">
+
+<p>
+MaddModel est un module technique d&#039;exemple. Il est fourni avec Capsis pour aider à évaluer les possibilités de la plate-forme.
+</p>
+
+<p>
+<a href="media/help_fr/viewer3d-2.jpg" class="media" target="_blank" title="help_fr:viewer3d-2.jpg"><img src="media/help_fr/viewer3d-2.jpg" class="media" title="" alt="" /></a>
+</p>
+
+<p>
+Ce modèle spatialement explicite emprunte certaines équations empiriques du module Mountain de Benoît Courbaud pour calculer des incréments de diamètres et de hauteurs. Certaines propriétés ont été ajoutées au peuplement et aux arbres pour tester des options techniques. Ces propriétés pourront changer dans des versions futures.
+</p>
+
+</div>
+<!-- EDIT309 SECTION "Objectifs" [218-745] -->
+<h2 class="sectionedit310" id="description">Description</h2>
+<div class="level2">
+
+<p>
+MaddModel est un modèle individuel spatialement explicite (Modèle Arbre Dépendant des Distances). Les arbres sont caractérisés par leur espèce, position (x, y, z), hauteur, diamètre à 1.3m et âge. La croissance est modélisée au niveau arbre pour chaque individu. La régénération est modélisée au niveau du peuplement. La mortalité des arbres est stochastique.
+</p>
+
+<p>
+<strong>Entrées</strong>
+</p>
+
+<p>
+MaddModel utilise des fichiers d&#039;inventaires avec les caractéristiques de chaque arbre :
+id, position (noyau ou non), x, y, z, année, h (m), dbh (cm), age.
+</p>
+
+<p>
+Exemple d&#039;inventaire avec 2 arbres : 
+</p>
+<div class="table sectionedit311"><table class="inline">
+	<tr class="row0">
+		<td class="col0">1 </td><td class="col1 rightalign">   N </td><td class="col2 centeralign">   0.1  </td><td class="col3 centeralign">  36   </td><td class="col4 rightalign">   0 </td><td class="col5 rightalign">  2000 </td><td class="col6 rightalign">   18 </td><td class="col7 centeralign">   25  </td><td class="col8 rightalign">  92 </td>
+	</tr>
+	<tr class="row1">
+		<td class="col0">2 </td><td class="col1 rightalign">   N </td><td class="col2 centeralign">   2.2  </td><td class="col3 rightalign">  49.1 </td><td class="col4 rightalign">   0 </td><td class="col5 rightalign">  2000 </td><td class="col6 rightalign">   18 </td><td class="col7 centeralign">   25  </td><td class="col8 rightalign">  92 </td>
+	</tr>
+</table></div>
+<!-- EDIT311 TABLE [1361-1486] -->
+<p>
+<strong>Sorties</strong>
+</p>
+
+<p>
+Des Visus peuvent être utilisés pour examiner l&#039;évolution des caractéristiques du peuplement (Visu simple, Visu texte, Explorateur, Inspecteur de structures de données…). Des graphiques peuvent être utilisés pour contrôler et comparer les différents états des peuplements ou pour surveiler l&#039;évolution de certaines variables au cours du temps (surface terrière, diamètre de l&#039;arbre moyen, nombre d&#039;arbres par classe de diamètre ou par espèce…).
+</p>
+
+</div>
+<!-- EDIT310 SECTION "Description" [746-] --></body>
+</html>

@@ -1122,7 +1122,7 @@ class Inventory(object):
             side = 'western'
 
         # get relative path to this module
-        this_dir = os.path.dirname(__file__)
+        this_dir = os.path.dirname(os.path.abspath(__file__))
 
         # load species crosswalk database
         crosswalk = cPickle.load(open(this_dir + '/data/species_crosswalk.p', 'rb'))
