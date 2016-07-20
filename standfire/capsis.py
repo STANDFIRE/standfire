@@ -153,7 +153,7 @@ class RunConfig(object):
 
         x = self.params['sceneSizeX']
         y = self.params['sceneSizeY']
-        self.params['xOffset'] = x - (64 + ((y - 64)/2))
+        self.params['xOffset'] = x - (64 + int((y - 64)/2.0)))
 
     def _set_y_offset(self):
         """
