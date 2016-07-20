@@ -1,1 +1,4 @@
 *.pyc
+
+# ignore capsis source directory
+standfire/bin/capsis/src/
