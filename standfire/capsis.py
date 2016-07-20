@@ -161,3 +161,34 @@ class RunConfig(object):
         """
 
         self.params['yOffset'] = int((self.params['sceneSizeY'] - 64)/2.0)
+
+    def _set_block_verts(self):
+        """
+        Calculates verticies for the 5 surface fuel block in the FDS domain
+
+        |----------------------|
+        |           | b3  |    |
+        |           -------    |
+        |   b2      |     | b4 |
+        |           |  b1 |    |
+        |           -------    |
+        |           | b5  |    |
+        |----------------------|
+        """
+
+        x = self.params['sceneSizeX']
+        y = self.params['sceneSizeY']
+        xoff = self.params['xOffset']
+        yoff = self.params['yOffset']
+
+        b1 = [[xoff, yoff], [xoff+64, yoff], [xoff+64, yoff+64], [xoff, yoff+64]]
+        b2 = [[0, 0], [xoff, 0], [xoff, y], [0, y]]
+        b3 = [[xoff, y-yoff-64], [xoff+64, y-yoff-64], [xoff+64, y], [xoff, y]]
+        b4 = [[xoff+64, 0], [x, 0], [x, y], [xoff+64, y]]
+        b5 = [[xoff, 0], [xoff+64, 0], [xoff+64, yoff], [xoff, yoff]]
+
+        self.params['srf_blocks'][1] = b1
+        self.params['srf_blocks'][2] = b2
+        self.params['srf_blocks'][3] = b3
+        self.params['srf_blocks'][4] = b4
+        self.params['srf_blocks'][5] = b5
