@@ -3,31 +3,34 @@ Capsis controller
 """
 
 import os
-
+from shutil import copyfile, rmtree
+from wfds import GenerateBinaryGrid
+import subprocess
+import platform
 
 class RunConfig(object):
     """
     """
 
-    def __init__(self):
+    def __init__(self, run_directory):
         """
         Constructor
         """
 
+        self.run_directory = run_directory
+
         this_dir = os.path.dirname(os.path.abspath(__file__))
 
-        with open(this_dir + '/data/capsis/input_template.txt', 'r') as f:
-            lines = f.read()
-
         # default parameters
-        self.params = {'path': '',
-                       'speciesFile': this_dir + '/data/capsis/speciesFiles.txt',
+        self.params = {'path': run_directory,
+                       'speciesFile': '/speciesFile.txt',
                        'svsBaseFile': '',
-                       'additionalProperties': this_dir + '/data/capsis/additionalProperties.txt',
+                       'additionalProperties': '/additionalProperties.txt',
                        'sceneOriginX': 0.0,
                        'sceneOriginY': 0.0,
                        'sceneSizeX': 160,
                        'sceneSizeY': 90,
+                       'sceneSizeZ': 100,
                        'show3d': 'false',
                        'extend': 'true',
                        'xOffset': 83.0,
@@ -37,7 +40,7 @@ class RunConfig(object):
                        'respaceDistance': 0.0,
                        'prune': 'false',
                        'pruneHeight': 0.0,
-                       'format': 64,
+                       'format': 86,
                        'litter': 'true',
                        'leaveLive': 'true',
                        'leaveDead': 'true',
@@ -47,10 +50,11 @@ class RunConfig(object):
                        'twig2Dead': 'false',
                        'twig3Live': 'false',
                        'twig3Dead': 'false',
-                       'canopyGeom': 'Rectangle',
-                       'bdBin': 0.01,
+                       'canopyGeom': 'RECTANGLE',
+                       'bdBin': 0.1,
                        'firstGridFile': 'grid.xyz',
-                       'gridNumber': 1,
+                       'gridNumber': 5,
+                       'gridResolution': 1.0,
                        'vegetation_cdrag': 0.5,
                        'vegetation_char_fraction': 0.2,
                        'emissivity': 0.99,
@@ -70,7 +74,7 @@ class RunConfig(object):
                                       4: [[0,0],[0,0],[0,0],[0,0]],
                                       5: [[0,0],[0,0],[0,0],[0,0]]}}
 
-        self.template = lines.format(d=self.params)
+        self.set_path = run_directory
 
     def set_path(self, path):
         """
@@ -121,9 +125,10 @@ class RunConfig(object):
         else:
             self.params['sceneSizeX'] = x_size
 
-        # update offset
+        # update offset and block verts
         self._set_x_offset()
         self._set_y_offset()
+        self._set_block_verts()
 
     def set_y_size(self, y_size):
         """
@@ -142,9 +147,23 @@ class RunConfig(object):
         else:
             self.params['sceneSizeY'] = y_size
 
-        # update offset
+        # update offset and block verts
         self._set_x_offset()
         self._set_y_offset()
+        self._set_block_verts()
+
+    def set_z_size(self, z_size):
+        """
+        Sets scene z dimension
+
+        :param z_size: size of scene in the z domain (meters)
+        :type z_size: integer
+
+        .. note:: `z_size` must be greater than or equal to tallest tree in domain
+
+        """
+
+        self.params['sceneSizeZ'] = z_size
 
     def _set_x_offset(self):
         """
@@ -153,7 +172,7 @@ class RunConfig(object):
 
         x = self.params['sceneSizeX']
         y = self.params['sceneSizeY']
-        self.params['xOffset'] = x - (64 + int((y - 64)/2.0)))
+        self.params['xOffset'] = x - (64 + int((y - 64)/2.0))
 
     def _set_y_offset(self):
         """
@@ -183,7 +202,7 @@ class RunConfig(object):
 
         b1 = [[xoff, yoff], [xoff+64, yoff], [xoff+64, yoff+64], [xoff, yoff+64]]
         b2 = [[0, 0], [xoff, 0], [xoff, y], [0, y]]
-        b3 = [[xoff, y-yoff-64], [xoff+64, y-yoff-64], [xoff+64, y], [xoff, y]]
+        b3 = [[xoff, yoff+64], [xoff+64, yoff+64], [xoff+64, y], [xoff, y]]
         b4 = [[xoff+64, 0], [x, 0], [x, y], [xoff+64, y]]
         b5 = [[xoff, 0], [xoff+64, 0], [xoff+64, yoff], [xoff, yoff]]
 
@@ -192,3 +211,70 @@ class RunConfig(object):
         self.params['srf_blocks'][3] = b3
         self.params['srf_blocks'][4] = b4
         self.params['srf_blocks'][5] = b5
+
+
+    def save_config(self):
+        """
+        """
+
+        this_dir = os.path.dirname(os.path.abspath(__file__))
+
+        with open(this_dir + '/data/capsis/input_template.txt', 'r') as f:
+            input_params = f.read()
+
+        with open(this_dir + '/data/capsis/additionalProperties_template.txt', 'r') as f:
+            properties = f.read()
+
+        # copy species file from standfire directory to capsis run directory
+        copyfile(this_dir + '/data/capsis/speciesFile.txt', self.run_directory + '/speciesFile.txt')
+
+        input_params = input_params.format(d=self.params)
+        properties = properties.format(d=self.params)
+
+        with open(self.run_directory + '/capsis_run_file.txt', 'w') as f:
+            f.write(input_params)
+
+        with open(self.run_directory + '/additionalProperties.txt', 'w') as f:
+            f.write(properties)
+
+        with open(self.run_directory + '/' + self.params['svsBaseFile'] + '_scalars.csv', 'w') as f:
+            f.write('"shrubwt", "herbwt", "litter", "duff"')
+
+        if os.path.isdir(self.run_directory + '/output/'):
+            rmtree(self.run_directory + '/output')
+            os.mkdir(self.run_directory + '/output/')
+        else:
+            os.mkdir(self.run_directory + '/output/')
+
+        # generate binary grid
+        binGrid = GenerateBinaryGrid(self.params['sceneSizeX'],
+                                     self.params['sceneSizeY'],
+                                     self.params['sceneSizeZ'],
+                                     self.params['gridResolution'],
+                                     self.params['gridNumber'],
+                                     self.run_directory + '/grid.txt')
+
+class Execute(object):
+    """
+    """
+
+    def __init__(self, path_to_run_file):
+
+        self.capsis_dir = os.path.dirname(os.path.abspath(__file__)) + '/bin/capsis/'
+
+        if platform.system().lower() == 'linux':
+            self._exec_capsis_linux(path_to_run_file)
+        if platform.system().lower() == 'windows':
+            self._exec_capsis_win(path_to_run_file)
+
+    def _exec_capsis_linux(self, path_to_run_file):
+        """
+        """
+
+        subprocess.call(['sh', self.capsis_dir + '/capsis.sh', '-p', 'script','standfire.myscripts.SFScript', path_to_run_file])
+
+    def _exec_capsis_win(self, path_to_run_file):
+        """
+        """
+
+        subprocess.call([self.capsis_dir + '/capsis.bat', '-p', 'script','standfire.myscripts.SFScript', path_to_run_file])

@@ -1,0 +1,1381 @@
+/*
+ * Capsis 4 - Computer-Aided Projections of Strategies in Silviculture
+ *
+ * Copyright (C) 2001-2003  Francois de Coligny
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+package capsis.extension.standviewer;
+
+import capsis.util.methodprovider.*;
+
+import capsis.extension.*;
+import capsis.kernel.*;
+import capsis.gui.*;
+import capsis.util.*;
+import java.util.*;
+import java.io.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.border.*;
+
+/**
+ * SVTest is a cartography simple viewer for trees with coordinates. It
+ * draws the trees within the cells.
+ *
+ * @author F. de Coligny - june 2004
+ */
+public class SVTest extends StandViewer implements ActionListener, Drawer, Pilotable, UpdateSource {
+	public final static int BUTTON_SIZE = 23;
+
+	public final static int TREE_MODE = 1;
+	public final static int CELL_MODE = 2;
+	public final static int MANY_TREES_MODE = 3;
+	public final static int MANY_CELLS_MODE = 4;
+
+	private ExtensionManager extMan;
+
+    protected JComboBox selectionCombo;
+    protected Color cellSelectionColor;  // = selection color with some transparency
+
+ 	// fc - 21.11.2003
+	protected OVChooser ovChooser;
+	protected Collection selectedTrees;
+    protected Collection selectedCells;
+
+    protected Panel2D panel2D;
+
+	protected int labelCounter;		// for trees label drawing strategy
+	protected int labelFrequency;
+
+	//~ protected FilteringPanelSettings filtration;	// protected since 11.9.2002 - fc (for phd)
+	//~ protected JButton filteringButton;
+
+	protected SVTestSettings settings;
+	
+	private String[] statusSelection;	// not in settings (available keys change with steps)
+	//~ private StatusChooser statusChooser;
+	
+	protected GStand stand;
+	protected JButton settingsButton;
+	protected JButton helpButton;
+
+	protected JPanel mainPanel;
+	protected JPanel optionPanel;
+	protected JScrollPane scrollPane;
+
+	protected JScrollPane legend;		// use setLegend (JComponent) to add a legend
+
+	//~ protected double detailThreshold;	// threshold dbh in m.: bigger trees are detailed
+	protected double visibleThreshold;	// things under this user size should not be drawn (too small on screen)
+
+	protected String customTitle;
+
+	private Collection<UpdateListener> updateListeners;	// fc - 23.11.2007
+	protected Collection memoSelection;						// fc - 23.11.2007
+
+	static {
+		Translator.addBundle("capsis.extension.standviewer.SVTest");
+	}
+
+
+	/**	Phantom constructor.
+	*	Only to ask for extension properties (authorName, version...).
+	*/
+	public SVTest () {}
+
+
+	/**	Official constructor. It uses the standard Extension starter.
+	*/
+	public SVTest (ExtensionStarter s) {
+		super (s);
+System.out.println ("SVTest 1.");
+		retrieveSettings ();
+System.out.println ("SVTest 2.");
+
+        extMan = ExtensionManager.getInstance ();
+		stand = step.getStand ();	// step is defined from sb by superclass
+
+		//~ filtration = new FilteringPanelSettings ();
+		//~ initFiltrationExtremes ();
+
+		double x, y, width, height;
+		Rectangle.Double r2 = null;
+		if (stand.hasPlot ()) {
+			GPlot plot = stand.getPlot ();
+			r2 = (Rectangle.Double) plot.getShape ().getBounds2D ();
+		} else {
+			x = stand.getOrigin ().x;
+			y = stand.getOrigin ().y;
+			width = stand.getWidth ();
+			height = stand.getHeight ();
+			r2 = new Rectangle.Double (x, y, width, height);
+		}
+System.out.println ("SVTest 3.");
+
+		panel2D = new Panel2D (this,
+				r2,
+				getPanel2DXMargin (),
+				getPanel2DYMargin ());
+System.out.println ("SVTest 4.");
+		panel2D.setSettings ((Panel2DSettings) settings.panel2DSettings.clone ());
+System.out.println ("SVTest 5.");
+
+		optionPanel = new JPanel ();
+System.out.println ("SVTest 6.");
+
+		createUI ();
+System.out.println ("SVTest 7.");
+	}
+
+
+	/**	Extension dynamic compatibility mechanism.
+	*	This matchwith method checks if the extension can deal (i.e. is compatible) with the referent.
+	*/
+	public boolean matchWith (Object referent) {
+		try {
+			if (!(referent instanceof GModel)) {return false;}
+			GModel m = (GModel) referent;
+			GStand s = ((Step) m.getScenario ().getRoot ()).getStand ();
+			
+			if (!(s instanceof GTCStand)) {return false;}	// for statusMap - fc - 22.4.2004
+			GTCStand gtcstand = (GTCStand) s;
+			if (gtcstand.isEmpty ()) {return true;}	// fc - 26.10.2001 - bc bare soil problem
+			if (!(gtcstand.getFirstTree () instanceof Spatialized)) {return false;}	// fc - 17.2.2003
+			
+			if (!(s.getPlot () instanceof RectangularPlot)) {return false;}
+			
+			//~ if (!(s instanceof TreeCollection)) {return false;}
+			//~ TreeCollection tc = (TreeCollection) s;
+			//~ if (tc.isEmpty ()) {return true;}	// fc - 26.10.2001 - bc bare soil problem
+			//~ if (!(tc.getFirstTree () instanceof Spatialized)) {return false;}	// fc - 17.2.2003
+
+		} catch (Exception e) {
+			Log.println (Log.ERROR, "SVTest.matchWith ()", "Error in matchWith () (returned false)", e);
+			return false;
+		}
+
+		return true;
+	}
+
+	// fc - 23.11.2007 - UpdateSource
+	public void addUpdateListener (UpdateListener l) {
+		if (updateListeners == null) {updateListeners = new ArrayList<UpdateListener> ();}
+		updateListeners.add (l);
+	}
+	public void removeUpdateListener (UpdateListener l) {
+		if (updateListeners == null) {return;}
+		updateListeners.remove (l);
+	}
+	public void fireUpdateEvent (UpdateEvent e) {
+		if (updateListeners == null) {return;}
+		for (UpdateListener l : updateListeners) {
+			l.sourceUpdated (e);
+		}
+	}
+	public Collection getSelection () {
+		return memoSelection;
+	}
+	// fc - 23.11.2007 - UpdateSource
+	
+
+	// Technical
+	//
+	//~ private void initFiltrationExtremes () {
+		//~ // Get min and max dbh
+		//~ double userMin = Double.MAX_VALUE;
+		//~ double userMax = Double.MIN_VALUE;
+		//~ for (Iterator i = ((TreeCollection) stand).getTrees ().iterator (); i.hasNext ();) {
+			//~ GMaddTree t = (GMaddTree) i.next ();
+			//~ double dbh = t.getDbh ();	// cm.
+			//~ userMin = Math.min (userMin, dbh);
+			//~ userMax = Math.max (userMax, dbh);
+		//~ }
+		//~ filtration.init ((int) userMin, (int) (userMax+1));
+	//~ }
+
+
+	/**	Called before whole trees drawing process.
+	*	May be redefined in subclasses.
+	*/
+	public Object[] preProcessTrees (Object[] trees, Rectangle.Double r) {
+		// Sort the trees in height order
+		Arrays.sort (trees, new GTreeHeightComparator ());
+
+		return trees;
+	}
+
+
+	/**	Method to draw a GCell within this viewer.
+	*	Only rectangle r is visible (user coordinates) -> do not draw if outside.
+	*	May be redefined in subclasses.
+	*/
+	public void drawCell (Graphics2D g2, GCell cell, Rectangle.Double r) {
+		g2.setColor (getCellColor ());
+
+		Shape sh = cell.getShape ();
+		Rectangle2D bBox = sh.getBounds2D ();
+		if (r.intersects (bBox)) {g2.draw (sh);}
+	}
+
+
+    // Cell selection : change color ("red")
+    // Should not be redefined
+    // fc - 28.5.2003
+    //
+	protected void selectCellIfNeeded (Graphics2D g2, GCell cell, Rectangle.Double r) {
+		if (selectedCells == null || !selectedCells.contains (cell)) {return;}
+
+		Shape sh = cell.getShape ();
+		Rectangle2D bBox = sh.getBounds2D ();
+		if (r.intersects (bBox)) {
+            Color memo = g2.getColor ();
+            g2.setColor (getCellSelectionColor ());
+            g2.fill (sh);
+            g2.setColor (memo);
+        }
+	}
+
+
+	/**	Method to draw a GMaddTree within this viewer.
+	*	Only rectangle r is visible (user coordinates) -> do not draw if outside.
+	*	May be redefined in subclasses.
+	*	Tree label is managed in draw () method, deals with max labels number for performance.
+	*/
+	public void drawTree (Graphics2D g2, GMaddTree tree, Rectangle.Double r) {
+		// 1. Marked trees are considered dead by generic tools -> don't draw
+		if (tree.isMarked ()) {return;}
+
+		// 2. Tree location
+		double x = tree.getX ();
+		double y = tree.getY ();
+		double width = tree.getDbh ()/100;	// in m. (we draw in Graphics in m.)
+
+		// 3. A detailled view is requested
+		//
+		if (settings.showDiameters) {
+
+			// 3.1 In some cases, a tree crown can be drawn
+			//
+			if (tree instanceof SimpleCrownDescription) {
+				SimpleCrownDescription data = (SimpleCrownDescription) tree;
+				int crownType = data.getCrownType ();
+				double crownBaseHeight = data.getCrownBaseHeight ();
+				double crownRadius = data.getCrownRadius ();
+				Color crownColor = data.getCrownColor ();
+				if (crownColor == null) {crownColor = Color.GREEN;}
+				float transparency = data.getTransparency ();
+
+				double d = crownRadius*2;	// crown diameter
+
+				// 3.1.1 Crown diameter is less than 1 pixel : draw 1 pixel
+				//
+				if (d <= visibleThreshold) {
+					if (r.contains (new java.awt.geom.Point2D.Double (x, y))) {
+						Rectangle2D.Double p = new Rectangle2D.Double
+								(x, y, visibleThreshold, visibleThreshold);	// fc - 15.12.2003 (bug by PhD)
+						g2.setColor (crownColor);
+						g2.fill (p);
+					}
+
+				// 3.1.2 Bigger than 1 pixel : fill a circle
+				//
+				} else {
+					Shape sh = new Ellipse2D.Double (x-crownRadius, y-crownRadius, d, d);
+					Rectangle2D bBox = sh.getBounds2D ();
+					if (r.intersects (bBox)) {
+						Rectangle ir = sh.getBounds();
+						g2.setColor (crownColor);
+						g2.fill (sh);
+						g2.setColor (crownColor.darker());
+						g2.draw (sh);
+					}
+				}
+
+			// 3.2 Detailled requested and no crown : draw a point proportional to diameter, min 1 pixel
+			//
+			} else {
+				if (width <= visibleThreshold) {	// min 1 pixel
+					if (r.contains (new java.awt.geom.Point2D.Double (x, y))) {
+						Rectangle2D.Double p = new Rectangle2D.Double
+								(x, y, visibleThreshold, visibleThreshold);	// fc - 15.12.2003 (bug by PhD)
+						g2.setColor (getTreeColor ());
+						g2.fill (p);
+
+					}
+				} else {		// ellipse for diameter
+					Shape sh = new Ellipse2D.Double (x-width/2, y-width/2, width, width);
+					Rectangle2D bBox = sh.getBounds2D ();
+					if (r.intersects (bBox)) {
+						g2.setColor (getTreeColor ());
+						g2.fill (sh);
+					}
+				}
+			}
+
+		// 4. No details requested : a single point will be drawn
+		//
+		} else {
+			if (r.contains (new java.awt.geom.Point2D.Double (x, y))) {
+				Rectangle2D.Double p = new Rectangle2D.Double
+						(x, y, visibleThreshold, visibleThreshold);	// fc - 15.12.2003 (bug by PhD)
+				g2.setColor (Color.BLACK);
+				g2.fill (p);
+
+			}
+		}
+	}
+
+
+    // Tree selection : change color ("red")
+    // Should not be redefined
+    // fc - 28.5.2003
+    //
+	protected void selectTreeIfNeeded (Graphics2D g2, GMaddTree tree, Rectangle.Double r) {
+		// 1. Marked trees are considered dead by generic tools -> ignore
+		if (tree.isMarked ()) {return;}
+
+		if (selectedTrees == null || !selectedTrees.contains (tree)) {return;}
+
+		// 2. Tree location
+		double x = tree.getX ();
+		double y = tree.getY ();
+
+		// fc - 22.12.2003
+		if (r.contains (new java.awt.geom.Point2D.Double (x, y))) {
+			drawSelectionMark (g2, panel2D, x, y);
+		}
+
+	}
+
+	// Draw a selection mark arround target point
+	//
+    protected void drawSelectionMark (Graphics2D g2, Panel2D panel2D, double x, double y) {
+        double w = panel2D.getUserWidth (2);  // 2 pixels
+        double h = panel2D.getUserHeight (2);  // 2 pixels
+
+        double wDec = panel2D.getUserWidth (5);
+        double hDec = panel2D.getUserHeight (5);
+
+        double xLeft = x-wDec;
+        double xRight = x+wDec;
+        double yTop = y+hDec;
+        double yBottom = y-hDec;
+
+        Color memo = g2.getColor ();
+        g2.setColor (settings.selectionColor);
+
+        g2.draw (new Line2D.Double (xLeft, yTop, xLeft, yTop-h));
+        g2.draw (new Line2D.Double (xLeft, yTop, xLeft+w, yTop));
+			g2.draw (new Line2D.Double (xLeft, yTop-h, xLeft+w, yTop));
+
+		g2.draw (new Line2D.Double (xRight, yTop, xRight-w, yTop));
+        g2.draw (new Line2D.Double (xRight, yTop, xRight, yTop-h));
+			g2.draw (new Line2D.Double (xRight-w, yTop, xRight, yTop-h));
+
+        g2.draw (new Line2D.Double (xRight, yBottom, xRight, yBottom+h));
+        g2.draw (new Line2D.Double (xRight, yBottom, xRight-w, yBottom));
+			g2.draw (new Line2D.Double (xRight, yBottom+h, xRight-w, yBottom));
+
+		g2.draw (new Line2D.Double (xLeft, yBottom, xLeft+w, yBottom));
+        g2.draw (new Line2D.Double (xLeft, yBottom, xLeft, yBottom+h));
+			g2.draw (new Line2D.Double (xLeft+w, yBottom, xLeft, yBottom+h));
+
+        g2.setColor (memo);
+    }
+
+
+	/**	From Pilotable interface. A tool bar for SVTest.
+	*/
+	public JComponent getPilot () {
+		ImageIcon icon = new IconLoader ().getIcon ("Properties16.gif");
+		settingsButton = new JButton (icon);
+		Tools.setSizeExactly (settingsButton, BUTTON_SIZE, BUTTON_SIZE);
+		settingsButton.setToolTipText (Translator.swap ("SVTest.settings"));
+		settingsButton.addActionListener (this);
+
+		//~ icon = new IconLoader ().getIcon ("ZoomOut16.gif");
+		//~ filteringButton = new JButton (icon);
+		//~ Tools.setSizeExactly (filteringButton, BUTTON_SIZE, BUTTON_SIZE);
+		//~ filteringButton.setToolTipText (Translator.swap ("Shared.filtering"));
+		//~ filteringButton.addActionListener (this);
+
+		// Define what objects are candidate for selection by OVChooser
+		// fc - 21.11.2003
+		//
+		Collection candidateObjects = new ArrayList (((TreeCollection) stand).getTrees ());	// no status here - fc - 22.4.2004
+		if (stand.hasPlot ()) {candidateObjects.addAll (stand.getPlot ().getCells ());}
+		ovChooser = new OVChooser (
+				candidateObjects, false, false, false, this);
+
+		icon = new IconLoader ().getIcon ("Help16.gif");
+		helpButton = new JButton (icon);
+		Tools.setSizeExactly (helpButton, BUTTON_SIZE, BUTTON_SIZE);
+		helpButton.setToolTipText (Translator.swap ("Shared.help"));
+		helpButton.addActionListener (this);
+
+		JToolBar toolbar = new JToolBar ();
+		//~ toolbar.add (settingsButton);
+		//~ toolbar.add (ovChooser);
+		toolbar.add (helpButton);
+		toolbar.setVisible (true);
+
+		return toolbar;
+	}
+
+
+	/**	From Drawer interface.
+	*	This method draws in the Panel2D each time the latter must be
+	*	repainted.
+	*	The given Rectangle is the sub-part (zoom) of the stand to draw in user
+	*	coordinates (i.e. meters...). It can be used in preprocesses to avoid
+	*	drawing invisible trees or cells.
+	*	<PRE>
+	*	1. draw the cells
+	*	2. restrict the tree set to a given grouper if needed
+	*	3. draw the trees, sometimes with label
+	*	</PRE>
+	*	The drawCell () and drawTree () methods may be redefined in subclasses
+	*	to draw differently.
+	*/
+	public void draw (Graphics g, Rectangle.Double r) {
+
+		Graphics2D g2 = (Graphics2D) g;
+
+		// 1. Cast settings for ease
+		SVTestSettings set = (SVTestSettings) settings;
+
+		// 2. Choose a pixel detailThreshold, compute it in meters with current scale
+		// if dbh in m. >= detailThreshold -> detailled level is reached
+		//~ double pixelThresholdDbh = filtration.detailValue;
+		//~ detailThreshold = pixelThresholdDbh / panel2D.getCurrentScale ().x;	// in meters
+		//~ if (!filtration.isDetailSet) {
+			//~ detailThreshold = 0;	// everything detailled
+		//~ }
+		visibleThreshold = 1.1 / panel2D.getCurrentScale ().x;	// 1 pixel in in meters
+
+		// 3. Consider optional status and grouper
+		//
+		GTCStand gtcstand = (GTCStand) stand;
+		Collection treesInStatus = gtcstand.getTrees ();
+		if (statusSelection != null) {		// fc - 23.4.2004
+			treesInStatus = gtcstand.getTrees (statusSelection);
+		}
+		//
+		//~ Collection auxTrees = Group.whichCollection (stand);	// fc - 5.4.2004
+		HashSet treesInGroup = null;
+		if (set.grouperMode) {
+			String name = set.grouperName;
+			GrouperManager gm = GrouperManager.getInstance ();
+			Grouper gr = gm.getGrouper (name);	// return null if not found
+			Collection aux = gr.apply (treesInStatus, name.toLowerCase ().startsWith ("not "));
+			treesInGroup = new HashSet (aux);
+		} else {
+			treesInGroup = new HashSet (treesInStatus);
+		}
+		
+		// 4. Deal with cells
+		Collection candidateTrees = new ArrayList ();
+		if (stand.hasPlot ()) {
+			GPlot plot = stand.getPlot ();
+			Collection level1 = plot.getCellsAtLevel (1);
+
+			// 4.2 Draw the cells, memorize their trees
+			for (Iterator i = level1.iterator (); i.hasNext ();) {
+				processCell ((GCell) i.next (), candidateTrees, g2, r);
+			}
+			// Caution: cells only contain alive trees !
+			if (statusSelection != null 
+					&& statusSelection.length == 1 
+					&& statusSelection[0].equals ("alive")) {
+				candidateTrees.retainAll (treesInGroup);
+			} else {
+				candidateTrees = treesInGroup;
+			}
+		} else {
+			candidateTrees = treesInGroup;
+		}
+
+//~ System.out.println ("canditateTrees="+candidateTrees.size ());
+
+		// 5.1 Give the possibility to subclasses to make something at the beginning (sorting...)
+		Object[] trees = candidateTrees.toArray ();
+		trees = preProcessTrees (trees, r);
+
+		// 5.2 Prepare label drawing strategy
+		if (settings.maxLabelNumber <= 0) {
+			labelCounter = 1;
+			labelFrequency = Integer.MAX_VALUE;
+		} else {
+			labelCounter = 0;
+			labelFrequency = Math.max (1, (int) trees.length / Math.max (1, settings.maxLabelNumber));
+		}
+
+		// 5.3 Draw the trees
+		for (int i = 0; i < trees.length; i++) {
+			GMaddTree t = (GMaddTree) trees[i];
+			if (t.isMarked ()) {continue;}	// fc - 5.1.2004
+
+			double dbh = t.getDbh ();
+
+			// Tree is not in considered dbh interval -> don't draw
+			//~ if (filtration.isMinimumSet && dbh < filtration.minimumValue) {continue;}
+			//~ if (filtration.isMaximumSet && dbh > filtration.maximumValue) {continue;}
+
+			drawTree (g2, t, r);
+            selectTreeIfNeeded (g2, t, r);    // fc - 28.5.2003
+
+			// 5.4 May draw tree label according to frequency - fc - 22.12.2003
+			// showSomeLabels () : if return false, no labels this way
+			// settings.showLabels : user asks for labels
+			//
+			float x = (float)t.getX ();
+			float y = (float)t.getY ();
+			if (showSomeLabels () && settings.showLabels
+					&& r.contains (new Point.Double (x, y))) {
+				drawLabel (g2, String.valueOf (t.getId ()), x, y);
+			}
+		}
+
+		// 6. Optionally draw more
+		drawMore (g2, r, stand);	// fc + bc - 6.2.2003
+
+		// 7. Ensure title is ok
+		defineTitle ();
+
+		// 8. Relative to filtering (see FilteringPanel)
+		updateToolTipText ();
+
+	}
+
+
+	// Draws a label for the given tree
+	// Implements a labels restriction strategy (see Draw (), very long to draw if numerous)
+	// fc - 22.12.2003
+	//
+ 	protected void drawLabel (Graphics2D g2, String label, float x, float y) {
+		if (labelCounter % labelFrequency == 0) {
+			labelCounter = 0;
+			g2.setColor (getLabelColor ());
+			g2.drawString (label, x, y);
+		}
+		labelCounter++;
+	}
+
+
+	// Process a cell and its daughters, memorize the trees in the drawn cells for further painting.
+	// fc - 17.2.2003
+	//
+ 	protected void processCell (GCell cell, Collection candidateTrees,
+			Graphics2D g2, Rectangle.Double r) {
+
+		// Stop condition : cell not visible
+		Rectangle2D bBox = cell.getShape ().getBounds2D ();
+		if (!r.intersects (bBox)) {return;}		// sub cells are not considered
+
+		// Draw cell (may be redefined in subclass)
+		drawCell (g2, cell, r);
+        selectCellIfNeeded (g2, cell, r);  // fc - 28.5.2003 - may change cell color
+
+		// If cell contains trees, memorize them
+		if (cell.isTreeLevel () && !cell.isEmpty ()) {
+			candidateTrees.addAll (cell.getTrees ());
+		}
+
+		// If daughter cells, process them
+		if (cell.isMother ()) {
+			for (Iterator i = cell.getCells ().iterator (); i.hasNext ();) {
+				processCell ((GCell) i.next (), candidateTrees,
+						g2, r);	// recursive descent on cell daugthers
+			}
+		}
+	}
+
+
+	/**	From Drawer interface.
+	*	We may receive (from Panel2D) a selection rectangle (in user space i.e. meters)
+	*	and return a JPanel containing information about the objects (trees) inside
+	*	the rectangle.
+	*	If no objects are found in the rectangle, return null.
+	*	fc - 21.11.2003 - use OVChooser
+	*/
+	public JPanel select (Rectangle.Double r, boolean ctrlIsDown) {
+		
+		double x = r.getCenterX ();
+		double y = r.getCenterY ();
+		
+		RectangularPlot plot = (RectangularPlot) stand.getPlot ();
+		
+		RoundMask m = new RoundMask (plot, 2, true);
+		selectedTrees = new HashSet (m.getTreesNear (x, y));
+		
+		memoSelection = selectedTrees;
+		
+		/*
+		// 1. If grouper is set, restrict stand to given grouper
+		//
+		GTCStand gtcstand = (GTCStand) stand;
+		Collection treesInStatus = gtcstand.getTrees ();
+		if (statusSelection != null) {
+			treesInStatus = gtcstand.getTrees (statusSelection);
+		}
+		//
+		Collection treesInGroup = treesInStatus;	// fc - 5.4.2004
+		//~ Collection treesInGroup = Group.whichCollection (stand);	// fc - 5.4.2004
+		if (settings.grouperMode) {
+			String name = settings.grouperName;
+			GrouperManager gm = GrouperManager.getInstance ();
+			Grouper gr = gm.getGrouper (name);	// return null if not found
+			treesInGroup = gr.apply (treesInGroup, name.toLowerCase ().startsWith ("not "));
+		}
+		
+ 		// 2. Search current selection : trees and cells (of lowest level) in
+		// the selection rectangle
+		//
+		Collection currentSelection = new ArrayList ();
+
+		// 2.1 Manage Ctrl-selection : adding selection to existing selection
+		if (!ctrlIsDown) {
+			selectedTrees = new HashSet();
+			selectedCells = new HashSet();
+		}
+
+		// 2.2 Which trees are selected in user selection rectangle ?
+		for (Iterator i = treesInGroup.iterator (); i.hasNext ();) {
+			GMaddTree t = (GMaddTree) i.next ();
+			if (t.isMarked ()) {continue;}	// fc - 5.1.2004
+			double dbh = t.getDbh ();
+
+			Point.Double p = new Point.Double (t.getX (), t.getY ());
+			if (r.contains (p)) {
+				if (selectedTrees.contains (t)) {
+					selectedTrees.remove (t);  // fc - 3.6.2003
+				} else {
+					selectedTrees.add (t);
+				}
+			}
+		}
+		*/
+		
+		/*
+		if (stand.hasPlot ()) {
+			// 2.3 Which cells are selected in user selection rectangle ?
+			for (Iterator i = stand.getPlot ().getCells ().iterator (); i.hasNext ();) {
+				GCell c = (GCell) i.next ();
+				
+				Shape cellShape = c.getShape ();
+				if (cellShape.intersects (r)) {
+					if (selectedCells.contains (c)) {
+					selectedCells.remove (c);  // fc - 3.6.2003
+					} else {
+						selectedCells.add (c);
+					}
+				}
+			}
+			
+			// 2.4 Restrict selection to one single level if needed (the "lowest" one)
+			int selectedLevel = 0;
+			for (Iterator i = selectedCells.iterator (); i.hasNext ();) {
+				GCell c = (GCell) i.next ();
+				selectedLevel = Math.max (selectedLevel, c.getLevel ());  // HERE : Manage cell levels
+			}
+			for (Iterator i = selectedCells.iterator (); i.hasNext ();) {
+				GCell c = (GCell) i.next ();
+				if (c.getLevel () != selectedLevel) {i.remove ();}
+			}
+		}
+		
+		// 2.5 Current selection collection mixes everything, OVChooser will show
+		// what it can according to selection mode (current ObjectViewer) capabilities
+		currentSelection.addAll (selectedTrees);
+		currentSelection.addAll (selectedCells);
+			//~ System.out.println ("=== currentSelection: "+currentSelection);
+			//~ System.out.println ("===");
+
+		// 2.5b Hook for subclasses : to add things which are in the rectangle,
+		// but not trees nor cells (landscape element, human landmark...)
+		selectMore (r, ctrlIsDown, currentSelection);
+		
+		// 2.6 Invoke OVChooser
+		JPanel panel = ovChooser.select (currentSelection);
+
+		// 2.7 Selected trees / cells will be enlighted
+		Object lastSelection = ovChooser.getLastSelection ();	// here: may be an Object or a Collection
+		Collection s = null;	// we need a collection. If not -> make one
+		if (lastSelection instanceof Collection) {
+			s = (Collection) lastSelection;
+		} else {
+			s = new ArrayList ();
+			s.add (lastSelection);
+		}
+		
+		// Rebuild current selected trees and cells from OVChooser lastSelection
+		selectedTrees = new HashSet ();  // HashSet : no dupplicates admitted
+		selectedCells = new HashSet ();
+		for (Iterator i = s.iterator (); i.hasNext ();) {
+		Object o = i.next ();
+			if (o instanceof GTree) {
+				selectedTrees.add (o);
+			} else if (o instanceof GCell) {
+				selectedCells.add (o);
+			} else {
+				Log.println (Log.INFO, "SVTest.select ()",
+				"SVTest: OVChooser selection should be a tree or a cell: "+o);
+			}
+		}
+		*/
+		
+		// Force panel repainting for selection enlighting
+		panel2D.reset ();
+		panel2D.repaint ();
+
+		// this is selection result (contains ObjectViewer)
+		//~ return panel;	// may be null if no selection
+		return null;	// may be null if no selection
+	}
+
+
+	/**	Subclasses can draw things after the cells and trees by redefining this method.
+	*/
+	protected void drawMore (Graphics2D g2,Rectangle.Double r, GStand s) {}	// fc - 26.11.2003 - added visible rectangle
+
+
+	/**	Subclasses can select things other then trees and cells :
+	*	add them to the currentSelection (which was prepared by select () :
+	*	already possibly contains trees and cells).
+	*	Note: do not alter currentSelection, just add things to it.
+	*/
+	protected void selectMore (Rectangle.Double r, boolean ctrlIsDown, Collection currentSelection) {}
+
+
+	/**	This viewer tries to show some tree labels, this can be desactivated
+	*	by redefining this method and return false.
+	*/
+	protected boolean showSomeLabels () {return true;}
+
+
+	/**	Retrieve the settings for this viewer as saved the last time they were
+	*	changed.
+	*/
+	protected void retrieveSettings () {
+		// Retrieve or create settings for the viewer
+		GSettings memoSettings = ExtensionManager.getSettings (this.getClass ());
+		if (memoSettings != null) {
+			settings = (SVTestSettings) memoSettings;	// cast from GSettings to Settings
+		} else {
+			settings = new SVTestSettings ();
+		}
+		cellSelectionColor = new Color (settings.selectionColor.getRed (),
+				settings.selectionColor.getGreen (), settings.selectionColor.getBlue (), 150);
+	}
+
+
+	/**	Needed (StandViewer superclass). Return StandViewer name.
+	*/
+	public String getName () {return Translator.swap ("SVTest");}
+
+
+	/**	From Extension interface.
+	*/
+	public String getVersion () {return VERSION;}
+	public static final String VERSION = "1.0";
+
+
+	/**	From Extension interface.
+	*/
+	public String getAuthor () {return "F. de Coligny";}
+
+
+	/**	From Extension interface.
+	*/
+	public String getDescription () {return Translator.swap ("SVTest.description");}
+
+
+	public Color getLabelColor () {return settings.labelColor;}	// use getSettings ()
+
+
+	public Color getTreeColor () {return settings.treeColor;}
+
+
+	public Color getCellColor () {return settings.cellColor;}
+
+
+	public Color getSelectionColor () {return settings.selectionColor;}
+
+
+	/**	Used for the settings and filtering buttons.
+	*/
+	public void actionPerformed (ActionEvent evt) {
+
+		SVTestSettings s = settings;
+
+		if (evt.getSource ().equals (settingsButton)) {
+			MainPanel mainPanel = new MainPanel ();
+			DUser dlg = new DUser (mainPanel);
+			if (dlg.isValidDialog ()) {
+
+				// 1. config for SVTest
+				s.showLabels = mainPanel.getCkShowLabels ().isSelected ();
+				s.maxLabelNumber = mainPanel.getMaxLabelNumber ();
+				s.showDiameters = mainPanel.getCkShowDiameters ().isSelected ();
+				s.labelColor = mainPanel.getNewLabelColor ();
+				s.treeColor = mainPanel.getNewTreeColor ();
+				s.cellColor = mainPanel.getNewCellColor ();
+				s.selectionColor = mainPanel.getNewSelectionColor ();
+				cellSelectionColor = new Color (s.selectionColor.getRed (),
+						s.selectionColor.getGreen (), s.selectionColor.getBlue (), 150);
+
+				s.grouperMode = mainPanel.getGrouperChooser ().isGrouperSelected ();	// fc - 30.4.2003
+				s.grouperNot = mainPanel.getGrouperChooser ().isGrouperNot ();	// fc - 21.4.2004
+				s.grouperName = mainPanel.getGrouperChooser ().getGrouperName ();
+
+				//~ statusChooser = mainPanel.getStatusChooser ();	// fc - 22.4.2004
+				statusSelection = mainPanel.getStatusChooser ().getSelection ();	// fc - 22.4.2004
+				
+				s.panel2DSettings = panel2D.getSettings ();
+
+				// 2. config for panel2D
+				panel2D.configure (mainPanel.getPanel2DConfigPanel ());
+
+				// 3. config for SVTest subclass
+				optionAction ();	// hook for subclasses
+
+				panel2D.invalidate ();
+			}
+			mainPanel.dispose ();
+			dlg.dispose ();
+			update ();
+
+		} else if (evt.getSource ().equals (helpButton)) {
+			Helper.helpFor (this);
+
+		//~ } else if (evt.getSource ().equals (filteringButton)) {
+
+			//~ FilteringPanel filteringPanel = new FilteringPanel (filtration);
+
+			//~ DUser2 dlg = new DUser2 (filteringPanel);
+
+			//~ filtration = filteringPanel.getSettings ();	// mandatory (updates values)
+			//~ panel2D.reset ();
+			//~ panel2D.repaint ();
+			//~ updateToolTipText ();
+
+			//~ filteringPanel.dispose ();
+			//~ dlg.dispose ();
+		}
+	}
+
+
+	/**	Creates a tool tip text on panel2D to inform user if some filtering is
+	*	currently active.
+	*/
+	protected void updateToolTipText () {
+		StringBuffer toolTipText = new StringBuffer ();
+
+		//~ if (filtration.isDetailSet) {
+			//~ toolTipText.append ("dDet=");
+			//~ toolTipText.append (filtration.detailValue);
+			//~ toolTipText.append ("p. ");
+		//~ }
+		//~ if (filtration.isMinimumSet) {
+			//~ toolTipText.append ("dMin=");
+			//~ toolTipText.append (filtration.minimumValue);
+			//~ toolTipText.append ("cm. ");
+		//~ }
+		//~ if (filtration.isMaximumSet) {
+			//~ toolTipText.append ("dMax=");
+			//~ toolTipText.append (filtration.maximumValue);
+			//~ toolTipText.append ("cm. ");
+		//~ }
+		//~ if (toolTipText.length () == 0) {
+			//~ toolTipText.append (Translator.swap ("Shared.noActiveFilters"));
+		//~ }
+
+		panel2D.setToolTipText (toolTipText.toString ());
+	}
+
+
+	/**	Called when ok on option panel, must be redefined by subclasses
+	*	which use optionPanel
+	*/
+	protected void optionAction () {
+		ExtensionManager.memoNewSettings (this.getClass (), settings);
+	}
+
+
+	/**	Update the viewer (for example, when changing step).
+	*/
+	public void update () {
+		super.update ();
+
+		stand = step.getStand ();
+		defineTitle ();
+		scrollPane.setViewportView (panel2D);	// panel2D might change size
+		panel2D.reset ();	// to disable buffered image and force redrawing
+		panel2D.repaint ();
+	}
+
+
+	/**	Refresh the GUI with another Step.
+	*/
+	public void update (StepButton sb) {
+		super.update (sb);
+		update ();
+	}
+
+
+	// Viewer title definition : reference to current step and considered group.
+	//
+	protected void defineTitle () {
+		try {
+			StringBuffer t = new StringBuffer ();
+			
+			// 1. Step reference
+			t.append (step.getScenario ().getName ());
+			t.append (".");
+			t.append (step.getName ());
+
+			// 1.1 Status : ask name considering stand under current step 
+			//	and current statusChooser selection (we may have changed 
+			//	steps since selection). Ex: (cut+windfall).
+			GTCStand gtcstand = (GTCStand) stand;	// stand under current step
+			String statusName = StatusChooser.getName (
+					gtcstand.getStatusMap (), statusSelection);
+			if (statusName != null && !statusName.equals ("")) {
+				t.append (statusName);	// ex: (alive+cut)
+			}
+			
+			// 2. Group name if exists
+			if (settings.grouperMode
+					&& settings.grouperName != null) {
+				// fc - 16.9.2004 - if group has been proposed, it must be compatible
+				//~ Grouper g = GrouperManager.getInstance ()
+						//~ .getGrouper (settings.grouperName);
+				//~ if (g.matchWith (stand)) {	// <<<<<<<<<<<<<<<<<< nuts, needs Collection
+					t.append (" / ");
+					t.append (settings.grouperName);
+				//~ }
+			}
+
+			// 3. Viewer name
+			t.append (" - ");
+			t.append (getName ());
+			customTitle = t.toString ();
+
+		} catch (Exception e) {
+			customTitle = getName ();
+		}
+		setTitle (customTitle);
+	}
+
+
+	/**	Redefines supserclass getTitle () (title from step button and extension name) : maybe group name added.
+	*/
+	public String getTitle () {
+		return (customTitle == null) ? super.getTitle () : customTitle;
+	}
+
+
+	/**	Create the GUI.
+	*/
+	protected void createUI () {
+System.out.println ("SVTest createUI 1.");
+		defineTitle ();
+System.out.println ("SVTest createUI 2.");
+
+		getContentPane ().setLayout (new BorderLayout ());	// mainBox in the internalFrame
+		scrollPane = new JScrollPane (panel2D);
+System.out.println ("SVTest createUI 3.");
+
+		scrollPane.getViewport().putClientProperty ("EnableWindowBlit", Boolean.TRUE);	// faster
+System.out.println ("SVTest createUI 4.");
+
+		getContentPane ().add (getPilot (), BorderLayout.NORTH);
+System.out.println ("SVTest createUI 5.");
+		getContentPane ().add (scrollPane, BorderLayout.CENTER);
+System.out.println ("SVTest createUI 6.");
+
+	}
+
+
+    // Create a selected viewer (an object viewer extension) for given subject on user request
+    // fc - 28.5.2003
+    //
+    protected ObjectViewer getViewer (String className, Object subject) {
+        ObjectViewer ov = null;
+
+        ExtensionStarter starter = new ExtensionStarter ();
+        starter.setObject (subject);
+        try {
+           ov = (ObjectViewer) extMan.loadExtension (className, starter);
+        } catch (Throwable e) {
+            Log.println (Log.WARNING, "SVTest.getViewer ()",
+                         "could not open viewer "+className+" due to exception ", e);
+            //~ DMessage.promptError (Translator.swap ("SVTest.errorWhileOpeningObjectViewerSeeLog"));
+			return null;	// fc - 4.11.2003
+        }
+		//~ System.out.println ("SVTest.getViewer (): ov="+ov);
+		return ov;
+	}
+
+
+    /**	Add a legend component on the right.
+	*/
+	protected void setLegend (JComponent newLegend) {
+
+		// Security
+		if (newLegend instanceof JScrollPane) {
+			Log.println (Log.ERROR, "SVTest.setLegend ()", "Legend must not be a JScrollPane");
+			return;
+		}
+
+		// We need to place legend in a scroll pane to
+		// change it with getViewport.setView ()
+		//
+		if (legend == null) {	// first call, layout legend somewhere
+			legend = new JScrollPane (newLegend);
+			layoutLegend (legend);
+		} else {	// further call : change legend
+			Point position = legend.getViewport ().getViewPosition ();
+			legend.getViewport ().setView (newLegend);
+			legend.getViewport ().setViewPosition (position);
+		}
+
+		//revalidate ();
+		//repaint ();
+	}
+
+	// fc - 8.3.2004
+	protected void layoutLegend (JComponent legend) {
+		getContentPane ().add (legend, BorderLayout.EAST);
+	}
+
+
+	public void dispose () {
+		super.dispose ();
+		panel2D.dispose ();
+		settings = null;
+		stand = null;
+		panel2D = null;
+		settingsButton = null;
+		mainPanel = null;
+		optionPanel = null;
+		scrollPane = null;
+	}
+
+
+	public Color getCellSelectionColor () {return cellSelectionColor;}
+
+
+	public int getPanel2DXMargin () {return Panel2D.X_MARGIN_IN_PIXELS;}
+
+
+	public int getPanel2DYMargin () {return Panel2D.Y_MARGIN_IN_PIXELS;}
+
+
+	// Old method, replaced by new selection strategy with OVChooser.
+	// Should not be used...
+	//
+	protected JPanel createInspectorPanel (Collection selectedTrees) {
+		return Tools.createInspectorPanel (selectedTrees);
+	}
+
+	public String[] getStatusSelection () {return statusSelection;}
+	public void setStatusSelection (String[] s) {statusSelection = s;}
+
+
+	// --------------------------------------------------------------------------- MainPanel
+	// --------------------------------------------------------------------------- MainPanel
+	// --------------------------------------------------------------------------- MainPanel
+	// --------------------------------------------------------------------------- MainPanel
+	// --------------------------------------------------------------------------- MainPanel
+
+	/**
+	 * Main option panel. Secondary option panel may be described in subclasses.
+	 */
+	class MainPanel extends JPanel implements ActionListener, Controlable {
+		private JTabbedPane tabs;
+
+		private GrouperChooser grouperChooser;
+		private StatusChooser statusChooser;
+
+		private JCheckBox ckShowLabels;
+		private JTextField maxLabelNumber;	// fc - 18.12.2003
+		private JCheckBox ckShowDiameters;
+		private JButton labelColorButton;
+		private JButton treeColorButton;
+		private JButton cellColorButton;
+		private JButton selectionColorButton;
+
+		/*private JRadioButton sideViewMode;
+		private JRadioButton inspectorMode;
+		private ButtonGroup selectMode;*/
+
+		private ConfigurationPanel p2DConfigPanel;
+
+
+		public MainPanel () {
+			super ();
+			setLayout (new BorderLayout ());
+			Border etched = BorderFactory.createEtchedBorder ();
+
+			ColumnPanel part1 = new ColumnPanel ();
+
+			// 1. Common
+			ColumnPanel p1 = new ColumnPanel ();
+			Border b1 = BorderFactory.createTitledBorder (etched, Translator.swap ("SVTest.MainPanel.common"));
+			p1.setBorder (b1);
+
+			ckShowLabels = new JCheckBox (Translator.swap ("SVTest.MainPanel.showLabels"), settings.showLabels);
+			maxLabelNumber = new JTextField (5);
+			maxLabelNumber.setText (""+settings.maxLabelNumber);
+			ckShowDiameters = new JCheckBox (Translator.swap ("SVTest.MainPanel.showDiameters"), settings.showDiameters);
+
+			LinePanel l6 = new LinePanel ();
+			LinePanel l7 = new LinePanel ();
+			LinePanel l71 = new LinePanel ();
+			LinePanel l8 = new LinePanel ();
+			l6.add (ckShowLabels);
+			//~ l6.add (new JLabel ("- "+Translator.swap ("SVTest.MainPanel.maxLabelNumber")+" : "));
+			l6.add (maxLabelNumber);
+			l6.addGlue ();
+			l7.add (ckShowDiameters);
+			l7.addGlue ();
+
+			// fc - 22.4.2004 - Status
+			GTCStand gtcstand = (GTCStand) stand;
+			statusChooser = new StatusChooser (gtcstand.getStatusMap (), getStatusSelection ());
+			l71.add (statusChooser);
+
+			// NEW... groups
+			boolean checked = settings.grouperMode;
+			boolean not = settings.grouperNot;
+			String selectedGroupName = settings.grouperName;
+			grouperChooser = new GrouperChooser (checked, stand, Group.TREE, 	// fc - 16.9.2004 - type
+					selectedGroupName, not);
+			l8.add (grouperChooser);
+
+			p1.add (l6);
+			p1.add (l7);
+			p1.add (l71);
+			p1.add (l8);
+			part1.add (p1);
+
+			// 3. Colors
+			ColumnPanel p2 = new ColumnPanel ();
+			Border b2 = BorderFactory.createTitledBorder (etched, Translator.swap ("SVTest.MainPanel.colors"));
+			p2.setBorder (b2);
+
+			labelColorButton = new JButton ();	// empty coloured buttons
+			treeColorButton = new JButton ();
+			cellColorButton = new JButton ();
+			selectionColorButton = new JButton ();
+			labelColorButton.setBackground (getLabelColor ());
+			treeColorButton.setBackground (getTreeColor ());
+			cellColorButton.setBackground (getCellColor ());
+			selectionColorButton.setBackground (getSelectionColor ());
+			labelColorButton.addActionListener (this);
+			treeColorButton.addActionListener (this);
+			cellColorButton.addActionListener (this);
+			selectionColorButton.addActionListener (this);
+
+			LinePanel l1 = new LinePanel ();
+			LinePanel l2 = new LinePanel ();
+			LinePanel l3 = new LinePanel ();
+			LinePanel l4 = new LinePanel ();
+			l1.add (new JWidthLabel (Translator.swap ("SVTest.MainPanel.labelColor")+" :", 170));
+			l1.add (labelColorButton);
+			l1.addGlue ();
+			l2.add (new JWidthLabel (Translator.swap ("SVTest.MainPanel.treeColor")+" :", 170));
+			l2.add (treeColorButton);
+			l2.addGlue ();
+			l3.add (new JWidthLabel (Translator.swap ("SVTest.MainPanel.cellColor")+" :", 170));
+			l3.add (cellColorButton);
+			l3.addGlue ();
+			l4.add (new JWidthLabel (Translator.swap ("SVTest.MainPanel.selectionColor")+" :", 170));
+			l4.add (selectionColorButton);
+			l4.addGlue ();
+
+			p2.add (l1);
+			p2.add (l2);
+			p2.add (l3);
+			p2.add (l4);
+			part1.add (p2);
+
+			// 4. NEW - panel2D configuration (fc - 30.4.2002)
+			p2DConfigPanel = panel2D.getConfigurationPanel (null);
+			JPanel p3 = new WrapperPanel (p2DConfigPanel, 0, 0);
+			Border b3 = BorderFactory.createTitledBorder (etched, panel2D.getConfigurationLabel ());
+			p3.setBorder (b3);
+
+			part1.add (p3);
+			part1.addGlue ();
+
+			// 5. Correct layout
+			JPanel worker = new JPanel (new BorderLayout ());
+			worker.add (part1, BorderLayout.NORTH);
+
+			if (optionPanel.getComponentCount () != 0) {
+				JPanel worker2 = new JPanel (new BorderLayout ());
+				worker2.add (optionPanel, BorderLayout.NORTH);
+
+				tabs = new JTabbedPane ();
+				tabs.setTabLayoutPolicy (JTabbedPane.SCROLL_TAB_LAYOUT);	// fc - 2.4.2003
+
+				tabs.addTab (Translator.swap ("SVTest.MainPanel.options"), null, worker2);
+				tabs.addTab (Translator.swap ("SVTest.MainPanel.general"), null, worker);
+				add (tabs, BorderLayout.CENTER);
+			} else {
+				add (part1, BorderLayout.NORTH);
+			}
+
+		}
+
+		public boolean isControlSuccessful () {
+			// Panel2D config panel must be ok
+			if (!p2DConfigPanel.checksAreOk ()) {return false;}
+
+			// Max label number must be an integer
+			try {
+				int max = new Integer (maxLabelNumber.getText ().trim ()).intValue ();
+			} catch (Exception e) {
+				DMessage.promptError (Translator.swap ("Shared.maxLabelNumberMustBeInteger"));
+				return false;
+			}
+			
+			// fc - 22.4.2004
+			if (!statusChooser.isValid ()) {
+				DMessage.promptError (Translator.swap ("Shared.chooseAtLeastOneStatus"));
+				return false;
+			}
+			setStatusSelection (statusChooser.getSelection ());
+			
+			return true;
+		}
+
+		public ConfigurationPanel getPanel2DConfigPanel () {return p2DConfigPanel;}
+
+		public void actionPerformed (ActionEvent evt) {
+			if (evt.getSource ().equals (labelColorButton)) {
+				Color newColor = JColorChooser.showDialog(
+						this,
+						Translator.swap ("SVTest.MainPanel.chooseAColor"),
+                		labelColorButton.getBackground());
+                if (newColor != null) {labelColorButton.setBackground (newColor);}
+
+			} else if (evt.getSource ().equals (treeColorButton)) {
+				Color newColor = JColorChooser.showDialog(
+						this,
+						Translator.swap ("SVTest.MainPanel.chooseAColor"),
+                		treeColorButton.getBackground());
+                if (newColor != null) {treeColorButton.setBackground (newColor);}
+
+			} else if (evt.getSource ().equals (cellColorButton)) {
+				Color newColor = JColorChooser.showDialog(
+						this,
+						Translator.swap ("SVTest.MainPanel.chooseAColor"),
+                		cellColorButton.getBackground());
+                if (newColor != null) {cellColorButton.setBackground (newColor);}
+
+            } else if (evt.getSource ().equals (selectionColorButton)) {
+				Color newColor = JColorChooser.showDialog(
+                    this,
+                    Translator.swap ("SVTest.MainPanel.chooseAColor"),
+                    selectionColorButton.getBackground());
+                if (newColor != null) {selectionColorButton.setBackground (newColor);}
+			}
+		}
+
+		public void dispose () {
+			try {
+				tabs.removeAll ();
+			} catch (Exception e) {}
+		}
+
+		public GrouperChooser getGrouperChooser () {return grouperChooser;}
+		public StatusChooser getStatusChooser () {return statusChooser;}
+
+		public JCheckBox getCkShowLabels () {return ckShowLabels;}
+
+		public JCheckBox getCkShowDiameters () {return ckShowDiameters;}
+
+		public Color getNewLabelColor () {
+			return new Color (labelColorButton.getBackground ().getRGB ());
+		}
+
+		public Color getNewTreeColor () {
+			return new Color (treeColorButton.getBackground ().getRGB ());
+		}
+
+		public Color getNewCellColor () {
+			return new Color (cellColorButton.getBackground ().getRGB ());
+		}
+
+		public Color getNewSelectionColor () {
+			return new Color (selectionColorButton.getBackground ().getRGB ());
+		}
+
+		public int getMaxLabelNumber () {	// format was checked in isControlSuccessful ()
+			return new Integer (maxLabelNumber.getText ().trim ()).intValue ();
+		}
+
+    }
+
+}
+
+
+
+
+// backup : old legend management - fc - 11.3.2004
+    /**	Add a legend component on the right.
+	*/
+/*	protected void setLegend (JComponent newLegend) {
+		if (newLegend == null) {
+			if (this.legend != null) {
+				getContentPane ().remove (this.legend);
+				getContentPane ().validate ();
+				getContentPane ().repaint ();
+
+				this.legend = null;
+			}
+			return;
+		}
+
+		if (!(newLegend instanceof JToolBar)) {
+			newLegend = new JScrollPane (newLegend);
+		}
+		if (this.legend != null) {
+			getContentPane ().remove (this.legend);
+		}
+		layoutLegend (newLegend);	// fc - 8.3.2004
+		revalidate ();
+		repaint ();
+
+		this.legend = newLegend;
+	}
+
+	// fc - 8.3.2004
+	protected void layoutLegend (JComponent newLegend) {
+		getContentPane ().add (newLegend, BorderLayout.EAST);
+	}
+*/
+
+
+
+

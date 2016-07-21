@@ -128,7 +128,7 @@ class Execute(object):
         if platform.system().lower() == "linux":
             self._exec_linux(input_file, n_proc)
         elif platform.system().lower() == "windows":
-            self.exec_win()
+            self.exec_win(input_file, n_proc)
         elif platform.system().lower() == "darwin":
             self.exec_mac()
         else:
@@ -139,6 +139,13 @@ class Execute(object):
         """
 
         log = subprocess.check_output([self.fds_bin + "fds_linux/wfds", input_file],
+                cwd='/'.join(input_file.split('/')[:-1]))
+
+    def _exec_win(self, input_file, n_proc):
+        """
+        """
+
+        log = subprocess.check_output([self.fds_bin + "fds_win/wfds.exe", input_file],
                 cwd='/'.join(input_file.split('/')[:-1]))
 
 class GenerateBinaryGrid(Mesh):

@@ -9,6 +9,7 @@ import pprint
 import platform
 import cPickle
 import math
+import csv
 
 __authors__ = "Team STANDFIRE"
 __copyright__ = "Copyright 2015, STANDFIRE"
@@ -323,8 +324,8 @@ class Fvsfuels(object):
             cnt += 1
 
         # close fvs simulation (call twice)
-        fvs.close()
-        fvs.close()
+        fvs.fvs()
+        fvs.fvs()
 
     def _get_obj_data(self):
         """
@@ -549,7 +550,8 @@ class Fvsfuels(object):
         for i in self.fuels.keys():
             for e in self.fuels[i]:
                 self.fuels[i][e].to_csv(self.wdir +
-                          "{0}_{1}_{2}.csv".format(standid, i, e), index=False)
+                          "{0}_{1}_{2}.csv".format(standid, e, i),
+                          quoting=3, index=False)
 
     def save_trees_by_year(self, year):
         """
@@ -559,7 +561,8 @@ class Fvsfuels(object):
         standid = self.get_standid()
 
         self.fuels["trees"][year].to_csv(self.wdir +
-                 "{0}_{1}_{2}.csv".format(standid, "trees", year), index=False)
+                 "{0}_{1}_{2}.csv".format(standid, year, "trees"),
+                 quoting=csv.QUOTE_NONNUMERIC, index=False)
 
     def save_snags_by_year(self, year):
         """
@@ -569,7 +572,8 @@ class Fvsfuels(object):
         standid = self.get_standid()
 
         self.fuels["snags"][year].to_csv(self.wdir +
-                 "{0}_{1}_{2}.csv".format(standid, "snags", year), index=False)
+                 "{0}_{1}_{2}.csv".format(standid, year, "snags"),
+                 quoting=3, index=False)
 
 
 class FuelCalc(object):

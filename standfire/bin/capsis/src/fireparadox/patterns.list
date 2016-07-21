@@ -1,0 +1,13 @@
+# FiPattern List
+
+patternid = 14
+alias = ex
+hDMax = 33.0
+s	33.0	80.0
+i	50.0	60.0
+
+patternid = 17
+alias = 
+hDMax = 30.0
+s	50.0	80.0
+
