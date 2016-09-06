@@ -72,7 +72,8 @@ class RunConfig(object):
                                       2: [[0,0],[0,0],[0,0],[0,0]],
                                       3: [[0,0],[0,0],[0,0],[0,0]],
                                       4: [[0,0],[0,0],[0,0],[0,0]],
-                                      5: [[0,0],[0,0],[0,0],[0,0]]}}
+                                      5: [[0,0],[0,0],[0,0],[0,0]],
+                                      6: [[0,0],[0,0],[0,0],[0,0]]}}
 
         self.set_path = run_directory
 
@@ -205,12 +206,14 @@ class RunConfig(object):
         b3 = [[xoff, yoff+64], [xoff+64, yoff+64], [xoff+64, y], [xoff, y]]
         b4 = [[xoff+64, 0], [x, 0], [x, y], [xoff+64, y]]
         b5 = [[xoff, 0], [xoff+64, 0], [xoff+64, yoff], [xoff, yoff]]
+        b6 = [[0,0], [x,0], [x,y], [0,y]]
 
         self.params['srf_blocks'][1] = b1
         self.params['srf_blocks'][2] = b2
         self.params['srf_blocks'][3] = b3
         self.params['srf_blocks'][4] = b4
         self.params['srf_blocks'][5] = b5
+        self.params['srf_blocks'][6] = b6
 
 
     def save_config(self):
