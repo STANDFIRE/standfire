@@ -53,7 +53,7 @@ public class WFDSCanopyFuel {
 			cbdOut.writeCharacter(this.completeTo(label, 100));
 			cbdOut.writeRecord();
 		}
-		lines.append(" ! " + label + "  -- specific instances /" + "\n");
+		//lines.append(" ! " + label + "  -- specific instances /" + "\n");
 		int nfam = 0;
 		for (FiParticle fp : data.bulkDensities.keySet()) {
 			if (data.bulkDensities.get(fp).size() > 0) {
@@ -105,10 +105,21 @@ public class WFDSCanopyFuel {
 					  z0 = data.plant.getCrownBaseHeight() + zc;
 					  z1 = data.plant.getHeight() + zc;
 					}
-					lines.append("&TREE XB=" + x0 + "," + x1 + "," + y0 + "," + y1 + ","+ z0 + "," + z1);
-					lines.append(",PART_ID='" + fp.getFullName() + "',FUEL_GEOM='RECTANGLE',OUTPUT_TREE=" + output_tree
-							+ ",LABEL='" + label + "_" + fp.getFullName() + "' / \n");
-					plantVolume = (x1 - x0) * (y1 - y0) * (z1 - z0); 
+
+                                        plantVolume = (x1 - x0) * (y1 - y0) * (z1 - z0);
+					double bulkDensity = fuelMass / plantVolume; // divided by crown volume (for cylinders and rectangle)
+                                        if (bulkDensity < 3.0) {
+						double bulkDensityBinned = Math.round(bulkDensity / bulkDensityAccuracy) * bulkDensityAccuracy;
+						if (bulkDensityBinned > 0.5 * bulkDensityAccuracy) {
+		                                	String name = fp.getFullName() + "_" + bulkDensityBinned;
+							if (bulkDensity > 0d) {
+								lines.append("&TREE XB=" + x0 + "," + x1 + "," + y0 + "," + y1 + ","+ z0 + "," + z1);
+								lines.append(",PART_ID='" + name + "',FUEL_GEOM='RECTANGLE',OUTPUT_TREE=" + output_tree
+										+ ",LABEL='" + label + "_" + fp.getFullName() + "' / \n");
+							}
+						}
+                                        }
+					 
 
 				} else if (canopyFuelRepresentation.equals(WFDSParam.CYLINDER)) { // data
 																					// issued

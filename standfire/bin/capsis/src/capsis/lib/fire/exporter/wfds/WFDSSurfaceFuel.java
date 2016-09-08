@@ -73,7 +73,7 @@ public class WFDSSurfaceFuel {
 			lines.append("VEGETATION_CDRAG    = " + p.vegetation_cdrag + "\n");
 			lines.append("VEGETATION_LOAD     = " + vegetationLoad + "\n");
 			lines.append("VEGETATION_HEIGHT   = " + vegetationHeight + "\n");
-			lines.append("VEGETATION_MOISTURE = " + sfp.moisture + "\n");
+			lines.append("VEGETATION_MOISTURE = " + 0.01 * sfp.moisture + "\n");
 			lines.append("VEGETATION_SVRATIO  = " + sfp.svr + "\n");
 			lines.append("VEGETATION_CHAR_FRACTION  = " + p.vegetation_char_fraction + "\n");
 			lines.append("VEGETATION_ELEMENT_DENSITY= " + sfp.mvr + "\n");
@@ -84,7 +84,7 @@ public class WFDSSurfaceFuel {
 			lines.append("RGB        = " + rgb.getRed() + "," + rgb.getGreen() + "," + rgb.getBlue() + " /" + "\n");
 			lines.append("!Surface fuel represented with BOUNDARY fuel model /" + "\n");
 			lines.append("&VENT XB=" + data.p0.x + "," + data.p1.x + "," + data.p0.y + "," + data.p1.y + ","
-					+ data.p0.z + "," + data.p0.z + ",,SURF_ID='" + sfp.speciesName + "' /" + "\n");// plane
+					+ data.p0.z + "," + data.p0.z + ",SURF_ID='" + sfp.speciesName + "' /" + "\n");// plane
 																									// in
 																									// the
 																									// z

@@ -132,9 +132,9 @@ public class WFDSWriter {
 								}
 							}
 						} else { // HET_RECTANGLE_BIN, RECTANGLE and CYLINDERS
-							String name = fp.getFullName();
-							if (!canopyParticles.contains(name)) {
-								canopyParticles.add(name);
+							String nameHRB = fp.getFullName();
+							if (!canopyParticles.contains(nameHRB)) {
+								canopyParticles.add(nameHRB);
 							}
 						    double fuelMass = 0d;
 							for (BulkDensityVoxel bdv : data.bulkDensities.get(fp)) {
@@ -144,18 +144,27 @@ public class WFDSWriter {
 							exportedBiomass += fuelMass;
 							 
 							if (canopyFuelRepresentation.equals(WFDSParam.HET_RECTANGLE_BIN)) {
-								WFDSCanopyParticle cp = new WFDSCanopyParticle(fp, name, param, -1d, data.color);
+								WFDSCanopyParticle cp = new WFDSCanopyParticle(fp, nameHRB, param, -1d, data.color);
 								if (!cp.isEmpty()) {
 									canopyParticleLines.add(cp.getLines());
 								}
 							} else { // RECTANGLE and CYLINDERS
 								double bulkDensity = fuelMass / cf.plantVolume; // divided by crown volume (for cylinders and rectangle)
-								if (bulkDensity > 0d) {
-									WFDSCanopyParticle cp = new WFDSCanopyParticle(fp, name, param, bulkDensity, data.color);
-									if (!cp.isEmpty()) {
-										canopyParticleLines.add(cp.getLines());
-									}
-								}
+                                                                if (bulkDensity < 3.0) {
+		                                                        double bulkDensityBinned = Math.round(bulkDensity / param.bulkDensityAccuracy) * param.bulkDensityAccuracy;
+		                                                        if (bulkDensityBinned > 0.5 * param.bulkDensityAccuracy) {
+		                                                                String name = fp.getFullName() + "_" + bulkDensityBinned;
+		                                                                if (!canopyParticles.contains(name)) {
+		                                                                        canopyParticles.add(name);
+											if (bulkDensity > 0d) {
+												WFDSCanopyParticle cp = new WFDSCanopyParticle(fp, name, param, bulkDensityBinned, data.color);
+												if (!cp.isEmpty()) {
+													canopyParticleLines.add(cp.getLines());
+												}
+											}
+		                                                                }
+		                                                        }
+                                                                }
 							}
 						}
 					}

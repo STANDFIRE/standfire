@@ -298,7 +298,7 @@ class Execute(object):
 
     def __init__(self, path_to_run_file):
 
-        self.capsis_dir = os.path.dirname(os.path.abspath(__file__)) + '/bin/capsis2/'
+        self.capsis_dir = os.path.dirname(os.path.abspath(__file__)) + '/bin/capsis/'
 
         if platform.system().lower() == 'linux':
             self._exec_capsis_linux(path_to_run_file)
