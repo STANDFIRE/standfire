@@ -117,6 +117,92 @@ class Mesh(object):
 
         return mesh_string
 
+class WFDS(Mesh):
+    """
+    """
+    def __init__(self, x, y, z, res, n, fuels):
+
+        super(self.__class__, self).__init__(x, y, z, res, n)
+
+        self.params = {'run_name'   : 'Default',
+                  'mesh'       : None,
+                  'time'       : 0,
+                  'init_temp'  : 0,
+                  'wind_speed' : 0,
+                  'ign'        : {'hrrpua' : 0,
+                                  'coords' : [0,0,0,0],
+                                  'ramp'   : [0,0,0,0,0]},
+                  'bounds'     : {'x' : x,
+                                  'y' : y,
+                                  'z' : z},
+                  'fuels'      : fuels}
+
+    def create_mesh(self, stretch=False):
+        """
+        """
+
+        if stretch:
+            self.stretch_mesh(stretch['CC'], stretch['PC'], stretch['axis'])
+
+        self.mesh = self.format_mesh()
+        self.params['mesh'] = self.mesh
+
+    def create_ignition(self, start_time, end_time, x0, x1, y0, y1):
+        """
+        """
+
+        self.params['ign']['coords'][0] = x0
+        self.params['ign']['coords'][1] = x1
+        self.params['ign']['coords'][2] = y0
+        self.params['ign']['coords'][3] = y1
+
+        delta = end_time - start_time
+        interval = delta/4.0
+        self.params['ign']['ramp'][0] = start_time
+        cT = start_time + interval
+        for i in range(1,4):
+            self.params['ign']['ramp'][i] = cT
+            cT += interval
+        self.params['ign']['ramp'][4] = end_time
+
+    def set_wind_speed(self, U0):
+        """
+        """
+
+        self.params['wind_speed'] = U0
+
+    def set_init_temp(self, temp):
+        """
+        """
+
+        self.params['init_temp'] = temp
+
+    def set_simulation_time(self, sim_time):
+        """
+        """
+
+        self.params['time'] = sim_time
+
+    def set_hrrpua(self, hrr):
+        """
+        """
+
+        self.params['ign']['hrrpua'] = hrr
+
+    def save_input(self, file_name):
+        """
+        """
+
+        this_dir = os.path.dirname(os.path.abspath(__file__))
+
+        with open(this_dir + '/data/wfds/wfds_template.txt', 'r') as f:
+            file_template = f.read()
+
+        fds_file = file_template.format(d=self.params)
+
+        with open(file_name, 'w') as f:
+            f.write(fds_file)
+
 
 class Execute(object):
 

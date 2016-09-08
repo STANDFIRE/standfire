@@ -38,7 +38,7 @@ cap.set_x_size(160)
 cap.set_y_size(90)
 cap.set_z_size(50)
 
-cap.params['gridNumber'] = 1
+#cap.params['gridNumber'] = 1
 
 cap.set_svs_base(svs_base + "_2010")
 
@@ -46,3 +46,15 @@ cap.save_config()
 
 # now run capsis
 exeCap = capsis.Execute(cap.params['path'] + '/capsis_run_file.txt')
+
+# instantiate a WFDS object
+fds = wfds.WFDS(160,90,50,1,9,exeCap.fuels)
+print fds.params['fuels']
+fds.create_mesh(stretch={'CC':[3,33], 'PC':[1,31], 'axis':'z'})
+fds.create_ignition(10, 30, 35, 40, 13, 77)
+fds.set_wind_speed(8.94)
+fds.set_init_temp(30)
+fds.set_simulation_time(300)
+fds.set_hrrpua(1000)
+
+fds.save_input(fuel.wdir + 'output/test_wfds.txt')

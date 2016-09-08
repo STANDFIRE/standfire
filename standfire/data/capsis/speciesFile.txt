@@ -10,6 +10,7 @@ PIEN	Genus	Trait	1	No_info	6.0	0,255,51	{(0,5);(10,60);(25,99);(50,93);(75,69);(
 PIPO	Genus	Trait	1	No_info	6.0	0,255,51	{(0,5);(10,60);(25,99);(50,93);(75,69);(100,0)}
 PSME	Genus	Trait	1	No_info	6.0	0,255,51	{(0,5);(10,60);(25,99);(50,93);(75,69);(100,0)}
 TSHE	Genus	Trait	1	No_info	6.0	0,255,51	{(0,5);(10,60);(25,99);(50,93);(75,69);(100,0)}
+ABLA	Genus	Trait	1	No_info	6.0	0,0,255	{(0,5);(10,60);(25,99);(50,93);(75,69);(100,0)}
 
 #Particle properties
 # NB: these properties should be set for each species (otherwise default is used for particles)	
@@ -78,6 +79,14 @@ Leave	Dead	TSHE	500	5000	10	Unknown
 Twig1	Dead	TSHE	500	2000	10	Unknown
 Twig2	Dead	TSHE	500	500	10	Unknown
 Twig3	Dead	TSHE	500	100	10	Unknown
+Leave	Live	ABLA	500	5000	100	Unknown
+Twig1	Live	ABLA	500	2000	100	Unknown
+Twig2	Live	ABLA	500	500	100	Unknown
+Twig3	Live	ABLA	500	100	100	Unknown
+Leave	Dead	ABLA	500	5000	10	Unknown
+Twig1	Dead	ABLA	500	2000	10	Unknown
+Twig2	Dead	ABLA	500	500	10	Unknown
+Twig3	Dead	ABLA	500	100	10	Unknown
 
 #Available mass crown profile functions:
 #	•poly2AboveCBH(a;b;c) = a*hrelInCrown^2+b*hrelInCrown+c  

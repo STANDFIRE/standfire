@@ -1,5 +1,5 @@
 Booting capsis.app.CapsisExtensionManager
-extension extensionSettings file name = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc/extension.settings
+extension extensionSettings file name = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis2/etc/extension.settings
 declaring type: ObjectViewer
 declaring type: Export
 declaring type: Import
@@ -818,6 +818,7 @@ reading: capsis.extension.spatializer.IdentitySpatializer enabled
 reading: pinuspinaster.extension.intervener.C2Thinner enabled
 reading: stretch.extension.dataextractor.StretchInterpolators enabled
 reading: pinuspinaster.extension.dataextractor.DECgNFCBA3 enabled
+reading: capsis.lib.economics2.gui.DENetPresentValueVsRate enabled
 reading: pinuspinaster.extension.dataextractor.DECgNFCBA2 enabled
 reading: capsis.extension.dataextractor.DETimeTotalResidualQuantityN enabled
 reading: pinuspinaster.extension.dataextractor.DECgNFCBA1 enabled
@@ -945,6 +946,7 @@ reading: capsis.extension.dataextractor.MuTimeDdom enabled
 reading: melies.extension.dataextractor.MesTimeN enabled
 reading: plantabsl.extension.dataextractor.PlantaTimeBa10 enabled
 reading: runaway.extension.dataextractor.FitnessPreferencePlot enabled
+reading: capsis.lib.economics2.gui.DEBasiVsRate enabled
 reading: melies.extension.dataextractor.MesTimeG enabled
 reading: stretch.extension.dataextractor.DETimeStemVolume enabled
 reading: isgm.extension.dataextractor.DEIsgmStandTable%defaultDataRenderer capsis.extension.datarenderer.drcurves.DRTable

@@ -10,33 +10,44 @@ understoreyFuelOption=1
 {{({d[srf_blocks][5][0][0]},{d[srf_blocks][5][0][1]});({d[srf_blocks][5][1][0]},{d[srf_blocks][5][1][1]});({d[srf_blocks][5][2][0]},{d[srf_blocks][5][2][1]});({d[srf_blocks][5][3][0]},{d[srf_blocks][5][3][1]})}}	{{9;10}}	{{false;false}}
 {{({d[srf_blocks][6][0][0]},{d[srf_blocks][6][0][1]});({d[srf_blocks][6][1][0]},{d[srf_blocks][6][1][1]});({d[srf_blocks][6][2][0]},{d[srf_blocks][6][2][1]});({d[srf_blocks][6][3][0]},{d[srf_blocks][6][3][1]})}}	{{11}}	{{true}}
 
-1	Shrub	0.35	0.0	0.5	2.0	0
-Leave_Live	0.8	500	5000.0	70.0
-2	Herb	0.35	0.0	0.3	0.5	1
-Leave_Dead	0.4	500	10000.0	10.0
+1	Shrub	{d[srf_fuels][shrub][ht]}	{d[srf_fuels][shrub][cbh]}	{d[srf_fuels][shrub][cover]}	{d[srf_fuels][shrub][width]}	{d[srf_fuels][shrub][spat_group]}
+Leave_Live	{d[srf_fuels][shrub][live][load]}	{d[srf_fuels][shrub][live][mvr]}	{d[srf_fuels][shrub][live][svr]}	{d[srf_fuels][shrub][live][moisture]}
+Leave_Dead	{d[srf_fuels][shrub][dead][load]}	{d[srf_fuels][shrub][dead][mvr]}	{d[srf_fuels][shrub][dead][svr]}	{d[srf_fuels][shrub][dead][moisture]}
+2	Herb	{d[srf_fuels][herb][ht]}	{d[srf_fuels][herb][cbh]}	{d[srf_fuels][herb][cover]}	{d[srf_fuels][herb][width]}	{d[srf_fuels][herb][spat_group]}
+Leave_Live	{d[srf_fuels][herb][live][load]}	{d[srf_fuels][herb][live][mvr]}	{d[srf_fuels][herb][live][svr]}	{d[srf_fuels][herb][live][moisture]}
+Leave_Dead	{d[srf_fuels][herb][dead][load]}	{d[srf_fuels][herb][dead][mvr]}	{d[srf_fuels][herb][dead][svr]}	{d[srf_fuels][herb][dead][moisture]}
 
-3	Shrub	0.35	0.0	0.5	2.0	0
-Leave_Live	0.8	500	5000.0	70.0
-4	Herb	0.35	0.0	0.3	0.5	1
-Leave_Dead	0.4	500	10000.0	10.0
+3	Shrub	{d[srf_fuels][shrub][ht]}	{d[srf_fuels][shrub][cbh]}	{d[srf_fuels][shrub][cover]}	{d[srf_fuels][shrub][width]}	{d[srf_fuels][shrub][spat_group]}
+Leave_Live	{d[srf_fuels][shrub][live][load]}	{d[srf_fuels][shrub][live][mvr]}	{d[srf_fuels][shrub][live][svr]}	{d[srf_fuels][shrub][live][moisture]}
+Leave_Dead	{d[srf_fuels][shrub][dead][load]}	{d[srf_fuels][shrub][dead][mvr]}	{d[srf_fuels][shrub][dead][svr]}	{d[srf_fuels][shrub][dead][moisture]}
+4	Herb	{d[srf_fuels][herb][ht]}	{d[srf_fuels][herb][cbh]}	{d[srf_fuels][herb][cover]}	{d[srf_fuels][herb][width]}	{d[srf_fuels][herb][spat_group]}
+Leave_Live	{d[srf_fuels][herb][live][load]}	{d[srf_fuels][herb][live][mvr]}	{d[srf_fuels][herb][live][svr]}	{d[srf_fuels][herb][live][moisture]}
+Leave_Dead	{d[srf_fuels][herb][dead][load]}	{d[srf_fuels][herb][dead][mvr]}	{d[srf_fuels][herb][dead][svr]}	{d[srf_fuels][herb][dead][moisture]}
 
-5	Shrub	0.35	0.0	0.5	2.0	0
-Leave_Live	0.8	500	5000.0	70.0
-6	Herb	0.35	0.0	0.3	0.5	1
-Leave_Dead	0.4	500	10000.0	10.0
+5	Shrub	{d[srf_fuels][shrub][ht]}	{d[srf_fuels][shrub][cbh]}	{d[srf_fuels][shrub][cover]}	{d[srf_fuels][shrub][width]}	{d[srf_fuels][shrub][spat_group]}
+Leave_Live	{d[srf_fuels][shrub][live][load]}	{d[srf_fuels][shrub][live][mvr]}	{d[srf_fuels][shrub][live][svr]}	{d[srf_fuels][shrub][live][moisture]}
+Leave_Dead	{d[srf_fuels][shrub][dead][load]}	{d[srf_fuels][shrub][dead][mvr]}	{d[srf_fuels][shrub][dead][svr]}	{d[srf_fuels][shrub][dead][moisture]}
+6	Herb	{d[srf_fuels][herb][ht]}	{d[srf_fuels][herb][cbh]}	{d[srf_fuels][herb][cover]}	{d[srf_fuels][herb][width]}	{d[srf_fuels][herb][spat_group]}
+Leave_Live	{d[srf_fuels][herb][live][load]}	{d[srf_fuels][herb][live][mvr]}	{d[srf_fuels][herb][live][svr]}	{d[srf_fuels][herb][live][moisture]}
+Leave_Dead	{d[srf_fuels][herb][dead][load]}	{d[srf_fuels][herb][dead][mvr]}	{d[srf_fuels][herb][dead][svr]}	{d[srf_fuels][herb][dead][moisture]}
 
-7	Shrub	0.35	0.0	0.5	2.0	0
-Leave_Live	0.8	500	5000.0	70.0
-8	Herb	0.35	0.0	0.3	0.5	1
-Leave_Dead	0.4	500	10000.0	10.0
+7	Shrub	{d[srf_fuels][shrub][ht]}	{d[srf_fuels][shrub][cbh]}	{d[srf_fuels][shrub][cover]}	{d[srf_fuels][shrub][width]}	{d[srf_fuels][shrub][spat_group]}
+Leave_Live	{d[srf_fuels][shrub][live][load]}	{d[srf_fuels][shrub][live][mvr]}	{d[srf_fuels][shrub][live][svr]}	{d[srf_fuels][shrub][live][moisture]}
+Leave_Dead	{d[srf_fuels][shrub][dead][load]}	{d[srf_fuels][shrub][dead][mvr]}	{d[srf_fuels][shrub][dead][svr]}	{d[srf_fuels][shrub][dead][moisture]}
+8	Herb	{d[srf_fuels][herb][ht]}	{d[srf_fuels][herb][cbh]}	{d[srf_fuels][herb][cover]}	{d[srf_fuels][herb][width]}	{d[srf_fuels][herb][spat_group]}
+Leave_Live	{d[srf_fuels][herb][live][load]}	{d[srf_fuels][herb][live][mvr]}	{d[srf_fuels][herb][live][svr]}	{d[srf_fuels][herb][live][moisture]}
+Leave_Dead	{d[srf_fuels][herb][dead][load]}	{d[srf_fuels][herb][dead][mvr]}	{d[srf_fuels][herb][dead][svr]}	{d[srf_fuels][herb][dead][moisture]}
 
-9	Shrub	0.35	0.0	0.5	2.0	0
-Leave_Live	0.8	500	5000.0	70.0
-10	Herb	0.35	0.0	0.3	0.5	1
-Leave_Dead	0.4	500	10000.0	10.0
+9	Shrub	{d[srf_fuels][shrub][ht]}	{d[srf_fuels][shrub][cbh]}	{d[srf_fuels][shrub][cover]}	{d[srf_fuels][shrub][width]}	{d[srf_fuels][shrub][spat_group]}
+Leave_Live	{d[srf_fuels][shrub][live][load]}	{d[srf_fuels][shrub][live][mvr]}	{d[srf_fuels][shrub][live][svr]}	{d[srf_fuels][shrub][live][moisture]}
+Leave_Dead	{d[srf_fuels][shrub][dead][load]}	{d[srf_fuels][shrub][dead][mvr]}	{d[srf_fuels][shrub][dead][svr]}	{d[srf_fuels][shrub][dead][moisture]}
+10	Herb	{d[srf_fuels][herb][ht]}	{d[srf_fuels][herb][cbh]}	{d[srf_fuels][herb][cover]}	{d[srf_fuels][herb][width]}	{d[srf_fuels][herb][spat_group]}
+Leave_Live	{d[srf_fuels][herb][live][load]}	{d[srf_fuels][herb][live][mvr]}	{d[srf_fuels][herb][live][svr]}	{d[srf_fuels][herb][live][moisture]}
+Leave_Dead	{d[srf_fuels][herb][dead][load]}	{d[srf_fuels][herb][dead][mvr]}	{d[srf_fuels][herb][dead][svr]}	{d[srf_fuels][herb][dead][moisture]}
 
-11	Litter	0.1	0.0	1	-1	0
-Litter	1.0	500	2000.0	5.0
+11	Litter	{d[srf_fuels][litter][ht]}	{d[srf_fuels][litter][cbh]}	{d[srf_fuels][litter][cover]}	{d[srf_fuels][litter][width]}	{d[srf_fuels][litter][spat_group]}
+Litter	{d[srf_fuels][litter][load]}	{d[srf_fuels][litter][mvr]}	{d[srf_fuels][litter][svr]}	{d[srf_fuels][litter][moisture]}
+
 
 Default	Leave_Live	0.9	150
 Default	Twig1_Live	0.9	100

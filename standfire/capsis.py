@@ -53,14 +53,14 @@ class RunConfig(object):
                        'canopyGeom': 'RECTANGLE',
                        'bdBin': 0.1,
                        'firstGridFile': 'grid.xyz',
-                       'gridNumber': 5,
+                       'gridNumber': 1,
                        'gridResolution': 1.0,
                        'vegetation_cdrag': 0.5,
                        'vegetation_char_fraction': 0.2,
                        'emissivity': 0.99,
                        'degrad': 'false',
-                       'mlr': 0.05,
-                       'init_temp': 20.0,
+                       'mlr': 0.35,
+                       'init_temp': 30.0,
                        'veg_char_fraction': 0.25,
                        'veg_drag_coefficient': 0.125,
                        'burnRateMax': 0.4,
@@ -73,7 +73,42 @@ class RunConfig(object):
                                       3: [[0,0],[0,0],[0,0],[0,0]],
                                       4: [[0,0],[0,0],[0,0],[0,0]],
                                       5: [[0,0],[0,0],[0,0],[0,0]],
-                                      6: [[0,0],[0,0],[0,0],[0,0]]}}
+                                      6: [[0,0],[0,0],[0,0],[0,0]]},
+                       'srf_fuels' : {'shrub' : {'ht': 1.0,
+                                                 'cbh': 0.0,
+                                                 'cover': 1.0,
+                                                 'width': 1.0,
+                                                 'spat_group': 1,
+                                                 'live' : {'load': 0.5,
+                                                           'mvr' : 500,
+                                                           'svr' : 5000,
+                                                           'moisture': 50},
+                                                 'dead' : {'load': 0.5,
+                                                           'mvr' : 500,
+                                                           'svr' : 5000,
+                                                           'moisture': 20}},
+                                       'herb' : {'ht': 1.0,
+                                                 'cbh': 0.0,
+                                                 'cover': 1.0,
+                                                 'width': 1.0,
+                                                 'spat_group': 1,
+                                                 'live' : {'load': 0.5,
+                                                           'mvr' : 500,
+                                                           'svr' : 10000,
+                                                           'moisture': 50},
+                                                 'dead' : {'load': 0.5,
+                                                           'mvr' : 500,
+                                                           'svr' : 10000,
+                                                           'moisture': 10}},
+                                        'litter' : {'ht' : 0.1,
+                                                    'cbh': 0.0,
+                                                    'cover':1.0,
+                                                    'width': -1,
+                                                    'spat_group': 0,
+                                                    'load': 1.0,
+                                                    'mvr' : 500,
+                                                    'svr' : 2000,
+                                                    'moisture': 10}}}
 
         self.set_path = run_directory
 
@@ -263,12 +298,14 @@ class Execute(object):
 
     def __init__(self, path_to_run_file):
 
-        self.capsis_dir = os.path.dirname(os.path.abspath(__file__)) + '/bin/capsis/'
+        self.capsis_dir = os.path.dirname(os.path.abspath(__file__)) + '/bin/capsis2/'
 
         if platform.system().lower() == 'linux':
             self._exec_capsis_linux(path_to_run_file)
+            self._read_fuels(path_to_run_file)
         if platform.system().lower() == 'windows':
             self._exec_capsis_win(path_to_run_file)
+            self._read_fuels(path_to_run_file)
 
     def _exec_capsis_linux(self, path_to_run_file):
         """
@@ -281,3 +318,11 @@ class Execute(object):
         """
 
         subprocess.call([self.capsis_dir + '/capsis.bat', '-p', 'script','standfire.myscripts.SFScript', path_to_run_file])
+
+    def _read_fuels(self, path_to_run_file):
+        """
+        """
+        with open('/'.join(path_to_run_file.split('/')[:-1]) + '/output/wfds.txt', 'r') as f:
+            lines = f.read()
+
+        self.fuels = lines
