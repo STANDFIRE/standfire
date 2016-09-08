@@ -1,5 +1,5 @@
 Booting capsis.app.CapsisExtensionManager
-extension extensionSettings file name = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis2/etc/extension.settings
+extension extensionSettings file name = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc/extension.settings
 declaring type: ObjectViewer
 declaring type: Export
 declaring type: Import

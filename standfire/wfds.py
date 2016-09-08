@@ -135,7 +135,8 @@ class WFDS(Mesh):
                   'bounds'     : {'x' : x,
                                   'y' : y,
                                   'z' : z},
-                  'fuels'      : fuels}
+                  'fuels'      : fuels,
+                  'dump'       : {'y_center' : y/2.0}}
 
     def create_mesh(self, stretch=False):
         """
