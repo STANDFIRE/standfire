@@ -9,9 +9,9 @@ mod_path = '/'.join(os.path.dirname(os.path.abspath(__file__)).split('/')[:-2]) 
 sys.path.append(mod_path)
 
 # import standfire modules
-from standfire import fuels
-from standfire import capsis
-from standfire import wfds
+import fuels
+import capsis
+import wfds
 
 # globals
 VARIANTS = {'Southeast Alaska and Costal BC (ak)' : 'ak',
