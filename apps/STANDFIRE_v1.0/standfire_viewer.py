@@ -225,7 +225,7 @@ class Application(ttk.Frame, object):
         cap.set_srf_dead_load(load_shrub_dead, load_herb_dead, self.litter_load.get())
         cap.set_srf_live_svr(self.shrub_sav.get(), self.herb_sav.get())
         cap.set_srf_dead_svr(self.shrub_sav.get(), self.herb_sav.get(), self.litter_sav.get())
-        cap.set_srf_cover(self.shrub_cover.get(), self.herb_cover.get())
+        cap.set_srf_cover(self.shrub_cover.get()/100., self.herb_cover.get()/100.)
         cap.set_srf_live_mc(self.shrub_live_mc.get(), self.herb_live_mc.get())
         cap.set_srf_dead_mc(self.shrub_dead_mc.get(), self.herb_dead_mc.get(), self.litter_dead_mc.get())
         
