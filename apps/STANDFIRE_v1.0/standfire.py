@@ -42,7 +42,13 @@ cap.set_z_size(50)
 
 cap.set_svs_base(svs_base + "_2010")
 
+cap.set_show3D('true')
+#cap.params['show3d'] = 'true'
+print cap.params
+
 cap.save_config()
+
+
 
 # now run capsis
 exeCap = capsis.Execute(cap.params['path'] + '/capsis_run_file.txt')
@@ -58,3 +64,4 @@ fds.set_simulation_time(300)
 fds.set_hrrpua(1000)
 
 fds.save_input(fuel.wdir + 'output/test_wfds.txt')
+

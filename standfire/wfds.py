@@ -190,6 +190,12 @@ class WFDS(Mesh):
 
         self.params['ign']['hrrpua'] = hrr
 
+    def set_run_name(self, name):
+        """
+        """
+
+        self.params['run_name'] = name
+
     def save_input(self, file_name):
         """
         """

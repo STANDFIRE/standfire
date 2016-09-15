@@ -112,6 +112,106 @@ class RunConfig(object):
                                                     'moisture'  : 10}}}
 
 
+
+    def set_x_offset(self, offset):
+        """
+        """
+
+        self.params['xOffset'] = offset
+
+    def set_y_offset(self, offset):
+        """
+        """
+
+        self.params['yOffset'] = offset
+
+    def set_show3D(self, value):
+        """
+        """
+
+        self.params['show3d'] = value
+
+    def set_crown_space(self, space):
+        """
+        """
+
+        if space != 0:
+            self.params['respace'] = 'true'
+            self.params['respaceDistance'] = space
+
+    def set_prune_height(self, prune):
+        """
+        """
+
+        if prune != 0:
+            self.params['prune'] = 'true'
+            self.params['pruneHeight'] = prune
+
+    def set_srf_height(self, shrub_ht, herb_ht, litter_ht):
+        """
+        """
+        self.params['srf_fuels']['shrub']['ht'] = shrub_ht
+        self.params['srf_fuels']['herb']['ht'] = herb_ht
+        self.params['srf_fuels']['litter']['ht'] = litter_ht
+
+    def set_srf_cbh(self, shrub_cbh, herb_cbh):
+        """
+        """
+        self.params['srf_fuels']['shrub']['cbh'] = shrub_cbh
+        self.params['srf_fuels']['herb']['cbh'] = herb_cbh
+
+    def set_srf_cover(self, shrub_cover, herb_cover):
+        """
+        """
+
+        self.params['srf_fuels']['shrub']['cover'] = shrub_cover
+        self.params['srf_fuels']['herb']['cover'] = herb_cover
+
+    def set_srf_live_svr(self, shrub_svr, herb_svr):
+        """
+        """
+
+        self.params['srf_fuels']['shrub']['live']['svr'] = shrub_svr
+        self.params['srf_fuels']['herb']['live']['svr'] = herb_svr
+
+    def set_srf_dead_svr(self, shrub_svr, herb_svr, litter_svr):
+        """
+        """
+
+        self.params['srf_fuels']['shrub']['dead']['svr'] = shrub_svr
+        self.params['srf_fuels']['herb']['dead']['svr'] = herb_svr
+        self.params['srf_fuels']['litter']['svr'] = litter_svr
+
+    def set_srf_live_load(self, shrub_load, herb_load):
+        """
+        """
+
+        self.params['srf_fuels']['shrub']['live']['load'] = shrub_load
+        self.params['srf_fuels']['herb']['live']['load'] = herb_load
+
+    def set_srf_dead_load(self, shrub_load, herb_load, litter_load):
+        """
+        """
+
+        self.params['srf_fuels']['shrub']['dead']['load'] = shrub_load
+        self.params['srf_fuels']['herb']['dead']['load'] = herb_load
+        self.params['srf_fuels']['litter']['load'] = litter_load
+
+    def set_srf_live_mc(self, shrub_mc, herb_mc):
+        """
+        """
+
+        self.params['srf_fuels']['shrub']['live']['moisture'] = shrub_mc
+        self.params['srf_fuels']['herb']['live']['moisture'] = herb_mc
+
+    def set_srf_dead_mc(self, shrub_mc, herb_mc, litter_mc):
+        """
+        """
+
+        self.params['srf_fuels']['shrub']['dead']['moisture'] = shrub_mc
+        self.params['srf_fuels']['herb']['dead']['moisture'] = herb_mc
+        self.params['srf_fuels']['litter']['moisture'] = herb_mc
+
     def set_path(self, path):
         """
         Sets path to Capsis run directory
