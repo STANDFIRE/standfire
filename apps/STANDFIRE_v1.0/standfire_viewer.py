@@ -409,7 +409,8 @@ class Application(ttk.Frame, object):
 			self.z_size.set(50)
 			self.svs_offset.set(83)
 			self.res.set(1.0)
-			self.n_mesh.set(multiprocessing.cpu_count())
+			# self.n_mesh.set(multiprocessing.cpu_count())
+                        self.n_mesh.set(1)
 			# weather
 			self.wind_speed.set(8.94)
 			self.temp.set(30)
