@@ -1,13 +1,13 @@
-INFO [2016.09.24 12:53:10 PDT] 
+INFO [2016.09.24 15:23:38 PDT] 
 Capsis booting...
 
-INFO [2016.09.24 12:53:10 PDT] Settings.loadPropertyFile ()
-Property file loaded: /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc/capsis.options
+INFO [2016.09.24 15:23:38 PDT] Settings.loadPropertyFile ()
+Property file loaded: C:\Users\wellslu\Projects\standfire\repo\standfire\standfire\bin\capsis\etc/capsis.options
 
-INFO [2016.09.24 12:53:10 PDT] Settings.loadPropertyFile ()
-Property file loaded: /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc/capsis.properties
+INFO [2016.09.24 15:23:38 PDT] Settings.loadPropertyFile ()
+Property file loaded: C:\Users\wellslu\Projects\standfire\repo\standfire\standfire\bin\capsis\etc/capsis.properties
 
-INFO [2016.09.24 12:53:10 PDT] 
+INFO [2016.09.24 15:23:38 PDT] 
 Settings properties...
      R_HOME_DIR = /program files/r/rw1090/bin
      R_HOME_UNIT = c:
@@ -21,7 +21,7 @@ Settings properties...
      capsis.var = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/var
      crash.recovery = true
      debug.extension.manager = true
-     default.property.file = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc/capsis.options
+     default.property.file = C:\Users\wellslu\Projects\standfire\repo\standfire\standfire\bin\capsis\etc/capsis.options
      memo.sketcher.for.BuiltinType.GRID = jeeb.lib.sketch.extension.sketcher.GridSketcher
      memo.sketcher.for.BuiltinType.TERRAIN = jeeb.lib.sketch.scene.extension.sketcher.DTMSketcher
      memo.sketcher.for.BuiltinType.TREE_WITH_CROWN_PROFILE = jeeb.lib.sketch.scene.extension.sketcher.TreeWithCrownProfileSketcher
@@ -29,72 +29,77 @@ Settings properties...
      sketch.panel3D.anti.aliasing = false
      sketch.panel3D.debug.gl = false
      standfire.last.memorizer = DefaultMemorizer
-     standfire.myscripts.StandFireFrame.location = 416x409
+     standfire.myscripts.StandFireFrame.location = 284x178
      standfire.myscripts.StandFireFrame.size = 1351x724
      translator.warning.log = false
      veto.dialog.location.memorization = false
      veto.dialog.size.memorization = false
 
-INFO [2016.09.24 12:53:10 PDT] 
+INFO [2016.09.24 15:23:38 PDT] 
 System properties...
-     awt.toolkit = sun.awt.X11.XToolkit
-     file.encoding = UTF-8
+     awt.toolkit = sun.awt.windows.WToolkit
+     file.encoding = Cp1252
      file.encoding.pkg = sun.io
-     file.separator = /
-     java.awt.graphicsenv = sun.awt.X11GraphicsEnvironment
-     java.awt.printerjob = sun.print.PSPrinterJob
-     java.class.path = ./class:./ext/j3d-core-utils.jar:./ext/gt-epsg-hsql-2.7.5.jar:./ext/gt-metadata-2.7.5.jar:./ext/jogl-all-natives-windows-amd64.jar:./ext/toniclf.jar:./ext/hsqldb.jar:./ext/mrnf-foresttools.jar:./ext/jfreechart-1.0.13-swt.jar:./ext/jogl-all-natives-windows-i586.jar:./ext/gluegen-rt.jar:./ext/gt-referencing-2.7.5.jar:./ext/xmlpull-1.1.3.1.jar:./ext/jdom.jar:./ext/xstream-1.4.7.jar:./ext/jeeb-util.jar:./ext/gt-opengis-2.7.5.jar:./ext/gt-api-2.7.5.jar:./ext/gluegen-rt-natives-linux-amd64.jar:./ext/commons-math-2.2.jar:./ext/gluegen-rt-natives-windows-i586.jar:./ext/gluegen-rt-natives-windows-amd64.jar:./ext/jts-1.11.jar:./ext/xpp3_min.jar:./ext/lerfob-foresttools.jar:./ext/kunststoff.jar:./ext/slimplot.jar:./ext/gluegen-rt-natives-linux-i586.jar:./ext/jogl-all-natives-linux-amd64.jar:./ext/junit.jar:./ext/vecmath-1_5_2.jar:./ext/phutil.jar:./ext/jsci-core.jar:./ext/jeeb-sketch.jar:./ext/jna-4.1.0.jar:./ext/jcommon.jar:./ext/j3d-core.jar:./ext/commons-math3-3.2.jar:./ext/jogl-all-natives-linux-i586.jar:./ext/jepp.jar:./ext/phreeqc-29oct2015.jar:./ext/gt-main-2.7.5.jar:./ext/gt-shapefile-2.7.5.jar:./ext/groovy-all-1.7.1.jar:./ext/args4j.jar:./ext/quickhull3d.jar:./ext/MirStretch.jar:./ext/flanagan.jar:./ext/opencsv-1.8.jar:./ext/jep-2.4.1.jar:./ext/repicea.jar:./ext/jogl-all-natives-macosx-universal.jar:./ext/jogl-all.jar:./ext/gluegen-rt-natives-macosx-universal.jar:./ext/jfreechart-1.0.13.jar:./ext/gt-data-2.7.5.jar
+     file.separator = \
+     java.awt.graphicsenv = sun.awt.Win32GraphicsEnvironment
+     java.awt.printerjob = sun.awt.windows.WPrinterJob
+     java.class.path = ./class;./ext/args4j.jar;./ext/commons-math-2.2.jar;./ext/commons-math3-3.2.jar;./ext/flanagan.jar;./ext/gluegen-rt-natives-linux-amd64.jar;./ext/gluegen-rt-natives-linux-i586.jar;./ext/gluegen-rt-natives-macosx-universal.jar;./ext/gluegen-rt-natives-windows-amd64.jar;./ext/gluegen-rt-natives-windows-i586.jar;./ext/gluegen-rt.jar;./ext/groovy-all-1.7.1.jar;./ext/gt-api-2.7.5.jar;./ext/gt-data-2.7.5.jar;./ext/gt-epsg-hsql-2.7.5.jar;./ext/gt-main-2.7.5.jar;./ext/gt-metadata-2.7.5.jar;./ext/gt-opengis-2.7.5.jar;./ext/gt-referencing-2.7.5.jar;./ext/gt-shapefile-2.7.5.jar;./ext/hsqldb.jar;./ext/j3d-core-utils.jar;./ext/j3d-core.jar;./ext/jcommon.jar;./ext/jdom.jar;./ext/jeeb-sketch.jar;./ext/jeeb-util.jar;./ext/jep-2.4.1.jar;./ext/jepp.jar;./ext/jfreechart-1.0.13-swt.jar;./ext/jfreechart-1.0.13.jar;./ext/jna-4.1.0.jar;./ext/jogl-all-natives-linux-amd64.jar;./ext/jogl-all-natives-linux-i586.jar;./ext/jogl-all-natives-macosx-universal.jar;./ext/jogl-all-natives-windows-amd64.jar;./ext/jogl-all-natives-windows-i586.jar;./ext/jogl-all.jar;./ext/jsci-core.jar;./ext/jts-1.11.jar;./ext/junit.jar;./ext/kunststoff.jar;./ext/lerfob-foresttools.jar;./ext/MirStretch.jar;./ext/mrnf-foresttools.jar;./ext/opencsv-1.8.jar;./ext/phreeqc-29oct2015.jar;./ext/phutil.jar;./ext/quickhull3d.jar;./ext/repicea.jar;./ext/slimplot.jar;./ext/toniclf.jar;./ext/vecmath-1_5_2.jar;./ext/xmlpull-1.1.3.1.jar;./ext/xpp3_min.jar;./ext/xstream-1.4.7.jar
      java.class.version = 52.0
-     java.endorsed.dirs = /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/endorsed
-     java.ext.dirs = /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext
-     java.home = /usr/lib/jvm/java-8-openjdk-amd64/jre
-     java.io.tmpdir = /tmp
-     java.library.path = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/ext/linux64:/usr/local/bin/FDS/FDS6/bin/LIB64::/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
-     java.runtime.name = OpenJDK Runtime Environment
-     java.runtime.version = 1.8.0_91-8u91-b14-3ubuntu1~16.04.1-b14
+     java.endorsed.dirs = C:\Program Files\Java\jre1.8.0_40\lib\endorsed
+     java.ext.dirs = C:\Program Files\Java\jre1.8.0_40\lib\ext;C:\WINDOWS\Sun\Java\lib\ext
+     java.home = C:\Program Files\Java\jre1.8.0_40
+     java.io.tmpdir = C:\Users\wellslu\AppData\Local\Temp\
+     java.library.path = C:\Users\wellslu\Projects\standfire\repo\standfire\standfire\bin\capsis\ext\windows64;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\ConEmu\ConEmu\Scripts;C:\Program Files (x86)\ConEmu;C:\Program Files (x86)\ConEmu\ConEmu;C:\ProgramData\Oracle\Java\javapath;C:\Python27\Lib\site-packages\PyQt4;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\MiKTeX 2.9\miktex\bin\;C:\Python27;C:\Python27\DLLs;C:\Python27\Scripts;C:\Python27\Lib\site-packages\vtk;C:\Python27\gnuplot\binary;C:\Python27\Lib\site-packages\osgeo;C:\Program Files (x86)\pythonxy\SciTE-3.3.2-3;C:\Program Files (x86)\pythonxy\console;C:\MinGW32-xy\bin;C:\Program Files (x86)\pythonxy\swig;C:\Program Files (x86)\pythonxy\gettext\bin;C:\Program Files\TortoiseHg\;C:\Program Files\MPICH2\bin;C:\Program Files\FDS\FDS6\bin;C:\Program Files (x86)\IBM\ILOG\CPLEX_Enterprise_Server1251\CPLEX_Studio\opl\bin\x86_win32;C:\Program Files (x86)\IBM\ILOG\CPLEX_Enterprise_Server1251\CPLEX_Studio\opl\oplide\;C:\Program Files (x86)\IBM\ILOG\CPLEX_Enterprise_Server1251\CPLEX_Studio\cplex\bin\x86_win32;C:\Program Files (x86)\IBM\ILOG\CPLEX_Enterprise_Server1251\CPLEX_Studio\cpoptimizer\bin\x86_win32;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Git\cmd;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\MATLAB\R2015b\runtime\win64;C:\Program Files\MATLAB\R2015b\bin;C:\Users\wellslu\AppData\Local\Pandoc\;C:\Program Files (x86)\Diffuse;.;;.;;.;;.;;.
+     java.runtime.name = Java(TM) SE Runtime Environment
+     java.runtime.version = 1.8.0_40-b26
      java.specification.name = Java Platform API Specification
      java.specification.vendor = Oracle Corporation
      java.specification.version = 1.8
      java.vendor = Oracle Corporation
      java.vendor.url = http://java.oracle.com/
      java.vendor.url.bug = http://bugreport.sun.com/bugreport/
-     java.version = 1.8.0_91
+     java.version = 1.8.0_40
      java.vm.info = mixed mode
-     java.vm.name = OpenJDK 64-Bit Server VM
+     java.vm.name = Java HotSpot(TM) 64-Bit Server VM
      java.vm.specification.name = Java Virtual Machine Specification
      java.vm.specification.vendor = Oracle Corporation
      java.vm.specification.version = 1.8
      java.vm.vendor = Oracle Corporation
-     java.vm.version = 25.91-b14
+     java.vm.version = 25.40-b25
+     jna.library.path = C:\Users\wellslu\Projects\standfire\repo\standfire\standfire\bin\capsis\ext\windows64;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\ConEmu\ConEmu\Scripts;C:\Program Files (x86)\ConEmu;C:\Program Files (x86)\ConEmu\ConEmu;C:\ProgramData\Oracle\Java\javapath;C:\Python27\Lib\site-packages\PyQt4;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\MiKTeX 2.9\miktex\bin\;C:\Python27;C:\Python27\DLLs;C:\Python27\Scripts;C:\Python27\Lib\site-packages\vtk;C:\Python27\gnuplot\binary;C:\Python27\Lib\site-packages\osgeo;C:\Program Files (x86)\pythonxy\SciTE-3.3.2-3;C:\Program Files (x86)\pythonxy\console;C:\MinGW32-xy\bin;C:\Program Files (x86)\pythonxy\swig;C:\Program Files (x86)\pythonxy\gettext\bin;C:\Program Files\TortoiseHg\;C:\Program Files\MPICH2\bin;C:\Program Files\FDS\FDS6\bin;C:\Program Files (x86)\IBM\ILOG\CPLEX_Enterprise_Server1251\CPLEX_Studio\opl\bin\x86_win32;C:\Program Files (x86)\IBM\ILOG\CPLEX_Enterprise_Server1251\CPLEX_Studio\opl\oplide\;C:\Program Files (x86)\IBM\ILOG\CPLEX_Enterprise_Server1251\CPLEX_Studio\cplex\bin\x86_win32;C:\Program Files (x86)\IBM\ILOG\CPLEX_Enterprise_Server1251\CPLEX_Studio\cpoptimizer\bin\x86_win32;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Git\cmd;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\MATLAB\R2015b\runtime\win64;C:\Program Files\MATLAB\R2015b\bin;C:\Users\wellslu\AppData\Local\Pandoc\;C:\Program Files (x86)\Diffuse;.;;.;;.;;.;;.
      line.separator = 
 
      os.arch = amd64
-     os.name = Linux
-     os.version = 4.4.0-36-generic
-     path.separator = :
+     os.name = Windows 7
+     os.version = 6.1
+     path.separator = ;
      sun.arch.data.model = 64
-     sun.boot.class.path = /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/classes
-     sun.boot.library.path = /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64
+     sun.boot.class.path = C:\Program Files\Java\jre1.8.0_40\lib\resources.jar;C:\Program Files\Java\jre1.8.0_40\lib\rt.jar;C:\Program Files\Java\jre1.8.0_40\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_40\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_40\lib\jce.jar;C:\Program Files\Java\jre1.8.0_40\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_40\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_40\classes
+     sun.boot.library.path = C:\Program Files\Java\jre1.8.0_40\bin
      sun.cpu.endian = little
-     sun.cpu.isalist = 
-     sun.desktop = gnome
+     sun.cpu.isalist = amd64
+     sun.desktop = windows
      sun.io.unicode.encoding = UnicodeLittle
-     sun.java.command = capsis.app.Starter -p script standfire.myscripts.SFScript /home/lawells/Projects/standfire/repo/standfire/apps/test_dir//capsis_run_file.txt
+     sun.java.command = capsis.app.Starter -p script standfire.myscripts.SFScript C:/Users/wellslu/Projects/standfire/repo/standfire/apps/test_dir//capsis_run_file.txt
      sun.java.launcher = SUN_STANDARD
-     sun.jnu.encoding = UTF-8
+     sun.jnu.encoding = Cp1252
      sun.management.compiler = HotSpot 64-Bit Tiered Compilers
-     sun.os.patch.level = unknown
+     sun.os.patch.level = Service Pack 1
+     sun.stderr.encoding = cp437
+     sun.stdout.encoding = cp437
      user.country = US
-     user.dir = /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis
-     user.home = /home/lawells
+     user.dir = C:\Users\wellslu\Projects\standfire\repo\standfire\standfire\bin\capsis
+     user.home = C:\Users\wellslu
      user.language = en
-     user.name = lawells
-     user.timezone = America/Vancouver
+     user.name = wellslu
+     user.script = 
+     user.timezone = America/Los_Angeles
+     user.variant = 
 
-INFO [2016.09.24 12:53:10 PDT] 
-Default encoding: UTF-8 (Aliases: [unicode-1-1-utf-8, UTF8])
+INFO [2016.09.24 15:23:38 PDT] 
+Default encoding: windows-1252 (Aliases: [cp5348, cp1252])
 
-INFO [2016.09.24 12:53:10 PDT] 
+INFO [2016.09.24 15:23:38 PDT] 
 CapsisExtensionManager knows 1202 active extensions:
    abccedrus.extension.standviewer.AbcSceneViewer
    abccedrus.model.AbcInventoryLoader
@@ -1300,10 +1305,10 @@ CapsisExtensionManager knows 1202 active extensions:
    woudyfor.model.WoudyShrubFilter
 
 
-INFO [2016.09.24 12:53:10 PDT] Engine.init ()
-Capsis 4.2.4 with pilot capsis.script.Pilot: correct boot at 24 Sep 2016 12:53:10 PDT
+INFO [2016.09.24 15:23:38 PDT] Engine.init ()
+Capsis 4.2.4 with pilot capsis.script.Pilot: correct boot at 24 Sep 2016 15:23:38 PDT
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for prunus
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1316,15 +1321,15 @@ Could not load idcard.properties for prunus
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for transpoprege
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1337,15 +1342,15 @@ Could not load idcard.properties for transpoprege
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for pp3
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1358,15 +1363,15 @@ Could not load idcard.properties for pp3
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for gymnos
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1379,15 +1384,15 @@ Could not load idcard.properties for gymnos
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for organon
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1400,15 +1405,15 @@ Could not load idcard.properties for organon
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for lerfob/abial
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1421,15 +1426,15 @@ Could not load idcard.properties for lerfob/abial
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for groovytest
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1442,15 +1447,15 @@ Could not load idcard.properties for groovytest
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for samsara
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1463,15 +1468,15 @@ Could not load idcard.properties for samsara
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for mangrove
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1484,15 +1489,15 @@ Could not load idcard.properties for mangrove
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for genloader
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1505,15 +1510,15 @@ Could not load idcard.properties for genloader
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for transpop
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1526,15 +1531,15 @@ Could not load idcard.properties for transpop
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for mustard
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1547,15 +1552,15 @@ Could not load idcard.properties for mustard
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for lemoine
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1568,15 +1573,15 @@ Could not load idcard.properties for lemoine
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for amapsim
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1589,15 +1594,15 @@ Could not load idcard.properties for amapsim
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for lsfmgm
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1610,15 +1615,15 @@ Could not load idcard.properties for lsfmgm
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for simsys
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1631,15 +1636,15 @@ Could not load idcard.properties for simsys
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for fcba/piceaabies
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1652,15 +1657,15 @@ Could not load idcard.properties for fcba/piceaabies
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for plantabsl
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1673,15 +1678,15 @@ Could not load idcard.properties for plantabsl
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for quergus
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1694,15 +1699,15 @@ Could not load idcard.properties for quergus
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for artemis
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1715,15 +1720,15 @@ Could not load idcard.properties for artemis
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for afocelpp
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1736,15 +1741,15 @@ Could not load idcard.properties for afocelpp
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for samsaraLightLoader
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1757,15 +1762,15 @@ Could not load idcard.properties for samsaraLightLoader
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for samare2014
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1778,15 +1783,15 @@ Could not load idcard.properties for samare2014
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for natura
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1799,15 +1804,15 @@ Could not load idcard.properties for natura
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for kerguelen
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1820,15 +1825,15 @@ Could not load idcard.properties for kerguelen
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for regix
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1841,15 +1846,15 @@ Could not load idcard.properties for regix
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for afocelpa
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1862,15 +1867,15 @@ Could not load idcard.properties for afocelpa
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for forceps
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1883,15 +1888,15 @@ Could not load idcard.properties for forceps
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for lerfob/commons
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1904,15 +1909,15 @@ Could not load idcard.properties for lerfob/commons
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for simcop
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1925,15 +1930,15 @@ Could not load idcard.properties for simcop
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for quercus
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1946,15 +1951,15 @@ Could not load idcard.properties for quercus
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for deesses
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1967,15 +1972,15 @@ Could not load idcard.properties for deesses
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for uqar/jackpine
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1988,15 +1993,15 @@ Could not load idcard.properties for uqar/jackpine
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for silmar/silmars
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2009,15 +2014,15 @@ Could not load idcard.properties for silmar/silmars
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for guppy
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2030,15 +2035,15 @@ Could not load idcard.properties for guppy
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for fasy
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2051,15 +2056,15 @@ Could not load idcard.properties for fasy
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for modispinaster
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2072,15 +2077,15 @@ Could not load idcard.properties for modispinaster
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for training
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2093,15 +2098,15 @@ Could not load idcard.properties for training
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for sydy
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2114,15 +2119,15 @@ Could not load idcard.properties for sydy
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for abccedrus
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2135,15 +2140,15 @@ Could not load idcard.properties for abccedrus
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for pnn2
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2156,15 +2161,15 @@ Could not load idcard.properties for pnn2
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for migration
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2177,15 +2182,15 @@ Could not load idcard.properties for migration
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for succes
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2198,15 +2203,15 @@ Could not load idcard.properties for succes
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for pinuspinaster
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2219,15 +2224,15 @@ Could not load idcard.properties for pinuspinaster
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for stretch
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2240,15 +2245,15 @@ Could not load idcard.properties for stretch
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for ftchene
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2261,15 +2266,15 @@ Could not load idcard.properties for ftchene
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for woudyfor
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2282,15 +2287,15 @@ Could not load idcard.properties for woudyfor
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for samare
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2303,15 +2308,15 @@ Could not load idcard.properties for samare
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for laricio
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2324,15 +2329,15 @@ Could not load idcard.properties for laricio
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for optimist
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2345,15 +2350,15 @@ Could not load idcard.properties for optimist
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for alisier
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2366,15 +2371,15 @@ Could not load idcard.properties for alisier
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for nz1
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2387,15 +2392,15 @@ Could not load idcard.properties for nz1
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for phenofit5
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2408,15 +2413,15 @@ Could not load idcard.properties for phenofit5
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for bidasoa
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2429,15 +2434,15 @@ Could not load idcard.properties for bidasoa
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for nrg
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2450,15 +2455,15 @@ Could not load idcard.properties for nrg
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for melies
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2471,15 +2476,15 @@ Could not load idcard.properties for melies
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for physiodemogenetics
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2492,15 +2497,15 @@ Could not load idcard.properties for physiodemogenetics
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for presage
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2513,15 +2518,15 @@ Could not load idcard.properties for presage
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for fcba/pseudotsugamenziesii
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2534,15 +2539,15 @@ Could not load idcard.properties for fcba/pseudotsugamenziesii
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for lerfob/fagacees
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2555,15 +2560,15 @@ Could not load idcard.properties for lerfob/fagacees
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for castaneaonly
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2576,15 +2581,15 @@ Could not load idcard.properties for castaneaonly
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for stretch2
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2597,15 +2602,15 @@ Could not load idcard.properties for stretch2
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for idf/castaneatables
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2618,15 +2623,15 @@ Could not load idcard.properties for idf/castaneatables
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for dynaclim
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2639,15 +2644,15 @@ Could not load idcard.properties for dynaclim
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for pradiata
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2660,15 +2665,15 @@ Could not load idcard.properties for pradiata
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for loxodonta
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2681,15 +2686,15 @@ Could not load idcard.properties for loxodonta
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for heterofor
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2702,15 +2707,15 @@ Could not load idcard.properties for heterofor
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for simcap
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2723,15 +2728,15 @@ Could not load idcard.properties for simcap
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for sexibridge
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2744,15 +2749,15 @@ Could not load idcard.properties for sexibridge
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for mathilde
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2765,15 +2770,15 @@ Could not load idcard.properties for mathilde
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for matapedia
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2786,15 +2791,15 @@ Could not load idcard.properties for matapedia
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for runaway
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2807,15 +2812,15 @@ Could not load idcard.properties for runaway
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for simmem
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2828,15 +2833,15 @@ Could not load idcard.properties for simmem
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for regelight
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2849,15 +2854,15 @@ Could not load idcard.properties for regelight
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for mediterranea
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2870,15 +2875,15 @@ Could not load idcard.properties for mediterranea
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for eucalypt
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2891,15 +2896,15 @@ Could not load idcard.properties for eucalypt
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for samsara2
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2912,15 +2917,15 @@ Could not load idcard.properties for samsara2
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for QS1
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2933,15 +2938,15 @@ Could not load idcard.properties for QS1
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for oakpine2
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2954,15 +2959,15 @@ Could not load idcard.properties for oakpine2
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for tagada
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2975,15 +2980,15 @@ Could not load idcard.properties for tagada
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for oakpine1
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2996,15 +3001,15 @@ Could not load idcard.properties for oakpine1
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for karite
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3017,15 +3022,15 @@ Could not load idcard.properties for karite
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for twoe
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3038,15 +3043,15 @@ Could not load idcard.properties for twoe
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for sylvestris
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3059,15 +3064,15 @@ Could not load idcard.properties for sylvestris
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for phenofit
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3080,15 +3085,15 @@ Could not load idcard.properties for phenofit
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for fiesta
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3101,15 +3106,15 @@ Could not load idcard.properties for fiesta
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for rreshar
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3122,15 +3127,15 @@ Could not load idcard.properties for rreshar
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for fompine
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3143,15 +3148,15 @@ Could not load idcard.properties for fompine
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for ifnca
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3164,15 +3169,15 @@ Could not load idcard.properties for ifnca
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for isgm
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3185,15 +3190,15 @@ Could not load idcard.properties for isgm
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for bimodal
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3206,15 +3211,15 @@ Could not load idcard.properties for bimodal
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for ventoux
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3227,15 +3232,15 @@ Could not load idcard.properties for ventoux
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for dynet
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3248,15 +3253,15 @@ Could not load idcard.properties for dynet
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for safe
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3269,15 +3274,15 @@ Could not load idcard.properties for safe
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for economics
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3290,15 +3295,15 @@ Could not load idcard.properties for economics
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for mpb
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3311,15 +3316,15 @@ Could not load idcard.properties for mpb
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for maddmodule
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3332,15 +3337,15 @@ Could not load idcard.properties for maddmodule
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for artemis2014
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3353,15 +3358,15 @@ Could not load idcard.properties for artemis2014
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for ca1
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3374,15 +3379,15 @@ Could not load idcard.properties for ca1
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for cytisus
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3395,15 +3400,15 @@ Could not load idcard.properties for cytisus
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for selva
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3416,15 +3421,15 @@ Could not load idcard.properties for selva
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for ivy
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3437,15 +3442,15 @@ Could not load idcard.properties for ivy
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for luberon
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3458,15 +3463,15 @@ Could not load idcard.properties for luberon
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for ventoug
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3479,15 +3484,15 @@ Could not load idcard.properties for ventoug
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for natura2014
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3500,15 +3505,15 @@ Could not load idcard.properties for natura2014
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for croireplant
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3521,15 +3526,15 @@ Could not load idcard.properties for croireplant
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for paletuviers
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3542,15 +3547,15 @@ Could not load idcard.properties for paletuviers
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 15:23:38 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for mountain
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3563,14 +3568,14 @@ Could not load idcard.properties for mountain
    at capsis.app.C4Script.<init>(C4Script.java:71)
    at standfire.myscripts.SFScript.main(SFScript.java:60)
    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-   at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-   at java.lang.reflect.Method.invoke(Method.java:498)
+   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+   at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+   at java.lang.reflect.Method.invoke(Unknown Source)
    at capsis.script.Pilot.runC4Script(Pilot.java:122)
    at capsis.script.Pilot.start(Pilot.java:111)
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-INFO [2016.09.24 12:53:10 PDT] 
+INFO [2016.09.24 15:23:38 PDT] 
 Model [standfire.model.SFModel] was correctly loaded
 

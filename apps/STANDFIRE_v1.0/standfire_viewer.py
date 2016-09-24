@@ -7,7 +7,10 @@ import platform
 import subprocess
 
 # relative path import for standfire modules
-mod_path = '/'.join(os.path.dirname(os.path.abspath(__file__)).split('/')[:-2]) + '/standfire/'
+print os.getcwd()
+sep = os.sep
+#mod_path = '/'.join(os.path.dirname(os.path.abspath(__file__)).split('/')[:-2]) + '/standfire/'
+mod_path = sep.join(os.getcwd().split(sep)[:-2]) + '\\standfire\\'
 sys.path.append(mod_path)
 
 # import standfire modules
@@ -327,7 +330,7 @@ class Application(ttk.Frame, object):
             if platform.system().lower() == 'linux':
                 os.system("gnome-terminal -e 'sh runScript.sh'")
             if platform.system().lower() == 'windows':
-                os.system("start cmd /K 'runScript.bat'")
+                os.system('start cmd /K "runScript.bat"')
 
         self.update_status("Done")
 
