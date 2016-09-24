@@ -417,6 +417,7 @@ class Execute(object):
         """
         """
 
+        os.chdir(self.capsis_dir)
         subprocess.call([self.capsis_dir + '/capsis.bat', '-p', 'script','standfire.myscripts.SFScript', path_to_run_file])
 
     def _read_fuels(self, path_to_run_file):
