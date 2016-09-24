@@ -4,6 +4,7 @@ import multiprocessing, os, sys, time, shutil
 import tkFileDialog, tkMessageBox, ttk
 import Tkinter as tk
 import platform
+import subprocess
 
 # relative path import for standfire modules
 mod_path = '/'.join(os.path.dirname(os.path.abspath(__file__)).split('/')[:-2]) + '/standfire/'
@@ -68,7 +69,7 @@ class Application(ttk.Frame, object):
         """
         Class constructor
         """
-        
+
         # boolean for GUI initialization
         self.is_initialized = False
 
@@ -84,12 +85,12 @@ class Application(ttk.Frame, object):
         self.create_widgets()
         self.grid_widgets()
         self.reset()
-        
+
         self.status.set(" Status: Ready")
-        
-       
+
+
     def update_status(self, text):
-    
+
     	self.status.set(" Status: %s" % text)
 
     def get_keyword_file(self):
@@ -115,32 +116,30 @@ class Application(ttk.Frame, object):
                 self.sim_years_cb['values'] = self.sim_years
             else:
                 tkMessageBox.showerror("", "The specified file must have a '.key' extension", parent=self.root)
-        
-        
-        
+
         self.update_status("Ready")
-                
+
     def get_output_dir(self):
     	"""
     	Opens file dialog and returns user specified directory
     	"""
-    	
+
     	file_opt = options = {}
     	options['parent'] = self.root
     	options['title'] = "Select Output Directory"
     	output_dir = tkFileDialog.askdirectory(**file_opt)
-    	
+
     	if (output_dir):
     		if os.path.isdir(output_dir):
     			self.output_dir.set(output_dir)
     		else:
     			tkMessageBox.showerror("", "The directory does not exist", parent=self.root)
-                
+
     def toggle_trt_check(self):
     	"""
     	Toggle logic for treatment parameter entry fields
     	"""
-    
+
     	if self.trt_check_var.get() == 0:
     		self.crown_spacing.set(0.0)
     		self.prune_height.set(0.0)
@@ -151,11 +150,11 @@ class Application(ttk.Frame, object):
     		self.prune_entry.configure(state='enabled')
     		self.crown_spacing.set(1.5)
     		self.prune_height.set(1.5)
-    		
+
     def toggle_unlock(self):
     	"""
     	"""
-    	
+
     	if self.unlock_check_var.get() == 0:
     		self.origin_x_entry.configure(state='disabled')
     		self.origin_y_entry.configure(state='disabled')
@@ -166,9 +165,9 @@ class Application(ttk.Frame, object):
     		self.origin_y_entry.configure(state='enabled')
     		self.width_entry.configure(state='enabled')
     		self.length_entry.configure(state='enabled')
-    		
+
     def update_domain_change(self, a, b, c):
-    
+
         try:
             offset = self.x_size.get() - 64 - ((self.y_size.get() - 64)/2)
             x_ign = int(0.3*float(offset))
@@ -193,12 +192,16 @@ class Application(ttk.Frame, object):
         if platform.system().lower() == 'linux':
             with open(out_dir + '/output/runScript.sh', 'w') as f:
                 f.write(mod_path + '/bin/fds_linux/wfds ' + self.run_name.get() + '.txt')
-    
+
+        if platform.system().lower() == 'windows':
+            with open(out_dir + '/output/runScript.bat', 'w') as f:
+                f.write(mod_path + '/bin/fds_win/wfds ' + self.run_name.get() + '.txt')
+
     def run(self):
     	"""
     	This method uses the user input and run a STANDFIRE simulation
     	"""
-    
+
     	# FVS simulation
     	# ==============
     	self.update_status("FVS simulation...")
@@ -206,18 +209,18 @@ class Application(ttk.Frame, object):
     	fuel = fuels.Fvsfuels(VARIANTS[self.variant_cb.get()])
     	fuel.set_keyword(self.keyword_filename.get())
     	fuel.run_fvs()
-    	
+
     	self.update_status("Saving FVS fuels output...")
     	self.root.update()
     	time.sleep(1)
     	fuel.save_trees_by_year(int(self.sim_years_cb.get()))
-    	
+
     	svs_base = fuel.get_standid()
-		
+
         self.update_status("Configuring Capsis...")
         self.root.update()
         time.sleep(1)
-        
+
         # configure the capsis run
         cap = capsis.RunConfig(fuel.wdir)
 
@@ -225,7 +228,7 @@ class Application(ttk.Frame, object):
         cap.set_x_size(self.x_size.get())
         cap.set_y_size(self.y_size.get())
         cap.set_z_size(self.z_size.get())
-        
+
         # set surface fuels
         cap.set_srf_height(self.shrub_ht.get(), self.herb_ht.get(), self.litter_ht.get())
         load_shrub_dead = self.shrub_load.get() * (self.shrub_percent_dead.get()/100.)
@@ -239,12 +242,12 @@ class Application(ttk.Frame, object):
         cap.set_srf_cover(self.shrub_cover.get()/100., self.herb_cover.get()/100.)
         cap.set_srf_live_mc(self.shrub_live_mc.get(), self.herb_live_mc.get())
         cap.set_srf_dead_mc(self.shrub_dead_mc.get(), self.herb_dead_mc.get(), self.litter_dead_mc.get())
-        
+
         # treatments
         if self.trt_check_var.get() == 1:
         	cap.set_crown_space(self.crown_spacing.get())
         	cap.set_prune_height(self.prune_height.get())
-        
+
         # show 3D
         if self.viewer_check_var.get() == 1:
         	cap.set_show3D('true')
@@ -271,8 +274,8 @@ class Application(ttk.Frame, object):
         # stretch the mesh
         fds.create_mesh(stretch={'CC':[3,33], 'PC':[1,31], 'axis':'z'})
         # set the ignition strip
-        fds.create_ignition(self.start_time.get(), self.end_time.get(), self.origin_x.get(), 
-        		self.origin_x.get() + self.width.get(), self.origin_y.get(), 
+        fds.create_ignition(self.start_time.get(), self.end_time.get(), self.origin_x.get(),
+        		self.origin_x.get() + self.width.get(), self.origin_y.get(),
         		self.origin_y.get() + self.length.get())
         fds.set_hrrpua(self.hrr.get())
         # other parameters
@@ -285,7 +288,6 @@ class Application(ttk.Frame, object):
         self.root.update()
         time.sleep(1)
         fds.save_input(fuel.wdir + 'output/' + self.run_name.get() + '.txt')
-
 
         # clean up directory
         self.update_status("Cleaning up directory...")
@@ -306,24 +308,35 @@ class Application(ttk.Frame, object):
 
         # create wfds run script
         self.create_wfds_run_script()
-        
+
+        # check if execute WFDS is on
+        if self.fds_check_var.get() == 1:
+            self.update_status("Executing WFDS...")
+            self.root.update()
+            time.sleep(1)
+            os.chdir(self.output_dir.get() + '/output/')
+            if platform.system().lower() == 'linux':
+                os.system("gnome-terminal -e 'sh runScript.sh'")
+            if platform.system().lower() == 'windows':
+                os.system("start cmd /K 'runScript.bat'")
+
         self.update_status("Done")
 
         # kill root
-        time.sleep(1)
+        time.sleep(2)
         self.root.quit()
-    
+
     def create_variables(self):
         """
         Application variable definitions
         """
-        
+
         # boolean check variables
         self.trt_check_var = tk.IntVar(self.root)
     	self.viewer_check_var = tk.IntVar(self.root)
     	self.fds_check_var = tk.IntVar(self.root)
     	self.unlock_check_var = tk.IntVar(self.root)
-    
+
     	# entry field variables
     	# =====================
     	# canopy fuels
@@ -374,31 +387,31 @@ class Application(ttk.Frame, object):
     	self.run_name = tk.StringVar(self.root)
     	self.sim_time = tk.IntVar(self.root)
     	self.output_dir = tk.StringVar(self.root)
-    	
+
     	# trace variable
     	self.x_size.trace('w', self.update_domain_change)
     	self.y_size.trace('w', self.update_domain_change)
-    	
+
     	# status bar
     	self.status = tk.StringVar(self.root)
-    	
-    	
+
+
     def reset(self):
     	"""
     	Resets values to default
-    	
+
     	..note:: This method is called when GUI is initialized
     	"""
-    	
+
     	if (self.is_initialized):
     		result = tkMessageBox.askquestion("Reset Values",
     				"Are you sure you want to reset values to default?",
     				icon='warning', parent=self.root)
     	else:
     		result = 'yes'
-    	
+
     	self.is_initialized = True
-    	
+
     	if result =='yes':
 			self.viewer_check_var.set(1)
 			# surface fuels
@@ -443,13 +456,13 @@ class Application(ttk.Frame, object):
 			self.end_time.set(80)
 			# run settings
 			self.sim_time.set(300)
-    	
+
     def clear(self):
-    
+
     	result = tkMessageBox.askquestion("Clear Form",
     			"Are you sure you want to clear this form?", icon='warning',
     			parent=self.root)
-    	
+
     	if result == 'yes':
 			# surface fuels
 			self.shrub_ht.set("")
@@ -492,8 +505,7 @@ class Application(ttk.Frame, object):
 			self.end_time.set("")
 			# run settings
 			self.sim_time.set("")
-    	
-    	
+
     def create_widgets(self):
         """
         Widget definitions and configuration
@@ -512,7 +524,7 @@ class Application(ttk.Frame, object):
         self.variant_cb.current(2)
         self.sim_years_lbl = ttk.Label(self.groupCF, text="Simulation year:")
         self.sim_years_cb = ttk.Combobox(self.groupCF, values="", state='readonly')
-    	
+
 
         # Surface fuels panel
         # ===================
@@ -577,7 +589,7 @@ class Application(ttk.Frame, object):
         self.wind_entry = ttk.Entry(self.groupWE, textvariable=self.wind_speed, **entry_opts)
         self.temp_lbl = ttk.Label(self.groupWE, text=u"temperature (\u00B0C):")
         self.temp_entry = ttk.Entry(self.groupWE, textvariable=self.temp, **entry_opts)
-        
+
         # Ignitor Fire
         # ============
         self.groupIF = ttk.LabelFrame(self.root, text="Igniter Fire")
@@ -613,7 +625,7 @@ class Application(ttk.Frame, object):
         self.prune_lbl = ttk.Label(self.groupTR, text="prune height (m):")
         self.prune_entry = ttk.Entry(self.groupTR, textvariable=self.prune_height, **entry_opts)
         self.prune_entry.configure(state='disabled')
-        
+
         # Run Settings
         # ============
         self.groupRS = ttk.LabelFrame(self.root, text="Run Settings")
@@ -628,18 +640,18 @@ class Application(ttk.Frame, object):
         self.output_dir_lbl = ttk.Label(self.groupRS, text="output directory:")
         self.output_dir_entry = ttk.Entry(self.groupRS, textvariable=self.output_dir, **entry_opts)
         self.output_dir_bnt = ttk.Button(self.groupRS, text="Browse...", command=self.get_output_dir)
-        
+
         # Control Buttons
         # ===============
         self.clear_form_bnt = ttk.Button(self.root, text="Clear Form", command=self.clear)
         self.reset_form_bnt = ttk.Button(self.root, text="Reset Values", command=self.reset)
         self.gen_bnt = ttk.Button(self.root, text="Run", command=self.run)
-        
+
         # Status Bar
         # ==========
         self.status_lbl = ttk.Label(self.root, relief=tk.SUNKEN, anchor=tk.W,
         		textvariable=self.status, font=("", 10))
-        
+
 
     def grid_widgets(self):
         """
@@ -659,7 +671,7 @@ class Application(ttk.Frame, object):
         self.variant_cb.grid(row=1, column=1, **options)
         self.sim_years_lbl.grid(row=1, column=2, **options)
         self.sim_years_cb.grid(row=1, column=3, **options)
-        
+
 
         # Surface fuels panel
         # ===================
@@ -726,7 +738,7 @@ class Application(ttk.Frame, object):
         self.wind_entry.grid(row=0, column=1, **options)
         self.temp_lbl.grid(row=1, column=0, **options)
         self.temp_entry.grid(row=1, column=1, **options)
-        
+
         # Ignitor Fire
         # ============
         self.groupIF.grid(row=1, rowspan=2, column=2, **options)
@@ -746,7 +758,7 @@ class Application(ttk.Frame, object):
         self.end_time_lbl.grid(row=6, column=0, **options)
         self.end_time_entry.grid(row=6, column=1, **options)
         self.auto_calc_bnt.grid(row=7, column=0, columnspan=2, **options)
-        
+
         # Treatment
         # =========
         self.groupTR.grid(row=3, column=0, columnspan=3, **options)
@@ -757,7 +769,7 @@ class Application(ttk.Frame, object):
         self.crown_entry.grid(row=0, column=2, **options)
         self.prune_lbl.grid(row=0, column=3, **options)
         self.prune_entry.grid(row=0, column=4, **options)
-        
+
         # Run Settings
         # ============
         self.groupRS.grid(row=4, rowspan=3, column=0, columnspan=2, **options)
@@ -771,17 +783,17 @@ class Application(ttk.Frame, object):
         self.output_dir_bnt.grid(row=1, column=3, **options)
         self.viewer_check.grid(row=2, column=0, **options)
         self.fds_check.grid(row=2, column=1, columnspan=2, **options)
-        
+
         # Control Buttons
         # ===============
         self.clear_form_bnt.grid(row=4, column=2, **options)
         self.reset_form_bnt.grid(row=5, column=2, **options)
         self.gen_bnt.grid(row=6, column=2, **options)
-        
+
         # Status bar
         # ==========
         self.status_lbl.grid(row=7, column=0, columnspan=4, sticky='NSEW', padx=0)
-        
+
 
 if __name__ == '__main__':
     Application.main()

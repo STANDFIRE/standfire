@@ -1,13 +1,13 @@
-INFO [2016.09.24 11:38:53 PDT] 
+INFO [2016.09.24 12:53:10 PDT] 
 Capsis booting...
 
-INFO [2016.09.24 11:38:53 PDT] Settings.loadPropertyFile ()
+INFO [2016.09.24 12:53:10 PDT] Settings.loadPropertyFile ()
 Property file loaded: /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc/capsis.options
 
-INFO [2016.09.24 11:38:53 PDT] Settings.loadPropertyFile ()
+INFO [2016.09.24 12:53:10 PDT] Settings.loadPropertyFile ()
 Property file loaded: /home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc/capsis.properties
 
-INFO [2016.09.24 11:38:53 PDT] 
+INFO [2016.09.24 12:53:10 PDT] 
 Settings properties...
      R_HOME_DIR = /program files/r/rw1090/bin
      R_HOME_UNIT = c:
@@ -29,13 +29,13 @@ Settings properties...
      sketch.panel3D.anti.aliasing = false
      sketch.panel3D.debug.gl = false
      standfire.last.memorizer = DefaultMemorizer
-     standfire.myscripts.StandFireFrame.location = 416x381
+     standfire.myscripts.StandFireFrame.location = 416x409
      standfire.myscripts.StandFireFrame.size = 1351x724
      translator.warning.log = false
      veto.dialog.location.memorization = false
      veto.dialog.size.memorization = false
 
-INFO [2016.09.24 11:38:53 PDT] 
+INFO [2016.09.24 12:53:10 PDT] 
 System properties...
      awt.toolkit = sun.awt.X11.XToolkit
      file.encoding = UTF-8
@@ -91,10 +91,10 @@ System properties...
      user.name = lawells
      user.timezone = America/Vancouver
 
-INFO [2016.09.24 11:38:53 PDT] 
+INFO [2016.09.24 12:53:10 PDT] 
 Default encoding: UTF-8 (Aliases: [unicode-1-1-utf-8, UTF8])
 
-INFO [2016.09.24 11:38:53 PDT] 
+INFO [2016.09.24 12:53:10 PDT] 
 CapsisExtensionManager knows 1202 active extensions:
    abccedrus.extension.standviewer.AbcSceneViewer
    abccedrus.model.AbcInventoryLoader
@@ -1300,10 +1300,10 @@ CapsisExtensionManager knows 1202 active extensions:
    woudyfor.model.WoudyShrubFilter
 
 
-INFO [2016.09.24 11:38:53 PDT] Engine.init ()
-Capsis 4.2.4 with pilot capsis.script.Pilot: correct boot at 24 Sep 2016 11:38:53 PDT
+INFO [2016.09.24 12:53:10 PDT] Engine.init ()
+Capsis 4.2.4 with pilot capsis.script.Pilot: correct boot at 24 Sep 2016 12:53:10 PDT
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for prunus
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1324,7 +1324,7 @@ Could not load idcard.properties for prunus
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for transpoprege
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1345,7 +1345,7 @@ Could not load idcard.properties for transpoprege
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for pp3
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1366,7 +1366,7 @@ Could not load idcard.properties for pp3
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for gymnos
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1387,7 +1387,7 @@ Could not load idcard.properties for gymnos
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for organon
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1408,7 +1408,7 @@ Could not load idcard.properties for organon
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for lerfob/abial
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1429,7 +1429,7 @@ Could not load idcard.properties for lerfob/abial
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for groovytest
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1450,7 +1450,7 @@ Could not load idcard.properties for groovytest
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for samsara
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1471,7 +1471,7 @@ Could not load idcard.properties for samsara
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for mangrove
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1492,7 +1492,7 @@ Could not load idcard.properties for mangrove
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for genloader
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1513,7 +1513,7 @@ Could not load idcard.properties for genloader
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for transpop
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1534,7 +1534,7 @@ Could not load idcard.properties for transpop
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for mustard
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1555,7 +1555,7 @@ Could not load idcard.properties for mustard
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for lemoine
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1576,7 +1576,7 @@ Could not load idcard.properties for lemoine
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for amapsim
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1597,7 +1597,7 @@ Could not load idcard.properties for amapsim
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for lsfmgm
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1618,7 +1618,7 @@ Could not load idcard.properties for lsfmgm
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for simsys
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1639,7 +1639,7 @@ Could not load idcard.properties for simsys
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for fcba/piceaabies
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1660,7 +1660,7 @@ Could not load idcard.properties for fcba/piceaabies
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for plantabsl
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1681,7 +1681,7 @@ Could not load idcard.properties for plantabsl
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for quergus
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1702,7 +1702,7 @@ Could not load idcard.properties for quergus
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for artemis
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1723,7 +1723,7 @@ Could not load idcard.properties for artemis
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for afocelpp
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1744,7 +1744,7 @@ Could not load idcard.properties for afocelpp
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for samsaraLightLoader
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1765,7 +1765,7 @@ Could not load idcard.properties for samsaraLightLoader
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for samare2014
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1786,7 +1786,7 @@ Could not load idcard.properties for samare2014
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for natura
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1807,7 +1807,7 @@ Could not load idcard.properties for natura
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for kerguelen
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1828,7 +1828,7 @@ Could not load idcard.properties for kerguelen
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for regix
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1849,7 +1849,7 @@ Could not load idcard.properties for regix
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for afocelpa
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1870,7 +1870,7 @@ Could not load idcard.properties for afocelpa
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for forceps
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1891,7 +1891,7 @@ Could not load idcard.properties for forceps
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for lerfob/commons
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1912,7 +1912,7 @@ Could not load idcard.properties for lerfob/commons
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for simcop
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1933,7 +1933,7 @@ Could not load idcard.properties for simcop
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for quercus
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1954,7 +1954,7 @@ Could not load idcard.properties for quercus
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for deesses
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1975,7 +1975,7 @@ Could not load idcard.properties for deesses
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for uqar/jackpine
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -1996,7 +1996,7 @@ Could not load idcard.properties for uqar/jackpine
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for silmar/silmars
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2017,7 +2017,7 @@ Could not load idcard.properties for silmar/silmars
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for guppy
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2038,7 +2038,7 @@ Could not load idcard.properties for guppy
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for fasy
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2059,7 +2059,7 @@ Could not load idcard.properties for fasy
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for modispinaster
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2080,7 +2080,7 @@ Could not load idcard.properties for modispinaster
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for training
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2101,7 +2101,7 @@ Could not load idcard.properties for training
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for sydy
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2122,7 +2122,7 @@ Could not load idcard.properties for sydy
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for abccedrus
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2143,7 +2143,7 @@ Could not load idcard.properties for abccedrus
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for pnn2
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2164,7 +2164,7 @@ Could not load idcard.properties for pnn2
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for migration
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2185,7 +2185,7 @@ Could not load idcard.properties for migration
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for succes
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2206,7 +2206,7 @@ Could not load idcard.properties for succes
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for pinuspinaster
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2227,7 +2227,7 @@ Could not load idcard.properties for pinuspinaster
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for stretch
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2248,7 +2248,7 @@ Could not load idcard.properties for stretch
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for ftchene
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2269,7 +2269,7 @@ Could not load idcard.properties for ftchene
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for woudyfor
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2290,7 +2290,7 @@ Could not load idcard.properties for woudyfor
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for samare
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2311,7 +2311,7 @@ Could not load idcard.properties for samare
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for laricio
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2332,7 +2332,7 @@ Could not load idcard.properties for laricio
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for optimist
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2353,7 +2353,7 @@ Could not load idcard.properties for optimist
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for alisier
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2374,7 +2374,7 @@ Could not load idcard.properties for alisier
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for nz1
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2395,7 +2395,7 @@ Could not load idcard.properties for nz1
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for phenofit5
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2416,7 +2416,7 @@ Could not load idcard.properties for phenofit5
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for bidasoa
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2437,7 +2437,7 @@ Could not load idcard.properties for bidasoa
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for nrg
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2458,7 +2458,7 @@ Could not load idcard.properties for nrg
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for melies
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2479,7 +2479,7 @@ Could not load idcard.properties for melies
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for physiodemogenetics
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2500,7 +2500,7 @@ Could not load idcard.properties for physiodemogenetics
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for presage
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2521,7 +2521,7 @@ Could not load idcard.properties for presage
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for fcba/pseudotsugamenziesii
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2542,7 +2542,7 @@ Could not load idcard.properties for fcba/pseudotsugamenziesii
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for lerfob/fagacees
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2563,7 +2563,7 @@ Could not load idcard.properties for lerfob/fagacees
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for castaneaonly
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2584,7 +2584,7 @@ Could not load idcard.properties for castaneaonly
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for stretch2
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2605,7 +2605,7 @@ Could not load idcard.properties for stretch2
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for idf/castaneatables
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2626,7 +2626,7 @@ Could not load idcard.properties for idf/castaneatables
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for dynaclim
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2647,7 +2647,7 @@ Could not load idcard.properties for dynaclim
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for pradiata
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2668,7 +2668,7 @@ Could not load idcard.properties for pradiata
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for loxodonta
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2689,7 +2689,7 @@ Could not load idcard.properties for loxodonta
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for heterofor
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2710,7 +2710,7 @@ Could not load idcard.properties for heterofor
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for simcap
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2731,7 +2731,7 @@ Could not load idcard.properties for simcap
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for sexibridge
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2752,7 +2752,7 @@ Could not load idcard.properties for sexibridge
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for mathilde
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2773,7 +2773,7 @@ Could not load idcard.properties for mathilde
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for matapedia
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2794,7 +2794,7 @@ Could not load idcard.properties for matapedia
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for runaway
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2815,7 +2815,7 @@ Could not load idcard.properties for runaway
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for simmem
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2836,7 +2836,7 @@ Could not load idcard.properties for simmem
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for regelight
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2857,7 +2857,7 @@ Could not load idcard.properties for regelight
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for mediterranea
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2878,7 +2878,7 @@ Could not load idcard.properties for mediterranea
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for eucalypt
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2899,7 +2899,7 @@ Could not load idcard.properties for eucalypt
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for samsara2
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2920,7 +2920,7 @@ Could not load idcard.properties for samsara2
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for QS1
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2941,7 +2941,7 @@ Could not load idcard.properties for QS1
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for oakpine2
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2962,7 +2962,7 @@ Could not load idcard.properties for oakpine2
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for tagada
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -2983,7 +2983,7 @@ Could not load idcard.properties for tagada
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for oakpine1
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3004,7 +3004,7 @@ Could not load idcard.properties for oakpine1
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for karite
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3025,7 +3025,7 @@ Could not load idcard.properties for karite
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for twoe
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3046,7 +3046,7 @@ Could not load idcard.properties for twoe
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for sylvestris
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3067,7 +3067,7 @@ Could not load idcard.properties for sylvestris
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for phenofit
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3088,7 +3088,7 @@ Could not load idcard.properties for phenofit
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for fiesta
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3109,7 +3109,7 @@ Could not load idcard.properties for fiesta
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for rreshar
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3130,7 +3130,7 @@ Could not load idcard.properties for rreshar
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for fompine
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3151,7 +3151,7 @@ Could not load idcard.properties for fompine
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for ifnca
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3172,7 +3172,7 @@ Could not load idcard.properties for ifnca
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for isgm
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3193,7 +3193,7 @@ Could not load idcard.properties for isgm
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for bimodal
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3214,7 +3214,7 @@ Could not load idcard.properties for bimodal
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for ventoux
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3235,7 +3235,7 @@ Could not load idcard.properties for ventoux
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for dynet
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3256,7 +3256,7 @@ Could not load idcard.properties for dynet
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for safe
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3277,7 +3277,7 @@ Could not load idcard.properties for safe
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for economics
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3298,7 +3298,7 @@ Could not load idcard.properties for economics
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for mpb
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3319,7 +3319,7 @@ Could not load idcard.properties for mpb
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for maddmodule
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3340,7 +3340,7 @@ Could not load idcard.properties for maddmodule
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for artemis2014
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3361,7 +3361,7 @@ Could not load idcard.properties for artemis2014
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for ca1
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3382,7 +3382,7 @@ Could not load idcard.properties for ca1
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for cytisus
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3403,7 +3403,7 @@ Could not load idcard.properties for cytisus
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for selva
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3424,7 +3424,7 @@ Could not load idcard.properties for selva
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for ivy
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3445,7 +3445,7 @@ Could not load idcard.properties for ivy
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for luberon
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3466,7 +3466,7 @@ Could not load idcard.properties for luberon
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for ventoug
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3487,7 +3487,7 @@ Could not load idcard.properties for ventoug
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for natura2014
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3508,7 +3508,7 @@ Could not load idcard.properties for natura2014
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for croireplant
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3529,7 +3529,7 @@ Could not load idcard.properties for croireplant
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for paletuviers
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3550,7 +3550,7 @@ Could not load idcard.properties for paletuviers
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-WARNING [2016.09.24 11:38:53 PDT] ModelManager.getIdCards ()
+WARNING [2016.09.24 12:53:10 PDT] ModelManager.getIdCards ()
 Could not load idcard.properties for mountain
 -> java.lang.NullPointerException
    at capsis.kernel.ModelManager.getIdCards(ModelManager.java:214)
@@ -3571,6 +3571,6 @@ Could not load idcard.properties for mountain
    at capsis.app.Starter.start(Starter.java:133)
    at capsis.app.Starter.main(Starter.java:161)
 
-INFO [2016.09.24 11:38:53 PDT] 
+INFO [2016.09.24 12:53:10 PDT] 
 Model [standfire.model.SFModel] was correctly loaded
 

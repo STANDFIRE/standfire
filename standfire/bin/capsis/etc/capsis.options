@@ -1,5 +1,5 @@
 #/home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc/capsis.options
-#Sat Sep 24 10:45:30 PDT 2016
+#Sat Sep 24 12:34:48 PDT 2016
 R_HOME_DIR=/program files/r/rw1090/bin
 R_HOME_UNIT=c\:
 apple.laf.useScreenMenuBar=true
@@ -20,7 +20,7 @@ memo.sketcher.for.Vegetation\ Layers=capsis.lib.fire.sketcher.FiLayerSetSketcher
 sketch.panel3D.anti.aliasing=false
 sketch.panel3D.debug.gl=false
 standfire.last.memorizer=DefaultMemorizer
-standfire.myscripts.StandFireFrame.location=416x381
+standfire.myscripts.StandFireFrame.location=416x409
 standfire.myscripts.StandFireFrame.size=1351x724
 translator.warning.log=false
 veto.dialog.location.memorization=false
