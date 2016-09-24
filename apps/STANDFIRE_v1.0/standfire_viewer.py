@@ -3,6 +3,7 @@
 import multiprocessing, os, sys, time, shutil
 import tkFileDialog, tkMessageBox, ttk
 import Tkinter as tk
+import platform
 
 # relative path import for standfire modules
 mod_path = '/'.join(os.path.dirname(os.path.abspath(__file__)).split('/')[:-2]) + '/standfire/'
@@ -182,6 +183,16 @@ class Application(ttk.Frame, object):
             self.origin_x.set("NA")
             self.origin_y.set("NA")
             self.length.set("NA")
+
+    def create_wfds_run_script(self):
+        """
+        """
+
+        out_dir = self.output_dir.get()
+
+        if platform.system().lower() == 'linux':
+            with open(out_dir + '/output/runScript.sh', 'w') as f:
+                f.write(mod_path + '/bin/fds_linux/wfds ' + self.run_name.get() + '.txt')
     
     def run(self):
     	"""
@@ -274,7 +285,8 @@ class Application(ttk.Frame, object):
         self.root.update()
         time.sleep(1)
         fds.save_input(fuel.wdir + 'output/' + self.run_name.get() + '.txt')
-        
+
+
         # clean up directory
         self.update_status("Cleaning up directory...")
         self.root.update()
@@ -291,6 +303,9 @@ class Application(ttk.Frame, object):
         		if i.split('.')[-1] not in keep:
         			shutil.copy(cur_dir + '/' + i, self.output_dir.get())
         			os.remove(cur_dir + '/' + i)
+
+        # create wfds run script
+        self.create_wfds_run_script()
         
         self.update_status("Done")
 

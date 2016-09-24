@@ -221,9 +221,9 @@ class Execute(object):
         if platform.system().lower() == "linux":
             self._exec_linux(input_file, n_proc)
         elif platform.system().lower() == "windows":
-            self.exec_win(input_file, n_proc)
+            self._exec_win(input_file, n_proc)
         elif platform.system().lower() == "darwin":
-            self.exec_mac()
+            self._exec_mac()
         else:
             print "OS of type {0} is not recognized by STANDFIRE".format(platform.system())
 
