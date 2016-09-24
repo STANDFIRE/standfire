@@ -1,0 +1,27 @@
+#/home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc/capsis.options
+#Thu Sep 15 08:29:40 MDT 2016
+R_HOME_DIR=/program files/r/rw1090/bin
+R_HOME_UNIT=c\:
+apple.laf.useScreenMenuBar=true
+capsis.ctrl.key=CTRL
+capsis.etc=/home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc
+capsis.gui.DialogWithClose.location=1314x609
+capsis.gui.DialogWithClose.size=417x478
+capsis.tmp=/home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/tmp
+capsis.url=http\://capsis.cirad.fr
+capsis.var=/home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/var
+crash.recovery=true
+debug.extension.manager=true
+default.property.file=/home/lawells/Projects/standfire/repo/standfire/standfire/bin/capsis/etc/capsis.options
+memo.sketcher.for.BuiltinType.GRID=jeeb.lib.sketch.extension.sketcher.GridSketcher
+memo.sketcher.for.BuiltinType.TERRAIN=jeeb.lib.sketch.scene.extension.sketcher.DTMSketcher
+memo.sketcher.for.BuiltinType.TREE_WITH_CROWN_PROFILE=jeeb.lib.sketch.scene.extension.sketcher.TreeWithCrownProfileSketcher
+memo.sketcher.for.Vegetation\ Layers=capsis.lib.fire.sketcher.FiLayerSetSketcher
+sketch.panel3D.anti.aliasing=false
+sketch.panel3D.debug.gl=false
+standfire.last.memorizer=DefaultMemorizer
+standfire.myscripts.StandFireFrame.location=300x683
+standfire.myscripts.StandFireFrame.size=1351x724
+translator.warning.log=false
+veto.dialog.location.memorization=false
+veto.dialog.size.memorization=false
