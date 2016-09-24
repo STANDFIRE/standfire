@@ -293,6 +293,10 @@ class Application(ttk.Frame, object):
         			os.remove(cur_dir + '/' + i)
         
         self.update_status("Done")
+
+        # kill root
+        time.sleep(1)
+        self.root.quit()
     
     def create_variables(self):
         """
