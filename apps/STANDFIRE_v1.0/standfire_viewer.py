@@ -190,12 +190,21 @@ class Application(ttk.Frame, object):
         out_dir = self.output_dir.get()
 
         if platform.system().lower() == 'linux':
-            with open(out_dir + '/output/runScript.sh', 'w') as f:
-                f.write(mod_path + '/bin/fds_linux/wfds ' + self.run_name.get() + '.txt')
+            if self.n_mesh.get() == 1:
+                with open(out_dir + '/output/runScript.sh', 'w') as f:
+                    f.write(mod_path + '/bin/fds_linux/wfds ' + self.run_name.get() + '.txt')
+            else:
+                with open(out_dir + '/output/runScript.sh', 'w') as f:
+                    f.write('module load mpi/openmpi-x86_64')
+                    f.write('mpiexec -np ' + self.n_mesh.get() + ' ' + mod_path + '/bin/fds_linux/wfds_mpi ' + self.run_name.get() + '.txt')
 
         if platform.system().lower() == 'windows':
-            with open(out_dir + '/output/runScript.bat', 'w') as f:
-                f.write(mod_path + '/bin/fds_win/wfds ' + self.run_name.get() + '.txt')
+            if self.n_mesh.get() == 1:
+                with open(out_dir + '/output/runScript.bat', 'w') as f:
+                    f.write(mod_path + '/bin/fds_win/wfds ' + self.run_name.get() + '.txt')
+            else:
+                with open(out_dir + '/output/runScript.bat', 'w') as f:
+                    f.write('mpiexec -np ' + self.n_mesh_get() + ' ' + mod_path + '/bin/fds_win/wfds_mpi ' + self.run_name.get() + '.txt')
 
     def run(self):
     	"""
