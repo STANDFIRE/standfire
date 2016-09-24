@@ -82,7 +82,7 @@ class Fvsfuels(object):
             if opt_sys == "Linux":
                 exec("from pyfvs.linux import pyfvs%s" % variant + " as temp")
             if opt_sys == "Windows":
-                exec("from pyfvs.windows import pyfvs%s" % variant + " as temp")
+                exec("from pyfvs.win import pyfvs%s" % variant + " as temp")
             if opt_sys == "Osx":
                 exec("from pyfvs.osx import pyfvs%s" % variant + "as temp")
         except ValueError:
