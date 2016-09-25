@@ -96,11 +96,11 @@ class MassLoss(object):
         """
 
         # read first tree file dry mass column
-        mass_sum = np.genfromtxt(self.wdir + SEP + self.tree_files[0], dtype=np.float, delimiter=',', skip_header=2)[:,3]
+        mass_sum = np.genfromtxt(self.wdir + SEP + self.tree_files[0], dtype=np.float, delimiter=',', skip_header=2)[:,2]
 
         # sum the rest
         for i in range(1, len(self.tree_files)):
-            mass_sum += np.genfromtxt(self.wdir + SEP + self.tree_files[i], dtype=np.float, delimiter=',', skip_header=2)[:,3]
+            mass_sum += np.genfromtxt(self.wdir + SEP + self.tree_files[i], dtype=np.float, delimiter=',', skip_header=2)[:,2]
 
         self.mass_sum = mass_sum
 
@@ -161,12 +161,12 @@ class HeatTransfer(object):
         """
 
         # read first tree file radiative heat column
-        conv_sum = np.genfromtxt(self.wdir + SEP + self.tree_files[0], dtype=np.float, delimiter=',', skip_header=2)[:,7]
+        conv_sum = np.genfromtxt(self.wdir + SEP + self.tree_files[0], dtype=np.float, delimiter=',', skip_header=2)[:,6]
         conv_sum = np.nan_to_num(conv_sum)
 
         # sum the rest
         for i in range(1, len(self.tree_files)):
-            tmp = np.genfromtxt(self.wdir + SEP + self.tree_files[i], dtype=np.float, delimiter=',', skip_header=2)[:,7]
+            tmp = np.genfromtxt(self.wdir + SEP + self.tree_files[i], dtype=np.float, delimiter=',', skip_header=2)[:,6]
             conv_sum += np.nan_to_num(tmp)
 
         self.conv_sum = conv_sum
@@ -176,12 +176,12 @@ class HeatTransfer(object):
         """
 
         # read first tree file radiative heat column
-        rad_sum = np.genfromtxt(self.wdir + SEP + self.tree_files[0], dtype=np.float, delimiter=',', skip_header=2)[:,8]
+        rad_sum = np.genfromtxt(self.wdir + SEP + self.tree_files[0], dtype=np.float, delimiter=',', skip_header=2)[:,7]
         rad_sum = np.nan_to_num(rad_sum)
 
         # sum the rest
         for i in range(1, len(self.tree_files)):
-            tmp = np.genfromtxt(self.wdir + SEP + self.tree_files[i], dtype=np.float, delimiter=',', skip_header=2)[:,8]
+            tmp = np.genfromtxt(self.wdir + SEP + self.tree_files[i], dtype=np.float, delimiter=',', skip_header=2)[:,7]
             rad_sum += np.nan_to_num(tmp)
 
         self.rad_sum = rad_sum

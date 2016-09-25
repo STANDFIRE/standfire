@@ -5,10 +5,19 @@ import platform
 
 # relative path import for standfire modules
 sep = os.sep
-mod_path = sep.join(os.getcwd().split(sep)[:-2]) +  sep + 'standfire' + sep
-sys.path.append(mod_path)
 
-import metrics
+# mod_path for python run
+#mod_path = sep.join(os.getcwd().split(sep)[:-2]) +  sep + 'standfire' + sep
+#sys.path.append(mod_path)
+
+# mod path for executable
+mod_path = os.getcwd() + sep + 'standfire' + sep
+
+# import for python run
+#import metrics
+
+# import for executable
+from standfire import metrics
 
 # simulation output directory
 print ''
@@ -92,6 +101,8 @@ if platform.system().lower() == 'linux':
     os.system("gnome-terminal -e 'sh runSMV.sh'")
 if platform.system().lower() == 'windows':
     os.system('start cmd /K "runSMV.bat"')
+
+hold = input('')
 
 
 
