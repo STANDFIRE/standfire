@@ -8,14 +8,23 @@ import subprocess
 
 # relative path import for standfire modules
 sep = os.sep
-#mod_path = '/'.join(os.path.dirname(os.path.abspath(__file__)).split('/')[:-2]) + '/standfire/'
+
+# mod_path for running from python
 mod_path = sep.join(os.getcwd().split(sep)[:-2]) +  sep + 'standfire' + sep
 sys.path.append(mod_path)
 
-# import standfire modules
+# mod_path for executable
+#mod_path = os.getcwd() + sep + 'standfire' + sep
+
+# import standfire modules for running from python
 import fuels
 import capsis
 import wfds
+
+# import standfire modules for executable
+#from standfire import fuels
+#from standfire import capsis
+#from standfire import wfds
 
 # globals
 VARIANTS = {'Southeast Alaska and Costal BC (ak)' : 'ak',
