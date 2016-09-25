@@ -202,20 +202,34 @@ class Application(ttk.Frame, object):
 
         if platform.system().lower() == 'linux':
             if self.n_mesh.get() == 1:
-                with open(out_dir + '/output/runScript.sh', 'w') as f:
+                with open(out_dir + '/output/runFDS.sh', 'w') as f:
                     f.write(mod_path + '/bin/fds_linux/wfds ' + self.run_name.get() + '.txt')
             else:
-                with open(out_dir + '/output/runScript.sh', 'w') as f:
+                with open(out_dir + '/output/runFDS.sh', 'w') as f:
                     f.write('module load mpi/openmpi-x86_64')
                     f.write('mpiexec -np ' + self.n_mesh.get() + ' ' + mod_path + '/bin/fds_linux/wfds_mpi ' + self.run_name.get() + '.txt')
 
         if platform.system().lower() == 'windows':
             if self.n_mesh.get() == 1:
-                with open(out_dir + '/output/runScript.bat', 'w') as f:
-                    f.write(mod_path + '/bin/fds_win/wfds ' + self.run_name.get() + '.txt')
+                with open(out_dir + '/output/runFDS.bat', 'w') as f:
+                    f.write(mod_path + '/bin/fds_win/wfds.exe ' + self.run_name.get() + '.txt')
             else:
-                with open(out_dir + '/output/runScript.bat', 'w') as f:
-                    f.write('mpiexec -np ' + self.n_mesh_get() + ' ' + mod_path + '/bin/fds_win/wfds_mpi ' + self.run_name.get() + '.txt')
+                with open(out_dir + '/output/runFDS.bat', 'w') as f:
+                    f.write('mpiexec -np ' + self.n_mesh_get() + ' ' + mod_path + '/bin/fds_win/wfds_mpi.exe ' + self.run_name.get() + '.txt')
+
+    def create_smv_run_script(self):
+        """
+        """
+
+        out_dir = self.output_dir.get()
+
+        if platform.system().lower() == 'linux':
+            with open(out_dir + '/output/runSMV.sh', 'w') as f:
+		    f.write(mod_path + '/bin/fds_linux/smokeview ' + self.run_name.get() + '.smv')
+
+        if platform.system().lower() == 'windows':
+            with open(out_dir + '/output/runSMV.bat', 'w') as f:
+                f.write(mod_path + '/bin/fds_win/smokeview.exe ' + self.run_name.get() + '.smv')
 
     def run(self):
     	"""
@@ -326,8 +340,9 @@ class Application(ttk.Frame, object):
         			shutil.copy(cur_dir + '/' + i, self.output_dir.get())
         			os.remove(cur_dir + '/' + i)
 
-        # create wfds run script
+        # create wfds and smv run scripts
         self.create_wfds_run_script()
+        self.create_smv_run_script()
 
         # check if execute WFDS is on
         if self.fds_check_var.get() == 1:
@@ -336,9 +351,9 @@ class Application(ttk.Frame, object):
             time.sleep(1)
             os.chdir(self.output_dir.get() + '/output/')
             if platform.system().lower() == 'linux':
-                os.system("gnome-terminal -e 'sh runScript.sh'")
+                os.system("gnome-terminal -e 'sh runFDS.sh'")
             if platform.system().lower() == 'windows':
-                os.system('start cmd /K "runScript.bat"')
+                os.system('start cmd /K "runFDS.bat"')
 
         self.update_status("Done")
 

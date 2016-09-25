@@ -63,7 +63,8 @@ class ROS(object):
         if time_1 and time_2:
             return self.x_diff / (time_2 - time_1)
         else:
-            return None
+            return 0.0
+
 
 class MassLoss(object):
 
@@ -115,6 +116,7 @@ class WindProfile(object):
     def __init__(self, wdir, slice_file, t_start, t_end, t_step):
 
         self.sf = SliceReader(wdir + SEP + slice_file, t_start, t_end, t_step)
+        self.sim_area = self.sf.sim_area
 
     def get_wind_profile(self):
         """
@@ -169,8 +171,6 @@ class HeatTransfer(object):
 
         self.conv_sum = conv_sum
 
-
-
     def read_tree_rad(self):
         """
         """
@@ -187,8 +187,6 @@ class HeatTransfer(object):
         self.rad_sum = rad_sum
 
 
-
-
 class SliceReader(object):
     """
     Reads slice file
@@ -200,12 +198,10 @@ class SliceReader(object):
         sfiles = glob.glob(sf_name)
         sfiles.sort(key=natural_keys)
 
-        print 'reading {0}'.format(sfiles[0])
         self.slice_data = self.binary_slice_reader(sfiles[0], t_start, t_end, t_step)
 
         # loop through each slice and assemble
         for sf in sfiles[1:]:
-            print 'reading {0}'.format(sf)
             self.slice_data = np.concatenate([self.slice_data,
                     self.binary_slice_reader(sf, t_start, t_end, t_step)], axis=2)
 
@@ -224,7 +220,6 @@ class SliceReader(object):
         # read the header and get variable name and units
         jump(bf)
         var_long = str(bf.read(30))
-        print var_long
         jump(bf)
 
         jump(bf)
@@ -243,6 +238,7 @@ class SliceReader(object):
         x_size = domain[1] - domain[0] + 1
         y_size = domain[3] - domain[2] + 1
         z_size = domain[5] - domain[4] + 1
+        self.sim_area = x_size * y_size
 
         # determine which axis the plane spans (orientation of the slice)
         if x_size == 1: M = y_size; N = z_size
@@ -282,7 +278,6 @@ class SliceReader(object):
 
             else:
                 break
-        print domain
 
         bf.close()
 
@@ -305,7 +300,6 @@ class ParticleReader(object):
         zp = {}
 
         for prt in prtfiles:
-            print 'reading {0}'.format(prt)
             xp[mesh], yp[mesh], zp[mesh] = self.binary_prt5_reader(prt, t_end, precision)
             mesh += 1
 
