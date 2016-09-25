@@ -461,7 +461,7 @@ class Application(ttk.Frame, object):
 			self.herb_ht.set(0.35)
 			self.herb_cbh.set(0.0)
 			self.herb_load.set(0.8)
-			self.herb_sav.set(10000)
+			self.herb_sav.set(5000)
 			self.herb_cover.set(80)
 			self.herb_live_mc.set(100)
 			self.herb_dead_mc.set(5)
@@ -487,8 +487,8 @@ class Application(ttk.Frame, object):
 			self.width.set(10)
 			self.length.set(64)
 			self.hrr.set(1000)
-			self.start_time.set(60)
-			self.end_time.set(80)
+			self.start_time.set(30)
+			self.end_time.set(50)
 			# run settings
 			self.sim_time.set(300)
 
