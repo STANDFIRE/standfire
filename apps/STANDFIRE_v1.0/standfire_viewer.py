@@ -7,10 +7,9 @@ import platform
 import subprocess
 
 # relative path import for standfire modules
-print os.getcwd()
 sep = os.sep
 #mod_path = '/'.join(os.path.dirname(os.path.abspath(__file__)).split('/')[:-2]) + '/standfire/'
-mod_path = sep.join(os.getcwd().split(sep)[:-2]) + '\\standfire\\'
+mod_path = sep.join(os.getcwd().split(sep)[:-2]) +  sep + 'standfire' + sep
 sys.path.append(mod_path)
 
 # import standfire modules

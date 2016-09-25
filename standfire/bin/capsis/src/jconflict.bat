@@ -1,1 +1,0 @@
-java -Duser.language=en jconflict.JConflict %*
