@@ -479,7 +479,7 @@ class Application(ttk.Frame, object):
 			# self.n_mesh.set(multiprocessing.cpu_count())
                         self.n_mesh.set(1)
 			# weather
-			self.wind_speed.set(3.58)
+			self.wind_speed.set(8.94)
 			self.temp.set(30)
 			# igniter fire
 			self.origin_x.set(24)
