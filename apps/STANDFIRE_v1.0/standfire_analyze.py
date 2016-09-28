@@ -44,7 +44,15 @@ fuel_2 = run_name + '_FUEL8_Herb_Leave_Dead_vegout.csv'
 ros = metrics.ROS(wdir, fuel_1, fuel_2, 64)
 ros_val = ros.get_ros()
 
-wind = metrics.WindProfile(wdir, run_name + '_01.sf', 29, 30, 1)
+# get first slice file (VELOCITY)
+files = os.listdir(wdir)
+slices = []
+for i in files:
+    if i.split('.')[-1] == 'sf':
+        slices.append(i)
+
+first_sf = slices.sort()[0]
+wind = metrics.WindProfile(wdir, first_sf, 29, 30, 1)
 wind_prof =  wind.get_wind_profile()
 sim_area = wind.sim_area
 

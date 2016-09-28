@@ -124,6 +124,8 @@ class WFDS(Mesh):
 
         super(self.__class__, self).__init__(x, y, z, res, n)
 
+        aoa_x_center = (x-((y-64)/2))-(64/2)
+
         self.params = {'run_name'   : 'Default',
                   'mesh'       : None,
                   'time'       : 0,
@@ -136,7 +138,10 @@ class WFDS(Mesh):
                                   'y' : y,
                                   'z' : z},
                   'fuels'      : fuels,
-                  'dump'       : {'y_center' : y/2.0}}
+                  'dump'       : {'y_center' : y/2.0,
+                                  'aoa_x_center' : aoa_x_center,
+                                  'aoa_x_front' : aoa_x_center - 10,
+                                  'aoa_x_back' : aoa_x_center + 10}}
 
     def create_mesh(self, stretch=False):
         """
