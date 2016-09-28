@@ -1,6 +1,18 @@
-"""
-This module is the entry point to the STANDFIRE process.
-"""
+#----------#
+# fuels.py #
+#----------#
+
+'''
+This module is an interface to FVS. Given a FVS variant name, a keyword file
+and the cooresponding tree file, a user can run a FVS simulation and request
+various fuels information from individual trees. The Fvsfuels class will also
+produce the 4 fuels files needed for the Capsis fuel matrix generator.
+
+If a user has a keyword file that points to a MS Access database, then the user
+can generate a tree file by exporting the Access database to an comma-delimited
+file and passing it through the Inventory class. The output will be the same
+inventory present in the mdb file, but formatted to FVS .tre file standards.
+'''
 
 import numpy as np
 import pandas as pd
@@ -13,13 +25,17 @@ import csv
 
 __authors__ = "Team STANDFIRE"
 __copyright__ = "Copyright 2015, STANDFIRE"
+__credits__ = ["Greg Cohn", "Matt Jolly", "Russ Parsons", "Lucas Wells"]
+__license__ = "GPL"
+__maintainer__ = "Lucas Wells"
+__email__ = "bluegrassforestry@gmail.com"
 __status__ = "Development"
 __version__ = '1.0.0a'
 
 # FVS variants
 eastern = {'CS', 'LS', 'NE', 'SN'}
-western = {'AK', 'BM', 'CA', 'CI', 'CR', 'EC', 'ID', 'NC', 'KT', 'NI', 'PN'
-        , 'SO', 'TT', 'UT', 'WC', 'WS'}
+western = {'AK', 'BM', 'CA', 'CI', 'CR', 'EC', 'ID', 'NC', 'KT', 'NI', 'PN',
+           'SO', 'TT', 'UT', 'WC', 'WS'}
 
 class Fvsfuels(object):
     """
@@ -1139,7 +1155,7 @@ class Inventory(object):
                 self.data.loc[self.data["Species"] == i
 			         , "Species"] = crosswalk[side][i][self.variant]
             else:
-                print("{0} is not recognized by FVS as a {1} species\n" + 
+                print("{0} is not recognized by FVS as a {1} species\n" +
                                 "defaulting to unknown species".format(i, side))
                 self.data.loc[self.data["Species"] == i, "Species"] = 'OT'
 
