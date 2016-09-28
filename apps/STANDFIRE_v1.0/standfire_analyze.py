@@ -51,8 +51,8 @@ for i in files:
     if i.split('.')[-1] == 'sf':
         slices.append(i)
 
-first_sf = slices.sort()[0]
-wind = metrics.WindProfile(wdir, first_sf, 29, 30, 1)
+first_sf = slices.sort()
+wind = metrics.WindProfile(wdir, first_sf[0], 29, 30, 1)
 wind_prof =  wind.get_wind_profile()
 sim_area = wind.sim_area
 

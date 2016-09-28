@@ -79,8 +79,34 @@
 !=============
 &DUMP DT_SLCF=1.0,DT_BNDF=1.0,DT_PART=2.0 /
 
-!y slices of u vel at centerline
+!y slices of u vel and temp at centerline
 &SLCF PBY={d[dump][y_center]}, QUANTITY='VELOCITY', VECTOR=.TRUE./
+&SLCF PBY={d[dump][y_center]}, QUANTITY='TEMPERATURE'/
+
+! for dosage
+&DEVC XYZ={d[dump][aoa_x_front]},{d[dump][y_center]},1.5, QUANTITY='TEMPERATURE', ID='T1' /
+&DEVC XYZ={d[dump][aoa_x_front]},{d[dump][y_center]},1.5, QUANTITY='U-VELOCITY', ID='T1' /
+&DEVC XYZ={d[dump][aoa_x_front]},{d[dump][y_center]},1.5, QUANTITY='V-VELOCITY', ID='T1' /
+&DEVC XYZ={d[dump][aoa_x_front]},{d[dump][y_center]},1.5, QUANTITY='W-VELOCITY', ID='T1' /
+&DEVC XYZ={d[dump][aoa_x_front]},{d[dump][y_center]},1.5, QUANTITY='FED', ID='T1' /
+&DEVC XYZ={d[dump][aoa_x_front]},{d[dump][y_center]},1.5, QUANTITY='RADIATIVE HEAT FLUX GAS', ID='T1' /
+
+&DEVC XYZ={d[dump][aoa_x_center]},{d[dump][y_center]},1.5, QUANTITY='TEMPERATURE', ID='T2' /
+&DEVC XYZ={d[dump][aoa_x_center]},{d[dump][y_center]},1.5, QUANTITY='U-VELOCITY', ID='T2' /
+&DEVC XYZ={d[dump][aoa_x_center]},{d[dump][y_center]},1.5, QUANTITY='V-VELOCITY', ID='T2' /
+&DEVC XYZ={d[dump][aoa_x_center]},{d[dump][y_center]},1.5, QUANTITY='W-VELOCITY', ID='T2' /
+&DEVC XYZ={d[dump][aoa_x_center]},{d[dump][y_center]},1.5, QUANTITY='FED', ID='T2' /
+&DEVC XYZ={d[dump][aoa_x_center]},{d[dump][y_center]},1.5, QUANTITY='RADIATIVE HEAT FLUX GAS', ID='T2' /
+
+&DEVC XYZ={d[dump][aoa_x_back]},{d[dump][y_center]},1.5, QUANTITY='TEMPERATURE', ID='T3' /
+&DEVC XYZ={d[dump][aoa_x_back]},{d[dump][y_center]},1.5, QUANTITY='U-VELOCITY', ID='T3' /
+&DEVC XYZ={d[dump][aoa_x_back]},{d[dump][y_center]},1.5, QUANTITY='V-VELOCITY', ID='T3' /
+&DEVC XYZ={d[dump][aoa_x_back]},{d[dump][y_center]},1.5, QUANTITY='W-VELOCITY', ID='T3' /
+&DEVC XYZ={d[dump][aoa_x_back]},{d[dump][y_center]},1.5, QUANTITY='FED', ID='T3' /
+&DEVC XYZ={d[dump][aoa_x_back]},{d[dump][y_center]},1.5, QUANTITY='RADIATIVE HEAT FLUX GAS', ID='T3' /
+
+# 3d quantities
+&DUMP DT_SLCF=1.0,DT_BNDF=1.0,DT_PL3D=60,DT_PART=1.0, PLOT3D_QUANTITY(1:5)='TEMPERATURE', 'U-VELOCITY','V-VELOCITY','W-VELOCITY','HRRPUV' /
 
 &TAIL /
 
