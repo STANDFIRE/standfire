@@ -51,11 +51,13 @@ for i in files:
     if i.split('.')[-1] == 'sf':
         slices.append(i)
 
-first_sf = slices.sort()
-wind = metrics.WindProfile(wdir, first_sf[0], 29, 30, 1)
+slices.sort()
+# wind profile
+wind = metrics.WindProfile(wdir, slices[0], 29, 30, 1)
 wind_prof =  wind.get_wind_profile()
 sim_area = wind.sim_area
 
+# heat
 heat = metrics.HeatTransfer(wdir)
 heat.get_tree_files()
 heat.read_tree_conv()
