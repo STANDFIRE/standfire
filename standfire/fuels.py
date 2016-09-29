@@ -3,17 +3,19 @@
 #----------#
 
 '''
-This module is an interface to FVS. Given a FVS variant name, a keyword file
-and the cooresponding tree file, a user can run a FVS simulation and request
+This module is the interface to FVS. Given a FVS variant name, a keyword file
+and the corresponding tree file, a user can run a FVS simulation and request
 various fuels information from individual trees. The Fvsfuels class will also
 produce the 4 fuels files needed for the Capsis fuel matrix generator.
 
+Currently FVS MC Access database querying not available on all platforms. 
 If a user has a keyword file that points to a MS Access database, then the user
 can generate a tree file by exporting the Access database to an comma-delimited
-file and passing it through the Inventory class. The output will be the same
+file and pass it through the Inventory class. The output will be the same
 inventory present in the mdb file, but formatted to FVS .tre file standards.
 '''
 
+# module imports
 import numpy as np
 import pandas as pd
 import os
@@ -23,6 +25,7 @@ import cPickle
 import math
 import csv
 
+# meta
 __authors__ = "Team STANDFIRE"
 __copyright__ = "Copyright 2015, STANDFIRE"
 __credits__ = ["Greg Cohn", "Matt Jolly", "Russ Parsons", "Lucas Wells"]
@@ -32,7 +35,7 @@ __email__ = "bluegrassforestry@gmail.com"
 __status__ = "Development"
 __version__ = '1.0.0a'
 
-# FVS variants
+# FVS variants globals
 eastern = {'CS', 'LS', 'NE', 'SN'}
 western = {'AK', 'BM', 'CA', 'CI', 'CR', 'EC', 'ID', 'NC', 'KT', 'NI', 'PN',
            'SO', 'TT', 'UT', 'WC', 'WS'}
@@ -172,6 +175,11 @@ class Fvsfuels(object):
         os.chdir(wdir)
 
     def _read_key(self, keyfile):
+        """
+        Pseudo-private method
+        Parses keyword file and extract inventory year, number of cycles,
+        time interval
+        """
 
         keys = {}
 
@@ -198,7 +206,7 @@ class Fvsfuels(object):
 
     def _set_num_cycles(self):
         """
-        Private method
+        Pseudo-private method
 
         Sets number of cycles for FVS simulation
         """
@@ -212,7 +220,7 @@ class Fvsfuels(object):
 
     def _set_time_int(self):
         """
-        Private method
+        Pseudo-private method
 
         Sets time interval in years for FVS simulation
         """
@@ -226,7 +234,7 @@ class Fvsfuels(object):
 
     def _set_inv_year(self):
         """
-        Private method
+        Pseudo-private method
 
         Sets inventory year for FVS simulation
         """
@@ -303,7 +311,7 @@ class Fvsfuels(object):
         """
         Runs the FVS simulation
 
-        This method run a FVS simulation using the previously specified keyword
+        This method runs a FVS simulation using the previously specified keyword
         file. The simulation will be paused at each time interval and the trees
         and snag data collected and appended to the fuels attribute of the
         Fvsfuels object.
@@ -345,7 +353,7 @@ class Fvsfuels(object):
 
     def _get_obj_data(self):
         """
-        Private method
+        Pseudo-private method
         """
 
         # fields to query
@@ -366,7 +374,7 @@ class Fvsfuels(object):
 
     def _get_spcodes(self):
         """
-        Private method
+        Pseudo-private method
         """
 
         # get four letter plant codes
@@ -378,7 +386,7 @@ class Fvsfuels(object):
 
     def _get_trees(self, svsobjdata, spcodes):
         """
-        Private method
+        Pseudo-private method
         """
 
         # headers
@@ -448,7 +456,7 @@ class Fvsfuels(object):
 
     def _get_snags(self, svsobjdata, spcodes):
         """
-        Private method
+        Pseudo-private method
         """
 
         # headers
@@ -511,7 +519,7 @@ class Fvsfuels(object):
 
     def get_trees(self, year):
         """
-        Returns pandas data fram of the trees by indexed year
+        Returns pandas data frame of the trees by indexed year
 
         :param year: simulation year of the data frame to return
         :type year: int
@@ -529,7 +537,7 @@ class Fvsfuels(object):
 
     def get_snags(self, year):
         """
-        Returns pandas data fram of the snags by indexed year
+        Returns pandas data frame of the snags by indexed year
 
         :param year: simulation year of the data frame to return
         :type year: int
@@ -594,6 +602,10 @@ class Fvsfuels(object):
 
 class FuelCalc(object):
     """
+    This class implements various fuel calculation based on the FVS output.
+
+    :param trees: FVS output tree list
+    :type trees: comma-delimited file or pandas data frame of tree list
     """
 
     def __init__(self, trees):
@@ -692,6 +704,7 @@ class FuelCalc(object):
 
     def calc_crown_volume(self):
         """
+        Calculates crown volume based on geometry and crown dimensions
         """
 
         if 'vol' not in self.trees:
@@ -704,6 +717,7 @@ class FuelCalc(object):
 
     def calc_bulk_density(self):
         """
+        Calculates crown bulk density based on crown volume and biomass weight
         """
 
         fields = ['bd_foliage', 'bd_1hr', 'bd_10hr', 'bd_100hr']
