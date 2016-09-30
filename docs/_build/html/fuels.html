@@ -32,7 +32,7 @@
   
     <link rel="top" title="STANDFIRE  documentation" href="index.html"/>
         <link rel="up" title="STANDFIRE API Reference" href="api_ref.html"/>
-        <link rel="next" title="Fvsfuels" href="Fvsfuels.html"/>
+        <link rel="next" title="Fvsfuels" href="fuels_Fvsfuels.html"/>
         <link rel="prev" title="STANDFIRE API Reference" href="api_ref.html"/> 
 
   
@@ -81,14 +81,15 @@
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="">Fuels module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Fvsfuels.html">Fvsfuels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Inventory.html">Inventory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="FuelCalc.html">FuelCalc</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Fuels module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fuels_Fvsfuels.html">Fvsfuels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fuels_Inventory.html">Inventory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fuels_FuelCalc.html">FuelCalc</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="placer.html">Placer module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intervene.html">intervene module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="capsis.html">Capsis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wfds.html">WFDS module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">Metrics module</a></li>
 </ul>
 </li>
 </ul>
@@ -113,7 +114,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -139,13 +140,21 @@
             
   <div class="section" id="module-fuels">
 <span id="fuels-module"></span><h1>Fuels module<a class="headerlink" href="#module-fuels" title="Permalink to this headline">¶</a></h1>
-<p>This module is the entry point to the STANDFIRE process.</p>
+<p>This module is the interface to FVS. Given a FVS variant name, a keyword file
+and the corresponding tree file, a user can run a FVS simulation and request
+various fuels information from individual trees. The Fvsfuels class will also
+produce the 4 fuels files needed for the Capsis fuel matrix generator.</p>
+<p>Currently FVS MC Access database querying not available on all platforms. 
+If a user has a keyword file that points to a MS Access database, then the user
+can generate a tree file by exporting the Access database to an comma-delimited
+file and pass it through the Inventory class. The output will be the same
+inventory present in the mdb file, but formatted to FVS .tre file standards.</p>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Fvsfuels.html">Fvsfuels</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Inventory.html">Inventory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="FuelCalc.html">FuelCalc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fuels_Fvsfuels.html">Fvsfuels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fuels_Inventory.html">Inventory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fuels_FuelCalc.html">FuelCalc</a></li>
 </ul>
 </div>
 </div>
@@ -157,7 +166,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Fvsfuels.html" class="btn btn-neutral float-right" title="Fvsfuels" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="fuels_Fvsfuels.html" class="btn btn-neutral float-right" title="Fvsfuels" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="api_ref.html" class="btn btn-neutral" title="STANDFIRE API Reference" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

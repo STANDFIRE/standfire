@@ -80,12 +80,9 @@
             
                 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of STANDFIRE</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="basic_usage.html">Basic Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advance_topics.html">Advance Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="">Interfacing with FVS</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Interfacing with FVS</a></li>
 </ul>
 </li>
 </ul>
@@ -113,7 +110,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -142,7 +139,7 @@
   <div class="section" id="interfacing-with-fvs">
 <h1>Interfacing with FVS<a class="headerlink" href="#interfacing-with-fvs" title="Permalink to this headline">¶</a></h1>
 <p>Use Suppose to generate a keyword file. Or use the following example .key</p>
-<div class="highlight-none"><div class="highlight"><pre>NOSCREEN
+<div class="highlight-none"><div class="highlight"><pre><span></span>NOSCREEN
 RANNSEED           0
 !STATS
 STDIDENT
@@ -169,7 +166,7 @@ STOP
 </pre></div>
 </div>
 <p>If don&#8217;t have a FVS tree list file, then copy and paste the following text and save  it to the same directory where the keyword file lives, give it the same prefix as the <code class="docutils literal"><span class="pre">.key</span></code> but with a <code class="docutils literal"><span class="pre">.tre</span></code> extension.</p>
-<div class="highlight-none"><div class="highlight"><pre>1   95       9PP 105    35                          0 0
+<div class="highlight-none"><div class="highlight"><pre><span></span>1   95       9PP 105    35                          0 0
 1   96       0PP 43     17        1                 0 0
 1   97       0PP 148    43        2                 0 0
 1   98       0PP 49     30        1                 0 0
@@ -190,28 +187,28 @@ STOP
 </div>
 <p>Once you have a keyword file and a tree list file in the same directory we can start to build a script to do some work.</p>
 <p>First we import the Fvsfuels class from the fuels module.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuels</span> <span class="kn">import</span> <span class="n">Fvsfuels</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuels</span> <span class="kn">import</span> <span class="n">Fvsfuels</span>
 </pre></div>
 </div>
 <p>Next create an instance of the class passes the desired variant as an argument and register the keyword file.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span> <span class="o">=</span> <span class="n">Fvsfuel</span><span class="p">(</span><span class="s">&quot;iec&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s">&quot;/Users/standfire/fvs_exp/example.key&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span> <span class="o">=</span> <span class="n">Fvsfuel</span><span class="p">(</span><span class="s2">&quot;iec&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s2">&quot;/Users/standfire/fvs_exp/example.key&quot;</span><span class="p">)</span>
 <span class="go">TIMEINT not found in keyword file, default is 10 years</span>
 </pre></div>
 </div>
 <p>We get a message telling us that the TIMEINT keyword was not found in the keyword file. No problem, STANDFIRE automatically sets this value to 10 years.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">keywords</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">keywords</span>
 <span class="go">{&#39;TIMEINT&#39;: 10, &#39;NUMCYCLE&#39;: 10, &#39;INVYEAR&#39;: 2010, &#39;SVS&#39;: 15, &#39;FUELOUT&#39;: 1}</span>
 </pre></div>
 </div>
 <p>Notice the keys in the keywords dictionary.  <code class="docutils literal"><span class="pre">TIMEINT</span></code> is the time interval of the FVS simulation in year, <code class="docutils literal"><span class="pre">NUMCYCLE</span></code> is the number of cycles, <code class="docutils literal"><span class="pre">INVYEAR</span></code> is the year of the inventory, and <code class="docutils literal"><span class="pre">SVS</span></code> and <code class="docutils literal"><span class="pre">FUELOUT</span></code> are there to check if these keywords are in the keyword file. If the <code class="docutils literal"><span class="pre">SVS</span></code> and <code class="docutils literal"><span class="pre">FUELOUT</span></code> keywords are not defined the keyword file then FVS will not calculate tree positions or fuel attributes. So be sure you add these to your keyword file before registering the .key with FVS. You can use <em>post processors*</em> in Suppose to do so.  <code class="docutils literal"><span class="pre">TIMEINT</span></code>, <code class="docutils literal"><span class="pre">NUMCYCLE</span></code>, and <code class="docutils literal"><span class="pre">INVYEAR</span></code> can be manually changed by calling setters for each. For instance, if you only want to calculate fuel attributes for trees during the year of the inventory then simply change the <code class="docutils literal"><span class="pre">NUMCYCLE</span></code> value in the keyword dictionary.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">set_num_cycle</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">set_num_cycle</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">keywords</span>
 <span class="go">{&#39;TIMEINT&#39;: 10, &#39;NUMCYCLE&#39;: 0, &#39;INVYEAR&#39;: 2010, &#39;SVS&#39;: 15, &#39;FUELOUT&#39;: 1}</span>
 </pre></div>
 </div>
 <p>Now that we have our simulation parameters established, we startup FVS.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">run_fvs</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stand_1</span><span class="o">.</span><span class="n">run_fvs</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
