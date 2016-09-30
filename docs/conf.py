@@ -58,6 +58,8 @@ master_doc = 'index'
 project = u'STANDFIRE'
 copyright = u'2015, STANDFIRE'
 author = u'Team STANDFIRE'
+version = u'1.1'
+release = u'1'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

@@ -1,17 +1,27 @@
 \select@language {english}
 \contentsline {chapter}{\numberline {1}STANDFIRE User Guide}{3}{chapter.1}
-\contentsline {section}{\numberline {1.1}Overview of STANDFIRE}{3}{section.1.1}
-\contentsline {section}{\numberline {1.2}Installation}{3}{section.1.2}
-\contentsline {section}{\numberline {1.3}Basic Usage}{3}{section.1.3}
-\contentsline {section}{\numberline {1.4}Advance Topics}{3}{section.1.4}
-\contentsline {section}{\numberline {1.5}Tutorials}{3}{section.1.5}
-\contentsline {subsection}{\numberline {1.5.1}Interfacing with FVS}{3}{subsection.1.5.1}
-\contentsline {chapter}{\numberline {2}STANDFIRE API Reference}{7}{chapter.2}
-\contentsline {section}{\numberline {2.1}fuels module}{7}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Fvsfuels}{7}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Inventory}{10}{subsection.2.1.2}
-\contentsline {section}{\numberline {2.2}intervene module}{13}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}SpaceCrowns}{13}{subsection.2.2.1}
-\contentsline {chapter}{\numberline {3}Indices and tables}{15}{chapter.3}
-\contentsline {chapter}{Python Module Index}{17}{section*.39}
-\contentsline {chapter}{Index}{19}{section*.40}
+\contentsline {section}{\numberline {1.1}Getting Started}{3}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Prerequisites}{3}{subsection.1.1.1}
+\contentsline {section}{\numberline {1.2}Tutorials}{3}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Interfacing with FVS}{3}{subsection.1.2.1}
+\contentsline {chapter}{\numberline {2}STANDFIRE API Reference}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Fuels module}{5}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Fvsfuels}{5}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Inventory}{8}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}FuelCalc}{12}{subsection.2.1.3}
+\contentsline {section}{\numberline {2.2}Capsis module}{14}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}RunConfig}{14}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Execute}{16}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.3}WFDS module}{16}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Mesh}{16}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}WFDS}{17}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Execute}{18}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}Generate Binary Grid}{19}{subsection.2.3.4}
+\contentsline {section}{\numberline {2.4}Metrics module}{19}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Rate of Spread}{19}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Mass Loss}{19}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}Wind Profile}{19}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}Heat Transfer}{20}{subsection.2.4.4}
+\contentsline {chapter}{\numberline {3}Indices and tables}{21}{chapter.3}
+\contentsline {chapter}{Python Module Index}{23}{section*.91}
+\contentsline {chapter}{Index}{25}{section*.92}
