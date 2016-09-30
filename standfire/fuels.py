@@ -2,7 +2,7 @@
 # fuels.py #
 #----------#
 
-'''
+"""
 This module is the interface to FVS. Given a FVS variant name, a keyword file
 and the corresponding tree file, a user can run a FVS simulation and request
 various fuels information from individual trees. The Fvsfuels class will also
@@ -13,7 +13,7 @@ If a user has a keyword file that points to a MS Access database, then the user
 can generate a tree file by exporting the Access database to an comma-delimited
 file and pass it through the Inventory class. The output will be the same
 inventory present in the mdb file, but formatted to FVS .tre file standards.
-'''
+"""
 
 # module imports
 import numpy as np

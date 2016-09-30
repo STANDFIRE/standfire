@@ -1,7 +1,24 @@
+#---------#
+# wfds.py #
+#---------#
+
 """
-wfds.py
+The wfds module is for configuring and running WFDS simulations. Use the WFDS
+class to setup the run. The WFDS class inherits the Mesh class, so meshes can
+be dealt with there.
 """
 
+# meta
+__authors__ = "Team STANDFIRE"
+__copyright__ = "Copyright 2015, STANDFIRE"
+__credits__ = ["Greg Cohn", "Matt Jolly", "Russ Parsons", "Lucas Wells"]
+__license__ = "GPL"
+__maintainer__ = "Lucas Wells"
+__email__ = "bluegrassforestry@gmail.com"
+__status__ = "Development"
+__version__ = '1.0.0a'
+
+# module imports
 import platform
 import subprocess
 import os
@@ -9,9 +26,32 @@ import os
 
 class Mesh(object):
     """
+    The Mesh class can be used to easily and quickly create FDS meshes.
+
+    :param x: X dimension of the simulation domain
+    :x type: integer
+    :param y: Y dimension of the simulation domain
+    :type y: integer
+    :param z: Z dimension of the simulation domain
+    :type z: integer
+    :param res: 3-space resolution prior to mesh stretching
+    :type res: integer
+    :param n: Number of meshes
+    :n type: integer
+    
+    *Example:*
+
+    >>> import wfds
+    >>> mesh = wfds.mesh(160,90,50,1,9)
+    >>> mesh.stretch_mesh([3,33], [1,31], axis='z')
+    >>> print mesh.format_mesh()
+
     """
 
     def __init__(self, x, y, z, res, n):
+        """
+        Constructor
+        """
 
         # instance variables
         self.res = res
@@ -50,13 +90,13 @@ class Mesh(object):
         remainder = y % self.n
         interval = (y-remainder)/self.n
 
-        acum = 0
+        acumm = 0
         for i in range(self.n):
             if (i == self.n - 1):
-                self.XB.append([0, x, acum, acum+interval+remainder, 0, z])
+                self.XB.append([0, x, acumm, acumm+interval+remainder, 0, z])
             else:
-                self.XB.append([0, x, acum, acum+interval, 0, z])
-            acum += interval
+                self.XB.append([0, x, acumm, acumm+interval, 0, z])
+            acumm += interval
 
 
     def stretch_mesh(self, CC, PC, axis='z'):
@@ -72,9 +112,9 @@ class Mesh(object):
 
         :Example:
 
-        >>> mesh = CalcMesh(200, 150, 100, 1, 1)
-        >>> mesh.stretch([3,33], [1,31], axis='z')
-        >>> print mesh.write(method='virt')
+        >>> mesh = Mesh(200, 150, 100, 1, 1)
+        >>> mesh.stretch_mesh([3,33], [1,31], axis='z')
+        >>> print mesh.format_mesh()
 
         """
 
@@ -117,15 +157,30 @@ class Mesh(object):
 
         return mesh_string
 
+
 class WFDS(Mesh):
     """
-    """
-    def __init__(self, x, y, z, res, n, fuels):
+    This class configures a WFDS simulation. This is a subclass of Mesh and
+    meshes are dealt with implicitly
 
+    *Example:*
+
+    >>> import wfds
+    >>> fds = wfds.WFDS(160, 90, 50, 1, 9, fuels)
+    """
+
+    def __init__(self, x, y, z, res, n, fuels):
+        """
+        Constructor
+        """
+
+        # call the super class constructor
         super(self.__class__, self).__init__(x, y, z, res, n)
 
+        # auto-calculate the position of the aoa
         aoa_x_center = (x-((y-64)/2))-(64/2)
 
+        # run configuration parameters
         self.params = {'run_name'   : 'Default',
                   'mesh'       : None,
                   'time'       : 0,
@@ -145,6 +200,12 @@ class WFDS(Mesh):
 
     def create_mesh(self, stretch=False):
         """
+        Call the `stretch_mesh()` method of the Mesh class
+
+        :param stretch: to stretch or not to strecth
+        :stretch type: False or stretch arguments
+
+        .. note:: See `Mesh.stretch_mesh()` for setting the mesh arguments
         """
 
         if stretch:
@@ -155,6 +216,23 @@ class WFDS(Mesh):
 
     def create_ignition(self, start_time, end_time, x0, x1, y0, y1):
         """
+        Places an ignition strip at the specified location and generates fire
+        at the specified HRR for the specified duration
+
+        :param start_time: start time of the igniter fire
+        :type start_time: integer
+        :param end_time: finish time of teh igniter fire
+        :type end_time: integer
+        :param x0: starting x position of the ignition strip
+        :type x0: float
+        :param x1: ending x position of the ignition strip
+        :type x1: float
+        :param y0: starting y position of the ignition strip
+        :type y0: float
+        :param y1: ending y position of the ignition strip
+        :type y1: float
+
+        .. note:: Ignition ramping is dealt with implicitly to avoid 'explosions'
         """
 
         self.params['ign']['coords'][0] = x0
@@ -173,24 +251,40 @@ class WFDS(Mesh):
 
     def set_wind_speed(self, U0):
         """
+        Set the inflow wind speed 
+
+        :param U0: inflow wind speed (m/s)
+        :type U0: float
         """
 
         self.params['wind_speed'] = U0
 
     def set_init_temp(self, temp):
         """
+        Set the initial temperature of the simulation
+
+        :param temp: temperature (celcius)
+        :type temp: float
         """
 
         self.params['init_temp'] = temp
 
     def set_simulation_time(self, sim_time):
         """
+        Set the duration of the simulation
+        
+        :param sim_time: duration of the simulation (s)
+        :type sim_time: float
         """
 
         self.params['time'] = sim_time
 
     def set_hrrpua(self, hrr):
         """
+        Set the heat release rate per unit area for the ignition strip
+
+        :param hrr: heat release rate per unit area (kW/m^2)
+        :type hrr: integer
         """
 
         self.params['ign']['hrrpua'] = hrr
@@ -203,22 +297,40 @@ class WFDS(Mesh):
 
     def save_input(self, file_name):
         """
+        Save the input file. Include the desired directory in the string
+
+        :param file_name: path to and name of input file (.txt not .fds please)
+        :type file_name: string
         """
 
         this_dir = os.path.dirname(os.path.abspath(__file__))
 
+        # open and read the fds input file template from the standfire directory
         with open(this_dir + '/data/wfds/wfds_template.txt', 'r') as f:
             file_template = f.read()
 
+        # set the parameters
         fds_file = file_template.format(d=self.params)
 
+        # write it to disk
         with open(file_name, 'w') as f:
             f.write(fds_file)
 
 
 class Execute(object):
+    """
+    The Execute class runs the WFDS input file (platform agnostic)
+
+    :param input_file: path to and name of input file
+    :type input_file: string
+    :param n_proc: number of processors
+    :type n_proc: integer
+    """
 
     def __init__(self, input_file, n_proc):
+        """
+        Constructor
+        """
 
         # get path to STANDFIRE directory
         self.fds_bin = os.path.dirname(os.path.abspath(__file__)) + "/bin/"
@@ -234,6 +346,7 @@ class Execute(object):
 
     def _exec_linux(self, input_file, n_proc):
         """
+        Private method
         """
 
         log = subprocess.check_output([self.fds_bin + "fds_linux/wfds", input_file],
@@ -241,16 +354,25 @@ class Execute(object):
 
     def _exec_win(self, input_file, n_proc):
         """
+        Private method
         """
 
         log = subprocess.check_output([self.fds_bin + "fds_win/wfds.exe", input_file],
                 cwd='/'.join(input_file.split('/')[:-1]))
 
+
 class GenerateBinaryGrid(Mesh):
     """
+    This class is for generating binary FDS grid. Usefull for Capsis. Inherits
+    the mesh class.
+
+    .. note:: See the wfds.Mesh() class for details
     """
 
     def __init__(self, x, y, z, res, n, f_name, stretch=False):
+        """
+        Constructor
+        """
 
         # call super constructor
         super(self.__class__, self).__init__(x, y, z, res, n)
@@ -265,6 +387,9 @@ class GenerateBinaryGrid(Mesh):
         self._generate()
 
     def _write(self):
+        """
+        Private method
+        """
 
         grid_name = self.f_name.split('/')[-1].split('.')[0]
         grid_input = "&HEAD CHID='{0}', TITLE='{0}' /\n\n\n".format(grid_name)
@@ -279,5 +404,10 @@ class GenerateBinaryGrid(Mesh):
             f.write(grid_input)
 
     def _generate(self):
+        """
+        Private method
+        """
 
         proc = Execute(self.f_name, 1)
+
+
