@@ -62,7 +62,7 @@ Once you have a keyword file and a tree list file in the same directory we can s
 	example.key    example.tre
 
 
-First we import the Fvsfuels class from the fuels module.
+First, we import the Fvsfuels class from the fuels module.
 
 .. code-block:: python
 
