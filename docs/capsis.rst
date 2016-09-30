@@ -8,5 +8,5 @@ Contents:
 .. toctree::
    :maxdepth: 4
 
-   capsis_CapRunConfig
-   capsis_CapExecute
+   capsis_RunConfig
+   capsis_Execute
