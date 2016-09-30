@@ -8,9 +8,9 @@ Contents:
 .. toctree::
    :maxdepth: 4
 
-   Fvsfuels
-   Inventory
-   FuelCalc
+   fuels_Fvsfuels
+   fuels_Inventory
+   fuels_FuelCalc
 
 
 

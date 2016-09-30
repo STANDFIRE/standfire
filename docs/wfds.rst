@@ -8,7 +8,7 @@ Contents:
 .. toctree::
    :maxdepth: 4
 
-   Mesh
-   WFDS
-   Execute
-   GenerateBinaryGrid
+   wfds_Mesh
+   wfds_WFDS
+   wfds_Execute
+   wfds_GenerateBinaryGrid

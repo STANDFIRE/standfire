@@ -8,7 +8,7 @@ Contents:
 .. toctree::
    :maxdepth: 4
 
-   ROS
-   MassLoss
-   WindProfile
-   HeatTransfer
+   metrics_ROS
+   metrics_MassLoss
+   metrics_WindProfile
+   metrics_HeatTransfer
