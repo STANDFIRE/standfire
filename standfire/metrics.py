@@ -1,7 +1,26 @@
+#------------#
+# metrics.py #
+#------------#
+
 """
-metrics.py
+This module contains class for calculating various metrics. These metrics are
+specific to the WFDS configurations used in Standfire, i.e. They probably won't
+work on all WFDS output direcotries.
+
+Lots of work to do here. Work in progress.
 """
 
+# meta
+__authors__ = "Team STANDFIRE"
+__copyright__ = "Copyright 2015, STANDFIRE"
+__credits__ = ["Greg Cohn", "Matt Jolly", "Russ Parsons", "Lucas Wells"]
+__license__ = "GPL"
+__maintainer__ = "Lucas Wells"
+__email__ = "bluegrassforestry@gmail.com"
+__status__ = "Development"
+__version__ = '1.0.0a'
+
+# module imports
 import numpy as np
 import os
 import glob
@@ -15,7 +34,7 @@ def natural_keys(text):
     return [ atoi(c) for c in re.split('(\d+)', text) ]
 
 def jump(bin_file):
-    """ Convenience function to jump bytes """
+    """ Convenience function to jump bytes for binary readers """
     np.fromfile(bin_file, dtype=np.dtype(np.int8), count=4)
 
 # global vars
@@ -23,8 +42,16 @@ SEP = os.sep
 
 
 class ROS(object):
+    """
+    Calculates rate of spread (m/s)
+    
+    # TODO: make subclass that reads the vegout files. Current each class reads them.
+    """
 
     def __init__(self, wdir, fuel_1, fuel_2, x_diff):
+        """
+        Constructor
+        """
 
         if (len(fuel_1.split('.')) == 2) and (len(fuel_2.split('.')) == 2):
             if (fuel_1.split('.')[-1] == 'csv') and (fuel_2.split('.')[-1] == 'csv'):
@@ -40,6 +67,8 @@ class ROS(object):
     def get_first_burn_time(self, fuel):
         """
         Returns the time when the fuel begins to burn
+
+        :param fuel: The fuel that burns first
         """
 
         # column 3 is total dry mass
@@ -55,6 +84,7 @@ class ROS(object):
 
     def get_ros(self):
         """
+        Returns the rate of spread in meters per second
         """
 
         time_1 = self.get_first_burn_time(self.data_1)
@@ -67,6 +97,9 @@ class ROS(object):
 
 
 class MassLoss(object):
+    """
+    Calculates dry mass consumption
+    """
 
     def __init__(self, wdir):
 
@@ -92,8 +125,6 @@ class MassLoss(object):
         self.tree_files = tree_files
 
     def read_tree_mass(self):
-        """
-        """
 
         # read first tree file dry mass column
         mass_sum = np.genfromtxt(self.wdir + SEP + self.tree_files[0], dtype=np.float, delimiter=',', skip_header=2)[:,2]
@@ -105,13 +136,14 @@ class MassLoss(object):
         self.mass_sum = mass_sum
 
     def get_total_mass_loss(self):
-        """
-        """
 
         return (1 - (self.mass_sum[-1] / self.mass_sum[0])) * 100
 
 
 class WindProfile(object):
+    """
+    Calculates wind profile
+    """
 
     def __init__(self, wdir, slice_file, t_start, t_end, t_step):
 
@@ -119,8 +151,6 @@ class WindProfile(object):
         self.sim_area = self.sf.sim_area
 
     def get_wind_profile(self):
-        """
-        """
 
         slice_data = self.sf.slice_data
 
@@ -132,6 +162,9 @@ class WindProfile(object):
         return savg
 
 class HeatTransfer(object):
+    """
+    Calculates crown heat transfer
+    """
 
     def __init__(self, wdir):
 
@@ -157,10 +190,9 @@ class HeatTransfer(object):
         self.tree_files = tree_files
 
     def read_tree_conv(self):
-        """
-        """
 
-        # read first tree file radiative heat column
+        # read first tree file radiative heat column (depending of the version
+        # of WFDS you are using, these indicies may be different)
         conv_sum = np.genfromtxt(self.wdir + SEP + self.tree_files[0], dtype=np.float, delimiter=',', skip_header=2)[:,6]
         conv_sum = np.nan_to_num(conv_sum)
 
@@ -172,8 +204,6 @@ class HeatTransfer(object):
         self.conv_sum = conv_sum
 
     def read_tree_rad(self):
-        """
-        """
 
         # read first tree file radiative heat column
         rad_sum = np.genfromtxt(self.wdir + SEP + self.tree_files[0], dtype=np.float, delimiter=',', skip_header=2)[:,7]
@@ -185,6 +215,9 @@ class HeatTransfer(object):
             rad_sum += np.nan_to_num(tmp)
 
         self.rad_sum = rad_sum
+
+
+""" Binary file readers """
 
 
 class SliceReader(object):
@@ -206,8 +239,6 @@ class SliceReader(object):
                     self.binary_slice_reader(sf, t_start, t_end, t_step)], axis=2)
 
     def binary_slice_reader(self, fname, t_start, t_end, t_step):
-        """
-        """
 
         # data types
         d8 = np.dtype(np.int8)
@@ -407,3 +438,5 @@ class ParticleReader(object):
 
         bf.close()
         return XP, YP, ZP
+
+
