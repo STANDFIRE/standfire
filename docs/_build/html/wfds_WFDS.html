@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>WFDS &mdash; STANDFIRE  documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="STANDFIRE  documentation" href="index.html"/>
+        <link rel="up" title="WFDS module" href="wfds.html"/>
+        <link rel="next" title="Execute" href="wfds_Execute.html"/>
+        <link rel="prev" title="Mesh" href="wfds_Mesh.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> STANDFIRE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="fuels.html">Fuels module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="capsis.html">Capsis module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="wfds.html">WFDS module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="wfds_Mesh.html">Mesh</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">WFDS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfds_Execute.html">Execute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfds_GenerateBinaryGrid.html">Generate Binary Grid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">Metrics module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">STANDFIRE</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="api_ref.html">STANDFIRE API Reference</a> &raquo;</li>
+      
+          <li><a href="wfds.html">WFDS module</a> &raquo;</li>
+      
+    <li>WFDS</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/wfds_WFDS.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="wfds">
+<h1>WFDS<a class="headerlink" href="#wfds" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="wfds.WFDS">
+<em class="property">class </em><code class="descclassname">wfds.</code><code class="descname">WFDS</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>res</em>, <em>n</em>, <em>fuels</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#WFDS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.WFDS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="wfds_Mesh.html#wfds.Mesh" title="wfds.Mesh"><code class="xref py py-class docutils literal"><span class="pre">wfds.Mesh</span></code></a></p>
+<p>This class configures a WFDS simulation. This is a subclass of Mesh and
+meshes are dealt with implicitly</p>
+<p><em>Example:</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">wfds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fds</span> <span class="o">=</span> <span class="n">wfds</span><span class="o">.</span><span class="n">WFDS</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="n">fuels</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="wfds.WFDS.create_ignition">
+<code class="descname">create_ignition</code><span class="sig-paren">(</span><em>start_time</em>, <em>end_time</em>, <em>x0</em>, <em>x1</em>, <em>y0</em>, <em>y1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#WFDS.create_ignition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.WFDS.create_ignition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Places an ignition strip at the specified location and generates fire
+at the specified HRR for the specified duration</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>start_time</strong> (<em>integer</em>) &#8211; start time of the igniter fire</li>
+<li><strong>end_time</strong> (<em>integer</em>) &#8211; finish time of teh igniter fire</li>
+<li><strong>x0</strong> (<em>float</em>) &#8211; starting x position of the ignition strip</li>
+<li><strong>x1</strong> (<em>float</em>) &#8211; ending x position of the ignition strip</li>
+<li><strong>y0</strong> (<em>float</em>) &#8211; starting y position of the ignition strip</li>
+<li><strong>y1</strong> (<em>float</em>) &#8211; ending y position of the ignition strip</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ignition ramping is dealt with implicitly to avoid &#8216;explosions&#8217;</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="wfds.WFDS.create_mesh">
+<code class="descname">create_mesh</code><span class="sig-paren">(</span><em>stretch=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#WFDS.create_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.WFDS.create_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call the <cite>stretch_mesh()</cite> method of the Mesh class</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stretch</strong> &#8211; to stretch or not to strecth</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Stretch type:</th><td class="field-body">False or stretch arguments</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">See <cite>Mesh.stretch_mesh()</cite> for setting the mesh arguments</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="wfds.WFDS.save_input">
+<code class="descname">save_input</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#WFDS.save_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.WFDS.save_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the input file. Include the desired directory in the string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_name</strong> (<em>string</em>) &#8211; path to and name of input file (.txt not .fds please)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wfds.WFDS.set_hrrpua">
+<code class="descname">set_hrrpua</code><span class="sig-paren">(</span><em>hrr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#WFDS.set_hrrpua"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.WFDS.set_hrrpua" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the heat release rate per unit area for the ignition strip</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>hrr</strong> (<em>integer</em>) &#8211; heat release rate per unit area (kW/m^2)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wfds.WFDS.set_init_temp">
+<code class="descname">set_init_temp</code><span class="sig-paren">(</span><em>temp</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#WFDS.set_init_temp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.WFDS.set_init_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the initial temperature of the simulation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>temp</strong> (<em>float</em>) &#8211; temperature (celcius)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wfds.WFDS.set_run_name">
+<code class="descname">set_run_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#WFDS.set_run_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.WFDS.set_run_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="wfds.WFDS.set_simulation_time">
+<code class="descname">set_simulation_time</code><span class="sig-paren">(</span><em>sim_time</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#WFDS.set_simulation_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.WFDS.set_simulation_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the duration of the simulation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sim_time</strong> (<em>float</em>) &#8211; duration of the simulation (s)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wfds.WFDS.set_wind_speed">
+<code class="descname">set_wind_speed</code><span class="sig-paren">(</span><em>U0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#WFDS.set_wind_speed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.WFDS.set_wind_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the inflow wind speed</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>U0</strong> (<em>float</em>) &#8211; inflow wind speed (m/s)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="wfds_Execute.html" class="btn btn-neutral float-right" title="Execute" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="wfds_Mesh.html" class="btn btn-neutral" title="Mesh" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, STANDFIRE.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
