@@ -8,5 +8,6 @@ Contents:
    :maxdepth: 4
 
    fuels
-   placer
-   intervene
+   capsis
+   wfds
+   metrics
