@@ -137,7 +137,7 @@ class MassLoss(object):
 
     def get_total_mass_loss(self):
 
-        return (1 - (self.mass_sum[-1] / self.mass_sum[0])) * 100
+        return (self.mass_sum[-1] / self.mass_sum[0]) * 100
 
 
 class WindProfile(object):
@@ -148,7 +148,6 @@ class WindProfile(object):
     def __init__(self, wdir, slice_file, t_start, t_end, t_step):
 
         self.sf = SliceReader(wdir + SEP + slice_file, t_start, t_end, t_step)
-        self.sim_area = self.sf.sim_area
 
     def get_wind_profile(self):
 
@@ -170,6 +169,8 @@ class HeatTransfer(object):
 
         self.wdir = wdir
         self.tree_files = None
+        with open(wdir + '/sim_area.txt', 'r') as f:
+            self.sim_area = float(f.read())
 
     def get_tree_files(self):
 

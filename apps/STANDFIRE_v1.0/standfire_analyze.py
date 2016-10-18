@@ -21,7 +21,6 @@ from standfire import metrics
 
 # simulation output directory
 print ''
-wdir = '/home/lawells/Projects/JUNK/output/'
 wdir = input("Enter simulation output directory:  ")
 
 # get the run name from the .smv file
@@ -55,7 +54,6 @@ slices.sort()
 # wind profile
 wind = metrics.WindProfile(wdir, slices[0], 29, 30, 1)
 wind_prof =  wind.get_wind_profile()
-sim_area = wind.sim_area
 
 # heat
 heat = metrics.HeatTransfer(wdir)
@@ -63,48 +61,75 @@ heat.get_tree_files()
 heat.read_tree_conv()
 heat.read_tree_rad()
 
-print ''
-print '='*42
+out_file = '\n'
+out_file += '='*42
 mass_title = 'Dry Mass Consumption'
 buf = (42-len(mass_title))/2
-print ' '*buf + mass_title
-print '='*42
-print '{:30s} {:10.2f}'.format('Total crown biomass (kg):', massloss.mass_sum[0])
-print '{:30s} {:10.2f}'.format('Total consumed biomass (kg):', massloss.mass_sum[-1])
-print '{:30s} {:10.2f}'.format('Percent consumed (%):', massloss_percent)
+out_file += '\n'
+out_file += ' '*buf + mass_title
+out_file += '\n'
+out_file += '='*42
+out_file += '\n'
+out_file += '{:30s} {:10.2f}'.format('Total crown biomass (kg):', massloss.mass_sum[0])
+out_file += '\n'
+out_file += '{:30s} {:10.2f}'.format('Total consumed biomass (kg):', massloss.mass_sum[-1])
+out_file += '\n'
+out_file += '{:30s} {:10.2f}'.format('Percent consumed (%):', massloss_percent)
 
-print ''
-print '='*42
+out_file += '\n'
+out_file += '='*42
 ros_title = 'Surface Fire Rate of Spread'
 buf = (42-len(ros_title))/2
-print ' '*buf + ros_title
-print '='*42
-print '{:30s} {:10.2f}'.format('Rate of spread (m/s):', ros_val)
+out_file += '\n'
+out_file += ' '*buf + ros_title
+out_file += '\n'
+out_file += '='*42
+out_file += '\n'
+out_file += '{:30s} {:10.2f}'.format('Rate of spread (m/s):', ros_val)
 
-print ''
-print '='*42
+out_file += '\n'
+out_file += '='*42
 wind_title = 'Wind Speed Profile'
 buf = (42-len(wind_title))/2
-print ' '*buf + wind_title
-print '='*42
-print '{:30s} {:10.2f}'.format('Wind speed at z=1m (m/s):', wind_prof[1])
-print '{:30s} {:10.2f}'.format('Wind speed at z=5m (m/s):', wind_prof[5])
-print '{:30s} {:10.2f}'.format('Wind speed at z=10m (m/s):', wind_prof[10])
-print '{:30s} {:10.2f}'.format('Wind speed at z=15m (m/s):', wind_prof[15])
-print '{:30s} {:10.2f}'.format('Wind speed at z=20m (m/s):', wind_prof[20])
+out_file += '\n'
+out_file += ' '*buf + wind_title
+out_file += '\n'
+out_file += '='*42
+out_file += '\n'
+out_file += '{:30s} {:10.2f}'.format('Wind speed at z=1m (m/s):', wind_prof[1])
+out_file += '\n'
+out_file += '{:30s} {:10.2f}'.format('Wind speed at z=5m (m/s):', wind_prof[5])
+out_file += '\n'
+out_file += '{:30s} {:10.2f}'.format('Wind speed at z=10m (m/s):', wind_prof[10])
+out_file += '\n'
+out_file += '{:30s} {:10.2f}'.format('Wind speed at z=15m (m/s):', wind_prof[15])
+out_file += '\n'
+out_file += '{:30s} {:10.2f}'.format('Wind speed at z=20m (m/s):', wind_prof[20])
 
-print ''
-print '='*42
+out_file += '\n'
+out_file += '='*42
 heat_title = 'Crown Heat Transfer'
 buf = (42-len(heat_title))/2
-print ' '*buf + heat_title
-print '='*42
-print '{:30s} {:10.2f}'.format('Total convection (kW/m^2):', sum(heat.conv_sum)/sim_area)
-print '{:30s} {:10.2f}'.format('Total radiation (kW/m^2):', sum(heat.rad_sum)/sim_area)
-print '{:30s} {:10.2f}'.format('Peak convection (kW):', max(heat.conv_sum))
-print '{:30s} {:10.2f}'.format('Peak radiation (kW):', max(heat.rad_sum))
-print ''
-print 'Initializing smokeview...'
+out_file += '\n'
+out_file += ' '*buf + heat_title
+out_file += '\n'
+out_file += '='*42
+out_file += '\n'
+out_file += '{:30s} {:10.2f}'.format('Total convection (kW/m^2):', sum(heat.conv_sum)/heat.sim_area)
+out_file += '\n'
+out_file += '{:30s} {:10.2f}'.format('Total radiation (kW/m^2):', sum(heat.rad_sum)/heat.sim_area)
+out_file += '\n'
+out_file += '{:30s} {:10.2f}'.format('Peak convection (kW):', max(heat.conv_sum))
+out_file += '\n'
+out_file += '{:30s} {:10.2f}'.format('Peak radiation (kW):', max(heat.rad_sum))
+out_file += '\n\n'
+out_file += 'Initializing smokeview...'
+out_file += '\n'
+
+print out_file
+
+with open(wdir + '/sf_metrics.txt', 'w') as f:
+    f.write(out_file)
 
 os.chdir(wdir)
 if platform.system().lower() == 'linux':

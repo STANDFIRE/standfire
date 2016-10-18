@@ -449,6 +449,10 @@ class RunConfig(object):
             os.mkdir(self.run_directory + '/output/')
         else:
             os.mkdir(self.run_directory + '/output/')
+		
+		# write sim area to file for standfire analyze
+        with open(self.run_directory + '/output/sim_area.txt', 'a') as f:
+            f.write(str(self.params['sceneSizeX']*self.params['sceneSizeY']))
 
         # generate binary grid for fuel placement
         binGrid = GenerateBinaryGrid(self.params['sceneSizeX'],
