@@ -137,7 +137,7 @@ class MassLoss(object):
 
     def get_total_mass_loss(self):
 
-        return (self.mass_sum[-1] / self.mass_sum[0]) * 100
+        return (1 - (self.mass_sum[-1] / self.mass_sum[0])) * 100
 
 
 class WindProfile(object):

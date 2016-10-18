@@ -133,7 +133,7 @@ class Mesh(object):
         """
 
         mesh_template = "&MESH IJK={i},{j},{k}, XB={xmin},{xmax},{ymin},{ymax},{zmin},{zmax} /\n"
-        stretch_template = "&TRANZ CC={cc}, PC={pc}, MESH_NUMBER={n} /\n"
+        stretch_template = "&TRNZ CC={cc}, PC={pc}, MESH_NUMBER={n} /\n"
 
         mesh_string = ""
 
