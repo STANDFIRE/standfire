@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_en.html>help_en</a></br>
+
+<h1 class="sectionedit128" id="modispinaster_model">ModisPinaster Model</h1>
+<div class="level1">
+
+<p>
+ModisPinaster is a diameter distribution model for <em>Pinus pinaster</em> stands (<em class="u">Mo</em>del with Diameter <em class="u">Dis</em>tribution for P. <em class="u">Pinaster</em>), originally developed by Fonseca (2004). It applies to pure maritime pine stands, thinned or unthinned. Stands might be homogeneous in horizontal distribution or having an irregularly shaped diameter distribution.
+</p>
+
+<p>
+ModisPinaster was implemented in Capsis platform in June 2009 by F.Coligny and T. Fidalgo Fonseca under COST Action FP0603. Contribution for the data base and for the site index module was given by C.P. Marques. Contribution for the diameter distribution fitting was given by B. R. Parresol.
+Improvement of the original version was made in May 2011 (COST Action FP0603).
+A new release become available in October 2012 with the support of COST Action FP0902. Contribution for the extended estimates of wood energy in the new release was given by H. Viana.
+</p>
+
+<p>
+ModisPinaster authors&#039; are T. Fonseca (UTAD, Portugal), C.P. Marques (UTAD, Portugal), B.R. Parresol (USDA Forest Services, USA), F. Coligny (AMAP, France) and H. Viana (IPV, Portugal). 
+</p>
+
+<p>
+Data used in model development come from the database on maritime pine (Data_Pinaster) created and maintained over the last two decades at the Forestry Department of University of Trás-os-Montes e Alto Douro. Data were collected in North Portugal, more precisely in Tâmega’s Valley stands (latitude range: 41º 15’N – 41º52’N; longitude range: 7º 20’ W – 8º 00’ W).
+</p>
+
+<p>
+ModisPinaster is constituted by six components: (<em>i</em>) dominant height growth; (<em>ii</em>) basal area growth; (<em>iii</em>) tree mortality; (<em>iv</em>) diameter distribution; (<em>v</em>) thinning algorithm and (<em>vi</em>) volume or biomass assessment by diameter classes. 
+The relashionship between the components is shown in Figure 1.
+</p>
+
+<p>
+<a href="media/help_en/esquema_modispinaster.jpg" class="media" target="_blank" title="help_en:esquema_modispinaster.jpg"><img src="media/help_en/esquema_modispinaster.jpg" class="media" title="" alt="" width="600" /></a>
+</p>
+
+<p>
+Figura 1. ModisPinaster structure.
+</p>
+
+</div>
+<!-- EDIT128 SECTION "ModisPinaster Model" [2-1931] -->
+<h3 class="sectionedit129" id="major_components">Major components</h3>
+<div class="level3">
+
+<p>
+Dominant height growth and site index are estimated using Marques (1987) models.
+</p>
+
+<p>
+Diameter distribution is modeled by Johnson’s S<sub>B</sub> (Johnson, 1949), using the 3-parameter recovery approach developed by Parresol (2003).
+</p>
+
+<p>
+Evaluation of tree mortality is a two-phase process. In the first phase the model estimates the probabilibity of mortality to occur during the projection period. In a second phase the number of survival trees is calculated for the projection age and then it is adjusted by the probability of mortality to occur.
+Probability of mortality is predicted by two sub-models, according to the major influences: wind or other causes, these being mainly related to density/competition effects.
+</p>
+
+<p>
+Basal area growth is estimated with a growth model that accounts for tree mortality.
+</p>
+
+<p>
+The procedure to simulate a thinning requires previous information on diameter distribution (current or simulated using the S<sub>B</sub> distribution). Trees to be removed from the diameter distribution are identified with a thinning algorithm (Alder 1979) that assumes a probability of survival to cut proportional to trees’ size. Inclusion of ModisPinaster into the Capsis platform extended the original thinning option to allow other selective thinnings (low, high, mixed) with the interactive thinning procedure developed by F. Coligny. 
+</p>
+
+<p>
+Volume by diameter classe is estimated using the volume (total e percentual) equations from Fonte (2000), and the height-diameter relashionships by Almeida (1999).
+</p>
+
+<p>
+The model provides information about biomass and wood energy, with energy conversion factors by Viana (2012).
+Carbon estimates are provided as option. Some scenes are presented in the following pictures.
+</p>
+
+<p>
+<a href="media/help_en/inputdialog.jpg" class="media" target="_blank" title="help_en:inputdialog.jpg"><img src="media/help_en/inputdialog.jpg" class="mediacenter" title="" alt="" width="500" /></a>
+</p>
+
+<p>
+Figura 2. ModisPinaster Input Dialog.
+</p>
+
+<p>
+<a href="media/help_en/figure_1.jpg" class="media" target="_blank" title="help_en:figure_1.jpg"><img src="media/help_en/figure_1.jpg" class="mediacenter" title="" alt="" width="500" /></a>
+</p>
+
+<p>
+Figura 3. ModisPinaster Data Extractors. Example of Output.
+</p>
+
+<p>
+<a href="media/help_en/interventiondialog.jpg" class="media" target="_blank" title="help_en:interventiondialog.jpg"><img src="media/help_en/interventiondialog.jpg" class="mediacenter" title="" alt="" width="300" /></a>
+</p>
+
+<p>
+Figura 4. ModisPinaster Intervention Dialog.
+</p>
+
+<p>
+<a href="media/help_en/figure_2.jpg" class="media" target="_blank" title="help_en:figure_2.jpg"><img src="media/help_en/figure_2.jpg" class="mediacenter" title="" alt="" width="600" /></a>
+</p>
+
+<p>
+Figura 2. ModisPinaster Output. Residuals and Stand Table.
+</p>
+
+<p>
+A synthesis of ModisPinaster development can be found in the document presented at the 11th Meeting of Capsis (Montpellier, 24 June 2009) <a href="media/help/modispinaster.pdf" class="media" target="_blank" title="help:modispinaster.pdf">modispinaster</a>, also available in Capsis documentation, or in the document presented at the University of Helsinki (Finland), 17-18 September 2009, under the 3rd Workshop and MC Meeting of the Cost Action FP0603.
+</p>
+
+<p>
+For an overview of ModisPinaster <a href="media/help_en/intech-models_to_implement_a_sustainable_forest_management_an_overview_of_the_modispinaster_model.pdf" class="media" target="_blank" title="help_en:intech-models_to_implement_a_sustainable_forest_management_an_overview_of_the_modispinaster_model.pdf"></a>
+(Fonseca, T.F., B. Parresol, C. Marques, F. de Coligny, 2012. Models to Implement a Sustainable Forest Management – an Overview of the ModisPinaster Model. In: Sustainable Forest Management / Book 1”, InTech - Open Access Publisher. Chapter 18, p. 321-338. J. Martín García , J. J. Diez Casero (Ed.), ISBN: 978-953-51-0621-0.). 
+You may see also the <a href="help-modispinaster-tutorial.html" class="wikilink1" title="help-modispinaster-tutorial.html">tutorial</a>.
+</p>
+
+<p>
+<a href="media/help/logo_modisp.jpg" class="media" target="_blank" title="help:logo_modisp.jpg"><img src="media/help/logo_modisp.jpg" class="media" title="" alt="" /></a>
+</p>
+
+</div>
+
+<h4 id="free_copies">Free copies</h4>
+<div class="level4">
+
+<p>
+The new release of ModisPinaster can be downloaded for free directly from the Capsis website (<a href="http://www.inra.fr/capsis/models" class="urlextern" target="blank" title="http://www.inra.fr/capsis/models"  rel="nofollow">http://www.inra.fr/capsis/models</a>). Users can also get one installer by asking for a copy to the first author (tfonseca@utad.pt). 
+</p>
+
+</div>
+
+<h4 id="acknowledgements">Acknowledgements</h4>
+<div class="level4">
+
+<p>
+T.Fonseca acknowledges the scientific supervision of M.Tomé (ISA, Portugal) during the development of the original version of ModisPinaster.
+</p>
+
+<p>
+The implementation of ModisPinaster in Capsis was supported by COST Action FP0603.
+The adaptations made in October 2012, to provide a detailed output of biomass and wood energy estimates, were supported by COST Action FP0902.
+</p>
+
+</div>
+
+<h4 id="references">References</h4>
+<div class="level4">
+
+<p>
+Alder, D., 1979. A distance-independent tree model for exotic conifer plantations in east Africa. For. Sci. 25: 59-71.
+</p>
+
+<p>
+Almeida, L.F.R., 1999. Comparação de metodologias para estimação de altura e volume em povoamentos de pinheiro bravo no Vale do Tâmega. Relatório Final de Estágio. UTAD, Vila Real, 114pp.
+</p>
+
+<p>
+Fonte, C.M.M., 2000. Estimação do volume total e mercantil em Pinus pinaster Ait. no Vale do Tâmega. Relatório Final de Estágio. UTAD, Vila Real, 95pp.
+</p>
+
+<p>
+Fonseca, T.F. 2004. Modelação do crescimento, mortalidade e distribuição diamétrica, do pinhal bravo no Vale do Tâmega. PhD. Thesis. University of Trás-os-Montes e Alto Douro, Vila Real, Portugal. 248 p.
+</p>
+
+<p>
+Johnson, N.L. 1949. Systems of frequency curves generated by methods of translation. Biometrika 36: 149-176.
+</p>
+
+<p>
+Marques, C. P., 1991. Evaluating site quality of even-aged maritime pine stands in northern Portugal using direct and indirect methods. For. Ecol. Manage. 41: 193-204.
+</p>
+
+<p>
+Parresol, B.R. 2003. Recovering parameters of Johnson’s S<sub>B</sub> distribution. USDA For. Ser. Res. Pap. SRS-31. 9 p.
+</p>
+
+<p>
+Viana, H., 2012. Modelling and mapping aboveground biomass for energy usage and carbon storage assessment in mediterranean ecosystems. PhD Thesis. University of Trás-os-Montes e Alto Douro, Vila Real, Portugal.
+</p>
+
+</div>
+<!-- EDIT129 SECTION "Major components" [1932-] --></body>
+</html>

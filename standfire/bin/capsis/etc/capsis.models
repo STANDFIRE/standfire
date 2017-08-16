@@ -1,5 +1,12 @@
 # List of available models
 
+salem=true
+luberon2=true
+bbb=true
+aaa=true
+nicolas=true
+training=true
+allostand3d=true
 silmar.silmars=true
 plantabsl=true
 phenofit5=true
@@ -7,7 +14,6 @@ phenofit=true
 organon=true
 economics=true
 pinuspinaster=true
-tagada=true
 standfire=true
 forceps=true
 fompine=true
@@ -26,7 +32,6 @@ natura2014=true
 abccedrus=true
 stretch2=true
 simmem=true
-training=true
 afocelpa=true
 afocelpp=true
 alisier=true
@@ -44,7 +49,6 @@ eucalypt=true
 lerfob.fagacees=true
 lerfob.abial=true
 fasy=true
-fiesta=true
 fireparadox=true
 genloader=true
 guppy=true
@@ -70,6 +74,7 @@ mountain=true
 mpb=true
 mustard=true
 nrg=true
+nrg2017=true
 nz1=true
 oakpine1=true
 oakpine2=true
@@ -92,14 +97,16 @@ samare=true
 samare2014=true
 samsara2=true
 samsara=true
-samsaraLightLoader=true
+samsaralightloader=true
 
 # fc-21.12.2010 removed the 'sapin' model, replaced by 'template' 
 # (not in this capsis.models) and 'training' built from 'template'
 # during the capsis training only (not in this capsis.models)
 sapin=false
 
-selva=true
+# fc-28.11.2016 Selva is not in the Capsis repository
+selva=false
+
 sexibridge=true
 simsys=true
 stretch=true
@@ -117,4 +124,4 @@ croireplant=true
 idf.castaneatables=true
 mathilde=true
 # not a model but include extensions
-lerfob.commons=true
+walltree = true

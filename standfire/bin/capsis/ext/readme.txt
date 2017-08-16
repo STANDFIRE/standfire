@@ -1,9 +1,18 @@
-Dependenciies
+Capsis external dependencies
 
-====== Capsis library ======
+SVN library (fc-10.1.2017)
 
-=====External library=====
-==== Scientific library ====
+  * SVNkit 1.8
+    * Extract, only to get the current SVN revision of the working copy
+    * https://svnkit.com/
+    * License: https://svnkit.com/license.html
+    * antlr-runtime-3.4.jar
+    * sqljet-1.1.10.jar
+    * sequence-library-1.0.3.jar
+    * svnkit-1.8.14.jar
+    * svnkit-cli-1.8.14.jar
+
+Scientific libraries
 
   * commons-math-2.O.jar : 
      * http://commons.apache.org/math/
@@ -23,8 +32,7 @@ Dependenciies
       * License GPL
       * ** JEP > 2.4.1 are distributed under a commercial license**
 
-
-==== Serialisation ====
+Serialisation
 
   * xstream.jar
      * XML serialization
@@ -35,14 +43,14 @@ Dependenciies
      * Fast XML parser
      * http://www.extreme.indiana.edu/xgws/xsoap/xpp/mxp1/index.html
 
-==== Plotter ====
+Plotter
 
   * jfreechart (jfreechart-1.0.6.jar, jfreechart-1.0.6-swt.jar, jcommon-1.0.10.jar)
       * http://www.jfree.org/jfreechart/
       * License : LGPL
       * Used by regix
 
-==== 3D ====
+3D
 
   * j3dcore.jar, vecmath.jar, j3dutils.jar, slimplot.jar
      * Java 3D : https://java3d.dev.java.net/
@@ -53,13 +61,12 @@ Dependenciies
      * https://jogl.dev.java.net/
      * License : BSD
 
-
-==== Java look and feel =====
+Java look and feel
 
   * kunststoff.jar 
   * toniclf.jar
 
-==== Utilities =====
+Utilities
 
   * args4j (command line parameter parsing)
     * https://args4j.dev.java.net/
@@ -74,8 +81,14 @@ Dependenciies
   * jepp : connection with CPython
     	 
 
-==== Developpement =====
+Developpement
 
   * ant
   * IZPack
   * JUnit
+
+
+
+
+
+

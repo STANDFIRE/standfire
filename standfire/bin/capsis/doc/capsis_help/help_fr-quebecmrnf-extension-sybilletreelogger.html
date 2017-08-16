@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_fr.html>help_fr</a></br>
+
+<p>
+<strong><a href="help_fr-quebecmrnf-artemis.html" class="wikilink1" title="help_fr-quebecmrnf-artemis.html">Index des pages d&#039;aide du simulateur ARTEMIS</a></strong>
+</p>
+
+<h1 class="sectionedit442" id="module_de_billonnage_sybille">Module de billonnage SYBILLE</h1>
+<div class="level1">
+
+<p>
+Sybille est un module complémentaire qui permet d&#039;effectuer un billonnage virtuel des arbres de certaines espèces. Le module vous permet de définir les catégories de billon, appelé ici grade de billon, que vous souhaitez produire.
+</p>
+
+<p>
+Le module repose sur des modèles de défilement étalonnés à partir des 13 000 analyses de tiges de la base de données de la Direction des inventaires forestiers du ministère des Ressources naturelles et de la Faune du Québec. 
+</p>
+
+</div>
+<!-- EDIT442 SECTION "Module de billonnage SYBILLE" [82-596] -->
+<h2 class="sectionedit443" id="especes_concernees">Espèces concernées</h2>
+<div class="level2">
+
+<p>
+Le module de billonnage Sybille traite les huit espèces suivantes :
+</p>
+<ul>
+<li class="level1"><div class="li"> Bouleau à papier - <em>Betula papyrifera</em> (BOP)</div>
+</li>
+<li class="level1"><div class="li"> Épinette blanche - <em>Picea glauca</em> (EPB)</div>
+</li>
+<li class="level1"><div class="li"> Épinette noire - <em>Picea mariana</em> (EPN)</div>
+</li>
+<li class="level1"><div class="li"> Épinette rouge - <em>Picea rubens</em> (EPR)</div>
+</li>
+<li class="level1"><div class="li"> Peuplier à grandes dents - <em>Populus grandidentata</em> (PEG)</div>
+</li>
+<li class="level1"><div class="li"> Peuplier faux-tremble - <em>Populus tremuloides</em> (PET)</div>
+</li>
+<li class="level1"><div class="li"> Sapin baumier - <em>Abies balsamea</em> (SAB)</div>
+</li>
+<li class="level1"><div class="li"> Thuya occidental - <em>Thuja occidentalis</em> (THO)</div>
+</li>
+</ul>
+
+<p>
+<a href="media/help_fr/quebecmrnf/extension/sybille1.png" class="media" target="_blank" title="help_fr:quebecmrnf:extension:sybille1.png"><img src="media/help_fr/quebecmrnf/extension/sybille1.png" class="media" title="" alt="" /></a>
+</p>
+
+</div>
+<!-- EDIT443 SECTION "Espèces concernées" [597-1158] -->
+<h2 class="sectionedit444" id="grades_de_billon">Grades de billon</h2>
+<div class="level2">
+
+<p>
+La seconde liste du dialogue vous affiche les grades de billon correspondant à l&#039;espèce sélectionnée dans la première liste. Il vous est possible d&#039;ajouter ou d&#039;enlever des grades de billon pour une espèce donnée en cliquant sur <strong>Grades de billon</strong> dans la bar de menus. Si vous cliquez sur <strong>Ajouter</strong>, un nouveau grade de billon dénommé <strong>unnamed</strong> apparaîtra dans la liste.
+</p>
+
+<p>
+<a href="media/help_fr/quebecmrnf/extension/sybille2.png" class="media" target="_blank" title="help_fr:quebecmrnf:extension:sybille2.png"><img src="media/help_fr/quebecmrnf/extension/sybille2.png" class="media" title="" alt="" /></a>
+</p>
+
+<p>
+Vous pouvez maintenant définir les caractéristiques de ce grade. Il serait possible de changer le nom pour <strong>sciage long</strong>, de fixer le diamètre minimum requis au fin bout à <strong>25 cm</strong> et définir la longueur minimale requise à <strong>3,54 m</strong> comme dans l&#039;exemple ci-dessous. 
+</p>
+
+<p>
+<a href="media/help_fr/quebecmrnf/extension/sybille3.png" class="media" target="_blank" title="help_fr:quebecmrnf:extension:sybille3.png"><img src="media/help_fr/quebecmrnf/extension/sybille3.png" class="media" title="" alt="" /></a>
+</p>
+
+<p>
+<strong>IMPORTANT:</strong> Fixer le diamètre minimum au fin bout à 0 cm revient à ne spécifier aucune contrainte en termes de diamètre.
+</p>
+
+<p>
+<strong>IMPORTANT:</strong> Laisser le champ longueur de billon vide revient à ne spécifier aucune contrainte en matière de longueur. 
+</p>
+
+<p>
+<strong>ASTUCE:</strong> Pour obtenir le volume marchand pour une espèce donnée, prenez le premier grade de cette espèce, inscrivez 9,1 dans la case <strong>diamètre minimum au fin bout</strong> et laissez la case <strong>longueur de billon</strong> vide.
+</p>
+
+<p>
+<strong>ASTUCE:</strong> Pour obtenir le volume total pour une espèce donnée, prenez le premier grade de cette espèce, inscrivez 0 dans la case <strong>diamètre minimum au fin bout</strong> et laissez la case <strong>longueur de billon</strong> vide.
+</p>
+
+</div>
+<!-- EDIT444 SECTION "Grades de billon" [1159-2649] -->
+<h2 class="sectionedit445" id="algorithme_de_billonnage">Algorithme de billonnage</h2>
+<div class="level2">
+
+<p>
+Sybille cherche à produire les billons dans l&#039;ordre indiqué à l&#039;écran. L&#039;algorithme débute à la hauteur de souche et vérifie s&#039;il peut produire un billon du premier grade. S&#039;il ne peut le faire, il passera au deuxième et ainsi de suite. Lorsqu&#039;un billon est produit, l&#039;algorithme se positionne au fin bout de ce billon et tente à nouveau de produire un nouveau billon selon la méthode décrite précédemment. La procédure s&#039;arrête lorsque Sybille ne peut plus produire aucun billon des grades définis dans la liste. 
+</p>
+
+<p>
+Dans l&#039;exemple précédent, l&#039;algorithme produira un billon de <strong>sciage long</strong> de bouleau à papier seulement s&#039;il ne peut produire ni un billon de <strong>sciage court</strong> ni un billon de <strong>pâte</strong>. Considérant les exigences du grade <strong>sciage long</strong>, l&#039;algorithme ne devrait produire aucun billon de ce grade. Pour modifier l&#039;algorithme  de billonnage, vous pouvez changer l&#039;ordre des grades en utilisant les flèches situées à la droite de la liste comme dans l&#039;exemple suivant.
+</p>
+
+<p>
+<a href="media/help_fr/quebecmrnf/extension/sybille4.png" class="media" target="_blank" title="help_fr:quebecmrnf:extension:sybille4.png"><img src="media/help_fr/quebecmrnf/extension/sybille4.png" class="media" title="" alt="" /></a>
+</p>
+
+</div>
+<!-- EDIT445 SECTION "Algorithme de billonnage" [2650-3745] -->
+<h2 class="sectionedit446" id="options_de_billonnage">Options de billonnage</h2>
+<div class="level2">
+
+<p>
+Vous pouvez accéder aux options du module de billonnage par le biais du menu <strong>Outils</strong> dans la bar de menus. Les options disponibles concernent les méthodes d&#039;estimation et la hauteur de souche.
+</p>
+
+<p>
+<a href="media/help_fr/quebecmrnf/extension/sybille5.png" class="media" target="_blank" title="help_fr:quebecmrnf:extension:sybille5.png"><img src="media/help_fr/quebecmrnf/extension/sybille5.png" class="media" title="" alt="" /></a>
+</p>
+
+</div>
+<!-- EDIT446 SECTION "Options de billonnage" [3746-4028] -->
+<h3 class="sectionedit447" id="methodes_d_estimation">Méthodes d&#039;estimation</h3>
+<div class="level3">
+
+<p>
+La méthode d&#039;estimation repose sur une série de Taylor. Par défaut, la série est du deuxième degré. L&#039;utilisation d&#039;une série de premier degré est possible. Le principal avantage à utiliser la série de premier degré est un temps de calcul plus court pour réaliser la simulation. Par contre, les volumes ainsi obtenus seront légèrement sous-estimés (de l&#039;ordre de 0,6-1,0%).
+</p>
+
+</div>
+<!-- EDIT447 SECTION "Méthodes d'estimation" [4029-4452] -->
+<h3 class="sectionedit448" id="hauteur_de_souche">Hauteur de souche</h3>
+<div class="level3">
+
+<p>
+Cette option permet de modifier la hauteur de souche. Par défaut, celle-ci est fixée à 0,15 m. 
+</p>
+
+</div>
+<!-- EDIT448 SECTION "Hauteur de souche" [4453-4581] -->
+<h2 class="sectionedit449" id="references">Références</h2>
+<div class="level2">
+
+<p>
+Schneider, R., M. Fortin et J.-P. Saucier. Equations de défilement pour les principales essences commerciales du Québec. Gouvernement du Québec. Ministère des Ressources naturelles et de la Faune. Direction de la recherche forestière. Mémoire de recherche forestière (<em>accepté</em>)
+</p>
+
+<p>
+Fortin, M., R. Schneider et J.-P. Saucier. Volume and error variance estimation using integrated stem taper models. Forest Science (<em>accepté</em>)
+</p>
+
+</div>
+<!-- EDIT449 SECTION "Références" [4582-] --></body>
+</html>

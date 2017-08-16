@@ -18,13 +18,13 @@ the project.
 Capsis runs on Java platforms and is tested under Windows, Linux and Mac.
 
 Check the Capsis web site http://www.inra.fr/capsis where you will find more 
-information and the Capsis Charter which must be accepted by all members. 
+information and the Capsis Charter which must be accepted by all users. 
 
 See also the Installation Guide and the Capsis Tutorial.
 
 Capsis is being developed at the AMAP research unity (Cirad, CNRS, INRA, IRD, 
-Université Montpellier 2 - botAnique et bioinforMatique de l'Architecture 
-des Plantes) in Montpellier, France.
+Université Montpellier 2 - botAnique et Modélisation de l'Architecture 
+des Plantes et des végétations) in Montpellier, France.
 
 http://www.inra.fr/capsis
 http://capsis.cirad.fr/

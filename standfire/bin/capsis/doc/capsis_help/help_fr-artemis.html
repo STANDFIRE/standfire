@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_fr.html>help_fr</a></br>
+
+<p>
+<strong><a href="help_fr-quebecmrnf-artemis.html" class="wikilink1" title="help_fr-quebecmrnf-artemis.html">Index des pages d&#039;aide du simulateur ARTEMIS</a></strong>
+</p>
+
+<h1 class="sectionedit108" id="simulateur_artemis">Simulateur ARTÉMIS</h1>
+<div class="level1">
+
+<p>
+Le simulateur ARTÉMIS est une initiative de la Direction de la recherche forestière du ministère des Ressources naturelles et de la Faune du Québec, Canada.
+</p>
+
+<p>
+Lorsque vous utiliserez ARTÉMIS, rappelez-vous trois choses :
+</p>
+<ul>
+<li class="level1"><div class="li"> un simulateur est un outil d&#039;aide à la décision, mais c&#039;est à vous seul que la décision revient;</div>
+</li>
+<li class="level1"><div class="li"> un simulateur est une simplification de la réalité et il comporte toujours de forces et des faiblesses;</div>
+</li>
+<li class="level1"><div class="li"> il s&#039;agit d&#039;un processus en constante amélioration.</div>
+</li>
+</ul>
+
+<p>
+Si vous avez des suggestions ou des préoccupations à l&#039;égard du comportement du simulateur, n&#039;hésitez pas à communiquer avec nous à l&#039;adresse suivante : 
+<a href="mailto:capsismrnfmodules@gmail.com">capsismrnfmodules@gmail.com</a>. Par ailleurs,  <a href="mailto:capsismrnfmodules@gmail.com">inscrivez-vous en ligne</a> à la même adresse pour être au courant des dernières mises à jour et amélioration du simulateur.
+</p>
+
+</div>
+<!-- EDIT108 SECTION "Simulateur ARTÉMIS" [82-1070] -->
+<h2 class="sectionedit109" id="introduction">Introduction</h2>
+<div class="level2">
+
+<p>
+ARTÉMIS est un simulateur de croissance conçu pour les forêts du Québec. Il a été paramétré et étalonné à partir du réseau de placettes permanentes de la Direction des inventaires forestiers du ministère des Ressources naturelles et de la faune du Québec. Ce réseau a été établi dans les années 1970 et comprend plus de 12 000 placettes permanentes.
+</p>
+
+<p>
+Ce simulateur a été conçu par la Direction de la recherche forestière dans l&#039;optique de remplacer le module par taux utilisé dans les calculs de possibilité forestière des forêts publiques québécoises. Il s&#039;applique autant aux forêts de feuillus, aux forêts mélangées qu&#039;aux forêts résineuses.
+</p>
+
+</div>
+<!-- EDIT109 SECTION "Introduction" [1071-1777] -->
+<h2 class="sectionedit110" id="fonctionnement">Fonctionnement</h2>
+<div class="level2">
+
+<p>
+Ce simulateur de croissance est un modèle par arbres individuelles indépendant des distances. Il fonctionne à partir des données dendrométriques de base comme la hauteur et le diamètre et comprend 7 modules (4 dynamiques et 3 statiques) :
+</p>
+<ol>
+<li class="level1"><div class="li"> Module dynamique de mortalité.</div>
+</li>
+<li class="level1"><div class="li"> Module dynamique d&#039;accroissement en diamètre à hauteur de poitrine (dhp).</div>
+</li>
+<li class="level1"><div class="li"> Module dynamique de recrutement.</div>
+</li>
+<li class="level1"><div class="li"> Module dynamique d&#039;attribution de dhp aux recrues.</div>
+</li>
+<li class="level1"><div class="li"> Module statique d&#039;estimation de la hauteur des arbres.</div>
+</li>
+<li class="level1"><div class="li"> Module statique d&#039;estimation du volume marchand brut.</div>
+</li>
+<li class="level1"><div class="li"> Module statique de prélèvement.</div>
+</li>
+</ol>
+
+<p>
+Les quatre modules dynamiques permettent de prévoir les changements sur une période de croissance de 10 ans, nommée <strong>décennie</strong>. Les trois modules statiques permettent de dériver d&#039;autres variables à partir de caractéristiques données à une moment précis. Pour obtenir des projections de croissance sur plus de 10 ans, le simulateur utilise un procédé itératif. Les prévisions obtenues pour une décade sont réinsérées dans le simulateur pour obtenir des prévisions sur 20 ans et ainsi de suite jusqu&#039;à ce que l&#039;on atteigne la durée de projection désirée.
+</p>
+
+<p>
+Comme la végétation potentielle influence grandement la dynamique forestière, les modules du simulateur ont été étalonnés pour les 25 <a href="help_fr-artemis.html#annexe_1_-_liste_des_vegetations_potentielles" class="wikilink1" title="help_fr-artemis.html">végétations potentielles</a> les plus fréquentes sur le territoire québécois. Il existe donc 25 versions du simulateur. Lors de la lecture des données d&#039;inventaire, la végétation potentielle de la placette est donc un champ <strong>obligatoire</strong> car il permet d&#039;identifier la version du simulateur appropriée à la placette en question.
+</p>
+
+</div>
+<!-- EDIT110 SECTION "Fonctionnement" [1778-3540] -->
+<h2 class="sectionedit111" id="contexte_d_utilisation">Contexte d&#039;utilisation</h2>
+<div class="level2">
+
+<p>
+Le simulateur ARTÉMIS actualise des placettes dans le temps. Les placettes qu&#039;il utilise sont des placettes à rayon fixe de 400 m<sup>2</sup>. Seuls les arbres marchands, c&#039;est-à-dire les arbres dont le dhp est égal ou supérieur à 9,1 cm, sont pris en compte. Comme les usagers sont généralement intéressés par la croissance des strates ou des peuplements, le simulateur permet de simuler plusieurs placettes dans un même fichier d&#039;inventaire. Ainsi, il est possible de simuler une strate de quinze placettes en mettant ces placettes bout à bout dans le fichier d&#039;inventaire. ARTÉMIS simule la croissance de chacune d&#039;elles séparément et affiche la moyenne des quinze évolutions.
+</p>
+
+<p>
+Le simulateur est conçu pour simuler la croissance de peuplements naturels ou de peuplements ayant subi des coupes partielles ou des perturbations légères ou moyennes. Le module de recrutement n&#039;a pas été testé à la suite d&#039;une coupe totale ou d&#039;une perturbation d&#039;origine. Dans un contexte de coupe totale ou de perturbation d&#039;origine, les concepteurs du modèle sont d&#039;avis que le modèle ne devrait être utilisé que lorsque :
+</p>
+<ul>
+<li class="level1"><div class="li"> la perturbation ou la coupe a eu lieu il y a plus de 20 ans et; </div>
+</li>
+<li class="level1"><div class="li"> la placette compte au moins 20 tiges marchandes (500 tiges/ha)</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT111 SECTION "Contexte d'utilisation" [3541-4848] -->
+<h2 class="sectionedit112" id="avantages_du_simulateur">Avantages du simulateur</h2>
+<div class="level2">
+
+<p>
+Par rapport au module par taux utilisé dans les précédents calculs de possibilité ligneuse, le simulateur ARTÉMIS présente plusieurs avantages, notamment les suivants:
+</p>
+<ul>
+<li class="level1"><div class="li"> il prévoit le recrutement;</div>
+</li>
+<li class="level1"><div class="li"> il comprend des variables climatiques;</div>
+</li>
+<li class="level1"><div class="li"> il tient compte des épisodes de défoliations causés par la tordeuse des bourgeons de l&#039;épinette;</div>
+</li>
+<li class="level1"><div class="li"> il permet de prévoir la décroissance (sénescence);</div>
+</li>
+<li class="level1"><div class="li"> il permet de simuler les effets de certaines coupes partielles générales.</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT112 SECTION "Avantages du simulateur" [4849-5378] -->
+<h2 class="sectionedit113" id="limites_du_simulateur">Limites du simulateur</h2>
+<div class="level2">
+
+<p>
+Le simulateur ARTÉMIS comporte les limites suivantes:
+</p>
+<ul>
+<li class="level1"><div class="li"> il n&#039;a pu être évalué que sur 38 ans en raison de la disponibilité des données;</div>
+</li>
+<li class="level1"><div class="li"> les prévisions de certaines végétations potentielles sont moins fiables en raison de leur faible représentativité (p. ex.: FC1, FO1, MF1);</div>
+</li>
+<li class="level1"><div class="li"> l&#039;effet des coupes partielles plus techniques ne peut pas être simulés adéquatement.</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT113 SECTION "Limites du simulateur" [5379-5798] -->
+<h2 class="sectionedit114" id="contributions">Contributions</h2>
+<div class="level2">
+
+<p>
+Les concepteurs du modèle tiennent à remercier François de Coligny et Samuel Dufour (Cirad - INRA) pour leur support technique dans l&#039;utilisation et la programmation de la plateforme CAPSIS. Merci à Jacques Régnière et Rémi Saint-Amant (Service canadien des forêts) pour la permission d&#039;utilisation du logiciel BioSIM qui permet de générer les variables climatiques nécessaires aux simulations (voir Annexe 2). Merci à Jean-François Lavoie (Arcane Technologies inc.) pour la programmation du simulateur et le support en programmation Java.
+</p>
+
+</div>
+<!-- EDIT114 SECTION "Contributions" [5799-6379] -->
+<h2 class="sectionedit115" id="references">Références</h2>
+<div class="level2">
+
+<p>
+Fortin, M., J. DeBlois, S. Bernier et G. Blais. 2007. Mise au point d&#039;un tarif de cubage général pour les forêts québécoises: une approche pour mieux évaluer l&#039;incertitude associée aux prévisions. The Forestry Chronicle 83(5): 754-765.  <a href="http://pubs.cif-ifc.org/doi/abs/10.5558/tfc83754-5">(Pour télécharger le document, cliquez ici)</a>
+</p>
+
+<p>
+Fortin, M., S. Bernier, J.-P. Saucier et F. Labbé. 2009. Une relation hauteur-diamètre tenant compte de l&#039;influence de la station et du climat pour 20 espèces commerciales du Québec. Gouvernement du Québec. Ministère des Ressources naturelles et de la Faune. Mémoire de recherche forestière. 22 p. <a href="media/help_fr/m2009-memoire153fortinetalcorrige.pdf" class="media" target="_blank" title="help_fr:m2009-memoire153fortinetalcorrige.pdf">(Pour télécharger le document, cliquez ici)</a>
+</p>
+
+<p>
+Fortin, M., et L. Langevin. 2010. ARTÉMIS-2009 : un modèle de croissance basé sur une approche par tiges individuelles pour les forêts du Québec. Gouvernement du Québec. Ministère des Ressources naturelles et de la Faune. Mémoire de recherche forestière. 48 p.  <a href="http://www.mrnf.gouv.qc.ca/publications/forets/connaissances/recherche/Fortin-Mathieu/Memoire156.pdf">(Pour télécharger le document, cliquez ici)</a>
+</p>
+
+<p>
+Fortin, M., et L. Langevin. 2010. ARTÉMIS-2009 : un modèle de croissance basé sur une approche par tiges individuelles pour les forêts du Québec (ERRATUM). <a href="media/help_fr/memoireartemis2009erratum.pdf" class="media" target="_blank" title="help_fr:memoireartemis2009erratum.pdf">(Pour télécharger le document, cliquez ici)</a>
+</p>
+
+<p>
+Fortin, M., et L. Langevin. 2012. Stochastic and deterministic single-tree models: is there any difference in growth predictions? Annals of Forest Science 69: 271-282.  <a href="http://link.springer.com/article/10.1007/s13595-011-0112-0">(Pour télécharger le document, cliquez ici)</a>
+</p>
+
+</div>
+<!-- EDIT115 SECTION "Références" [6380-8180] -->
+<h2 class="sectionedit116" id="annexe_1_-_liste_des_vegetations_potentielles">Annexe 1 - Liste des végétations potentielles</h2>
+<div class="level2">
+
+<p>
+Le simulateur ARTÉMIS reconnaît les 25 végétations potentielles suivantes (le code de chacune utilisé par le ministère des Ressources naturelles et de la Faune figure entre parenthèses) : 
+</p>
+<ol>
+<li class="level1"><div class="li"> Chênaie (FC1)</div>
+</li>
+<li class="level1"><div class="li"> Érablière à caryer (FE1)</div>
+</li>
+<li class="level1"><div class="li"> Érablière à tilleul (FE2)</div>
+</li>
+<li class="level1"><div class="li"> Érablière à bouleau jaune (FE3)</div>
+</li>
+<li class="level1"><div class="li"> Érablière à bouleau jaune et hêtre (FE4)</div>
+</li>
+<li class="level1"><div class="li"> Érablière à ostryer (FE5)</div>
+</li>
+<li class="level1"><div class="li"> Érablière à chêne rouge (FE6)</div>
+</li>
+<li class="level1"><div class="li"> Ormaie à frêne noir (FO1)</div>
+</li>
+<li class="level1"><div class="li"> Frênaie noire à sapin (MF1)</div>
+</li>
+<li class="level1"><div class="li"> Bétulaie jaune à sapin et à érable à sucre (MJ1)</div>
+</li>
+<li class="level1"><div class="li"> Bétulaie jaune à sapin (MJ2)</div>
+</li>
+<li class="level1"><div class="li"> Sapinière à bouleau jaune (MS1)</div>
+</li>
+<li class="level1"><div class="li"> Sapinière à bouleau blanc (MS2)</div>
+</li>
+<li class="level1"><div class="li"> Sapinière à érable rouge (MS6)</div>
+</li>
+<li class="level1"><div class="li"> Pessière blanche issue d’agriculture (RB1)</div>
+</li>
+<li class="level1"><div class="li"> Cédrière tourbeuse à sapin (RC3)</div>
+</li>
+<li class="level1"><div class="li"> Pessière noire à lichens (RE1)</div>
+</li>
+<li class="level1"><div class="li"> Pessière noire à mousses (RE2)</div>
+</li>
+<li class="level1"><div class="li"> Pessière noire à sphaignes (RE3)</div>
+</li>
+<li class="level1"><div class="li"> Pinède (RP1)</div>
+</li>
+<li class="level1"><div class="li"> Sapinière à thuya (RS1)</div>
+</li>
+<li class="level1"><div class="li"> Sapinière à épinette noire (RS2)</div>
+</li>
+<li class="level1"><div class="li"> Sapinière à épinette noire et sphaignes (RS3)</div>
+</li>
+<li class="level1"><div class="li"> Sapinière à épinette rouge (RS5)</div>
+</li>
+<li class="level1"><div class="li"> Prucheraie (RT1)</div>
+</li>
+</ol>
+
+</div>
+<!-- EDIT116 SECTION "Annexe 1 - Liste des végétations potentielles" [8181-9360] -->
+<h2 class="sectionedit117" id="annexe_2_-_variables_climatiques">Annexe 2 - Variables climatiques</h2>
+<div class="level2">
+
+<p>
+Le simulateur ARTÉMIS utilise des variables climatiques afin d&#039;ajuster les prévisions de certaines végétations potentielles. Les variables utilisées peuvent être :
+</p>
+<ul>
+<li class="level1"><div class="li"> les précipitations annuelles moyennes;</div>
+</li>
+<li class="level1"><div class="li"> la température annuelle moyenne.</div>
+</li>
+</ul>
+
+<p>
+Ces variables sont toutes calculées sur la base des moyennes climatiques de la période 1971-2000. Ces deux variables peuvent être calculées à l&#039;aide du logiciel BioSIM, version 9, mis au point par le Service canadien des forêts (voir le site <a href="http://scf.rncan.gc.ca/fichesinformation/biosim" class="urlextern" target="blank" title="http://scf.rncan.gc.ca/fichesinformation/biosim"  rel="nofollow">http://scf.rncan.gc.ca/fichesinformation/biosim</a>).
+</p>
+
+</div>
+<!-- EDIT117 SECTION "Annexe 2 - Variables climatiques" [9361-9957] -->
+<h2 class="sectionedit118" id="annexe_3_-_liste_des_especes">Annexe 3 - Liste des espèces</h2>
+<div class="level2">
+
+<p>
+Le simulateur ARTÉMIS prend en compte les 54 espèces ci-desssous (le code de chacune utilisé par le ministère de Ressources naturelles et de la Faune figure entre parenthèses). N.B. <strong>Si votre fichier d&#039;inventaire contient d&#039;autres espèces que celles mentionnées dans la présente annexe, le simulateur n&#039;en tiendra pas compte.</strong>
+</p>
+
+</div>
+
+<h5 id="especes_commerciales_de_feuillus">Espèces commerciales de feuillus</h5>
+<div class="level5">
+<ol>
+<li class="level1"><div class="li"> Bouleau gris - <em>Betula populifolia</em> (BOG)</div>
+</li>
+<li class="level1"><div class="li"> Bouleau à papier - <em>Betula papyrifera</em> (BOP)</div>
+</li>
+<li class="level1"><div class="li"> Bouleau jaune - <em>Betula alleghaniensis</em> (BOJ)</div>
+</li>
+<li class="level1"><div class="li"> Caryer cordiforme - <em>Carya cordiformis</em> (CAC)</div>
+</li>
+<li class="level1"><div class="li"> Caryer à fruits doux - <em>Carya ovata</em> (CAF)</div>
+</li>
+<li class="level1"><div class="li"> Cerisier tardif - <em>Prunus serotina</em> (CET)</div>
+</li>
+<li class="level1"><div class="li"> Chêne blanc - <em>Quercus alba</em> (CHB)</div>
+</li>
+<li class="level1"><div class="li"> Chêne bicolore - <em>Quercus bicolor</em> (CHE)</div>
+</li>
+<li class="level1"><div class="li"> Chêne à gros fruits - <em>Quercus macrocarpa</em> (CHG)</div>
+</li>
+<li class="level1"><div class="li"> Chêne rouge - <em>Quercus rubra</em> (CHR)</div>
+</li>
+<li class="level1"><div class="li"> Érable argenté - <em>Acer saccharinum</em> (ERA)</div>
+</li>
+<li class="level1"><div class="li"> Érable noir - <em>Acer nigrum</em> (ERN)</div>
+</li>
+<li class="level1"><div class="li"> Érable rouge - <em>Acer rubrum</em> (ERR)</div>
+</li>
+<li class="level1"><div class="li"> Érable à sucre - <em>Acer saccharum</em> (ERS)</div>
+</li>
+<li class="level1"><div class="li"> Frêne d&#039;Amérique - <em>Fraxinus americana</em> (FRA)</div>
+</li>
+<li class="level1"><div class="li"> Frêne noir - <em>Fraxinus nigra</em> (FRN)</div>
+</li>
+<li class="level1"><div class="li"> Frêne de Pennsylvanie - <em>Fraxinus pensylvanica</em> (FRP)</div>
+</li>
+<li class="level1"><div class="li"> Hêtre à grandes feuilles - <em>Fagus grandifolia</em> (HEG)</div>
+</li>
+<li class="level1"><div class="li"> Noyer cendré - <em>Juglans cinerea</em> (NOC)</div>
+</li>
+<li class="level1"><div class="li"> Orme d&#039;Amérique - <em>Ulmus americana</em> (ORA)</div>
+</li>
+<li class="level1"><div class="li"> Orme rouge - <em>Ulmus rubra</em> (ORR)</div>
+</li>
+<li class="level1"><div class="li"> Orme de Thomas - <em>Ulmus Thomasi</em> (ORT)</div>
+</li>
+<li class="level1"><div class="li"> Ostryer de Virginie - <em>Ostrya virginiana</em> (OSV)</div>
+</li>
+<li class="level1"><div class="li"> Peuplier baumier - <em>Populus balsamifera</em> (PEB)</div>
+</li>
+<li class="level1"><div class="li"> Peuplier à feuilles deltoïdes - <em>Populus detoides</em> (PED)</div>
+</li>
+<li class="level1"><div class="li"> Peuplier à grandes dents - <em>Populus grandidentata</em> (PEG)</div>
+</li>
+<li class="level1"><div class="li"> Peuplier faux-tremble - <em>Populus tremuloides</em> (PET)</div>
+</li>
+<li class="level1"><div class="li"> Tilleul d&#039;Amérique - <em>Tilia americana</em> (TIL)</div>
+</li>
+</ol>
+
+</div>
+
+<h5 id="especes_commerciales_de_resineux">Espèces commerciales de résineux</h5>
+<div class="level5">
+<ol>
+<li class="level1"><div class="li"> Épinette blanche - <em>Picea glauca</em> (EPB)</div>
+</li>
+<li class="level1"><div class="li"> Épinette noire - <em>Picea mariana</em> (EPN)</div>
+</li>
+<li class="level1"><div class="li"> Épinette rouge - <em>Picea rubens</em> (EPR)</div>
+</li>
+<li class="level1"><div class="li"> Épinette de Norvège - <em>Picea abies</em> (EPO)</div>
+</li>
+<li class="level1"><div class="li"> Mélèze japonais - <em>Larix leptolepis</em> (MEJ)</div>
+</li>
+<li class="level1"><div class="li"> Mélèze laricin - <em>Larix laricina</em> (MEL)</div>
+</li>
+<li class="level1"><div class="li"> Mélèze européen - <em>Larix decidua</em> (MEU)</div>
+</li>
+<li class="level1"><div class="li"> Pin blanc - <em>Pinus strobus</em> (PIB)</div>
+</li>
+<li class="level1"><div class="li"> Pin gris - <em>Pinus banksiana</em> (PIG)</div>
+</li>
+<li class="level1"><div class="li"> Pin rigide - <em>Pinus rigida</em> (PID)</div>
+</li>
+<li class="level1"><div class="li"> Pin rouge - <em>Pinus resinosa</em> (PIR)</div>
+</li>
+<li class="level1"><div class="li"> Pin sylvestre - <em>Pinus sylvestris</em> (PIS)</div>
+</li>
+<li class="level1"><div class="li"> Pruche - <em>Tsuga canadensis</em> (PRU)</div>
+</li>
+<li class="level1"><div class="li"> Sapin baumier - <em>Abies balsamea</em> (SAB)</div>
+</li>
+<li class="level1"><div class="li"> Thuya occidental - <em>Thuja occidentalis</em> (THO)</div>
+</li>
+</ol>
+
+</div>
+
+<h5 id="especes_non_commerciales">Espèces non commerciales</h5>
+<div class="level5">
+<ol>
+<li class="level1"><div class="li"> Érable négondo - <em>Acer Negundo</em> (ERA)</div>
+</li>
+<li class="level1"><div class="li"> Érable de Pennsylvanie - <em>Acer pensylvanicum</em> (ERP)</div>
+</li>
+<li class="level1"><div class="li"> Charme de Caroline - <em>Carpinus caroliniana</em> (CAR)</div>
+</li>
+<li class="level1"><div class="li"> Micocoulier occidental - <em>Celtis occidentalis</em> (CEO)</div>
+</li>
+<li class="level1"><div class="li"> Aubépine - <em>Crataegus sp.</em> (CRA)</div>
+</li>
+<li class="level1"><div class="li"> Génévrier de Virginie - <em>Juniperus virginiana</em> (JUV)</div>
+</li>
+<li class="level1"><div class="li"> Pommiers - <em>Malus sp.</em> (MAS)</div>
+</li>
+<li class="level1"><div class="li"> Cerisier de Pennsylvanie - <em>Prunus pensylvanica</em> (PRP)</div>
+</li>
+<li class="level1"><div class="li"> Saules - <em>Salix sp.</em> (SAL)</div>
+</li>
+<li class="level1"><div class="li"> Sorbier d&#039;Amérique - <em>Sorbus americana</em> (SOA)</div>
+</li>
+<li class="level1"><div class="li"> Sorbier des montagnes - <em>Sorbus decora</em> (SOD)</div>
+</li>
+</ol>
+
+</div>
+<!-- EDIT118 SECTION "Annexe 3 - Liste des espèces" [9958-13112] -->
+<h2 class="sectionedit119" id="annexe_4_-_regroupement_d_especes">Annexe 4 - Regroupement d&#039;espèces</h2>
+<div class="level2">
+
+<p>
+Le simulateur ARTÉMIS utilise deux niveaux de regroupements d&#039;espèces. Tout d&#039;abord, les espèces d&#039;épinettes, de chênes, de peupliers et des pins blanc et rouge ont été regroupées en quatre groupes (le code utilisé apparaît entre parenthèses).
+</p>
+<ol>
+<li class="level1"><div class="li"> Les épinettes (EPX) comprenant les espèces EPB, EPN, EPR et EPO.</div>
+</li>
+<li class="level1"><div class="li"> Les chênes (CHX) comprenant les espèces CHB, CHE, CHG et CHR.</div>
+</li>
+<li class="level1"><div class="li"> Les peupliers (PEU) comprenant les espèces PEB, PED, PEG, PET.</div>
+</li>
+<li class="level1"><div class="li"> Les pins (<abbr title="Personal Identification Number">PIN</abbr>) comprenant les espèces PIB et PIR.</div>
+</li>
+</ol>
+
+<p>
+Par la suite, le simulateur regroupe les espèces qui sont les moins fréquentes au sein d&#039;une végétation potentielle donnée. Ce regroupement est nécessaire puisqu&#039;il est impossible de modéliser le recrutement des espèces rares. Une fois les espèces regroupées, la modélisation du recrutement de ces espèces devient possible.
+Les regroupements sont propres à chaque végétation potentielle étant donné que les espèces rares sont différentes d&#039;une végétation potentielle à l&#039;autre. Par exemple, les espèces de résineux tendent à être rares dans l&#039;érablière à caryer (FE1) alors que les espèces de feuillus sont plutôt rares dans la pessière à mousses (RE2). Le détail exhaustif de ces regroupements peut être consulté dans le fichier <a href="media/help_fr/regroupementsespeces.pdf" class="media" target="_blank" title="help_fr:regroupementsespeces.pdf"></a>.
+</p>
+
+</div>
+<!-- EDIT119 SECTION "Annexe 4 - Regroupement d'espèces" [13113-] --></body>
+</html>

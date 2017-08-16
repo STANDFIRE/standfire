@@ -2,22 +2,22 @@ Capsis Licenses
 
 1. Introduction
 
-Capsis 4 is developped by several people and its components may be 
+Capsis4 is developed by several people and its components may be 
 covered by various licenses:
 
   - Capsis kernel, generic pilots, libraries and extensions (i.e. the 
     platform core components) are covered by the GNU Lesser GPL License 
     (see section 3. below).
 
-  - Capsis modules implementing the stands growth and dynamic models 
+  - Capsis modules implementing the forestry growth and dynamics models 
     may have different licenses depending on the authors (see section 2. 
     below).
 
 
-2. Default module license
+2. Default module license (i.e. forestry dynamics models)
 
 Capsis modules may have an explicit license in the module directory in 
-a file called license_en.html (e.g. bin/mountain/license_en.html). 
+a license file (e.g. bin/mountain/license_en.html). 
 This license may be the GPL or LGPL License (recommended free licenses) 
 OR NOT.
 
@@ -28,7 +28,7 @@ modules, they must NOT BE COPIED and you should contact their
 authors for further information.
 
 
-3. Capsis kernel license 
+3. Capsis kernel license (i.e. core platform)
 
 		  GNU LESSER GENERAL PUBLIC LICENSE
 		       Version 2.1, February 1999

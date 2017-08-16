@@ -1,0 +1,76 @@
+# ForestGALES 2.3Res  Sitka spruce parameter file
+SS
+# L3 Conversion Top height (m) to mean height (m): MeanHt = Multiplier*TopHt + intercept
+# Multiplier
+1.0467
+# Intercept
+-2.1452
+# L8 CanopyBreadth (m) as function of DBH (cm).
+# Equation form: 1 linear: Param1*DBH*100 + param2; 2 Power: Param1*DBH^Param2 + Param3
+1
+# Param1
+0.1346
+# Param2
+0.6418
+# Param3
+0
+# L17 CanopyDepth  (m) as function of height (m)= Mulitplier*Height + intercept; (m).
+# Equation form: 1 linear: Param1*Height + param2; 2 Exp: Param1*exp(Param2*height)
+1
+# Param1
+0.3667
+# Param2
+2.4682
+# L24 Stem Density
+850 
+# Canopy Density
+2.5
+# Modulus of rupture
+3.4E7
+# L30 Knot factor
+1.0
+# Modulus of elasticity
+5.9E9
+# L34 Streamlining parameters
+# C
+2.35
+# N
+0.51
+# Root bending term K
+0.0
+# L41 Overturning Moment Multipliers
+# Soil-A; Rooting depth 1,2,3
+152.7
+156.2
+178.1
+# Soil-B; Rooting depth 1,2,3
+135.4
+138.5
+157.9
+# Soil-C; Rooting depth 1,2,3
+147.8
+151.2
+172.5
+# Soil-D; Rooting depth 1,2,3
+168.1
+172.1
+196.2
+# L58 OTM Scaling value
+100
+# Maximum stem weight in each category (kg)
+# Soil-A; Rooting depth 1,2,3
+494
+519
+893
+# Soil-B; Rooting depth 1,2,3
+1110
+2068
+1042
+# L69 Soil-C; Rooting depth 1,2,3
+472
+1205
+237
+# L73 Soil-D; Rooting depth 1,2,3
+477
+1070
+1012

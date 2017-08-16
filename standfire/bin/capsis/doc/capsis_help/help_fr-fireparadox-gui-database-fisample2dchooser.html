@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_fr.html>help_fr</a>&nbsp;=>&nbsp;<a href=help_fr-fireparadox.html>fireparadox</a></br>
+
+<h2 class="sectionedit403" id="construction_d_un_echantillon_unique_coeur_ou_bord">CONSTRUCTION D&#039;UN ECHANTILLON (UNIQUE, COEUR OU BORD)</h2>
+<div class="level2">
+
+<p>
+Cette interface permet de positionner les 3 types de cubes dans la colonne d&#039;échantillon. 
+</p>
+
+<p>
+Les types de cubes possibles sont <strong>HAUT - CENTRE - BASE.</strong>
+</p>
+
+<p>
+<a href="media/help_fr/fireparadox/gui/frsamplecreation.jpg" class="media" target="_blank" title="help_fr:fireparadox:gui:frsamplecreation.jpg"><img src="media/help_fr/fireparadox/gui/frsamplecreation.jpg" class="media" title="" alt="" /></a>
+</p>
+
+</div>
+
+<h5 id="legendes">LEGENDES</h5>
+<div class="level5">
+
+<p>
+En haut à droite, un encadré rappelle les informations concernant la forme en cours de saisie (ID, type d&#039;échantillon, type de forme (XZ=2D), dimension des voxels). 
+</p>
+
+<p>
+A cette étape de la saisie, l&#039;ID est encore égal à -1, car l&#039;échantillon n&#039;est pas encore enregistré dans la base de données. L&#039;ID sera attribué après sa création complète avec la saisie des biomasses pour tous les types de cubes.
+</p>
+
+<p>
+En dessous apparait la légende des couleurs des différents types de cubes. 
+</p>
+
+</div>
+
+<h5 id="valeurs_par_defaut">VALEURS PAR DEFAUT</h5>
+<div class="level5">
+
+<p>
+Si la colonne ne possède qu&#039;un seul cube, il sera positionné à la valeur <strong>HAUT</strong>.
+</p>
+
+<p>
+Si la colonne possède 2 cubes, ils seront positionnés aux valeurs <strong>BASE</strong> - <strong>HAUT</strong> du bas vers le haut.
+</p>
+
+<p>
+Si la colonne possède 3 cubes, ils seront positionnés aux valeurs <strong>BASE - CENTRE - HAUT</strong> du bas vers le haut.
+</p>
+
+<p>
+Si la colonne est plus grande, le cube de <strong>BASE</strong> sera positionné en bas de la colonne, le cube de <strong>HAUT</strong> sera positionné en haut, et le cube de <strong>CENTRE</strong> sera positionné au milieu de la colonne.
+</p>
+
+</div>
+
+<h5 id="modification_de_la_position_des_types_de_cube">MODIFICATION DE LA POSITION DES TYPES DE CUBE</h5>
+<div class="level5">
+
+<p>
+Seul le cube de type <strong>CENTRE</strong> peut être déplacé. Un double clic sur un cube <strong>BLANC</strong> permet de lui attribuer le type <strong>CENTRE</strong>. Il prend alors la couleur correspondante. 
+</p>
+
+<p>
+Les cubes de type <strong>BASE</strong> et <strong>HAUT</strong> ne peuvent pas être déplacés de leur position initiale. 
+</p>
+
+<p>
+Chaque type de cube peut être supprimé. Un double clic permet de les faire disparaitre (il apparaissent alors en BLANC). Un nouveau double clic les fait réapparaitre.
+</p>
+
+</div>
+
+<h5 id="validation_de_la_colonne">VALIDATION DE LA COLONNE</h5>
+<div class="level5">
+
+<p>
+Pour être validée la colonne doit contenir<strong> au moins un cube coloré</strong>. 
+</p>
+
+<p>
+Les cubes vides situés en haut de la colonne ne seront pas sauvegardés dans la base de donnée. La taille de la colonne s&#039;ajustera automatiquement. 
+</p>
+
+</div>
+</body>
+</html>
