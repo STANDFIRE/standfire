@@ -1,0 +1,87 @@
+change log standfire_mini_interface.py
+July-August, 2017
+Reflects changes from version 1.0.0a to 1.1.0a
+
+-modified submodule import methodology - accommodates running both from the
+	interpreter and compiled as long as the path to the submodules is
+	included in the .spec/.cmake/ etc. file.
+
+-added import for new lidar (lidar.py) module
+
+-added lidar_get_shapefile method. Opens file dialog and stores user
+	selected filename in lidar_entry box.
+
+-added 'filetype' option to get_keyword_file method to restrict displayed
+	files to *.key or *.*.
+
+-added checks for spaces in file names and directories to three methods:
+	get_output_directory, get_lidar_shapefile and get_keyword_file. If
+	there are spaces asks the user to move or rename the input file/
+	directory. 
+
+-added toggle_ldr_check method. Checks whether the 'Enable LiDAR Run box
+	is checked, enables or disables GUI elements as appropriate and 
+	populates/depopulates GUI entry fields as appropriate.
+
+-modified update_domain_change method:
+	-removed hard-wired numbers to accomadate both standard and lidar
+	 simulations.
+	-added x & y Area Of Interest (AOI) variable for use in calculating
+	 x & y offsets.
+	-added y offset variable
+	-added pathways to calculate various dimensions for both standard 
+	 and lidar runs.
+	-changed the methodology for calculating WFDS igniter location and
+	 dimensions.
+
+- added run_button method. Runs either a standard or lidar FVS simulation 
+	method (run_standard or run_lidar) depending on user specification.
+	Also runs run_etal which runs CAPSIS and WFDS for either type of 
+	simulation.
+
+-split the run method into run_standard and capsis_etal methods and added the
+	run_lidar method.
+	The run_lidar method processes the input shapefile, runs multiple
+	64 x 64m FVS simulations and collates the FVS simulation results.
+
+-modified the capsis_etal (formally a part of the run method) to 1) set the 
+	'extend' parameter for capsis to True (standard run) or False 
+	(lidar run) and 2) to pass on new variables required by the WFDS class
+	constructor (__init__) method.
+
+-added the following variables to the create_variables method:
+	-ldr_check_var - t/f lidar run checkbox
+	-lidar_shapefile - input lidar shapefile path and name
+	-x_AOI_size - x Area Of Interest size
+	-y_AOI_size - y AOI size
+
+-added the following variables to the reset method:
+	-lidar_check_var (uncheck)
+	-lidar_shapefile (clear)
+	-shape_entry (disable)
+	-shp_brws_btn (disable)
+	-x_entry (enable)
+	-y_entry (enable)
+	-x_AOI_size (64)
+	-y_AOI_size (64)
+
+-deleted the clear method. This method set all input variables to an empty
+	string. This could cause some bugs in the program down the road and
+	we decided to eliminate it.
+
+-added the following to the GUI:
+	-'Enable LiDAR Run' checkbox
+	-'Specify LiDAR shapefile' string entry box
+	-'Browse' button (to browse for LiDAR shapefile)
+
+-added the the 'lidar panel' to the create_widgets method (includes the above
+	GUI additions and associated text prompts)
+
+-deleted the clear button from the create_widgets method (see above)
+
+-added the lidar panel items (see above) to the grid_widgets method. Adjusted
+	adjusted the positioning of other GUI elements as necessary.
+
+-deleted the clear button from the grid_widgets method.
+
+-stripped tabs from script and replaced with spaces.
