@@ -1,0 +1,76 @@
+# ForestGALES 2.3Res  Lodgepole pine parameter file
+LP
+# L3 Conversion Top height (m) to mean height (m): MeanHt = Multiplier*TopHt + intercept
+# Multiplier
+1.0244
+# Intercept
+-1.2085
+# L8 CanopyBreadth (m) as function of DBH (cm).
+# Equation form: 1 linear: Param1*DBH*100 + param2; 2 Power: Param1*DBH^Param2 + Param3
+1
+# Param1
+0.1069
+# Param2
+0.5932
+# Param3
+0
+# L17 CanopyDepth  (m) as function of height (m)= Mulitplier*Height + intercept; (m).
+# Equation form: 1 linear: Param1*Height + param2; 2 Exp: Param1*exp(Param2*height)
+1
+# Param1
+0.446
+# Param2
+0.7818
+# L24 Stem Density
+850 
+# Canopy Density
+2.5
+# Modulus of rupture
+4.1E7
+# L30 Knot factor
+0.8
+# Modulus of elasticity
+6.4E9
+# L34 Streamlining parameters
+# C
+2.48
+# N
+0.63
+# Root bending term K
+0.0
+# L41 Overturning Moment Multipliers
+# Soil-A; Rooting depth 1,2,3
+141.0
+144.3
+164.5
+# Soil-B; Rooting depth 1,2,3
+125.0
+127.9
+145.9
+# Soil-C; Rooting depth 1,2,3
+136.5
+139.7
+159.3
+# Soil-D; Rooting depth 1,2,3
+155.3
+158.9
+181.2
+# L58 OTM Scaling value
+100
+# Maximum stem weight in each category (kg)
+# Soil-A; Rooting depth 1,2,3
+487
+895
+612
+# Soil-B; Rooting depth 1,2,3
+0
+202
+227
+# L69 Soil-C; Rooting depth 1,2,3
+85
+261
+374
+# L73 Soil-D; Rooting depth 1,2,3
+0
+274
+484

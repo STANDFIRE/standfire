@@ -1,0 +1,7 @@
+# Forest gales species file																																						
+																																						
+# id	name	topHeightMultiplier	topHeightIntercept	canopyWidthFunction	canopyDepthFunction	greenWoodDensity	canopyDensity	modulusOfRupture	knotFactor	crownFactor	modulusOfElasticity	canopyStreamliningC	canopyStreamliningN	rootBendingK	MA1	MA2	MA3	MB1	MB2	MB3	MC1	MC2	MC3	MD1	MD2	MD3	WA1	WA2	WA3	WB1	WB2	WB3	WC1	WC2	WC3	WD1	WD2	WD3
+0	Maritime pine	1	0	linear2p(0.15674;0.0)	linear2p(0.3156;1.3424)	903.4	2.73	3.60E+07	0.85	1	6.60E+09	3.07	0.75	0	125.8	144.5	168.8	123.8	126.7	144.4	135.1	138.3	157.7	153.7	157.3	179.4	294	469	576	0	0	0	0	0	0	0	0	0
+1	OAK	1	0	linear2p(0.157;0.0)	linear2p(0.3156;1.3424)	833	2.73	5.90E+07	0.85	1	8.30E+09	3.07	0.75	0	168.8	144.5	125.8	123.8	126.7	144.4	135.1	138.3	157.7	153.7	157.3	179.4	294	469	576	0	0	0	0	0	0	0	0	0
+2	BEECH	1	0	linear2p(0.157;0.0)	linear2p(0.3156;1.3424)	833	2.73	6.90E+07	0.85	1	9.80E+09	3.07	0.75	0	168.8	144.5	125.8	123.8	126.7	144.4	135.1	138.3	157.7	153.7	157.3	179.4	294	469	576	0	0	0	0	0	0	0	0	0
+3	Test species 3	1	0	linear2p(0.157;0.0)	linear2p(0.3156;1.3424)	903.4	2.73	3.60E+07	0.85	1	6.60E+09	3.07	0.75	0	168.8	144.5	125.8	123.8	126.7	144.4	135.1	138.3	157.7	153.7	157.3	179.4	294	469	576	0	0	0	0	0	0	0	0	0

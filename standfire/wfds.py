@@ -1,3 +1,5 @@
+#!python2
+################################################################################
 #---------#
 # wfds.py #
 #---------#
@@ -11,12 +13,12 @@ be dealt with there.
 # meta
 __authors__ = "Team STANDFIRE"
 __copyright__ = "Copyright 2015, STANDFIRE"
-__credits__ = ["Greg Cohn", "Matt Jolly", "Russ Parsons", "Lucas Wells"]
+__credits__ = ["Greg Cohn","Brett Davis","Matt Jolly","Russ Parsons","Lucas Wells"]
 __license__ = "GPL"
 __maintainer__ = "Lucas Wells"
 __email__ = "bluegrassforestry@gmail.com"
 __status__ = "Development"
-__version__ = '1.0.0a'
+__version__ = "1.1.0a" # Previous version: '1.0.0a'
 
 # module imports
 import platform
@@ -38,7 +40,7 @@ class Mesh(object):
     :type res: integer
     :param n: Number of meshes
     :n type: integer
-    
+
     *Example:*
 
     >>> import wfds
@@ -166,19 +168,28 @@ class WFDS(Mesh):
     *Example:*
 
     >>> import wfds
-    >>> fds = wfds.WFDS(160, 90, 50, 1, 9, fuels)
+    >>> fds = wfds.WFDS(160, 90, 50, 64, 83, 1, 9, fuels)
     """
 
-    def __init__(self, x, y, z, res, n, fuels):
+    def __init__(self, x, y, z, xA, xO, res, n, fuels):
         """
         Constructor
+        x: scene size in the x dimension
+        y: scene size in the y dimension
+        z: scene size in the z dimension
+        xA: Area Of Interest in the x dimension
+        xO: x offset
+        res: simulation resolution
+        n: number of WFDS meshes
+        fuels: fuels object (fuels.py, class: FVSfuels)
         """
 
         # call the super class constructor
         super(self.__class__, self).__init__(x, y, z, res, n)
 
         # auto-calculate the position of the aoa
-        aoa_x_center = (x-((y-64)/2))-(64/2)
+        aoa_x_center = (xO+(xA/2))
+        #aoa_x_center = (x-((y-64)/2))-(64/2)
 
         # run configuration parameters
         self.params = {'run_name'   : 'Default',
@@ -251,7 +262,7 @@ class WFDS(Mesh):
 
     def set_wind_speed(self, U0):
         """
-        Set the inflow wind speed 
+        Set the inflow wind speed
 
         :param U0: inflow wind speed (m/s)
         :type U0: float
@@ -272,7 +283,7 @@ class WFDS(Mesh):
     def set_simulation_time(self, sim_time):
         """
         Set the duration of the simulation
-        
+
         :param sim_time: duration of the simulation (s)
         :type sim_time: float
         """
@@ -315,7 +326,6 @@ class WFDS(Mesh):
         # write it to disk
         with open(file_name, 'w') as f:
             f.write(fds_file)
-
 
 class Execute(object):
     """

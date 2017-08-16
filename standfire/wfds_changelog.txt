@@ -1,0 +1,10 @@
+change log wfds.py
+July, 2017
+Reflects changes from version 1.0.0a to 1.1.0a
+
+-modified the WFDS class constructor to accept x dimension Area Of
+	Interest (AOI) and the x Offset (fetch or the distance between
+	the x minimum and the x AOI minimum).
+
+- removed hard-wired values from the constructor and used the AOI and 
+	Offset to calculate the center point of the AOI (aoa_x_center)

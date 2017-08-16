@@ -1,3 +1,5 @@
+#!python2
+################################################################################
 #----------#
 # fuels.py #
 #----------#
@@ -8,7 +10,7 @@ and the corresponding tree file, a user can run a FVS simulation and request
 various fuels information from individual trees. The Fvsfuels class will also
 produce the 4 fuels files needed for the Capsis fuel matrix generator.
 
-Currently FVS MC Access database querying not available on all platforms. 
+Currently FVS MC Access database querying not available on all platforms.
 If a user has a keyword file that points to a MS Access database, then the user
 can generate a tree file by exporting the Access database to an comma-delimited
 file and pass it through the Inventory class. The output will be the same
@@ -28,12 +30,12 @@ import csv
 # meta
 __authors__ = "Team STANDFIRE"
 __copyright__ = "Copyright 2015, STANDFIRE"
-__credits__ = ["Greg Cohn", "Matt Jolly", "Russ Parsons", "Lucas Wells"]
+__credits__ = ["Greg Cohn","Brett Davis","Matt Jolly","Russ Parsons","Lucas Wells"]
 __license__ = "GPL"
 __maintainer__ = "Lucas Wells"
 __email__ = "bluegrassforestry@gmail.com"
 __status__ = "Development"
-__version__ = '1.0.0a'
+__version__ = "1.1.0a" # Previous version: '1.0.0a'
 
 # FVS variants globals
 eastern = {'CS', 'LS', 'NE', 'SN'}

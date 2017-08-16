@@ -1,40 +1,34 @@
 # -*- mode: python -*-
+
+block_cipher = None
+
 a = Analysis(['standfire_mini_interface.py'],
-             pathex=['C:\\Users\\wellslu\\Projects\\standfire\\repo\\standfire\\apps\\STANDFIRE_v1.0'],
-             hiddenimports=['pyfvs.win.pyfvsak',
-			                'pyfvs.win.pyfvsbmc',
-							'pyfvs.win.pyfvscac',
-							'pyfvs.win.pyfvscic',
-							'pyfvs.win.pyfvscrc',
-							'pyfvs.win.pyfvscs',
-							'pyfvs.win.pyfvsecc',
-							'pyfvs.win.pyfvsiec',
-							'pyfvs.win.pyfvsktc',
-							'pyfvs.win.pyfvsls',
-							'pyfvs.win.pyfvsncc',
-							'pyfvs.win.pyfvsne',
-							'pyfvs.win.pyfvspnc',
-							'pyfvs.win.pyfvssn',
-							'pyfvs.win.pyfvssoc',
-							'pyfvs.win.pyfvsttc',
-							'pyfvs.win.pyfvsutc',
-							'pyfvs.win.pyfvswcc',
-							'pyfvs.win.pyfvswsc'],
-             hookspath=None,
-             runtime_hooks=None)
-pyz = PYZ(a.pure)
+             pathex=['C:\\Users\\bhdavis\\Documents\\STANDFIRE\\github\\Aug15_update\\standfire',
+             'C:\\Users\\bhdavis\\Documents\\STANDFIRE\\github\\Aug15_update\\apps\\STANDFIRE_v1.0'],
+             binaries=[],
+             datas=[],
+             hiddenimports=[],
+             hookspath=[],
+             runtime_hooks=[],
+             excludes=[],
+             win_no_prefer_redirects=False,
+             win_private_assemblies=False,
+             cipher=block_cipher)
+pyz = PYZ(a.pure, a.zipped_data,
+             cipher=block_cipher)
 exe = EXE(pyz,
           a.scripts,
           exclude_binaries=True,
-          name='standfire_mini_interface.exe',
+          name='standfire_mini_interface',
           debug=False,
-          strip=None,
+          strip=False,
           upx=True,
-          console=True , icon='sf_icon_64.ico')
+          console=True,
+          icon='sf_icon_64.ico')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
                a.datas,
-               strip=None,
+               strip=False,
                upx=True,
                name='standfire_mini_interface')

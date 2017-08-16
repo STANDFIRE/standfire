@@ -1,0 +1,7 @@
+change log standfire_cmdline.py
+July, 2017
+Reflects changes from version 1.0.0a to 1.1.0a
+
+Standfire command line has been completely rewritten.Only 10 lines of code 
+remain from the original. Please see the comments in standfire_cmdline.py 
+for a description of its operation.

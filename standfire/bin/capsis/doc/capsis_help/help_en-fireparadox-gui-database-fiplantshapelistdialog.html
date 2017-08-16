@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_en.html>help_en</a>&nbsp;=>&nbsp;<a href=help_en-fireparadox.html>fireparadox</a></br>
+
+<h2 class="sectionedit281" id="fuel_shape_list">FUEL SHAPE LIST</h2>
+<div class="level2">
+
+<p>
+All <strong>shapes</strong> attached to a fuel and stored in the database appear in this list.
+</p>
+
+<p>
+It contains for each the <strong>type</strong> (plant, layer or sample), XZ, XZ_XY ou XYZ means that the shape is <strong>2D, 2 X 2D or 3D</strong>, the <strong>sampling méthod</strong> (cubes or cage), <strong>crown dimensions</strong> and the mention if the shape is  <strong>validated</strong> or <strong>désactivated</strong>.
+</p>
+
+<p>
+At the top od the screen, on the left, a panel resume fuel general informations.
+</p>
+
+<p>
+<a href="media/help_en/fireparadox/gui/database/enshapelist.jpg" class="media" target="_blank" title="help_en:fireparadox:gui:database:enshapelist.jpg"><img src="media/help_en/fireparadox/gui/database/enshapelist.jpg" class="media" title="" alt="" /></a>
+</p>
+
+<p>
+Control buttons are:
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>Add</strong>: to add a new shape</div>
+</li>
+<li class="level1"><div class="li"> <strong>Edit</strong>: to edit a shape</div>
+</li>
+<li class="level1"><div class="li"> <strong>Desactivate/Reactivate</strong>: to desactivate or reactivate a shape</div>
+</li>
+<li class="level1"><div class="li"> <strong>Close</strong>: to close the window</div>
+</li>
+</ul>
+
+<p>
+<strong>Add</strong> action is not available if the user is not the owner of the plant, or if the plant is desactivated or validated. It is also impossible to enter several active 3D shapes for a plant or several active 2D shapes for a layer. 
+</p>
+
+<p>
+<strong>Edit</strong> action is usefull to see the shape. Modifications are possible if the user is not the owner of the plant and if this plant is neither desactivated or validated.
+</p>
+
+<p>
+<strong>Desactivate</strong> action is usefull to denied utilisation of a shape without deleting data physically in the database. This action is not available if the user is not the owner of the plant, or if the plant is desactivated or validated.
+</p>
+
+</div>
+
+<h5 id="measured_plants">Measured plants</h5>
+<div class="level5">
+
+<p>
+With <strong>cube</strong> sampling method, shape list can present at least, one <strong>SAMPLE UNIQUE</strong> and one <strong>3D shape</strong>. 2D and 2 * 2D shapes can also appears, to help user to build automatically 3D shapes. 
+</p>
+
+<p>
+With <strong>cage</strong> sampling method, shape list presents only one <strong>SAMPLE UNIQUE</strong> and one <strong>3D shape</strong>.
+It is not possible to have 2D shapes. 
+</p>
+
+</div>
+
+<h5 id="virtual_plants">Virtual plants</h5>
+<div class="level5">
+
+<p>
+For virtual plants, SAMPLES creation is optionnal. If a virtual SAMPLE is created, it is possible only with <strong>cube</strong> sampling method
+</p>
+
+</div>
+
+<h5 id="measured_layers">Measured layers</h5>
+<div class="level5">
+
+<p>
+<strong>Cage</strong> sampling method is not available for layers.
+</p>
+
+<p>
+Shape list can present 2 types of samples <strong>CORE</strong> and/or <strong>EDGE</strong> and one <strong>2D shape</strong> composed with a core part and/or an edge part. 
+</p>
+
+</div>
+
+<h5 id="virtual_layers">Virtual layers</h5>
+<div class="level5">
+
+<p>
+For virtual layers, SAMPLES creation is optionnal.
+</p>
+
+</div>
+</body>
+</html>

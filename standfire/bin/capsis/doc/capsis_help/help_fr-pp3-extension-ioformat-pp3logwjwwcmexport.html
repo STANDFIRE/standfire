@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_fr.html>help_fr</a>&nbsp;=>&nbsp;<a href=help_fr-pp3.html>pp3</a></br>
+
+<h1 class="sectionedit341" id="exportation_de_billons_avec_calcul_du_bois_juvenile_et_du_carbone">Exportation de billons avec calcul du bois juvénile et du carbone</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT341 SECTION "Exportation de billons avec calcul du bois juvénile et du carbone" [1-84] -->
+<h2 class="sectionedit342" id="principe">Principe</h2>
+<div class="level2">
+
+<p>
+Exportation des caractéristiques de billons comportant également les dimensions du bois juvénile, de la biomasse et du carbone selon un plan de billonnage (voir aussi la méthode “Exportation de billons”).
+</p>
+
+<p>
+Voir aussi “Exportation biomasse-carbone des arbres coupés” et “Exportation biomasse-carbone du peuplement sur pied”.
+</p>
+
+<p>
+<strong> ATTENTION - Limites</strong>
+</p>
+
+<p>
+Pour effectuer le calcul des dimensions du bois juvénile, l&#039;étape racine du scénario doit avoir un age minimum de 15 ans. Si ce n&#039;est pas le cas, le fichier d&#039;exportation est vide. Utiliser alors uniquement Pp3LogExport (Exportation de billons).
+</p>
+
+</div>
+<!-- EDIT342 SECTION "Principe" [85-714] -->
+<h2 class="sectionedit343" id="description_des_colonnes">Description des colonnes</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li">     Id : numéro de l&#039;arbre dans le peuplement pour un âge donné</div>
+</li>
+<li class="level1"><div class="li">     Age : Age de l&#039;arbre</div>
+</li>
+<li class="level1"><div class="li">     DBH : Diamètre de l&#039;arbre</div>
+</li>
+<li class="level1"><div class="li">     HT : Hauteur de l&#039;arbre</div>
+</li>
+<li class="level1"><div class="li">     NumberOfTrees : Nombre d&#039;arbres dans la classe de diamètre considéré pour la surface initiale du peuplement virtuel ou pour la surface du peuplement réel</div>
+</li>
+<li class="level1"><div class="li">     LogNumber :</div>
+</li>
+</ul>
+
+<p>
+0 : billon compris entre la découpe fin bout de l&#039;arbre et l&#039;apex<br/>
+
+1 à n : billons à longueur fixée numérotés du bas en haut de l&#039;arbre<br/>
+
+-1 : billon compris entre la découpe du dernier billon à longueur fixée et la découpe fin bout de l&#039;arbre
+</p>
+<ul>
+<li class="level1"><div class="li">     LogLength : Longueur du billon</div>
+</li>
+<li class="level1"><div class="li">     LargeEndD : Diamètre sur écorce à la base du billon</div>
+</li>
+<li class="level1"><div class="li">     LargeEndDInsideBark : Diamètre sous écorce à la base du billon</div>
+</li>
+<li class="level1"><div class="li">     LargeEndDJuvenileWood : Diamètre du bois juvénile à la base du billon</div>
+</li>
+<li class="level1"><div class="li">     LargeEndH : Position en hauteur de la base du billon</div>
+</li>
+<li class="level1"><div class="li">     SmallEndD : Diamètre sur écorce au sommet du billon</div>
+</li>
+<li class="level1"><div class="li">     SmallEndDInsideBark : Diamètre sous écorce au sommet du billon</div>
+</li>
+<li class="level1"><div class="li">     SmallEndDJuvenileWood : Diamètre du bois juvénile au sommet du billon</div>
+</li>
+<li class="level1"><div class="li">     SmallEndH : Position en hauteur du sommet du billon</div>
+</li>
+<li class="level1"><div class="li">     WoodVolume : Volume de bois du billon</div>
+</li>
+<li class="level1"><div class="li">     JuvenileWoodVolume : Volume de bois juvénile du billon</div>
+</li>
+<li class="level1"><div class="li">     BarkVolume : Volume d&#039;écorce du billon</div>
+</li>
+<li class="level1"><div class="li">     TotalVolume : Volume total du billon</div>
+</li>
+<li class="level1"><div class="li">     WoodMass : Biomasse de bois du billon</div>
+</li>
+<li class="level1"><div class="li">     WoodCarbonMass : Masse de carbone de bois du billon</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT343 SECTION "Description des colonnes" [715-2268] -->
+<h2 class="sectionedit344" id="modules_pouvant_utiliser_cette_extension">Modules pouvant utiliser cette extension</h2>
+<div class="level2">
+
+<p>
+Attention liste non exhaustive….
+</p>
+
+<p>
+Module PP3
+</p>
+
+</div>
+<!-- EDIT344 SECTION "Modules pouvant utiliser cette extension" [2269-] --></body>
+</html>

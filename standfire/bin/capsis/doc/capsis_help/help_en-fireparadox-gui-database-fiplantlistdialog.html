@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_en.html>help_en</a>&nbsp;=>&nbsp;<a href=help_en-fireparadox.html>fireparadox</a></br>
+
+<h2 class="sectionedit304" id="fuel_list">FUEL LIST</h2>
+<div class="level2">
+
+<p>
+All fuel objects (plants or layers) stored in the database appear in this list. 
+</p>
+
+<p>
+<a href="media/help_en/fireparadox/gui/database/enlayerlist.jpg" class="media" target="_blank" title="help_en:fireparadox:gui:database:enlayerlist.jpg"><img src="media/help_en/fireparadox/gui/database/enlayerlist.jpg" class="media" title="" alt="" /></a>
+</p>
+
+<p>
+The result table contains for each fuel : the <strong>team</strong>, the <strong>site</strong>, the <strong>species name</strong>, the <strong>crown dimensions</strong> , the fuel origin (measured or vistual) and the mention if the plant is <strong>validated</strong> and <strong>desactivated</strong> or not.
+</p>
+
+<p>
+The list is sorted by team - site - species - height - diameter. 
+</p>
+
+<p>
+Selectors on top of the screen can reduice the list size.
+</p>
+
+<p>
+Control buttons are:
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>Add</strong>: to add a new fuel </div>
+</li>
+<li class="level1"><div class="li"> <strong>Shapes</strong>: to manage shapes attached to this fuel </div>
+</li>
+<li class="level1"><div class="li"> <strong>Parameters</strong>: to modify this fuel parameters</div>
+</li>
+<li class="level1"><div class="li"> <strong>Validate/Unvalidate</strong>: to validate or unvalidate the fuel </div>
+</li>
+<li class="level1"><div class="li"> <strong>Edit</strong>: to edit an existing fuel </div>
+</li>
+<li class="level1"><div class="li"> <strong>Copy</strong>: to copy this fuel into a new one</div>
+</li>
+<li class="level1"><div class="li"> <strong>Desactivate/Reactivate</strong>: to desactivate or reactivate an existing fuel </div>
+</li>
+<li class="level1"><div class="li"> <strong>Close</strong>: to close the window</div>
+</li>
+</ul>
+
+<p>
+<strong>Edit</strong> action is usefull to display fuel informations. Modification will be possible if the user is the owner of the fuel and if this fuel is neither desactivated or validated. 
+In the contrary, the fuel will have be be unvalidated or reactivated before being updated again.
+</p>
+
+<p>
+<strong>Validate</strong> action is usefull to check a fuel data integrity in the database and to permit utilisation in virtual scene creation and in exportation for models as <strong>FireTec</strong>. To be validated a plant must have a 3D shape and a layer must have a 2D shape. A validated fuel cannot be modified.
+</p>
+
+<p>
+<strong>Unvalidate</strong> action is usefull to cancel a fuel validation.
+</p>
+
+<p>
+<strong>Desactivate</strong> action is usefull to denied utilisation of a fuel without deleting referenced data. Desactivation is also done for all shapes attached to the fuel. 
+</p>
+
+<p>
+<strong>Reactivate</strong> action is usefull to calcel a desactivation. Only the plant or the layer will be reactivated, but not the shapes. 
+</p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_en.html>help_en</a></br>
+
+<h1 class="sectionedit77" id="the_capsis_manual">The Capsis Manual</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT77 SECTION "The Capsis Manual" [1-33] -->
+<h2 class="sectionedit78" id="introduction">Introduction</h2>
+<div class="level2">
+
+<p>
+Capsis (Computer-Aided Projection for Strategies In Silviculture) is a generic simulation platform to study growth and dynamics of forests and plantations. It was designed arround a software kernel providing common features and generic data structures and <strong>modules</strong> implementing the dynamics models for given species and regions.
+</p>
+
+<p>
+At the beginning of a simulation, an initial stand must be provided by the chosen module, by reading an inventory file or by some virtual generation method. The resulting root step determines a project and can be the basis for various simulations, by alternating evolution phases with interventions to build <strong>silvicultural scenarios</strong>.
+</p>
+
+<p>
+<a href="media/help_en/capsis/scenariomanager.gif" class="media" target="_blank" title="help_en:capsis:scenariomanager.gif"><img src="media/help_en/capsis/scenariomanager.gif" class="mediacenter" title="General view : Two projects in the project manager (interactive pilot)" alt="General view : Two projects in the project manager (interactive pilot)" /></a>
+</p>
+
+<p>
+The <strong>evolution</strong> process from a given step is delegated to the module. The latter contains an evolution loop which invokes the methods for growth, regeneration, mortality… (having regard to the modules) for each step to be created depending on a custom simulation step (free).
+</p>
+
+<p>
+An <strong>intervention</strong> on a given step (thinning, pruning, fertilizing…) are delegated to an extension (which type is Intervener) which create a new step carrying the stand resulting from the intervention.
+</p>
+
+<p>
+<strong>Models of different types</strong> (individual based, distance dependent or not, stand type, mixed types, continuous time…) can coexist in different Capsis modules describing different data structures. Each one can make use of a custom extensions set. Other extensions are called generic because they are compatible with several modules.
+</p>
+
+<p>
+The Capsis platform is <strong>co-developed</strong> by computer scientists, dealing with the community and technical matters and research workers responsible for the development of their module.
+</p>
+
+</div>
+<!-- EDIT78 SECTION "Introduction" [34-1851] -->
+<h2 class="sectionedit79" id="installation">Installation</h2>
+<div class="level2">
+
+<p>
+Capsis is compatible with the Windows and Linux operating systems (tested). Due to its Java implementation language, highly portable, Capsis may be usable on other systems, but only Windows and Linux are officially supported.
+</p>
+
+<p>
+To install Capsis, you must first install a Java Virtual Machine by Sun Microsystems.
+</p>
+
+<p>
+Installation procedure is explained in the <a href="documentation-installation_guide.html" class="wikilink1" title="documentation-installation_guide.html">installation guide</a>.
+</p>
+
+</div>
+<!-- EDIT79 SECTION "Installation" [1852-2272] -->
+<h2 class="sectionedit80" id="frequently_asked_question">Frequently Asked Question</h2>
+<div class="level2">
+
+<p>
+See the <a href="documentation-faq.html" class="wikilink1" title="documentation-faq.html">FAQ</a>
+</p>
+
+</div>
+<!-- EDIT80 SECTION "Frequently Asked Question" [2273-2342] -->
+<h2 class="sectionedit81" id="how_to_get_help">How to get Help</h2>
+<div class="level2">
+
+<p>
+If you want to know the main features of Capsis, read the <a href="documentation-tutorial_en.html" class="wikilink1" title="documentation-tutorial_en.html">tutorial</a> . To get help on a given module or a specific Capsis feature, check the online help accessible from the <code>Help &gt; About Capsis</code> dialog (select a module and click on the Information icon) or from one of the Help buttons in the application dialogs.
+</p>
+
+<p>
+For more information on the Capsis project, check the <a href="documentation.html" class="wikilink1" title="documentation.html">Capsis web site</a> . For general or technical information, ask by mail (see <a href="contact.html" class="wikilink1" title="contact.html">contact</a>).
+</p>
+
+<p>
+Finally, for scientific information about the modules under Capsis, send directly a mail to the author of the module by consulting the <a href="models.html" class="wikilink1" title="models.html">project page</a> of the Capsis web site.
+</p>
+
+</div>
+<!-- EDIT81 SECTION "How to get Help" [2343-3063] -->
+<h2 class="sectionedit82" id="project_module_session">Project, module, session</h2>
+<div class="level2">
+
+<p>
+Each forestry growth or dynamics <strong>model</strong> implemented in Capsis corresponds with a <strong>module</strong> in the platform (ex: <em>mountain</em> module, Spruce in the french Alps).
+</p>
+
+<p>
+To use a given model, you must create a <strong>new project</strong> and link to it the matching module chosen in the list of the modules available in the platform. During the following initialization phase, you have to set the model <strong>parameters</strong> and to choose a <strong>beginning stand</strong> for the simulations in this project. At the end of this phase, you get a project (fig. 1) containing a root step, basis for the future simulations and carrying the beginning stand.
+</p>
+
+<p>
+<a href="media/help_en/capsis/newproject.gif" class="media" target="_blank" title="help_en:capsis:newproject.gif"><img src="media/help_en/capsis/newproject.gif" class="mediacenter" title="Fig. 1. New project" alt="Fig. 1. New project" /></a>
+</p>
+
+<p>
+It is possible to work at the same time on several projects. All the opened projects are part of the <strong>working session</strong> . The projects can be saved separately or at the same time by saving the whole session for a faster future reopening. Projects can always be opened individually, even if they were saved together in the session. The <em>File</em> menu can be used to manage the whole session, while the project can be individually managed by the <em>Project</em> menu.
+</p>
+
+</div>
+<!-- EDIT82 SECTION "Project, module, session" [3064-4242] -->
+<h2 class="sectionedit83" id="evolution">Evolution</h2>
+<div class="level2">
+
+<p>
+From the root step (or then from whatever step), you can trigger an evolution phase (fig. 2) by action on the <strong>Step Popup Menu</strong> (right click on the chosen step).
+</p>
+
+<p>
+<a href="media/help_en/capsis/evolution.gif" class="media" target="_blank" title="help_en:capsis:evolution.gif"><img src="media/help_en/capsis/evolution.gif" class="mediacenter" title="Fig. 2. Evolution from a step by the Step Popup Menu" alt="Fig. 2. Evolution from a step by the Step Popup Menu" /></a>
+</p>
+
+<p>
+Set the evolution parameters (number of days, years, target date (…) depending on the model), then validate. The module evolution method is triggered and builds some new steps which are added to the scenario after the beginning step.
+</p>
+
+</div>
+<!-- EDIT83 SECTION "Evolution" [4243-4757] -->
+<h2 class="sectionedit84" id="intervention">Intervention</h2>
+<div class="level2">
+
+<p>
+On a chosen step, trigger an intervention by using the Step Popup Menu (fig. 3).
+</p>
+
+<p>
+<a href="media/help_en/capsis/intervention.gif" class="media" target="_blank" title="help_en:capsis:intervention.gif"><img src="media/help_en/capsis/intervention.gif" class="mediacenter" title="Fig. 3. Intervention on a chosen step" alt="Fig. 3. Intervention on a chosen step" /></a>
+</p>
+
+<p>
+Once the intervention is correctly set and validated, a new step carrying its result is built and linked to the original step (ex: less trees if thinning).
+</p>
+
+</div>
+<!-- EDIT84 SECTION "Intervention" [4758-5100] -->
+<h2 class="sectionedit85" id="groups">Groups</h2>
+<div class="level2">
+
+<p>
+Groups concern stands with individual trees inside (spatialized or not) or plots divided into square or polygonal cells.
+</p>
+
+<p>
+Building a group always occurs relatively to the current step (the last one which was selected). The stand of this step is used as a basis for the operation. The Group Catalog (fig. 4) can be opened by the Step Menu or by the Group Icon in the main Capsis Toolbar (or sometimes from another tool preference dialog).
+</p>
+
+<p>
+<a href="media/help_en/capsis/groupcatalog.gif" class="media" target="_blank" title="help_en:capsis:groupcatalog.gif"><img src="media/help_en/capsis/groupcatalog.gif" class="mediacenter" title="Fig. 4. The Group Icon opens the Group Catalog" alt="Fig. 4. The Group Icon opens the Group Catalog" /></a>
+</p>
+
+<p>
+A group can be created with the <strong>Group Manager</strong> (fig. 5), by combining filters into successive refinements. <strong>Filters</strong> are extension of the platform which can recognize their compatibility with the modules by making dynamic tests (ex: do the stand description of this module contain spatialized trees ?).
+</p>
+
+<p>
+<a href="media/help_en/capsis/groupdefiner.gif" class="media" target="_blank" title="help_en:capsis:groupdefiner.gif"><img src="media/help_en/capsis/groupdefiner.gif" class="mediacenter" title="Fig. 5. From the Catalog, customize the group : H &lt; 5m." alt="Fig. 5. From the Catalog, customize the group : H &lt; 5m." /></a>
+</p>
+
+<p>
+When a group is built (it then has a name), it is saved and will be reloaded each time Capsis is launched. Groups are usable in some tools (viewers, graphical outputs) to study sub populations (ex: trees greater than 35 m., cells at the north…).
+</p>
+
+</div>
+<!-- EDIT85 SECTION "Groups" [5101-6300] -->
+<h2 class="sectionedit86" id="open_and_synchronize_viewers_and_graphical_outputs">Open and synchronize viewers and graphical outputs</h2>
+<div class="level2">
+
+<p>
+To control the simulations, it is possible to open viewers and graphical outputs by action on the Selector .
+</p>
+<ul>
+<li class="level1"><div class="li"> Select a current step (left click) in the project manager, </div>
+</li>
+<li class="level1"><div class="li"> Select a tool in the selector (double click), </div>
+</li>
+<li class="level1"><div class="li"> The tool is opened and synchronized on the colored step.</div>
+</li>
+</ul>
+
+<p>
+<a href="media/help_en/capsis/selectoruse.gif" class="media" target="_blank" title="help_en:capsis:selectoruse.gif"><img src="media/help_en/capsis/selectoruse.gif" class="mediacenter" title="Fig. 6. Opening a viewer on step 2010a" alt="Fig. 6. Opening a viewer on step 2010a" /></a>
+</p>
+
+<p>
+To move tools from one step to another in the same project, click on the source colored step, then click 2 times on the target step.
+To close a tool, use the close icon in its title bar. To close all the tools synchronized on a given step, ctrl-click the step.
+</p>
+
+</div>
+<!-- EDIT86 SECTION "Open and synchronize viewers and graphical outputs" [6301-6991] -->
+<h2 class="sectionedit87" id="viewers">Viewers</h2>
+<div class="level2">
+
+<p>
+Access by the Selector (see previous paragraph) .
+</p>
+
+<p>
+These tools can be synchronized with a project step and give a representation of the carried stand (fig. 7). This representation can be graphical (map, distribution…) or not (text, table).
+</p>
+
+<p>
+<a href="media/help_en/capsis/explorator.gif" class="media" target="_blank" title="help_en:capsis:explorator.gif"><img src="media/help_en/capsis/explorator.gif" class="mediacenter" title="Fig. 7. A viewer : the explorer shows the trees of the stand in a table" alt="Fig. 7. A viewer : the explorer shows the trees of the stand in a table" /></a>
+</p>
+
+<p>
+Generally (but not always), viewers propose to restrict to a given group which can be created on the fly with their configuration dialog.
+</p>
+
+<p>
+To open a viewer, select a step in the project manager, then select a viewer in the Selector (left click).
+</p>
+
+</div>
+<!-- EDIT87 SECTION "Viewers" [6992-7613] -->
+<h2 class="sectionedit88" id="graphical_outputs">Graphical outputs</h2>
+<div class="level2">
+
+<p>
+Access by the Selector (see previous section) .
+</p>
+
+<p>
+They are data extractors which can provide representation of the state of a stand at a given date, or a representation of the evolution of a property along time (fig. 8). The great difference with the viewers is that graphical outputs can generally draw data from several steps of several projects on the same representation (graphical or not) for comparisons.
+</p>
+
+<p>
+Such extractors are provided for classical dendrometrical properties. Modelers can write their own data extractors for their special needs.
+</p>
+
+<p>
+To open a graphical output, same way than for a viewer (see previous section).
+</p>
+
+<p>
+<a href="media/help_en/capsis/extractortimen.gif" class="media" target="_blank" title="help_en:capsis:extractortimen.gif"><img src="media/help_en/capsis/extractortimen.gif" class="mediacenter" title="Fig. 8. A data extractor showing evolution of the number of trees per hectare along time for two scenarios of the vtx project. A thinning action can be noted in 2005 for scenario a." alt="Fig. 8. A data extractor showing evolution of the number of trees per hectare along time for two scenarios of the vtx project. A thinning action can be noted in 2005 for scenario a." /></a>
+</p>
+
+<p>
+To add a new extractor in an opened graphic, select the step in the project manager, then ctrl-click in the graphic.
+</p>
+
+<p>
+To remove an extractor from a graphic, use the graphic popup menu (right click on the graphic). Graphics are configurable from the same popup menu.
+</p>
+
+</div>
+<!-- EDIT88 SECTION "Graphical outputs" [7614-8767] -->
+<h2 class="sectionedit89" id="export">Export</h2>
+<div class="level2">
+
+<p>
+Export is accessible from the Step Popup Menu if compatible export extensions are available (fig. 9).
+</p>
+
+<p>
+<a href="media/help_en/capsis/export.gif" class="media" target="_blank" title="help_en:capsis:export.gif"><img src="media/help_en/capsis/export.gif" class="mediacenter" title="Fig. 9. The export dialog can be opened on a step with the Step Popup Menu" alt="Fig. 9. The export dialog can be opened on a step with the Step Popup Menu" /></a>
+</p>
+
+<p>
+The export extensions describe an export format for data under the reference Step into a file which name can be chosen.
+</p>
+
+</div>
+<!-- EDIT89 SECTION "Export" [8768-9120] -->
+<h2 class="sectionedit90" id="generic_tools">Generic tools</h2>
+<div class="level2">
+
+<p>
+The <em>Tools menu</em> in the main menu bar proposes general tools without compatibility notion (ex: editor, extension manager, memory control…).
+</p>
+
+</div>
+<!-- EDIT90 SECTION "Generic tools" [9121-9292] -->
+<h2 class="sectionedit91" id="toolbox">ToolBox</h2>
+<div class="level2">
+
+<p>
+These special tools can be accessed by the Step Popup Menu (if available). They propose analysis methods, connections with other simulaion software or heavy representation (ex: 3D viewers).
+</p>
+
+</div>
+<!-- EDIT91 SECTION "ToolBox" [9293-] --></body>
+</html>

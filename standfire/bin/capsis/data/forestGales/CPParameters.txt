@@ -1,0 +1,76 @@
+# ForestGALES 2.3Res  Corsican pine parameter file
+CP
+# L3 Conversion Top height (m) to mean height (m): MeanHt = Multiplier*TopHt + intercept
+# Multiplier
+1.0316
+# Intercept
+-1.3262
+# L8 CanopyBreadth (m) as function of DBH (cm).
+# Equation form: 1 linear: Param1*DBH*100 + param2; 2 Power: Param1*DBH^Param2 + Param3
+1
+# Param1
+0.1249
+# Param2
+0.6827
+# Param3
+0
+# L17 CanopyDepth  (m) as function of height (m)= Mulitplier*Height + intercept; (m).
+# Equation form: 1 linear: Param1*Height + param2; 2 Exp: Param1*exp(Param2*height)
+1
+# Param1
+0.2881
+# Param2
+2.6773
+# L24 Stem Density
+850 
+# Canopy Density
+2.5
+# Modulus of rupture
+4.1E7
+# L30 Knot factor
+0.85
+# Modulus of elasticity
+7.0E9
+# L34 Streamlining parameters
+# C
+2.57
+# N
+0.61
+# Root bending term K
+0.0
+# L41 Overturning Moment Multipliers
+# Soil-A; Rooting depth 1,2,3
+110.5
+113.1
+128.9
+# Soil-B; Rooting depth 1,2,3
+98.0
+100.2
+114.3
+# Soil-C; Rooting depth 1,2,3
+107.0
+109.5
+124.8
+# Soil-D; Rooting depth 1,2,3
+121.7
+124.5
+142.0
+# L58 OTM Scaling value
+100
+# Maximum stem weight in each category (kg)
+# Soil-A; Rooting depth 1,2,3
+339
+432
+519
+# Soil-B; Rooting depth 1,2,3
+0
+284
+0
+# L69 Soil-C; Rooting depth 1,2,3
+0
+0
+0
+# L73 Soil-D; Rooting depth 1,2,3
+0
+0
+0

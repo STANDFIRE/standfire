@@ -74,8 +74,16 @@ firetec_aa1=0.1
 canopyFuelRepresentation=CYLINDER
 #canopyFuelRepresentation=HET_RECTANGLE_BIN
 #canopyFuelRepresentation=HET_RECTANGLE_TEXT
+
+# layerSetRepresentation is optional (by default it is the same as canopy fuel. However it can be specified differently mainly to allow cylinders or rectangle for 
+# plants and HET_RECTANGLE_TEXT for layerSet
+# layerSetRepresentation= RECTANGLE or HET_RECTANGLE_BIN or HET_RECTANGLE_TEXT (binary format is only permitted for canopy AND layerset)
+# layerSetRepresentation=RECTANGLE
+# layerSetRepresentation=HET_RECTANGLE_BIN
+layerSetRepresentation=HET_RECTANGLE_TEXT
+
 # mandatory parameter for HET_RECTANGLE_TEXT (default value is 0.01 kg/m3) to decide the accuracy of bulk density bins
-bulkDensityAccuracy=0.001
+bulkDensityAccuracy=0.01
 
 #wfdsFirstGridFile=data/standfire/grid/test2001_0001.xyz
 wfdsFirstGridFile=data/standfire/grid/wfdsgrid_150x_90y_50z_1m_res_no_trnz.xyz
