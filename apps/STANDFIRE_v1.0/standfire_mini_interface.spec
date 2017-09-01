@@ -3,8 +3,8 @@
 block_cipher = None
 
 a = Analysis(['standfire_mini_interface.py'],
-             pathex=['C:\\Users\\bhdavis\\Documents\\STANDFIRE\\github\\Aug15_update\\standfire',
-             'C:\\Users\\bhdavis\\Documents\\STANDFIRE\\github\\Aug15_update\\apps\\STANDFIRE_v1.0'],
+             pathex=['C:\\Users\\bhdavis\\Documents\\STANDFIRE\\source\\standfire',
+             'C:\\Users\\bhdavis\\Documents\\STANDFIRE\\source\\apps\\STANDFIRE_v1.0'],
              binaries=[],
              datas=[],
              hiddenimports=[],
