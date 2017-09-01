@@ -1,10 +1,6 @@
 change log standfire_mini_interface.py
-July-August, 2017
+July, 2017
 Reflects changes from version 1.0.0a to 1.1.0a
-
--modified submodule import methodology - accommodates running both from the
-	interpreter and compiled as long as the path to the submodules is
-	included in the .spec/.cmake/ etc. file.
 
 -added import for new lidar (lidar.py) module
 
@@ -13,11 +9,6 @@ Reflects changes from version 1.0.0a to 1.1.0a
 
 -added 'filetype' option to get_keyword_file method to restrict displayed
 	files to *.key or *.*.
-
--added checks for spaces in file names and directories to three methods:
-	get_output_directory, get_lidar_shapefile and get_keyword_file. If
-	there are spaces asks the user to move or rename the input file/
-	directory. 
 
 -added toggle_ldr_check method. Checks whether the 'Enable LiDAR Run box
 	is checked, enables or disables GUI elements as appropriate and 
@@ -84,4 +75,14 @@ Reflects changes from version 1.0.0a to 1.1.0a
 
 -deleted the clear button from the grid_widgets method.
 
--stripped tabs from script and replaced with spaces.
+
+
+August, 2017
+Reflects changes from version 1.1.0a to 1.1.1a
+
+- modified spacing throughout the script to come in line with PEP recommendations
+
+- replaced call to lidar.py:Convert_Lidar:spatial_join method with calls to 
+	several methods (copy_shapefile, cleanup_lidar_fields, fishnet_id and
+	cleanup_lidar_features) which replace spatial join for the purpose of 
+	eliminating the use of the ogr2ogr.exe binary.

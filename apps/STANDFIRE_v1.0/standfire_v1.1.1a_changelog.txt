@@ -1,0 +1,55 @@
+August, 2017 changelog for standfire version 1.1.1a (from version 1.1.0a)
+
+SCRIPTS
+
+*******************************
+* standfire_mini_interface.py *
+*******************************
+
+- modified spacing throughout the script to come in line with PEP recommendations
+
+- replaced call to lidar.py:Convert_Lidar:spatial_join method with calls to 
+	several methods (copy_shapefile, cleanup_lidar_fields, fishnet_id and
+	cleanup_lidar_features) which replace spatial join for the purpose of 
+	eliminating the use of the ogr2ogr.exe binary.
+
+
+************************
+* standfire_cmdline.py *
+************************
+
+- modified spacing throughout the script to come in line with PEP recommendations
+
+- replaced call to lidar.py:Convert_Lidar:spatial_join method with calls to 
+	several methods (copy_shapefile, cleanup_lidar_fields, fishnet_id and
+	cleanup_lidar_features) which replace spatial join for the purpose of 
+	eliminating the use of the ogr2ogr.exe binary.
+
+
+************
+* lidar.py *
+************
+
+-eliminated the use of the GDAL binary ogr2ogr.exe to make its functions platform
+	neutral and speed up processing time.
+
+- replaced the '_write_vrt_file' and 'spatial_join' methods from standfire ver 1.1.0a
+	with 'copy_shapefile', 'cleanup_lidar_fields', 'fishnet_id' and 
+	'cleanup_lidar_features' to facilitate the elimination of the ogr2ogr binary.
+
+- modified the __init__ method to eliminate the definition of the path to ogr2ogr.exe
+
+- modified spacing throughout the script to come in line with PEP recommendations
+
+- deleted the addition of the 'Plot_ID' field from the 'add_attribute_fields' method.
+	This field is now added and populated in the 'fishnet_id' method.
+
+- eliminated the populating of the 'Plot_ID' field from the 'calculate_attributes'
+	method for the reasons listed above.
+
+
+PROGRAMS
+
+- removed ogr2ogr.exe and gdal201.dll files from the bin folder. Their functionality 
+	has been replaced by basic ogr functions in several methods in lidar.py
+	(see above).
