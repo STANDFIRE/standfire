@@ -1,0 +1,157 @@
+change log standfire_mini_interface.py
+July, 2017
+Reflects changes from version 1.0.0a to 1.1.0a
+
+-added import for new lidar (lidar.py) module
+
+-added lidar_get_shapefile method. Opens file dialog and stores user
+	selected filename in lidar_entry box.
+
+-added 'filetype' option to get_keyword_file method to restrict displayed
+	files to *.key or *.*.
+
+-added toggle_ldr_check method. Checks whether the 'Enable LiDAR Run box
+	is checked, enables or disables GUI elements as appropriate and 
+	populates/depopulates GUI entry fields as appropriate.
+
+-modified update_domain_change method:
+	-removed hard-wired numbers to accomadate both standard and lidar
+	 simulations.
+	-added x & y Area Of Interest (AOI) variable for use in calculating
+	 x & y offsets.
+	-added y offset variable
+	-added pathways to calculate various dimensions for both standard 
+	 and lidar runs.
+	-changed the methodology for calculating WFDS igniter location and
+	 dimensions.
+
+- added run_button method. Runs either a standard or lidar FVS simulation 
+	method (run_standard or run_lidar) depending on user specification.
+	Also runs run_etal which runs CAPSIS and WFDS for either type of 
+	simulation.
+
+-split the run method into run_standard and capsis_etal methods and added the
+	run_lidar method.
+	The run_lidar method processes the input shapefile, runs multiple
+	64 x 64m FVS simulations and collates the FVS simulation results.
+
+-modified the capsis_etal (formally a part of the run method) to 1) set the 
+	'extend' parameter for capsis to True (standard run) or False 
+	(lidar run) and 2) to pass on new variables required by the WFDS class
+	constructor (__init__) method.
+
+-added the following variables to the create_variables method:
+	-ldr_check_var - t/f lidar run checkbox
+	-lidar_shapefile - input lidar shapefile path and name
+	-x_AOI_size - x Area Of Interest size
+	-y_AOI_size - y AOI size
+
+-added the following variables to the reset method:
+	-lidar_check_var (uncheck)
+	-lidar_shapefile (clear)
+	-shape_entry (disable)
+	-shp_brws_btn (disable)
+	-x_entry (enable)
+	-y_entry (enable)
+	-x_AOI_size (64)
+	-y_AOI_size (64)
+
+-deleted the clear method. This method set all input variables to an empty
+	string. This could cause some bugs in the program down the road and
+	we decided to eliminate it.
+
+-added the following to the GUI:
+	-'Enable LiDAR Run' checkbox
+	-'Specify LiDAR shapefile' string entry box
+	-'Browse' button (to browse for LiDAR shapefile)
+
+-added the the 'lidar panel' to the create_widgets method (includes the above
+	GUI additions and associated text prompts)
+
+-deleted the clear button from the create_widgets method (see above)
+
+-added the lidar panel items (see above) to the grid_widgets method. Adjusted
+	adjusted the positioning of other GUI elements as necessary.
+
+-deleted the clear button from the grid_widgets method.
+
+
+
+August, 2017
+Reflects changes from version 1.1.0a to 1.1.1a
+
+- modified spacing throughout the script to come in line with PEP recommendations
+
+- replaced call to lidar.py:Convert_Lidar:spatial_join method with calls to 
+	several methods (copy_shapefile, cleanup_lidar_fields, fishnet_id and
+	cleanup_lidar_features) which replace spatial join for the purpose of 
+	eliminating the use of the ogr2ogr.exe binary.
+
+
+September 14, 2017
+Reflects changes from version 1.1.1a to 1.1.2a
+
+- changed attribute/variable/method names to conform to PEP style guidelines:
+	https://www.python.org/dev/peps/pep-0008/
+
+- shortened lines >100 characters
+
+- standardized use of quotation marks: "outside"; 'inside'; """doc strings"""
+
+- added extensive error handling to the run_lidar method in 
+	standfire_mini_interface and to all lidar processing methods in the
+	ConvertLidar class of the lidar submodule. The methods in the
+	ConvertLidar class now trap many types of errors and return error
+	messages back to run_lidar. When a trapped error occurs, run_lidar halts
+	the execution of the standfire simulation and prints the error message
+	to the console. Successful processing also generates messages which are
+	sent to the console when all the processes executed in run_lidar have
+	successfully completed. See comments in the mini interface and lidar
+	scripts for more information.
+
+- changed the execution of lidar processing methods (calls to the ConvertLidar
+	class of the lidar submodule) from serial execution to execution using a
+	for loop. This allows for the termination of the standfire simulation
+	upon an error in any of the lidar processing methods instead of after the
+	completion of all methods. This also facilitated the error trapping
+	methodology described above. See comments in the mini interface and lidar
+	scripts for more information.
+
+- added an end method that can be called for terminating the program and
+	performing cleanup (cleanup has not yet been implemented)
+
+- specified an exception type (ValueError) for a try/except pair in the
+	update_domain_change method. This method updates associated parameters
+	when an xy domain changes in the user interface. This exception handles
+	cases where x or y domains are empty strings.
+
+- changed return attribute variable names in update_domain_change to be more
+	descriptive of the atributes returned by the trace method when a value
+	changes in the x or y domains in the user interface. (from 'a, b, c' to
+	'internal_name, index, operation')
+
+- rewrote superclass constructor in '__int__' method of the Application class to
+	eliminate a potential infinite recursion.
+
+- corrected potential error in the create_wfds_run_script method
+	(linux/OSX branch), where self.n_mesh.get() was written as
+	self.n_mesh_get()
+
+- The create_fishnet method in the lidar submodule's ConvertLidar class was
+	changed to no longer return the x and y dimensions of the fishnet.
+	Therefore, the calling method was updated to no longer receive a return.
+
+- split run_lidar method into run_lidar and _lidar_fvs methods
+
+- changed file variable name 'f' to 'script' in the create_wfds_run_script and
+	create_smv_run_script methods for clarity
+
+- Updated path references for the importation of submodules to accommodate the
+	changes in directory structure (the contents of \standfire\ were moved
+	to \apps\STANDFIRE_v1.1\) This change was made so that submodules and 
+	their dependencies exist in the same directory or a subdirectory of the 
+	main program. This makes importation easier and clearer (e.g. 
+	dependencies can be referenced with the name of a subdirectory: 
+	<dir>.<subdir>.<pyfvs>)
+
+- Updated and expanded commenting throughout

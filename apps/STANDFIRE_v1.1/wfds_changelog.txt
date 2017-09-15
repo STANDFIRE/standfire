@@ -1,0 +1,21 @@
+change log wfds.py
+July, 2017
+Reflects changes from version 1.0.0a to 1.1.0a
+
+-modified the WFDS class constructor to accept x dimension Area Of
+	Interest (AOI) and the x Offset (fetch or the distance between
+	the x minimum and the x AOI minimum).
+
+- removed hard-wired values from the constructor and used the AOI and 
+	Offset to calculate the center point of the AOI (aoa_x_center)
+
+
+change log wfds.py
+September 14, 2017
+Reflects changes from version 1.1.1a to 1.1.2a
+
+- rewrote superclass constructor in '__int__' method of the WFDS and
+	GenerateBinaryGrid classes to eliminate a potential infinite
+	recursions.
+
+

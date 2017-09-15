@@ -1,0 +1,447 @@
+# Parameter file from Standfire module
+
+#Species information
+#Name	Genus	Trait	Tax. Level	Info	SLA	Color (RGB)	CrownGeometry
+Default	Genus	Trait	1	No_info	6.0	0,0,0	{(0,5);(10,60);(25,99);(50,93);(75,69);(100,0)}
+2TB	Other	Trait	1	No_info	6.0	255,0,0	{(0,0);(1,100);(99,100);(100,0)}
+2TD	Other	Trait	1	No_info	6.0	255,0,0	{(0,0);(10,80);(99,100);(100,0)}
+2TE	Other	Trait	1	No_info	6.0	255,0,0	{(0,0);(3,91);(80,40);(100,0)}
+2TREE	Other	Trait	1	No_info	6.0	255,0,0	{(0,0);(1,70);(99,100);(100,0)}
+ABAM	Abies	Trait	1	No_info	6.0	34,139,34	{(0,0);(10,100);(80,60);(100,0)}
+ABBA	Abies	Trait	1	No_info	6.0	34,139,34	{(0,0);(1,100);(73,21);(100,0)}
+ABBR	Abies	Trait	1	No_info	6.0	34,139,34	{(0,0);(1,100);(87,12);(100,0)}
+ABCO	Abies	Trait	1	No_info	6.0	34,139,34	{(0,0);(10,100);(80,60);(100,0)}
+ABGR	Abies	Trait	1	No_info	6.0	34,139,34	{(0,0);(1,100);(80,60);(100,0)}
+ABIES	Abies	Trait	1	No_info	6.0	34,139,34	{(0,0);(1,100);(87,12);(100,0)}
+ABLA	Abies	Trait	1	No_info	6.0	34,139,34	{(0,0);(1,100);(87,12);(100,0)}
+ABLAA	Abies	Trait	1	No_info	6.0	34,139,34	{(0,0);(10,45);(43,39);(100,0)}
+ABMA	Abies	Trait	1	No_info	6.0	34,139,34	{(0,0);(1,100);(88,63);(100,0)}
+ABPR	Abies	Trait	1	No_info	6.0	34,139,34	{(0,0);(1,100);(92,67);(100,0)}
+ABSH	Abies	Trait	1	No_info	6.0	34,139,34	{(0,0);(1,100);(92,67);(100,0)}
+ACACI	Acacia	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+ACBA3	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,90);(99,100);(100,0)}
+ACCI	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+ACER	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+ACGL	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+ACGR3	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+ACLE	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+ACMA3	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+ACNE2	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,90);(99,100);(100,0)}
+ACNI5	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+ACPE	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,30);(99,100);(100,0)}
+ACRU	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+ACSA2	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+ACSA3	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+ACSP2	Acer	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+AECA	Aesculus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+AEFL	Aesculus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+AEGL	Aesculus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+AESCU	Aesculus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+AIAL	Ailanthus	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+ALGL2	Alnus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,40);(100,0)}
+ALNUS	Alnus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,40);(100,0)}
+ALRH2	Alnus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,95);(99,45);(100,0)}
+ALRU2	Alnus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,40);(100,0)}
+AMELA	Amelanchier	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,20);(99,100);(100,0)}
+ARAR2	Arbutus	Trait	1	No_info	6.0	76,230,0	{(0,0);(25,66);(99,100);(100,0)}
+ARBUT	Arbutus	Trait	1	No_info	6.0	76,230,0	{(0,0);(25,66);(99,100);(100,0)}
+ARME	Arbutus	Trait	1	No_info	6.0	76,230,0	{(0,0);(25,66);(99,100);(100,0)}
+BEAL2	Betula	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+BELE	Betula	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+BENI	Betula	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+BEOC2	Betula	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,73);(100,0)}
+BEPA	Betula	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,73);(100,0)}
+BEPO	Betula	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,56);(99,100);(100,0)}
+BETUL	Betula	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,73);(100,0)}
+BEUT	Betula	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,73);(100,0)}
+CAAL27	Carya	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,40);(99,100);(100,0)}
+CAAQ2	Carya	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,76);(100,0)}
+CACA18	Carpinus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,35);(99,100);(100,0)}
+CACO15	Carya	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+CADE12	Castanea	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+CADE27	Calocedrus	Trait	1	No_info	6.0	76,230,0	{(0,0);(15,100);(55,60);(100,0)}
+CAGL8	Carya	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,76);(100,0)}
+CAIL2	Carya	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,76);(100,0)}
+CALA21	Carya	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,76);(100,0)}
+CANO9	Callitropsis	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(87,60);(100,0)}
+CAOV2	Carya	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,76);(100,0)}
+CARYA	Carya	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,76);(100,0)}
+CATAL	Catalpa	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+CATE9	Carya	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+CEAL8	Cercocarpus	Trait	1	No_info	6.0	76,230,0	{(0,0);(6,100);(80,20);(100,0)}
+CECA4	Cercis	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+CELA	Celtis	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,76);(100,0)}
+CELE3	Cercocarpus	Trait	1	No_info	6.0	76,230,0	{(0,0);(6,100);(80,20);(100,0)}
+CELTI	Celtis	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,76);(100,0)}
+CEMOG	Cercocarpus	Trait	1	No_info	6.0	76,230,0	{(0,0);(6,100);(80,20);(100,0)}
+CEOC	Celtis	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,76);(100,0)}
+CHAMA4	Chamaecyparis	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(87,60);(100,0)}
+CHCHC4	Chrysolepis	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,95);(99,100);(100,0)}
+CHLA	Chamaecyparis	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(60,48);(100,0)}
+CHTH2	Chamaecyparis	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,100);(80,74);(100,0)}
+COCO6	Corylus	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+COFL2	Cornus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+CONU4	Cornus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,95);(99,32);(100,0)}
+CORNU	Cornus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,95);(99,32);(100,0)}
+CRATA	Crataegus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,95);(99,100);(100,0)}
+CUAR	Cupressus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,53);(75,28);(100,0)}
+CUBA	Cupressus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,53);(75,28);(100,0)}
+CUFO2	Cupressus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,53);(75,28);(100,0)}
+CUMA2	Cupressus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,53);(75,28);(100,0)}
+CUPRE	Cupressus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,53);(75,28);(100,0)}
+CUSA3	Cupressus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,53);(75,28);(100,0)}
+DIVI5	Diospyros	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+FAGR	Fagus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+FRAM2	Fraxinus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+FRAXI	Fraxinus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+FRLA	Fraxinus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+FRNI	Fraxinus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+FRPE	Fraxinus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+FRPR	Fraxinus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+FRPU7	Frangula	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+FRQU	Fraxinus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+FRVE2	Fraxinus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+GLTR	Gleditsia	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+GOLA	Gordonia	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+GYDI	Gymnocladus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(86,90);(100,0)}
+HALES	Halesia	Trait	1	No_info	6.0	76,230,0	{(0,0);(21,100);(82,71);(100,0)}
+ILOP	Ilex	Trait	1	No_info	6.0	76,230,0	{(0,0);(21,100);(82,71);(100,0)}
+JUCA	Juglans	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+JUCA7	Juniperus	Trait	1	No_info	6.0	38,115,0	{(0,0);(1,53);(75,28);(100,0)}
+JUCI	Juglans	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+JUCO11	Juniperus	Trait	1	No_info	6.0	38,115,0	{(0,0);(1,53);(75,28);(100,0)}
+JUDE2	Juniperus	Trait	1	No_info	6.0	38,115,0	{(0,0);(1,53);(75,28);(100,0)}
+JUGLA	Juglans	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+JUHI	Juglans	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+JUMI	Juglans	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+JUMO	Juniperus	Trait	1	No_info	6.0	38,115,0	{(0,0);(1,53);(75,28);(100,0)}
+JUNI	Juglans	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+JUNIP	Juniperus	Trait	1	No_info	6.0	38,115,0	{(0,0);(1,53);(75,28);(100,0)}
+JUOC	Juniperus	Trait	1	No_info	6.0	38,115,0	{(0,0);(1,53);(75,28);(100,0)}
+JUOS	Juniperus	Trait	1	No_info	6.0	38,115,0	{(0,0);(1,53);(75,28);(100,0)}
+JUPI	Juniperus	Trait	1	No_info	6.0	38,115,0	{(0,0);(1,53);(75,28);(100,0)}
+JUSC2	Juniperus	Trait	1	No_info	6.0	38,115,0	{(0,0);(1,53);(75,28);(100,0)}
+JUVI	Juniperus	Trait	1	No_info	6.0	38,115,0	{(0,0);(1,53);(75,28);(100,0)}
+LALA	Larix	Trait	1	No_info	6.0	173,255,47	{(0,0);(15,100);(57,63);(100,0)}
+LALY	Larix	Trait	1	No_info	6.0	173,255,47	{(0,0);(1,98);(78,30);(100,0)}
+LAOC	Larix	Trait	1	No_info	6.0	173,255,47	{(0,0);(15,100);(57,63);(100,0)}
+LARIX	Larix	Trait	1	No_info	6.0	173,255,47	{(0,0);(15,100);(57,63);(100,0)}
+LIDE3	Lithocarpus	Trait	1	No_info	6.0	76,230,0	{(0,0);(44,100);(71,100);(100,0)}
+LIST2	Liquidambar	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,20);(99,100);(100,0)}
+LITU	Liriodendron	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,76);(100,0)}
+MAAC	Magnolia	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(81,72);(100,0)}
+MAFU	Malus	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+MAGNO	Magnolia	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(81,72);(100,0)}
+MAGR4	Magnolia	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(81,72);(100,0)}
+MALUS	Malus	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+MAMA2	Magnolia	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(81,72);(100,0)}
+MAPO	Maclura	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+MAVI2	Magnolia	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+MEQU	Melaleuca	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+MOAL	Morus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+MOCA6	Morella	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+MORU2	Morus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+MORUS	Morus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+NYAQ2	Nyssa	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,77);(99,100);(100,0)}
+NYBI	Nyssa	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,77);(99,100);(100,0)}
+NYOG	Nyssa	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,77);(99,100);(100,0)}
+NYSSA	Nyssa	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,77);(99,100);(100,0)}
+NYSY	Nyssa	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,77);(99,100);(100,0)}
+OLTE	Olneya	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+OSVI	Ostrya	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,35);(99,100);(100,0)}
+OXAR	Oxydendrum	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(80,80);(100,0)}
+PATO2	Paulownia	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+PEBO	Persea	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+PIAB	Picea	Trait	1	No_info	6.0	0,201,87	{(0,0);(1,100);(68,20);(100,0)}
+PIAL	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(17,100);(82,52);(100,0)}
+PIAR	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(17,100);(82,52);(100,0)}
+PIAR5	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(11,100);(80,75);(100,0)}
+PIAT	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(10,100);(80,40);(100,0)}
+PIBA	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(17,100);(82,52);(100,0)}
+PIBA2	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(15,100);(87,50);(100,0)}
+PIBR	Picea	Trait	1	No_info	6.0	0,201,87	{(0,0);(4,72);(80,46);(100,0)}
+PICE	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(1,53);(75,28);(100,0)}
+PICEA	Picea	Trait	1	No_info	6.0	0,201,87	{(0,0);(1,100);(73,78);(100,0)}
+PICL	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(15,100);(87,50);(100,0)}
+PICO	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(17,100);(88,21);(100,0)}
+PICO3	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(10,100);(80,40);(100,0)}
+PIDI3	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(1,53);(75,28);(100,0)}
+PIEC2	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(15,100);(87,50);(100,0)}
+PIED	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(1,53);(75,28);(100,0)}
+PIEL	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(15,100);(87,50);(100,0)}
+PIEN	Picea	Trait	1	No_info	6.0	0,201,87	{(0,0);(1,100);(73,78);(100,0)}
+PIEN2	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(11,100);(80,75);(100,0)}
+PIFL2	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(1,88);(51,100);(100,0)}
+PIGL	Picea	Trait	1	No_info	6.0	0,201,87	{(0,0);(1,100);(73,78);(100,0)}
+PIGL2	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(15,100);(87,50);(100,0)}
+PIJE	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(1,100);(51,90);(100,0)}
+PILA	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(1,99);(80,80);(100,0)}
+PILEC	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(11,100);(80,75);(100,0)}
+PILO	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(1,53);(75,28);(100,0)}
+PIMA	Picea	Trait	1	No_info	6.0	0,201,87	{(0,0);(10,100);(66,46);(100,0)}
+PIMO	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(1,53);(75,28);(100,0)}
+PIMO3	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(17,100);(82,52);(100,0)}
+PIMOF	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(1,53);(75,28);(100,0)}
+PIMU	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(3,91);(80,40);(100,0)}
+PINI	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(11,100);(80,75);(100,0)}
+PINUS	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(17,100);(88,21);(100,0)}
+PIPA2	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(15,100);(87,50);(100,0)}
+PIPO	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(11,100);(80,75);(100,0)}
+PIPU	Picea	Trait	1	No_info	6.0	0,201,87	{(0,0);(1,57);(62,19);(100,0)}
+PIPU5	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(15,100);(87,50);(100,0)}
+PIQU	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(1,53);(75,28);(100,0)}
+PIRA2	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(10,100);(80,40);(100,0)}
+PIRE	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(15,100);(87,50);(100,0)}
+PIRI	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(15,100);(87,50);(100,0)}
+PIRU	Picea	Trait	1	No_info	6.0	0,201,87	{(0,0);(1,100);(68,20);(100,0)}
+PISA2	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(10,100);(80,40);(100,0)}
+PISE	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(15,100);(87,50);(100,0)}
+PISI	Picea	Trait	1	No_info	6.0	0,201,87	{(0,0);(4,72);(80,46);(100,0)}
+PIST	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(15,100);(87,50);(100,0)}
+PIST3	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(17,100);(82,52);(100,0)}
+PISY	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(17,100);(88,21);(100,0)}
+PITA	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(15,100);(87,50);(100,0)}
+PITO	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(11,100);(80,75);(100,0)}
+PIVI2	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(15,100);(87,50);(100,0)}
+PIWA	Pinus	Trait	1	No_info	6.0	107,142,35	{(0,0);(11,100);(80,75);(100,0)}
+PLATA	Platanus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+PLOC	Platanus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+PLRA	Platanus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+POAN3	Populus	Trait	1	No_info	6.0	76,230,0	{(0,0);(15,96);(99,81);(100,0)}
+POBA2	Populus	Trait	1	No_info	6.0	76,230,0	{(0,0);(15,96);(99,81);(100,0)}
+POBAT	Populus	Trait	1	No_info	6.0	76,230,0	{(0,0);(15,96);(99,81);(100,0)}
+PODE3	Populus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+PODEM	Populus	Trait	1	No_info	6.0	76,230,0	{(0,0);(15,96);(99,81);(100,0)}
+POFR2	Populus	Trait	1	No_info	6.0	76,230,0	{(0,0);(15,96);(99,81);(100,0)}
+POGR4	Populus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+POHE4	Populus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+POPUL	Populus	Trait	1	No_info	6.0	76,230,0	{(0,0);(15,96);(99,81);(100,0)}
+POTR5	Populus	Trait	1	No_info	6.0	76,230,0	{(0,0);(20,100);(70,70);(100,0)}
+PREM	Prunus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+PRGLT	Prosopis	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+PROSO	Prosopis	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+PRPE2	Prunus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+PRPU	Prosopis	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+PRSE2	Prunus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+PRUNU	Prunus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+PRVE	Prosopis	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+PRVI	Prunus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+PSEUD7	Pseudotsuga	Trait	1	No_info	6.0	95,158,160	{(0,0);(15,100);(55,83);(100,0)}
+PSMA	Pseudotsuga	Trait	1	No_info	6.0	95,158,160	{(0,0);(15,100);(55,83);(100,0)}
+PSME	Pseudotsuga	Trait	1	No_info	6.0	95,158,160	{(0,0);(15,100);(55,83);(100,0)}
+QUAG	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QUAL	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,50);(99,100);(100,0)}
+QUAR	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QUBI	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,50);(99,100);(100,0)}
+QUCH2	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QUCO2	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,60);(99,76);(100,0)}
+QUDO	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QUEL	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,60);(99,76);(100,0)}
+QUEM	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QUEN	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QUERC	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QUFA	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,90);(99,76);(100,0)}
+QUGA	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QUGA4	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+QUGR3	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QUHY	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QUIM	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,50);(99,100);(100,0)}
+QUIN	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,50);(99,100);(100,0)}
+QUKE	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QULA2	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,50);(99,100);(100,0)}
+QULA3	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,50);(99,100);(100,0)}
+QULO	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QULY	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,50);(99,100);(100,0)}
+QUMA2	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QUMA3	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,90);(99,76);(100,0)}
+QUMA6	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+QUMI	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,50);(99,100);(100,0)}
+QUMU	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QUNI	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,60);(99,76);(100,0)}
+QUNU	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,90);(99,76);(100,0)}
+QUOB	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+QUPA2	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,60);(99,76);(100,0)}
+QUPA5	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,90);(99,76);(100,0)}
+QUPH	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,60);(99,46);(100,0)}
+QUPR2	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+QURU	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,60);(99,76);(100,0)}
+QUSH	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,60);(99,76);(100,0)}
+QUSI2	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+QUST	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+QUVE	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,60);(99,76);(100,0)}
+QUVI	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,50);(99,100);(100,0)}
+QUWI2	Quercus	Trait	1	No_info	6.0	76,230,0	{(0,0);(8,32);(99,100);(100,0)}
+RONE	Robinia	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+ROPS	Robinia	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+SAAL5	Sassafras	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+SAERF	Salix	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+SALIX	Salix	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,25);(99,41);(100,0)}
+SANI	Salix	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+SASC	Salix	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,25);(99,41);(100,0)}
+SEGI2	Sequoiadendron	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(63,61);(100,0)}
+SESE3	Sequoia	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(63,61);(100,0)}
+SOAM3	Sorbus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+TAAS	Taxodium	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+TABR2	Taxus	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,100);(80,100);(100,0)}
+TADI2	Taxodium	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(99,100);(100,0)}
+TAMAR2	Tamarix	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,80);(99,100);(100,0)}
+TAXUS	Taxus	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,100);(80,100);(100,0)}
+THOC2	Thuja	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,100);(80,47);(100,0)}
+THPL	Thuja	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(60,48);(100,0)}
+THUJA	Thuja	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,100);(60,48);(100,0)}
+TIAM	Tilia	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+TIAMH	Tilia	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,91);(99,100);(100,0)}
+TOCA	Torreya	Trait	1	No_info	6.0	76,230,0	{(0,0);(10,100);(80,100);(100,0)}
+TSCA	Tsuga	Trait	1	No_info	6.0	0,255,51	{(0,0);(1,100);(62,56);(100,0)}
+TSHE	Tsuga	Trait	1	No_info	6.0	0,255,51	{(0,0);(25,100);(90,5);(100,0)}
+TSME	Tsuga	Trait	1	No_info	6.0	0,255,51	{(0,0);(1,100);(90,5);(100,0)}
+TSUGA	Tsuga	Trait	1	No_info	6.0	0,255,51	{(0,0);(25,100);(90,5);(100,0)}
+ULAL	Ulmus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+ULAM	Ulmus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,20);(99,100);(100,0)}
+ULMUS	Ulmus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,20);(99,100);(100,0)}
+ULPU	Ulmus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+ULRU	Ulmus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,20);(99,100);(100,0)}
+ULTH	Ulmus	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,70);(99,100);(100,0)}
+UMCA	Umbellularia	Trait	1	No_info	6.0	76,230,0	{(0,0);(1,95);(99,100);(100,0)}
+
+#Particle properties
+# NB: these properties should be set for each species (otherwise default is used for particles)	
+#ParticleType	Status	SpeciesName	MVR(kg/m3)	SVR(m2/m3)	Moisture(%)	source
+Leave	Live	Default	500	5000	100	Unknown
+Twig1	Live	Default	500	2000	100	Unknown
+Twig2	Live	Default	500	500	100	Unknown
+Twig3	Live	Default	500	100	100	Unknown
+Leave	Dead	Default	500	5000	10	Unknown
+Twig1	Dead	Default	500	2000	10	Unknown
+Twig2	Dead	Default	500	500	10	Unknown
+Twig3	Dead	Default	500	100	10	Unknown
+Leave	Live	ABGR	500	5000	100	Unknown
+Twig1	Live	ABGR	500	2000	100	Unknown
+Twig2	Live	ABGR	500	500	100	Unknown
+Twig3	Live	ABGR	500	100	100	Unknown
+Leave	Dead	ABGR	500	5000	10	Unknown
+Twig1	Dead	ABGR	500	2000	10	Unknown
+Twig2	Dead	ABGR	500	500	10	Unknown
+Twig3	Dead	ABGR	500	100	10	Unknown
+Leave	Live	LAOC	500	5000	100	Unknown
+Twig1	Live	LAOC	500	2000	100	Unknown
+Twig2	Live	LAOC	500	500	100	Unknown
+Twig3	Live	LAOC	500	100	100	Unknown
+Leave	Dead	LAOC	500	5000	10	Unknown
+Twig1	Dead	LAOC	500	2000	10	Unknown
+Twig2	Dead	LAOC	500	500	10	Unknown
+Twig3	Dead	LAOC	500	100	10	Unknown
+Leave	Live	PICO	500	5000	100	Unknown
+Twig1	Live	PICO	500	2000	100	Unknown
+Twig2	Live	PICO	500	500	100	Unknown
+Twig3	Live	PICO	500	100	100	Unknown
+Leave	Dead	PICO	500	5000	10	Unknown
+Twig1	Dead	PICO	500	2000	10	Unknown
+Twig2	Dead	PICO	500	500	10	Unknown
+Twig3	Dead	PICO	500	100	10	Unknown
+Leave	Live	PIEN	500	5000	100	Unknown
+Twig1	Live	PIEN	500	2000	100	Unknown
+Twig2	Live	PIEN	500	500	100	Unknown
+Twig3	Live	PIEN	500	100	100	Unknown
+Leave	Dead	PIEN	500	5000	10	Unknown
+Twig1	Dead	PIEN	500	2000	10	Unknown
+Twig2	Dead	PIEN	500	500	10	Unknown
+Twig3	Dead	PIEN	500	100	10	Unknown
+Leave	Live	PIPO	500	5000	100	Unknown
+Twig1	Live	PIPO	500	2000	100	Unknown
+Twig2	Live	PIPO	500	500	100	Unknown
+Twig3	Live	PIPO	500	100	100	Unknown
+Leave	Dead	PIPO	500	5000	10	Unknown
+Twig1	Dead	PIPO	500	2000	10	Unknown
+Twig2	Dead	PIPO	500	500	10	Unknown
+Twig3	Dead	PIPO	500	100	10	Unknown
+Leave	Live	PSME	500	5000	100	Unknown
+Twig1	Live	PSME	500	2000	100	Unknown
+Twig2	Live	PSME	500	500	100	Unknown
+Twig3	Live	PSME	500	100	100	Unknown
+Leave	Dead	PSME	500	5000	10	Unknown
+Twig1	Dead	PSME	500	2000	10	Unknown
+Twig2	Dead	PSME	500	500	10	Unknown
+Twig3	Dead	PSME	500	100	10	Unknown
+Leave	Live	TSHE	500	5000	100	Unknown
+Twig1	Live	TSHE	500	2000	100	Unknown
+Twig2	Live	TSHE	500	500	100	Unknown
+Twig3	Live	TSHE	500	100	100	Unknown
+Leave	Dead	TSHE	500	5000	10	Unknown
+Twig1	Dead	TSHE	500	2000	10	Unknown
+Twig2	Dead	TSHE	500	500	10	Unknown
+Twig3	Dead	TSHE	500	100	10	Unknown
+Leave	Live	ABLA	500	5000	100	Unknown
+Twig1	Live	ABLA	500	2000	100	Unknown
+Twig2	Live	ABLA	500	500	100	Unknown
+Twig3	Live	ABLA	500	100	100	Unknown
+Leave	Dead	ABLA	500	5000	10	Unknown
+Twig1	Dead	ABLA	500	2000	10	Unknown
+Twig2	Dead	ABLA	500	500	10	Unknown
+Twig3	Dead	ABLA	500	100	10	Unknown
+
+#Available mass crown profile functions:
+#	•poly2AboveCBH(a;b;c) = a*hrelInCrown^2+b*hrelInCrown+c  
+#                         ! this is the derivates of cumulative law pw = c * ph + b/2 sqr(ph) +  a/3 * cube(ph)
+#                         ! assumes that fuel mass is between CBH and H
+#	•constantAboveCBH() = 1 for z>CBH and z<H
+#	•constant() = 1 for z<H
+#
+
+#Vertical Mass crown profile
+# 2 unused equations :
+#  -western red cedar = thuja plicata :IC	poly2AboveCBH(-4.6185;5.0790;0)
+#  -pinus ponderosa SW 	poly2AboveCBH(-5.7966;5.6144;0.1251)
+#Particle type	Status	SpeciesName	ProfileType	EquationType	source
+Leave	Live	Default	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Twig1	Live	Default	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Twig2	Live	Default	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Twig3	Live	Default	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Leave	Dead	Default	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Twig1	Dead	Default	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Twig2	Dead	Default	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Twig3	Dead	Default	Vertical	constantAboveCBH()	Unknown
+Leave	Live	ABGR	Vertical	poly2AboveCBH(0;0;1)	Unknown
+Twig1	Live	ABGR	Vertical	poly2AboveCBH(0;0;1)	Unknown
+Twig2	Live	ABGR	Vertical	poly2AboveCBH(0;0;1)	Unknown
+Twig3	Live	ABGR	Vertical	poly2AboveCBH(0;0;1)	Unknown
+Leave	Dead	ABGR	Vertical	poly2AboveCBH(0;0;1)	Unknown
+Twig1	Dead	ABGR	Vertical	poly2AboveCBH(0;0;1)	Unknown
+Twig2	Dead	ABGR	Vertical	poly2AboveCBH(0;0;1)	Unknown
+Twig3	Dead	ABGR	Vertical	poly2AboveCBH(0;0;1)	Unknown
+Leave	Live	PICO	Vertical	poly2AboveCBH(-1.8135;3.2090;0)	Unknown
+Twig1	Live	PICO	Vertical	poly2AboveCBH(-1.8135;3.2090;0)	Unknown
+Twig2	Live	PICO	Vertical	poly2AboveCBH(-1.8135;3.2090;0)	Unknown
+Twig3	Live	PICO	Vertical	poly2AboveCBH(-1.8135;3.2090;0)	Unknown
+Leave	Dead	PICO	Vertical	poly2AboveCBH(-1.8135;3.2090;0)	Unknown
+Twig1	Dead	PICO	Vertical	poly2AboveCBH(-1.8135;3.2090;0)	Unknown
+Twig2	Dead	PICO	Vertical	poly2AboveCBH(-1.8135;3.2090;0)	Unknown
+Twig3	Dead	PICO	Vertical	poly2AboveCBH(-1.8135;3.2090;0)	Unknown
+Leave	Live	PIPO	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Twig1	Live	PIPO	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Twig2	Live	PIPO	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Twig3	Live	PIPO	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Leave	Dead	PIPO	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Twig1	Dead	PIPO	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Twig2	Dead	PIPO	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Twig3	Dead	PIPO	Vertical	poly2AboveCBH(-4.0911;4.7274;0)	Unknown
+Leave	Live	PSME	Vertical	poly2AboveCBH(-3.9852;4.6568;0)	Unknown
+Twig1	Live	PSME	Vertical	poly2AboveCBH(-3.9852;4.6568;0)	Unknown
+Twig2	Live	PSME	Vertical	poly2AboveCBH(-3.9852;4.6568;0)	Unknown
+Twig3	Live	PSME	Vertical	poly2AboveCBH(-3.9852;4.6568;0)	Unknown
+Leave	Dead	PSME	Vertical	poly2AboveCBH(-3.9852;4.6568;0)	Unknown
+Twig1	Dead	PSME	Vertical	poly2AboveCBH(-3.9852;4.6568;0)	Unknown
+Twig2	Dead	PSME	Vertical	poly2AboveCBH(-3.9852;4.6568;0)	Unknown
+Twig3	Dead	PSME	Vertical	poly2AboveCBH(-3.9852;4.6568;0)	Unknown
+
+#Horizontal Mass crown profile
+#Particle type	Status	SpeciesName	ProfileType	EquationType	source
+Leave	Live	Default	Horizontal	constant()	Unknown
+Twig1	Live	Default	Horizontal	constant()	Unknown
+Twig2	Live	Default	Horizontal	constant()	Unknown
+Twig3	Live	Default	Horizontal	constant()	Unknown
+Leave	Dead	Default	Horizontal	constant()	Unknown
+Twig1	Dead	Default	Horizontal	constant()	Unknown
+Twig2	Dead	Default	Horizontal	constant()	Unknown
+Twig3	Dead	Default	Horizontal	constant()	Unknown
+

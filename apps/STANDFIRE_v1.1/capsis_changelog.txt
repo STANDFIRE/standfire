@@ -1,0 +1,52 @@
+change log capsis.py
+July, 2017
+Reflects changes from version 1.0.0a to 1.1.0a
+
+
+-changed default parameter 'extend' (in 'params' dictionary) from true to false.
+	This will prevent capsis from extrapolating new trees into areas outside
+	the sample area. This is important for lidar data input which has real 
+	data from edge to edge.This parameter can be reset using the 
+	'set_extend_FVS_sample' method for standard runs.
+    
+- changed other default parameters to eliminate hard wired values including sceneSizeX,
+    sceneSizeY, xOffset and yOffset (changed to 0 or 0.0)
+
+-changed default parameters for 'canopyGeom' and 'bdBin' to 'CYLINDER' and '0.01' from
+	'RECTANGLE' and '0.1' to accommodate the new version of CAPSIS' ability to 
+	generate heterogeneous surface fuels.
+
+-added 'layerGeom' as a new parameter and set it to 'HET_RECTANGLE_TEXT'. This will
+	generate heterogeneous surface fuels in the new version of capsis.
+
+-changed the default surface fuels parameters under 'srf_fuels' to match the defaults
+	used in the standfire mini interface (standfire_mini_interface.py).
+
+-corrected an error in capsis.py in the 'set_srf_dead_mc' method where litter moisture
+	was being set to herbaceous moisture.
+
+-combined RunConfig methods 'set_x_size' and 'set_y_size' to create 'set_xy_size'
+
+-expanded 'set_xy_size' parameters to include x&y scene sizes and x&y AOI sizes.
+	The AOI sizes are passed to the semi-private methods '_set_x_offset', 
+	'_set_y_offset' and '_set_block_verts' to calculate these parameters.
+    
+-modified the set x&y offset methods to add x&y AOI size parameters
+
+-replaced hardwired parameters in the set x&y offset methods with formulas using 
+	x&y AOI values to calculate these offsets.
+
+-modified '_set_block_verts' method to add x&y AOI parameters and replace
+	hardwired values with formulas to calculate the surface fuel blocks using
+	these parameters.
+   
+-added set_extend_FVS_sample method to set extend to true when starting from FVS .tre
+	file (standard run)
+
+
+change log capsis.py
+September 14, 2017
+Reflects changes from version 1.1.1a to 1.1.2a
+
+- Modified _read_fuels method to accomodate changes in the standfire directory
+	structure.
