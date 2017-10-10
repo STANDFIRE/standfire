@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_fr.html>help_fr</a></br>
+
+<h1 class="sectionedit2" id="eclaircisseur_melies">Eclaircisseur Melies</h1>
+<div class="level1">
+
+<p>
+Cet outil d&#039;intervention permet de spécifier un objectif en termes de RDI ou de surface terrière pour chaque essence. Le coefficient d&#039;éclaircie Kg est appliqué sur la valeur qui a été recalculée.
+Ie : si vous fixez le RDI, G est calculé. Changer Kg recalcule G
+</p>
+
+<p>
+Détail des formules utilisées :
+</p>
+<ul>
+<li class="level1"><div class="li"> Kg = ( Dg_arbres_eclaircis / Dg_initial)²</div>
+</li>
+<li class="level1"><div class="li"> Kg = ( N_initial * G_arbres_eclaircis) / ( N_arbres_eclaircis * G_initial )</div>
+</li>
+<li class="level1"><div class="li"> RDI = tiges_par_ha * exp( -13.06 + 1.83 * ln(Dg_initial) )</div>
+</li>
+</ul>
+
+<p>
+Pour plus de détails, voir : <em>Vallet et Pérot 2011, Journal of Vegetation Science, 22(5):932–942)</em>
+</p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,103 @@
+# PARAMETERS FOR THE SIMPLE SCRIPT IN STANDFIRE
+path=.
+#path=/Users/pimont/capsis4
+# INPUT FILES
+# file containing tree species properties (mass distribution, shape, particle properties...)
+speciesFile=data/standfire/inputfiles/speciesFile
+# svs base file name (svs produce 4 file finishing with "_trees.cvs","_snags.cvs","_cwd.cvs","_scalars.cvs"
+svsBaseFile=data/standfire/inputfiles/S248112_THN1_2020
+# additional properties : layer details, trees moisture, etc..
+#additionalPropertyFile=data/standfire/inputfiles/additionalProperties_SVS_understorey.txt
+additionalPropertyFile=data/standfire/inputfiles/additionalProperties_multiLayerSet_understorey.txt
+
+# SCENE_SIZE (by default 0,0,200,200)
+sceneOriginX=0.0
+sceneOriginY=0.0
+sceneSizeX=150.0
+sceneSizeY=90.0
+
+# 3D VIEWER
+show3Dview=true
+
+# potential extension of the FVSstand (defined on 1ha) and beginning position of this sample in the scene (x in m)
+extendFVSSample=true
+xFVSSampleBegin=10.0
+extendFVSSampleSpatialOption=0
+#	(0: random spatialization, 1: repulsive with simple Gibbs pattern, 2:Hardcore that limits crown volume intersections)
+
+# FUEL TREATMENT
+respace=true
+respaceDistance=3
+prune=true
+pruneHeight=10
+
+# SAVE PROJECT
+saveProject=true
+projectName=../temp/project
+
+
+# POLYGON LIST
+
+# Treatment Type, Polygon, Parameters
+
+
+# EXPORT
+# 0=none, 1= wfds, 2=firetec, 3=both
+modelChoice=3
+format=86
+verboseExport=true
+
+# PARTICLES TO EXPORT
+includeLitter=true
+includeLeaveLive=true
+includeLeaveDead=true
+includeTwig1Live=true
+includeTwig1Dead=true
+includeTwig2Live=true
+includeTwig2Dead=true
+includeTwig3Live=true
+includeTwig3Dead=true
+
+#FIRETEC EXPORT
+firetecOutDir=../temp/firetec
+# default parameter 2,2,15,41,0.1
+firetec_dx=2.0
+firetec_dy=2.0
+firetec_dz=15.0
+firetec_nz=41
+firetec_aa1=0.1
+
+#WFDS EXPORT
+# NB when several grids are used the name of the first grid should end with « 1.xyz » and the next ones with « 2.xyz »…
+# canopyFuelRepresentation= RECTANGLE or CYLINDER or HET_RECTANGLE_BIN or HET_RECTANGLE_TEXT
+# canopyFuelRepresentation=RECTANGLE
+canopyFuelRepresentation=CYLINDER
+#canopyFuelRepresentation=HET_RECTANGLE_BIN
+#canopyFuelRepresentation=HET_RECTANGLE_TEXT
+
+# layerSetRepresentation is optional (by default it is the same as canopy fuel. However it can be specified differently mainly to allow cylinders or rectangle for 
+# plants and HET_RECTANGLE_TEXT for layerSet
+# layerSetRepresentation= RECTANGLE or HET_RECTANGLE_BIN or HET_RECTANGLE_TEXT (binary format is only permitted for canopy AND layerset)
+# layerSetRepresentation=RECTANGLE
+# layerSetRepresentation=HET_RECTANGLE_BIN
+layerSetRepresentation=HET_RECTANGLE_TEXT
+
+# mandatory parameter for HET_RECTANGLE_TEXT (default value is 0.01 kg/m3) to decide the accuracy of bulk density bins
+bulkDensityAccuracy=0.01
+
+#wfdsFirstGridFile=data/standfire/grid/test2001_0001.xyz
+wfdsFirstGridFile=data/standfire/grid/wfdsgrid_150x_90y_50z_1m_res_no_trnz.xyz
+wfdsGridNumber=1
+vegetation_cdrag=0.05
+vegetation_char_fraction=0.2
+emissivity=0.99
+vegetation_arrhenius_degrad = false
+fireline_mlr_max=0.05
+veg_initial_temperature = 20.0
+veg_char_fraction = 0.25
+veg_drag_coefficient = 0.125
+veg_burning_rate_max = 0.4
+veg_dehydratation_rate_max = 0.4
+veg_remove_charred = true
+wfdsOutDir=../temp/wfds
+wfdsFileName=wfds1

@@ -1,0 +1,76 @@
+# ForestGALES 2.3Res  Japanese Larch parameter file
+JL
+# L3 Conversion Top height (m) to mean height (m): MeanHt = Multiplier*TopHt + intercept
+# Multiplier
+1.0348
+# Intercept
+-1.236
+# L8 CanopyBreadth (m) as function of DBH (cm).
+# Equation form: 1 linear: Param1*DBH*100 + param2; 2 Power: Param1*DBH^Param2 + Param3
+1
+# Param1
+0.1808
+# Param2
+0.1706
+# Param3
+0
+# L17 CanopyDepth  (m) as function of height (m)= Mulitplier*Height + intercept; (m).
+# Equation form: 1 linear: Param1*Height + param2; 2 Exp: Param1*exp(Param2*height)
+1
+# Param1
+0.4616
+# Param2
+0.248
+# L24 Stem Density
+850 
+# Canopy Density
+2.5
+# Modulus of rupture
+4.8E7
+# L30 Knot factor
+0.85
+# Modulus of elasticity
+6.8E9
+# L34 Streamlining parameters
+# C
+3.07
+# N
+0.75
+# Root bending term K
+0.0
+# L41 Overturning Moment Multipliers
+# Soil-A; Rooting depth 1,2,3
+156.3
+159.9
+182.3
+# Soil-B; Rooting depth 1,2,3
+138.5
+141.8
+161.6
+# Soil-C; Rooting depth 1,2,3
+151.3
+154.8
+176.5
+# Soil-D; Rooting depth 1,2,3
+172.1
+176.1
+200.8
+# L58 OTM Scaling value
+100
+# Maximum stem weight in each category (kg)
+# Soil-A; Rooting depth 1,2,3
+236
+607
+447
+# Soil-B; Rooting depth 1,2,3
+0
+0
+0
+# L69 Soil-C; Rooting depth 1,2,3
+0
+0
+0
+# L73 Soil-D; Rooting depth 1,2,3
+0
+0
+0

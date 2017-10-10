@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_fr.html>help_fr</a></br>
+
+<h1 class="sectionedit133" id="le_manuel_capsis">Le manuel Capsis</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT133 SECTION "Le manuel Capsis" [1-32] -->
+<h2 class="sectionedit134" id="introduction">Introduction</h2>
+<div class="level2">
+
+<p>
+Capsis (Croissance d&#039;Arbres en Peuplement avec simulation d&#039;Interventions Sylvicoles) est une plate-forme de simulation pour l&#039;étude de la croissance et de la dynamique des peuplements forestiers. Elle est organisée autour d&#039;un noyau logiciel proposant des fonctionnalités communes et des structures de données génériques et de <strong>modules</strong> implémentant les modèles de dynamique pour les espèces et régions considérées.
+</p>
+
+<p>
+En début de simulation, un peuplement initial doit être produit par le module choisi, par lecture d&#039;un fichier d&#039;inventaire ou encore par une méthode de génération virtuelle. L&#039;<strong>étape racine</strong> ainsi constituée détermine un <strong>projet</strong> et peut servir de base à des simulations variées, en alternant des phases d&#039;évolution et d&#039;intervention pour constituer des scénarios sylvicoles .
+</p>
+
+<p>
+<a href="media/help_en/capsis/scenariomanager.gif" class="media" target="_blank" title="help_en:capsis:scenariomanager.gif"><img src="media/help_en/capsis/scenariomanager.gif" class="mediacenter" title="General view : Two projects in the project manager (interactive pilot)" alt="General view : Two projects in the project manager (interactive pilot)" /></a>
+</p>
+
+<p>
+Le processus d&#039;<strong>évolution</strong> à partir d&#039;une étape donnée est délégué au module. Ce dernier contient une boucle d&#039;évolution qui invoque les méthodes de croissance, régénération, mortalité… (selon les modules) pour chaque étape à créer en fonction d&#039;un pas de simulation personnalisé (libre).
+</p>
+
+<p>
+L&#039;<strong>intervention</strong> sur une étape donnée (éclaircie, élagage, fertilisation…) est déléguée à une extension (de type Intervener ) qui produit une nouvelle étape portant le peuplement résultant de l&#039;intervention.
+</p>
+
+<p>
+Des <strong>modèles de types différents</strong> (individuels dépendant ou indépendant des distances, type peuplement, types mixtes, temps continus…) peuvent coexister dans des modules Capsis décrivant des structures de données différentes. Chacun peut disposer d&#039;un jeu d&#039;extensions personnalisées. D&#039;autres extensions, dites génériques, ont la particularité d&#039;être compatibles avec plusieurs modules.
+</p>
+
+<p>
+La plate-forme Capsis est <strong>co-développée</strong> par des informaticiens, gérant les problématiques techniques et communautaires, et des chercheurs responsables du développement de leur module.
+</p>
+
+</div>
+<!-- EDIT134 SECTION "Introduction" [33-2134] -->
+<h2 class="sectionedit135" id="installation">Installation</h2>
+<div class="level2">
+
+<p>
+Capsis est compatible avec les systèmes Windows et Linux (testés). Du fait de son implémentation en langage Java portable sur de nombreux systèmes, Capsis est vraissemblablement utilisable sur d&#039;autres systèmes, mais seuls Windows et Linux sont officielement supportés.
+</p>
+
+<p>
+L&#039;installation de Capsis nécessite l&#039;installation préalable d&#039;une machine virtuelle Java de Sun Microsystems. Il suffit ensuite de décompresser l&#039;archive Capsis dans un répertoire de votre choix comme expliqué dans la fiche d&#039;installation : <a href="documentation-installation_guide.html" class="wikilink1" title="documentation-installation_guide.html">installation guide</a>.
+</p>
+
+</div>
+<!-- EDIT135 SECTION "Installation" [2135-2721] -->
+<h2 class="sectionedit136" id="frequently_asked_question">Frequently Asked Question</h2>
+<div class="level2">
+
+<p>
+Voir la <a href="documentation-faq.html" class="wikilink1" title="documentation-faq.html">FAQ</a>
+</p>
+
+</div>
+<!-- EDIT136 SECTION "Frequently Asked Question" [2722-2791] -->
+<h2 class="sectionedit137" id="comment_obtenir_de_l_aide">Comment obtenir de l&#039;aide</h2>
+<div class="level2">
+
+<p>
+Si vous souhaitez connaître les grandes fonctionnalités de Capsis, suivez le <a href="documentation-tutorial_fr.html" class="wikilink1" title="documentation-tutorial_fr.html">tutoriel</a>. Pour obtenir de l&#039;aide sur un module ou une fonctionnalité de Capsis, consultez l&#039;aide en ligne accessible depuis la boîte de dialogue A propos (sélection d&#039;un module et icône Information) ou depuis les boutons Aide des dialogues de l&#039;application.
+</p>
+
+<p>
+Pour plus de renseignements sur le projet Capsis, consultez le <a href="documentation.html" class="wikilink1" title="documentation.html">site web Capsis</a> . Pour des renseignements généraux ou techniques, demandez des informations par mail (voir <a href="contact.html" class="wikilink1" title="contact.html">contact</a>).
+</p>
+
+<p>
+Enfin, pour des renseignements d&#039;ordre scientifique sur les modèles implémentés sous Capsis, joignez directement l&#039;auteur du module par mail en consultant la <a href="models.html" class="wikilink1" title="models.html">page projet</a> du site Capsis.
+</p>
+
+</div>
+<!-- EDIT137 SECTION "Comment obtenir de l'aide" [2792-3612] -->
+<h2 class="sectionedit138" id="projet_module_session">Projet, module, session</h2>
+<div class="level2">
+
+<p>
+Chaque <strong>modèle</strong> de croissance ou de dynamique forestière implémenté dans Capsis correspond à un <strong>module</strong> de la plate-forme (ex: module <em>mountain</em> , pessières de montagne, Alpes françaises).
+</p>
+
+<p>
+Pour utiliser un modèle donné, il faut créer un nouveau <strong>projet</strong> et lui associer le module choisi parmi la liste des modules disponibles sur la plate-forme. La phase d&#039;initialisation qui suit permet de choisir des <strong>paramètres</strong> pour le modèle et un <strong>peuplement de départ</strong> pour les simulations dans ce projet. A l&#039;issue de cette phase, on obtient un projet (fig. 1) contenant une étape racine,base des simulations à venir, portant le peuplement de départ.
+</p>
+
+<p>
+<a href="media/help_en/capsis/newproject.gif" class="media" target="_blank" title="help_en:capsis:newproject.gif"><img src="media/help_en/capsis/newproject.gif" class="mediacenter" title="Fig. 1. Nouveau projet" alt="Fig. 1. Nouveau projet" /></a>
+</p>
+
+<p>
+Il est possible de travailler sur plusieurs projets en parallèle.Tous les projets ouverts font partie de la <strong>session</strong> de travail. On peut sauvegarder les projets séparément ou bien tous ensemble en sauvegardant toute la session pour une réouverture ultérieure plus rapide. Les projets sont toujours réouvrables individuellement, même s&#039;il ont été sauvés en bloc avec la session. Le menu <em>Fichier</em> permet de gérer la session dans son ensemble alors que le menu <em>Projet</em> permet de gérer les projets individuellement.
+</p>
+
+</div>
+<!-- EDIT138 SECTION "Projet, module, session" [3613-4918] -->
+<h2 class="sectionedit139" id="evolution">Evolution</h2>
+<div class="level2">
+
+<p>
+A partir de l&#039;étape racine (ou par la suite d&#039;une étape quelconque), on peut déclencher une phase d&#039;évolution (fig.2) par action sur le <strong>menu contextuel</strong> étape ( <em>clic droit</em> sur l&#039;étape choisie).
+</p>
+
+<p>
+<a href="media/help_en/capsis/evolution.gif" class="media" target="_blank" title="help_en:capsis:evolution.gif"><img src="media/help_en/capsis/evolution.gif" class="mediacenter" title="Fig. 2. Evolution depuis une étape par le menu contectuel" alt="Fig. 2. Evolution depuis une étape par le menu contectuel" /></a>
+</p>
+
+<p>
+Positionnez les paramètres de l&#039;évolution (nombre de jours, d&#039;années, date cible (…) en fonction du modèle), puis validez. La méthode d&#039;évolution du module est sollicitée et produit un certain nombre d&#039;étapes qui sont rajoutées au scénario à la suite de l&#039;étape de départ.
+</p>
+
+</div>
+<!-- EDIT139 SECTION "Evolution" [4919-5536] -->
+<h2 class="sectionedit140" id="intervention">Intervention</h2>
+<div class="level2">
+
+<p>
+Sur une étape du scénario, déclenchez une intervention de votre choix à l&#039;aide du menu contextuel étape (fig. 3).
+</p>
+
+<p>
+<a href="media/help_en/capsis/intervention.gif" class="media" target="_blank" title="help_en:capsis:intervention.gif"><img src="media/help_en/capsis/intervention.gif" class="mediacenter" title="Fig. 3. Intervention sur une étape donnée" alt="Fig. 3. Intervention sur une étape donnée" /></a>
+</p>
+
+<p>
+L&#039;intervention une fois paramétrée et validée, unenouvelle étape portant son résultat est liée à l&#039;étape de départ (ex: moins d&#039;arbres si éclaircie).
+</p>
+
+</div>
+<!-- EDIT140 SECTION "Intervention" [5537-5928] -->
+<h2 class="sectionedit141" id="groupes">Groupes</h2>
+<div class="level2">
+
+<p>
+Les groupes concernent les peuplements constitués d&#039;arbres individualisés des modèles arbres (dépendants ou indépendants des distances), ou les terrains constitués de cellules carrées ou polygonales. 
+</p>
+
+<p>
+La constitution d&#039;un groupe s&#039;effectue toujours relativement à l&#039;étape courante (la dernière désignée par l&#039;utilisateur). Le peuplement de cette étape sert de support à l&#039;opération. On accède au <strong>Catalogue de groupes</strong> (fig. 4) à partir dumenu contextuel étape ou de l&#039;icône <strong>Grouper</strong> située dans la barre de menu (ou dans un onglet de paramétrage d&#039;un outil).
+</p>
+
+<p>
+<a href="media/help_en/capsis/groupcatalog.gif" class="media" target="_blank" title="help_en:capsis:groupcatalog.gif"><img src="media/help_en/capsis/groupcatalog.gif" class="mediacenter" title="Fig. 4. Le catalogue de groupes " alt="Fig. 4. Le catalogue de groupes " /></a>
+</p>
+
+<p>
+On constitue un groupe avec le <strong>Gestionnaire de groupes</strong> (fig.5), en combinant des <strong>filtres</strong> par raffinements successifs. Les filtres sont des extensions de la plate-forme qui se reconnaissent compatibles avec lesmodules par des séries de tests dynamiques (ex: les peuplements de ce module contiennent-ils des arbres spatialisés ?).
+</p>
+
+<p>
+<a href="media/help_en/capsis/groupdefiner.gif" class="media" target="_blank" title="help_en:capsis:groupdefiner.gif"><img src="media/help_en/capsis/groupdefiner.gif" class="mediacenter" title="Fig. 5. Depuis le catalogue, personnalisation du groupe H &lt; 5m." alt="Fig. 5. Depuis le catalogue, personnalisation du groupe H &lt; 5m." /></a>
+</p>
+
+<p>
+Une fois un groupe constitué (il porte alors un nom), il est sauvegardé et rechargé à chaque ouverture de Capsis. Les groupes sont utilisables dans certains outils (visualiseurs, extracteurs de données) pour étudier des sous populations (ex: arbres de plus de 35 m. de hauteur, cellules de la lisière nord).
+</p>
+
+</div>
+<!-- EDIT141 SECTION "Groupes" [5929-7371] -->
+<h2 class="sectionedit142" id="ouvrir_et_synchroniser_les_visualiseurs_et_graphiques">Ouvrir et synchroniser les visualiseurs et graphiques</h2>
+<div class="level2">
+
+<p>
+Pour suivre les simulations, il est possible d&#039;ouvrir des visualiseurs et graphiques par action sur le <strong>Sélecteur</strong>. 
+</p>
+<ul>
+<li class="level1"><div class="li"> Désigner une étape courante (clic-gauche) dans le gestionnaire de projets, </div>
+</li>
+<li class="level2"><div class="li"> Désigner un outil dans le sélecteur (double clic-gauche), </div>
+</li>
+<li class="level2"><div class="li"> L&#039;outil s&#039;ouvre, synchronisé sur l&#039;étape qui se voit attribuer une couleur.</div>
+</li>
+</ul>
+
+<p>
+<a href="media/help_en/capsis/selectoruse.gif" class="media" target="_blank" title="help_en:capsis:selectoruse.gif"><img src="media/help_en/capsis/selectoruse.gif" class="mediacenter" title="Fig. 6. Ouverture d&#039;un Visu sur l&#039;étape 2010a" alt="Fig. 6. Ouverture d&#039;un Visu sur l&#039;étape 2010a" /></a>
+</p>
+
+<p>
+Pour déplacer les outils d&#039;une étape vers une autre étape du même projet, cliquer l&#039;étape colorée de départ, puis cliquer 2 fois sur l&#039;étape cible. Pour fermer un outil, utiliser l&#039;icône de fermeture dans sa barre de titre.Pour fermer tous les outils associés à une étape, ctrl-clic sur l&#039;étape.
+</p>
+
+</div>
+<!-- EDIT142 SECTION "Ouvrir et synchroniser les visualiseurs et graphiques" [7372-8191] -->
+<h2 class="sectionedit143" id="visualiseurs">Visualiseurs</h2>
+<div class="level2">
+
+<p>
+Accès par le Sélecteur (cf. section précédente).
+</p>
+
+<p>
+Ce sont des outils synchronisables avec une étape de projet et qui donnent une représentation du peuplement attaché (fig.7). La représentation peut être graphique (carte, histogramme de distribution) ou non (sous forme de texte, tableau).
+</p>
+
+<p>
+<a href="media/help_en/capsis/explorator.gif" class="media" target="_blank" title="help_en:capsis:explorator.gif"><img src="media/help_en/capsis/explorator.gif" class="mediacenter" title="Fig. 7.  Un visualiseur : l&#039;explorateur montre les arbres du peuplement dans un tableau" alt="Fig. 7.  Un visualiseur : l&#039;explorateur montre les arbres du peuplement dans un tableau" /></a>
+</p>
+
+<p>
+Généralement (mais pas toujours), les visualiseurs proposent la restriction à un groupe que l&#039;on peut constituer à la volée par leur boîte de configuration.
+</p>
+
+<p>
+Pour ouvrir un visualiseur, sélectionner une étape dans le gestionnaire de projets, puis désignez un visualiseur dans le sélecteur d&#039;un clic de souris.
+</p>
+
+</div>
+<!-- EDIT143 SECTION "Visualiseurs" [8192-8964] -->
+<h2 class="sectionedit144" id="graphiques">Graphiques</h2>
+<div class="level2">
+
+<p>
+Accès par le Sélecteur (cf. section précédente).
+</p>
+
+<p>
+Ce sont extracteurs de données qui fournissent des représentations de l&#039;état d&#039;un peuplement à une étape de projet donnée, ou encore de l&#039;évolution d&#039;une grandeur au cours du temps (fig.8).La différence importante avec les visualiseurs est que les extracteurs de données permettent de croiser des données provenant de plusieurs projets sur une même représentation (graphique ou non) pour comparaison.
+</p>
+
+<p>
+Des extracteurs sont fournis pour les grandeurs dendrométriques classiques. Les modélisateurs peuvent écrire des extracteurs supplémentaires pour leurs besoins particuliers.
+</p>
+
+<p>
+Pour ouvrir un extracteur de données, même démarche que pour un visualiseur (voir plus haut).
+</p>
+
+<p>
+<a href="media/help_en/capsis/extractortimen.gif" class="media" target="_blank" title="help_en:capsis:extractortimen.gif"><img src="media/help_en/capsis/extractortimen.gif" class="mediacenter" title="Fig. 8. Un extracteur de données montrant l&#039;évoluton de l&#039;effectif par hectare au cours du temps pour deux scénarios du projet vtx. On note une éclaircie en 2005 pour le scénario a." alt="Fig. 8. Un extracteur de données montrant l&#039;évoluton de l&#039;effectif par hectare au cours du temps pour deux scénarios du projet vtx. On note une éclaircie en 2005 pour le scénario a." /></a>
+</p>
+
+<p>
+Pour ajouter un nouvel extracteur dans un graphique ouvert, désigner une étape dans le gestionnaire de projets, puis ctrl-cliquer dans l&#039;extracteur.
+</p>
+
+<p>
+Pour supprimer un extracteur d&#039;un graphique, utiliser le menu contextuel (clic droit sur le graphique). Les graphiques sont configurables à partir du même menu contextuel.
+</p>
+
+</div>
+<!-- EDIT144 SECTION "Graphiques" [8965-10289] -->
+<h2 class="sectionedit145" id="exportation">Exportation</h2>
+<div class="level2">
+
+<p>
+L&#039;exportation est accessible à partir du menu contextuel d&#039;étape si des composant d&#039;export compatibles avec le module sont trouvés (fig. 9).
+</p>
+
+<p>
+<a href="media/help_en/capsis/export.gif" class="media" target="_blank" title="help_en:capsis:export.gif"><img src="media/help_en/capsis/export.gif" class="mediacenter" title="Fig. 9. Le dialogue Exportation est invoqué sur une étape grâce au menu contextuel" alt="Fig. 9. Le dialogue Exportation est invoqué sur une étape grâce au menu contextuel" /></a>
+</p>
+
+<p>
+Ces composants décrivent l&#039;exportation des données sous l&#039;étape de référence vers un fichier dont on peut choisir le nom.
+</p>
+
+</div>
+<!-- EDIT145 SECTION "Exportation" [10290-10707] -->
+<h2 class="sectionedit146" id="outils_generiques">Outils génériques</h2>
+<div class="level2">
+
+<p>
+Le menu <em>Outils</em> de la barre de menu générale propose des outils sans notion de compatibilité (ex: éditeur, gestionnaire d&#039;extensions, surveillance mémoire…).
+</p>
+
+</div>
+<!-- EDIT146 SECTION "Outils génériques" [10708-10910] -->
+<h2 class="sectionedit147" id="boite_a_outils">Boîte à outils</h2>
+<div class="level2">
+
+<p>
+Ces outils particuliers sont accessibles par le menu contextuel d&#039;étape (si disponibles). Ils proposent des méthodes d&#039;anlayses, de connexion avec d&#039;autres logiciels ou encore des représentations lourdes (ex: visualisation en trois dimensions).
+</p>
+
+</div>
+<!-- EDIT147 SECTION "Boîte à outils" [10911-] --></body>
+</html>

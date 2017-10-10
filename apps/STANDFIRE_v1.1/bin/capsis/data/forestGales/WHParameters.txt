@@ -1,0 +1,76 @@
+# ForestGALES 2.3Res  Western hemlock parameter file
+WH
+# L3 Conversion Top height (m) to mean height (m): MeanHt = Multiplier*TopHt + intercept
+# Multiplier
+1.0245
+# Intercept
+-1.515
+# L8 CanopyBreadth (m) as function of DBH (cm).
+# Equation form: 1 linear: Param1*DBH*100 + param2; 2 Power: Param1*DBH^Param2 + Param3
+1
+# Param1
+0.1165
+# Param2
+1.2906
+# Param3
+0
+# L17 CanopyDepth  (m) as function of height (m)= Mulitplier*Height + intercept; (m).
+# Equation form: 1 linear: Param1*Height + param2; 2 Exp: Param1*exp(Param2*height)
+1
+# Param1
+0.483
+# Param2
+0.7464
+# L24 Stem Density
+850 
+# Canopy Density
+2.5
+# Modulus of rupture
+4.1E7
+# L30 Knot factor
+1.0
+# Modulus of elasticity
+8.9E9
+# L34 Streamlining parameters
+# C
+1.51
+# N
+0.68
+# Root bending term K
+0.0
+# L41 Overturning Moment Multipliers
+# Soil-A; Rooting depth 1,2,3
+149.6
+153.1
+174.6
+# Soil-B; Rooting depth 1,2,3
+132.7
+135.8
+154.8
+# Soil-C; Rooting depth 1,2,3
+144.9
+148.2
+169.0
+# Soil-D; Rooting depth 1,2,3
+164.8
+168.6
+192.3
+# L58 OTM Scaling value
+100
+# Maximum stem weight in each category (kg)
+# Soil-A; Rooting depth 1,2,3
+284
+286
+425
+# Soil-B; Rooting depth 1,2,3
+247
+215
+0
+# L69 Soil-C; Rooting depth 1,2,3
+0
+0
+0
+# L73 Soil-D; Rooting depth 1,2,3
+0
+0
+0

@@ -1,0 +1,15 @@
+# Forest gales stand file													
+													
+# id	soilType	rootingDepth	nha	hdom	species	dbh_m	height	crownWidth	crownDepth	stemVolume	stemWeight	crownVolume	crownWeight
+StandA0	0	0	2000	20	Maritime pine	0.2	20	5	5	-1	304.3	-1	53.8
+StandA1	0	1	2000	20	Maritime pine	0.2	20	5	5	-1	304.3	-1	53.8
+StandA2	0	2	2000	20	Maritime pine	0.2	20	5	5	-1	304.3	-1	53.8
+StandB0	1	0	2000	20	Maritime pine	0.2	20	5	5	-1	304.3	-1	53.8
+StandB1	1	1	2000	20	Maritime pine	0.2	20	5	5	-1	304.3	-1	53.8
+StandB2	1	2	2000	20	Maritime pine	0.2	20	5	5	-1	304.3	-1	53.8
+StandC0	2	0	2000	20	Maritime pine	0.2	20	5	5	-1	304.3	-1	53.8
+StandC1	2	1	2000	20	Maritime pine	0.2	20	5	5	-1	304.3	-1	53.8
+StandC2	2	2	2000	20	Maritime pine	0.2	20	5	5	-1	304.3	-1	53.8
+StandD1	3	0	2000	20	Maritime pine	0.2	20	5	5	-1	304.3	-1	53.8
+StandD2	3	1	2000	20	Maritime pine	0.2	20	5	5	-1	304.3	-1	53.8
+StandD3	3	2	2000	20	Maritime pine	0.2	20	5	5	-1	304.3	-1	53.8

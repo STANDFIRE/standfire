@@ -1,0 +1,133 @@
+September 14, 2017 changelog for standfire version 1.1.2a (from version 1.1.1a)
+
+
+DIRECTORIES
+
+- renamed \apps\STANDFIRE_v1.1 --> \apps\STANDFIRE_v1.1
+
+- changed directory structure: moved the contents of the \standfire\ directory 
+	to \apps\STANDFIRE_v1.1\ and deleted the \standfire\directory
+
+
+SCRIPTS
+
+*******************************
+* standfire_mini_interface.py *
+*******************************
+
+- changed attribute/variable/method names to conform to PEP style guidelines:
+	https://www.python.org/dev/peps/pep-0008/
+
+- shortened lines >100 characters
+
+- standardized use of quotation marks: "outside"; 'inside'; """doc strings"""
+
+- added extensive error handling to the run_lidar method in 
+	standfire_mini_interface and to all lidar processing methods in the
+	ConvertLidar class of the lidar submodule. The methods in the
+	ConvertLidar class now trap many types of errors and return error
+	messages back to run_lidar. When a trapped error occurs, run_lidar halts
+	the execution of the standfire simulation and prints the error message
+	to the console. Successful processing also generates messages which are
+	sent to the console when all the processes executed in run_lidar have
+	successfully completed. See comments in the mini interface and lidar
+	scripts for more information.
+
+- changed the execution of lidar processing methods (calls to the ConvertLidar
+	class of the lidar submodule) from serial execution to execution using a
+	for loop. This allows for the termination of the standfire simulation
+	upon an error in any of the lidar processing methods instead of after the
+	completion of all methods. This also facilitated the error trapping
+	methodology described above. See comments in the mini interface and lidar
+	scripts for more information.
+
+- added an end method that can be called for terminating the program and
+	performing cleanup (cleanup has not yet been implemented)
+
+- specified an exception type (ValueError) for a try/except pair in the
+	update_domain_change method. This method updates associated parameters
+	when an xy domain changes in the user interface. This exception handles
+	cases where x or y domains are empty strings.
+
+- changed return attribute variable names in update_domain_change to be more
+	descriptive of the attributes returned by the trace method when a value
+	changes in the x or y domains in the user interface. (from 'a, b, c' to
+	'internal_name, index, operation')
+
+- rewrote superclass constructor in '__int__' method of the Application class to
+	eliminate a potential infinite recursion.
+
+- corrected potential error in the create_wfds_run_script method
+	(linux/OSX branch), where self.n_mesh.get() was written as
+	self.n_mesh_get()
+
+- The create_fishnet method in the lidar submodule's ConvertLidar class was
+	changed to no longer return the x and y dimensions of the fishnet.
+	Therefore, the calling method was updated to no longer receive a return.
+
+- split run_lidar method into run_lidar and _lidar_fvs methods
+
+- changed file variable name 'f' to 'script' in the create_wfds_run_script and
+	create_smv_run_script methods for clarity
+
+- Updated path references for the importation of submodules to accommodate the
+	changes in directory structure (the contents of \standfire\ were moved
+	to \apps\STANDFIRE_v1.1\) This change was made so that submodules and 
+	their dependencies exist in the same directory or a subdirectory of the 
+	main program. This makes importation easier and clearer (e.g. 
+	dependencies can be referenced with the name of a subdirectory: 
+	<dir>.<subdir>.<pyfvs>)
+
+- Updated and expanded commenting throughout
+
+
+
+*************
+* capsis.py *
+*************
+
+- Modified _read_fuels method to accommodate changes in the standfire directory
+	structure.
+
+
+************
+* fuels.py *
+************
+
+-No significant changes.
+
+
+***********
+* wfds.py *
+***********
+
+- rewrote superclass constructor in '__int__' method of the WFDS and
+	GenerateBinaryGrid classes to eliminate a potential infinite
+	recursions.
+
+
+************
+* lidar.py *
+************
+
+- added extensive error handling to the run_lidar method in 
+	standfire_mini_interface and to all lidar processing methods in the
+	ConvertLidar class of the lidar submodule. The methods in the
+	ConvertLidar class now trap many types of errors and return error
+	messages back to run_lidar. When a trapped error occurs, run_lidar halts
+	the execution of the standfire simulation and prints the error message
+	to the console. Successful processing also generates messages which are
+	sent to the console when all the processes executed in run_lidar have
+	successfully completed. See comments in the mini interface and lidar
+	scripts for more information.
+
+- Changed the create_fishnet method in the ConvertLidar class to no longer return the
+	x and y dimensions of the fishnet as they are no longer needed in the main
+	application.
+
+
+FILES
+
+- Updated pyinstaller's .spec files (changed pathex in .spec file to reflect
+	directory structure changes), compile-freeze_instructions.txt (to reflect
+	directory structure changes), requirments.txt and all changelogs.

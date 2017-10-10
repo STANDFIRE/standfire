@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_en.html>help_en</a>&nbsp;=>&nbsp;<a href=help_en-fireparadox.html>fireparadox</a></br>
+
+<h2 class="sectionedit289" id="d_shape_edition_cage_method">3D SHAPE EDITION  (CAGE METHOD)</h2>
+<div class="level2">
+
+<p>
+This interface aims at enter cubes (or voxels) repartition in a *2D shape. 
+</p>
+
+<p>
+All biomasse values and particles can be different in these cubes, there is no TOP/CENTER/BOTTOM as in the cube method.
+</p>
+
+<p>
+Cube can be :
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>SET</strong> = There is particle and biomass in this cube</div>
+</li>
+</ul>
+<ul>
+<li class="level1"><div class="li"> <strong>NO SET</strong> = NOT ANY particle or biomass in this cube</div>
+</li>
+</ul>
+
+<p>
+<a href="media/help_en/fireparadox/gui/database/en3dshapecageedition.jpg" class="media" target="_blank" title="help_en:fireparadox:gui:database:en3dshapecageedition.jpg"><img src="media/help_en/fireparadox/gui/database/en3dshapecageedition.jpg" class="media" title="" alt="" /></a>
+</p>
+
+</div>
+
+<h5 id="legends">LEGENDS</h5>
+<div class="level5">
+
+<p>
+On top right, 2 panels display general informations about the plant (ID, team, site, species, height, origin) and the shape (ID, sample type, shape kind (XZ=2D), voxel dimensions)
+</p>
+
+<p>
+Bellow appears the color legend for each type of cubes: 
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>GREY</strong> : set</div>
+</li>
+</ul>
+<ul>
+<li class="level1"><div class="li"> <strong>WHITE</strong> : not set</div>
+</li>
+</ul>
+
+</div>
+
+<h5 id="initialisation">INITIALISATION</h5>
+<div class="level5">
+
+<p>
+If the shape has been generated from a 2D shape, a rotation algorithm have calculated each biomass in each cube. Calculation is done with distance of each cube from central axe of the rotation. 
+</p>
+
+<p>
+In other case, all cubes will be SET but without any particle or biomass.
+</p>
+
+</div>
+
+<h5 id="position_in_the_3d_shape">POSITION IN THE 3D SHAPE</h5>
+<div class="level5">
+
+<p>
+In left part of the screen, the 3D shape is displayed in space.
+</p>
+
+<p>
+<strong>Front/Rear/Left/Right/Top/Bottom</strong> aims at see the shape from different direction. 
+</p>
+
+<p>
+<strong>Forward/Backward</strong> aims at changing the cube slice point of view.
+</p>
+
+<p>
+The selected cube slice appears in 2D in the grid in the central screen. 
+</p>
+
+</div>
+
+<h5 id="shape_modification">SHAPE MODIFICATION</h5>
+<div class="level5">
+
+<p>
+To change a cube color (type), select the color on the legend and left clic on the cube. The cube appears in the right color with a red border. 
+</p>
+
+<p>
+To change several cubes color at the same time, draw a rectangle with the right clic around the group of cubes.
+</p>
+
+<p>
+A zoom tool is available by drawing a rectangle with the left clic of the mouse. A single right clic zoom forward. 
+</p>
+
+<p>
+<a href="media/help_fr/fireparadox/gui/plusmoins.jpg" class="media" target="_blank" title="help_fr:fireparadox:gui:plusmoins.jpg"><img src="media/help_fr/fireparadox/gui/plusmoins.jpg" class="media" title="" alt="" /></a>
++ and - increase and decrease the size if the grid in 4 dimensions. 
+</p>
+
+<p>
+<a href="media/help_fr/fireparadox/gui/fleches.jpg" class="media" target="_blank" title="help_fr:fireparadox:gui:fleches.jpg"><img src="media/help_fr/fireparadox/gui/fleches.jpg" class="media" title="" alt="" /></a>
+Blue arrows copy cubes from left to right symetrically to Z axe. 
+</p>
+
+</div>
+
+<h5 id="biomasses_modification">BIOMASSES MODIFICATION</h5>
+<div class="level5">
+
+<p>
+In the bottom right part of the screen, for the selected cube, a table appears with particle names and biomass values (alive and dead). Biomass values can be modified and the unit is grams. 
+</p>
+
+<p>
+biomass value = <strong>0.0</strong> means a measured value equals to zero.
+</p>
+
+<p>
+biomass value = <strong>-9.0</strong> means a missing value, NONE measured.
+</p>
+
+<p>
+biomass value = <strong>NaN</strong> means ann existing value, NONE measured. 
+</p>
+
+</div>
+
+<h5 id="add_a_particle">ADD A PARTICLE</h5>
+<div class="level5">
+
+<p>
+Use this button to add a new particle in the biomass table.
+</p>
+
+<p>
+After selection and validation, this new particle will appears ine the biomass table with -9.0 values.
+</p>
+
+</div>
+
+<h5 id="verifications">VERIFICATIONS</h5>
+<div class="level5">
+
+<p>
+The shape can be validated only if at least one biomass is entered for each <strong>SET</strong> cube.
+</p>
+
+<p>
+Biomass values have to be numerical and greater or equals to zero (except -9.0 and NaN for none measured values)
+</p>
+
+</div>
+
+<h5 id="validation">VALIDATION</h5>
+<div class="level5">
+
+<p>
+Click on Validate to create the new sample or to update biomass values in the database.
+</p>
+
+<p>
+In case of plant or layer creation, you will be automatically redirected to shape 2D or 3D creation.
+</p>
+
+<p>
+In other cases, you will go back to plant or layer shape list.
+</p>
+
+<p>
+<strong>CAUTION if the shape has a great number of cubes, the database update can be QUITE LONG (several minutes) </strong>
+</p>
+
+</div>
+</body>
+</html>

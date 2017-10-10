@@ -1,0 +1,76 @@
+# ForestGALES 2.3Res  Douglas fir parameter file
+DF
+# L3 Conversion Top height (m) to mean height (m): MeanHt = Multiplier*TopHt + intercept
+# Multiplier
+1.0343
+# Intercept
+-1.951
+# L8 CanopyBreadth (m) as function of DBH (cm).
+# Equation form: 1 linear: Param1*DBH*100 + param2; 2 Power: Param1*DBH^Param2 + Param3
+1
+# Param1
+0.1092
+# Param2
+1.83
+# Param3
+0
+# L17 CanopyDepth  (m) as function of height (m)= Mulitplier*Height + intercept; (m).
+# Equation form: 1 linear: Param1*Height + param2; 2 Exp: Param1*exp(Param2*height)
+1
+# Param1
+0.4811
+# Param2
+1.1044
+# L24 Stem Density
+850 
+# Canopy Density
+2.5
+# Modulus of rupture
+5.3E7
+# L30 Knot factor
+1.0
+# Modulus of elasticity
+8.3E9
+# L34 Streamlining parameters
+# C
+2.40
+# N
+0.7
+# Root bending term K
+0.0
+# L41 Overturning Moment Multipliers
+# Soil-A; Rooting depth 1,2,3
+145.7
+149.1
+170.1
+# Soil-B; Rooting depth 1,2,3
+129.2
+132.2
+150.8
+# Soil-C; Rooting depth 1,2,3
+141.1
+144.4
+164.6
+# Soil-D; Rooting depth 1,2,3
+160.5
+164.3
+187.3
+# L58 OTM Scaling value
+100
+# Maximum stem weight in each category (kg)
+# Soil-A; Rooting depth 1,2,3
+0
+499
+557
+# Soil-B; Rooting depth 1,2,3
+133
+138
+0
+# L69 Soil-C; Rooting depth 1,2,3
+0
+0
+0
+# L73 Soil-D; Rooting depth 1,2,3
+0
+0
+0

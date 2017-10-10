@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+  <link rel="stylesheet" media="screen" type="text/css" href="./design.css" />
+  <link rel="stylesheet" media="print" type="text/css" href="./print.css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<a href=.>start</a>&nbsp;=>&nbsp;<a href=help_fr.html>help_fr</a>&nbsp;=>&nbsp;<a href=help_fr-fireparadox.html>fireparadox</a></br>
+
+<h2 class="sectionedit395" id="edition_de_nappe_2d_methode_cage">EDITION DE NAPPE 2D (METHODE CAGE)</h2>
+<div class="level2">
+
+<p>
+Cette interface permet la saisie de la répartition des différents type de cubes (ou voxels) dans une nappe en 2 dimensions. 
+</p>
+
+<p>
+Une nappe peut être composée de 2 parties optionnelles : un COEUR et un BORD. 
+</p>
+
+<p>
+Toutes les biomasses présentent dans les  cubes peuvent être différentes, il n&#039;y a pas ici de type HAUT/CENTRE/BASE. 
+</p>
+
+<p>
+Un cube peut être seulement :
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>VIDE</strong> = aucune particule ni biomasse pour ce cube.</div>
+</li>
+</ul>
+<ul>
+<li class="level1"><div class="li"> <strong>PLEIN</strong> = Il existe des particules avec des biomasses pour ce cube </div>
+</li>
+</ul>
+
+<p>
+<a href="media/help_fr/fireparadox/gui/database/frlayer2dcage.jpg" class="media" target="_blank" title="help_fr:fireparadox:gui:database:frlayer2dcage.jpg"><img src="media/help_fr/fireparadox/gui/database/frlayer2dcage.jpg" class="media" title="" alt="" /></a>
+</p>
+
+</div>
+
+<h5 id="legendes">LEGENDES</h5>
+<div class="level5">
+
+<p>
+En haut à droite, 2 encadrés rappellent les informations concernant la plante (ID, équipe, site, espèce, hauteur, origine) et la forme en cours de saisie (ID, type layer, forme (XZ=2D), dimension des voxels)
+</p>
+
+<p>
+En dessous apparait la légende des couleurs des différents types de cube possibles : 
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>GRIS</strong> : plein </div>
+</li>
+</ul>
+<ul>
+<li class="level1"><div class="li"> <strong>BLANC</strong> : vide </div>
+</li>
+</ul>
+
+</div>
+
+<h5 id="initialisation">INITIALISATION</h5>
+<div class="level5">
+
+<p>
+Tous les cubes des 2 formes COEUR et BORD sont initialisés à PLEIN.
+</p>
+
+<p>
+Par contre aucune particule ni biomasse n&#039;existe.
+</p>
+
+</div>
+
+<h5 id="modification_de_la_forme">MODIFICATION DE LA FORME</h5>
+<div class="level5">
+
+<p>
+La sélection d&#039;un cube s&#039;effectue avec un double-clic gauche de la souris.  
+</p>
+
+<p>
+Le cube sélectionné pour la saisie apparait bordé de rouge.
+</p>
+
+<p>
+Pour modifier le status de ce cube (PLEIN/VIDE), choisir au préalable la couleur désirée dans la légende.
+</p>
+
+<p>
+Les biomasses déjà saisies pour ce cube apparaissent en bas à gauche. 
+</p>
+
+<p>
+Il est possible de zoomer en dessinant un rectangle de sélection avec le clic gauche de la souris. Un clic droit permet de revenir en arrière sur le zoom. 
+</p>
+
+<p>
+<a href="media/help_fr/fireparadox/gui/plusmoins.jpg" class="media" target="_blank" title="help_fr:fireparadox:gui:plusmoins.jpg"><img src="media/help_fr/fireparadox/gui/plusmoins.jpg" class="media" title="" alt="" /></a>
+Les boutons + et - permettent d&#039;agrandir ou de réduire la grille dans les 4 dimensions.
+</p>
+
+<p>
+<a href="media/help_fr/fireparadox/gui/fleches.jpg" class="media" target="_blank" title="help_fr:fireparadox:gui:fleches.jpg"><img src="media/help_fr/fireparadox/gui/fleches.jpg" class="media" title="" alt="" /></a>
+Les 2 flèches bleues permettent de copier tous les voxels à droite ou à gauche, symétriquement selon l&#039;axe des Z
+</p>
+
+</div>
+
+<h5 id="saisie_des_biomasses">SAISIE DES BIOMASSES</h5>
+<div class="level5">
+
+<p>
+Dans la partie droite de l&#039;écran, la liste des particules pour le cube sélectionné, avec les biomasses vivantes et mortes apparaissent sous forme de table dont les valeurs sont modifiables. Ces biomasses sont exprimées en grammes.
+</p>
+
+<p>
+La valeur <strong>0.0</strong> correspond à une valeur mesurée et égale à zéro.
+</p>
+
+<p>
+La valeur <strong>-9.0</strong> correspond à une valeur manquante non mesurée.
+</p>
+
+<p>
+La valeur <strong>NaN</strong> correspond à une valeur existante mais non mesurée.
+</p>
+
+</div>
+
+<h5 id="ajout_d_une_particule">AJOUT D&#039;UNE PARTICULE</h5>
+<div class="level5">
+
+<p>
+L&#039;ajout d&#039;une nouvelle particule s&#039;effectue avec la bouton <strong>Ajouter une particule</strong> au bas de l&#039;écran.
+</p>
+
+<p>
+Après la validation du choix de la nouvelle particule, celle ci apparait dans le tableau des biomasses avec des valeurs initialisées à -9.0.  
+</p>
+
+</div>
+
+<h5 id="verifications">VERIFICATIONS</h5>
+<div class="level5">
+
+<p>
+La validation ne peux avoir lieu que si au moins une biomasse est saisie par cube déclaré plein dans la forme.
+</p>
+
+<p>
+Les valeurs des biomasses doivent être de type numérique supérieures ou égales à zéros (sauf les valeurs NaN et -9.0 qui sont non significatives) 
+</p>
+
+</div>
+
+<h5 id="validation">VALIDATION</h5>
+<div class="level5">
+
+<p>
+Pour sauvegarder la nouvelle forme dans la base ou valider les modifications effectuées sur la répartition des voxels ou les biomasse, cliquez sur <strong>Valider</strong>.
+</p>
+
+<p>
+Tous les voxels vides à gauche et en haut de chaque forme ne seront pas sauvegardés. 
+</p>
+
+<p>
+La taille de la forme s&#039;ajustera automatiquement. 
+</p>
+
+<p>
+<strong>ATTENTION si la forme contient un grand nombre de cubes, la mise à jour de la base de données peut être assez longue (plusieurs minutes)</strong>
+</p>
+
+</div>
+</body>
+</html>

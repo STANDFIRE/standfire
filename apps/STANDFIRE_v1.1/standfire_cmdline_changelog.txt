@@ -1,0 +1,19 @@
+change log standfire_cmdline.py
+July, 2017
+Reflects changes from version 1.0.0a to 1.1.0a
+
+Standfire command line has been completely rewritten.Only 10 lines of code 
+remain from the original. Please see the comments in standfire_cmdline.py 
+for a description of its operation.
+
+
+August, 2017
+Reflects changes from version 1.1.0a to 1.1.1a
+
+- modified spacing throughout the script to come in line with PEP recommendations
+
+- replaced call to lidar.py:Convert_Lidar:spatial_join method with calls to 
+	several methods (copy_shapefile, cleanup_lidar_fields, fishnet_id and
+	cleanup_lidar_features) which replace spatial join for the purpose of 
+	eliminating the use of the ogr2ogr.exe binary.
+
