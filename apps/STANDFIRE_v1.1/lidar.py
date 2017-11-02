@@ -4,7 +4,7 @@
 # lidar.py  #
 #-----------#
 
-'''
+"""
 This module implements all LiDAR processing tasks for STANDFIRE. This
 includes creating a fishnet with 64x64m cells to divide the lidar points into
 one acre plots, calculating FVS input variables, running FVS for each plot
@@ -27,7 +27,8 @@ Outputs:
 3) Text file containing the calculated attributes (*_export.csv)
 4) FVS (*.tre and *.key) files for each plot
 5) Tree list for CAPSIS (*_trees.csv)
-'''
+"""
+
 # meta
 __authors__ = "Team STANDFIRE"
 __copyright__ = "Copyright 2017, STANDFIRE"
@@ -36,14 +37,12 @@ __license__ = "GPL"
 __maintainer__ = "Brett Davis"
 __email__ = "bhdavis@fs.fed.us"
 __status__ = "Development"
-__version__ = "1.1.2a" # previous version 1.1.1a
+__version__ = "1.1.3a" # previous version 1.1.2a
 
 # Import some modules
 import timeit
 import os
 #import sys
-#from os.path import dirname as dirname
-#import subprocess
 import shutil
 import csv
 
@@ -74,15 +73,15 @@ ogr.UseExceptions()
 # ##    sys.exit("ERROR: Python bindings of GDAL 2.1.3 or later required")
 
 class ConvertLidar(object):
-    '''
+    """
     The ConvertLidar class is used to generate a CAPSIS tree list of lidar
     tree attributes from a shapefile of lidar trees.
 
-    :param lidarShp: name and path of input lidar shapefile.
+    :param lidar_shp: name and path of input lidar shapefile.
     :type: string
-    :param fishnetShp: name and path for output fishnet shapefile.
+    :param fishnet_shp: name and path for output fishnet shapefile.
     :type: string
-    :param newLidar: name and path for output lidar shapefile.
+    :param new_lidar: name and path for output lidar shapefile.
     :type: string
 
     Methods:
@@ -98,177 +97,178 @@ class ConvertLidar(object):
         calculate_attribute_fields
         number_trees
         export_attributes_to_csv
-    '''
-    def __init__(self, lidarShp, fishnetShp, newLidar):
-        '''
+    """
+    def __init__(self, lidar_shp, fishnet_shp, new_lidar):
+        """
         Constructor
 
         Defines local variables that will be used by various methods below
-        '''
-        self.lidarShp = lidarShp
-        self.fishnetShp = fishnetShp
-        self.newLidar = newLidar
-        self.set_path = os.path.dirname(lidarShp)
+        """
+        self.lidar_shp = lidar_shp
+        self.fishnet_shp = fishnet_shp
+        self.new_lidar = new_lidar
+        self.set_path = os.path.dirname(lidar_shp)
         # initialize more commonly used stuff like the shapefile driver...
 
     def verify_projection(self):
-        '''
+        """
         Verifies that the input shapefile is projected and, if so, whether the
             projection is WGS 1984 UTM. Uses EPSG projection codes to verify.
-        '''
-        EPSG_UTM = range(32600, 32661) # EPSG codes for UTM North zones
-        EPSG_UTM.extend(range(32700, 32761)) # EPSG codes for UTM South zones
-        ds = ogr.Open(self.lidarShp)
-        lyr = ds.GetLayer()
-        srs = lyr.GetSpatialRef()
-        if srs is None:
-            prjOk = False
+        """
+        epsg_utm = range(32600, 32661) # EPSG codes for UTM North zones
+        epsg_utm.extend(range(32700, 32761)) # append EPSG codes for UTM South zones
+        in_data_source = ogr.Open(self.lidar_shp)
+        in_layer = in_data_source.GetLayer()
+        in_spatial_ref = in_layer.GetSpatialRef()
+        if in_spatial_ref is None:
+            prj_ok = False
             msg = ("Shapefile appears to be unprojected. Please project to WGS "
                    "1984 UTM and retry.")
             print msg
             code = 2
-            ds = None
+            in_data_source = None
             print "ERROR: Shapefile unprojected"
-            return prjOk, msg, code
+            return prj_ok, msg, code
         else:
-            err = srs.AutoIdentifyEPSG()
+            err = in_spatial_ref.AutoIdentifyEPSG()
             if err != 0:
-                prjOk = False
+                prj_ok = False
                 msg = ("Unable to identify projection. (Unexpected results may "
                        "occur if the shapefile is in the wrong projection)")
                 print msg
                 code = 1
-                ds = None
+                in_data_source = None
             else:
-                EPSG = srs.GetAuthorityCode(None)
-                print "EPSG Authority code: ", EPSG
-                EPSG = int(EPSG)
-                ds = None
-                if EPSG in EPSG_UTM:
-                    prjOk = True
+                epsg = in_spatial_ref.GetAuthorityCode(None)
+                print "EPSG Authority code: ", epsg
+                epsg = int(epsg)
+                in_data_source = None
+                if epsg in epsg_utm:
+                    prj_ok = True
                     msg = "Projection appears to be WGS 1984 UTM as required"
                     code = 0
                 else:
-                    prjOk = False
+                    prj_ok = False
                     msg = ("This shapefile doesn\'t appear to be in a WGS 1984 "
                            "UTM projection as required. (Unexpected results "
                            "may occur if the shapefile is in the wrong "
                            "projection)")
                     print msg
                     code = 1
-            return prjOk, msg, code
+            return prj_ok, msg, code
 
     def verify_input_fields(self):
-        '''
+        """
         Verifies that the required input fields are in the input shapefile.
-        '''
-        reqFields = ["X_UTM", "Y_UTM", "Height_m", "CBH_m", "DBH_cm", "Species"]
-        misFields = []
-        ds = ogr.Open(self.lidarShp)
-        lyr = ds.GetLayer()
-        lyrDefn = lyr.GetLayerDefn()
-        inFields = [lyrDefn.GetFieldDefn(i).GetName()
-                    for i in range(lyrDefn.GetFieldCount())]
-        ds = None
-        for req in reqFields:
-            if req not in inFields:
-                misFields.append(req)
-        if misFields:
-            fieldsOk = False
+        """
+        required_fields = ["X_UTM", "Y_UTM", "Height_m", "CBH_m", "DBH_cm", "Species"]
+        missing_fields = []
+        in_data_source = ogr.Open(self.lidar_shp)
+        in_layer = in_data_source.GetLayer()
+        in_layer_defn = in_layer.GetLayerDefn()
+        in_fields = [in_layer_defn.GetFieldDefn(i).GetName()
+                     for i in range(in_layer_defn.GetFieldCount())]
+        in_data_source = None
+        for req in required_fields:
+            if req not in in_fields:
+                missing_fields.append(req)
+        if missing_fields:
+            fields_ok = False
             msg = ("The following fields seem to be missing from the input lidar"
                    " shapefile. Please ensure these fields exist and are named "
-                   "as shown above. Missing fields: \n" + ', '.join(misFields))
+                   "as shown above. Missing fields: \n" + ", ".join(missing_fields))
             print msg
         else:
-            fieldsOk = True
+            fields_ok = True
             msg = "Required input fields appear to be present."
             print msg
-        return fieldsOk, msg
+        return fields_ok, msg
 
     def calculate_extents(self):
-        '''
+        """
         Calculates the minimum and maximum x and y extents of the input
         shapefile.
 
         Returns extents of the input shapefile as a list of four floating point
         numbers
-        '''
-        ds = ogr.Open(self.lidarShp, 0)
-        lyr = ds.GetLayer()
-        extents = lyr.GetExtent()
+        """
+        in_data_source = ogr.Open(self.lidar_shp, 0)
+        in_layer = in_data_source.GetLayer()
+        extents = in_layer.GetExtent()
         extents = [round(x, 3) for x in extents]
-        ds = None
+        in_data_source = None
         return extents
 
     def create_fishnet(self, extents):
-        '''
+        """
         Creates a fishnet polygon shapefile to be used to assign plot
         numbers to the lidar points. Fishnet cells are 64x64m (~1 acre). Feature
         ID numbers are used to number plots
-        '''
+        """
         fish_ok = True
         msg = "\nMethod: create_fishnet\n"
         drv = ogr.GetDriverByName("ESRI Shapefile")
         # dimensions
-        xMin, xMax, yMin, yMax = extents
-        gridWidth = 64
-        gridHeight = 64
-        cols = int((xMax-xMin)/gridWidth)
-        rows = int((yMax-yMin)/gridHeight)
+        x_min, x_max, y_min, y_max = extents
+        grid_width = 64
+        grid_height = 64
+        cols = int((x_max-x_min)/grid_width)
+        rows = int((y_max-y_min)/grid_height)
         # start grid cell envelope
-        ringXleftOrigin = xMin
-        ringXrightOrigin = xMin + gridWidth
-        ringYtopOrigin = yMin + gridHeight
-        ringYbottomOrigin = yMin
+        ring_x_left_origin = x_min
+        ring_x_right_origin = x_min + grid_width
+        ring_y_top_origin = y_min + grid_height
+        ring_y_bottom_origin = y_min
         # get projection from in shapefile
-        prjDs = ogr.Open(self.lidarShp, 0)
-        prjLyr = prjDs.GetLayer()
-        prj = prjLyr.GetSpatialRef()
-        prjDs = None
+        proj_data_source = ogr.Open(self.lidar_shp, 0)
+        proj_layer = proj_data_source.GetLayer()
+        spatial_ref = proj_layer.GetSpatialRef()
+        proj_data_source = None
         # create output file
-        if os.path.exists(self.fishnetShp):
-            drv.DeleteDataSource(self.fishnetShp)
-        outDs = drv.CreateDataSource(self.fishnetShp)
+        if os.path.exists(self.fishnet_shp):
+            drv.DeleteDataSource(self.fishnet_shp)
+        out_data_source = drv.CreateDataSource(self.fishnet_shp)
         # add projection below
-        outLyr = outDs.CreateLayer(self.fishnetShp, srs=prj, geom_type=ogr.wkbPolygon)
-        featureDefn = outLyr.GetLayerDefn()
+        out_layer = out_data_source.CreateLayer(self.fishnet_shp, srs=spatial_ref,
+                                                geom_type=ogr.wkbPolygon)
+        out_layer_defn = out_layer.GetLayerDefn()
         # create grid cells
         countcols = 0
         while countcols < cols:
             countcols += 1
             # reset envelope for rows
-            ringYtop = ringYtopOrigin
-            ringYbottom = ringYbottomOrigin
+            ring_y_top = ring_y_top_origin
+            ring_y_bottom = ring_y_bottom_origin
             countrows = 0
             while countrows < rows:
                 countrows += 1
                 ring = ogr.Geometry(ogr.wkbLinearRing)
-                ring.AddPoint(ringXleftOrigin, ringYtop)
-                ring.AddPoint(ringXrightOrigin, ringYtop)
-                ring.AddPoint(ringXrightOrigin, ringYbottom)
-                ring.AddPoint(ringXleftOrigin, ringYbottom)
-                ring.AddPoint(ringXleftOrigin, ringYtop)
+                ring.AddPoint(ring_x_left_origin, ring_y_top)
+                ring.AddPoint(ring_x_right_origin, ring_y_top)
+                ring.AddPoint(ring_x_right_origin, ring_y_bottom)
+                ring.AddPoint(ring_x_left_origin, ring_y_bottom)
+                ring.AddPoint(ring_x_left_origin, ring_y_top)
                 poly = ogr.Geometry(ogr.wkbPolygon)
                 poly.AddGeometry(ring)
                 # add new geom to layer
-                outFtr = ogr.Feature(featureDefn)
-                outFtr.SetGeometry(poly)
-                outLyr.CreateFeature(outFtr)
-                outFtr = None
+                out_feature = ogr.Feature(out_layer_defn)
+                out_feature.SetGeometry(poly)
+                out_layer.CreateFeature(out_feature)
+                out_feature = None
                 # new envelope for next poly
-                ringYtop = ringYtop + gridHeight
-                ringYbottom = ringYbottom + gridHeight
+                ring_y_top = ring_y_top + grid_height
+                ring_y_bottom = ring_y_bottom + grid_height
             # new envelope for next poly
-            ringXleftOrigin = ringXleftOrigin + gridWidth
-            ringXrightOrigin = ringXrightOrigin + gridWidth
+            ring_x_left_origin = ring_x_left_origin + grid_width
+            ring_x_right_origin = ring_x_right_origin + grid_width
         # Save and close DataSources
-        outDs = None
+        out_data_source = None
         # Check for features in fishnet shapefile
-        if os.path.exists(self.fishnetShp):
-            outDs = drv.Open(self.fishnetShp, 0)
-            outLyr = outDs.GetLayer()
-            feat_count = outLyr.GetFeatureCount()
-            outDs = None
+        if os.path.exists(self.fishnet_shp):
+            out_data_source = drv.Open(self.fishnet_shp, 0)
+            out_layer = out_data_source.GetLayer()
+            feat_count = out_layer.GetFeatureCount()
+            out_data_source = None
             if feat_count > 0:
                 fish_ok = True
                 msg += "Fishnet shapefile creation appears to have been successful\n"
@@ -281,14 +281,14 @@ class ConvertLidar(object):
         return fish_ok, msg
 
     def copy_shapefile(self):
-        '''
+        """
         Makes an exact copy of a shapefile.
-        '''
+        """
         copy_ok = True
         msg = "\nMethod: copy_shapefile\n"
         # set shapefile names
-        in_shp = self.lidarShp
-        out_shp = self.newLidar
+        in_shp = self.lidar_shp
+        out_shp = self.new_lidar
 
         # start timer
         copy_start = timeit.default_timer()
@@ -301,7 +301,7 @@ class ConvertLidar(object):
         in_lyr = in_ds.GetLayer()
         lyr_def = in_lyr.GetLayerDefn()
         lyr_geom = in_lyr.GetGeomType()
-        prj = in_lyr.GetSpatialRef()
+        spatial_ref = in_lyr.GetSpatialRef()
 
         # delete output shapefile if it exists
         if os.path.exists(out_shp):
@@ -311,7 +311,7 @@ class ConvertLidar(object):
 
         # create out shapefile
         out_ds = drv.CreateDataSource(out_shp)
-        out_lyr = out_ds.CreateLayer(out_shp.split(".")[0], prj, lyr_geom)
+        out_lyr = out_ds.CreateLayer(out_shp.split(".")[0], spatial_ref, lyr_geom)
 
         # add fields from input shapefile to output shapefile
         cfld_ok = 0
@@ -320,7 +320,7 @@ class ConvertLidar(object):
             cfld_ok += out_lyr.CreateField(lyr_def.GetFieldDefn(i)) #returns flag
             if cfld_ok != 0:
                 msg += ("ERROR: Problems creating fields in out LiDAR shapefile. OGR "
-                       "CreateField error = " + str(cfld_ok) + "\n")
+                        "CreateField error = " + str(cfld_ok) + "\n")
                 copy_ok = False
 ##                in_ds = None
 ##                out_ds = None
@@ -335,7 +335,7 @@ class ConvertLidar(object):
                 cftr_ok = out_lyr.CreateFeature(in_feat)
             except:
                 msg += ("ERROR: Problem creating features in out LiDAR shapefile. OGR "
-                       "CreateFeatrure error = " + str(cftr_ok) + "\n")
+                        "CreateFeatrure error = " + str(cftr_ok) + "\n")
                 copy_ok = False
 ##                in_ds = None
 ##                out_ds = None
@@ -358,13 +358,13 @@ class ConvertLidar(object):
         return copy_ok, msg
 
     def cleanup_lidar_fields(self):
-        '''
+        """
         Deletes extraneous fields from output shapefile
-        '''
+        """
         cln_fld_ok = True
         msg = "\nMethod: cleanup_lidar_fields\n"
         # define input shapefile
-        pt_shp = self.newLidar
+        pt_shp = self.new_lidar
 
         # start timer
         cleanup_start = timeit.default_timer()
@@ -393,7 +393,7 @@ class ConvertLidar(object):
                 if dflds_ok != 0:
                     cln_fld_ok = False
                     msg += ("ERROR: Problem deleting extraneous fields from output "
-                           "shapefile. OGR DeleteField error: " + str(dflds_ok) + "\n")
+                            "shapefile. OGR DeleteField error: " + str(dflds_ok) + "\n")
                     return cln_fld_ok, msg
 
         # save and close data sources, layers and layer definitions
@@ -407,18 +407,18 @@ class ConvertLidar(object):
         return cln_fld_ok, msg
 
     def fishnet_id(self):
-        '''
+        """
         Assigns a fishnet based plot ID number to each tree in the output
         shapefile
-        '''
+        """
         fish_id_ok = True
         msg = "\nMethod: fishnet_id\n"
         # define input shapefiles
-        pt_shp = self.newLidar
-        poly_shp = self.fishnetShp
+        pt_shp = self.new_lidar
+        poly_shp = self.fishnet_shp
 
         # start timer
-        fishID_start = timeit.default_timer()
+        fish_id_start = timeit.default_timer()
 
         # get driver
         drv = ogr.GetDriverByName("ESRI Shapefile")
@@ -461,19 +461,19 @@ class ConvertLidar(object):
         for feat in pt_lyr:
             # get XY coordinates for points in the lidar shapefile
             geom = feat.GetGeometryRef()
-            mx, my = geom.GetX(), geom.GetY()
+            x_coordinate, y_coordinate = geom.GetX(), geom.GetY()
             # create single point to filter fishnet
-            pt = ogr.Geometry(ogr.wkbPoint)
-            pt.AddPoint(mx, my)
+            point = ogr.Geometry(ogr.wkbPoint)
+            point.AddPoint(x_coordinate, y_coordinate)
             # filter fishnet features by point location
-            poly_lyr.SetSpatialFilter(pt)
+            poly_lyr.SetSpatialFilter(point)
             # extract fishnet ID number and add to lidar point attributes
             # loop doesn't execute when the point falls outside fishnet
             for poly_feat in poly_lyr:
-                FID = int(poly_feat.GetFieldAsInteger(fish_id))
-                feat.SetField("Plot_ID", FID)
+                feature_id = int(poly_feat.GetFieldAsInteger(fish_id))
+                feat.SetField("Plot_ID", feature_id)
                 feat_ok += pt_lyr.SetFeature(feat)
-                fish_id_list.append(FID) #testing
+                fish_id_list.append(feature_id) #testing
             poly_lyr.SetSpatialFilter(None)
         pt_lyr.ResetReading() # prob not necessary now...
         if feat_ok != 0:
@@ -492,18 +492,18 @@ class ConvertLidar(object):
             print "Unique values in fish ID list: "
             print sorted(set(fish_id_list))
 
-            fishID_time = timeit.default_timer() - fishID_start
-            print "Fishnet ID function took ", fishID_time, " to run."
+            fish_id_time = timeit.default_timer() - fish_id_start
+            print "Fishnet ID function took ", fish_id_time, " to run."
         return fish_id_ok, msg
 
     def cleanup_lidar_features(self):
-        '''
+        """
         Deletes features outside the fishnet area
-        '''
+        """
         cln_ftr_ok = True
         msg = "\nMethod: cleanup_lidar_features\n"
         # get path and layer name for output shapefile
-        pt_shp = self.newLidar
+        pt_shp = self.new_lidar
         lyr_name = os.path.basename(pt_shp)[:-4]
 
         # start timer
@@ -534,7 +534,7 @@ class ConvertLidar(object):
         pt_lyr = None
         pt_ds = None
         pt_ds = drv.Open(pt_shp, 1)
-        repack_return = pt_ds.ExecuteSQL('repack ' + lyr_name)
+        repack_return = pt_ds.ExecuteSQL("repack " + lyr_name)
 ##        if repack_ok != 0:
 ##            cln_ftr_ok = False
 ##            msg += "ERROR: Problem 'repacking' features in the lidar out shapefile\n"
@@ -560,12 +560,12 @@ class ConvertLidar(object):
         return cln_ftr_ok, msg
 
     def add_attribute_fields(self):
-        '''
+        """
         Adds and defines new attribute fields
-        '''
+        """
         add_flds_ok = True
         msg = "\nMethod: add_attribute_fields\n"
-        newFields = {
+        new_fields = {
             "POINT_X": ogr.OFTReal,
             "POINT_Y": ogr.OFTReal,
             "CR_code": ogr.OFTInteger,
@@ -573,16 +573,16 @@ class ConvertLidar(object):
             "Height_ft": ogr.OFTInteger,
             "Tree_ID": ogr.OFTInteger
         }
-        ds = ogr.Open(self.newLidar, update=True)
-        lyr = ds.GetLayer()
-        lyrDefn = lyr.GetLayerDefn()
-        fieldNames = [lyrDefn.GetFieldDefn(i).GetName()
-                      for i in range(lyrDefn.GetFieldCount())]
+        in_data_source = ogr.Open(self.new_lidar, update=True)
+        in_layer = in_data_source.GetLayer()
+        in_layer_defn = in_layer.GetLayerDefn()
+        field_names = [in_layer_defn.GetFieldDefn(i).GetName()
+                       for i in range(in_layer_defn.GetFieldCount())]
         crt_flds_ok = 0
-        for key in newFields:
-            if key not in fieldNames:
-                new = ogr.FieldDefn(key, newFields[key])
-                crt_flds_ok += lyr.CreateField(new)
+        for key in new_fields:
+            if key not in field_names:
+                new = ogr.FieldDefn(key, new_fields[key])
+                crt_flds_ok += in_layer.CreateField(new)
             else:
                 print key + " field already exists"
         if crt_flds_ok != 0:
@@ -590,16 +590,16 @@ class ConvertLidar(object):
             msg += "ERROR: Problem adding new fields to lidar out shapefile\n"
         else:
             msg += "New fields successfully added to lidar out shapefile\n"
-        ds = None
+        in_data_source = None
         return add_flds_ok, msg
 
     def calculate_attribute_fields(self):
-        '''
+        """
         Calculates values for the attribute fields added in the
         'add_attribute_fields' method above.
 
-        inOutCols contains input and output field names and conversion formulas
-        inOutcols = {<outfield>: [<infield>, <formula>],
+        in_out_cols contains input and output field names and conversion formulas
+        in_out_cols = {<outfield>: [<infield>, <formula>],
                       ...
                       }
             Height- converts from meters to feet and rounds to integer
@@ -611,10 +611,10 @@ class ConvertLidar(object):
                 FVS crown ratio codes: 1: 0-10%; 2: 11-20%;...; 9: 81-100%
 
             DBH - converts from centimeters to inches*10 and rounds to integer
-        '''
+        """
         calc_flds_ok = True
         msg = "\nMethod: calculate_attribute_fields\n"
-        inOutCols = {
+        in_out_cols = {
             "POINT_X": ["X_UTM", "%s*1"],
             "POINT_Y": ["Y_UTM", "%s*1"],
             "Height_ft": ["Height_m", "int((%s*3.281)+0.5)"],
@@ -623,95 +623,95 @@ class ConvertLidar(object):
                         "0.000001)*10)+1"],
             "DBH_in_x10": ["DBH_cm", "int((%s*3.937)+0.5)"]
         }
-        ds = ogr.Open(self.newLidar, 1)
-        lyr = ds.GetLayer()
+        in_data_source = ogr.Open(self.new_lidar, 1)
+        in_layer = in_data_source.GetLayer()
         set_ftr_ok = 0
-        for ftr in lyr:
-            for key in inOutCols:
+        for ftr in in_layer:
+            for key in in_out_cols:
                 if key == "CR_code":
-                    inVal0 = ftr.GetField(inOutCols[key][0]) #Height_m
-                    inVal1 = ftr.GetField(inOutCols[key][1]) #CBH_m
-                    inForm1 = inOutCols[key][2]
-                    inForm2 = inOutCols[key][3]
-                    cR = eval(inForm1.replace("%s", str(inVal0)).replace("%t", str(inVal1)))
-                    val = eval(inForm2.replace("%s", str(cR)))
+                    in_value_0 = ftr.GetField(in_out_cols[key][0]) #Height_m
+                    in_value_1 = ftr.GetField(in_out_cols[key][1]) #CBH_m
+                    in_formula_1 = in_out_cols[key][2]
+                    in_formula_2 = in_out_cols[key][3]
+                    crown_ratio = eval(in_formula_1.replace("%s", str(in_value_0)).replace("%t", str(in_value_1)))
+                    val = eval(in_formula_2.replace("%s", str(crown_ratio)))
                     ftr.SetField(key, val)
                 else:
-                    inVal = ftr.GetField(inOutCols[key][0])
-                    inForm = inOutCols[key][1]
-                    val = eval(inForm.replace("%s", str(inVal)))
+                    in_value = ftr.GetField(in_out_cols[key][0])
+                    in_formula = in_out_cols[key][1]
+                    val = eval(in_formula.replace("%s", str(in_value)))
                     ftr.SetField(key, val)
-            set_ftr_ok += lyr.SetFeature(ftr)
+            set_ftr_ok += in_layer.SetFeature(ftr)
         if set_ftr_ok != 0:
             calc_flds_ok = False
             msg += "ERROR: Problem calculating fields in output shapefile\n"
         else:
             msg += "Calculated attribute values for new fields in output shapefile\n"
-        ds = None
+        in_data_source = None
         return calc_flds_ok, msg
 
     def number_trees(self):
-        '''
+        """
         Numbers trees within each plot. The combination of plot ID and tree Id
         constitutes a unique identifier for each tree in the simulation.
-        '''
+        """
         nmbr_trees_ok = True
         msg = "\nMethod: number_trees\n"
-        ds = ogr.Open(self.newLidar, 1)
-        lyr = ds.GetLayer()
+        in_data_source = ogr.Open(self.new_lidar, 1)
+        in_layer = in_data_source.GetLayer()
         field_vals = []
-        for ftr in lyr:
+        for ftr in in_layer:
             field_vals.append(ftr.GetFieldAsInteger("Plot_ID"))
         plots = list(set(field_vals))
-        lyr.ResetReading()
-        x = 1
+        in_layer.ResetReading()
+        tree_counter = 1
         set_ftr_ok = 0
-        for p in plots:
-            eq = "Plot_ID = " + str(p)
-            set_ftr_ok += lyr.SetAttributeFilter(eq)
-            for ftr in lyr:
-                ftr.SetField("Tree_ID", x)
-                set_ftr_ok += lyr.SetFeature(ftr)
-                x += 1
-            print str(x-1) + " trees numbered in plot " + str(p)
-            x = 1
+        for plot in plots:
+            plot_filter = "Plot_ID = " + str(plot)
+            set_ftr_ok += in_layer.SetAttributeFilter(plot_filter)
+            for ftr in in_layer:
+                ftr.SetField("Tree_ID", tree_counter)
+                set_ftr_ok += in_layer.SetFeature(ftr)
+                tree_counter += 1
+            print str(tree_counter-1) + " trees numbered in plot " + str(plot)
+            tree_counter = 1
         if set_ftr_ok != 0:
             nmbr_trees_ok = False
             msg += "ERROR: Problem numbering trees within each plot\n"
         else:
             msg += "Numbered all trees within each plot\n"
-        ds = None
+        in_data_source = None
         return nmbr_trees_ok, msg
 
-    def export_attributes_to_csv(self, lidarCsv):
-        '''
+    def export_attributes_to_csv(self, lidar_csv):
+        """
         Exports select attributes in the new lidar shapefile to a text (.csv)
-        file. Exported attributes are listed in the 'outFields' variable
+        file. Exported attributes are listed in the 'out_fields' variable
         assignment below.
 
-        :param lidarCsv - name and path for output text file
-        :type lidarCsv: string
-        '''
+        :param lidar_csv - name and path for output text file
+        :type lidar_csv: string
+        """
         csv_ok = True
         msg = "\nMethod: export_attributes_to_csv\n"
-        csv_filename = lidarCsv
+        csv_filename = lidar_csv
         #Export select fields to csv file
-        outFields = ["FID", "POINT_X", "POINT_Y", "Species", "CR_code",
-                     "DBH_in_x10", "Height_ft", "Plot_ID", "Tree_ID"]
-        with open(lidarCsv, "w") as lidarCsv:
-            csvwriter = csv.writer(lidarCsv, delimiter=",", lineterminator="\n")
-            csvwriter.writerow(outFields)
-            outFields.remove("FID")
-            ds = ogr.Open(self.newLidar, 0)
-            lyr = ds.GetLayer()
-            for ftr in lyr:
+        out_fields = ["FID", "POINT_X", "POINT_Y", "Species", "CR_code",
+                      "DBH_in_x10", "Height_ft", "Plot_ID", "Tree_ID"]
+        with open(lidar_csv, "w") as lidar_csv_file:
+            csvwriter = csv.writer(lidar_csv_file, delimiter=",", lineterminator="\n")
+            csvwriter.writerow(out_fields)
+            out_fields.remove("FID")
+            in_data_source = ogr.Open(self.new_lidar, 0)
+            in_layer = in_data_source.GetLayer()
+            for ftr in in_layer:
                 attributes = []
                 attributes.append(ftr.GetFID())
-                for f in outFields:
-                    attributes.append(ftr.GetField(f))
+                for field in out_fields:
+                    attributes.append(ftr.GetField(field))
                 csvwriter.writerow(attributes)
-            lidarCsv.close()
-            ds = None
+            lidar_csv_file.close()
+            in_data_source = None
         if os.path.exists(csv_filename):
             msg += "Lidar out shapefile fields exported to csv: " + csv_filename + "\n"
         else:
@@ -721,108 +721,109 @@ class ConvertLidar(object):
 ###End class 'ConvertLidar'###
 
 class FVSFromLidar(object):
-    '''
+    """
     Creates FVS tree lists (*.tre) and keyword files (*.key), runs FVS for
     each 64x64m (~1 acre) lidar plot and creates a tree list for CAPSIS.
 
     :param fuel: FVS fuels object. Specific to a single FVS variant.
     :type fuel: object
-    :param lidarCsv: path and file name of input text file (generated by the
+    :param lidar_csv: path and file name of input text file (generated by the
                     ConvertLidar class above (export_attributes_to_csv method)
-    :type lidarCsv: string
-    :param keywordFile: path and file name of the 'master' FVS keyword file.
-    :type keywordFile: string
+    :type lidar_csv: string
+    :param keyword_file: path and file name of the 'master' FVS keyword file.
+    :type keyword_file: string
 
     Methods:
-        run_FVS_lidar
+        run_fvs_lidar
         create_capsis_csv
-    '''
+    """
 
-    def __init__(self, fuel, lidarCsv, keywordFile):
-        '''
+    def __init__(self, fuel, lidar_csv, keyword_file):
+        """
         Constructor
 
         Defines local variables and objects that will be used by methods below
-        '''
+        """
         self.fuel = fuel # fuels object
-        self.lidarCsv = lidarCsv
-        self.keywordFile = keywordFile
-        self.set_path = os.path.dirname(lidarCsv)
+        self.lidar_csv = lidar_csv
+        self.keyword_file = keyword_file
+        self.set_path = os.path.dirname(lidar_csv)
 
-    def run_FVS_lidar(self):
-        '''
+    def run_fvs_lidar(self):
+        """
         Creates FVS input files (.key and .tre) from lidar tree list generated
         in the export_attributes_to_csv method in the ConvertLidar class. Uses
         these files to run FVS for each lidar subset/plot.
 
-        :returns fvsCsv: filename and path for a collated (from subsets/plots)
+        :returns fvs_csv: filename and path for a collated (from subsets/plots)
             FVS results file. Only the filename is generated in this method.
             The file itself will be collated in the create_capsis_csv method.
-        :type fvsCsv: string
-        '''
-        FVS_start = timeit.default_timer()
-        workDir = os.path.dirname(self.keywordFile)
+        :type fvs_csv: string
+        """
+        fvs_start = timeit.default_timer()
+        work_dir = os.path.dirname(self.keyword_file)
         # Read lidar data into pandas data frame
-        df = pd.read_csv(self.lidarCsv)
-        plots = sorted(df.Plot_ID.unique())
+        df_lidar_fvs = pd.read_csv(self.lidar_csv)
+        plots = sorted(df_lidar_fvs.Plot_ID.unique())
         # Empty or unchanging .tre variables
-        prob = "".ljust(6) # Tree_count
-        ith = "0" # Tree_history
-        dg = "".ljust(3) # DBH_increment
-        tht = "".ljust(3) # Height_to_top-kill
-        htg = "".ljust(4) # Height_increment
-        theRest = "".ljust(27) # All variables after Crown_ratio_code
+        tree_cnt = "".ljust(6) # Tree_count
+        tree_hist = "0" # Tree_history
+        dbh_inc = "".ljust(3) # DBH_increment
+        top_kill_ht = "".ljust(3) # Height_to_top-kill
+        ht_inc = "".ljust(4) # Height_increment
+        the_rest = "".ljust(27) # All variables after Crown_ratio_code
         # Get column index by name. Safer than by index order if the order in
         #   the file changes...
-        itreC = df.columns.get_loc("Plot_ID")
-        idtreeC = df.columns.get_loc("Tree_ID")
-        ispC = df.columns.get_loc("Species")
-        dbhC = df.columns.get_loc("DBH_in_x10")
-        htC = df.columns.get_loc("Height_ft")
-        icrC = df.columns.get_loc("CR_code")
+        plot_id_col = df_lidar_fvs.columns.get_loc("Plot_ID")
+        tree_id_col = df_lidar_fvs.columns.get_loc("Tree_ID")
+        species_col = df_lidar_fvs.columns.get_loc("Species")
+        dbh_col = df_lidar_fvs.columns.get_loc("DBH_in_x10")
+        ht_col = df_lidar_fvs.columns.get_loc("Height_ft")
+        cr_code_col = df_lidar_fvs.columns.get_loc("CR_code")
         # Loop through each subset/plot to create .tre files and run FVS
-        for p in plots:
-            dfSub = df[df.Plot_ID == p]
-            numRecords = len(dfSub.index)
-            treLines = [] # Initialize list variable to store FVS tree data
-            treFileName = workDir+"/subset"+str(p)+".tre" # FVS subset tree file
-            treFile = open(treFileName, "w")
+        for plot in plots:
+            df_lidar_fvs_subplot = df_lidar_fvs[df_lidar_fvs.Plot_ID == plot]
+            num_records = len(df_lidar_fvs_subplot.index)
+            tre_lines = [] # Initialize list variable to store FVS tree data
+            tre_file_name = work_dir+"/subset"+str(plot)+".tre" # FVS subset tree file
+            tre_file = open(tre_file_name, "w")
             # Loop through records in subset's data frame and extract variables
-            for y in range(0, numRecords):
-                itre = str(dfSub.iat[y, itreC]).ljust(4) # Plot_ID
-                idtree = str(dfSub.iat[y, idtreeC]).ljust(3) # Tree_ID
-                isp = str(dfSub.iat[y, ispC]).ljust(3) # Species
-                dbh = str(dfSub.iat[y, dbhC]).ljust(4) # DBH
-                ht = str(dfSub.iat[y, htC]).ljust(3) # Live_height
-                icr = str(dfSub.iat[y, icrC]) # Crown_ratio_code
+            for rec in range(0, num_records):
+                plot_id = str(df_lidar_fvs_subplot.iat[rec, plot_id_col]).ljust(4) # Plot_ID
+                tree_id = str(df_lidar_fvs_subplot.iat[rec, tree_id_col]).ljust(3) # Tree_ID
+                species = str(df_lidar_fvs_subplot.iat[rec, species_col]).ljust(3) # Species
+                dbh = str(df_lidar_fvs_subplot.iat[rec, dbh_col]).ljust(4) # DBH
+                height = str(df_lidar_fvs_subplot.iat[rec, ht_col]).ljust(3) # Live_height
+                cr_code = str(df_lidar_fvs_subplot.iat[rec, cr_code_col]) # Crown_ratio_code
                 # Merge variables and spaces into one long string
-                treLine = itre+idtree+prob+ith+isp+dbh+dg+ht+tht+htg+icr+theRest+"\n"
-                treLines.append(treLine) # Add to list variable
-            treFile.writelines(treLines) # Write all lines to subset's .tre file
-            treFile.close() # .tre file for each subset
+                tre_line = (plot_id + tree_id + tree_cnt + tree_hist + species + dbh +
+						    dbh_inc + height + top_kill_ht + ht_inc + cr_code + the_rest + "\n")
+                tre_lines.append(tre_line) # Add to list variable
+            tre_file.writelines(tre_lines) # Write all lines to subset's .tre file
+            tre_file.close() # .tre file for each subset
             # .key file for each subset (identical to master key)
-            shutil.copy(self.keywordFile, treFileName[0:-4]+".key")
-            keyFile = treFileName[0:-4]+".key"
-            self.fuel.set_keyword(keyFile)
+            shutil.copy(self.keyword_file, tre_file_name[0:-4]+".key")
+            key_file = tre_file_name[0:-4]+".key"
+            self.fuel.set_keyword(key_file)
             # Start FVS simulation
             self.fuel.run_fvs() # FVS for each subset
             # Base name for output .csv file. e.g. STANDFIRE_ex. From .key file
             svs_base = self.fuel.get_standid()
             # Writes subset .csv file containg tree variables for CAPSIS
             self.fuel.save_trees_by_year(2010)
-            fvsCsv = self.fuel.wdir+svs_base+"_2010_trees.csv"
-            subOut = fvsCsv[0:-4]+"_subset"+str(p)+".csv"
-            if os.path.exists(subOut):
-                os.remove(subOut)
-            os.rename(fvsCsv, subOut) # Renames .csv file with the subset name.
-        FVS_elapsed = timeit.default_timer() - FVS_start
-        print "FVS runs took: "+str(round(FVS_elapsed, 3))+" seconds."
-        return fvsCsv
+            fvs_csv = self.fuel.wdir+svs_base+"_2010_trees.csv"
+            subplot_out = fvs_csv[0:-4]+"_subset"+str(plot)+".csv"
+            if os.path.exists(subplot_out):
+                os.remove(subplot_out)
+            os.rename(fvs_csv, subplot_out) # Renames .csv file with the subset name.
+        fvs_elapsed = timeit.default_timer() - fvs_start
+        print "FVS runs took: "+str(round(fvs_elapsed, 3))+" seconds."
+        return fvs_csv
 
-    def create_capsis_csv(self, xyOrig, fvsCsv):
-        '''
+    def create_capsis_csv(self, xy_orig, fvs_csv):
+        """
         Creates a capsis input file from FVS subset/plot output files generated
-        by the run_FVS_lidar method above. Calculates adjusted xy coordinates for
+        by the run_fvs_lidar method above. Calculates adjusted xy coordinates for
         each tree (i.e. each plot's coordinates need to be adjusted depending on
         its position amoungst all plots). For example, Each of the six 64x64m
         plots illustrated below were modeled seperately in FVS. As a
@@ -842,33 +843,33 @@ class FVSFromLidar(object):
                         |_________|_________|_________|
                        0          64       128       192
 
-        :param xyOrig: xy origin of the original input lidar shapefile in UTM
+        :param xy_orig: xy origin of the original input lidar shapefile in UTM
             coordinates.
-        :type xyOrig: list of two floats
-        :param fvsCsv: filename and path for the collated (from subsets/plots)
+        :type xy_orig: list of two floats
+        :param fvs_csv: filename and path for the collated (from subsets/plots)
             FVS results file.
-        :type fvsCsv: string
-        '''
+        :type fvs_csv: string
+        """
         # Create merged _trees.csv with adjusted coordinates for input into CAPSIS
-        colNames = ["xloc", "yloc", "species", "dbh", "ht", "crd", "cratio",
-                    "crownwt0", "crownwt1", "crownwt2", "crownwt3"]
+        col_names = ["xloc", "yloc", "species", "dbh", "ht", "crd", "cratio",
+                     "crownwt0", "crownwt1", "crownwt2", "crownwt3"]
         #Create data frame from lidar data to obtain original UTM xy coordinates
-        dfLidar = pd.read_csv(self.lidarCsv)
-        df = pd.DataFrame(columns=colNames) # Initialize empty data frame
-        plots = sorted(dfLidar.Plot_ID.unique())
-        for p in plots:
-            treeSubFile = fvsCsv[:-4]+"_subset"+str(p)+".csv"
-            dfTrees = pd.read_csv(treeSubFile) # Data frame for subset
-            dfLidarSub = dfLidar[dfLidar.Plot_ID == p]
+        df_lidar = pd.read_csv(self.lidar_csv)
+        df_fvs_csv = pd.DataFrame(columns=col_names) # Initialize empty data frame
+        plots = sorted(df_lidar.Plot_ID.unique())
+        for plot in plots:
+            subplot_file = fvs_csv[:-4]+"_subset"+str(plot)+".csv"
+            df_trees = pd.read_csv(subplot_file) # Data frame for subset
+            df_lidar_subset = df_lidar[df_lidar.Plot_ID == plot]
             # Need index numbers for both data frames to match up
-            dfLidarSub.reset_index(drop=True, inplace=True)
+            df_lidar_subset.reset_index(drop=True, inplace=True)
             # Subtract original UTM origin from original tree location to get xy
             # coordinate system whose origin is 0,0 and whose units are now feet
-            dfTrees.xloc = ((dfLidarSub.POINT_X - xyOrig[0])*3.28)
-            dfTrees.yloc = ((dfLidarSub.POINT_Y - xyOrig[1])*3.28)
-            dfTrees.xloc = dfTrees.xloc.apply(lambda x: round(x, 3))
-            dfTrees.yloc = dfTrees.yloc.apply(lambda x: round(x, 3))
+            df_trees.xloc = ((df_lidar_subset.POINT_X - xy_orig[0])*3.28)
+            df_trees.yloc = ((df_lidar_subset.POINT_Y - xy_orig[1])*3.28)
+            df_trees.xloc = df_trees.xloc.apply(lambda x: round(x, 3))
+            df_trees.yloc = df_trees.yloc.apply(lambda x: round(x, 3))
             # Append subset data frame to set data frame
-            df = df.append(dfTrees, ignore_index=True)
+            df_fvs_csv = df_fvs_csv.append(df_trees, ignore_index=True)
             # Convert set data frame to set *_trees.csv
-        df.to_csv(fvsCsv, index=False, quoting=csv.QUOTE_NONNUMERIC)
+        df_fvs_csv.to_csv(fvs_csv, index=False, quoting=csv.QUOTE_NONNUMERIC)

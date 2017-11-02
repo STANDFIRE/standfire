@@ -1,6 +1,6 @@
-STANDFIRE 1.1.2
+STANDFIRE 1.1.3
+Java Runtime Environment >= 1.8.x
 Python 2.7.x
-STANDFIRE 1.1.0
 GDAL==2.1.3
 pandas==0.19.1
  numpy>=1.7.0

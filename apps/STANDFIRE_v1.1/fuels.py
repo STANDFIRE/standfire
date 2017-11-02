@@ -35,7 +35,7 @@ __license__ = "GPL"
 __maintainer__ = "Lucas Wells"
 __email__ = "bluegrassforestry@gmail.com"
 __status__ = "Development"
-__version__ = "1.1.2a" # Previous version: '1.1.1a'
+__version__ = "1.1.3a" # Previous version: '1.1.2a'
 
 # FVS variants globals
 eastern = {'CS', 'LS', 'NE', 'SN'}
@@ -281,7 +281,7 @@ class Fvsfuels(object):
         self.inv_year = inv_year
         self.keywords["INVYEAR"] = inv_year
 
-    def set_stop_point(code=5, year=-1):
+    def set_stop_point(self, code, year):
         """
         Set the FVS stop point code and year
 
@@ -306,8 +306,7 @@ class Fvsfuels(object):
         ===============    ==========
         """
 
-        print "Not implemented"
-        #fvs.fvssetstoppointcodes(code, year)
+        fvs.fvssetstoppointcodes(code, year)
 
     def run_fvs(self):
         """
@@ -330,23 +329,31 @@ class Fvsfuels(object):
         24.3    90.4    PIPO     11.46   56.6   5.63     15     6.55     2.33
         88.84  162.98   PIPO     18.63   67.76  9.48     45    75.88     6.89
         ...
+        Return codes (from open-fvs wiki):
+            -1: indicates that FVS has not been started
+             0: indicates that FVS is in a good running states
+             1: indicates that FVS has detected an error of some kind and should
+                not be used until reset by specifying new input
+             2: indicates that FVS has finished processing all the stands; new
+                input can be specified
 
         """
 
         # set fvs stop point codes
-        fvs.fvssetstoppointcodes(5,-1)
+        self.set_stop_point(1, -1) # Currently hardwired. Future: pass values to run_fvs based on type of run
 
         cnt = 0
         print "Simulating..."
-        for i in range(self.inv_year, self.inv_year +
+        for yr in range(self.inv_year, self.inv_year +
                       (self.num_cyc * self.time_int) +
                        self.time_int, self.time_int):
-            print "{0}   {1}".format(cnt, i)
-            fvs.fvs()
-            svs_attr = self._get_obj_data()
+            print "{0}   {1}".format(cnt, yr)
+            return_code = fvs.fvs() # B - added return code.
+            print "Return code: ", return_code
+            svs_attr = self._get_obj_data() # numpy array
             spcodes = self._get_spcodes()
-            self.fuels["trees"][i] = self._get_trees(svs_attr, spcodes)
-            self.fuels["snags"][i] = self._get_snags(svs_attr, spcodes)
+            self.fuels["trees"][yr] = self._get_trees(svs_attr, spcodes)
+            self.fuels["snags"][yr] = self._get_snags(svs_attr, spcodes)
             cnt += 1
 
         # close fvs simulation (call twice)
@@ -356,6 +363,9 @@ class Fvsfuels(object):
     def _get_obj_data(self):
         """
         Pseudo-private method
+
+        Sets up a 4 x [total objects in SVS storage] numpy array and returns it
+        to run_fvs method. Initially populated with zeros.
         """
 
         # fields to query
@@ -377,9 +387,11 @@ class Fvsfuels(object):
     def _get_spcodes(self):
         """
         Pseudo-private method
+        Generates a list of FIA plant codes (up to six digits, e.g . PSME, PIMO3)
+        that occur in the fvs object and returns the result to the run_fvs method.
         """
 
-        # get four letter plant codes
+        # get four letter plant codes #B not 4, check if 4 is expected down the road
         spcd = []
         for i in range(0, fvs.fvsdimsizes()[4]+1):
             spcd.append(fvs.fvsspeciescode(i)[2].split(' ')[0])
@@ -389,6 +401,8 @@ class Fvsfuels(object):
     def _get_trees(self, svsobjdata, spcodes):
         """
         Pseudo-private method
+        Populates a 10 x [ntrees] numpy array (tree_attrs) with tree attributes.
+        Returns a pandas data frame.
         """
 
         # headers
