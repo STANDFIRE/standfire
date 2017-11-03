@@ -1,0 +1,222 @@
+October 31, 2017 changelog for standfire version 1.1.3a (from version 1.1.2a)
+
+
+FUNCTIONALITY
+
+1) Exposed litter cover percentage in GUI. The ability to change this 
+   attribute was not available to the user prior to version 1.1.3.
+   Exposing it opens up the possibility of modeling discontinuous litter
+   fuels in the future, but has not been implemented in the CAPSIS modeling
+   process yet. See below for details of the changes.
+
+2) Adding patch size to the GUI and handling user input. Three new entry boxes
+   were added to the surface fuels section of the user interface, patch size
+   (width) for shrubs, herbs and litter. The user can now enter patch sizes
+   for surface fuels. Shrub and herb patch sizes will be reflected in surface
+   fuel outputs from CAPSIS, the ability to model discontinuous litter has not
+   been implemented yet. See below for more detailed descriptions of changes
+   to the code.
+
+3) Added the ability for the user to reduce the number of trees and surface
+   fuels that WFDS tracks during its simulation. These fuels are still modeled
+   by WFDS. This ability should decrease the amount of computer resources
+   needed for a WFDS simulation. Currently, this is a yes/no option in the
+   interface (via a check box). If the box is checked only 1% of fuels are
+   tracked by WFDS. If it is unchecked all fuels are tracked. See below for
+   more detailed descriptions of changes to the code.
+
+
+SCRIPTS
+
+*******************************
+* standfire_mini_interface.py *
+*******************************
+
+Litter cover:
+
+- added litter_cover variable to create_variables method
+
+- added litter_cover to reset method with a default of 100
+
+- modified litter_cover_entry in create_widgets to expose it to user.
+
+- added litter cover variable to cap.set_srf_cover call in run_capsis method
+
+
+Patch size:
+
+- added the following variables to create_variables method: shrub_patch, 
+	herb_patch, litter_patch.
+
+- added shrub_patch to reset method with a default of 5.0 (m)
+
+- added herb_patch to reset method with a default of 1.0
+
+- added litter_patch to reset method with a default of -1 (indicates boundary
+	layer)
+
+- added patch_lbl ("patch size (m):") to create_widgets method
+
+- added shrub, herb and litter patch entries to create_widgets method (in
+	surface fuels group)
+
+- added patch_lbl, and shrub, herb and litter patch entries to the 
+	grid_widgets method between cover and live mc. Shifted following
+	enrties down a row.
+
+- added call to cap.set_srf_patch, passing shrub, herb and litter patch
+	entries in the run_capsis method
+
+
+WFDS Fuels:
+
+- added self.execute_capsis attribute to the Application class __init__ 
+	to make it accessible to multiple methods (vs. declaring it within
+	a particular method or methods).
+
+- added if/else conditional statement to set subset_percent (% of fuels to 
+	continue tracking in a WFDS run) in run_capsis method based on 
+	whether the user checked the 'Subset WFDS fuels (display only) check
+	box. The value in subset_percent also controls whether or
+	not the _subet_fuels method in capsis.py Execute class is run
+	(!= 1.0) or not (= 1.0).
+
+- changed call to self.capsis_execute to pass subset_percent.
+
+- added subset check box to GUI (create_widgets and grid_widgets methods) and
+	supporting variable (subset_fds_check_var) to create_variables.
+
+
+Other:
+
+- split the capsis_etal method up into three methods: run_capsis, config_wfds
+	 and run_wfds. These are all called from the run_button method.
+
+- fixed type mismatch bug (attempt to concat. str and int) when mesh not = 1.
+	In create_wfds_run_script method.
+
+- fixed bug in which the FVS .out report would get overwritten with a blank
+	file in a standard (non-lidar) run. Every call to FVS initiates a new
+	.out file. After our main FVS simulation (called by the run_standard
+	method)  the .out file is now copied (in the run_capsis method)	with
+	a new name (*_fvs_report.out) before making subsequent calls to FVS.
+
+- rounded live and dead shrub and herb loadings to avoid super long floats 
+	(e.g. 0.08 verses 0.08000000000001) in the run_capsis method
+
+- added working directory (fuel_wdir variable) to the Application class
+	__init__ method so it can be accessed from multiple methods.
+
+
+
+*************
+* capsis.py *
+*************
+
+Litter cover:
+
+- added litter_cover to set_srf_cover method 
+
+
+Patch size:
+
+- added set_srf_patch method to set shrub, herb and litter patch sizes
+
+
+WFDS Fuels:
+
+- added subset_percent input variable to the Execute class' __init__ method
+	and a conditional statement to execute _subset_fuels method if the 
+	subset percentage is not = to 1.0 (see below)
+
+- added _subset_fuels method to capsis.py's Execute class. It sets a 
+	defined percentage of fuel's (shrub, herb and tree) OUTPUT_TREE 
+	parameter to FALSE in the capsis_fuels.txt file. This change is then
+	propigated to the WFDS input file (<run name>.txt). Current default
+	percentage is 1% (0.01) This affects what fuels
+ WFDS tracks (not what
+	it models) and should reduce the computing resources
+ needed to run 
+	WFDS and SMOKEVIEW. This won't impact capsis' 3d viewer display.
+
+- added import random (standard library) for use in _subset_fuels method
+
+- modified Execute class' __init__ method to call _subset_fuels after the 
+	capsis run and before the development of the WFDS input file.
+
+Other:
+
+- changed the default shrub width from 1.0 to 5.0 in self.params.
+
+- modified the subprocess call to capsis to fix a path problem in both
+	_execute_capsis_linux and _execute_capsis_win methods
+
+- modified the _read_fuels method to fix a path problem
+
+
+************
+* fuels.py *
+************
+
+- enabled the formally latent set_stop_point method. Is now being used to 
+	set FVS stop points. It currently defaults to stop point codes: 1,-1
+	(stop just before first call to the Event Monitor, every year). See
+	code documentation for more info on stop points
+	
+- added call to set_stop_point method in the run_fvs method
+
+- added code to capture and print fvs return codes in run_fvs method. See code
+	documentation for more info on return codes.
+
+- changed index variable 'i' to 'yr' in run_fvs method for clarity
+
+
+************
+* lidar.py *
+************
+
+- changed attribute/variable/method names to conform to PEP style guidelines:
+	https://www.python.org/dev/peps/pep-0008/
+
+- shortened lines >100 characters
+
+- standardized use of quotation marks: "outside"; 'inside'; """doc strings"""
+
+- other minor changes to comply with PEP 8.
+
+
+***********
+* wfds.py *
+***********
+
+-No significant changes.
+
+
+PROGRAMS
+
+**********
+* PyFVS  *
+**********
+
+- added a new versions of pyFVS for windows. Compiled from the pyFVS branch of 
+	open-FVS: https://sourceforge.net/p/open-fvs/code/HEAD/tree/branches/PyFVS/
+	This runs versions of the variants from June 2015, rather than the old
+	pyFVS which ran versions from November, 2013. The python library (*.pyd) 
+	is all that is needed to run this version of pyFVS so the other python files
+	were removed from the pyfvs/win/ directory.
+
+- Lucas Wells compiled the new version for linux and updated the repo prior to this
+	update (1.1.3a). He also added a shell script users can use to build pyFVS
+	on their own. He also updated the capsis linux launcher (capsis.sh)
+
+FILES
+
+
+- updated requirements file to add Java Runtime Environment 1.8+ (necessary to
+	run CAPSIS)
+
+- Lucas added a shell script (build_pyfvs_linux.sh) that will automatically build
+	pyFVS on linux. It is located in the ../pyfvs/linux/ folder.
+
+- Lucas updated the capsis linux launcher (capsis.sh) located in the ../bin/capsis/
+	folder

@@ -13,11 +13,6 @@ for placing these fuels. The pertenant arguments can be controlled through
 the Capsis RunConig class. The Execute class is used to run Capsis. An up-to-date
 Java installation is required since Capsis runs on a Java Virtual Machine.
 
-Modified by Brett Davis for lidar data consumption in Dec. 2016
-Modified again to eliminate all hard-wired variables. June 2017. The following
-functions were modified: set_x_size, set_y_size, _set_x_offset, _set_y_offset and
-_set_block_verts to require both a capsis scene size and an 'Area of Interest'
-size(AOI- 64x64 for 1 acre inputs and variable for lidar inputs).
 """
 
 # meta
@@ -28,7 +23,7 @@ __license__ = "GPL"
 __maintainer__ = "Lucas Wells"
 __email__ = "bluegrassforestry@gmail.com"
 __status__ = "Development"
-__version__ = "1.1.2a" # Previous version: '1.1.1a'
+__version__ = "1.1.3a" # Previous version: '1.1.2a'
 
 # module imports
 import os
@@ -36,6 +31,7 @@ from shutil import copyfile, rmtree
 from wfds import GenerateBinaryGrid
 import subprocess
 import platform
+import random
 
 class RunConfig(object):
     """
@@ -116,7 +112,7 @@ class RunConfig(object):
                        'dehydration'              : 0.4,
                        'rmChar'                   : 'true',
                        'outDir'                   : '/output/',
-                       'fileName'                 : 'capsis_fuels.txt',
+                       'fileName'                 : 'capsis_fuels.txt', # capsis out file
                        'srf_blocks': {1: [[0,0],[0,0],[0,0],[0,0]],
                                       2: [[0,0],[0,0],[0,0],[0,0]],
                                       3: [[0,0],[0,0],[0,0],[0,0]],
@@ -127,7 +123,7 @@ class RunConfig(object):
                        'srf_fuels' : {'shrub' : {'ht'        : 0.35,
                                                  'cbh'       : 0.0,
                                                  'cover'     : 0.5,
-                                                 'width'     : 1.0,
+                                                 'width'     : 5.0,
                                                  'spat_group': 1,
                                                  'live' : {'load'    : 0.72,
                                                            'mvr'     : 500,
@@ -169,7 +165,6 @@ class RunConfig(object):
         :param offset: x offset of the AOA
         :offset type: integer
         """
-
         self.params['xOffset'] = offset
 
 	#B not currently used (offsets calculated and set below)
@@ -180,7 +175,6 @@ class RunConfig(object):
         :param offset: y offset of the AOA
         :offset type: integer
         """
-
         self.params['yOffset'] = offset
 
     def set_show3D(self, value):
@@ -191,7 +185,6 @@ class RunConfig(object):
         :param value: Truth value of the show3D parameter
         :value type: boolean
         """
-
         self.params['show3d'] = value
 
     def set_crown_space(self, space):
@@ -201,7 +194,6 @@ class RunConfig(object):
         :param space: crown spacing in meters
         :space type: float
         """
-
         if space != 0:
             self.params['respace'] = 'true'
             self.params['respaceDistance'] = space
@@ -232,24 +224,29 @@ class RunConfig(object):
         self.params['srf_fuels']['shrub']['cbh'] = shrub_cbh
         self.params['srf_fuels']['herb']['cbh'] = herb_cbh
 
-    def set_srf_cover(self, shrub_cover, herb_cover):
+    def set_srf_cover(self, shrub_cover, herb_cover, litter_cover):
         """
         """
-
         self.params['srf_fuels']['shrub']['cover'] = shrub_cover
         self.params['srf_fuels']['herb']['cover'] = herb_cover
+        self.params['srf_fuels']['litter']['cover'] = litter_cover
+
+    def set_srf_patch(self, shrub_patch, herb_patch, litter_patch): #B
+        """
+        """
+        self.params['srf_fuels']['shrub']['width'] = shrub_patch
+        self.params['srf_fuels']['herb']['width'] = herb_patch
+        self.params['srf_fuels']['litter']['width'] = litter_patch
 
     def set_srf_live_svr(self, shrub_svr, herb_svr):
         """
         """
-
         self.params['srf_fuels']['shrub']['live']['svr'] = shrub_svr
         self.params['srf_fuels']['herb']['live']['svr'] = herb_svr
 
     def set_srf_dead_svr(self, shrub_svr, herb_svr, litter_svr):
         """
         """
-
         self.params['srf_fuels']['shrub']['dead']['svr'] = shrub_svr
         self.params['srf_fuels']['herb']['dead']['svr'] = herb_svr
         self.params['srf_fuels']['litter']['svr'] = litter_svr
@@ -257,14 +254,12 @@ class RunConfig(object):
     def set_srf_live_load(self, shrub_load, herb_load):
         """
         """
-
         self.params['srf_fuels']['shrub']['live']['load'] = shrub_load
         self.params['srf_fuels']['herb']['live']['load'] = herb_load
 
     def set_srf_dead_load(self, shrub_load, herb_load, litter_load):
         """
         """
-
         self.params['srf_fuels']['shrub']['dead']['load'] = shrub_load
         self.params['srf_fuels']['herb']['dead']['load'] = herb_load
         self.params['srf_fuels']['litter']['load'] = litter_load
@@ -272,17 +267,14 @@ class RunConfig(object):
     def set_srf_live_mc(self, shrub_mc, herb_mc):
         """
         """
-
         self.params['srf_fuels']['shrub']['live']['moisture'] = shrub_mc
         self.params['srf_fuels']['herb']['live']['moisture'] = herb_mc
 
     def set_srf_dead_mc(self, shrub_mc, herb_mc, litter_mc):
         """
         """
-
         self.params['srf_fuels']['shrub']['dead']['moisture'] = shrub_mc
         self.params['srf_fuels']['herb']['dead']['moisture'] = herb_mc
-        #self.params['srf_fuels']['litter']['moisture'] = herb_mc #ERROR
         self.params['srf_fuels']['litter']['moisture'] = litter_mc
 
     def set_path(self, path):
@@ -515,27 +507,31 @@ class Execute(object):
     Capsis execution is platform agnostic
     """
 
-    def __init__(self, path_to_run_file):
+    def __init__(self, path_to_run_file, subset_percent):
         """
         Constructor
         """
-		#B Below hardwired to run from interpreter
-        #B self.capsis_dir = 'C:/Users/bhdavis/Documents/standfire/STANDFIRE_v1.0/standfire/bin/capsis/'
+
         self.capsis_dir = os.path.dirname(os.path.abspath(__file__)) + '/bin/capsis/'
+        #self.subset_percent = 0.01 # expose this to user at some point
 
         if platform.system().lower() == 'linux':
             self._exec_capsis_linux(path_to_run_file)
-            self._read_fuels(path_to_run_file)
         if platform.system().lower() == 'windows':
             self._exec_capsis_win(path_to_run_file)
-            self._read_fuels(path_to_run_file)
+
+        if subset_percent != 1.0:
+            self._subset_fuels(path_to_run_file, subset_percent)
+
+        self._read_fuels(path_to_run_file)
+
 
     def _exec_capsis_linux(self, path_to_run_file):
         """
         Private method
         """
 
-        subprocess.call(['sh', self.capsis_dir + '/capsis.sh', '-p', 'script','standfire.myscripts.SFScript', path_to_run_file])
+        subprocess.call(['sh', self.capsis_dir + 'capsis.sh', '-p', 'script','standfire.myscripts.SFScript', path_to_run_file])
 
     def _exec_capsis_win(self, path_to_run_file):
         """
@@ -543,7 +539,48 @@ class Execute(object):
         """
 
         os.chdir(self.capsis_dir)
-        subprocess.call([self.capsis_dir + '/capsis.bat', '-p', 'script','standfire.myscripts.SFScript', path_to_run_file])
+        subprocess.call([self.capsis_dir + 'capsis.bat', '-p', 'script','standfire.myscripts.SFScript', path_to_run_file])
+
+    def _subset_fuels(self, path_to_run_file, subset_percent):
+        """
+        Private method
+
+        Sets a user defined percentage of fuels (shrubs, herbs and trees) OUTPUT_TREE
+        parameter to FALSE in the capsis_fuels.txt file. This effects what fuels
+        WFDS tracks (not what it models) and should reduce the computing resources
+        needed to run WFDS and SMOKEVIEW.
+
+        :param path_to_run_file: Path and file name of capsis run file (capsis parameters)
+        :type string
+        :param subset_percent: Percentage of fuels to leave OUTPUT_TREE=.TRUE.
+        :type float
+        """
+        cap_fuels = '/'.join(path_to_run_file.split('/')[:-1]) + '/output/capsis_fuels.txt'
+        # read capsis_fuels.txt into the list variable 'lines'
+        capsis_fuels = open(cap_fuels, 'r')
+        lines = capsis_fuels.readlines()
+        capsis_fuels.close()
+        # create a list of indicies for those lines that contain "OUTPUT_TREE="
+        tree_line_index = [index for index, x in enumerate(lines) if "OUTPUT_TREE=" in x]
+        # generate a random sample of indicies
+        sample_size = int(round(len(tree_line_index) * (1 - subset_percent)))
+        rand_sample = sorted(random.sample(tree_line_index, sample_size))
+        # set OUTPUT_TREE to FALSE for those lines indexed in the random sample
+        line_num = 0
+        lines_new = []
+        for l in lines:
+            if line_num not in rand_sample:
+                lines_new.append(l)
+            else:
+                lines_new.append(l.replace("OUTPUT_TREE=.TRUE.", "OUTPUT_TREE=.FALSE."))
+            line_num += 1
+        # copy original version of capsis_fuels.txt to preserve it (for now)
+        copyfile(cap_fuels, cap_fuels[:-4] + "_raw.txt")
+        # overwrite capsis_fuels.txt with the new values
+        out = open(cap_fuels, 'w')
+        out.writelines(lines_new)
+        out.close()
+
 
     def _read_fuels(self, path_to_run_file):
         """
@@ -552,7 +589,8 @@ class Execute(object):
 		 #Below hardwired to run from interpreter
 ##        with open('C:/Users/bhdavis/Documents/STANDFIRE/STANDFIRE_v1.0/output/capsis_fuels.txt', 'r') as f:
 ##            lines = f.read()
-        with open('/'.join(path_to_run_file.split('/')[:-1]) + 'output/capsis_fuels.txt', 'r') as f:
+        with open('/'.join(path_to_run_file.split('/')[:-1]) + '/output/capsis_fuels.txt', 'r') as f:
             lines = f.read()
 
+        # creates and populates fuels variable. Becomes part of the object stored in 'capsis_execute' in the standfire_mini_interface script
         self.fuels = lines

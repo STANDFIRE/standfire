@@ -18,7 +18,7 @@ __license__ = "GPL"
 __maintainer__ = "Lucas Wells"
 __email__ = "bluegrassforestry@gmail.com"
 __status__ = "Development"
-__version__ = "1.1.2a" # Previous version: '1.1.1a'
+__version__ = "1.1.3a" # Previous version: '1.1.2a'
 
 # module imports
 import platform
