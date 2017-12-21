@@ -32,32 +32,6 @@ All) 1) Python standard library: cPickle, csv, math, os, platform, pprint,
                          pandas) (there may be other prerequisites for these
                          modules)
 
-Methods:
-main
-__init__
-update_status
-get_lidar_shapefile
-get_keyword_file
-get_output_dir
-toggle_ldr_check
-toggle_trt_check
-toggle_unlock
-update_domain_change
-create_wfds_run_script
-create_smv_run_script
-run_button
-run_lidar
-_lidar_fvs
-run_standard
-run_capsis
-config_wfds
-run_wfds
-create_variables
-reset
-create_widgets
-grid_widgets
-end
-
 See the following for more information on FVS:
 Gary E. Dixon, Essential FVS: A User's Guide to the Forest
         Vegetation Simulator Tech. Rep., U.S. Department of Agriculture , Forest
@@ -66,13 +40,13 @@ Gary E. Dixon, Essential FVS: A User's Guide to the Forest
 
 # meta
 __authors__ = "Team STANDFIRE"
-__copyright__ = "Copyright 2015, STANDFIRE"
+__copyright__ = "Copyright 2017, STANDFIRE"
 __credits__ = ["Greg Cohn", "Brett Davis", "Matt Jolly", "Russ Parsons", "Lucas Wells"]
 __license__ = "GPL"
 __maintainer__ = "Lucas Wells"
 __email__ = "bluegrassforestry@gmail.com"
 __status__ = "Development"
-__version__ = "1.1.3a" # Previous version: '1.1.2a'
+__version__ = "1.1.4a" # Previous version: "1.1.3a"
 
 # module imports #pyinstaller doesn't recognize 2nd level imports (e.g.
 #   import os, timeit). must be on seperate lines
@@ -88,14 +62,13 @@ import Tkinter as tk
 import platform
 
 # import standfire modules - works in both the interpreter and the compiler
-#  as long as the path to these files is in the pyinstaller command or to the
+#  as long as the path to these files is in the pyinstaller command or in the
 # .spec file.
 import fuels
 import capsis
 import wfds
 import lidar
 
-#SEP = os.sep # necessary?
 MOD_PATH = os.getcwd() # necessary?
 
 # FVS variant abbreviations
@@ -122,9 +95,11 @@ VARIANTS = {"Southeast Alaska and Costal BC (ak)" : "ak",
 
 class Application(ttk.Frame, object):
     """ STANDFIRE application """
+
     @classmethod
     def main(cls):
         """ Main method for running application """
+
         tk.NoDefaultRoot()
         root = tk.Tk()
         app = cls(root)
@@ -143,9 +118,9 @@ class Application(ttk.Frame, object):
 
     def __init__(self, root):
         """ Class constructor """
+
         # boolean for GUI initialization
         self.is_initialized = False
-        #super(self.__class__, self).__init__(root) # risky to use: "self.__class__"
         super(Application, self).__init__(root)
         # set window title
         root.title("STANDFIRE v1.1a")
@@ -155,25 +130,30 @@ class Application(ttk.Frame, object):
         self.create_widgets()
         self.grid_widgets()
         self.reset()
-        self.execute_capsis = None # attribute will be defined in run_capsis method
-        self.fuel_wdir = None # attribute will be defined in get_keyword_file method
+        self.execute_capsis = None # will be defined in run_capsis method
+        self.fuel_wdir = None # will be defined in get_keyword_file method
         # idea: create a testing method with default inputs and run it here
-        #key_path = r"C:\Users\bhdavis\ownCloud\STANDFIRE\v112\apps\STANDFIRE_v1.1\test_dir\SW_fvs\SW.key"
-        #out_name = "SW_2025"
+        #key_path = r""
+        #out_name = ""
         #self.test(key_path, out_name)
         self.status.set(" Status: Ready")
 
     def update_status(self, text):
-        """ Update applicaion status in GUI gutter
+        """
+        Update applicaion status in GUI gutter
+
         :param text: text to add to the GUI gutter
         :type text: string
         """
+
         self.status.set(" Status: %s" % text)
 
     def get_lidar_shapefile(self):
-        """ Opens file dialog and stores user selected lidar shapefile name and
-        directory path in lidar_entry box
         """
+        Opens file dialog and stores user selected lidar shapefile name and
+        directory path in lidar_entry box.
+        """
+
         tkMessageBox.showinfo("Lidar Shapefile Requirements", "The lidar shapefile projection "
                               "must be WGS 1984 UTM. \n\nAttributes/Fields must include the "
                               "following: \nX_UTM (meters), \nY_UTM (meters), \nHeight_m (meters),"
@@ -183,7 +163,7 @@ class Application(ttk.Frame, object):
         file_opt = options = {}
         options["parent"] = self.root
         options["title"] = "Select LiDAR shapefile"
-        # file type order matters: interp 2nd is shown 1st, exe is the opposite
+        # file type order matters. interp: 2nd is shown 1st, exe is the opposite
         options["filetypes"] = (("shapefiles", "*.shp"), ("all_files", "*.*"))
         filename = str(tkFileDialog.askopenfilename(**file_opt)) # str to convert from unicode
         # Check for spaces in path or file name
@@ -201,7 +181,7 @@ class Application(ttk.Frame, object):
                 # set intermediate and output file names
                 fishnet_shp = lidar_shp[:-4]+"_fishnet.shp"
                 new_lidar_shp = lidar_shp[:-4] + "_out.shp"
-                # instantiate lidar objects
+                # instantiate lidar object
                 ldr = lidar.ConvertLidar(lidar_shp, fishnet_shp, new_lidar_shp)
                 # verify shapefile projection
                 projection_ok, projection_msg, code = ldr.verify_projection()
@@ -230,7 +210,7 @@ class Application(ttk.Frame, object):
                     tkMessageBox.showerror("Terminal error", fields_msg, parent=self.root)
                     self.ldr_check_var.set(0)
                     self.toggle_ldr_check()
-                # calc dimensions and set associated variables
+                # calculate dimensions and set associated variables
                 if projection_ok and fields_ok:
                     x_min, x_max, y_min, y_max = ldr.calculate_extents()
                     x_scene_size = x_aoi_size = int((x_max-x_min)/64)*64
@@ -246,27 +226,29 @@ class Application(ttk.Frame, object):
         self.update_status("Ready")
 
     def get_keyword_file(self):
-        """ Opens file dialog and stores user selected filename in keyword_entry
+        """
+        Opens file dialog and stores user selected filename in keyword_entry
         box. Calls fuels submodule to extract inventory year, time interval and
         number of cycles from the keyword file, calculates potential simulation
         years and populates the simulation year combobox with these years.
         """
+
         self.update_status("Select FVS keyword file...")
         file_opt = options = {}
         options["parent"] = self.root
         options["title"] = "Select FVS keyword file"
         # file type order matters: interp 2nd is shown 1st, exe is the opposite
         options["filetypes"] = (("keyword files", "*.key"), ("all files", "*.*"))
-        filename = str(tkFileDialog.askopenfilename(**file_opt)) # str to convert from unicode
+        filename = str(tkFileDialog.askopenfilename(**file_opt))
         # Check for spaces in path or file name
         if " " in filename:
             tkMessageBox.showerror("", "Spaces not allowed in path or file name: \n" + filename
                                    + " \nPlease move or rename *.key file", parent=self.root)
             self.update_status("Ready")
             return
-            # if filename exists, continue
+        # if filename exists, continue
         if filename:
-            # if filename extension is not '.key', report error to user
+            # if filename extension is not ".key", report error to user
             if filename.split(".")[-1] == "key":
                 self.keyword_filename.set(filename)
                 self.output_dir.set("/".join(filename.split("/")[:-1]))
@@ -284,10 +266,11 @@ class Application(ttk.Frame, object):
 
     def get_output_dir(self):
         """ Opens file dialog and returns user specified directory """
+
         file_opt = options = {}
         options["parent"] = self.root
         options["title"] = "Select Output Directory"
-        output_dir = str(tkFileDialog.askdirectory(**file_opt)) # str to convert from unicode
+        output_dir = str(tkFileDialog.askdirectory(**file_opt))
         # Check for spaces in path or file name
         if " " in output_dir:
             tkMessageBox.showerror("", "Spaces not allowed in path or file name: \n"
@@ -302,16 +285,18 @@ class Application(ttk.Frame, object):
                 tkMessageBox.showerror("", "The directory does not exist", parent=self.root)
 
     def toggle_ldr_check(self):
-        """ Toggle logic for LiDAR vs standard STANDFIRE run. Resets lidar and
+        """
+        Toggle logic for LiDAR vs standard STANDFIRE run. Resets lidar and
         related input variables when the lidar check box is toggled.
         """
+
         if self.ldr_check_var.get() == 0:
             self.lidar_shapefile.set("")
             self.shape_entry.configure(state="disabled")
             self.shp_brws_btn.configure(state="disabled")
             self.x_entry.configure(state="enabled")
             self.y_entry.configure(state="enabled")
-            self.is_initialized = False # suppress 'are you sure' message
+            self.is_initialized = False # suppress "are you sure" message
             self.reset()
         else:
             self.shape_entry.configure(state="enabled")
@@ -327,9 +312,11 @@ class Application(ttk.Frame, object):
             self.length.set("") # igniter
 
     def toggle_trt_check(self):
-        """ Toggle logic for treatment parameter entry fields. Resets treatment
+        """
+        Toggle logic for treatment parameter entry fields. Resets treatment
         and related input variables when the treatment check box is toggled.
         """
+
         if self.trt_check_var.get() == 0:
             self.crown_spacing.set(0.0)
             self.prune_height.set(0.0)
@@ -342,9 +329,11 @@ class Application(ttk.Frame, object):
             self.prune_height.set(1.5)
 
     def toggle_unlock(self):
-        """ Toggle logic for igniter dimensions. Resets igniter dimension
+        """
+        Toggle logic for igniter dimensions. Resets igniter dimension
         variables when the unlock values check box is toggled.
         """
+
         if self.unlock_check_var.get() == 0:
             self.origin_x_entry.configure(state="disabled")
             self.origin_y_entry.configure(state="disabled")
@@ -357,12 +346,14 @@ class Application(ttk.Frame, object):
             self.length_entry.configure(state="enabled")
 
     def update_domain_change(self, internal_name, index, operation):
-        """ Reset calculated variables when the x or y dimensions are changed in
+        """
+        Reset calculated variables when the x or y dimensions are changed in
         the GUI. Tkinter return arguments:
                     Internal variable name
                     Index (only if the variable is a list)
                     Operation: w - write, r - read, u - unset (delete)
         """
+
         trace_return = ("Trace return: \nInternal variable name: " + internal_name +
                         "\n Index: " + index + "\n Operation: " + operation)
         try: # in case x or y is an empty string (no value in box)
@@ -383,13 +374,13 @@ class Application(ttk.Frame, object):
                 x_aoi_size = x_size # change when we implement diff AOI size in lidar
                 y_aoi_size = y_size
                 x_offset = max(1, int(x_size - x_aoi_size))
-                #y_offset = max(1,int((y_size - y_aoi_size)/2.0))
                 # calculate WFDS igniter dimensions
                 x_ign = max(1, int(x_size * 0.2))
                 y_ign = max(1, int(y_size * 0.2))
                 length = max(1, int(y_size * 0.6))
             else:
-                print "Possible lidar check variable problem. See update_domain_change method"
+                print "Possible lidar check variable problem. See \
+                        update_domain_change method"
             # set calculated variables
             self.svs_offset.set(x_offset)
             self.x_aoi_size.set(x_aoi_size)
@@ -409,9 +400,12 @@ class Application(ttk.Frame, object):
             self.width.set("")
 
     def create_wfds_run_script(self):
-        """ Create an OS specific batch script that can be used to execute WFDS.
-        Only linux and Windows are supported at the moment.
         """
+        Create an OS specific batch script that can be used to execute WFDS.
+        Only linux and Windows are currently supported. Multiprocesing is not
+        directly supported in Windows at the moment.
+        """
+
         out_dir = self.output_dir.get()
         # linux bash file
         if platform.system().lower() == "linux":
@@ -425,19 +419,25 @@ class Application(ttk.Frame, object):
                                  "/bin/fds_linux/wfds_mpi " + self.run_name.get() + ".txt")
         # windows batch file
         if platform.system().lower() == "windows":
-            if self.n_mesh.get() == 1:
-                with open(out_dir + "/output/runFDS.bat", "w") as script:
-                    script.write(MOD_PATH + "/bin/fds_win/wfds.exe " + self.run_name.get() +
-                                 ".txt")
-            else:
-                with open(out_dir + "/output/runFDS.bat", "w") as script:
-                    script.write("mpiexec -np " + str(self.n_mesh.get()) + " " + MOD_PATH +
-                                 "/bin/fds_win/wfds_mpi.exe " + self.run_name.get() + ".txt")
+            with open(out_dir + "/output/runFDS.bat", "w") as script:
+                script.write(MOD_PATH + "/bin/fds_win/wfds.exe " +
+                             self.run_name.get() + ".txt")
+# multiprocessing not currently supported in Windows.
+##            if self.n_mesh.get() == 1:
+##                with open(out_dir + "/output/runFDS.bat", "w") as script:
+##                    script.write(MOD_PATH + "/bin/fds_win/wfds.exe " + self.run_name.get() +
+##                                 ".txt")
+##            else:
+##                with open(out_dir + "/output/runFDS.bat", "w") as script:
+##                    script.write("mpiexec -np " + str(self.n_mesh.get()) + " " + MOD_PATH +
+##                                 "/bin/fds_win/wfds_mpi.exe " + self.run_name.get() + ".txt")
 
     def create_smv_run_script(self):
-        """ Create an OS specific batch script that can be used to execute Smoke
+        """
+        Create an OS specific batch script that can be used to execute Smoke
         View. Only linux and Windows are supported at the moment.
         """
+
         out_dir = self.output_dir.get()
         # linux bash file
         if platform.system().lower() == "linux":
@@ -450,9 +450,11 @@ class Application(ttk.Frame, object):
                              ".smv")
 
     def run_button(self):
-        """ Calls either a standard or LiDAR run depending on the status of the
+        """
+        Calls either a standard or LiDAR run depending on the status of the
         lidar check box (ldr_check_var).
         """
+
         if self.ldr_check_var.get() == 1:
             lidar_run_ok, all_msg = self.run_lidar()
             if not lidar_run_ok:
@@ -478,12 +480,13 @@ class Application(ttk.Frame, object):
         self.end("STANDFIRE simulation finished")
 
     def run_lidar(self):
-        """ This method processes the input lidar shapefile, runs multiple
-        FVS simulations and collates the FVS simulation outputs for a lidar
-        based STANDFIRE simulation
         """
+        This method processes the input lidar shapefile, runs multiple FVS
+        simulations and collates the FVS simulation outputs for a lidar based
+        STANDFIRE simulation
+        """
+
         # Lidar processing
-        # ================
         lidar_start = timeit.default_timer()
         lidar_run_ok = True
         all_msg = "\nLIDAR PROCESSING MESSAGES: \n"
@@ -521,10 +524,10 @@ class Application(ttk.Frame, object):
                        "fishnet_id", "cleanup_lidar_features", "add_attribute_fields",
                        "calculate_attribute_fields", "number_trees", "export_attributes_to_csv"]
         for key in ordered_key:
-            print "\nGonna run: ", key
-            # eval usage- as formulated it may not be a security risk (processing_steps
-            #   keys are hard-wired) but probably worthwhile to figure a way around
-            #   its usage in the future...
+            print "\nRunning: ", key
+            # eval usage- as formulated it may not be too much of a security
+            #  risk (processing_steps keys are hard-wired) but it's probably
+            #  worthwhile to figure a way around its usage in the future...
             lidar_step_ok, msg = eval("ldr.%s(%s)" % (key, processing_steps[key]))
             if not lidar_step_ok:
                 lidar_run_ok = False
@@ -534,22 +537,23 @@ class Application(ttk.Frame, object):
                 all_msg += msg + "Step ok: " + str(lidar_step_ok) + "\n"
         # Runs FVS simulation for each plot
         if lidar_run_ok:
-            print "\nLidar processing messages: ", all_msg
+            print all_msg
             self._lidar_fvs(fvs, xy_origin)
             lidar_elapsed = timeit.default_timer() - lidar_start
             print "Converting lidar data took: "+str(round(lidar_elapsed, 3))+" seconds."
         return lidar_run_ok, all_msg
 
     def _lidar_fvs(self, fvs, xy_origin):
-        """ Run an FVS simulation from lidar data.
+        """
+        Pseudo-private method.
+        Run an FVS simulation from lidar data.
         :param fvs: FVSFromLidar class from lidar submodule
         :type fvs: object
         :param xy_origin: pair of coordinates describing the origin of the lidar
              shapefile
         :type xy_origin: list
         """
-        #FVS simulation
-        # ==============
+
         self.update_status("FVS simulation...")
         self.root.update()
         time.sleep(1)
@@ -559,11 +563,11 @@ class Application(ttk.Frame, object):
         fvs.create_capsis_csv(xy_origin, fvs_csv)
 
     def run_standard(self):
-        """ This method uses the user input and run the FVS simulation for a
-        standard STANDFIRE simulation
         """
-        # FVS simulation
-        # ==============
+        This method takes user input and runs the FVS simulation for a standard
+        STANDFIRE simulation.
+        """
+
         self.update_status("FVS simulation...")
         self.root.update()
         # instantiate fuels object
@@ -578,6 +582,7 @@ class Application(ttk.Frame, object):
 
     def run_capsis(self):
         """ This method configures and runs CAPSIS """
+
         # copy orginal fvs report before it gets over-written ?temp solution?
         fvs_report = self.keyword_filename.get()[:-4] + ".out"
         shutil.copyfile(fvs_report, fvs_report[:-4] + "_fvs_report.out")
@@ -589,7 +594,7 @@ class Application(ttk.Frame, object):
         self.root.update()
         time.sleep(1)
         # configure the capsis run
-        cap = capsis.RunConfig(self.fuel_wdir[:-1]) # removes trailing '/' in fuel_wdir
+        cap = capsis.RunConfig(self.fuel_wdir[:-1]) # removes trailing "/" in fuel_wdir
         # spatial domain - also calculates x & y offsets and surface fuel block dimensions
         cap.set_xy_size(self.x_size.get(), self.y_size.get(), self.x_aoi_size.get(),
                         self.y_aoi_size.get())
@@ -617,13 +622,13 @@ class Application(ttk.Frame, object):
             cap.set_prune_height(self.prune_height.get())
         # show 3D
         if self.viewer_check_var.get() == 1:
-            cap.set_show3D("true")
+            cap.set_show_3d("true")
         # extrapolate tree AOI sample to entire scene for standard runs
         if self.ldr_check_var.get() == 0:
             b_extend = True
         elif self.ldr_check_var.get() == 1:
             b_extend = False
-        cap.set_extend_FVS_sample(b_extend)
+        cap.set_extend_fvs_sample(b_extend)
         # set subset fds percentage
         if self.subset_fds_check_var.get() == 1:
             # when user percent entry is added, get and set the value here
@@ -644,7 +649,11 @@ class Application(ttk.Frame, object):
                                              subset_percent)#B
 
     def config_wfds(self):
-        """ Configures a WFDS simulation and creates WFDS and SMOKEVIEW run scripts"""
+        """
+        Configures a WFDS simulation and creates WFDS and SMOKEVIEW run scripts.
+        CC - computational coordinates, PC - physical coordinates
+        """
+
         # instantiate a WFDS object
         self.update_status("Configuring WFDS...")
         self.root.update()
@@ -652,8 +661,8 @@ class Application(ttk.Frame, object):
         fds = wfds.WFDS(self.x_size.get(), self.y_size.get(), self.z_size.get(),
                         self.x_aoi_size.get(), self.svs_offset.get(), self.res.get(),
                         self.n_mesh.get(), self.execute_capsis.fuels)
-        # stretch the mesh
-        fds.create_mesh(stretch={"CC":[3, 33], "PC":[1, 31], "axis":"z"})
+        # stretch the mesh. CC and PC are currently hard-wired
+        fds.create_mesh(stretch={"CC":[3, 33], "PC":[1, 31]})
         # set the ignition strip
         fds.create_ignition(self.start_time.get(), self.end_time.get(), self.origin_x.get(),
                             self.origin_x.get() + self.width.get(), self.origin_y.get(),
@@ -692,6 +701,7 @@ class Application(ttk.Frame, object):
 
     def run_wfds(self):
         """ Executes WFDS simulation """
+
         self.update_status("Executing WFDS...")
         self.root.update()
         time.sleep(1)
@@ -703,17 +713,18 @@ class Application(ttk.Frame, object):
 
     def create_variables(self):
         """ Application variable definitions """
+
         # boolean check variables
         self.trt_check_var = tk.IntVar(self.root)
         self.viewer_check_var = tk.IntVar(self.root)
         self.fds_check_var = tk.IntVar(self.root)
         self.unlock_check_var = tk.IntVar(self.root)
-        self.ldr_check_var = tk.IntVar(self.root) #B
-        self.subset_fds_check_var = tk.IntVar(self.root) #B
+        self.ldr_check_var = tk.IntVar(self.root)
+        self.subset_fds_check_var = tk.IntVar(self.root)
         # entry field variables
         # =====================
         # lidar run
-        self.lidar_shapefile = tk.StringVar(self.root) #B
+        self.lidar_shapefile = tk.StringVar(self.root)
         # canopy fuels
         self.keyword_filename = tk.StringVar(self.root)
         # surface fuels
@@ -722,7 +733,7 @@ class Application(ttk.Frame, object):
         self.shrub_load = tk.DoubleVar(self.root)
         self.shrub_sav = tk.IntVar(self.root)
         self.shrub_cover = tk.IntVar(self.root)
-        self.shrub_patch = tk.DoubleVar(self.root) #B
+        self.shrub_patch = tk.DoubleVar(self.root)
         self.shrub_live_mc = tk.IntVar(self.root)
         self.shrub_dead_mc = tk.IntVar(self.root)
         self.shrub_percent_dead = tk.IntVar(self.root)
@@ -731,7 +742,7 @@ class Application(ttk.Frame, object):
         self.herb_load = tk.DoubleVar(self.root)
         self.herb_sav = tk.IntVar(self.root)
         self.herb_cover = tk.IntVar(self.root)
-        self.herb_patch = tk.DoubleVar(self.root) #B
+        self.herb_patch = tk.DoubleVar(self.root)
         self.herb_live_mc = tk.IntVar(self.root)
         self.herb_dead_mc = tk.IntVar(self.root)
         self.herb_percent_dead = tk.IntVar(self.root)
@@ -739,7 +750,7 @@ class Application(ttk.Frame, object):
         self.litter_load = tk.DoubleVar(self.root)
         self.litter_sav = tk.IntVar(self.root)
         self.litter_cover = tk.IntVar(self.root)
-        self.litter_patch = tk.DoubleVar(self.root) #B
+        self.litter_patch = tk.DoubleVar(self.root)
         self.litter_dead_mc = tk.IntVar(self.root)
         # simulation area
         self.x_size = tk.IntVar(self.root)
@@ -775,9 +786,11 @@ class Application(ttk.Frame, object):
         self.status = tk.StringVar(self.root)
 
     def reset(self):
-        """ Resets values to default
+        """
+        Resets values to default
         ..note:: This method is called when GUI is initialized
         """
+
         # confirm reset
         if self.is_initialized:
             result = tkMessageBox.askquestion("Reset Values",
@@ -802,7 +815,7 @@ class Application(ttk.Frame, object):
             self.shrub_load.set(0.8)
             self.shrub_sav.set(5000)
             self.shrub_cover.set(50)
-            self.shrub_patch.set(5.0) #B
+            self.shrub_patch.set(5.0)
             self.shrub_live_mc.set(100)
             self.shrub_dead_mc.set(40)
             self.shrub_percent_dead.set(10)
@@ -811,7 +824,7 @@ class Application(ttk.Frame, object):
             self.herb_load.set(0.8)
             self.herb_sav.set(5000)
             self.herb_cover.set(80)
-            self.herb_patch.set(1.0) #B
+            self.herb_patch.set(1.0)
             self.herb_live_mc.set(100)
             self.herb_dead_mc.set(5)
             self.herb_percent_dead.set(100)
@@ -819,7 +832,7 @@ class Application(ttk.Frame, object):
             self.litter_load.set(0.5)
             self.litter_sav.set(2000)
             self.litter_cover.set(100)
-            self.litter_patch.set(-1) #B
+            self.litter_patch.set(-1)
             self.litter_dead_mc.set(10)
             # simulation area
             self.x_size.set(160)
@@ -848,6 +861,7 @@ class Application(ttk.Frame, object):
 
     def create_widgets(self):
         """ Widget definitions and configuration """
+
         entry_opts = dict(width="5")
         # Lidar panel
         # ===========
@@ -882,7 +896,7 @@ class Application(ttk.Frame, object):
         self.load_lbl = ttk.Label(self.group_surface_fuels, text=u"load (kg/m\u00B2):")
         self.sav_lbl = ttk.Label(self.group_surface_fuels, text="SAV:")
         self.cover_lbl = ttk.Label(self.group_surface_fuels, text="cover (%):")
-        self.patch_lbl = ttk.Label(self.group_surface_fuels, text="patch size (m):") #B
+        self.patch_lbl = ttk.Label(self.group_surface_fuels, text="patch size (m):")
         self.live_mc_lbl = ttk.Label(self.group_surface_fuels, text="live mc (%):")
         self.dead_mc_lbl = ttk.Label(self.group_surface_fuels, text="dead mc (%):")
         self.percent_dead_lbl = ttk.Label(self.group_surface_fuels, text="percent dead:")
@@ -897,7 +911,7 @@ class Application(ttk.Frame, object):
         self.shrub_cover_entry = ttk.Entry(self.group_surface_fuels, textvariable=self.shrub_cover,
                                            **entry_opts)
         self.shrub_patch_entry = ttk.Entry(self.group_surface_fuels, textvariable=self.shrub_patch,
-                                           **entry_opts) #B
+                                           **entry_opts)
         self.shrub_live_mc_entry = ttk.Entry(self.group_surface_fuels,
                                              textvariable=self.shrub_live_mc, **entry_opts)
         self.shrub_dead_mc_entry = ttk.Entry(self.group_surface_fuels,
@@ -915,8 +929,8 @@ class Application(ttk.Frame, object):
                                         **entry_opts)
         self.herb_cover_entry = ttk.Entry(self.group_surface_fuels, textvariable=self.herb_cover,
                                           **entry_opts)
-        self.herb_patch_entry = ttk.Entry(self.group_surface_fuels, textvariable=self.herb_patch, #B
-                                          **entry_opts) #B
+        self.herb_patch_entry = ttk.Entry(self.group_surface_fuels, textvariable=self.herb_patch,
+                                          **entry_opts)
         self.herb_live_mc_entry = ttk.Entry(self.group_surface_fuels,
                                             textvariable=self.herb_live_mc, **entry_opts)
         self.herb_dead_mc_entry = ttk.Entry(self.group_surface_fuels,
@@ -935,8 +949,8 @@ class Application(ttk.Frame, object):
                                             textvariable=self.litter_cover,
                                             **entry_opts)
         self.litter_patch_entry = ttk.Entry(self.group_surface_fuels,
-                                            textvariable=self.litter_patch, #B
-                                            **entry_opts) #B
+                                            textvariable=self.litter_patch,
+                                            **entry_opts)
         self.litter_live_mc_entry = ttk.Entry(self.group_surface_fuels, **entry_opts)
         self.litter_live_mc_entry.configure(state="disabled")
         self.litter_dead_mc_entry = ttk.Entry(self.group_surface_fuels,
@@ -1013,7 +1027,7 @@ class Application(ttk.Frame, object):
         self.fds_check = ttk.Checkbutton(self.group_run_settings, text="Execute WFDS",
                                          variable=self.fds_check_var)
         self.subset_fds_check = ttk.Checkbutton(self.group_run_settings,
-                                                text="Subset WFDS fuels (display only)",
+                                                text="Subset WFDS fuels tracking",
                                                 variable=self.subset_fds_check_var)
         self.sim_time_lbl = ttk.Label(self.group_run_settings, text="simulation time (s):")
         self.sim_time_entry = ttk.Entry(self.group_run_settings, textvariable=self.sim_time,
@@ -1030,15 +1044,14 @@ class Application(ttk.Frame, object):
         # ===============
         self.reset_form_bnt = ttk.Button(self.root, text="Reset Values", command=self.reset)
         self.gen_bnt = ttk.Button(self.root, text="Run", command=self.run_button)
-
         # Status Bar
         # ==========
-        # Change font from "" to "Arial" to try to fix a runtime error - didn't matter
         self.status_lbl = ttk.Label(self.root, relief=tk.SUNKEN, anchor=tk.W,
                                     textvariable=self.status, font=("Arial", 10))
 
     def grid_widgets(self):
         """ Widget positioning and auto-resize configuration """
+
         options = dict(sticky="NSEW", padx=5, pady=5)
         # Lidar panel
         # ===========
@@ -1070,7 +1083,7 @@ class Application(ttk.Frame, object):
         self.load_lbl.grid(row=2, column=0, **options)
         self.sav_lbl.grid(row=3, column=0, **options)
         self.cover_lbl.grid(row=4, column=0, **options)
-        self.patch_lbl.grid(row=5, column=0, **options) #B
+        self.patch_lbl.grid(row=5, column=0, **options)
         self.live_mc_lbl.grid(row=6, column=0, **options)
         self.dead_mc_lbl.grid(row=7, column=0, **options)
         self.percent_dead_lbl.grid(row=8, column=0, **options)
@@ -1080,7 +1093,7 @@ class Application(ttk.Frame, object):
         self.shrub_load_entry.grid(row=2, column=1, **options)
         self.shrub_sav_entry.grid(row=3, column=1, **options)
         self.shrub_cover_entry.grid(row=4, column=1, **options)
-        self.shrub_patch_entry.grid(row=5, column=1, **options) #B
+        self.shrub_patch_entry.grid(row=5, column=1, **options)
         self.shrub_live_mc_entry.grid(row=6, column=1, **options)
         self.shrub_dead_mc_entry.grid(row=7, column=1, **options)
         self.shrub_percent_dead_entry.grid(row=8, column=1, **options)
@@ -1090,7 +1103,7 @@ class Application(ttk.Frame, object):
         self.herb_load_entry.grid(row=2, column=2, **options)
         self.herb_sav_entry.grid(row=3, column=2, **options)
         self.herb_cover_entry.grid(row=4, column=2, **options)
-        self.herb_patch_entry.grid(row=5, column=2, **options) #B
+        self.herb_patch_entry.grid(row=5, column=2, **options)
         self.herb_live_mc_entry.grid(row=6, column=2, **options)
         self.herb_dead_mc_entry.grid(row=7, column=2, **options)
         self.herb_percent_dead_entry.grid(row=8, column=2, **options)
@@ -1100,7 +1113,7 @@ class Application(ttk.Frame, object):
         self.litter_load_entry.grid(row=2, column=3, **options)
         self.litter_sav_entry.grid(row=3, column=3, **options)
         self.litter_cover_entry.grid(row=4, column=3, **options)
-        self.litter_patch_entry.grid(row=5, column=3, **options) #B
+        self.litter_patch_entry.grid(row=5, column=3, **options)
         self.litter_live_mc_entry.grid(row=6, column=3, **options)
         self.litter_dead_mc_entry.grid(row=7, column=3, **options)
         self.litter_percent_dead_entry.grid(row=8, column=3, **options)
@@ -1167,8 +1180,8 @@ class Application(ttk.Frame, object):
         self.output_dir_entry.grid(row=1, column=1, columnspan=2, **options)
         self.output_dir_bnt.grid(row=1, column=3, **options)
         self.viewer_check.grid(row=2, column=0, **options)
-        self.fds_check.grid(row=2, column=1, columnspan=1, **options) #B
-        self.subset_fds_check.grid(row=2, column=2, columnspan=2, **options) #B
+        self.fds_check.grid(row=2, column=1, columnspan=1, **options)
+        self.subset_fds_check.grid(row=2, column=2, columnspan=2, **options)
         # Control Buttons
         # ===============
         self.reset_form_bnt.grid(row=6, column=2, **options)
@@ -1178,7 +1191,8 @@ class Application(ttk.Frame, object):
         self.status_lbl.grid(row=8, column=0, columnspan=4, sticky="NSEW", padx=0)
 
     def end(self, msg):
-        """ End the STANDFIRE program """
+        """ End the STANDFIRE program. Currently this leaves the GUI open. """
+
         self.update_status(msg)
         self.root.update()
         print "The end method was called"

@@ -55,7 +55,7 @@ If don't have a FVS tree list file, then copy and paste the following text and s
 
 Once you have a keyword file and a tree list file in the same directory we can start to build a script to do some work.
 
-.. code-block::
+.. code-block:: none
 
 	$ cd /Users/standfire/fvs_exp
 	$ ls

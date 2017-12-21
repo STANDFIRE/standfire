@@ -1,5 +1,4 @@
-Compilation/Installation instructions
- 
+Compilation/Installation instructions 
 1)      Make sure the following python dependencies are installed on your machine 
 	a. Python 2.7.13
 	b. GDAL==2.1.3 
@@ -25,7 +24,7 @@ Compilation/Installation instructions
 		wherever you like.
 5)      Edit the .spec file found in ../apps/STANDFIRE_v1.1/ : change the path in the 
 		pathex list to reflect where this directory is found on your machine.
-6)      Build the program by pointing pyinstaller at the .spec file (e.g. from the 
+6)      Build the program by pointing pyinstaller at the .spec file (from the 
 		directory where the .spec file is located: 
 		<C:\Python27\Scripts\pyinstaller.exe standfire_mini_interface.spec> )
 7)      Once it is built, copy the bin, data and pyfvs directories from …/apps/ 
