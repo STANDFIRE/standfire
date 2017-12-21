@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Generate Binary Grid &mdash; STANDFIRE 1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="STANDFIRE 1 documentation" href="index.html"/>
+        <link rel="up" title="WFDS module" href="wfds.html"/>
+        <link rel="next" title="Metrics module" href="metrics.html"/>
+        <link rel="prev" title="Execute" href="wfds_Execute.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> STANDFIRE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="fuels.html">Fuels module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="capsis.html">Capsis module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="wfds.html">WFDS module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="wfds_Mesh.html">Mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfds_WFDS.html">WFDS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfds_Execute.html">Execute</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Generate Binary Grid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">Metrics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar.html">LiDAR module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">STANDFIRE</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api_ref.html">STANDFIRE API Reference</a> &raquo;</li>
+        
+          <li><a href="wfds.html">WFDS module</a> &raquo;</li>
+        
+      <li>Generate Binary Grid</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/wfds_GenerateBinaryGrid.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="generate-binary-grid">
+<h1>Generate Binary Grid<a class="headerlink" href="#generate-binary-grid" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="wfds.GenerateBinaryGrid">
+<em class="property">class </em><code class="descclassname">wfds.</code><code class="descname">GenerateBinaryGrid</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>res</em>, <em>n</em>, <em>f_name</em>, <em>stretch=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#GenerateBinaryGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.GenerateBinaryGrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="wfds_Mesh.html#wfds.Mesh" title="wfds.Mesh"><code class="xref py py-class docutils literal"><span class="pre">wfds.Mesh</span></code></a></p>
+<p>This subclass of <code class="docutils literal"><span class="pre">Mesh</span></code> is used to generate a binary FDS grid for Capsis.
+Inherits the mesh class.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">See the <code class="docutils literal"><span class="pre">wfds.Mesh()</span></code> class for details</p>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="metrics.html" class="btn btn-neutral float-right" title="Metrics module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="wfds_Execute.html" class="btn btn-neutral" title="Execute" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, STANDFIRE.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

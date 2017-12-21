@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FuelCalc &mdash; STANDFIRE 1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="STANDFIRE 1 documentation" href="index.html"/>
+        <link rel="up" title="Fuels module" href="fuels.html"/>
+        <link rel="next" title="Capsis module" href="capsis.html"/>
+        <link rel="prev" title="Inventory" href="fuels_Inventory.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> STANDFIRE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="fuels.html">Fuels module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="fuels_Fvsfuels.html">Fvsfuels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fuels_Inventory.html">Inventory</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">FuelCalc</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="capsis.html">Capsis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wfds.html">WFDS module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">Metrics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar.html">LiDAR module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">STANDFIRE</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api_ref.html">STANDFIRE API Reference</a> &raquo;</li>
+        
+          <li><a href="fuels.html">Fuels module</a> &raquo;</li>
+        
+      <li>FuelCalc</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/fuels_FuelCalc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fuelcalc">
+<h1>FuelCalc<a class="headerlink" href="#fuelcalc" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="fuels.FuelCalc">
+<em class="property">class </em><code class="descclassname">fuels.</code><code class="descname">FuelCalc</code><span class="sig-paren">(</span><em>trees</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class calculates several fuel attributes and appends them to the FVS
+output tree list generated by the Fvsfuels class, generating a new .csv file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>trees</strong> (<em>csv file</em><em> or </em><em>pandas data frame</em>) – FVS output tree list</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="fuels.FuelCalc.calc_bulk_density">
+<code class="descname">calc_bulk_density</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.calc_bulk_density"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.calc_bulk_density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates crown bulk density based on crown volume and biomass weight
+(weight/vol)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.FuelCalc.calc_crown_volume">
+<code class="descname">calc_crown_volume</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.calc_crown_volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.calc_crown_volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates crown volume based on geometry and crown dimensions</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="fuels.FuelCalc.cone_volume">
+<em class="property">static </em><code class="descname">cone_volume</code><span class="sig-paren">(</span><em>radius</em>, <em>height</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.cone_volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.cone_volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the volume of a cone</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>radius</strong> (<em>float</em>) – radius</li>
+<li><strong>height</strong> (<em>float</em>) – height</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">volume</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="math">
+\[\Pi*radius^2 \frac{height}{3}\]</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.FuelCalc.convert_units">
+<code class="descname">convert_units</code><span class="sig-paren">(</span><em>from_to=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.convert_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.convert_units" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert all units in data frame</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>from_to</strong> (<em>integer</em>) – 1 = english to metric; 2 = metric to english (default=1)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">if this method is called more than once on the same instance
+of a data frame with the same conversion code a warning will
+be printed to the console</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="fuels.FuelCalc.cylinder_volume">
+<em class="property">static </em><code class="descname">cylinder_volume</code><span class="sig-paren">(</span><em>radius</em>, <em>height</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.cylinder_volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.cylinder_volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the volume of a cylinder</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>radius</strong> (<em>float</em>) – radius</li>
+<li><strong>height</strong> (<em>float</em>) – height</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">volume</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="math">
+\[\Pi*radius^2*height\]</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="fuels.FuelCalc.frustum_volume">
+<em class="property">static </em><code class="descname">frustum_volume</code><span class="sig-paren">(</span><em>big_r</em>, <em>height</em>, <em>small_r=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.frustum_volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.frustum_volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the volume of a frustum</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>small_r</strong> (<em>float</em>) – small (top) radius</li>
+<li><strong>height</strong> (<em>float</em>) – height</li>
+<li><strong>big_r</strong> (<em>float</em>) – big (bottom) radius</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">volume</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="math">
+\[\frac{\Pi*height}{3}(big_r^2+small_r*big_r+small_r^2)\]</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.FuelCalc.get_crown_base_ht">
+<code class="descname">get_crown_base_ht</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.get_crown_base_ht"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.get_crown_base_ht" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates crown base height for each tree based on crown ratio and
+tree height. This value is added to the data frame</p>
+<div class="math">
+\[h - (c_{ratio}*h)\]</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.FuelCalc.get_crown_ht">
+<code class="descname">get_crown_ht</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.get_crown_ht"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.get_crown_ht" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates crown height for each trees based on crown ratio. This
+value is added to the data frame</p>
+<div class="math">
+\[c_{ratio}*h\]</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.FuelCalc.get_species_list">
+<code class="descname">get_species_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.get_species_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.get_species_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return set of species existing in trees file supplied to constructor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">unique list of species</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This methods is useful when assigning geometries by species.
+A user can first retrieve the species list then use it to
+assigne crown geometries</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="fuels.FuelCalc.rectangle_volume">
+<em class="property">static </em><code class="descname">rectangle_volume</code><span class="sig-paren">(</span><em>width</em>, <em>height</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.rectangle_volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.rectangle_volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the volume of a rectangle</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>width</strong> (<em>float</em>) – width</li>
+<li><strong>height</strong> (<em>float</em>) – height</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">volume</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="math">
+\[width^2*height\]</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.FuelCalc.save_trees">
+<code class="descname">save_trees</code><span class="sig-paren">(</span><em>save_to</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.save_trees"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.save_trees" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write trees data frame to specified directory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>save_to</strong> (<em>string</em>) – directory and filename of file to save</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuels.FuelCalc.set_crown_geometry">
+<code class="descname">set_crown_geometry</code><span class="sig-paren">(</span><em>sp_geom_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#FuelCalc.set_crown_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.FuelCalc.set_crown_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends crown geometry to each tree in the data frame conditional on
+species.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sp_geom_dict</strong> (<em>python dictionary</em>) – dictionary of species-specific crown geometries</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sp_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;PIPO&quot;</span> <span class="p">:</span> <span class="s2">&quot;cylinder&quot;</span><span class="p">,</span> <span class="s2">&quot;PSME&quot;</span> <span class="p">:</span> <span class="s2">&quot;frustum&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fuels</span><span class="o">.</span><span class="n">set_crown_geometry</span><span class="p">(</span><span class="n">sp_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="capsis.html" class="btn btn-neutral float-right" title="Capsis module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fuels_Inventory.html" class="btn btn-neutral" title="Inventory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, STANDFIRE.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,1210 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>lidar &mdash; STANDFIRE 1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="STANDFIRE 1 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> STANDFIRE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide.html">STANDFIRE User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_ref.html">STANDFIRE API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">STANDFIRE</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>lidar</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for lidar</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!python2</span>
+<span class="c1">###############################################################################</span>
+<span class="c1">#-----------#</span>
+<span class="c1"># lidar.py  #</span>
+<span class="c1">#-----------#</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module implements all LiDAR processing tasks for STANDFIRE. This</span>
+<span class="sd">includes creating a fishnet with 64x64m cells to divide the lidar points into</span>
+<span class="sd">one acre plots, calculating FVS input variables, running FVS for each plot</span>
+<span class="sd">and collating the results.</span>
+
+<span class="sd">**Inputs:**</span>
+
+<span class="sd">1. Lidar shapefile. Projected in WGS 1984 UTM (any zone). This shapefile</span>
+<span class="sd">needs to have the following attributes:</span>
+
+<span class="sd">==========  ======= =========== ===========</span>
+<span class="sd">Field Name  Type    Units       Description</span>
+<span class="sd">==========  ======= =========== ===========</span>
+<span class="sd">X_UTM       Float   Meters      X coordinate</span>
+<span class="sd">Y_UTM       Float   Meters      Y coordinate</span>
+<span class="sd">Height_m    Float   Meters      Tree height</span>
+<span class="sd">CBH_m       Float   Meters      Crown Base Height</span>
+<span class="sd">DBH_cm      Float   Centimeters Diameter at Breast Height</span>
+<span class="sd">Species     String  Text        Two letter FVS species code</span>
+<span class="sd">==========  ======= =========== ===========</span>
+
+<span class="sd">2. FVS keyword file.</span>
+
+<span class="sd">**Outputs:**</span>
+
+<span class="sd">1. Fishnet shapefile containing the plots (&lt;example&gt;_fishnet.shp)</span>
+<span class="sd">2. Lidar shapefile containing the input and calculated attributes (&lt;example&gt;_out.shp)</span>
+<span class="sd">3. Text file containing the calculated attributes (&lt;example&gt;_export.csv)</span>
+<span class="sd">4. FVS (&lt;example&gt;.tre and &lt;example&gt;.key) files for each plot</span>
+<span class="sd">5. Tree list for CAPSIS (&lt;example&gt;_trees.csv)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># meta</span>
+<span class="n">__authors__</span> <span class="o">=</span> <span class="s2">&quot;Team STANDFIRE&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2017, STANDFIRE&quot;</span>
+<span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Greg Cohn&quot;</span><span class="p">,</span> <span class="s2">&quot;Brett Davis&quot;</span><span class="p">,</span> <span class="s2">&quot;Matt Jolly&quot;</span><span class="p">,</span> <span class="s2">&quot;Russ Parsons&quot;</span><span class="p">,</span> <span class="s2">&quot;Lucas Wells&quot;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;GPL&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Brett Davis&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;bhdavis@fs.fed.us&quot;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Development&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;1.1.3a&quot;</span> <span class="c1"># previous version 1.1.2a</span>
+
+<span class="c1"># Import some modules</span>
+<span class="kn">import</span> <span class="nn">timeit</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="c1">#import sys</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">osgeo</span> <span class="k">import</span> <span class="n">ogr</span>
+<span class="n">ogr</span><span class="o">.</span><span class="n">UseExceptions</span><span class="p">()</span>
+
+<span class="c1"># Below error handling not necessary if compiled</span>
+<span class="c1"># try:</span>
+    <span class="c1"># import pandas as pd</span>
+<span class="c1"># except: # can&#39;t sys.exit. find another way to handle errors</span>
+    <span class="c1"># sys.exit(&quot;ERROR: cannot find Pandas modules. Please ensure Pandas \n&quot;</span>
+    <span class="c1"># &quot;package for Python is installed&quot;)</span>
+<span class="c1"># try:</span>
+    <span class="c1"># from osgeo import ogr</span>
+    <span class="c1"># from osgeo.gdal import __version__ as gdal_ver</span>
+<span class="c1"># except:</span>
+    <span class="c1"># sys.exit(&quot;ERROR: cannot find GDAL/OGR modules. Please ensure GDAL package\n&quot;</span>
+    <span class="c1"># &quot; for Python is installed.&quot;)</span>
+
+<span class="c1"># pd_ver_no = int((pd.__version__).replace(&quot;.&quot;,&quot;&quot;))</span>
+<span class="c1"># ##if pd_ver_no &lt; 191: # 0.19.1 Development version November 2016</span>
+<span class="c1"># ##    sys.exit(&quot;ERROR: Python bindings of Pandas 0.19.1 or later required&quot;)</span>
+
+<span class="c1"># gdal_ver_no = int((gdal_ver).replace(&quot;.&quot;,&quot;&quot;))</span>
+<span class="c1"># # Might be able to get away with a older version, haven&#39;t tested.</span>
+<span class="c1"># ##if gdal_ver_no &lt; 213: # 2.1.3 Devel version January 2017</span>
+<span class="c1"># ##    sys.exit(&quot;ERROR: Python bindings of GDAL 2.1.3 or later required&quot;)</span>
+
+<div class="viewcode-block" id="ConvertLidar"><a class="viewcode-back" href="../lidar_ConvertLidar.html#lidar.ConvertLidar">[docs]</a><span class="k">class</span> <span class="nc">ConvertLidar</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The ConvertLidar class is used to generate a CAPSIS tree list of lidar</span>
+<span class="sd">    tree attributes from a shapefile of lidar trees.</span>
+
+<span class="sd">    :param lidar_shp: name and path of input lidar shapefile.</span>
+<span class="sd">    :type lidar_shp: string</span>
+<span class="sd">    :param fishnet_shp: name and path for output fishnet shapefile.</span>
+<span class="sd">    :type fishnet_shp: string</span>
+<span class="sd">    :param new_lidar: name and path for output lidar shapefile.</span>
+<span class="sd">    :type new_lidar: string</span>
+
+<span class="sd">    **Methods (execution order):**</span>
+
+<span class="sd">    * verify_projection</span>
+<span class="sd">    * verify_input_fields</span>
+<span class="sd">    * calculate_extents</span>
+<span class="sd">    * create_fishnet</span>
+<span class="sd">    * copy_shapefile</span>
+<span class="sd">    * cleanup_lidar_fields</span>
+<span class="sd">    * fishnet_id</span>
+<span class="sd">    * cleanup_lidar_features</span>
+<span class="sd">    * add_attribute_fields</span>
+<span class="sd">    * calculate_attribute_fields</span>
+<span class="sd">    * number_trees</span>
+<span class="sd">    * export_attributes_to_csv</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lidar_shp</span><span class="p">,</span> <span class="n">fishnet_shp</span><span class="p">,</span> <span class="n">new_lidar</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor</span>
+
+<span class="sd">        Defines local variables that will be used by various methods below</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lidar_shp</span> <span class="o">=</span> <span class="n">lidar_shp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fishnet_shp</span> <span class="o">=</span> <span class="n">fishnet_shp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_lidar</span> <span class="o">=</span> <span class="n">new_lidar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">lidar_shp</span><span class="p">)</span>
+        <span class="c1"># TODO: initialize more commonly used stuff like the shapefile driver...</span>
+
+<div class="viewcode-block" id="ConvertLidar.verify_projection"><a class="viewcode-back" href="../lidar_ConvertLidar.html#lidar.ConvertLidar.verify_projection">[docs]</a>    <span class="k">def</span> <span class="nf">verify_projection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifies that the input shapefile is projected and, if so, whether the</span>
+<span class="sd">        projection is WGS 1984 UTM. Uses EPSG projection codes to verify.</span>
+
+<span class="sd">        :return: projection fitness</span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">        :return: fitness message</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        :return: fitness code</span>
+<span class="sd">        :rtype: integer</span>
+
+<span class="sd">        *Fitness Codes:*</span>
+
+<span class="sd">        * 0 - projection ok</span>
+<span class="sd">        * 1 - unable to identify projection</span>
+<span class="sd">        * 2 - unprojected</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">epsg_utm</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32600</span><span class="p">,</span> <span class="mi">32661</span><span class="p">)</span> <span class="c1"># EPSG codes for UTM North zones</span>
+        <span class="n">epsg_utm</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">32700</span><span class="p">,</span> <span class="mi">32761</span><span class="p">))</span> <span class="c1"># append EPSG codes for UTM South zones</span>
+        <span class="n">in_data_source</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lidar_shp</span><span class="p">)</span>
+        <span class="n">in_layer</span> <span class="o">=</span> <span class="n">in_data_source</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+        <span class="n">in_spatial_ref</span> <span class="o">=</span> <span class="n">in_layer</span><span class="o">.</span><span class="n">GetSpatialRef</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">in_spatial_ref</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">prj_ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Shapefile appears to be unprojected. Please project to WGS &quot;</span>
+                   <span class="s2">&quot;1984 UTM and retry.&quot;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="n">msg</span>
+            <span class="n">code</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="n">in_data_source</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="nb">print</span> <span class="s2">&quot;ERROR: Shapefile unprojected&quot;</span>
+            <span class="k">return</span> <span class="n">prj_ok</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">code</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">in_spatial_ref</span><span class="o">.</span><span class="n">AutoIdentifyEPSG</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">prj_ok</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Unable to identify projection. (Unexpected results may &quot;</span>
+                       <span class="s2">&quot;occur if the shapefile is in the wrong projection)&quot;</span><span class="p">)</span>
+                <span class="nb">print</span> <span class="n">msg</span>
+                <span class="n">code</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">in_data_source</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">epsg</span> <span class="o">=</span> <span class="n">in_spatial_ref</span><span class="o">.</span><span class="n">GetAuthorityCode</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+                <span class="nb">print</span> <span class="s2">&quot;EPSG Authority code: &quot;</span><span class="p">,</span> <span class="n">epsg</span>
+                <span class="n">epsg</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">epsg</span><span class="p">)</span>
+                <span class="n">in_data_source</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">if</span> <span class="n">epsg</span> <span class="ow">in</span> <span class="n">epsg_utm</span><span class="p">:</span>
+                    <span class="n">prj_ok</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Projection appears to be WGS 1984 UTM as required&quot;</span>
+                    <span class="n">code</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">prj_ok</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;This shapefile doesn</span><span class="se">\&#39;</span><span class="s2">t appear to be in a WGS 1984 &quot;</span>
+                           <span class="s2">&quot;UTM projection as required. (Unexpected results &quot;</span>
+                           <span class="s2">&quot;may occur if the shapefile is in the wrong &quot;</span>
+                           <span class="s2">&quot;projection)&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span> <span class="n">msg</span>
+                    <span class="n">code</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">prj_ok</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">code</span></div>
+
+<div class="viewcode-block" id="ConvertLidar.verify_input_fields"><a class="viewcode-back" href="../lidar_ConvertLidar.html#lidar.ConvertLidar.verify_input_fields">[docs]</a>    <span class="k">def</span> <span class="nf">verify_input_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifies that the required input fields are in the input shapefile.</span>
+
+<span class="sd">        **Required fields:**</span>
+
+<span class="sd">        ==========  ======= =========== ===========</span>
+<span class="sd">        Field Name  Type    Units       Description</span>
+<span class="sd">        ==========  ======= =========== ===========</span>
+<span class="sd">        X_UTM       Float   Meters      X coordinate</span>
+<span class="sd">        Y_UTM       Float   Meters      Y coordinate</span>
+<span class="sd">        Height_m    Float   Meters      Tree height</span>
+<span class="sd">        CBH_m       Float   Meters      Crown Base Height</span>
+<span class="sd">        DBH_cm      Float   Centimeters Diameter at Breast Height</span>
+<span class="sd">        Species     String  Text        Two letter FVS species code</span>
+<span class="sd">        ==========  ======= =========== ===========</span>
+
+<span class="sd">        :return: input field fitness</span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">        :return: fitness message</span>
+<span class="sd">        :rtype: string</span>
+
+<span class="sd">        .. note:: See FVS variant users guides for definitions of species codes:</span>
+<span class="sd">                  https://www.fs.fed.us/fvs/documents/guides.shtml</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">required_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;X_UTM&quot;</span><span class="p">,</span> <span class="s2">&quot;Y_UTM&quot;</span><span class="p">,</span> <span class="s2">&quot;Height_m&quot;</span><span class="p">,</span> <span class="s2">&quot;CBH_m&quot;</span><span class="p">,</span> <span class="s2">&quot;DBH_cm&quot;</span><span class="p">,</span> <span class="s2">&quot;Species&quot;</span><span class="p">]</span>
+        <span class="n">missing_fields</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">in_data_source</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lidar_shp</span><span class="p">)</span>
+        <span class="n">in_layer</span> <span class="o">=</span> <span class="n">in_data_source</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+        <span class="n">in_layer_defn</span> <span class="o">=</span> <span class="n">in_layer</span><span class="o">.</span><span class="n">GetLayerDefn</span><span class="p">()</span>
+        <span class="n">in_fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">in_layer_defn</span><span class="o">.</span><span class="n">GetFieldDefn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span>
+                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">in_layer_defn</span><span class="o">.</span><span class="n">GetFieldCount</span><span class="p">())]</span>
+        <span class="n">in_data_source</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">req</span> <span class="ow">in</span> <span class="n">required_fields</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">req</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">in_fields</span><span class="p">:</span>
+                <span class="n">missing_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">missing_fields</span><span class="p">:</span>
+            <span class="n">fields_ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The following fields seem to be missing from the input lidar&quot;</span>
+                   <span class="s2">&quot; shapefile. Please ensure these fields exist and are named &quot;</span>
+                   <span class="s2">&quot;as shown above. Missing fields: </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing_fields</span><span class="p">))</span>
+            <span class="nb">print</span> <span class="n">msg</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fields_ok</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Required input fields appear to be present.&quot;</span>
+            <span class="nb">print</span> <span class="n">msg</span>
+        <span class="k">return</span> <span class="n">fields_ok</span><span class="p">,</span> <span class="n">msg</span></div>
+
+<div class="viewcode-block" id="ConvertLidar.calculate_extents"><a class="viewcode-back" href="../lidar_ConvertLidar.html#lidar.ConvertLidar.calculate_extents">[docs]</a>    <span class="k">def</span> <span class="nf">calculate_extents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the minimum and maximum x and y extents of the input</span>
+<span class="sd">        shapefile.</span>
+
+<span class="sd">        :return: x min, x max, y min, y max</span>
+<span class="sd">        :rtype: list of four floats</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">in_data_source</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lidar_shp</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">in_layer</span> <span class="o">=</span> <span class="n">in_data_source</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+        <span class="n">extents</span> <span class="o">=</span> <span class="n">in_layer</span><span class="o">.</span><span class="n">GetExtent</span><span class="p">()</span>
+        <span class="n">extents</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">extents</span><span class="p">]</span>
+        <span class="n">in_data_source</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">extents</span></div>
+
+<div class="viewcode-block" id="ConvertLidar.create_fishnet"><a class="viewcode-back" href="../lidar_ConvertLidar.html#lidar.ConvertLidar.create_fishnet">[docs]</a>    <span class="k">def</span> <span class="nf">create_fishnet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extents</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a fishnet polygon shapefile to be used to assign plot</span>
+<span class="sd">        numbers to the lidar points. Fishnet cells are 64x64m (~1 acre).</span>
+<span class="sd">        Feature ID numbers are used to number plots.</span>
+
+<span class="sd">        :param extents: x min, x max, y min, y max of the input shapefile</span>
+<span class="sd">        :type extents: list of four floats</span>
+
+<span class="sd">        :return: fishnet creation success</span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">        :return: fishnet creation message</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fish_ok</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Method: create_fishnet</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">drv</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s2">&quot;ESRI Shapefile&quot;</span><span class="p">)</span>
+        <span class="c1"># dimensions</span>
+        <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">extents</span>
+        <span class="n">grid_width</span> <span class="o">=</span> <span class="mi">64</span>
+        <span class="n">grid_height</span> <span class="o">=</span> <span class="mi">64</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">x_max</span><span class="o">-</span><span class="n">x_min</span><span class="p">)</span><span class="o">/</span><span class="n">grid_width</span><span class="p">)</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">y_max</span><span class="o">-</span><span class="n">y_min</span><span class="p">)</span><span class="o">/</span><span class="n">grid_height</span><span class="p">)</span>
+        <span class="c1"># start grid cell envelope</span>
+        <span class="n">ring_x_left_origin</span> <span class="o">=</span> <span class="n">x_min</span>
+        <span class="n">ring_x_right_origin</span> <span class="o">=</span> <span class="n">x_min</span> <span class="o">+</span> <span class="n">grid_width</span>
+        <span class="n">ring_y_top_origin</span> <span class="o">=</span> <span class="n">y_min</span> <span class="o">+</span> <span class="n">grid_height</span>
+        <span class="n">ring_y_bottom_origin</span> <span class="o">=</span> <span class="n">y_min</span>
+        <span class="c1"># get projection from in shapefile</span>
+        <span class="n">proj_data_source</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lidar_shp</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">proj_layer</span> <span class="o">=</span> <span class="n">proj_data_source</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+        <span class="n">spatial_ref</span> <span class="o">=</span> <span class="n">proj_layer</span><span class="o">.</span><span class="n">GetSpatialRef</span><span class="p">()</span>
+        <span class="n">proj_data_source</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># create output file</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fishnet_shp</span><span class="p">):</span>
+            <span class="n">drv</span><span class="o">.</span><span class="n">DeleteDataSource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fishnet_shp</span><span class="p">)</span>
+        <span class="n">out_data_source</span> <span class="o">=</span> <span class="n">drv</span><span class="o">.</span><span class="n">CreateDataSource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fishnet_shp</span><span class="p">)</span>
+        <span class="c1"># add projection below</span>
+        <span class="n">out_layer</span> <span class="o">=</span> <span class="n">out_data_source</span><span class="o">.</span><span class="n">CreateLayer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fishnet_shp</span><span class="p">,</span> <span class="n">srs</span><span class="o">=</span><span class="n">spatial_ref</span><span class="p">,</span>
+                                                <span class="n">geom_type</span><span class="o">=</span><span class="n">ogr</span><span class="o">.</span><span class="n">wkbPolygon</span><span class="p">)</span>
+        <span class="n">out_layer_defn</span> <span class="o">=</span> <span class="n">out_layer</span><span class="o">.</span><span class="n">GetLayerDefn</span><span class="p">()</span>
+        <span class="c1"># create grid cells</span>
+        <span class="n">countcols</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">countcols</span> <span class="o">&lt;</span> <span class="n">cols</span><span class="p">:</span>
+            <span class="n">countcols</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1"># reset envelope for rows</span>
+            <span class="n">ring_y_top</span> <span class="o">=</span> <span class="n">ring_y_top_origin</span>
+            <span class="n">ring_y_bottom</span> <span class="o">=</span> <span class="n">ring_y_bottom_origin</span>
+            <span class="n">countrows</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">countrows</span> <span class="o">&lt;</span> <span class="n">rows</span><span class="p">:</span>
+                <span class="n">countrows</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">ring</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Geometry</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">wkbLinearRing</span><span class="p">)</span>
+                <span class="n">ring</span><span class="o">.</span><span class="n">AddPoint</span><span class="p">(</span><span class="n">ring_x_left_origin</span><span class="p">,</span> <span class="n">ring_y_top</span><span class="p">)</span>
+                <span class="n">ring</span><span class="o">.</span><span class="n">AddPoint</span><span class="p">(</span><span class="n">ring_x_right_origin</span><span class="p">,</span> <span class="n">ring_y_top</span><span class="p">)</span>
+                <span class="n">ring</span><span class="o">.</span><span class="n">AddPoint</span><span class="p">(</span><span class="n">ring_x_right_origin</span><span class="p">,</span> <span class="n">ring_y_bottom</span><span class="p">)</span>
+                <span class="n">ring</span><span class="o">.</span><span class="n">AddPoint</span><span class="p">(</span><span class="n">ring_x_left_origin</span><span class="p">,</span> <span class="n">ring_y_bottom</span><span class="p">)</span>
+                <span class="n">ring</span><span class="o">.</span><span class="n">AddPoint</span><span class="p">(</span><span class="n">ring_x_left_origin</span><span class="p">,</span> <span class="n">ring_y_top</span><span class="p">)</span>
+                <span class="n">poly</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Geometry</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">wkbPolygon</span><span class="p">)</span>
+                <span class="n">poly</span><span class="o">.</span><span class="n">AddGeometry</span><span class="p">(</span><span class="n">ring</span><span class="p">)</span>
+                <span class="c1"># add new geom to layer</span>
+                <span class="n">out_feature</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">out_layer_defn</span><span class="p">)</span>
+                <span class="n">out_feature</span><span class="o">.</span><span class="n">SetGeometry</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+                <span class="n">out_layer</span><span class="o">.</span><span class="n">CreateFeature</span><span class="p">(</span><span class="n">out_feature</span><span class="p">)</span>
+                <span class="n">out_feature</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="c1"># new envelope for next poly</span>
+                <span class="n">ring_y_top</span> <span class="o">=</span> <span class="n">ring_y_top</span> <span class="o">+</span> <span class="n">grid_height</span>
+                <span class="n">ring_y_bottom</span> <span class="o">=</span> <span class="n">ring_y_bottom</span> <span class="o">+</span> <span class="n">grid_height</span>
+            <span class="c1"># new envelope for next poly</span>
+            <span class="n">ring_x_left_origin</span> <span class="o">=</span> <span class="n">ring_x_left_origin</span> <span class="o">+</span> <span class="n">grid_width</span>
+            <span class="n">ring_x_right_origin</span> <span class="o">=</span> <span class="n">ring_x_right_origin</span> <span class="o">+</span> <span class="n">grid_width</span>
+        <span class="c1"># Save and close DataSources</span>
+        <span class="n">out_data_source</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># Check for features in fishnet shapefile</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fishnet_shp</span><span class="p">):</span>
+            <span class="n">out_data_source</span> <span class="o">=</span> <span class="n">drv</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fishnet_shp</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">out_layer</span> <span class="o">=</span> <span class="n">out_data_source</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+            <span class="n">feat_count</span> <span class="o">=</span> <span class="n">out_layer</span><span class="o">.</span><span class="n">GetFeatureCount</span><span class="p">()</span>
+            <span class="n">out_data_source</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">feat_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">fish_ok</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Fishnet shapefile creation appears to have been successful</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fish_ok</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;ERROR: Fishnet shapefile has no features</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fish_ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;ERROR: Creation of the fishnet shapefile failed</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">fish_ok</span><span class="p">,</span> <span class="n">msg</span></div>
+
+<div class="viewcode-block" id="ConvertLidar.copy_shapefile"><a class="viewcode-back" href="../lidar_ConvertLidar.html#lidar.ConvertLidar.copy_shapefile">[docs]</a>    <span class="k">def</span> <span class="nf">copy_shapefile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Makes an exact copy of the input lidar shapefile for use in creating</span>
+<span class="sd">        the output lidar shapefile.</span>
+
+<span class="sd">        :return: shapefile copy success</span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">        :return: shapefile copy message</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">copy_ok</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Method: copy_shapefile</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="c1"># set shapefile names</span>
+        <span class="n">in_shp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lidar_shp</span>
+        <span class="n">out_shp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_lidar</span>
+
+        <span class="c1"># start timer</span>
+        <span class="n">copy_start</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
+
+        <span class="c1"># get driver</span>
+        <span class="n">drv</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s2">&quot;ESRI Shapefile&quot;</span><span class="p">)</span>
+
+        <span class="c1"># open input shapefile and extract information</span>
+        <span class="n">in_ds</span> <span class="o">=</span> <span class="n">drv</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">in_shp</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">in_lyr</span> <span class="o">=</span> <span class="n">in_ds</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+        <span class="n">lyr_def</span> <span class="o">=</span> <span class="n">in_lyr</span><span class="o">.</span><span class="n">GetLayerDefn</span><span class="p">()</span>
+        <span class="n">lyr_geom</span> <span class="o">=</span> <span class="n">in_lyr</span><span class="o">.</span><span class="n">GetGeomType</span><span class="p">()</span>
+        <span class="n">spatial_ref</span> <span class="o">=</span> <span class="n">in_lyr</span><span class="o">.</span><span class="n">GetSpatialRef</span><span class="p">()</span>
+
+        <span class="c1"># delete output shapefile if it exists</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_shp</span><span class="p">):</span>
+            <span class="n">del_ok</span> <span class="o">=</span> <span class="n">drv</span><span class="o">.</span><span class="n">DeleteDataSource</span><span class="p">(</span><span class="n">out_shp</span><span class="p">)</span> <span class="c1">#returns flag</span>
+            <span class="k">if</span> <span class="n">del_ok</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span> <span class="s2">&quot;Deleted old LiDAR out shapefile&quot;</span>
+
+        <span class="c1"># create out shapefile</span>
+        <span class="n">out_ds</span> <span class="o">=</span> <span class="n">drv</span><span class="o">.</span><span class="n">CreateDataSource</span><span class="p">(</span><span class="n">out_shp</span><span class="p">)</span>
+        <span class="n">out_lyr</span> <span class="o">=</span> <span class="n">out_ds</span><span class="o">.</span><span class="n">CreateLayer</span><span class="p">(</span><span class="n">out_shp</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">spatial_ref</span><span class="p">,</span> <span class="n">lyr_geom</span><span class="p">)</span>
+
+        <span class="c1"># add fields from input shapefile to output shapefile</span>
+        <span class="n">cfld_ok</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">field_cnt</span> <span class="o">=</span> <span class="n">lyr_def</span><span class="o">.</span><span class="n">GetFieldCount</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">field_cnt</span><span class="p">):</span>
+            <span class="n">cfld_ok</span> <span class="o">+=</span> <span class="n">out_lyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">lyr_def</span><span class="o">.</span><span class="n">GetFieldDefn</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="c1">#returns flag</span>
+            <span class="k">if</span> <span class="n">cfld_ok</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="p">(</span><span class="s2">&quot;ERROR: Problems creating fields in out LiDAR shapefile. OGR &quot;</span>
+                        <span class="s2">&quot;CreateField error = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cfld_ok</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">copy_ok</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="c1">##                in_ds = None</span>
+<span class="c1">##                out_ds = None</span>
+        <span class="n">out_lyr</span><span class="o">.</span><span class="n">ResetReading</span><span class="p">()</span>
+
+        <span class="c1"># create output shapefile features</span>
+        <span class="k">for</span> <span class="n">in_feat</span> <span class="ow">in</span> <span class="n">in_lyr</span><span class="p">:</span>
+            <span class="n">out_feat</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">lyr_def</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">field_cnt</span><span class="p">):</span>
+                <span class="n">out_feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="n">lyr_def</span><span class="o">.</span><span class="n">GetFieldDefn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">GetNameRef</span><span class="p">(),</span> <span class="n">in_feat</span><span class="o">.</span><span class="n">GetField</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="n">cftr_ok</span> <span class="o">=</span> <span class="n">out_lyr</span><span class="o">.</span><span class="n">CreateFeature</span><span class="p">(</span><span class="n">in_feat</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">cftr_ok</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="p">(</span><span class="s2">&quot;ERROR: Problem creating features in out LiDAR shapefile. OGR &quot;</span>
+                        <span class="s2">&quot;CreateFeatrure error = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cftr_ok</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">copy_ok</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="c1">##                in_ds = None</span>
+<span class="c1">##                out_ds = None</span>
+            <span class="n">out_feat</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># dereference feature</span>
+            <span class="n">in_feat</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># ogr cleanup and save shapefile</span>
+        <span class="n">in_lyr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">in_ds</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">out_lyr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">out_ds</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">copy_ok</span><span class="p">:</span>
+            <span class="c1"># end timer</span>
+            <span class="n">copy_time</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">copy_start</span>
+            <span class="nb">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Create output shapefile took &quot;</span><span class="p">,</span> <span class="n">copy_time</span><span class="p">,</span> <span class="s2">&quot; to run.&quot;</span>
+
+            <span class="c1"># return messages</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Created initial LiDAR out shapefile</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">copy_ok</span><span class="p">,</span> <span class="n">msg</span></div>
+
+<div class="viewcode-block" id="ConvertLidar.cleanup_lidar_fields"><a class="viewcode-back" href="../lidar_ConvertLidar.html#lidar.ConvertLidar.cleanup_lidar_fields">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup_lidar_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes extraneous fields from output shapefile.</span>
+
+<span class="sd">        :return: cleanup success</span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">        :return: cleanup message</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cln_fld_ok</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Method: cleanup_lidar_fields</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="c1"># define input shapefile</span>
+        <span class="n">pt_shp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_lidar</span>
+
+        <span class="c1"># required input fields</span>
+        <span class="n">pt_req_in_flds</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FID&quot;</span><span class="p">,</span> <span class="s2">&quot;Shape&quot;</span><span class="p">,</span> <span class="s2">&quot;X_UTM&quot;</span><span class="p">,</span> <span class="s2">&quot;Y_UTM&quot;</span><span class="p">,</span> <span class="s2">&quot;Height_m&quot;</span><span class="p">,</span> <span class="s2">&quot;CBH_m&quot;</span><span class="p">,</span>
+                          <span class="s2">&quot;DBH_cm&quot;</span><span class="p">,</span> <span class="s2">&quot;Species&quot;</span><span class="p">]</span>
+
+        <span class="c1"># get driver</span>
+        <span class="n">drv</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s2">&quot;ESRI Shapefile&quot;</span><span class="p">)</span>
+
+        <span class="c1"># open lidar point shapefile</span>
+        <span class="n">pt_ds</span> <span class="o">=</span> <span class="n">drv</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">pt_shp</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">pt_lyr</span> <span class="o">=</span> <span class="n">pt_ds</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+
+        <span class="c1"># get lidar point field names</span>
+        <span class="n">pt_lyr_def</span> <span class="o">=</span> <span class="n">pt_lyr</span><span class="o">.</span><span class="n">GetLayerDefn</span><span class="p">()</span>
+        <span class="n">pt_nmbr_flds</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">pt_lyr_def</span><span class="o">.</span><span class="n">GetFieldCount</span><span class="p">())</span>
+        <span class="n">pt_fld_nms</span> <span class="o">=</span> <span class="p">[</span><span class="n">pt_lyr_def</span><span class="o">.</span><span class="n">GetFieldDefn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pt_nmbr_flds</span><span class="p">]</span>
+
+        <span class="c1"># delete extraneous lidar point fields</span>
+        <span class="k">for</span> <span class="n">in_fld</span> <span class="ow">in</span> <span class="n">pt_fld_nms</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">in_fld</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pt_req_in_flds</span><span class="p">:</span>
+                <span class="n">del_fld_idx</span> <span class="o">=</span> <span class="n">pt_lyr_def</span><span class="o">.</span><span class="n">GetFieldIndex</span><span class="p">(</span><span class="n">in_fld</span><span class="p">)</span>
+                <span class="n">dflds_ok</span> <span class="o">=</span> <span class="n">pt_lyr</span><span class="o">.</span><span class="n">DeleteField</span><span class="p">(</span><span class="n">del_fld_idx</span><span class="p">)</span> <span class="c1"># returns flag</span>
+                <span class="k">if</span> <span class="n">dflds_ok</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">cln_fld_ok</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="p">(</span><span class="s2">&quot;ERROR: Problem deleting extraneous fields from output &quot;</span>
+                            <span class="s2">&quot;shapefile. OGR DeleteField error: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dflds_ok</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">cln_fld_ok</span><span class="p">,</span> <span class="n">msg</span>
+
+        <span class="c1"># save and close data sources, layers and layer definitions</span>
+        <span class="n">pt_lyr_def</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pt_lyr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pt_ds</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">cln_fld_ok</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Deleted extraneous fileds from output shapefile</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">cln_fld_ok</span><span class="p">,</span> <span class="n">msg</span></div>
+
+<div class="viewcode-block" id="ConvertLidar.fishnet_id"><a class="viewcode-back" href="../lidar_ConvertLidar.html#lidar.ConvertLidar.fishnet_id">[docs]</a>    <span class="k">def</span> <span class="nf">fishnet_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assigns a fishnet-based plot ID number to each tree in the output</span>
+<span class="sd">        shapefile.</span>
+
+<span class="sd">        :return: plot number assignment success</span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">        :return: plot number assignment message</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fish_id_ok</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Method: fishnet_id</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="c1"># define input shapefiles</span>
+        <span class="n">pt_shp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_lidar</span>
+        <span class="n">poly_shp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fishnet_shp</span>
+
+        <span class="c1"># start timer</span>
+        <span class="n">fish_id_start</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
+
+        <span class="c1"># get driver</span>
+        <span class="n">drv</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s2">&quot;ESRI Shapefile&quot;</span><span class="p">)</span>
+
+        <span class="c1"># open lidar point shapefile</span>
+        <span class="n">pt_ds</span> <span class="o">=</span> <span class="n">drv</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">pt_shp</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">pt_lyr</span> <span class="o">=</span> <span class="n">pt_ds</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+
+        <span class="c1"># add fishnet ID field to lidar out shapefile</span>
+        <span class="n">fish_field</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">FieldDefn</span><span class="p">(</span><span class="s2">&quot;Plot_ID&quot;</span><span class="p">,</span> <span class="n">ogr</span><span class="o">.</span><span class="n">OFTInteger</span><span class="p">)</span>
+        <span class="n">fish_field_ok</span> <span class="o">=</span> <span class="n">pt_lyr</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">fish_field</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fish_field_ok</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">fish_id_ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;ERROR: Problem adding fishnet ID field to lidar out shapefile</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="c1"># set all initial fishnet ID values to -9999</span>
+        <span class="n">feat_init_ok</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">pt_lyr</span><span class="p">:</span>
+            <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;Plot_ID&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">9999</span><span class="p">)</span>
+            <span class="n">feat_init_ok</span> <span class="o">+=</span> <span class="n">pt_lyr</span><span class="o">.</span><span class="n">SetFeature</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span>
+        <span class="n">pt_lyr</span><span class="o">.</span><span class="n">ResetReading</span><span class="p">()</span> <span class="c1"># prob not necessary now...</span>
+        <span class="k">if</span> <span class="n">feat_init_ok</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">fish_id_ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;ERROR: Problem initializing fishnet ID field in lidar out shapefile</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="c1"># save and refresh data sources and layers</span>
+        <span class="n">pt_lyr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pt_ds</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pt_ds</span> <span class="o">=</span> <span class="n">drv</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">pt_shp</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">pt_lyr</span> <span class="o">=</span> <span class="n">pt_ds</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+
+        <span class="c1"># open fishnet shapefile</span>
+        <span class="n">poly_ds</span> <span class="o">=</span> <span class="n">drv</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">poly_shp</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">poly_lyr</span> <span class="o">=</span> <span class="n">poly_ds</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+
+        <span class="c1"># get field index for fishnet FID field</span>
+        <span class="n">fish_id</span> <span class="o">=</span> <span class="n">poly_lyr</span><span class="o">.</span><span class="n">GetLayerDefn</span><span class="p">()</span><span class="o">.</span><span class="n">GetFieldIndex</span><span class="p">(</span><span class="s2">&quot;FID&quot;</span><span class="p">)</span>
+        <span class="n">fish_id_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">feat_ok</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">pt_lyr</span><span class="p">:</span>
+            <span class="c1"># get XY coordinates for points in the lidar shapefile</span>
+            <span class="n">geom</span> <span class="o">=</span> <span class="n">feat</span><span class="o">.</span><span class="n">GetGeometryRef</span><span class="p">()</span>
+            <span class="n">x_coordinate</span><span class="p">,</span> <span class="n">y_coordinate</span> <span class="o">=</span> <span class="n">geom</span><span class="o">.</span><span class="n">GetX</span><span class="p">(),</span> <span class="n">geom</span><span class="o">.</span><span class="n">GetY</span><span class="p">()</span>
+            <span class="c1"># create single point to filter fishnet</span>
+            <span class="n">point</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Geometry</span><span class="p">(</span><span class="n">ogr</span><span class="o">.</span><span class="n">wkbPoint</span><span class="p">)</span>
+            <span class="n">point</span><span class="o">.</span><span class="n">AddPoint</span><span class="p">(</span><span class="n">x_coordinate</span><span class="p">,</span> <span class="n">y_coordinate</span><span class="p">)</span>
+            <span class="c1"># filter fishnet features by point location</span>
+            <span class="n">poly_lyr</span><span class="o">.</span><span class="n">SetSpatialFilter</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+            <span class="c1"># extract fishnet ID number and add to lidar point attributes</span>
+            <span class="c1"># loop doesn&#39;t execute when the point falls outside fishnet</span>
+            <span class="k">for</span> <span class="n">poly_feat</span> <span class="ow">in</span> <span class="n">poly_lyr</span><span class="p">:</span>
+                <span class="n">feature_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">poly_feat</span><span class="o">.</span><span class="n">GetFieldAsInteger</span><span class="p">(</span><span class="n">fish_id</span><span class="p">))</span>
+                <span class="n">feat</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;Plot_ID&quot;</span><span class="p">,</span> <span class="n">feature_id</span><span class="p">)</span>
+                <span class="n">feat_ok</span> <span class="o">+=</span> <span class="n">pt_lyr</span><span class="o">.</span><span class="n">SetFeature</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span>
+                <span class="n">fish_id_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature_id</span><span class="p">)</span> <span class="c1">#testing</span>
+            <span class="n">poly_lyr</span><span class="o">.</span><span class="n">SetSpatialFilter</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">pt_lyr</span><span class="o">.</span><span class="n">ResetReading</span><span class="p">()</span> <span class="c1"># prob not necessary now...</span>
+        <span class="k">if</span> <span class="n">feat_ok</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">fish_id_ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;ERROR: Problem adding fishnet ID # to lidar out shapefile</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="c1"># save and close layers and data sources</span>
+        <span class="n">pt_lyr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pt_ds</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">poly_lyr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">poly_ds</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">fish_id_ok</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Plot ID numbers successfully added to lidar out shapefile</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="c1"># print some statistics</span>
+            <span class="nb">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Length of fish ID list is: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fish_id_list</span><span class="p">))</span>
+            <span class="nb">print</span> <span class="s2">&quot;Unique values in fish ID list: &quot;</span>
+            <span class="nb">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">fish_id_list</span><span class="p">))</span>
+
+            <span class="n">fish_id_time</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">fish_id_start</span>
+            <span class="nb">print</span> <span class="s2">&quot;Fishnet ID function took &quot;</span><span class="p">,</span> <span class="n">fish_id_time</span><span class="p">,</span> <span class="s2">&quot; to run.&quot;</span>
+        <span class="k">return</span> <span class="n">fish_id_ok</span><span class="p">,</span> <span class="n">msg</span></div>
+
+<div class="viewcode-block" id="ConvertLidar.cleanup_lidar_features"><a class="viewcode-back" href="../lidar_ConvertLidar.html#lidar.ConvertLidar.cleanup_lidar_features">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup_lidar_features</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes features outside the fishnet area.</span>
+
+<span class="sd">        :return: cleanup success</span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">        :return: cleanup message</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cln_ftr_ok</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Method: cleanup_lidar_features</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="c1"># get path and layer name for output shapefile</span>
+        <span class="n">pt_shp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_lidar</span>
+        <span class="n">lyr_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">pt_shp</span><span class="p">)[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+
+        <span class="c1"># get driver</span>
+        <span class="n">drv</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s2">&quot;ESRI Shapefile&quot;</span><span class="p">)</span>
+
+        <span class="c1"># open lidar point shapefile</span>
+        <span class="n">pt_ds</span> <span class="o">=</span> <span class="n">drv</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">pt_shp</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">pt_lyr</span> <span class="o">=</span> <span class="n">pt_ds</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+
+        <span class="c1"># get number of input features</span>
+        <span class="n">pt_nmbr_in_ftrs</span> <span class="o">=</span> <span class="n">pt_lyr</span><span class="o">.</span><span class="n">GetFeatureCount</span><span class="p">()</span>
+
+        <span class="c1"># delete features outside the fishnet</span>
+        <span class="n">del_feat_ok</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">pt_lyr</span><span class="o">.</span><span class="n">SetAttributeFilter</span><span class="p">(</span><span class="s2">&quot;Plot_ID = &#39;-9999&#39;&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">pt_lyr</span><span class="p">:</span>
+            <span class="n">del_feats</span> <span class="o">=</span> <span class="n">feat</span><span class="o">.</span><span class="n">GetFID</span><span class="p">()</span>
+            <span class="n">del_feat_ok</span> <span class="o">+=</span> <span class="n">pt_lyr</span><span class="o">.</span><span class="n">DeleteFeature</span><span class="p">(</span><span class="n">del_feats</span><span class="p">)</span>
+            <span class="n">feat</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">del_feat_ok</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">cln_ftr_ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;ERROR: Problem deleting features that fell outside the fishnet boundary</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="c1"># shapefile needs to be &quot;repacked&quot; before the features will actually be deleted</span>
+        <span class="c1"># close and refresh data source</span>
+        <span class="n">pt_lyr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pt_ds</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pt_ds</span> <span class="o">=</span> <span class="n">drv</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">pt_shp</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">repack_return</span> <span class="o">=</span> <span class="n">pt_ds</span><span class="o">.</span><span class="n">ExecuteSQL</span><span class="p">(</span><span class="s2">&quot;repack &quot;</span> <span class="o">+</span> <span class="n">lyr_name</span><span class="p">)</span>
+        <span class="c1"># ExecuteSQL returns &quot;Null&quot; if no error occured</span>
+        <span class="k">if</span> <span class="n">repack_return</span><span class="p">:</span>
+            <span class="n">cln_ftr_ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;ERROR: Problem &#39;repacking&#39; features in the lidar out shapefile</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="n">cln_ftr_ok</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Features outside the fishnet boundary were successfully deleted</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="c1"># calculate the numer of features deleted</span>
+            <span class="n">pt_lyr</span> <span class="o">=</span> <span class="n">pt_ds</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+            <span class="n">pt_nmbr_out_ftrs</span> <span class="o">=</span> <span class="n">pt_lyr</span><span class="o">.</span><span class="n">GetFeatureCount</span><span class="p">()</span>
+            <span class="n">pt_nmbr_del_ftrs</span> <span class="o">=</span> <span class="n">pt_nmbr_in_ftrs</span> <span class="o">-</span> <span class="n">pt_nmbr_out_ftrs</span>
+            <span class="c1"># print deleted feature count</span>
+            <span class="nb">print</span> <span class="n">pt_nmbr_del_ftrs</span><span class="p">,</span> <span class="s2">&quot; features fell outside the fishnet and were deleted.&quot;</span>
+        <span class="k">else</span><span class="p">:</span> <span class="n">msg</span> <span class="o">+=</span> <span class="p">(</span><span class="s2">&quot;ERROR: Problem rebuilding output shapefile after deleting features &quot;</span>
+                      <span class="s2">&quot;outside the fishnet boundary</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># save and close shapefile</span>
+        <span class="n">pt_lyr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pt_ds</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">cln_ftr_ok</span><span class="p">,</span> <span class="n">msg</span></div>
+
+<div class="viewcode-block" id="ConvertLidar.add_attribute_fields"><a class="viewcode-back" href="../lidar_ConvertLidar.html#lidar.ConvertLidar.add_attribute_fields">[docs]</a>    <span class="k">def</span> <span class="nf">add_attribute_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds and defines new attribute fields to the output shapefile.</span>
+
+<span class="sd">        **Fields added:**</span>
+
+<span class="sd">        ==========  ======= ===========</span>
+<span class="sd">        Field Name  Type    Description</span>
+<span class="sd">        ==========  ======= ===========</span>
+<span class="sd">        POINT_X     Float   X coordinate</span>
+<span class="sd">        POINT_Y     Float   Y coordinate</span>
+<span class="sd">        CR_code     Integer FVS crown ratio code</span>
+<span class="sd">        DBH_in_x10  Integer Diameter at Breast Height in inches x 10</span>
+<span class="sd">        Height_ft   Integer Tree height in feet</span>
+<span class="sd">        Tree_ID     Integer Unique tree ID number within each plot</span>
+<span class="sd">        ==========  ======= ===========</span>
+
+<span class="sd">        :return: add attribute fields success</span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">        :return: add attribute fields message</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">add_flds_ok</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Method: add_attribute_fields</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">new_fields</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;POINT_X&quot;</span><span class="p">:</span> <span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">,</span>
+            <span class="s2">&quot;POINT_Y&quot;</span><span class="p">:</span> <span class="n">ogr</span><span class="o">.</span><span class="n">OFTReal</span><span class="p">,</span>
+            <span class="s2">&quot;CR_code&quot;</span><span class="p">:</span> <span class="n">ogr</span><span class="o">.</span><span class="n">OFTInteger</span><span class="p">,</span>
+            <span class="s2">&quot;DBH_in_x10&quot;</span><span class="p">:</span> <span class="n">ogr</span><span class="o">.</span><span class="n">OFTInteger</span><span class="p">,</span>
+            <span class="s2">&quot;Height_ft&quot;</span><span class="p">:</span> <span class="n">ogr</span><span class="o">.</span><span class="n">OFTInteger</span><span class="p">,</span>
+            <span class="s2">&quot;Tree_ID&quot;</span><span class="p">:</span> <span class="n">ogr</span><span class="o">.</span><span class="n">OFTInteger</span>
+        <span class="p">}</span>
+        <span class="n">in_data_source</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_lidar</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">in_layer</span> <span class="o">=</span> <span class="n">in_data_source</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+        <span class="n">in_layer_defn</span> <span class="o">=</span> <span class="n">in_layer</span><span class="o">.</span><span class="n">GetLayerDefn</span><span class="p">()</span>
+        <span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">in_layer_defn</span><span class="o">.</span><span class="n">GetFieldDefn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span>
+                       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">in_layer_defn</span><span class="o">.</span><span class="n">GetFieldCount</span><span class="p">())]</span>
+        <span class="n">crt_flds_ok</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">new_fields</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field_names</span><span class="p">:</span>
+                <span class="n">new</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">FieldDefn</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">new_fields</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                <span class="n">crt_flds_ok</span> <span class="o">+=</span> <span class="n">in_layer</span><span class="o">.</span><span class="n">CreateField</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span> <span class="n">key</span> <span class="o">+</span> <span class="s2">&quot; field already exists&quot;</span>
+        <span class="k">if</span> <span class="n">crt_flds_ok</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">add_flds_ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;ERROR: Problem adding new fields to lidar out shapefile</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;New fields successfully added to lidar out shapefile</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">in_data_source</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">add_flds_ok</span><span class="p">,</span> <span class="n">msg</span></div>
+
+<div class="viewcode-block" id="ConvertLidar.calculate_attribute_fields"><a class="viewcode-back" href="../lidar_ConvertLidar.html#lidar.ConvertLidar.calculate_attribute_fields">[docs]</a>    <span class="k">def</span> <span class="nf">calculate_attribute_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates values for the attribute fields added in the</span>
+<span class="sd">        &quot;add_attribute_fields&quot; method.</span>
+
+<span class="sd">        **Formula descriptions:**</span>
+
+<span class="sd">            * Height- converts from meters to feet and rounds to integer</span>
+<span class="sd">            * DBH - converts from centimeters to inches*10 and rounds to integer</span>
+<span class="sd">            * CR_code- calculates crown ratio while accounting for anomolous data</span>
+<span class="sd">              where Height is &lt;= CBH. Then classifies the crown ratio into FVS</span>
+<span class="sd">              categories.</span>
+
+<span class="sd">              * crown ratio = (height - crown base height)/height).</span>
+<span class="sd">              * FVS crown ratio codes: 1: 0-10%; 2: 11-20%;...; 9: 81-100%</span>
+
+<span class="sd">        :return: calculate attribute fields success</span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">        :return: calculate attribute fields message</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">calc_flds_ok</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Method: calculate_attribute_fields</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">in_data_source</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_lidar</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">in_layer</span> <span class="o">=</span> <span class="n">in_data_source</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+        <span class="n">set_ftr_ok</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">ftr</span> <span class="ow">in</span> <span class="n">in_layer</span><span class="p">:</span>
+            <span class="c1"># set X-Y coordinates</span>
+            <span class="n">ftr</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;POINT_X&quot;</span><span class="p">,</span> <span class="n">ftr</span><span class="o">.</span><span class="n">GetField</span><span class="p">(</span><span class="s2">&quot;X_UTM&quot;</span><span class="p">))</span>
+            <span class="n">ftr</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;POINT_Y&quot;</span><span class="p">,</span> <span class="n">ftr</span><span class="o">.</span><span class="n">GetField</span><span class="p">(</span><span class="s2">&quot;Y_UTM&quot;</span><span class="p">))</span>
+            <span class="c1"># extract input height, diameter at breast height and crown base height</span>
+            <span class="n">in_ht</span> <span class="o">=</span> <span class="n">ftr</span><span class="o">.</span><span class="n">GetField</span><span class="p">(</span><span class="s2">&quot;Height_m&quot;</span><span class="p">)</span>
+            <span class="n">in_dbh</span> <span class="o">=</span> <span class="n">ftr</span><span class="o">.</span><span class="n">GetField</span><span class="p">(</span><span class="s2">&quot;DBH_cm&quot;</span><span class="p">)</span>
+            <span class="n">in_cbh</span> <span class="o">=</span> <span class="n">ftr</span><span class="o">.</span><span class="n">GetField</span><span class="p">(</span><span class="s2">&quot;CBH_m&quot;</span><span class="p">)</span>
+            <span class="c1"># calculate and set output height and diameter at breast height</span>
+            <span class="n">out_ht</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">in_ht</span><span class="o">*</span><span class="mf">3.281</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+            <span class="n">out_dbh</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">in_dbh</span><span class="o">*</span><span class="mf">3.937</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+            <span class="n">ftr</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;Height_ft&quot;</span><span class="p">,</span> <span class="n">out_ht</span><span class="p">)</span>
+            <span class="n">ftr</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;DBH_in_x10&quot;</span><span class="p">,</span> <span class="n">out_dbh</span><span class="p">)</span>
+            <span class="c1"># calculate and set FVS crown ratio code</span>
+            <span class="k">if</span> <span class="n">in_ht</span> <span class="o">&lt;=</span> <span class="n">in_cbh</span><span class="p">:</span>
+                <span class="n">crown_ratio</span> <span class="o">=</span> <span class="mf">0.0001</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">crown_ratio</span> <span class="o">=</span> <span class="p">((</span><span class="n">in_ht</span> <span class="o">-</span> <span class="n">in_cbh</span><span class="p">)</span> <span class="o">/</span> <span class="n">in_ht</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">crown_ratio</span> <span class="o">&gt;=</span> <span class="mf">0.8</span><span class="p">:</span>
+                <span class="n">ftr</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;CR_code&quot;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ftr</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;CR_code&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">crown_ratio</span> <span class="o">-</span> <span class="mf">0.000001</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># save feature attribute changes</span>
+            <span class="n">set_ftr_ok</span> <span class="o">+=</span> <span class="n">in_layer</span><span class="o">.</span><span class="n">SetFeature</span><span class="p">(</span><span class="n">ftr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">set_ftr_ok</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">calc_flds_ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;ERROR: Problem calculating fields in output shapefile</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Calculated attribute values for new fields in output shapefile</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">in_data_source</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">calc_flds_ok</span><span class="p">,</span> <span class="n">msg</span></div>
+
+<div class="viewcode-block" id="ConvertLidar.number_trees"><a class="viewcode-back" href="../lidar_ConvertLidar.html#lidar.ConvertLidar.number_trees">[docs]</a>    <span class="k">def</span> <span class="nf">number_trees</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Numbers trees within each 64x64m (~1 acre) plot. The combination of plot ID</span>
+<span class="sd">        and tree Id constitutes a unique identifier for each tree in the simulation.</span>
+
+<span class="sd">        :return: numbering trees success</span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">        :return: numbering trees message</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nmbr_trees_ok</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Method: number_trees</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">in_data_source</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_lidar</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">in_layer</span> <span class="o">=</span> <span class="n">in_data_source</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+        <span class="n">field_vals</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ftr</span> <span class="ow">in</span> <span class="n">in_layer</span><span class="p">:</span>
+            <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ftr</span><span class="o">.</span><span class="n">GetFieldAsInteger</span><span class="p">(</span><span class="s2">&quot;Plot_ID&quot;</span><span class="p">))</span>
+        <span class="n">plots</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">field_vals</span><span class="p">))</span>
+        <span class="n">in_layer</span><span class="o">.</span><span class="n">ResetReading</span><span class="p">()</span>
+        <span class="n">tree_counter</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">set_ftr_ok</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">:</span>
+            <span class="n">plot_filter</span> <span class="o">=</span> <span class="s2">&quot;Plot_ID = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+            <span class="n">set_ftr_ok</span> <span class="o">+=</span> <span class="n">in_layer</span><span class="o">.</span><span class="n">SetAttributeFilter</span><span class="p">(</span><span class="n">plot_filter</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">ftr</span> <span class="ow">in</span> <span class="n">in_layer</span><span class="p">:</span>
+                <span class="n">ftr</span><span class="o">.</span><span class="n">SetField</span><span class="p">(</span><span class="s2">&quot;Tree_ID&quot;</span><span class="p">,</span> <span class="n">tree_counter</span><span class="p">)</span>
+                <span class="n">set_ftr_ok</span> <span class="o">+=</span> <span class="n">in_layer</span><span class="o">.</span><span class="n">SetFeature</span><span class="p">(</span><span class="n">ftr</span><span class="p">)</span>
+                <span class="n">tree_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="nb">print</span> <span class="nb">str</span><span class="p">(</span><span class="n">tree_counter</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; trees numbered in plot &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+            <span class="n">tree_counter</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">set_ftr_ok</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nmbr_trees_ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;ERROR: Problem numbering trees within each plot</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Numbered all trees within each plot</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">in_data_source</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">nmbr_trees_ok</span><span class="p">,</span> <span class="n">msg</span></div>
+
+<div class="viewcode-block" id="ConvertLidar.export_attributes_to_csv"><a class="viewcode-back" href="../lidar_ConvertLidar.html#lidar.ConvertLidar.export_attributes_to_csv">[docs]</a>    <span class="k">def</span> <span class="nf">export_attributes_to_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lidar_csv</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Exports select attributes in the new lidar shapefile to a text (.csv)</span>
+<span class="sd">        file.</span>
+
+<span class="sd">        **Exported attributes:**</span>
+
+<span class="sd">        ==========  ===========</span>
+<span class="sd">        Name        Description</span>
+<span class="sd">        ==========  ===========</span>
+<span class="sd">        FID         GIS record ID number</span>
+<span class="sd">        POINT_X     X coordinate</span>
+<span class="sd">        POINT_Y     Y coordinate</span>
+<span class="sd">        Species     Two letter FVS species code</span>
+<span class="sd">        CR_code     FVS crown ratio code</span>
+<span class="sd">        DBH_in_x10  Diameter at Breast Height in inches x 10</span>
+<span class="sd">        Height_ft   Tree height in feet</span>
+<span class="sd">        Plot_ID     Unique plot ID number</span>
+<span class="sd">        Tree_ID     Unique tree ID number within each plot</span>
+<span class="sd">        ==========  ===========</span>
+
+<span class="sd">        :param lidar_csv: name and path for output text file</span>
+<span class="sd">        :type lidar_csv: string</span>
+
+<span class="sd">        :return: export success</span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">        :return: export message</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">csv_ok</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Method: export_attributes_to_csv</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">csv_filename</span> <span class="o">=</span> <span class="n">lidar_csv</span>
+        <span class="c1">#Export select fields to csv file</span>
+        <span class="n">out_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FID&quot;</span><span class="p">,</span> <span class="s2">&quot;POINT_X&quot;</span><span class="p">,</span> <span class="s2">&quot;POINT_Y&quot;</span><span class="p">,</span> <span class="s2">&quot;Species&quot;</span><span class="p">,</span> <span class="s2">&quot;CR_code&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;DBH_in_x10&quot;</span><span class="p">,</span> <span class="s2">&quot;Height_ft&quot;</span><span class="p">,</span> <span class="s2">&quot;Plot_ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Tree_ID&quot;</span><span class="p">]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">lidar_csv</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">lidar_csv_file</span><span class="p">:</span>
+            <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">lidar_csv_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">lineterminator</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">out_fields</span><span class="p">)</span>
+            <span class="n">out_fields</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;FID&quot;</span><span class="p">)</span>
+            <span class="n">in_data_source</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_lidar</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">in_layer</span> <span class="o">=</span> <span class="n">in_data_source</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">ftr</span> <span class="ow">in</span> <span class="n">in_layer</span><span class="p">:</span>
+                <span class="n">attributes</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ftr</span><span class="o">.</span><span class="n">GetFID</span><span class="p">())</span>
+                <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">out_fields</span><span class="p">:</span>
+                    <span class="n">attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ftr</span><span class="o">.</span><span class="n">GetField</span><span class="p">(</span><span class="n">field</span><span class="p">))</span>
+                <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+            <span class="n">lidar_csv_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">in_data_source</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Lidar out shapefile fields exported to csv: &quot;</span> <span class="o">+</span> <span class="n">csv_filename</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">csv_ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;ERROR: Export of lidar out shapefile fields failed.</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">csv_ok</span><span class="p">,</span> <span class="n">msg</span></div></div>
+<span class="c1">###End class &quot;ConvertLidar&quot;###</span>
+
+<div class="viewcode-block" id="FVSFromLidar"><a class="viewcode-back" href="../lidar_FVSFromLidar.html#lidar.FVSFromLidar">[docs]</a><span class="k">class</span> <span class="nc">FVSFromLidar</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates FVS tree lists (&lt;example&gt;.tre) and keyword files (&lt;example&gt;.key),</span>
+<span class="sd">    runs FVS for each 64x64m (~1 acre) lidar plot and creates a tree list for CAPSIS.</span>
+
+<span class="sd">    :param fuel: FVS fuels object. Specific to a single FVS variant.</span>
+<span class="sd">    :type fuel: object</span>
+<span class="sd">    :param lidar_csv: path and file name of input text file (generated by the</span>
+<span class="sd">                    ConvertLidar class above (export_attributes_to_csv method)</span>
+<span class="sd">    :type lidar_csv: string</span>
+<span class="sd">    :param keyword_file: path and file name of the &quot;master&quot; FVS keyword file.</span>
+<span class="sd">    :type keyword_file: string</span>
+
+<span class="sd">    **Methods:**</span>
+
+<span class="sd">    * run_fvs_lidar</span>
+<span class="sd">    * create_capsis_csv</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fuel</span><span class="p">,</span> <span class="n">lidar_csv</span><span class="p">,</span> <span class="n">keyword_file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor</span>
+
+<span class="sd">        Defines local variables and objects that will be used by methods below</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fuel</span> <span class="o">=</span> <span class="n">fuel</span> <span class="c1"># fuels object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lidar_csv</span> <span class="o">=</span> <span class="n">lidar_csv</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keyword_file</span> <span class="o">=</span> <span class="n">keyword_file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">lidar_csv</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FVSFromLidar.run_fvs_lidar"><a class="viewcode-back" href="../lidar_FVSFromLidar.html#lidar.FVSFromLidar.run_fvs_lidar">[docs]</a>    <span class="k">def</span> <span class="nf">run_fvs_lidar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates FVS input files (.key and .tre) from lidar tree list generated</span>
+<span class="sd">        in the export_attributes_to_csv method in the ConvertLidar class. Uses</span>
+<span class="sd">        these files to run FVS for each lidar subset/plot.</span>
+
+<span class="sd">        :returns: filename and path for a collated (from subsets/plots)</span>
+<span class="sd">            FVS results file. Only the filename is generated in this method.</span>
+<span class="sd">            The file itself will be collated in the create_capsis_csv method.</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fvs_start</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
+        <span class="n">work_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keyword_file</span><span class="p">)</span>
+        <span class="c1"># Read lidar data into pandas data frame</span>
+        <span class="n">df_lidar_fvs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lidar_csv</span><span class="p">)</span>
+        <span class="n">plots</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df_lidar_fvs</span><span class="o">.</span><span class="n">Plot_ID</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+        <span class="c1"># Empty or unchanging .tre variables</span>
+        <span class="n">tree_cnt</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="c1"># Tree_count</span>
+        <span class="n">tree_hist</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="c1"># Tree_history</span>
+        <span class="n">dbh_inc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># DBH_increment</span>
+        <span class="n">top_kill_ht</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># Height_to_top-kill</span>
+        <span class="n">ht_inc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># Height_increment</span>
+        <span class="n">the_rest</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span> <span class="c1"># All variables after Crown_ratio_code</span>
+        <span class="c1"># Get column index by name. Safer than by index order if the order in</span>
+        <span class="c1">#   the file changes...</span>
+        <span class="n">plot_id_col</span> <span class="o">=</span> <span class="n">df_lidar_fvs</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="s2">&quot;Plot_ID&quot;</span><span class="p">)</span>
+        <span class="n">tree_id_col</span> <span class="o">=</span> <span class="n">df_lidar_fvs</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="s2">&quot;Tree_ID&quot;</span><span class="p">)</span>
+        <span class="n">species_col</span> <span class="o">=</span> <span class="n">df_lidar_fvs</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="s2">&quot;Species&quot;</span><span class="p">)</span>
+        <span class="n">dbh_col</span> <span class="o">=</span> <span class="n">df_lidar_fvs</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="s2">&quot;DBH_in_x10&quot;</span><span class="p">)</span>
+        <span class="n">ht_col</span> <span class="o">=</span> <span class="n">df_lidar_fvs</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="s2">&quot;Height_ft&quot;</span><span class="p">)</span>
+        <span class="n">cr_code_col</span> <span class="o">=</span> <span class="n">df_lidar_fvs</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="s2">&quot;CR_code&quot;</span><span class="p">)</span>
+        <span class="c1"># Loop through each subset/plot to create .tre files and run FVS</span>
+        <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">:</span>
+            <span class="n">df_lidar_fvs_subplot</span> <span class="o">=</span> <span class="n">df_lidar_fvs</span><span class="p">[</span><span class="n">df_lidar_fvs</span><span class="o">.</span><span class="n">Plot_ID</span> <span class="o">==</span> <span class="n">plot</span><span class="p">]</span>
+            <span class="n">num_records</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_lidar_fvs_subplot</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">tre_lines</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Initialize list variable to store FVS tree data</span>
+            <span class="n">tre_file_name</span> <span class="o">=</span> <span class="n">work_dir</span><span class="o">+</span><span class="s2">&quot;/subset&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;.tre&quot;</span> <span class="c1"># FVS subset tree file</span>
+            <span class="n">tre_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">tre_file_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+            <span class="c1"># Loop through records in subset&#39;s data frame and extract variables</span>
+            <span class="k">for</span> <span class="n">rec</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_records</span><span class="p">):</span>
+                <span class="n">plot_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_lidar_fvs_subplot</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="n">rec</span><span class="p">,</span> <span class="n">plot_id_col</span><span class="p">])</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># Plot_ID</span>
+                <span class="n">tree_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_lidar_fvs_subplot</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="n">rec</span><span class="p">,</span> <span class="n">tree_id_col</span><span class="p">])</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># Tree_ID</span>
+                <span class="n">species</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_lidar_fvs_subplot</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="n">rec</span><span class="p">,</span> <span class="n">species_col</span><span class="p">])</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># Species</span>
+                <span class="n">dbh</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_lidar_fvs_subplot</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="n">rec</span><span class="p">,</span> <span class="n">dbh_col</span><span class="p">])</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># DBH</span>
+                <span class="n">height</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_lidar_fvs_subplot</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="n">rec</span><span class="p">,</span> <span class="n">ht_col</span><span class="p">])</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># Live_height</span>
+                <span class="n">cr_code</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_lidar_fvs_subplot</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="n">rec</span><span class="p">,</span> <span class="n">cr_code_col</span><span class="p">])</span> <span class="c1"># Crown_ratio_code</span>
+                <span class="c1"># Merge variables and spaces into one long string</span>
+                <span class="n">tre_line</span> <span class="o">=</span> <span class="p">(</span><span class="n">plot_id</span> <span class="o">+</span> <span class="n">tree_id</span> <span class="o">+</span> <span class="n">tree_cnt</span> <span class="o">+</span> <span class="n">tree_hist</span> <span class="o">+</span> <span class="n">species</span> <span class="o">+</span> <span class="n">dbh</span> <span class="o">+</span> \
+						    <span class="n">dbh_inc</span> <span class="o">+</span> <span class="n">height</span> <span class="o">+</span> <span class="n">top_kill_ht</span> <span class="o">+</span> <span class="n">ht_inc</span> <span class="o">+</span> <span class="n">cr_code</span> <span class="o">+</span> <span class="n">the_rest</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">tre_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tre_line</span><span class="p">)</span> <span class="c1"># Add to list variable</span>
+            <span class="n">tre_file</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">tre_lines</span><span class="p">)</span> <span class="c1"># Write all lines to subset&#39;s .tre file</span>
+            <span class="n">tre_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c1"># .tre file for each subset</span>
+            <span class="c1"># .key file for each subset (identical to master key)</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keyword_file</span><span class="p">,</span> <span class="n">tre_file_name</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;.key&quot;</span><span class="p">)</span>
+            <span class="n">key_file</span> <span class="o">=</span> <span class="n">tre_file_name</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;.key&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fuel</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="n">key_file</span><span class="p">)</span>
+            <span class="c1"># Start FVS simulation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fuel</span><span class="o">.</span><span class="n">run_fvs</span><span class="p">()</span> <span class="c1"># FVS for each subset</span>
+            <span class="c1"># Base name for output .csv file. e.g. STANDFIRE_ex. From .key file</span>
+            <span class="n">svs_base</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuel</span><span class="o">.</span><span class="n">get_standid</span><span class="p">()</span>
+            <span class="c1"># Writes subset .csv file containg tree variables for CAPSIS</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fuel</span><span class="o">.</span><span class="n">save_trees_by_year</span><span class="p">(</span><span class="mi">2010</span><span class="p">)</span>
+            <span class="n">fvs_csv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuel</span><span class="o">.</span><span class="n">wdir</span><span class="o">+</span><span class="n">svs_base</span><span class="o">+</span><span class="s2">&quot;_2010_trees.csv&quot;</span>
+            <span class="n">subplot_out</span> <span class="o">=</span> <span class="n">fvs_csv</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;_subset&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;.csv&quot;</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">subplot_out</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">subplot_out</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">fvs_csv</span><span class="p">,</span> <span class="n">subplot_out</span><span class="p">)</span> <span class="c1"># Renames .csv file with the subset name.</span>
+        <span class="n">fvs_elapsed</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">fvs_start</span>
+        <span class="nb">print</span> <span class="s2">&quot;FVS runs took: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">fvs_elapsed</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot; seconds.&quot;</span>
+        <span class="k">return</span> <span class="n">fvs_csv</span></div>
+
+<div class="viewcode-block" id="FVSFromLidar.create_capsis_csv"><a class="viewcode-back" href="../lidar_FVSFromLidar.html#lidar.FVSFromLidar.create_capsis_csv">[docs]</a>    <span class="k">def</span> <span class="nf">create_capsis_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xy_orig</span><span class="p">,</span> <span class="n">fvs_csv</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a capsis input file from FVS subset/plot output files generated</span>
+<span class="sd">        by the run_fvs_lidar method. Calculates adjusted xy coordinates for</span>
+<span class="sd">        each tree (i.e. each plot&#39;s coordinates need to be adjusted depending on</span>
+<span class="sd">        its position amoungst all plots).</span>
+
+<span class="sd">        :param xy_orig: xy origin of the original input lidar shapefile in UTM</span>
+<span class="sd">            coordinates.</span>
+<span class="sd">        :type xy_orig: list of two floats</span>
+<span class="sd">        :param fvs_csv: filename and path for the collated (from subsets/plots)</span>
+<span class="sd">            FVS results file.</span>
+<span class="sd">        :type fvs_csv: string</span>
+
+<span class="sd">        Each of the six 64x64m plots illustrated below were modeled seperately</span>
+<span class="sd">        in FVS. As a consequence, they each have coordinates with a 0,0 origin</span>
+<span class="sd">        in their lower left corners. This method adjusts the coordinates of</span>
+<span class="sd">        plots 1-5 so their origin is now the lower left corner of plot 0 \</span>
+<span class="sd">        (original input lidar shapefile&#39;s origin location).</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">                _____________________________</span>
+<span class="sd">            128|         |         |         |</span>
+<span class="sd">               |    3    |    4    |    5    |</span>
+<span class="sd">               |         |         |         |</span>
+<span class="sd">               |_________|_________|_________|</span>
+<span class="sd">             64|         |         |         |</span>
+<span class="sd">               |    0    |    1    |    2    |</span>
+<span class="sd">               |         |         |         |</span>
+<span class="sd">               |_________|_________|_________|</span>
+<span class="sd">               0        64        128       192</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create merged _trees.csv with adjusted coordinates for input into CAPSIS</span>
+        <span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;xloc&quot;</span><span class="p">,</span> <span class="s2">&quot;yloc&quot;</span><span class="p">,</span> <span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;dbh&quot;</span><span class="p">,</span> <span class="s2">&quot;ht&quot;</span><span class="p">,</span> <span class="s2">&quot;crd&quot;</span><span class="p">,</span> <span class="s2">&quot;cratio&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;crownwt0&quot;</span><span class="p">,</span> <span class="s2">&quot;crownwt1&quot;</span><span class="p">,</span> <span class="s2">&quot;crownwt2&quot;</span><span class="p">,</span> <span class="s2">&quot;crownwt3&quot;</span><span class="p">]</span>
+        <span class="c1">#Create data frame from lidar data to obtain original UTM xy coordinates</span>
+        <span class="n">df_lidar</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lidar_csv</span><span class="p">)</span>
+        <span class="n">df_fvs_csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span> <span class="c1"># Initialize empty data frame</span>
+        <span class="n">plots</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df_lidar</span><span class="o">.</span><span class="n">Plot_ID</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">:</span>
+            <span class="n">subplot_file</span> <span class="o">=</span> <span class="n">fvs_csv</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;_subset&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;.csv&quot;</span>
+            <span class="n">df_trees</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">subplot_file</span><span class="p">)</span> <span class="c1"># Data frame for subset</span>
+            <span class="n">df_lidar_subset</span> <span class="o">=</span> <span class="n">df_lidar</span><span class="p">[</span><span class="n">df_lidar</span><span class="o">.</span><span class="n">Plot_ID</span> <span class="o">==</span> <span class="n">plot</span><span class="p">]</span>
+            <span class="c1"># Need index numbers for both data frames to match up</span>
+            <span class="n">df_lidar_subset</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># Subtract original UTM origin from original tree location to get xy</span>
+            <span class="c1"># coordinate system whose origin is 0,0 and whose units are now feet</span>
+            <span class="n">df_trees</span><span class="o">.</span><span class="n">xloc</span> <span class="o">=</span> <span class="p">((</span><span class="n">df_lidar_subset</span><span class="o">.</span><span class="n">POINT_X</span> <span class="o">-</span> <span class="n">xy_orig</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="mf">3.28</span><span class="p">)</span>
+            <span class="n">df_trees</span><span class="o">.</span><span class="n">yloc</span> <span class="o">=</span> <span class="p">((</span><span class="n">df_lidar_subset</span><span class="o">.</span><span class="n">POINT_Y</span> <span class="o">-</span> <span class="n">xy_orig</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mf">3.28</span><span class="p">)</span>
+            <span class="n">df_trees</span><span class="o">.</span><span class="n">xloc</span> <span class="o">=</span> <span class="n">df_trees</span><span class="o">.</span><span class="n">xloc</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+            <span class="n">df_trees</span><span class="o">.</span><span class="n">yloc</span> <span class="o">=</span> <span class="n">df_trees</span><span class="o">.</span><span class="n">yloc</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+            <span class="c1"># Append subset data frame to set data frame</span>
+            <span class="n">df_fvs_csv</span> <span class="o">=</span> <span class="n">df_fvs_csv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_trees</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># Convert set data frame to set *_trees.csv</span>
+        <span class="n">df_fvs_csv</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fvs_csv</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_NONNUMERIC</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, STANDFIRE.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
