@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -30,6 +32,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="STANDFIRE 1 documentation" href="index.html"/>
         <link rel="up" title="STANDFIRE API Reference" href="api_ref.html"/>
         <link rel="next" title="Mesh" href="wfds_Mesh.html"/>
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -82,7 +88,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="fuels.html">Fuels module</a></li>
@@ -95,6 +104,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.html">Metrics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar.html">LiDAR module</a></li>
 </ul>
 </li>
 </ul>
@@ -109,8 +119,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">STANDFIRE</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">STANDFIRE</a>
+        
       </nav>
 
 
@@ -119,25 +131,42 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
           <li><a href="api_ref.html">STANDFIRE API Reference</a> &raquo;</li>
-      
-    <li>WFDS module</li>
+        
+      <li>WFDS module</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/wfds.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/wfds.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -145,9 +174,15 @@
             
   <div class="section" id="module-wfds">
 <span id="wfds-module"></span><h1>WFDS module<a class="headerlink" href="#module-wfds" title="Permalink to this headline">¶</a></h1>
-<p>The wfds module is for configuring and running WFDS simulations. Use the WFDS
-class to setup the run. The WFDS class inherits the Mesh class, so meshes can
-be dealt with there.</p>
+<p>The wfds module is for configuring and running the Wildland-urban interface Fire
+Dynamics Simulator (WFDS). The <code class="docutils literal"><span class="pre">WFDS``class</span> <span class="pre">is</span> <span class="pre">used</span> <span class="pre">to</span> <span class="pre">setup</span> <span class="pre">the</span> <span class="pre">run.</span> <span class="pre">This</span>
+<span class="pre">class</span> <span class="pre">inherits</span> <span class="pre">the</span> <span class="pre">``Mesh</span></code> class, so meshes can be dealt with there. The main
+purpose of the WFDS class is to create a WFDS input file. The <code class="docutils literal"><span class="pre">Execute</span></code> class
+runs a WFDS simulation. The <code class="docutils literal"><span class="pre">GenerateBinaryGrid</span></code> class is used to generate
+grids for the capsis module.</p>
+<p>See the FDS Users Guide: <a class="reference external" href="https://pages.nist.gov/fds-smv/manuals.html">https://pages.nist.gov/fds-smv/manuals.html</a> and the
+WFDS Users Guide: <a class="reference external" href="https://www.fs.fed.us/pnw/fera/wfds/wfds_user_guide.pdf">https://www.fs.fed.us/pnw/fera/wfds/wfds_user_guide.pdf</a>
+for further information.</p>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -161,15 +196,18 @@ be dealt with there.</p>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="wfds_Mesh.html" class="btn btn-neutral float-right" title="Mesh" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="wfds_Mesh.html" class="btn btn-neutral float-right" title="Mesh" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="capsis_Execute.html" class="btn btn-neutral" title="Execute" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="capsis_Execute.html" class="btn btn-neutral" title="Execute" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -178,7 +216,7 @@ be dealt with there.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, STANDFIRE.
+        &copy; Copyright 2017, STANDFIRE.
 
     </p>
   </div>
@@ -203,13 +241,14 @@ be dealt with there.</p>
             VERSION:'1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

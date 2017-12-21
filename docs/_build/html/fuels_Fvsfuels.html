@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -30,6 +32,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="STANDFIRE 1 documentation" href="index.html"/>
         <link rel="up" title="Fuels module" href="fuels.html"/>
         <link rel="next" title="Inventory" href="fuels_Inventory.html"/>
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -82,7 +88,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="fuels.html">Fuels module</a><ul class="current">
@@ -94,6 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="capsis.html">Capsis module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wfds.html">WFDS module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.html">Metrics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar.html">LiDAR module</a></li>
 </ul>
 </li>
 </ul>
@@ -108,8 +118,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">STANDFIRE</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">STANDFIRE</a>
+        
       </nav>
 
 
@@ -118,27 +130,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
           <li><a href="api_ref.html">STANDFIRE API Reference</a> &raquo;</li>
-      
+        
           <li><a href="fuels.html">Fuels module</a> &raquo;</li>
-      
-    <li>Fvsfuels</li>
+        
+      <li>Fvsfuels</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/fuels_Fvsfuels.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/fuels_Fvsfuels.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -154,33 +183,26 @@
 <p>A Fvsfuels object is used to calculate component fuels at the individual
 tree level using the Forest Vegetation Simulator. To create an instance
 of this class you need two items: a keyword file (.key) and tree list file
-(.tre) with the same prefix as the keyword file. If you don&#8217;t already have
-a tree list file then you can use <code class="docutils literal"><span class="pre">`fuels.Inventory`</span></code> class to generate
-one.</p>
+(.tre) with the same prefix as the keyword file. If you don’t already have
+a tree list file then you can use <code class="docutils literal"><span class="pre">fuels.Inventory</span></code> class to generate
+one from a .csv file exported from an FVS database.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>variant</strong> (<em>string</em>) &#8211; FVS variant to be imported</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>variant</strong> (<em>string</em>) – FVS variant to be imported</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Example:</strong></p>
 <p>A basic example to extract live canopy biomass for individual trees during
 year of inventory</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuels</span> <span class="k">import</span> <span class="n">Fvsfuels</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fuels</span> <span class="k">import</span> <span class="n">Fvsfuels</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stand001</span> <span class="o">=</span> <span class="n">Fvsfuels</span><span class="p">(</span><span class="s2">&quot;iec&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stand001</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s2">&quot;/Users/standfire/test/example.key&quot;</span><span class="p">)</span>
 <span class="go">TIMEINT not found in keyword file, default is 10 years</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stand001</span><span class="o">.</span><span class="n">keywords</span>
-<span class="go">{&#39;TIMEINT&#39;: 10, &#39;NUMCYCLE&#39;: 10, &#39;INVYEAR&#39;: 2010, &#39;SVS&#39;: 15, &#39;FUELOUT&#39;: 1}</span>
-</pre></div>
-</div>
-<p>The keyword file is setup to simulate 100 years at a time interval of 10
-years. Lets change this to only simulate the inventory year.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stand001</span><span class="o">.</span><span class="n">set_num_cycles</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stand001</span><span class="o">.</span><span class="n">keywords</span>
-<span class="go">{&#39;TIMEINT&#39;: 10, &#39;NUMCYCLE&#39;: 0, &#39;INVYEAR&#39;: 2010, &#39;SVS&#39;: 15, &#39;FUELOUT&#39;: 1}</span>
+<span class="go">{&quot;TIMEINT&quot;: 10, &quot;NUMCYCLE&quot;: 10, &quot;INVYEAR&quot;: 2010, &quot;SVS&quot;: 15, &quot;FUELOUT&quot;: 1}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stand001</span><span class="o">.</span><span class="n">run_fvs</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -190,10 +212,83 @@ years. Lets change this to only simulate the inventory year.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The argument must match one of the available variant in the
-PyFVS module. Search through standfire/pyfvs/ to see all
-variants</p>
+<p class="last">The argument must match one of the available variants in the
+PyFVS module. See below for a list of all available variants.</p>
 </div>
+<p><strong>Available FVS variants:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="79%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variant</th>
+<th class="head">Abbreviation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Southeast Alaska and Coastal British Columbia</td>
+<td>ak</td>
+</tr>
+<tr class="row-odd"><td>Blue Mountains</td>
+<td>bmc</td>
+</tr>
+<tr class="row-even"><td>Inland California and Southern Cascades</td>
+<td>cac</td>
+</tr>
+<tr class="row-odd"><td>Central Idaho</td>
+<td>cic</td>
+</tr>
+<tr class="row-even"><td>Central Rockies</td>
+<td>crc</td>
+</tr>
+<tr class="row-odd"><td>Central States</td>
+<td>cs</td>
+</tr>
+<tr class="row-even"><td>East Cascades</td>
+<td>ecc</td>
+</tr>
+<tr class="row-odd"><td>Eastern Montana</td>
+<td>emc</td>
+</tr>
+<tr class="row-even"><td>Inland Empire</td>
+<td>iec</td>
+</tr>
+<tr class="row-odd"><td>Klamath Mountains</td>
+<td>ncc</td>
+</tr>
+<tr class="row-even"><td>Kootenai, Kaniksu, and Tally Lake</td>
+<td>ktc</td>
+</tr>
+<tr class="row-odd"><td>Lake States</td>
+<td>ls</td>
+</tr>
+<tr class="row-even"><td>Northeast</td>
+<td>ne</td>
+</tr>
+<tr class="row-odd"><td>Pacific Northwest Coast</td>
+<td>pnc</td>
+</tr>
+<tr class="row-even"><td>Southern</td>
+<td>sn</td>
+</tr>
+<tr class="row-odd"><td>South Central Oregon and Northeast California</td>
+<td>soc</td>
+</tr>
+<tr class="row-even"><td>Tetons</td>
+<td>ttc</td>
+</tr>
+<tr class="row-odd"><td>Utah</td>
+<td>utc</td>
+</tr>
+<tr class="row-even"><td>Westside Cascades</td>
+<td>wcc</td>
+</tr>
+<tr class="row-odd"><td>Western Sierra Nevada</td>
+<td>wsc</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="fuels.Fvsfuels.get_simulation_years">
 <code class="descname">get_simulation_years</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.get_simulation_years"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.get_simulation_years" title="Permalink to this definition">¶</a></dt>
@@ -218,7 +313,7 @@ variants</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>year</strong> (<em>int</em>) &#8211; simulation year of the data frame to return</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>year</strong> (<em>integer</em>) – simulation year of the data frame to return</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">data frame of snags at indexed year</td>
 </tr>
@@ -257,7 +352,7 @@ a message will be printed to the console.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>year</strong> (<em>int</em>) &#8211; simulation year of the data frame to return</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>year</strong> (<em>integer</em>) – simulation year of the data frame to return</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">data frame of trees at indexed year</td>
 </tr>
@@ -275,11 +370,11 @@ a message will be printed to the console.</p>
 <dl class="method">
 <dt id="fuels.Fvsfuels.run_fvs">
 <code class="descname">run_fvs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.run_fvs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.run_fvs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Runs the FVS simulation</p>
-<p>This method runs a FVS simulation using the previously specified keyword
-file. The simulation will be paused at each time interval and the trees
-and snag data collected and appended to the fuels attribute of the
-Fvsfuels object.</p>
+<dd><p>This method runs an FVS simulation using the specified keyword file.
+The simulation will be paused at each time cycle as defined by the stop
+point codes and the time interval (TIMEINT from the keyword file).
+During the pause tree and snag data are collected and appended to the
+fuels attribute of the Fvsfuels object.</p>
 <p><strong>Example:</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuels</span> <span class="k">import</span> <span class="n">Fvsfuels</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stand010</span> <span class="o">=</span> <span class="n">Fvsfuels</span><span class="p">(</span><span class="s2">&quot;iec&quot;</span><span class="p">)</span>
@@ -293,25 +388,51 @@ Fvsfuels object.</p>
 <span class="gp">...</span>
 </pre></div>
 </div>
+<p>FVS return codes from open-fvs wiki. Printed to the console:</p>
+<ul class="simple">
+<li>-1: indicates that FVS has not been started</li>
+<li>0: indicates that FVS is in a good running state</li>
+<li>1: indicates that FVS has detected an error of some kind and should
+not be used until reset by specifying new input</li>
+<li>2: indicates that FVS has finished processing all the stands; new
+input can be specified</li>
+</ul>
 </dd></dl>
 
 <dl class="method">
 <dt id="fuels.Fvsfuels.save_all">
 <code class="descname">save_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.save_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.save_all" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes all data frame in the <code class="docutils literal"><span class="pre">fuels</span></code> attribute of the class to the
-specified working directory. Output file are .csv.</p>
+<dd><p>Allows the user to create output files of trees and snags by year for
+all years simulated. Output file are in the .csv format and are named:
+&lt;standid&gt;_&lt;trees/snags&gt;_&lt;year&gt;.csv</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="fuels.Fvsfuels.save_snags_by_year">
 <code class="descname">save_snags_by_year</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.save_snags_by_year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.save_snags_by_year" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes snag data frame at indexed year to .csv in working directory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>year</strong> (<em>integer</em>) – simulated year</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="fuels.Fvsfuels.save_trees_by_year">
 <code class="descname">save_trees_by_year</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.save_trees_by_year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.save_trees_by_year" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes tree data frame at indexed year to .csv in working directory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>year</strong> (<em>integer</em>) – simulated year</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -321,59 +442,32 @@ specified working directory. Output file are .csv.</p>
 <p>This method is called by <code class="docutils literal"><span class="pre">Fvsfuels.set_keyword()</span></code>. Thus, the default
 working directory is the folder containing the specified keyword file.
 If you wish to store simulation outputs in a different directory then
-use this methods to do so.</p>
+use this method to do so.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wdir</strong> (<em>string</em>) &#8211; path/to/desired_directory</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wdir</strong> (<em>string</em>) – path to desired directory</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Example:</strong></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuel</span> <span class="k">import</span> <span class="n">Fvsfuels</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fuels</span> <span class="k">import</span> <span class="n">Fvsfuels</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">test</span> <span class="o">=</span> <span class="n">Fvsfuels</span><span class="p">(</span><span class="s2">&quot;emc&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s2">&quot;/Users/standfire/test/example.key&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="o">.</span><span class="n">set_dir</span><span class="p">(</span><span class="s2">&quot;/Users/standfire/outputs/&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Whoops, I would like to store simulation outputs elsewhere...</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="o">.</span><span class="n">set_dir</span><span class="p">(</span><span class="s2">&quot;/Users/standfire/outputs/&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="fuels.Fvsfuels.set_inv_year">
-<code class="descname">set_inv_year</code><span class="sig-paren">(</span><em>inv_year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_inv_year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_inv_year" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets inventory year for FVS simulation</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inv_year</strong> (<em>int</em>) &#8211; year of the inventory</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="fuels.Fvsfuels.set_keyword">
 <code class="descname">set_keyword</code><span class="sig-paren">(</span><em>keyfile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_keyword"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_keyword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the keyword file to be used in the FVS simulation</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">2015-8-12</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Authors:</th><td class="field-body">Lucas Wells</td>
-</tr>
-</tbody>
-</table>
-<p>This method will initalize a FVS simulation by registering the
+<p>This method will initalize an FVS simulation by registering the
 specified keyword file (.key) with FVS. The working directory of a
 Fvsfuels object will be set to the folder containing the keyword file.
-You can manually change the working directory with Fvsfuels.set_dir().
+You can manually change the working directory with <code class="docutils literal"><span class="pre">Fvsfuels.set_dir()</span></code>.
 This function will also call private methods in this class to extract
 information from the keyword file and set class fields accordingly for
 use in other methods.</p>
@@ -381,12 +475,12 @@ use in other methods.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>keyfile</strong> (<em>string</em>) &#8211; path/to/keyword_file. This must have a .key extension</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>keyfile</strong> (<em>string</em>) – path/to/keyword_file. This must have a .key extension</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Example:</strong></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuels</span> <span class="k">import</span> <span class="n">Fvsfuels</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fuels</span> <span class="k">import</span> <span class="n">Fvsfuels</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">test</span> <span class="o">=</span> <span class="n">Fvsfuels</span><span class="p">(</span><span class="s2">&quot;iec&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s2">&quot;/Users/standfire/test/example.key&quot;</span><span class="p">)</span>
 </pre></div>
@@ -394,30 +488,17 @@ use in other methods.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="fuels.Fvsfuels.set_num_cycles">
-<code class="descname">set_num_cycles</code><span class="sig-paren">(</span><em>num_cyc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_num_cycles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_num_cycles" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets number of cycles for FVS simulation</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>num_cyc</strong> (<em>int</em>) &#8211; number of simulation cycles</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
 <dt id="fuels.Fvsfuels.set_stop_point">
-<code class="descname">set_stop_point</code><span class="sig-paren">(</span><em>code=5</em>, <em>year=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_stop_point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_stop_point" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the FVS stop point code and year</p>
+<code class="descname">set_stop_point</code><span class="sig-paren">(</span><em>code=1</em>, <em>year=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_stop_point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_stop_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to set the FVS stop point code and year. This causes FVS to
+pause at points defined by the stop point code and year.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>code</strong> (<em>integer</em>) &#8211; stop point code (default=5)</li>
-<li><strong>year</strong> (<em>integer</em>) &#8211; stop point year (default=-1)</li>
+<li><strong>code</strong> (<em>integer</em>) – stop point code (default=1)</li>
+<li><strong>year</strong> (<em>integer</em>) – stop point year (default=-1)</li>
 </ul>
 </td>
 </tr>
@@ -466,35 +547,24 @@ use in other methods.</p>
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="fuels.Fvsfuels.set_time_int">
-<code class="descname">set_time_int</code><span class="sig-paren">(</span><em>time_int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fuels.html#Fvsfuels.set_time_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fuels.Fvsfuels.set_time_int" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets time interval for FVS simulation</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>time_int</strong> (<em>int</em>) &#8211; length of simulation time step</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </dd></dl>
 
 </div>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="fuels_Inventory.html" class="btn btn-neutral float-right" title="Inventory" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="fuels_Inventory.html" class="btn btn-neutral float-right" title="Inventory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="fuels.html" class="btn btn-neutral" title="Fuels module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="fuels.html" class="btn btn-neutral" title="Fuels module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -503,7 +573,7 @@ use in other methods.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, STANDFIRE.
+        &copy; Copyright 2017, STANDFIRE.
 
     </p>
   </div>
@@ -528,13 +598,14 @@ use in other methods.</p>
             VERSION:'1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

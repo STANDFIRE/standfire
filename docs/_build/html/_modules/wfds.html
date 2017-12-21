@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -30,6 +32,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="STANDFIRE 1 documentation" href="../index.html"/>
         <link rel="up" title="Module code" href="index.html"/> 
 
@@ -40,6 +45,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -80,7 +86,10 @@
           
             
             
-                <ul>
+              
+            
+            
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../user_guide.html">STANDFIRE User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_ref.html">STANDFIRE API Reference</a></li>
 </ul>
@@ -95,8 +104,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">STANDFIRE</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">STANDFIRE</a>
+        
       </nav>
 
 
@@ -109,177 +120,231 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="index.html">Module code</a> &raquo;</li>
-      
-    <li>wfds</li>
+        
+      <li>wfds</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
   <h1>Source code for wfds</h1><div class="highlight"><pre>
-<span></span><span class="c1">#---------#</span>
+<span></span><span class="ch">#!python2</span>
+<span class="c1">################################################################################</span>
+<span class="c1">#---------#</span>
 <span class="c1"># wfds.py #</span>
 <span class="c1">#---------#</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">The wfds module is for configuring and running WFDS simulations. Use the WFDS</span>
-<span class="sd">class to setup the run. The WFDS class inherits the Mesh class, so meshes can</span>
-<span class="sd">be dealt with there.</span>
+<span class="sd">The wfds module is for configuring and running the Wildland-urban interface Fire</span>
+<span class="sd">Dynamics Simulator (WFDS). The ``WFDS``class is used to setup the run. This</span>
+<span class="sd">class inherits the ``Mesh`` class, so meshes can be dealt with there. The main</span>
+<span class="sd">purpose of the WFDS class is to create a WFDS input file. The ``Execute`` class</span>
+<span class="sd">runs a WFDS simulation. The ``GenerateBinaryGrid`` class is used to generate</span>
+<span class="sd">grids for the capsis module.</span>
+
+<span class="sd">See the FDS Users Guide: https://pages.nist.gov/fds-smv/manuals.html and the</span>
+<span class="sd">WFDS Users Guide: https://www.fs.fed.us/pnw/fera/wfds/wfds_user_guide.pdf</span>
+<span class="sd">for further information.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># meta</span>
 <span class="n">__authors__</span> <span class="o">=</span> <span class="s2">&quot;Team STANDFIRE&quot;</span>
-<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2015, STANDFIRE&quot;</span>
-<span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Greg Cohn&quot;</span><span class="p">,</span> <span class="s2">&quot;Matt Jolly&quot;</span><span class="p">,</span> <span class="s2">&quot;Russ Parsons&quot;</span><span class="p">,</span> <span class="s2">&quot;Lucas Wells&quot;</span><span class="p">]</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2017, STANDFIRE&quot;</span>
+<span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Greg Cohn&quot;</span><span class="p">,</span> <span class="s2">&quot;Brett Davis&quot;</span><span class="p">,</span> <span class="s2">&quot;Matt Jolly&quot;</span><span class="p">,</span> <span class="s2">&quot;Russ Parsons&quot;</span><span class="p">,</span> <span class="s2">&quot;Lucas Wells&quot;</span><span class="p">]</span>
 <span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;GPL&quot;</span>
 <span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Lucas Wells&quot;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;bluegrassforestry@gmail.com&quot;</span>
 <span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Development&quot;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.0a&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;1.1.4a&quot;</span> <span class="c1"># Previous version: &quot;1.1.3a&quot;</span>
 
 <span class="c1"># module imports</span>
 <span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-
 <div class="viewcode-block" id="Mesh"><a class="viewcode-back" href="../wfds_Mesh.html#wfds.Mesh">[docs]</a><span class="k">class</span> <span class="nc">Mesh</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The Mesh class can be used to easily and quickly create FDS meshes.</span>
+<span class="sd">    The Mesh class can be used to easily and quickly calculate the input</span>
+<span class="sd">    parameters needed to define FDS meshes. It is inherited by the ``WFDS`` and</span>
+<span class="sd">    ``GenerateBinaryGrid`` classes. It has two callable (non-private) methods:</span>
+<span class="sd">    ``stretch_mesh()`` and ``format_mesh()``</span>
 
-<span class="sd">    :param x: X dimension of the simulation domain</span>
-<span class="sd">    :x type: integer</span>
-<span class="sd">    :param y: Y dimension of the simulation domain</span>
-<span class="sd">    :type y: integer</span>
-<span class="sd">    :param z: Z dimension of the simulation domain</span>
-<span class="sd">    :type z: integer</span>
+<span class="sd">    :param x_dom: X dimension of the simulation domain</span>
+<span class="sd">    :type x_dom: integer</span>
+<span class="sd">    :param y_dom: Y dimension of the simulation domain</span>
+<span class="sd">    :type y_dom: integer</span>
+<span class="sd">    :param z_dom: Z dimension of the simulation domain</span>
+<span class="sd">    :type z_dom: integer</span>
 <span class="sd">    :param res: 3-space resolution prior to mesh stretching</span>
-<span class="sd">    :type res: integer</span>
-<span class="sd">    :param n: Number of meshes</span>
-<span class="sd">    :n type: integer</span>
-<span class="sd">    </span>
-<span class="sd">    *Example:*</span>
+<span class="sd">    :type res: float</span>
+<span class="sd">    :param num_meshes: Number of meshes</span>
+<span class="sd">    :type num_meshes: integer</span>
+
+<span class="sd">    :Example:</span>
 
 <span class="sd">    &gt;&gt;&gt; import wfds</span>
-<span class="sd">    &gt;&gt;&gt; mesh = wfds.mesh(160,90,50,1,9)</span>
-<span class="sd">    &gt;&gt;&gt; mesh.stretch_mesh([3,33], [1,31], axis=&#39;z&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; mesh = wfds.Mesh(160,90,50,1,9)</span>
+<span class="sd">    &gt;&gt;&gt; mesh.stretch_mesh([3,33], [1,31])</span>
 <span class="sd">    &gt;&gt;&gt; print mesh.format_mesh()</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_dom</span><span class="p">,</span> <span class="n">y_dom</span><span class="p">,</span> <span class="n">z_dom</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">num_meshes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># instance variables</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">res</span> <span class="o">=</span> <span class="n">res</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">IJK</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">XB</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="c1"># unused as of v 1.1.4a</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_cells</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mesh_domain</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_meshes</span> <span class="o">=</span> <span class="n">num_meshes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stretch</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="c1"># calculate IJK</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_calcIJK</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_calcXB</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+        <span class="c1"># calculate cell size and mesh domain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_num_cells</span><span class="p">(</span><span class="n">x_dom</span><span class="p">,</span> <span class="n">y_dom</span><span class="p">,</span> <span class="n">z_dom</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_mesh_domain</span><span class="p">(</span><span class="n">x_dom</span><span class="p">,</span> <span class="n">y_dom</span><span class="p">,</span> <span class="n">z_dom</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_calcIJK</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_calc_num_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_dom</span><span class="p">,</span> <span class="n">y_dom</span><span class="p">,</span> <span class="n">z_dom</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Private method</span>
+<span class="sd">        Pseudo-private method. Called when a Mesh object is instantiated.</span>
 
-<span class="sd">        Calculates IJK based on xyz and res</span>
+<span class="sd">        Calculates the number of cells in the x, y and z directions for each</span>
+<span class="sd">        mesh using x, y and z domains and the number of meshes. When multiple</span>
+<span class="sd">        meshes are requested the domain is divided along the y axis. For example,</span>
+<span class="sd">        in a mesh domain where x=160, y=90 and z=50, and only one mesh is</span>
+<span class="sd">        requested the the number of cells would be 160, 90 and 50. If two meshes</span>
+<span class="sd">        are requested, the number of cells for each would be 160, 45 and 50.</span>
+<span class="sd">        These numbers act as divisors for the mesh domain dimensions to define</span>
+<span class="sd">        cell sizes. These three numbers populate the IJK parameter in the WFDS</span>
+<span class="sd">        input file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">remainder</span> <span class="o">=</span> <span class="n">y</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
-        <span class="n">interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">remainder</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+        <span class="n">remainder</span> <span class="o">=</span> <span class="n">y_dom</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_meshes</span>
+        <span class="n">interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_dom</span><span class="o">-</span><span class="n">remainder</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">num_meshes</span>
 
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">IJK</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">interval</span><span class="o">+</span><span class="n">remainder</span><span class="p">,</span><span class="n">z</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_meshes</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_meshes</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">num_cells</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">x_dom</span><span class="p">,</span> <span class="n">interval</span><span class="o">+</span><span class="n">remainder</span><span class="p">,</span> <span class="n">z_dom</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">IJK</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">interval</span><span class="p">,</span><span class="n">z</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">num_cells</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">x_dom</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">z_dom</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="nf">_calcXB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_calc_mesh_domain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_dom</span><span class="p">,</span> <span class="n">y_dom</span><span class="p">,</span> <span class="n">z_dom</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Private method</span>
+<span class="sd">        Pseudo-private method. Called when a Mesh object is instantiated.</span>
 
-<span class="sd">        Calculates XB based on xyz and n</span>
+<span class="sd">        Calculates mesh domains based on the x,y,z domain and the number of</span>
+<span class="sd">        meshes.</span>
+
+<span class="sd">		A mesh domain is defined by a set of six coordinates. The first,</span>
+<span class="sd">        third and fifth coordinates define the origin point of the mesh and the</span>
+<span class="sd">        second, fourth and sixth coordinates define the opposite corner of the</span>
+<span class="sd">        mesh. For example, coordinates (0,160,0,90,0,50) define a mesh that</span>
+<span class="sd">        extends 160 units in the x direction, 90 units in the y direction and 50</span>
+<span class="sd">        units in the z direction. These six numbers populate the XB parameter in</span>
+<span class="sd">        the WFDS input file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">remainder</span> <span class="o">=</span> <span class="n">y</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
-        <span class="n">interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">remainder</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+        <span class="n">remainder</span> <span class="o">=</span> <span class="n">y_dom</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_meshes</span>
+        <span class="n">interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_dom</span><span class="o">-</span><span class="n">remainder</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">num_meshes</span>
 
         <span class="n">acumm</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">XB</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">acumm</span><span class="p">,</span> <span class="n">acumm</span><span class="o">+</span><span class="n">interval</span><span class="o">+</span><span class="n">remainder</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">z</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_meshes</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_meshes</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mesh_domain</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_dom</span><span class="p">,</span> <span class="n">acumm</span><span class="p">,</span> <span class="n">acumm</span><span class="o">+</span><span class="n">interval</span><span class="o">+</span><span class="n">remainder</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">z_dom</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">XB</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">acumm</span><span class="p">,</span> <span class="n">acumm</span><span class="o">+</span><span class="n">interval</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">z</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mesh_domain</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_dom</span><span class="p">,</span> <span class="n">acumm</span><span class="p">,</span> <span class="n">acumm</span><span class="o">+</span><span class="n">interval</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">z_dom</span><span class="p">])</span>
             <span class="n">acumm</span> <span class="o">+=</span> <span class="n">interval</span>
 
 
-<div class="viewcode-block" id="Mesh.stretch_mesh"><a class="viewcode-back" href="../wfds_Mesh.html#wfds.Mesh.stretch_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">stretch_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">CC</span><span class="p">,</span> <span class="n">PC</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="Mesh.stretch_mesh"><a class="viewcode-back" href="../wfds_Mesh.html#wfds.Mesh.stretch_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">stretch_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_coord</span><span class="p">,</span> <span class="n">phys_coord</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Apply stretching to the mesh along the specified axis</span>
+<span class="sd">        Defines the parameters for stretching a the mesh along the z axis,</span>
+<span class="sd">        distorting the cell sizes.  Passes the two sets of coordinates to the</span>
+<span class="sd">        self.stretch variable which will be accessed by the</span>
+<span class="sd">        ``format_mesh()`` method to format the WFDS input file.</span>
 
-<span class="sd">        :param CC: computation coordinates</span>
-<span class="sd">        :type CC: python list</span>
-<span class="sd">        :param PC: physical coordinates</span>
-<span class="sd">        :type PC: python list</span>
+<span class="sd">        :param comp_coord: computation coordinates</span>
+<span class="sd">        :type comp_coord: python list</span>
+<span class="sd">        :param phys_coord: physical coordinates</span>
+<span class="sd">        :type phys_coord: python list</span>
 
-<span class="sd">        .. note:: CC and PC must have equal number of elements</span>
+<span class="sd">        .. note:: comp_coord and phys_coord must have an equal number of</span>
+<span class="sd">                  elements.See the FDS users guide for more information on</span>
+<span class="sd">                  stretching:</span>
+<span class="sd">                  https://pages.nist.gov/fds-smv/manuals.html</span>
 
 <span class="sd">        :Example:</span>
 
-<span class="sd">        &gt;&gt;&gt; mesh = Mesh(200, 150, 100, 1, 1)</span>
-<span class="sd">        &gt;&gt;&gt; mesh.stretch_mesh([3,33], [1,31], axis=&#39;z&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; mesh = wfds.Mesh(200, 150, 100, 1, 1)</span>
+<span class="sd">        &gt;&gt;&gt; mesh.stretch_mesh([3,33], [1,31])</span>
 <span class="sd">        &gt;&gt;&gt; print mesh.format_mesh()</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">CC</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">PC</span><span class="p">)):</span>
-            <span class="nb">print</span> <span class="s2">&quot;CC and PC are not of equal length&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">comp_coord</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phys_coord</span><span class="p">):</span>
+            <span class="nb">print</span> <span class="s2">&quot;Computational coordinates and physical coordinates are not </span><span class="se">\</span>
+<span class="s2">                   of equal length&quot;</span>
             <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">stretch</span> <span class="o">=</span> <span class="p">[</span><span class="n">CC</span><span class="p">,</span> <span class="n">PC</span><span class="p">]</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stretch</span> <span class="o">=</span> <span class="p">[</span><span class="n">comp_coord</span><span class="p">,</span> <span class="n">phys_coord</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Mesh.format_mesh"><a class="viewcode-back" href="../wfds_Mesh.html#wfds.Mesh.format_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">format_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Formats mesh for WFDS input file</span>
+<span class="sd">        Formats a mesh for the WFDS input file.</span>
 
 <span class="sd">        :return: formated WFDS mesh</span>
 <span class="sd">        :rtype: string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="c1"># Below, XB defines the mesh domain, IJK defines the number of cells</span>
+        <span class="c1">#  within a mesh, TRNZ defines a mesh stretch in the Z direction, CC is</span>
+        <span class="c1">#  comutaional coordinates and PC is physical coordinates.</span>
         <span class="n">mesh_template</span> <span class="o">=</span> <span class="s2">&quot;&amp;MESH IJK=</span><span class="si">{i}</span><span class="s2">,</span><span class="si">{j}</span><span class="s2">,</span><span class="si">{k}</span><span class="s2">, XB=</span><span class="si">{xmin}</span><span class="s2">,</span><span class="si">{xmax}</span><span class="s2">,</span><span class="si">{ymin}</span><span class="s2">,</span><span class="si">{ymax}</span><span class="s2">,</span><span class="si">{zmin}</span><span class="s2">,</span><span class="si">{zmax}</span><span class="s2"> /</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">stretch_template</span> <span class="o">=</span> <span class="s2">&quot;&amp;TRANZ CC=</span><span class="si">{cc}</span><span class="s2">, PC=</span><span class="si">{pc}</span><span class="s2">, MESH_NUMBER=</span><span class="si">{n}</span><span class="s2"> /</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">stretch_template</span> <span class="o">=</span> <span class="s2">&quot;&amp;TRNZ CC=</span><span class="si">{cc}</span><span class="s2">, PC=</span><span class="si">{pc}</span><span class="s2">, MESH_NUMBER=</span><span class="si">{n}</span><span class="s2"> /</span><span class="se">\n</span><span class="s2">&quot;</span>
 
         <span class="n">mesh_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
-        <span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
-            <span class="n">mesh_string</span> <span class="o">+=</span> <span class="n">mesh_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">IJK</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-                                                <span class="n">j</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">IJK</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
-                                                <span class="n">k</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">IJK</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span>
-                                                <span class="n">xmin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">XB</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-                                                <span class="n">xmax</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">XB</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
-                                                <span class="n">ymin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">XB</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span>
-                                                <span class="n">ymax</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">XB</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span>
-                                                <span class="n">zmin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">XB</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span>
-                                                <span class="n">zmax</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">XB</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">5</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_meshes</span><span class="p">):</span>
+            <span class="n">mesh_string</span> <span class="o">+=</span> <span class="n">mesh_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_cells</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                                <span class="n">j</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_cells</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                                                <span class="n">k</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_cells</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span>
+                                                <span class="n">xmin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mesh_domain</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                                <span class="n">xmax</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mesh_domain</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                                                <span class="n">ymin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mesh_domain</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span>
+                                                <span class="n">ymax</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mesh_domain</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span>
+                                                <span class="n">zmin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mesh_domain</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span>
+                                                <span class="n">zmax</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mesh_domain</span><span class="p">[</span><span class="n">mesh</span><span class="p">][</span><span class="mi">5</span><span class="p">])</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stretch</span><span class="p">:</span>
-            <span class="n">mesh_string</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span>
-            <span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">mesh_string</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_meshes</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stretch</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
                     <span class="n">mesh_string</span> <span class="o">+=</span> <span class="n">stretch_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stretch</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
                                                            <span class="n">pc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stretch</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
@@ -290,104 +355,159 @@
 
 <div class="viewcode-block" id="WFDS"><a class="viewcode-back" href="../wfds_WFDS.html#wfds.WFDS">[docs]</a><span class="k">class</span> <span class="nc">WFDS</span><span class="p">(</span><span class="n">Mesh</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This class configures a WFDS simulation. This is a subclass of Mesh and</span>
-<span class="sd">    meshes are dealt with implicitly</span>
+<span class="sd">    This class configures a WFDS simulation. It gathers and calculates WFDS</span>
+<span class="sd">    paramters and writes them to a WFDS input file.</span>
 
-<span class="sd">    *Example:*</span>
+<span class="sd">    ``WFDS()`` is a subclass of the ``Mesh()`` class and meshes are dealt with</span>
+<span class="sd">    implicitly.</span>
 
-<span class="sd">    &gt;&gt;&gt; import wfds</span>
-<span class="sd">    &gt;&gt;&gt; fds = wfds.WFDS(160, 90, 50, 1, 9, fuels)</span>
+<span class="sd">    :param x: scene size in the x dimension</span>
+<span class="sd">    :type x: integer</span>
+<span class="sd">    :param y: scene size in the y dimension</span>
+<span class="sd">    :type y: integer</span>
+<span class="sd">    :param z: scene size in the z dimension</span>
+<span class="sd">    :type z: integer</span>
+<span class="sd">    :param xA: x dimension of the Area Of Interest</span>
+<span class="sd">    :type xA: integer</span>
+<span class="sd">    :param xO: x offset</span>
+<span class="sd">    :type xO: integer</span>
+<span class="sd">    :param res: simulation resolution</span>
+<span class="sd">    :type res: double</span>
+<span class="sd">    :param n: number of WFDS meshes</span>
+<span class="sd">    :type n: integer</span>
+<span class="sd">    :param fuels: fuels object (fuels.py, class: FVSfuels)</span>
+<span class="sd">    :type fuels: object</span>
+
+<span class="sd">    The following example assumes that a fuels object has been created using</span>
+<span class="sd">    the fuels module.</span>
+
+<span class="sd">    :Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; fds = wfds.WFDS(160, 90, 50, 64, 83, 1, 1, fuels)</span>
+<span class="sd">    &gt;&gt;&gt; fds.create_mesh(stretch={&quot;CC&quot;:[3, 33], &quot;PC&quot;:[1, 31]})</span>
+<span class="sd">    &gt;&gt;&gt; fds.create_ignition(30, 50, 24, 29, 13, 77)</span>
+<span class="sd">    &gt;&gt;&gt; fds.set_hrrpua(1000)</span>
+<span class="sd">    &gt;&gt;&gt; fds.set_wind_speed(9)</span>
+<span class="sd">    &gt;&gt;&gt; fds.set_init_temp(30)</span>
+<span class="sd">    &gt;&gt;&gt; fds.set_simulation_time(300)</span>
+<span class="sd">    &gt;&gt;&gt; fds.set_run_name(&quot;standard_run&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; fds.save_input(&quot;C:/temp/standard_run.txt&quot;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">fuels</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">xA</span><span class="p">,</span> <span class="n">xO</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">fuels</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor</span>
+
+<span class="sd">        :param x: scene size in the x dimension</span>
+<span class="sd">        :type x: integer</span>
+<span class="sd">        :param y: scene size in the y dimension</span>
+<span class="sd">        :type y: integer</span>
+<span class="sd">        :param z: scene size in the z dimension</span>
+<span class="sd">        :type z: integer</span>
+<span class="sd">        :param xA: x dimension of the Area Of Interest</span>
+<span class="sd">        :type xA: integer</span>
+<span class="sd">        :param xO: x offset</span>
+<span class="sd">        :type xO: integer</span>
+<span class="sd">        :param res: simulation resolution</span>
+<span class="sd">        :type res: double</span>
+<span class="sd">        :param n: number of WFDS meshes</span>
+<span class="sd">        :type n: integer</span>
+<span class="sd">        :param fuels: fuels object (fuels.py, class: FVSfuels)</span>
+<span class="sd">        :type fuels: object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># call the super class constructor</span>
-        <span class="nb">super</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">WFDS</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
-        <span class="c1"># auto-calculate the position of the aoa</span>
-        <span class="n">aoa_x_center</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="mi">64</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">-</span><span class="p">(</span><span class="mi">64</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># auto-calculate the position of the &quot;area of interest&quot;</span>
+        <span class="n">aoi_x_center</span> <span class="o">=</span> <span class="p">(</span><span class="n">xO</span><span class="o">+</span><span class="p">(</span><span class="n">xA</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
 
-        <span class="c1"># run configuration parameters</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;run_name&#39;</span>   <span class="p">:</span> <span class="s1">&#39;Default&#39;</span><span class="p">,</span>
-                  <span class="s1">&#39;mesh&#39;</span>       <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                  <span class="s1">&#39;time&#39;</span>       <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                  <span class="s1">&#39;init_temp&#39;</span>  <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                  <span class="s1">&#39;wind_speed&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                  <span class="s1">&#39;ign&#39;</span>        <span class="p">:</span> <span class="p">{</span><span class="s1">&#39;hrrpua&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                                  <span class="s1">&#39;coords&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
-                                  <span class="s1">&#39;ramp&#39;</span>   <span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]},</span>
-                  <span class="s1">&#39;bounds&#39;</span>     <span class="p">:</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span> <span class="p">:</span> <span class="n">x</span><span class="p">,</span>
-                                  <span class="s1">&#39;y&#39;</span> <span class="p">:</span> <span class="n">y</span><span class="p">,</span>
-                                  <span class="s1">&#39;z&#39;</span> <span class="p">:</span> <span class="n">z</span><span class="p">},</span>
-                  <span class="s1">&#39;fuels&#39;</span>      <span class="p">:</span> <span class="n">fuels</span><span class="p">,</span>
-                  <span class="s1">&#39;dump&#39;</span>       <span class="p">:</span> <span class="p">{</span><span class="s1">&#39;y_center&#39;</span> <span class="p">:</span> <span class="n">y</span><span class="o">/</span><span class="mf">2.0</span><span class="p">,</span>
-                                  <span class="s1">&#39;aoa_x_center&#39;</span> <span class="p">:</span> <span class="n">aoa_x_center</span><span class="p">,</span>
-                                  <span class="s1">&#39;aoa_x_front&#39;</span> <span class="p">:</span> <span class="n">aoa_x_center</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span>
-                                  <span class="s1">&#39;aoa_x_back&#39;</span> <span class="p">:</span> <span class="n">aoa_x_center</span> <span class="o">+</span> <span class="mi">10</span><span class="p">}}</span>
+        <span class="c1"># WFDS run configuration parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;run_name&quot;</span>   <span class="p">:</span> <span class="s2">&quot;Default&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;mesh&quot;</span>       <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="s2">&quot;time&quot;</span>       <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                       <span class="s2">&quot;init_temp&quot;</span>  <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                       <span class="s2">&quot;wind_speed&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                       <span class="s2">&quot;ign&quot;</span>        <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;hrrpua&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                       <span class="s2">&quot;coords&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                                       <span class="s2">&quot;ramp&quot;</span>   <span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]},</span>
+                       <span class="s2">&quot;bounds&quot;</span>     <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span> <span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+                                       <span class="s2">&quot;y&quot;</span> <span class="p">:</span> <span class="n">y</span><span class="p">,</span>
+                                       <span class="s2">&quot;z&quot;</span> <span class="p">:</span> <span class="n">z</span><span class="p">},</span>
+                       <span class="s2">&quot;fuels&quot;</span>      <span class="p">:</span> <span class="n">fuels</span><span class="p">,</span>
+                       <span class="s2">&quot;dump&quot;</span>       <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;y_center&quot;</span> <span class="p">:</span> <span class="n">y</span><span class="o">/</span><span class="mf">2.0</span><span class="p">,</span>
+                                       <span class="s2">&quot;aoa_x_center&quot;</span> <span class="p">:</span> <span class="n">aoi_x_center</span><span class="p">,</span>
+                                       <span class="s2">&quot;aoa_x_front&quot;</span> <span class="p">:</span> <span class="n">aoi_x_center</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span>
+                                       <span class="s2">&quot;aoa_x_back&quot;</span> <span class="p">:</span> <span class="n">aoi_x_center</span> <span class="o">+</span> <span class="mi">10</span><span class="p">}}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># will be defined in create_mesh()</span>
 
 <div class="viewcode-block" id="WFDS.create_mesh"><a class="viewcode-back" href="../wfds_WFDS.html#wfds.WFDS.create_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">create_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Call the `stretch_mesh()` method of the Mesh class</span>
+<span class="sd">        Collates and adds mesh parameters to the params dictionary.</span>
+<span class="sd">        Conditionally calls the ``stretch_mesh()`` method of the Mesh class</span>
+<span class="sd">        depending on the state of the stretch argument. Calls the</span>
+<span class="sd">        ``format_mesh()`` method of the Mesh class.</span>
 
-<span class="sd">        :param stretch: to stretch or not to strecth</span>
-<span class="sd">        :stretch type: False or stretch arguments</span>
+<span class="sd">        :param stretch: to stretch or not to stretch</span>
+<span class="sd">        :type stretch: False or dictionary of stretch parameters</span>
 
-<span class="sd">        .. note:: See `Mesh.stretch_mesh()` for setting the mesh arguments</span>
+<span class="sd">        Example dictionary of stretch parameters:</span>
+<span class="sd">            {&quot;CC&quot;:[3, 33], &quot;PC&quot;:[1, 31]}</span>
+
+<span class="sd">        .. note:: See ``Mesh.stretch_mesh()`` for setting the stretch arguments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">stretch</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">stretch_mesh</span><span class="p">(</span><span class="n">stretch</span><span class="p">[</span><span class="s1">&#39;CC&#39;</span><span class="p">],</span> <span class="n">stretch</span><span class="p">[</span><span class="s1">&#39;PC&#39;</span><span class="p">],</span> <span class="n">stretch</span><span class="p">[</span><span class="s1">&#39;axis&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stretch_mesh</span><span class="p">(</span><span class="n">stretch</span><span class="p">[</span><span class="s2">&quot;CC&quot;</span><span class="p">],</span> <span class="n">stretch</span><span class="p">[</span><span class="s2">&quot;PC&quot;</span><span class="p">])</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_mesh</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;mesh&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;mesh&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span></div>
 
-<div class="viewcode-block" id="WFDS.create_ignition"><a class="viewcode-back" href="../wfds_WFDS.html#wfds.WFDS.create_ignition">[docs]</a>    <span class="k">def</span> <span class="nf">create_ignition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">):</span>
+<div class="viewcode-block" id="WFDS.create_ignition"><a class="viewcode-back" href="../wfds_WFDS.html#wfds.WFDS.create_ignition">[docs]</a>    <span class="k">def</span> <span class="nf">create_ignition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">,</span> <span class="n">x_strt</span><span class="p">,</span> <span class="n">x_end</span><span class="p">,</span> <span class="n">y_strt</span><span class="p">,</span> <span class="n">y_end</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Places an ignition strip at the specified location and generates fire</span>
-<span class="sd">        at the specified HRR for the specified duration</span>
+<span class="sd">        at the specified Heat Release Rate Per Unit Area (HRRPUA) for the</span>
+<span class="sd">        specified duration.</span>
 
 <span class="sd">        :param start_time: start time of the igniter fire</span>
 <span class="sd">        :type start_time: integer</span>
-<span class="sd">        :param end_time: finish time of teh igniter fire</span>
+<span class="sd">        :param end_time: finish time of the igniter fire</span>
 <span class="sd">        :type end_time: integer</span>
-<span class="sd">        :param x0: starting x position of the ignition strip</span>
-<span class="sd">        :type x0: float</span>
-<span class="sd">        :param x1: ending x position of the ignition strip</span>
-<span class="sd">        :type x1: float</span>
-<span class="sd">        :param y0: starting y position of the ignition strip</span>
-<span class="sd">        :type y0: float</span>
-<span class="sd">        :param y1: ending y position of the ignition strip</span>
-<span class="sd">        :type y1: float</span>
+<span class="sd">        :param x_strt: starting x position of the ignition strip</span>
+<span class="sd">        :type x_strt: float</span>
+<span class="sd">        :param x_end: ending x position of the ignition strip</span>
+<span class="sd">        :type x_end: float</span>
+<span class="sd">        :param y_strt: starting y position of the ignition strip</span>
+<span class="sd">        :type y_strt: float</span>
+<span class="sd">        :param y_end: ending y position of the ignition strip</span>
+<span class="sd">        :type y_end: float</span>
 
-<span class="sd">        .. note:: Ignition ramping is dealt with implicitly to avoid &#39;explosions&#39;</span>
+<span class="sd">        .. note:: Ignition ramping is dealt with explicitly to avoid &quot;explosions&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;ign&#39;</span><span class="p">][</span><span class="s1">&#39;coords&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;ign&#39;</span><span class="p">][</span><span class="s1">&#39;coords&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;ign&#39;</span><span class="p">][</span><span class="s1">&#39;coords&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">y0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;ign&#39;</span><span class="p">][</span><span class="s1">&#39;coords&#39;</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">y1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;ign&quot;</span><span class="p">][</span><span class="s2">&quot;coords&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_strt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;ign&quot;</span><span class="p">][</span><span class="s2">&quot;coords&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_end</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;ign&quot;</span><span class="p">][</span><span class="s2">&quot;coords&quot;</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_strt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;ign&quot;</span><span class="p">][</span><span class="s2">&quot;coords&quot;</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_end</span>
 
         <span class="n">delta</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
         <span class="n">interval</span> <span class="o">=</span> <span class="n">delta</span><span class="o">/</span><span class="mf">4.0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;ign&#39;</span><span class="p">][</span><span class="s1">&#39;ramp&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_time</span>
-        <span class="n">cT</span> <span class="o">=</span> <span class="n">start_time</span> <span class="o">+</span> <span class="n">interval</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;ign&#39;</span><span class="p">][</span><span class="s1">&#39;ramp&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cT</span>
-            <span class="n">cT</span> <span class="o">+=</span> <span class="n">interval</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;ign&#39;</span><span class="p">][</span><span class="s1">&#39;ramp&#39;</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_time</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;ign&quot;</span><span class="p">][</span><span class="s2">&quot;ramp&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_time</span>
+        <span class="n">time_step</span> <span class="o">=</span> <span class="n">start_time</span> <span class="o">+</span> <span class="n">interval</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;ign&quot;</span><span class="p">][</span><span class="s2">&quot;ramp&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_step</span>
+            <span class="n">time_step</span> <span class="o">+=</span> <span class="n">interval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;ign&quot;</span><span class="p">][</span><span class="s2">&quot;ramp&quot;</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_time</span></div>
 
-<div class="viewcode-block" id="WFDS.set_wind_speed"><a class="viewcode-back" href="../wfds_WFDS.html#wfds.WFDS.set_wind_speed">[docs]</a>    <span class="k">def</span> <span class="nf">set_wind_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">U0</span><span class="p">):</span>
+<div class="viewcode-block" id="WFDS.set_wind_speed"><a class="viewcode-back" href="../wfds_WFDS.html#wfds.WFDS.set_wind_speed">[docs]</a>    <span class="k">def</span> <span class="nf">set_wind_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inflow_spd</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set the inflow wind speed </span>
+<span class="sd">        Set the inflow wind speed</span>
 
-<span class="sd">        :param U0: inflow wind speed (m/s)</span>
-<span class="sd">        :type U0: float</span>
+<span class="sd">        :param inflow_spd: inflow wind speed (m/s)</span>
+<span class="sd">        :type inflow_spd: float</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;wind_speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">U0</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;wind_speed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inflow_spd</span></div>
 
 <div class="viewcode-block" id="WFDS.set_init_temp"><a class="viewcode-back" href="../wfds_WFDS.html#wfds.WFDS.set_init_temp">[docs]</a>    <span class="k">def</span> <span class="nf">set_init_temp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -397,17 +517,17 @@
 <span class="sd">        :type temp: float</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;init_temp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;init_temp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span></div>
 
 <div class="viewcode-block" id="WFDS.set_simulation_time"><a class="viewcode-back" href="../wfds_WFDS.html#wfds.WFDS.set_simulation_time">[docs]</a>    <span class="k">def</span> <span class="nf">set_simulation_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sim_time</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the duration of the simulation</span>
-<span class="sd">        </span>
+
 <span class="sd">        :param sim_time: duration of the simulation (s)</span>
 <span class="sd">        :type sim_time: float</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sim_time</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sim_time</span></div>
 
 <div class="viewcode-block" id="WFDS.set_hrrpua"><a class="viewcode-back" href="../wfds_WFDS.html#wfds.WFDS.set_hrrpua">[docs]</a>    <span class="k">def</span> <span class="nf">set_hrrpua</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hrr</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -417,44 +537,51 @@
 <span class="sd">        :type hrr: integer</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;ign&#39;</span><span class="p">][</span><span class="s1">&#39;hrrpua&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hrr</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;ign&quot;</span><span class="p">][</span><span class="s2">&quot;hrrpua&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hrr</span></div>
 
 <div class="viewcode-block" id="WFDS.set_run_name"><a class="viewcode-back" href="../wfds_WFDS.html#wfds.WFDS.set_run_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_run_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds the run name to `params` dictionary</span>
+
+<span class="sd">        :params name: run name</span>
+<span class="sd">        :type name: string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;run_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;run_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span></div>
 
 <div class="viewcode-block" id="WFDS.save_input"><a class="viewcode-back" href="../wfds_WFDS.html#wfds.WFDS.save_input">[docs]</a>    <span class="k">def</span> <span class="nf">save_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Save the input file. Include the desired directory in the string</span>
+<span class="sd">        Creates and saves the WFDS input file using a template file. Include the</span>
+<span class="sd">        desired directory in the string.</span>
 
-<span class="sd">        :param file_name: path to and name of input file (.txt not .fds please)</span>
+<span class="sd">        :param file_name: path to and name of WFDS input file (.txt NOT .fds)</span>
 <span class="sd">        :type file_name: string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">this_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+        <span class="n">this_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
 
         <span class="c1"># open and read the fds input file template from the standfire directory</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">this_dir</span> <span class="o">+</span> <span class="s1">&#39;/data/wfds/wfds_template.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">file_template</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">this_dir</span> <span class="o">+</span> <span class="s2">&quot;/data/wfds/wfds_template.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tmplt_file</span><span class="p">:</span>
+            <span class="n">file_template</span> <span class="o">=</span> <span class="n">tmplt_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
         <span class="c1"># set the parameters</span>
         <span class="n">fds_file</span> <span class="o">=</span> <span class="n">file_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
 
         <span class="c1"># write it to disk</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fds_file</span><span class="p">)</span></div></div>
-
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fds_file_out</span><span class="p">:</span>
+            <span class="n">fds_file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fds_file</span><span class="p">)</span></div></div>
 
 <div class="viewcode-block" id="Execute"><a class="viewcode-back" href="../wfds_Execute.html#wfds.Execute">[docs]</a><span class="k">class</span> <span class="nc">Execute</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Execute class runs the WFDS input file (platform agnostic)</span>
 
-<span class="sd">    :param input_file: path to and name of input file</span>
+<span class="sd">    :param input_file: path to and name of input file (e.g. grid.txt)</span>
 <span class="sd">    :type input_file: string</span>
 <span class="sd">    :param n_proc: number of processors</span>
 <span class="sd">    :type n_proc: integer</span>
+
+<span class="sd">    .. note:: multiple processors not currently supported. Planned for a future</span>
+<span class="sd">              version.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_file</span><span class="p">,</span> <span class="n">n_proc</span><span class="p">):</span>
@@ -463,40 +590,52 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># get path to STANDFIRE directory</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fds_bin</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/bin/&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fds_bin</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;/bin/&quot;</span>
 
         <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;linux&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exec_linux</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">n_proc</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;windows&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exec_win</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">n_proc</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;darwin&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_exec_mac</span><span class="p">()</span>
+<span class="c1">##        elif platform.system().lower() == &quot;darwin&quot;:</span>
+<span class="c1">##            self._exec_mac()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span> <span class="s2">&quot;OS of type </span><span class="si">{0}</span><span class="s2"> is not recognized by STANDFIRE&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">_exec_linux</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_file</span><span class="p">,</span> <span class="n">n_proc</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Private method</span>
+<span class="sd">        Pseudo-private method</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="k">if</span> <span class="n">n_proc</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span> <span class="s2">&quot;Multiple processors not currently supported for standfire </span><span class="se">\</span>
+<span class="s2">                   WFDS execution&quot;</span>
+
         <span class="n">log</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">fds_bin</span> <span class="o">+</span> <span class="s2">&quot;fds_linux/wfds&quot;</span><span class="p">,</span> <span class="n">input_file</span><span class="p">],</span>
-                <span class="n">cwd</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+                                      <span class="n">cwd</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+
+        <span class="nb">print</span> <span class="n">log</span>
 
     <span class="k">def</span> <span class="nf">_exec_win</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_file</span><span class="p">,</span> <span class="n">n_proc</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Private method</span>
+<span class="sd">        Pseudo-private method</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="k">if</span> <span class="n">n_proc</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span> <span class="s2">&quot;Multiple processors not currently supported for standfire </span><span class="se">\</span>
+<span class="s2">                   WFDS execution&quot;</span>
+
         <span class="n">log</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">fds_bin</span> <span class="o">+</span> <span class="s2">&quot;fds_win/wfds.exe&quot;</span><span class="p">,</span> <span class="n">input_file</span><span class="p">],</span>
-                <span class="n">cwd</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span></div>
+                                      <span class="n">cwd</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+
+        <span class="nb">print</span> <span class="n">log</span></div>
 
 
 <div class="viewcode-block" id="GenerateBinaryGrid"><a class="viewcode-back" href="../wfds_GenerateBinaryGrid.html#wfds.GenerateBinaryGrid">[docs]</a><span class="k">class</span> <span class="nc">GenerateBinaryGrid</span><span class="p">(</span><span class="n">Mesh</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This class is for generating binary FDS grid. Usefull for Capsis. Inherits</span>
-<span class="sd">    the mesh class.</span>
+<span class="sd">    This subclass of ``Mesh`` is used to generate a binary FDS grid for Capsis.</span>
+<span class="sd">    Inherits the mesh class.</span>
 
-<span class="sd">    .. note:: See the wfds.Mesh() class for details</span>
+<span class="sd">    .. note:: See the ``wfds.Mesh()`` class for details</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">f_name</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -504,11 +643,11 @@
 <span class="sd">        Constructor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c1"># call super constructor</span>
-        <span class="nb">super</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="c1"># call super constructor (GBG inherits Mesh)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GenerateBinaryGrid</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">stretch</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">stretch_mesh</span><span class="p">(</span><span class="n">stretch</span><span class="p">[</span><span class="s1">&#39;CC&#39;</span><span class="p">],</span> <span class="n">stretch</span><span class="p">[</span><span class="s1">&#39;PC&#39;</span><span class="p">],</span> <span class="n">stretch</span><span class="p">[</span><span class="s1">&#39;axis&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stretch_mesh</span><span class="p">(</span><span class="n">stretch</span><span class="p">[</span><span class="s2">&quot;CC&quot;</span><span class="p">],</span> <span class="n">stretch</span><span class="p">[</span><span class="s2">&quot;PC&quot;</span><span class="p">])</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">f_name</span> <span class="o">=</span> <span class="n">f_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_mesh</span><span class="p">()</span>
@@ -518,10 +657,11 @@
 
     <span class="k">def</span> <span class="nf">_write</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Private method</span>
+<span class="sd">        Pseudo-private method</span>
+<span class="sd">        Create WFDS input file (e.g. grid.txt)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">grid_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">grid_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">grid_input</span> <span class="o">=</span> <span class="s2">&quot;&amp;HEAD CHID=&#39;</span><span class="si">{0}</span><span class="s2">&#39;, TITLE=&#39;</span><span class="si">{0}</span><span class="s2">&#39; /</span><span class="se">\n\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">grid_name</span><span class="p">)</span>
 
         <span class="n">grid_input</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span>
@@ -530,19 +670,21 @@
         <span class="n">grid_input</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&amp;DUMP WRITE_XYZ=.TRUE. /</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="n">grid_input</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&amp;TAIL /&quot;</span>
 
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">grid_input</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">cap_grid_file</span><span class="p">:</span>
+            <span class="n">cap_grid_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">grid_input</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Private method</span>
+<span class="sd">        Pseudo-private method</span>
+
+<span class="sd">        f_name is the name of the WFDS input file (e.g. grid.txt)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">proc</span> <span class="o">=</span> <span class="n">Execute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f_name</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
-
-
+        <span class="n">Execute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f_name</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
 </pre></div>
 
+           </div>
+           <div class="articleComments">
+            
            </div>
           </div>
           <footer>
@@ -552,7 +694,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, STANDFIRE.
+        &copy; Copyright 2017, STANDFIRE.
 
     </p>
   </div>
@@ -577,13 +719,14 @@
             VERSION:'1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

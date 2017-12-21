@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -30,6 +32,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="STANDFIRE 1 documentation" href="index.html"/>
         <link rel="next" title="Fuels module" href="fuels.html"/>
         <link rel="prev" title="Interfacing with FVS" href="interfacing_with_fvs.html"/> 
@@ -41,6 +46,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -81,13 +87,17 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">STANDFIRE API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="fuels.html">Fuels module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="capsis.html">Capsis module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wfds.html">WFDS module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.html">Metrics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar.html">LiDAR module</a></li>
 </ul>
 </li>
 </ul>
@@ -102,8 +112,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">STANDFIRE</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">STANDFIRE</a>
+        
       </nav>
 
 
@@ -112,23 +124,40 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
-    <li>STANDFIRE API Reference</li>
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>STANDFIRE API Reference</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/api_ref.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/api_ref.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -164,21 +193,29 @@
 <li class="toctree-l2"><a class="reference internal" href="metrics_HeatTransfer.html">Heat Transfer</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="lidar.html">LiDAR module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lidar_ConvertLidar.html">ConvertLidar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar_FVSFromLidar.html">FVSFromLidar</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="fuels.html" class="btn btn-neutral float-right" title="Fuels module" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="fuels.html" class="btn btn-neutral float-right" title="Fuels module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="interfacing_with_fvs.html" class="btn btn-neutral" title="Interfacing with FVS" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="interfacing_with_fvs.html" class="btn btn-neutral" title="Interfacing with FVS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -187,7 +224,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, STANDFIRE.
+        &copy; Copyright 2017, STANDFIRE.
 
     </p>
   </div>
@@ -212,13 +249,14 @@
             VERSION:'1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

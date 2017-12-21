@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LiDAR module &mdash; STANDFIRE 1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="STANDFIRE 1 documentation" href="index.html"/>
+        <link rel="up" title="STANDFIRE API Reference" href="api_ref.html"/>
+        <link rel="next" title="ConvertLidar" href="lidar_ConvertLidar.html"/>
+        <link rel="prev" title="Heat Transfer" href="metrics_HeatTransfer.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> STANDFIRE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="fuels.html">Fuels module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="capsis.html">Capsis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wfds.html">WFDS module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">Metrics module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">LiDAR module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lidar_ConvertLidar.html">ConvertLidar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lidar_FVSFromLidar.html">FVSFromLidar</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">STANDFIRE</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api_ref.html">STANDFIRE API Reference</a> &raquo;</li>
+        
+      <li>LiDAR module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/lidar.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-lidar">
+<span id="lidar-module"></span><h1>LiDAR module<a class="headerlink" href="#module-lidar" title="Permalink to this headline">¶</a></h1>
+<p>This module implements all LiDAR processing tasks for STANDFIRE. This
+includes creating a fishnet with 64x64m cells to divide the lidar points into
+one acre plots, calculating FVS input variables, running FVS for each plot
+and collating the results.</p>
+<p><strong>Inputs:</strong></p>
+<p>1. Lidar shapefile. Projected in WGS 1984 UTM (any zone). This shapefile
+needs to have the following attributes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="13%" />
+<col width="20%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Units</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>X_UTM</td>
+<td>Float</td>
+<td>Meters</td>
+<td>X coordinate</td>
+</tr>
+<tr class="row-odd"><td>Y_UTM</td>
+<td>Float</td>
+<td>Meters</td>
+<td>Y coordinate</td>
+</tr>
+<tr class="row-even"><td>Height_m</td>
+<td>Float</td>
+<td>Meters</td>
+<td>Tree height</td>
+</tr>
+<tr class="row-odd"><td>CBH_m</td>
+<td>Float</td>
+<td>Meters</td>
+<td>Crown Base Height</td>
+</tr>
+<tr class="row-even"><td>DBH_cm</td>
+<td>Float</td>
+<td>Centimeters</td>
+<td>Diameter at Breast Height</td>
+</tr>
+<tr class="row-odd"><td>Species</td>
+<td>String</td>
+<td>Text</td>
+<td>Two letter FVS species code</td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple" start="2">
+<li>FVS keyword file.</li>
+</ol>
+<p><strong>Outputs:</strong></p>
+<ol class="arabic simple">
+<li>Fishnet shapefile containing the plots (&lt;example&gt;_fishnet.shp)</li>
+<li>Lidar shapefile containing the input and calculated attributes (&lt;example&gt;_out.shp)</li>
+<li>Text file containing the calculated attributes (&lt;example&gt;_export.csv)</li>
+<li>FVS (&lt;example&gt;.tre and &lt;example&gt;.key) files for each plot</li>
+<li>Tree list for CAPSIS (&lt;example&gt;_trees.csv)</li>
+</ol>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="lidar_ConvertLidar.html">ConvertLidar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lidar_FVSFromLidar.html">FVSFromLidar</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="lidar_ConvertLidar.html" class="btn btn-neutral float-right" title="ConvertLidar" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="metrics_HeatTransfer.html" class="btn btn-neutral" title="Heat Transfer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, STANDFIRE.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

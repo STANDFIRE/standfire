@@ -1,0 +1,695 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ConvertLidar &mdash; STANDFIRE 1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="STANDFIRE 1 documentation" href="index.html"/>
+        <link rel="up" title="LiDAR module" href="lidar.html"/>
+        <link rel="next" title="FVSFromLidar" href="lidar_FVSFromLidar.html"/>
+        <link rel="prev" title="LiDAR module" href="lidar.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> STANDFIRE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="fuels.html">Fuels module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="capsis.html">Capsis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wfds.html">WFDS module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">Metrics module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="lidar.html">LiDAR module</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ConvertLidar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lidar_FVSFromLidar.html">FVSFromLidar</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">STANDFIRE</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api_ref.html">STANDFIRE API Reference</a> &raquo;</li>
+        
+          <li><a href="lidar.html">LiDAR module</a> &raquo;</li>
+        
+      <li>ConvertLidar</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/lidar_ConvertLidar.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="convertlidar">
+<h1>ConvertLidar<a class="headerlink" href="#convertlidar" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="lidar.ConvertLidar">
+<em class="property">class </em><code class="descclassname">lidar.</code><code class="descname">ConvertLidar</code><span class="sig-paren">(</span><em>lidar_shp</em>, <em>fishnet_shp</em>, <em>new_lidar</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lidar.html#ConvertLidar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lidar.ConvertLidar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>The ConvertLidar class is used to generate a CAPSIS tree list of lidar
+tree attributes from a shapefile of lidar trees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lidar_shp</strong> (<em>string</em>) – name and path of input lidar shapefile.</li>
+<li><strong>fishnet_shp</strong> (<em>string</em>) – name and path for output fishnet shapefile.</li>
+<li><strong>new_lidar</strong> (<em>string</em>) – name and path for output lidar shapefile.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Methods (execution order):</strong></p>
+<ul class="simple">
+<li>verify_projection</li>
+<li>verify_input_fields</li>
+<li>calculate_extents</li>
+<li>create_fishnet</li>
+<li>copy_shapefile</li>
+<li>cleanup_lidar_fields</li>
+<li>fishnet_id</li>
+<li>cleanup_lidar_features</li>
+<li>add_attribute_fields</li>
+<li>calculate_attribute_fields</li>
+<li>number_trees</li>
+<li>export_attributes_to_csv</li>
+</ul>
+<dl class="method">
+<dt id="lidar.ConvertLidar.add_attribute_fields">
+<code class="descname">add_attribute_fields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lidar.html#ConvertLidar.add_attribute_fields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lidar.ConvertLidar.add_attribute_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds and defines new attribute fields to the output shapefile.</p>
+<p><strong>Fields added:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="12%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>POINT_X</td>
+<td>Float</td>
+<td>X coordinate</td>
+</tr>
+<tr class="row-odd"><td>POINT_Y</td>
+<td>Float</td>
+<td>Y coordinate</td>
+</tr>
+<tr class="row-even"><td>CR_code</td>
+<td>Integer</td>
+<td>FVS crown ratio code</td>
+</tr>
+<tr class="row-odd"><td>DBH_in_x10</td>
+<td>Integer</td>
+<td>Diameter at Breast Height in inches x 10</td>
+</tr>
+<tr class="row-even"><td>Height_ft</td>
+<td>Integer</td>
+<td>Tree height in feet</td>
+</tr>
+<tr class="row-odd"><td>Tree_ID</td>
+<td>Integer</td>
+<td>Unique tree ID number within each plot</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">add attribute fields success</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">add attribute fields message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lidar.ConvertLidar.calculate_attribute_fields">
+<code class="descname">calculate_attribute_fields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lidar.html#ConvertLidar.calculate_attribute_fields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lidar.ConvertLidar.calculate_attribute_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates values for the attribute fields added in the
+“add_attribute_fields” method.</p>
+<p><strong>Formula descriptions:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>Height- converts from meters to feet and rounds to integer</li>
+<li>DBH - converts from centimeters to inches*10 and rounds to integer</li>
+<li>CR_code- calculates crown ratio while accounting for anomolous data
+where Height is &lt;= CBH. Then classifies the crown ratio into FVS
+categories.<ul>
+<li>crown ratio = (height - crown base height)/height).</li>
+<li>FVS crown ratio codes: 1: 0-10%; 2: 11-20%;…; 9: 81-100%</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">calculate attribute fields success</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">calculate attribute fields message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lidar.ConvertLidar.calculate_extents">
+<code class="descname">calculate_extents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lidar.html#ConvertLidar.calculate_extents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lidar.ConvertLidar.calculate_extents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the minimum and maximum x and y extents of the input
+shapefile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">x min, x max, y min, y max</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of four floats</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lidar.ConvertLidar.cleanup_lidar_features">
+<code class="descname">cleanup_lidar_features</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lidar.html#ConvertLidar.cleanup_lidar_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lidar.ConvertLidar.cleanup_lidar_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes features outside the fishnet area.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">cleanup success</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">cleanup message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lidar.ConvertLidar.cleanup_lidar_fields">
+<code class="descname">cleanup_lidar_fields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lidar.html#ConvertLidar.cleanup_lidar_fields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lidar.ConvertLidar.cleanup_lidar_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes extraneous fields from output shapefile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">cleanup success</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">cleanup message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lidar.ConvertLidar.copy_shapefile">
+<code class="descname">copy_shapefile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lidar.html#ConvertLidar.copy_shapefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lidar.ConvertLidar.copy_shapefile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes an exact copy of the input lidar shapefile for use in creating
+the output lidar shapefile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">shapefile copy success</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">shapefile copy message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lidar.ConvertLidar.create_fishnet">
+<code class="descname">create_fishnet</code><span class="sig-paren">(</span><em>extents</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lidar.html#ConvertLidar.create_fishnet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lidar.ConvertLidar.create_fishnet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a fishnet polygon shapefile to be used to assign plot
+numbers to the lidar points. Fishnet cells are 64x64m (~1 acre).
+Feature ID numbers are used to number plots.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>extents</strong> (<em>list of four floats</em>) – x min, x max, y min, y max of the input shapefile</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">fishnet creation success</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">fishnet creation message</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lidar.ConvertLidar.export_attributes_to_csv">
+<code class="descname">export_attributes_to_csv</code><span class="sig-paren">(</span><em>lidar_csv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lidar.html#ConvertLidar.export_attributes_to_csv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lidar.ConvertLidar.export_attributes_to_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports select attributes in the new lidar shapefile to a text (.csv)
+file.</p>
+<p><strong>Exported attributes:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>FID</td>
+<td>GIS record ID number</td>
+</tr>
+<tr class="row-odd"><td>POINT_X</td>
+<td>X coordinate</td>
+</tr>
+<tr class="row-even"><td>POINT_Y</td>
+<td>Y coordinate</td>
+</tr>
+<tr class="row-odd"><td>Species</td>
+<td>Two letter FVS species code</td>
+</tr>
+<tr class="row-even"><td>CR_code</td>
+<td>FVS crown ratio code</td>
+</tr>
+<tr class="row-odd"><td>DBH_in_x10</td>
+<td>Diameter at Breast Height in inches x 10</td>
+</tr>
+<tr class="row-even"><td>Height_ft</td>
+<td>Tree height in feet</td>
+</tr>
+<tr class="row-odd"><td>Plot_ID</td>
+<td>Unique plot ID number</td>
+</tr>
+<tr class="row-even"><td>Tree_ID</td>
+<td>Unique tree ID number within each plot</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lidar_csv</strong> (<em>string</em>) – name and path for output text file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">export success</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">export message</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lidar.ConvertLidar.fishnet_id">
+<code class="descname">fishnet_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lidar.html#ConvertLidar.fishnet_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lidar.ConvertLidar.fishnet_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns a fishnet-based plot ID number to each tree in the output
+shapefile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">plot number assignment success</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">plot number assignment message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lidar.ConvertLidar.number_trees">
+<code class="descname">number_trees</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lidar.html#ConvertLidar.number_trees"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lidar.ConvertLidar.number_trees" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numbers trees within each 64x64m (~1 acre) plot. The combination of plot ID
+and tree Id constitutes a unique identifier for each tree in the simulation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">numbering trees success</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">numbering trees message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lidar.ConvertLidar.verify_input_fields">
+<code class="descname">verify_input_fields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lidar.html#ConvertLidar.verify_input_fields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lidar.ConvertLidar.verify_input_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verifies that the required input fields are in the input shapefile.</p>
+<p><strong>Required fields:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="13%" />
+<col width="20%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Units</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>X_UTM</td>
+<td>Float</td>
+<td>Meters</td>
+<td>X coordinate</td>
+</tr>
+<tr class="row-odd"><td>Y_UTM</td>
+<td>Float</td>
+<td>Meters</td>
+<td>Y coordinate</td>
+</tr>
+<tr class="row-even"><td>Height_m</td>
+<td>Float</td>
+<td>Meters</td>
+<td>Tree height</td>
+</tr>
+<tr class="row-odd"><td>CBH_m</td>
+<td>Float</td>
+<td>Meters</td>
+<td>Crown Base Height</td>
+</tr>
+<tr class="row-even"><td>DBH_cm</td>
+<td>Float</td>
+<td>Centimeters</td>
+<td>Diameter at Breast Height</td>
+</tr>
+<tr class="row-odd"><td>Species</td>
+<td>String</td>
+<td>Text</td>
+<td>Two letter FVS species code</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">input field fitness</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">fitness message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">See FVS variant users guides for definitions of species codes:
+<a class="reference external" href="https://www.fs.fed.us/fvs/documents/guides.shtml">https://www.fs.fed.us/fvs/documents/guides.shtml</a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="lidar.ConvertLidar.verify_projection">
+<code class="descname">verify_projection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lidar.html#ConvertLidar.verify_projection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lidar.ConvertLidar.verify_projection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verifies that the input shapefile is projected and, if so, whether the
+projection is WGS 1984 UTM. Uses EPSG projection codes to verify.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">projection fitness</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">fitness message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">fitness code</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+<p><em>Fitness Codes:</em></p>
+<ul class="simple">
+<li>0 - projection ok</li>
+<li>1 - unable to identify projection</li>
+<li>2 - unprojected</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="lidar_FVSFromLidar.html" class="btn btn-neutral float-right" title="FVSFromLidar" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="lidar.html" class="btn btn-neutral" title="LiDAR module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, STANDFIRE.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

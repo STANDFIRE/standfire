@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -30,6 +32,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="STANDFIRE 1 documentation" href="index.html"/>
         <link rel="up" title="Capsis module" href="capsis.html"/>
         <link rel="next" title="Execute" href="capsis_Execute.html"/>
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -82,7 +88,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="fuels.html">Fuels module</a></li>
@@ -93,6 +102,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="wfds.html">WFDS module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.html">Metrics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar.html">LiDAR module</a></li>
 </ul>
 </li>
 </ul>
@@ -107,8 +117,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">STANDFIRE</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">STANDFIRE</a>
+        
       </nav>
 
 
@@ -117,27 +129,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
           <li><a href="api_ref.html">STANDFIRE API Reference</a> &raquo;</li>
-      
+        
           <li><a href="capsis.html">Capsis module</a> &raquo;</li>
-      
-    <li>RunConfig</li>
+        
+      <li>RunConfig</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/capsis_RunConfig.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/capsis_RunConfig.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -149,33 +178,38 @@
 <dt id="capsis.RunConfig">
 <em class="property">class </em><code class="descclassname">capsis.</code><code class="descname">RunConfig</code><span class="sig-paren">(</span><em>run_directory</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>The Capsis RunConfig class is used to configure a capsis run.</p>
+<p>The <code class="docutils literal"><span class="pre">RunConfig</span></code> class is used to configure a capsis run.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>run_directory</strong> &#8211; desired path for Capsis run</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">Run_directory type:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">string</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>run_directory</strong> (<em>string</em>) – desired path for Capsis run</td>
 </tr>
 </tbody>
 </table>
-<p><a href="#id1"><span class="problematic" id="id2">*</span></a>Example:#</p>
+<p><em>Example:</em></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">capsis</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span> <span class="o">=</span> <span class="n">capsis</span><span class="o">.</span><span class="n">RunConfig</span><span class="p">(</span><span class="s1">&#39;/path/to/capsis_run/&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">set_x_size</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">set_y_size</span><span class="p">(</span><span class="mi">145</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">set_svs_base</span><span class="p">(</span><span class="s1">&#39;stand_0001&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span> <span class="o">=</span> <span class="n">capsis</span><span class="o">.</span><span class="n">RunConfig</span><span class="p">(</span><span class="s2">&quot;/path/to/capsis_run/&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">set_xy_size</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">set_svs_base</span><span class="p">(</span><span class="s2">&quot;stand_0001&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">set_crown_space</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">set_show3d</span><span class="p">(</span><span class="s1">&#39;true&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">set_show_3d</span><span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">save_config</span><span class="p">()</span>
 </pre></div>
 </div>
 <dl class="method">
 <dt id="capsis.RunConfig.save_config">
 <code class="descname">save_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.save_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.save_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method uses the defined parameters to generate Capsis input files</p>
+<dd><p>This method uses template and reference files to create capsis input
+files. Input files include input_template.txt,
+additionalProperties_template.txt and speciesFile.txt, all of which are
+located in the /data/capsis/ directory. It creates the following output
+files for the capsis run: capsis_run_file.txt, additionalProperties.txt
+and &lt;run name&gt;_scalars.csv. Run name is generally the standid found in
+the FVS keyword file. This method also calls the WFDS.py
+<code class="docutils literal"><span class="pre">GenerateBinaryGrid</span></code> method to generate a binary FDS grid for use by
+capsis and creates the sim_area.txt file for use by the
+standfire_analyze.py script.</p>
 </dd></dl>
 
 <dl class="method">
@@ -186,9 +220,24 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>space</strong> &#8211; crown spacing in meters</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>space</strong> (<em>float</em>) – crown spacing in meters</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Space type:</th><td class="field-body">float</td>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capsis.RunConfig.set_extend_fvs_sample">
+<code class="descname">set_extend_fvs_sample</code><span class="sig-paren">(</span><em>extend</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_extend_fvs_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_extend_fvs_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets CAPSIS extend to true. This will cause CAPSIS to add additional
+trees to its landscape based on patterns found in the FVS input tree
+list. This should only be implemented when the sample doesn’t cover the
+whole scene (e.g. not for lidar data).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>extend</strong> (<em>boolean</em>) – Truth value of the extend parameter</td>
 </tr>
 </tbody>
 </table>
@@ -197,12 +246,14 @@
 <dl class="method">
 <dt id="capsis.RunConfig.set_path">
 <code class="descname">set_path</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets path to Capsis run directory</p>
+<dd><p>Sets path to Capsis run directory. Initially used to verify that “path”
+is a legitimate directory. Allows the user to modify the path after
+initialization.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<em>string</em>) &#8211; path to Capsis run directory</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<em>string</em>) – path to Capsis run directory</td>
 </tr>
 </tbody>
 </table>
@@ -217,161 +268,251 @@ for a Capsis intervention</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prune</strong> &#8211; prunning height</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Prune type:</th><td class="field-body">float</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prune</strong> (<em>float</em>) – prunning height</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="method">
-<dt id="capsis.RunConfig.set_show3D">
-<code class="descname">set_show3D</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_show3D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_show3D" title="Permalink to this definition">¶</a></dt>
+<dt id="capsis.RunConfig.set_show_3d">
+<code class="descname">set_show_3d</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_show_3d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_show_3d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the boolean value of the show3D parameter in the Capsis run file. If
-true, Capsis will open a 3D displaying the simulation domain.</p>
+true, Capsis will open a 3D display showing the simulation domain.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> &#8211; Truth value of the show3D parameter</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Value type:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>boolean</em>) – Truth value of the show3D parameter</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="method">
-<dt id="capsis.RunConfig.set_srf_cbh">
-<code class="descname">set_srf_cbh</code><span class="sig-paren">(</span><em>shrub_cbh</em>, <em>herb_cbh</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_srf_cbh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_srf_cbh" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
 <dt id="capsis.RunConfig.set_srf_cover">
-<code class="descname">set_srf_cover</code><span class="sig-paren">(</span><em>shrub_cover</em>, <em>herb_cover</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_srf_cover"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_srf_cover" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">set_srf_cover</code><span class="sig-paren">(</span><em>shrub_cover</em>, <em>herb_cover</em>, <em>litter_cover</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_srf_cover"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_srf_cover" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set percent cover for shrubs, herbs and litter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shrub_cover</strong> (<em>integer</em>) – shrub percent cover</li>
+<li><strong>herb_cover</strong> (<em>integer</em>) – herb percent cover</li>
+<li><strong>litter_cover</strong> (<em>integer</em>) – litter percent cover</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="capsis.RunConfig.set_srf_dead_load">
 <code class="descname">set_srf_dead_load</code><span class="sig-paren">(</span><em>shrub_load</em>, <em>herb_load</em>, <em>litter_load</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_srf_dead_load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_srf_dead_load" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Set surface loads (kg/m2) for dead shrubs, herbs and litter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shrub_load</strong> (<em>float</em>) – dead shrub surface load (kg/m2)</li>
+<li><strong>herb_load</strong> (<em>float</em>) – dead herbaceaous surface load (kg/m2)</li>
+<li><strong>litter_load</strong> (<em>float</em>) – litter surface load (kg/m2)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="capsis.RunConfig.set_srf_dead_mc">
 <code class="descname">set_srf_dead_mc</code><span class="sig-paren">(</span><em>shrub_mc</em>, <em>herb_mc</em>, <em>litter_mc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_srf_dead_mc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_srf_dead_mc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Set percent moisture content for dead shrubs, herbs and litter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shrub_mc</strong> (<em>integer</em>) – dead shrub moisture content (%)</li>
+<li><strong>herb_mc</strong> (<em>integer</em>) – dead herbaceaous moisture content (%)</li>
+<li><strong>litter_mc</strong> (<em>integer</em>) – dead litter moisture content (%)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="capsis.RunConfig.set_srf_dead_svr">
 <code class="descname">set_srf_dead_svr</code><span class="sig-paren">(</span><em>shrub_svr</em>, <em>herb_svr</em>, <em>litter_svr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_srf_dead_svr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_srf_dead_svr" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Set surface area to volume ratio for dead shrubs, herbs and litter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shrub_svr</strong> (<em>integer</em>) – shrub surface area to volume ratio</li>
+<li><strong>herb_svr</strong> (<em>integer</em>) – herbaceaous surface area to volume ratio</li>
+<li><strong>litter_svr</strong> (<em>integer</em>) – litter surface area to volume ratio</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Live and dead surface area to volume ratios and not yet
+differentiated in the user interface. Both live and dead
+surface area to volume ratios are currently set to the same
+value.</p>
+</div>
+</dd></dl>
 
 <dl class="method">
 <dt id="capsis.RunConfig.set_srf_height">
 <code class="descname">set_srf_height</code><span class="sig-paren">(</span><em>shrub_ht</em>, <em>herb_ht</em>, <em>litter_ht</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_srf_height"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_srf_height" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Set surface fuel heights for shrubs, herbs and litter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shrub_ht</strong> (<em>float</em>) – shrub height</li>
+<li><strong>herb_ht</strong> (<em>float</em>) – herb height</li>
+<li><strong>litter_ht</strong> (<em>float</em>) – litter height</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="capsis.RunConfig.set_srf_live_load">
 <code class="descname">set_srf_live_load</code><span class="sig-paren">(</span><em>shrub_load</em>, <em>herb_load</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_srf_live_load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_srf_live_load" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Set surface loads (kg/m2) for live shrubs and herbs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shrub_load</strong> (<em>float</em>) – live shrub surface load (kg/m2)</li>
+<li><strong>herb_load</strong> (<em>float</em>) – live herbaceaous surface load (kg/m2)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="capsis.RunConfig.set_srf_live_mc">
 <code class="descname">set_srf_live_mc</code><span class="sig-paren">(</span><em>shrub_mc</em>, <em>herb_mc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_srf_live_mc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_srf_live_mc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Set percent moisture content for live shrubs and herbs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shrub_mc</strong> (<em>integer</em>) – live shrub moisture content (%)</li>
+<li><strong>herb_mc</strong> (<em>integer</em>) – live herbaceaous moisture content (%)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="capsis.RunConfig.set_srf_live_svr">
 <code class="descname">set_srf_live_svr</code><span class="sig-paren">(</span><em>shrub_svr</em>, <em>herb_svr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_srf_live_svr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_srf_live_svr" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Set surface area to volume ratio for live shrubs and herbs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shrub_svr</strong> (<em>integer</em>) – shrub surface area to volume ratio</li>
+<li><strong>herb_svr</strong> (<em>integer</em>) – herbaceaous surface area to volume ratio</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capsis.RunConfig.set_srf_patch">
+<code class="descname">set_srf_patch</code><span class="sig-paren">(</span><em>shrub_patch</em>, <em>herb_patch</em>, <em>litter_patch</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_srf_patch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_srf_patch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set patch sizes (widths) for shrubs, herbs and litter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shrub_patch</strong> (<em>float</em>) – shrub patch size (meters)</li>
+<li><strong>herb_patch</strong> (<em>float</em>) – herb patch size (meters)</li>
+<li><strong>litter_patch</strong> (<em>float</em>) – litter patch size (meters)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="capsis.RunConfig.set_svs_base">
 <code class="descname">set_svs_base</code><span class="sig-paren">(</span><em>base_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_svs_base"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_svs_base" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the base file name for FVS/SVS fuel output files</p>
+<dd><p>Sets the base file name for FVS/SVS fuel output files. Unless reset
+using this function the base name generally is the stand ID found in the
+FVS keyword file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>base_name</strong> (<em>string</em>) &#8211; base file name for fuel output files</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>base_name</strong> (<em>string</em>) – base file name for fuel output files</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Only the tree.csv file is required. If snags, cwd and scalar
-files exist in the same directory they will be used by
-Capsis when writing WFDS fuel inputs.</p>
+<p class="last">Only the tree .csv file is required. If snags, coarse woody
+debris (cwd) and scalar files exist in the same directory they
+will be used by Capsis when writing WFDS fuel inputs.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
-<dt id="capsis.RunConfig.set_x_offset">
-<code class="descname">set_x_offset</code><span class="sig-paren">(</span><em>offset</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_x_offset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_x_offset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the x offset of the area of analysis</p>
+<dt id="capsis.RunConfig.set_xy_size">
+<code class="descname">set_xy_size</code><span class="sig-paren">(</span><em>x_size</em>, <em>y_size</em>, <em>x_aoi_size</em>, <em>y_aoi_size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_xy_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_xy_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets scene and Area Of Interest (AOI) dimensions. Calls methods to
+update offset and surface fuel block values</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>offset</strong> &#8211; x offset of the AOA</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Offset type:</th><td class="field-body">integer</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="capsis.RunConfig.set_x_size">
-<code class="descname">set_x_size</code><span class="sig-paren">(</span><em>x_size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_x_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_x_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets scene x dimension</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x_size</strong> (<em>integer</em>) &#8211; size of scene in the x domain (meters)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x_size</strong> (<em>integer</em>) – size of scene in the x domain (meters)</li>
+<li><strong>y_size</strong> (<em>integer</em>) – size of scene in the y domain (meters)</li>
+<li><strong>x_aoi_size</strong> (<em>integer</em>) – area of interest size in the x domain</li>
+<li><strong>y_aoi_size</strong> (<em>integer</em>) – area of interest size in the y domain</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><cite>x_size</cite> must be greater than or equal to 64 meters</p>
+<p class="last">“x_size” and “y_size” must be greater than or equal to 64 meters</p>
 </div>
-</dd></dl>
-
-<dl class="method">
-<dt id="capsis.RunConfig.set_y_offset">
-<code class="descname">set_y_offset</code><span class="sig-paren">(</span><em>offset</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_y_offset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_y_offset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the y offset of the area of analysis</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>offset</strong> &#8211; y offset of the AOA</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Offset type:</th><td class="field-body">integer</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="capsis.RunConfig.set_y_size">
-<code class="descname">set_y_size</code><span class="sig-paren">(</span><em>y_size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/capsis.html#RunConfig.set_y_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capsis.RunConfig.set_y_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets scene y dimension</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>y_size</strong> (<em>integer</em>) &#8211; size of scene in the y domain (meters)</td>
-</tr>
-</tbody>
-</table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><cite>y_size</cite> must be greater than or equal to 64 meters</p>
+<p class="last">“x_aoi_size” and “y_aoi_size” must be at least 2 meters less
+than x and y sizes</p>
 </div>
 </dd></dl>
 
@@ -383,13 +524,14 @@ Capsis when writing WFDS fuel inputs.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>z_size</strong> (<em>integer</em>) &#8211; size of scene in the z domain (meters)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>z_size</strong> (<em>integer</em>) – size of scene in the z domain (meters)</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><cite>z_size</cite> must be greater than or equal to tallest tree in domain</p>
+<p class="last">“z_size” must be greater than or equal to tallest tree in the
+domain</p>
 </div>
 </dd></dl>
 
@@ -399,15 +541,18 @@ Capsis when writing WFDS fuel inputs.</p>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="capsis_Execute.html" class="btn btn-neutral float-right" title="Execute" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="capsis_Execute.html" class="btn btn-neutral float-right" title="Execute" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="capsis.html" class="btn btn-neutral" title="Capsis module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="capsis.html" class="btn btn-neutral" title="Capsis module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -416,7 +561,7 @@ Capsis when writing WFDS fuel inputs.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, STANDFIRE.
+        &copy; Copyright 2017, STANDFIRE.
 
     </p>
   </div>
@@ -441,13 +586,14 @@ Capsis when writing WFDS fuel inputs.</p>
             VERSION:'1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

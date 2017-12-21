@@ -1,0 +1,788 @@
+July, 2017 changelog for standfire version 1.1.0a (from version 1.0.0a)
+
+SCRIPTS
+
+*******************************
+* standfire_mini_interface.py *
+*******************************
+
+-added import for new lidar (lidar.py) module
+
+-added lidar_get_shapefile method. Opens file dialog and stores user
+	selected filename in lidar_entry box.
+
+-added 'filetype' option to get_keyword_file method to restrict displayed
+	files to *.key or *.*.
+
+-added toggle_ldr_check method. Checks whether the 'Enable LiDAR Run box
+	is checked, enables or disables GUI elements as appropriate and 
+	populates/depopulates GUI entry fields as appropriate.
+
+-modified update_domain_change method:
+	-removed hard-wired numbers to accomadate both standard and lidar
+	 simulations.
+	-added x & y Area Of Interest (AOI) variable for use in calculating
+	 x & y offsets.
+	-added y offset variable
+	-added pathways to calculate various dimensions for both standard 
+	 and lidar runs.
+	-changed the methodology for calculating WFDS igniter location and
+	 dimensions.
+
+- added run_button method. Runs either a standard or lidar FVS simulation 
+	method (run_standard or run_lidar) depending on user specification.
+	Also runs run_etal which runs CAPSIS and WFDS for either type of 
+	simulation.
+
+-split the run method into run_standard and capsis_etal methods and added the
+	run_lidar method.
+	The run_lidar method processes the input shapefile, runs multiple
+	64 x 64m FVS simulations and collates the FVS simulation results.
+
+-modified the capsis_etal (formally a part of the run method) to 1) set the 
+	'extend' parameter for capsis to True (standard run) or False 
+	(lidar run) and 2) to pass on new variables required by the WFDS class
+	constructor (__init__) method.
+
+-added the following variables to the create_variables method:
+	-ldr_check_var - t/f lidar run checkbox
+	-lidar_shapefile - input lidar shapefile path and name
+	-x_AOI_size - x Area Of Interest size
+	-y_AOI_size - y AOI size
+
+-added the following variables to the reset method:
+	-lidar_check_var (uncheck)
+	-lidar_shapefile (clear)
+	-shape_entry (disable)
+	-shp_brws_btn (disable)
+	-x_entry (enable)
+	-y_entry (enable)
+	-x_AOI_size (64)
+	-y_AOI_size (64)
+
+-deleted the clear method. This method set all input variables to an empty
+	string. This could cause some bugs in the program down the road and
+	we decided to eliminate it.
+
+-added the following to the GUI:
+	-'Enable LiDAR Run' checkbox
+	-'Specify LiDAR shapefile' string entry box
+	-'Browse' button (to browse for LiDAR shapefile)
+
+-added the the 'lidar panel' to the create_widgets method (includes the above
+	GUI additions and associated text prompts)
+
+-deleted the clear button from the create_widgets method (see above)
+
+-added the lidar panel items (see above) to the grid_widgets method. Adjusted
+	adjusted the positioning of other GUI elements as necessary.
+
+-deleted the clear button from the grid_widgets method.
+
+
+************************
+* standfire_cmdline.py *
+************************
+
+Standfire command line has been completely rewritten. Only 10 lines of code 
+remain from the original. Please see the comments in standfire_cmdline.py 
+for a description of its operation.
+
+
+*************
+* capsis.py *
+*************
+
+-changed default parameter 'extend' (in 'params' dictionary) from true to false.
+	This will prevent capsis from extrapolating new trees into areas outside
+	the sample area. This is important for lidar data input which has real 
+	data from edge to edge.This parameter can be reset using the 
+	'set_extend_FVS_sample' method for standard runs.
+    
+- changed other default parameters to eliminate hard wired values including 
+	sceneSizeX, sceneSizeY, xOffset and yOffset (changed to 0 or 0.0)
+
+-changed default parameters for 'canopyGeom' and 'bdBin' to 'CYLINDER' and '0.01'
+	from 'RECTANGLE' and '0.1' to accomidate the new version of CAPSIS' ability to 
+	generate heterogeneous surface fuels.
+
+-added 'layerGeom' as a new parameter and set it to 'HET_RECTANGLE_TEXT'. This will
+	generate heterogeneous surface fuels in the new version of capsis.
+
+-changed the default surface fuels parameters under 'srf_fuels' to match the defaults
+	used in the standfire mini interface (standfire_mini_interface.py).
+
+-corrected an error in capsis.py in the 'set_srf_dead_mc' method where litter moisture
+	was being set to herbaceous moisture.
+
+-combined RunConfig methods 'set_x_size' and 'set_y_size' to create 'set_xy_size'
+
+-expanded 'set_xy_size' parameters to include x&y scene sizes and x&y AOI sizes.
+	The AOI sizes are passed to the private methods '_set_x_offset', 
+	'_set_y_offset' and '_set_block_verts' to calculate these parameters.
+    
+-modified the set x&y offset methods to add x&y AOI size parameters
+
+-replaced hardwired parameters in the set x&y offset methods with formulas using 
+	x&y AOI values to calculate these offsets.
+
+-modified '_set_block_verts' method to add x&y AOI parameters and replace
+	hardwired values with formulas to calculate the surface fuel blocks using
+	these parameters.
+   
+-added set_extend_FVS_sample method to set extend to true when starting from FVS .tre
+	file (standard run)
+
+
+************
+* fuels.py *
+************
+
+-No significant changes.
+
+
+***********
+* wfds.py *
+***********
+
+-modified the WFDS class constructor to accept x dimension Area Of
+	Interest (AOI) and the x Offset (fetch or the distance between
+	the x minimum and the x AOI minimum).
+
+- removed hard-wired values from the constructor and used the AOI and 
+	Offset to calculate the center point of the AOI (aoa_x_center)
+
+
+************
+* lidar.py *
+************
+
+- Entirely new sub module. Please see the comments in lidar.py for a
+	description of its operation.
+
+
+FILES
+
+**********************
+* input_template.txt *
+**********************
+
+This is the capsis input file template. Found in .../source/standfire/data/capsis/
+
+-added layerSetRepresentation keyword to support heterogeneous surface fuels. Requires
+	a recent version of standfire capsis (currently using one compiled by Russ in
+	late July, 2017.
+
+
+*******************
+* speciesFile.txt *
+*******************
+
+This is a capsis input file. Found in .../source/standfire/data/capsis/
+
+-added all species found in FVS/SVS (apprx 300 spp)
+
+
+PROGRAMS
+
+**********
+* CAPSIS *
+**********
+
+Added a new version of capsis, compiled by Russ on July 28th, to /source/standfire/bin
+
+
+
+August, 2017 changelog for standfire version 1.1.1a (from version 1.1.0a)
+
+SCRIPTS
+
+*******************************
+* standfire_mini_interface.py *
+*******************************
+
+- modified spacing throughout the script to come in line with PEP recommendations
+
+- replaced call to lidar.py:Convert_Lidar:spatial_join method with calls to 
+	several methods (copy_shapefile, cleanup_lidar_fields, fishnet_id and
+	cleanup_lidar_features) which replace spatial join for the purpose of 
+	eliminating the use of the ogr2ogr.exe binary.
+
+
+************************
+* standfire_cmdline.py *
+************************
+
+- modified spacing throughout the script to come in line with PEP recommendations
+
+- replaced call to lidar.py:Convert_Lidar:spatial_join method with calls to 
+	several methods (copy_shapefile, cleanup_lidar_fields, fishnet_id and
+	cleanup_lidar_features) which replace spatial join for the purpose of 
+	eliminating the use of the ogr2ogr.exe binary.
+
+
+************
+* lidar.py *
+************
+
+-eliminated the use of the GDAL binary ogr2ogr.exe to make its functions platform
+	neutral and speed up processing time.
+
+- replaced the '_write_vrt_file' and 'spatial_join' methods from standfire ver 1.1.0a
+	with 'copy_shapefile', 'cleanup_lidar_fields', 'fishnet_id' and 
+	'cleanup_lidar_features' to facilitate the elimination of the ogr2ogr binary.
+
+- modified the __init__ method to eliminate the definition of the path to ogr2ogr.exe
+
+- modified spacing throughout the script to come in line with PEP recommendations
+
+- deleted the addition of the 'Plot_ID' field from the 'add_attribute_fields' method.
+	This field is now added and populated in the 'fishnet_id' method.
+
+- eliminated the populating of the 'Plot_ID' field from the 'calculate_attributes'
+	method for the reasons listed above.
+
+
+PROGRAMS
+
+- removed ogr2ogr.exe and gdal201.dll files from the bin folder. Their functionality 
+	has been replaced by basic ogr functions in several methods in lidar.py
+	(see above).
+	
+	
+
+	September 14, 2017 changelog for standfire version 1.1.2a (from version 1.1.1a)
+
+
+DIRECTORIES
+
+- renamed \apps\STANDFIRE_v1.0 --> \apps\STANDFIRE_v1.1
+
+- changed directory structure: moved the contents of the \standfire\ directory 
+	to \apps\STANDFIRE_v1.1\ and deleted the \standfire\directory
+
+
+SCRIPTS
+
+*******************************
+* standfire_mini_interface.py *
+*******************************
+
+- changed attribute/variable/method names to conform to PEP style guidelines:
+	https://www.python.org/dev/peps/pep-0008/
+
+- shortened lines >100 characters
+
+- standardized use of quotation marks: "outside"; 'inside'; """doc strings"""
+
+- added extensive error handling to the run_lidar method in 
+	standfire_mini_interface and to all lidar processing methods in the
+	ConvertLidar class of the lidar submodule. The methods in the
+	ConvertLidar class now trap many types of errors and return error
+	messages back to run_lidar. When a trapped error occurs, run_lidar halts
+	the execution of the standfire simulation and prints the error message
+	to the console. Successful processing also generates messages which are
+	sent to the console when all the processes executed in run_lidar have
+	successfully completed. See comments in the mini interface and lidar
+	scripts for more information.
+
+- changed the execution of lidar processing methods (calls to the ConvertLidar
+	class of the lidar submodule) from serial execution to execution using a
+	for loop. This allows for the termination of the standfire simulation
+	upon an error in any of the lidar processing methods instead of after the
+	completion of all methods. This also facilitated the error trapping
+	methodology described above. See comments in the mini interface and lidar
+	scripts for more information.
+
+- added an end method that can be called for terminating the program and
+	performing cleanup (cleanup has not yet been implemented)
+
+- specified an exception type (ValueError) for a try/except pair in the
+	update_domain_change method. This method updates associated parameters
+	when an xy domain changes in the user interface. This exception handles
+	cases where x or y domains are empty strings.
+
+- changed return attribute variable names in update_domain_change to be more
+	descriptive of the attributes returned by the trace method when a value
+	changes in the x or y domains in the user interface. (from 'a, b, c' to
+	'internal_name, index, operation')
+
+- rewrote superclass constructor in '__int__' method of the Application class to
+	eliminate a potential infinite recursion.
+
+- corrected potential error in the create_wfds_run_script method
+	(linux/OSX branch), where self.n_mesh.get() was written as
+	self.n_mesh_get()
+
+- The create_fishnet method in the lidar submodule's ConvertLidar class was
+	changed to no longer return the x and y dimensions of the fishnet.
+	Therefore, the calling method was updated to no longer receive a return.
+
+- split run_lidar method into run_lidar and _lidar_fvs methods
+
+- changed file variable name 'f' to 'script' in the create_wfds_run_script and
+	create_smv_run_script methods for clarity
+
+- Updated path references for the importation of submodules to accommodate the
+	changes in directory structure (the contents of \standfire\ were moved
+	to \apps\STANDFIRE_v1.1\) This change was made so that submodules and 
+	their dependencies exist in the same directory or a subdirectory of the 
+	main program. This makes importation easier and clearer (e.g. 
+	dependencies can be referenced with the name of a subdirectory: 
+	<dir>.<subdir>.<pyfvs>)
+
+- Updated and expanded commenting throughout
+
+
+
+*************
+* capsis.py *
+*************
+
+- Modified _read_fuels method to accommodate changes in the standfire directory
+	structure.
+
+
+************
+* fuels.py *
+************
+
+-No significant changes.
+
+
+***********
+* wfds.py *
+***********
+
+- rewrote superclass constructor in '__int__' method of the WFDS and
+	GenerateBinaryGrid classes to eliminate a potential infinite
+	recursions.
+
+
+************
+* lidar.py *
+************
+
+- added extensive error handling to the run_lidar method in 
+	standfire_mini_interface and to all lidar processing methods in the
+	ConvertLidar class of the lidar submodule. The methods in the
+	ConvertLidar class now trap many types of errors and return error
+	messages back to run_lidar. When a trapped error occurs, run_lidar halts
+	the execution of the standfire simulation and prints the error message
+	to the console. Successful processing also generates messages which are
+	sent to the console when all the processes executed in run_lidar have
+	successfully completed. See comments in the mini interface and lidar
+	scripts for more information.
+
+- Changed the create_fishnet method in the ConvertLidar class to no longer return the
+	x and y dimensions of the fishnet as they are no longer needed in the main
+	application.
+
+
+FILES
+
+- Updated pyinstaller's .spec files (changed pathex in .spec file to reflect
+	directory structure changes), compile-freeze_instructions.txt (to reflect
+	directory structure changes) and all changelogs.
+
+
+
+October 31, 2017 changelog for standfire version 1.1.3a (from version 1.1.2a)
+
+
+FUNCTIONALITY
+
+1) Exposed litter cover percentage in GUI. The ability to change this 
+   attribute was not available to the user prior to version 1.1.3.
+   Exposing it opens up the possibility of modeling discontinuous litter
+   fuels in the future, but has not been implemented in the CAPSIS modeling
+   process yet. See below for details of the changes.
+
+2) Adding patch size to the GUI and handling user input. Three new entry boxes
+   were added to the surface fuels section of the user interface, patch size
+   (width) for shrubs, herbs and litter. The user can now enter patch sizes
+   for surface fuels. Shrub and herb patch sizes will be reflected in surface
+   fuel outputs from CAPSIS, the ability to model discontinuous litter has not
+   been implemented yet. See below for more detailed descriptions of changes
+   to the code.
+
+3) Added the ability for the user to reduce the number of trees and surface
+   fuels that WFDS tracks during its simulation. These fuels are still modeled
+   by WFDS. This ability should decrease the amount of computer resources
+   needed for a WFDS simulation. Currently, this is a yes/no option in the
+   interface (via a check box). If the box is checked only 1% of fuels are
+   tracked by WFDS. If it is unchecked all fuels are tracked. See below for
+   more detailed descriptions of changes to the code.
+
+
+SCRIPTS
+
+*******************************
+* standfire_mini_interface.py *
+*******************************
+
+Litter cover:
+
+- added litter_cover variable to create_variables method
+
+- added litter_cover to reset method with a default of 100
+
+- modified litter_cover_entry in create_widgets to expose it to user.
+
+- added litter cover variable to cap.set_srf_cover call in run_capsis method
+
+
+Patch size:
+
+- added the following variables to create_variables method: shrub_patch, 
+	herb_patch, litter_patch.
+
+- added shrub_patch to reset method with a default of 5.0 (m)
+
+- added herb_patch to reset method with a default of 1.0
+
+- added litter_patch to reset method with a default of -1 (indicates boundary
+	layer)
+
+- added patch_lbl ("patch size (m):") to create_widgets method
+
+- added shrub, herb and litter patch entries to create_widgets method (in
+	surface fuels group)
+
+- added patch_lbl, and shrub, herb and litter patch entries to the 
+	grid_widgets method between cover and live mc. Shifted following
+	enrties down a row.
+
+- added call to cap.set_srf_patch, passing shrub, herb and litter patch
+	entries in the run_capsis method
+
+
+WFDS Fuels:
+
+- added self.execute_capsis attribute to the Application class __init__ 
+	to make it accessible to multiple methods (vs. declaring it within
+	a particular method or methods).
+
+- added if/else conditional statement to set subset_percent (% of fuels to 
+	continue tracking in a WFDS run) in run_capsis method based on 
+	whether the user checked the 'Subset WFDS fuels (display only) check
+	box. The value in subset_percent also controls whether or
+	not the _subet_fuels method in capsis.py Execute class is run
+	(!= 1.0) or not (= 1.0).
+
+- changed call to self.capsis_execute to pass subset_percent.
+
+- added subset check box to GUI (create_widgets and grid_widgets methods) and
+	supporting variable (subset_fds_check_var) to create_variables.
+
+
+Other:
+
+- split the capsis_etal method up into three methods: run_capsis, config_wfds
+	 and run_wfds. These are all called from the run_button method.
+
+- fixed type mismatch bug (attempt to concat. str and int) when mesh not = 1.
+	In create_wfds_run_script method.
+
+- fixed bug in which the FVS .out report would get overwritten with a blank
+	file in a standard (non-lidar) run. Every call to FVS initiates a new
+	.out file. After our main FVS simulation (called by the run_standard
+	method)  the .out file is now copied (in the run_capsis method)	with
+	a new name (*_fvs_report.out) before making subsequent calls to FVS.
+
+- rounded live and dead shrub and herb loadings to avoid super long floats 
+	(e.g. 0.08 verses 0.08000000000001) in the run_capsis method
+
+- added working directory (fuel_wdir variable) to the Application class
+	__init__ method so it can be accessed from multiple methods.
+
+
+
+*************
+* capsis.py *
+*************
+
+Litter cover:
+
+- added litter_cover to set_srf_cover method 
+
+
+Patch size:
+
+- added set_srf_patch method to set shrub, herb and litter patch sizes
+
+
+WFDS Fuels:
+
+- added subset_percent input variable to the Execute class' __init__ method
+	and a conditional statement to execute _subset_fuels method if the 
+	subset percentage is not = to 1.0 (see below)
+
+- added _subset_fuels method to capsis.py's Execute class. It sets a 
+	defined percentage of fuel's (shrub, herb and tree) OUTPUT_TREE 
+	parameter to FALSE in the capsis_fuels.txt file. This change is then
+	propigated to the WFDS input file (<run name>.txt). Current default
+	percentage is 1% (0.01) This affects what fuels
+ WFDS tracks (not what
+	it models) and should reduce the computing resources
+ needed to run 
+	WFDS and SMOKEVIEW. This won't impact capsis' 3d viewer display.
+
+- added import random (standard library) for use in _subset_fuels method
+
+- modified Execute class' __init__ method to call _subset_fuels after the 
+	capsis run and before the development of the WFDS input file.
+
+Other:
+
+- changed the default shrub width from 1.0 to 5.0 in self.params.
+
+- modified the subprocess call to capsis to fix a path problem in both
+	_execute_capsis_linux and _execute_capsis_win methods
+
+- modified the _read_fuels method to fix a path problem
+
+
+************
+* fuels.py *
+************
+
+- enabled the formally latent set_stop_point method. Is now being used to 
+	set FVS stop points. It currently defaults to stop point codes: 1,-1
+	(stop just before first call to the Event Monitor, every year). See
+	code documentation for more info on stop points
+	
+- added call to set_stop_point method in the run_fvs method
+
+- added code to capture and print fvs return codes in run_fvs method. See code
+	documentation for more info on return codes.
+
+- changed index variable 'i' to 'yr' in run_fvs method for clarity
+
+
+************
+* lidar.py *
+************
+
+- changed attribute/variable/method names to conform to PEP style guidelines:
+	https://www.python.org/dev/peps/pep-0008/
+
+- shortened lines >100 characters
+
+- standardized use of quotation marks: "outside"; 'inside'; """doc strings"""
+
+- other minor changes to comply with PEP 8.
+
+
+***********
+* wfds.py *
+***********
+
+-No significant changes.
+
+
+PROGRAMS
+
+**********
+* PyFVS  *
+**********
+
+- added a new versions of pyFVS for windows. Compiled from the pyFVS branch of 
+	open-FVS: https://sourceforge.net/p/open-fvs/code/HEAD/tree/branches/PyFVS/
+	This runs versions of the variants from June 2015, rather than the old
+	pyFVS which ran versions from November, 2013. The python library (*.pyd) 
+	is all that is needed to run this version of pyFVS so the other python files
+	were removed from the pyfvs/win/ directory.
+
+- Lucas Wells compiled the new version for linux and updated the repo prior to this
+	update (1.1.3a). He also added a shell script users can use to build pyFVS
+	on their own. He also updated the capsis linux launcher (capsis.sh)
+
+FILES
+
+
+- updated requirements file to add Java Runtime Environment 1.8+ (necessary to
+	run CAPSIS)
+
+
+	
+December 20, 2017 changelog for standfire version 1.1.4a (from version 1.1.3a)
+
+
+FUNCTIONALITY
+
+- no major functionality changes or additions.
+
+
+SCRIPTS
+
+*******************************
+* standfire_mini_interface.py *
+*******************************
+
+- extensively added and updated docstrings to be more descriptive and to include 
+	reStructuredText that can be used to generate documentation for the API 
+	reference guide. Also added additional commenting outside of the docstrings.
+
+- deleted unnecessary/legacy code 
+
+- commented out currently unsupported code (e.g. Windows multiprocessing)
+
+- eliminated 'axis=z' (part of the 'stretch' argument) from a call to 
+	wfds.WFDS.crate_mesh() because it is unused (create_mesh is hard-wired 
+	for a z-axis stretch).
+
+- eliminated '(display only)' from 'subset wfds fuels tracking' label in GUI
+
+
+*************
+* capsis.py *
+*************
+
+- changed attribute/variable/method names for clarity and to conform to Python 
+	Enhancement Proposals (PEPs) style guidelines such as PEP 8:
+	https://www.python.org/dev/peps/pep-0008/
+
+- shortened lines >100 characters
+
+- standardized use of quotation marks: "outside"; 'inside'; """doc strings"""
+
+- other minor changes to comply with PEP 8 (e.g. spacing)
+
+- extensively modified code to comply with current best coding practices as (e.g. 
+	avoid eval and exec, using isinstance instead of type, iterate directly on 
+	dictionaries rather than using .keys(), too many nested blocks etc.
+
+- extensively added and updated docstrings to be more descriptive and to include 
+	reStructuredText that can be used to generate documentation for the API 
+	reference guide. Also added additional commenting outside of the docstrings.
+
+- deleted unnecessary/legacy code 
+
+- eliminated self.run_directory and self.set_path from RunConfig classes constructor 
+	as they were redundant with self.params['path'] dictionary entry and the 
+	run_directory local variable. modified code without the class to reflect this 
+	change.
+
+- commented out the public 'set_x_offset' and 'set_y_offset' methods as they are 
+	currently unused. private versions of these methods are still present. These 
+	could be used in the future to allow a user to change offsets, but downstream 
+	code would have to be modified.
+
+- renamed the set_show_3D and set_extend_FVS_sample methods to comply with PEP 
+	guidelines (see above).
+
+- commented out set_srf_cbh' method as it is currently unused by the mini-interface 
+	and probably shouldn't be implemented until we know exactly how shrub and 
+	herb cbh parameters are used by capsis and whether we need to modify them 
+	from their defaults of 0.
+
+
+************
+* fuels.py *
+************
+
+- changed attribute/variable/method names for clarity and to conform to Python 
+	Enhancement Proposals (PEPs) style guidelines such as PEP 8:
+	https://www.python.org/dev/peps/pep-0008/
+
+- shortened lines >100 characters
+
+- standardized use of quotation marks: "outside"; 'inside'; """doc strings"""
+
+- other minor changes to comply with PEP 8 (e.g. spacing)
+
+- extensively modified code to comply with current best coding practices as (e.g. 
+	avoid eval and exec, using isinstance instead of type, iterate directly on 
+	dictionaries rather than using .keys(), too many nested blocks etc.
+
+- extensively added and updated docstrings to be more descriptive and to include 
+	reStructuredText that can be used to generate documentation for the API 
+	reference guide. Also added additional commenting outside of the docstrings.
+
+- deleted unnecessary/legacy code 
+
+-commented out the following methods under the Fvsfuels class: 'set_num_cycles', 
+	'set_time_int' and 'set_inv_year'. Using these methods doesn't affect the fvs 
+	modeling, only the looping and what is reported to the console. It was 
+	intended to allow the user to alter the inventory year, time interval and 
+	number of cycles in the FVS simulation but was never completely implemented. 
+	It would be possible to properly implement it in the future if that is 
+	desirable.
+
+- fixed math formula formatting (updated Sphinx version used to develop documentation 
+	(from 1.3.3 to 1.6.5) and altered formula formatting
+
+- converted the following instance methods to static methods (from FuelCalc class) 
+	due to no 'self' use and a desire to keep them in the class: frustrum_volume, 
+	cone_volume, cylinder_volume and rectangle_volume.
+
+- rewrote the FuelCalc.convert_units() method to reduce the number of branches and 
+	make the code more concise and readable.
+
+
+************
+* lidar.py *
+************
+
+- extensively added and updated docstrings to be more descriptive and to include 
+	reStructuredText that can be used to generate documentation for the API 
+	reference guide. Also added additional commenting outside of the docstrings.
+
+- removed much of the process timing code.
+
+- rewrote calculate_attribute_fields method to increase clarity.
+
+
+***********
+* wfds.py *
+***********
+
+- changed attribute/variable/method names for clarity and to conform to Python 
+	Enhancement Proposals (PEPs) style guidelines such as PEP 8:
+	https://www.python.org/dev/peps/pep-0008/
+
+- shortened lines >100 characters
+
+- standardized use of quotation marks: "outside"; 'inside'; """doc strings"""
+
+- other minor changes to comply with PEP 8 (e.g. spacing)
+
+- extensively modified code to comply with current best coding practices as (e.g. 
+	avoid eval and exec, using isinstance instead of type, iterate directly on 
+	dictionaries rather than using .keys(), too many nested blocks etc.
+
+- extensively added and updated docstrings to be more descriptive and to include 
+	reStructuredText that can be used to generate documentation for the API 
+	reference guide. Also added additional commenting outside of the docstrings.
+
+- deleted unnecessary/legacy code 
+
+
+PROGRAMS
+
+- no changes
+
+
+FILES
+
+- compile-freeze_instructions.txt
+- requirements.txt
+
+The following restructured text files found in /standfire/docs/ were modified
+to reflect changes in the structure of the STANDFIRE program. These files are 
+used to build the STANDFIRE documentation found in /standfire/docs/_build/.
+- lidar.rst
+- lidar_ConvertLidar.rst
+- lidar_FVSFromLidar.rst
+- api_ref.rst
+- interfacing_with_fvs.rst
+
+In addition, there were minor changes made to the sphinx configuration script
+(conf.py) to reflect changes in STANDFIRE directory structure.
+
+STANDFIRE documentation was rebuilt using Sphinx 1.6.5 to reflect the code/API 
+changes implemented since version 1.1.0. Therefore, the entire /docs/_build 
+directory was replaced. To access the documentation open the index.html file
+found in /docs/_build/
+

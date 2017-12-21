@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -30,6 +32,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="STANDFIRE 1 documentation" href="index.html"/>
         <link rel="up" title="WFDS module" href="wfds.html"/>
         <link rel="next" title="WFDS" href="wfds_WFDS.html"/>
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -82,7 +88,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="fuels.html">Fuels module</a></li>
@@ -95,6 +104,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.html">Metrics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar.html">LiDAR module</a></li>
 </ul>
 </li>
 </ul>
@@ -109,8 +119,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">STANDFIRE</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">STANDFIRE</a>
+        
       </nav>
 
 
@@ -119,27 +131,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
           <li><a href="api_ref.html">STANDFIRE API Reference</a> &raquo;</li>
-      
+        
           <li><a href="wfds.html">WFDS module</a> &raquo;</li>
-      
-    <li>Mesh</li>
+        
+      <li>Mesh</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/wfds_Mesh.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/wfds_Mesh.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -149,41 +178,39 @@
 <h1>Mesh<a class="headerlink" href="#mesh" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="wfds.Mesh">
-<em class="property">class </em><code class="descclassname">wfds.</code><code class="descname">Mesh</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>res</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#Mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.Mesh" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">wfds.</code><code class="descname">Mesh</code><span class="sig-paren">(</span><em>x_dom</em>, <em>y_dom</em>, <em>z_dom</em>, <em>res</em>, <em>num_meshes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#Mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.Mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>The Mesh class can be used to easily and quickly create FDS meshes.</p>
+<p>The Mesh class can be used to easily and quickly calculate the input
+parameters needed to define FDS meshes. It is inherited by the <code class="docutils literal"><span class="pre">WFDS</span></code> and
+<code class="docutils literal"><span class="pre">GenerateBinaryGrid</span></code> classes. It has two callable (non-private) methods:
+<code class="docutils literal"><span class="pre">stretch_mesh()</span></code> and <code class="docutils literal"><span class="pre">format_mesh()</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>x</strong> &#8211; X dimension of the simulation domain</li>
-<li><strong>y</strong> (<em>integer</em>) &#8211; Y dimension of the simulation domain</li>
-<li><strong>z</strong> (<em>integer</em>) &#8211; Z dimension of the simulation domain</li>
-<li><strong>res</strong> (<em>integer</em>) &#8211; 3-space resolution prior to mesh stretching</li>
-<li><strong>n</strong> &#8211; Number of meshes</li>
+<li><strong>x_dom</strong> (<em>integer</em>) – X dimension of the simulation domain</li>
+<li><strong>y_dom</strong> (<em>integer</em>) – Y dimension of the simulation domain</li>
+<li><strong>z_dom</strong> (<em>integer</em>) – Z dimension of the simulation domain</li>
+<li><strong>res</strong> (<em>float</em>) – 3-space resolution prior to mesh stretching</li>
+<li><strong>num_meshes</strong> (<em>integer</em>) – Number of meshes</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">X type:</th><td class="field-body"><p class="first">integer</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">N type:</th><td class="field-body"><p class="first last">integer</p>
-</td>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>
-<p><em>Example:</em></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">wfds</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span> <span class="o">=</span> <span class="n">wfds</span><span class="o">.</span><span class="n">mesh</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span><span class="o">.</span><span class="n">stretch_mesh</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">33</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span> <span class="o">=</span> <span class="n">wfds</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span><span class="o">.</span><span class="n">stretch_mesh</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">33</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">mesh</span><span class="o">.</span><span class="n">format_mesh</span><span class="p">()</span>
 </pre></div>
 </div>
 <dl class="method">
 <dt id="wfds.Mesh.format_mesh">
 <code class="descname">format_mesh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#Mesh.format_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.Mesh.format_mesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Formats mesh for WFDS input file</p>
+<dd><p>Formats a mesh for the WFDS input file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -198,15 +225,18 @@
 
 <dl class="method">
 <dt id="wfds.Mesh.stretch_mesh">
-<code class="descname">stretch_mesh</code><span class="sig-paren">(</span><em>CC</em>, <em>PC</em>, <em>axis='z'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#Mesh.stretch_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.Mesh.stretch_mesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply stretching to the mesh along the specified axis</p>
+<code class="descname">stretch_mesh</code><span class="sig-paren">(</span><em>comp_coord</em>, <em>phys_coord</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wfds.html#Mesh.stretch_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wfds.Mesh.stretch_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the parameters for stretching a the mesh along the z axis,
+distorting the cell sizes.  Passes the two sets of coordinates to the
+self.stretch variable which will be accessed by the
+<code class="docutils literal"><span class="pre">format_mesh()</span></code> method to format the WFDS input file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>CC</strong> (<em>python list</em>) &#8211; computation coordinates</li>
-<li><strong>PC</strong> (<em>python list</em>) &#8211; physical coordinates</li>
+<li><strong>comp_coord</strong> (<em>python list</em>) – computation coordinates</li>
+<li><strong>phys_coord</strong> (<em>python list</em>) – physical coordinates</li>
 </ul>
 </td>
 </tr>
@@ -214,7 +244,10 @@
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">CC and PC must have equal number of elements</p>
+<p class="last">comp_coord and phys_coord must have an equal number of
+elements.See the FDS users guide for more information on
+stretching:
+<a class="reference external" href="https://pages.nist.gov/fds-smv/manuals.html">https://pages.nist.gov/fds-smv/manuals.html</a></p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -224,8 +257,8 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span><span class="o">.</span><span class="n">stretch_mesh</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">33</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span> <span class="o">=</span> <span class="n">wfds</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span><span class="o">.</span><span class="n">stretch_mesh</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">33</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">mesh</span><span class="o">.</span><span class="n">format_mesh</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -237,15 +270,18 @@
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="wfds_WFDS.html" class="btn btn-neutral float-right" title="WFDS" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="wfds_WFDS.html" class="btn btn-neutral float-right" title="WFDS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="wfds.html" class="btn btn-neutral" title="WFDS module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="wfds.html" class="btn btn-neutral" title="WFDS module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -254,7 +290,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, STANDFIRE.
+        &copy; Copyright 2017, STANDFIRE.
 
     </p>
   </div>
@@ -279,13 +315,14 @@
             VERSION:'1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

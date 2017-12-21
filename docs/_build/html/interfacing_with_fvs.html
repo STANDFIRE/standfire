@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -30,6 +32,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="STANDFIRE 1 documentation" href="index.html"/>
         <link rel="up" title="Tutorials" href="tutorials.html"/>
         <link rel="next" title="STANDFIRE API Reference" href="api_ref.html"/>
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -82,7 +88,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
@@ -104,8 +113,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">STANDFIRE</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">STANDFIRE</a>
+        
       </nav>
 
 
@@ -114,27 +125,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
           <li><a href="user_guide.html">STANDFIRE User Guide</a> &raquo;</li>
-      
+        
           <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
-      
-    <li>Interfacing with FVS</li>
+        
+      <li>Interfacing with FVS</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/interfacing_with_fvs.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/interfacing_with_fvs.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -169,7 +197,7 @@ PROCESS
 STOP
 </pre></div>
 </div>
-<p>If don&#8217;t have a FVS tree list file, then copy and paste the following text and save  it to the same directory where the keyword file lives, give it the same prefix as the <code class="docutils literal"><span class="pre">.key</span></code> but with a <code class="docutils literal"><span class="pre">.tre</span></code> extension.</p>
+<p>If don’t have a FVS tree list file, then copy and paste the following text and save  it to the same directory where the keyword file lives, give it the same prefix as the <code class="docutils literal"><span class="pre">.key</span></code> but with a <code class="docutils literal"><span class="pre">.tre</span></code> extension.</p>
 <div class="highlight-none"><div class="highlight"><pre><span></span>1   95       9PP 105    35                          0 0
 1   96       0PP 43     17        1                 0 0
 1   97       0PP 148    43        2                 0 0
@@ -190,6 +218,11 @@ STOP
 </pre></div>
 </div>
 <p>Once you have a keyword file and a tree list file in the same directory we can start to build a script to do some work.</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>$ cd /Users/standfire/fvs_exp
+$ ls
+example.key    example.tre
+</pre></div>
+</div>
 <p>First, we import the Fvsfuels class from the fuels module.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">standfire.fuels</span> <span class="kn">import</span> <span class="n">Fvsfuels</span>
 </pre></div>
@@ -219,15 +252,18 @@ STOP
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="api_ref.html" class="btn btn-neutral float-right" title="STANDFIRE API Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api_ref.html" class="btn btn-neutral float-right" title="STANDFIRE API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="tutorials.html" class="btn btn-neutral" title="Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="tutorials.html" class="btn btn-neutral" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -236,7 +272,7 @@ STOP
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, STANDFIRE.
+        &copy; Copyright 2017, STANDFIRE.
 
     </p>
   </div>
@@ -261,13 +297,14 @@ STOP
             VERSION:'1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

@@ -10,23 +10,31 @@ includes creating a fishnet with 64x64m cells to divide the lidar points into
 one acre plots, calculating FVS input variables, running FVS for each plot
 and collating the results.
 
-Inputs:
-1) Lidar shapefile. Projected in WGS 1984 UTM (any zone). This shapefile
-    needs to have the following attributes:
-    - X coordinates: name- 'X_UTM', units- meters, type- float
-    - Y coordinates: name- 'Y_UTM', units- meters, type- float
-    - Tree height: name- 'Height_m', units- meters, type- float
-    - Crown Base Height: name 'CBH_m', units- meters, type- float
-    - Diameter at Breast Height: name- 'DBH_cm', units- centimeters, type- float
-    - Tree species: name- 'Species', units- 2 letter FVS species code, type- text
-2) FVS keyword file.
+**Inputs:**
 
-Outputs:
-1) Fishnet shapefile containing the plots (*_fishnet.shp)
-2) Lidar shapefile containing the input and calculated attributes (*_out.shp)
-3) Text file containing the calculated attributes (*_export.csv)
-4) FVS (*.tre and *.key) files for each plot
-5) Tree list for CAPSIS (*_trees.csv)
+1. Lidar shapefile. Projected in WGS 1984 UTM (any zone). This shapefile
+needs to have the following attributes:
+
+==========  ======= =========== ===========
+Field Name  Type    Units       Description
+==========  ======= =========== ===========
+X_UTM       Float   Meters      X coordinate
+Y_UTM       Float   Meters      Y coordinate
+Height_m    Float   Meters      Tree height
+CBH_m       Float   Meters      Crown Base Height
+DBH_cm      Float   Centimeters Diameter at Breast Height
+Species     String  Text        Two letter FVS species code
+==========  ======= =========== ===========
+
+2. FVS keyword file.
+
+**Outputs:**
+
+1. Fishnet shapefile containing the plots (<example>_fishnet.shp)
+2. Lidar shapefile containing the input and calculated attributes (<example>_out.shp)
+3. Text file containing the calculated attributes (<example>_export.csv)
+4. FVS (<example>.tre and <example>.key) files for each plot
+5. Tree list for CAPSIS (<example>_trees.csv)
 """
 
 # meta
@@ -56,7 +64,7 @@ ogr.UseExceptions()
 # except: # can't sys.exit. find another way to handle errors
     # sys.exit("ERROR: cannot find Pandas modules. Please ensure Pandas \n"
     # "package for Python is installed")
-# try:#not necessary if standfire distributed as a 'frozen' binary.
+# try:
     # from osgeo import ogr
     # from osgeo.gdal import __version__ as gdal_ver
 # except:
@@ -78,26 +86,28 @@ class ConvertLidar(object):
     tree attributes from a shapefile of lidar trees.
 
     :param lidar_shp: name and path of input lidar shapefile.
-    :type: string
+    :type lidar_shp: string
     :param fishnet_shp: name and path for output fishnet shapefile.
-    :type: string
+    :type fishnet_shp: string
     :param new_lidar: name and path for output lidar shapefile.
-    :type: string
+    :type new_lidar: string
 
-    Methods:
-        verify_projection
-        verify_input_fields
-        calculate_extents
-        create_fishnet
-        copy_shapefile
-        cleanup_lidar_fields
-        fishnet_id
-        cleanup_lidar_features
-        add_attribute_fields
-        calculate_attribute_fields
-        number_trees
-        export_attributes_to_csv
+    **Methods (execution order):**
+
+    * verify_projection
+    * verify_input_fields
+    * calculate_extents
+    * create_fishnet
+    * copy_shapefile
+    * cleanup_lidar_fields
+    * fishnet_id
+    * cleanup_lidar_features
+    * add_attribute_fields
+    * calculate_attribute_fields
+    * number_trees
+    * export_attributes_to_csv
     """
+
     def __init__(self, lidar_shp, fishnet_shp, new_lidar):
         """
         Constructor
@@ -108,12 +118,25 @@ class ConvertLidar(object):
         self.fishnet_shp = fishnet_shp
         self.new_lidar = new_lidar
         self.set_path = os.path.dirname(lidar_shp)
-        # initialize more commonly used stuff like the shapefile driver...
+        # TODO: initialize more commonly used stuff like the shapefile driver...
 
     def verify_projection(self):
         """
         Verifies that the input shapefile is projected and, if so, whether the
-            projection is WGS 1984 UTM. Uses EPSG projection codes to verify.
+        projection is WGS 1984 UTM. Uses EPSG projection codes to verify.
+
+        :return: projection fitness
+        :rtype: boolean
+        :return: fitness message
+        :rtype: string
+        :return: fitness code
+        :rtype: integer
+
+        *Fitness Codes:*
+
+        * 0 - projection ok
+        * 1 - unable to identify projection
+        * 2 - unprojected
         """
         epsg_utm = range(32600, 32661) # EPSG codes for UTM North zones
         epsg_utm.extend(range(32700, 32761)) # append EPSG codes for UTM South zones
@@ -160,6 +183,27 @@ class ConvertLidar(object):
     def verify_input_fields(self):
         """
         Verifies that the required input fields are in the input shapefile.
+
+        **Required fields:**
+
+        ==========  ======= =========== ===========
+        Field Name  Type    Units       Description
+        ==========  ======= =========== ===========
+        X_UTM       Float   Meters      X coordinate
+        Y_UTM       Float   Meters      Y coordinate
+        Height_m    Float   Meters      Tree height
+        CBH_m       Float   Meters      Crown Base Height
+        DBH_cm      Float   Centimeters Diameter at Breast Height
+        Species     String  Text        Two letter FVS species code
+        ==========  ======= =========== ===========
+
+        :return: input field fitness
+        :rtype: boolean
+        :return: fitness message
+        :rtype: string
+
+        .. note:: See FVS variant users guides for definitions of species codes:
+                  https://www.fs.fed.us/fvs/documents/guides.shtml
         """
         required_fields = ["X_UTM", "Y_UTM", "Height_m", "CBH_m", "DBH_cm", "Species"]
         missing_fields = []
@@ -189,8 +233,8 @@ class ConvertLidar(object):
         Calculates the minimum and maximum x and y extents of the input
         shapefile.
 
-        Returns extents of the input shapefile as a list of four floating point
-        numbers
+        :return: x min, x max, y min, y max
+        :rtype: list of four floats
         """
         in_data_source = ogr.Open(self.lidar_shp, 0)
         in_layer = in_data_source.GetLayer()
@@ -202,8 +246,16 @@ class ConvertLidar(object):
     def create_fishnet(self, extents):
         """
         Creates a fishnet polygon shapefile to be used to assign plot
-        numbers to the lidar points. Fishnet cells are 64x64m (~1 acre). Feature
-        ID numbers are used to number plots
+        numbers to the lidar points. Fishnet cells are 64x64m (~1 acre).
+        Feature ID numbers are used to number plots.
+
+        :param extents: x min, x max, y min, y max of the input shapefile
+        :type extents: list of four floats
+
+        :return: fishnet creation success
+        :rtype: boolean
+        :return: fishnet creation message
+        :rtype: string
         """
         fish_ok = True
         msg = "\nMethod: create_fishnet\n"
@@ -282,7 +334,13 @@ class ConvertLidar(object):
 
     def copy_shapefile(self):
         """
-        Makes an exact copy of a shapefile.
+        Makes an exact copy of the input lidar shapefile for use in creating
+        the output lidar shapefile.
+
+        :return: shapefile copy success
+        :rtype: boolean
+        :return: shapefile copy message
+        :rtype: string
         """
         copy_ok = True
         msg = "\nMethod: copy_shapefile\n"
@@ -331,9 +389,8 @@ class ConvertLidar(object):
             out_feat = ogr.Feature(lyr_def)
             for i in range(field_cnt):
                 out_feat.SetField(lyr_def.GetFieldDefn(i).GetNameRef(), in_feat.GetField(i))
-            try:
-                cftr_ok = out_lyr.CreateFeature(in_feat)
-            except:
+            cftr_ok = out_lyr.CreateFeature(in_feat)
+            if cftr_ok != 0:
                 msg += ("ERROR: Problem creating features in out LiDAR shapefile. OGR "
                         "CreateFeatrure error = " + str(cftr_ok) + "\n")
                 copy_ok = False
@@ -359,15 +416,17 @@ class ConvertLidar(object):
 
     def cleanup_lidar_fields(self):
         """
-        Deletes extraneous fields from output shapefile
+        Deletes extraneous fields from output shapefile.
+
+        :return: cleanup success
+        :rtype: boolean
+        :return: cleanup message
+        :rtype: string
         """
         cln_fld_ok = True
         msg = "\nMethod: cleanup_lidar_fields\n"
         # define input shapefile
         pt_shp = self.new_lidar
-
-        # start timer
-        cleanup_start = timeit.default_timer()
 
         # required input fields
         pt_req_in_flds = ["FID", "Shape", "X_UTM", "Y_UTM", "Height_m", "CBH_m",
@@ -401,15 +460,18 @@ class ConvertLidar(object):
         pt_lyr = None
         pt_ds = None
         if cln_fld_ok:
-            cleanup_time = timeit.default_timer() - cleanup_start
-            print "\nCleanup lidar fields function took ", cleanup_time, " to run."
             msg += "Deleted extraneous fileds from output shapefile\n"
         return cln_fld_ok, msg
 
     def fishnet_id(self):
         """
-        Assigns a fishnet based plot ID number to each tree in the output
-        shapefile
+        Assigns a fishnet-based plot ID number to each tree in the output
+        shapefile.
+
+        :return: plot number assignment success
+        :rtype: boolean
+        :return: plot number assignment message
+        :rtype: string
         """
         fish_id_ok = True
         msg = "\nMethod: fishnet_id\n"
@@ -498,16 +560,18 @@ class ConvertLidar(object):
 
     def cleanup_lidar_features(self):
         """
-        Deletes features outside the fishnet area
+        Deletes features outside the fishnet area.
+
+        :return: cleanup success
+        :rtype: boolean
+        :return: cleanup message
+        :rtype: string
         """
         cln_ftr_ok = True
         msg = "\nMethod: cleanup_lidar_features\n"
         # get path and layer name for output shapefile
         pt_shp = self.new_lidar
         lyr_name = os.path.basename(pt_shp)[:-4]
-
-        # start timer
-        del_features_start = timeit.default_timer()
 
         # get driver
         drv = ogr.GetDriverByName("ESRI Shapefile")
@@ -529,15 +593,16 @@ class ConvertLidar(object):
         if del_feat_ok != 0:
             cln_ftr_ok = False
             msg += "ERROR: Problem deleting features that fell outside the fishnet boundary\n"
-        # shapefile needs to be 'repacked' before the features will actually be deleted
+        # shapefile needs to be "repacked" before the features will actually be deleted
         # close and refresh data source
         pt_lyr = None
         pt_ds = None
         pt_ds = drv.Open(pt_shp, 1)
         repack_return = pt_ds.ExecuteSQL("repack " + lyr_name)
-##        if repack_ok != 0:
-##            cln_ftr_ok = False
-##            msg += "ERROR: Problem 'repacking' features in the lidar out shapefile\n"
+        # ExecuteSQL returns "Null" if no error occured
+        if repack_return:
+            cln_ftr_ok = False
+            msg += "ERROR: Problem 'repacking' features in the lidar out shapefile\n"
 
         if cln_ftr_ok:
             msg += "Features outside the fishnet boundary were successfully deleted\n"
@@ -545,14 +610,11 @@ class ConvertLidar(object):
             pt_lyr = pt_ds.GetLayer()
             pt_nmbr_out_ftrs = pt_lyr.GetFeatureCount()
             pt_nmbr_del_ftrs = pt_nmbr_in_ftrs - pt_nmbr_out_ftrs
-        #else: msg += ("ERROR: Problem rebuilding output shapefile after deleting features "
-        #              "outside the fishnet boundary\n")
-        # Need to know what executesql returns if it fails: 'NULL' maybe None?
-
             # print deleted feature count
             print pt_nmbr_del_ftrs, " features fell outside the fishnet and were deleted."
-            del_features_time = timeit.default_timer() - del_features_start
-            print "Point file feature cleanup function took ", del_features_time, " to run."
+        else: msg += ("ERROR: Problem rebuilding output shapefile after deleting features "
+                      "outside the fishnet boundary\n")
+
         # save and close shapefile
         pt_lyr = None
         pt_ds = None
@@ -561,7 +623,25 @@ class ConvertLidar(object):
 
     def add_attribute_fields(self):
         """
-        Adds and defines new attribute fields
+        Adds and defines new attribute fields to the output shapefile.
+
+        **Fields added:**
+
+        ==========  ======= ===========
+        Field Name  Type    Description
+        ==========  ======= ===========
+        POINT_X     Float   X coordinate
+        POINT_Y     Float   Y coordinate
+        CR_code     Integer FVS crown ratio code
+        DBH_in_x10  Integer Diameter at Breast Height in inches x 10
+        Height_ft   Integer Tree height in feet
+        Tree_ID     Integer Unique tree ID number within each plot
+        ==========  ======= ===========
+
+        :return: add attribute fields success
+        :rtype: boolean
+        :return: add attribute fields message
+        :rtype: string
         """
         add_flds_ok = True
         msg = "\nMethod: add_attribute_fields\n"
@@ -596,51 +676,52 @@ class ConvertLidar(object):
     def calculate_attribute_fields(self):
         """
         Calculates values for the attribute fields added in the
-        'add_attribute_fields' method above.
+        "add_attribute_fields" method.
 
-        in_out_cols contains input and output field names and conversion formulas
-        in_out_cols = {<outfield>: [<infield>, <formula>],
-                      ...
-                      }
-            Height- converts from meters to feet and rounds to integer
+        **Formula descriptions:**
 
-            CR_code- calculates crown ratio while accounting for anomolous data
-            where CBH is >= Height. Then classifies the crown ratio into FVS
-            categories.
-                crown ratio = (height - crown base height)/height)
-                FVS crown ratio codes: 1: 0-10%; 2: 11-20%;...; 9: 81-100%
+            * Height- converts from meters to feet and rounds to integer
+            * DBH - converts from centimeters to inches*10 and rounds to integer
+            * CR_code- calculates crown ratio while accounting for anomolous data
+              where Height is <= CBH. Then classifies the crown ratio into FVS
+              categories.
 
-            DBH - converts from centimeters to inches*10 and rounds to integer
+              * crown ratio = (height - crown base height)/height).
+              * FVS crown ratio codes: 1: 0-10%; 2: 11-20%;...; 9: 81-100%
+
+        :return: calculate attribute fields success
+        :rtype: boolean
+        :return: calculate attribute fields message
+        :rtype: string
         """
         calc_flds_ok = True
         msg = "\nMethod: calculate_attribute_fields\n"
-        in_out_cols = {
-            "POINT_X": ["X_UTM", "%s*1"],
-            "POINT_Y": ["Y_UTM", "%s*1"],
-            "Height_ft": ["Height_m", "int((%s*3.281)+0.5)"],
-            "CR_code": ["Height_m", "CBH_m", "0.0001 if (%s-%t) <= 0 else "
-                        "((%s-%t)/%s)", "9 if %s >= 0.8 else int((%s - "
-                        "0.000001)*10)+1"],
-            "DBH_in_x10": ["DBH_cm", "int((%s*3.937)+0.5)"]
-        }
         in_data_source = ogr.Open(self.new_lidar, 1)
         in_layer = in_data_source.GetLayer()
         set_ftr_ok = 0
         for ftr in in_layer:
-            for key in in_out_cols:
-                if key == "CR_code":
-                    in_value_0 = ftr.GetField(in_out_cols[key][0]) #Height_m
-                    in_value_1 = ftr.GetField(in_out_cols[key][1]) #CBH_m
-                    in_formula_1 = in_out_cols[key][2]
-                    in_formula_2 = in_out_cols[key][3]
-                    crown_ratio = eval(in_formula_1.replace("%s", str(in_value_0)).replace("%t", str(in_value_1)))
-                    val = eval(in_formula_2.replace("%s", str(crown_ratio)))
-                    ftr.SetField(key, val)
-                else:
-                    in_value = ftr.GetField(in_out_cols[key][0])
-                    in_formula = in_out_cols[key][1]
-                    val = eval(in_formula.replace("%s", str(in_value)))
-                    ftr.SetField(key, val)
+            # set X-Y coordinates
+            ftr.SetField("POINT_X", ftr.GetField("X_UTM"))
+            ftr.SetField("POINT_Y", ftr.GetField("Y_UTM"))
+            # extract input height, diameter at breast height and crown base height
+            in_ht = ftr.GetField("Height_m")
+            in_dbh = ftr.GetField("DBH_cm")
+            in_cbh = ftr.GetField("CBH_m")
+            # calculate and set output height and diameter at breast height
+            out_ht = int((in_ht*3.281)+0.5)
+            out_dbh = int((in_dbh*3.937)+0.5)
+            ftr.SetField("Height_ft", out_ht)
+            ftr.SetField("DBH_in_x10", out_dbh)
+            # calculate and set FVS crown ratio code
+            if in_ht <= in_cbh:
+                crown_ratio = 0.0001
+            else:
+                crown_ratio = ((in_ht - in_cbh) / in_ht)
+            if crown_ratio >= 0.8:
+                ftr.SetField("CR_code", 9)
+            else:
+                ftr.SetField("CR_code", int((crown_ratio - 0.000001) * 10) + 1)
+            # save feature attribute changes
             set_ftr_ok += in_layer.SetFeature(ftr)
         if set_ftr_ok != 0:
             calc_flds_ok = False
@@ -652,8 +733,13 @@ class ConvertLidar(object):
 
     def number_trees(self):
         """
-        Numbers trees within each plot. The combination of plot ID and tree Id
-        constitutes a unique identifier for each tree in the simulation.
+        Numbers trees within each 64x64m (~1 acre) plot. The combination of plot ID
+        and tree Id constitutes a unique identifier for each tree in the simulation.
+
+        :return: numbering trees success
+        :rtype: boolean
+        :return: numbering trees message
+        :rtype: string
         """
         nmbr_trees_ok = True
         msg = "\nMethod: number_trees\n"
@@ -686,11 +772,31 @@ class ConvertLidar(object):
     def export_attributes_to_csv(self, lidar_csv):
         """
         Exports select attributes in the new lidar shapefile to a text (.csv)
-        file. Exported attributes are listed in the 'out_fields' variable
-        assignment below.
+        file.
 
-        :param lidar_csv - name and path for output text file
+        **Exported attributes:**
+
+        ==========  ===========
+        Name        Description
+        ==========  ===========
+        FID         GIS record ID number
+        POINT_X     X coordinate
+        POINT_Y     Y coordinate
+        Species     Two letter FVS species code
+        CR_code     FVS crown ratio code
+        DBH_in_x10  Diameter at Breast Height in inches x 10
+        Height_ft   Tree height in feet
+        Plot_ID     Unique plot ID number
+        Tree_ID     Unique tree ID number within each plot
+        ==========  ===========
+
+        :param lidar_csv: name and path for output text file
         :type lidar_csv: string
+
+        :return: export success
+        :rtype: boolean
+        :return: export message
+        :rtype: string
         """
         csv_ok = True
         msg = "\nMethod: export_attributes_to_csv\n"
@@ -718,24 +824,25 @@ class ConvertLidar(object):
             csv_ok = False
             msg += "ERROR: Export of lidar out shapefile fields failed.\n"
         return csv_ok, msg
-###End class 'ConvertLidar'###
+###End class "ConvertLidar"###
 
 class FVSFromLidar(object):
     """
-    Creates FVS tree lists (*.tre) and keyword files (*.key), runs FVS for
-    each 64x64m (~1 acre) lidar plot and creates a tree list for CAPSIS.
+    Creates FVS tree lists (<example>.tre) and keyword files (<example>.key),
+    runs FVS for each 64x64m (~1 acre) lidar plot and creates a tree list for CAPSIS.
 
     :param fuel: FVS fuels object. Specific to a single FVS variant.
     :type fuel: object
     :param lidar_csv: path and file name of input text file (generated by the
                     ConvertLidar class above (export_attributes_to_csv method)
     :type lidar_csv: string
-    :param keyword_file: path and file name of the 'master' FVS keyword file.
+    :param keyword_file: path and file name of the "master" FVS keyword file.
     :type keyword_file: string
 
-    Methods:
-        run_fvs_lidar
-        create_capsis_csv
+    **Methods:**
+
+    * run_fvs_lidar
+    * create_capsis_csv
     """
 
     def __init__(self, fuel, lidar_csv, keyword_file):
@@ -755,10 +862,10 @@ class FVSFromLidar(object):
         in the export_attributes_to_csv method in the ConvertLidar class. Uses
         these files to run FVS for each lidar subset/plot.
 
-        :returns fvs_csv: filename and path for a collated (from subsets/plots)
+        :returns: filename and path for a collated (from subsets/plots)
             FVS results file. Only the filename is generated in this method.
             The file itself will be collated in the create_capsis_csv method.
-        :type fvs_csv: string
+        :rtype: string
         """
         fvs_start = timeit.default_timer()
         work_dir = os.path.dirname(self.keyword_file)
@@ -796,7 +903,7 @@ class FVSFromLidar(object):
                 height = str(df_lidar_fvs_subplot.iat[rec, ht_col]).ljust(3) # Live_height
                 cr_code = str(df_lidar_fvs_subplot.iat[rec, cr_code_col]) # Crown_ratio_code
                 # Merge variables and spaces into one long string
-                tre_line = (plot_id + tree_id + tree_cnt + tree_hist + species + dbh +
+                tre_line = (plot_id + tree_id + tree_cnt + tree_hist + species + dbh + \
 						    dbh_inc + height + top_kill_ht + ht_inc + cr_code + the_rest + "\n")
                 tre_lines.append(tre_line) # Add to list variable
             tre_file.writelines(tre_lines) # Write all lines to subset's .tre file
@@ -823,25 +930,9 @@ class FVSFromLidar(object):
     def create_capsis_csv(self, xy_orig, fvs_csv):
         """
         Creates a capsis input file from FVS subset/plot output files generated
-        by the run_fvs_lidar method above. Calculates adjusted xy coordinates for
+        by the run_fvs_lidar method. Calculates adjusted xy coordinates for
         each tree (i.e. each plot's coordinates need to be adjusted depending on
-        its position amoungst all plots). For example, Each of the six 64x64m
-        plots illustrated below were modeled seperately in FVS. As a
-        consequence, they each have coordinates with a 0,0 origin in their lower
-        left corners. This method adjusts the coordinates of plots 1-5 so their
-        origin is now the lower left corner of plot 0 (original input lidar
-        shapefile's origin location).
-
-                         _____________________________
-                     128|         |         |         |
-                        |    3    |    4    |    5    |
-                        |         |         |         |
-                        |_________|_________|_________|
-                      64|         |         |         |
-                        |    0    |    1    |    2    |
-                        |         |         |         |
-                        |_________|_________|_________|
-                       0          64       128       192
+        its position amoungst all plots).
 
         :param xy_orig: xy origin of the original input lidar shapefile in UTM
             coordinates.
@@ -849,6 +940,26 @@ class FVSFromLidar(object):
         :param fvs_csv: filename and path for the collated (from subsets/plots)
             FVS results file.
         :type fvs_csv: string
+
+        Each of the six 64x64m plots illustrated below were modeled seperately
+        in FVS. As a consequence, they each have coordinates with a 0,0 origin
+        in their lower left corners. This method adjusts the coordinates of
+        plots 1-5 so their origin is now the lower left corner of plot 0 \
+        (original input lidar shapefile's origin location).
+
+        Example::
+
+                _____________________________
+            128|         |         |         |
+               |    3    |    4    |    5    |
+               |         |         |         |
+               |_________|_________|_________|
+             64|         |         |         |
+               |    0    |    1    |    2    |
+               |         |         |         |
+               |_________|_________|_________|
+               0        64        128       192
+
         """
         # Create merged _trees.csv with adjusted coordinates for input into CAPSIS
         col_names = ["xloc", "yloc", "species", "dbh", "ht", "crd", "cratio",

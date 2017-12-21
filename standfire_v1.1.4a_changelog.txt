@@ -1,0 +1,180 @@
+December 20, 2017 changelog for standfire version 1.1.4a (from version 1.1.3a)
+
+
+FUNCTIONALITY
+
+- no major functionality changes or additions.
+
+
+SCRIPTS
+
+*******************************
+* standfire_mini_interface.py *
+*******************************
+
+- extensively added and updated docstrings to be more descriptive and to include 
+	reStructuredText that can be used to generate documentation for the API 
+	reference guide. Also added additional commenting outside of the docstrings.
+
+- deleted unnecessary/legacy code 
+
+- commented out currently unsupported code (e.g. Windows multiprocessing)
+
+- eliminated 'axis=z' (part of the 'stretch' argument) from a call to 
+	wfds.WFDS.crate_mesh() because it is unused (create_mesh is hard-wired 
+	for a z-axis stretch).
+
+- eliminated '(display only)' from 'subset wfds fuels tracking' label in GUI
+
+
+*************
+* capsis.py *
+*************
+
+- changed attribute/variable/method names for clarity and to conform to Python 
+	Enhancement Proposals (PEPs) style guidelines such as PEP 8:
+	https://www.python.org/dev/peps/pep-0008/
+
+- shortened lines >100 characters
+
+- standardized use of quotation marks: "outside"; 'inside'; """doc strings"""
+
+- other minor changes to comply with PEP 8 (e.g. spacing)
+
+- extensively modified code to comply with current best coding practices as (e.g. 
+	avoid eval and exec, using isinstance instead of type, iterate directly on 
+	dictionaries rather than using .keys(), too many nested blocks etc.
+
+- extensively added and updated docstrings to be more descriptive and to include 
+	reStructuredText that can be used to generate documentation for the API 
+	reference guide. Also added additional commenting outside of the docstrings.
+
+- deleted unnecessary/legacy code 
+
+- eliminated self.run_directory and self.set_path from RunConfig classes constructor 
+	as they were redundant with self.params['path'] dictionary entry and the 
+	run_directory local variable. modified code without the class to reflect this 
+	change.
+
+- commented out the public 'set_x_offset' and 'set_y_offset' methods as they are 
+	currently unused. private versions of these methods are still present. These 
+	could be used in the future to allow a user to change offsets, but downstream 
+	code would have to be modified.
+
+- renamed the set_show_3D and set_extend_FVS_sample methods to comply with PEP 
+	guidelines (see above).
+
+- commented out set_srf_cbh' method as it is currently unused by the mini-interface 
+	and probably shouldn't be implemented until we know exactly how shrub and 
+	herb cbh parameters are used by capsis and whether we need to modify them 
+	from their defaults of 0.
+
+
+************
+* fuels.py *
+************
+
+- changed attribute/variable/method names for clarity and to conform to Python 
+	Enhancement Proposals (PEPs) style guidelines such as PEP 8:
+	https://www.python.org/dev/peps/pep-0008/
+
+- shortened lines >100 characters
+
+- standardized use of quotation marks: "outside"; 'inside'; """doc strings"""
+
+- other minor changes to comply with PEP 8 (e.g. spacing)
+
+- extensively modified code to comply with current best coding practices as (e.g. 
+	avoid eval and exec, using isinstance instead of type, iterate directly on 
+	dictionaries rather than using .keys(), too many nested blocks etc.
+
+- extensively added and updated docstrings to be more descriptive and to include 
+	reStructuredText that can be used to generate documentation for the API 
+	reference guide. Also added additional commenting outside of the docstrings.
+
+- deleted unnecessary/legacy code 
+
+-commented out the following methods under the Fvsfuels class: 'set_num_cycles', 
+	'set_time_int' and 'set_inv_year'. Using these methods doesn't affect the fvs 
+	modeling, only the looping and what is reported to the console. It was 
+	intended to allow the user to alter the inventory year, time interval and 
+	number of cycles in the FVS simulation but was never completely implemented. 
+	It would be possible to properly implement it in the future if that is 
+	desirable.
+
+- fixed math formula formatting (updated Sphinx version used to develop documentation 
+	(from 1.3.3 to 1.6.5) and altered formula formatting
+
+- converted the following instance methods to static methods (from FuelCalc class) 
+	due to no 'self' use and a desire to keep them in the class: frustrum_volume, 
+	cone_volume, cylinder_volume and rectangle_volume.
+
+- rewrote the FuelCalc.convert_units() method to reduce the number of branches and 
+	make the code more concise and readable.
+
+
+************
+* lidar.py *
+************
+
+- extensively added and updated docstrings to be more descriptive and to include 
+	reStructuredText that can be used to generate documentation for the API 
+	reference guide. Also added additional commenting outside of the docstrings.
+
+- removed much of the process timing code.
+
+- rewrote calculate_attribute_fields method to increase clarity.
+
+
+***********
+* wfds.py *
+***********
+
+- changed attribute/variable/method names for clarity and to conform to Python 
+	Enhancement Proposals (PEPs) style guidelines such as PEP 8:
+	https://www.python.org/dev/peps/pep-0008/
+
+- shortened lines >100 characters
+
+- standardized use of quotation marks: "outside"; 'inside'; """doc strings"""
+
+- other minor changes to comply with PEP 8 (e.g. spacing)
+
+- extensively modified code to comply with current best coding practices as (e.g. 
+	avoid eval and exec, using isinstance instead of type, iterate directly on 
+	dictionaries rather than using .keys(), too many nested blocks etc.
+
+- extensively added and updated docstrings to be more descriptive and to include 
+	reStructuredText that can be used to generate documentation for the API 
+	reference guide. Also added additional commenting outside of the docstrings.
+
+- deleted unnecessary/legacy code 
+
+
+PROGRAMS
+
+- no changes
+
+
+FILES
+
+- compile-freeze_instructions.txt
+- requirements.txt
+
+The following restructured text files found in /standfire/docs/ were modified
+to reflect changes in the structure of the STANDFIRE program. These files are 
+used to build the STANDFIRE documentation found in /standfire/docs/_build/.
+- lidar.rst
+- lidar_ConvertLidar.rst
+- lidar_FVSFromLidar.rst
+- api_ref.rst
+- interfacing_with_fvs.rst
+
+In addition, there were minor changes made to the sphinx configuration script
+(conf.py) to reflect changes in STANDFIRE directory structure.
+
+STANDFIRE documentation was rebuilt using Sphinx 1.6.5 to reflect the code/API 
+changes implemented since version 1.1.0. Therefore, the entire /docs/_build 
+directory was replaced. To access the documentation open the index.html file
+found in /docs/_build/
+

@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -30,6 +32,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="STANDFIRE 1 documentation" href="../index.html"/>
         <link rel="up" title="Module code" href="index.html"/> 
 
@@ -40,6 +45,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -80,7 +86,10 @@
           
             
             
-                <ul>
+              
+            
+            
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../user_guide.html">STANDFIRE User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_ref.html">STANDFIRE API Reference</a></li>
 </ul>
@@ -95,8 +104,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">STANDFIRE</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">STANDFIRE</a>
+        
       </nav>
 
 
@@ -109,19 +120,36 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="index.html">Module code</a> &raquo;</li>
-      
-    <li>metrics</li>
+        
+      <li>metrics</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -278,7 +306,6 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wdir</span><span class="p">,</span> <span class="n">slice_file</span><span class="p">,</span> <span class="n">t_start</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">t_step</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">sf</span> <span class="o">=</span> <span class="n">SliceReader</span><span class="p">(</span><span class="n">wdir</span> <span class="o">+</span> <span class="n">SEP</span> <span class="o">+</span> <span class="n">slice_file</span><span class="p">,</span> <span class="n">t_start</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">t_step</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sim_area</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sf</span><span class="o">.</span><span class="n">sim_area</span>
 
 <div class="viewcode-block" id="WindProfile.get_wind_profile"><a class="viewcode-back" href="../metrics_WindProfile.html#metrics.WindProfile.get_wind_profile">[docs]</a>    <span class="k">def</span> <span class="nf">get_wind_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
@@ -300,6 +327,8 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">wdir</span> <span class="o">=</span> <span class="n">wdir</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tree_files</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">wdir</span> <span class="o">+</span> <span class="s1">&#39;/sim_area.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sim_area</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
 <div class="viewcode-block" id="HeatTransfer.get_tree_files"><a class="viewcode-back" href="../metrics_HeatTransfer.html#metrics.HeatTransfer.get_tree_files">[docs]</a>    <span class="k">def</span> <span class="nf">get_tree_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
@@ -573,6 +602,9 @@
 </pre></div>
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
@@ -581,7 +613,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, STANDFIRE.
+        &copy; Copyright 2017, STANDFIRE.
 
     </p>
   </div>
@@ -606,13 +638,14 @@
             VERSION:'1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

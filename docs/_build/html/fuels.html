@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -30,6 +32,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="STANDFIRE 1 documentation" href="index.html"/>
         <link rel="up" title="STANDFIRE API Reference" href="api_ref.html"/>
         <link rel="next" title="Fvsfuels" href="fuels_Fvsfuels.html"/>
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -82,7 +88,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">STANDFIRE User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="api_ref.html">STANDFIRE API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Fuels module</a><ul>
@@ -94,6 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="capsis.html">Capsis module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wfds.html">WFDS module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.html">Metrics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lidar.html">LiDAR module</a></li>
 </ul>
 </li>
 </ul>
@@ -108,8 +118,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">STANDFIRE</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">STANDFIRE</a>
+        
       </nav>
 
 
@@ -118,25 +130,42 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
           <li><a href="api_ref.html">STANDFIRE API Reference</a> &raquo;</li>
-      
-    <li>Fuels module</li>
+        
+      <li>Fuels module</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/fuels.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/fuels.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -145,14 +174,16 @@
   <div class="section" id="module-fuels">
 <span id="fuels-module"></span><h1>Fuels module<a class="headerlink" href="#module-fuels" title="Permalink to this headline">¶</a></h1>
 <p>This module is the interface to FVS. Given a FVS variant name, a keyword file
-and the corresponding tree file, a user can run a FVS simulation and request
-various fuels information from individual trees. The Fvsfuels class will also
-produce the 4 fuels files needed for the Capsis fuel matrix generator.</p>
-<p>Currently FVS MC Access database querying not available on all platforms. 
+and the corresponding tree file, a user can run an FVS simulation
+(<code class="docutils literal"><span class="pre">Fvsfuels</span> <span class="pre">class</span></code>) and request various fuels information from individual trees
+(<code class="docutils literal"><span class="pre">Fuelcalc</span> <span class="pre">class</span></code>) The Fvsfuels class will also produce the 4 fuels files
+needed for the Capsis fuel matrix generator.</p>
+<p>Currently FVS MC Access database querying not available on all platforms.
 If a user has a keyword file that points to a MS Access database, then the user
-can generate a tree file by exporting the Access database to an comma-delimited
-file and pass it through the Inventory class. The output will be the same
-inventory present in the mdb file, but formatted to FVS .tre file standards.</p>
+can generate a tree file by exporting the FVS_TreeInit data table from the
+Access database to an comma-delimited (.csv) file and pass it through the
+<code class="docutils literal"><span class="pre">Inventory</span> <span class="pre">class</span></code>. The output will be the same inventory present in the .mdb
+file, but formatted to FVS .tre file standards.</p>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -165,15 +196,18 @@ inventory present in the mdb file, but formatted to FVS .tre file standards.</p>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="fuels_Fvsfuels.html" class="btn btn-neutral float-right" title="Fvsfuels" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="fuels_Fvsfuels.html" class="btn btn-neutral float-right" title="Fvsfuels" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="api_ref.html" class="btn btn-neutral" title="STANDFIRE API Reference" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="api_ref.html" class="btn btn-neutral" title="STANDFIRE API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -182,7 +216,7 @@ inventory present in the mdb file, but formatted to FVS .tre file standards.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, STANDFIRE.
+        &copy; Copyright 2017, STANDFIRE.
 
     </p>
   </div>
@@ -207,13 +241,14 @@ inventory present in the mdb file, but formatted to FVS .tre file standards.</p>
             VERSION:'1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
