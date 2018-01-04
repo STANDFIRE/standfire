@@ -30,7 +30,7 @@ sys.path.insert(0, os.path.abspath('../apps/STANDFIRE_v1.1'))
 ### Jan 2018 addition ###
 # RTD can't import modules that depend on C libraries. In STANDFIRE's case
 # this is causing a problem when lidar.py tries to import anything from osgeo
-# (e.g. org or gdal). Therefore we need to mock out these imports with the
+# (e.g. ogr or gdal). Therefore we need to mock out these imports with the
 # following code (MagicMock imported above)
 
 class Mock(MagicMock):
@@ -41,7 +41,7 @@ class Mock(MagicMock):
 # more modules can be added below. Side note: pandas and numpy depend on C
 # libraries but they don't seem to have problems. I believe that this is becuse
 # they are imported in their entireties and their submodules are not imported
-# from them (e.g. 'import pandas' and not 'from pandas import# xyz'). Therefore
+# from them (e.g. 'import pandas' and not 'from pandas import xyz'). Therefore
 # RTD can handle them.
 MOCK_MODULES = ['osgeo']
 # mock osgeo submodules

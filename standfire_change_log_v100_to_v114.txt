@@ -1,4 +1,4 @@
-July, 2017 changelog for standfire version 1.1.0a (from version 1.0.0a)
+JULY, 2017 changelog for standfire version 1.1.0a (from version 1.0.0a)
 
 SCRIPTS
 
@@ -193,7 +193,9 @@ Added a new version of capsis, compiled by Russ on July 28th, to /source/standfi
 
 
 
-August, 2017 changelog for standfire version 1.1.1a (from version 1.1.0a)
+
+
+AUGUST, 2017 changelog for standfire version 1.1.1a (from version 1.1.0a)
 
 SCRIPTS
 
@@ -250,8 +252,10 @@ PROGRAMS
 	(see above).
 	
 	
+	
+	
 
-	September 14, 2017 changelog for standfire version 1.1.2a (from version 1.1.1a)
+SEPTEMBER 14, 2017 changelog for standfire version 1.1.2a (from version 1.1.1a)
 
 
 DIRECTORIES
@@ -386,8 +390,10 @@ FILES
 	directory structure changes) and all changelogs.
 
 
+	
+	
 
-October 31, 2017 changelog for standfire version 1.1.3a (from version 1.1.2a)
+OCTOBER 31, 2017 changelog for standfire version 1.1.3a (from version 1.1.2a)
 
 
 FUNCTIONALITY
@@ -605,8 +611,10 @@ FILES
 	run CAPSIS)
 
 
+
+
 	
-December 20, 2017 changelog for standfire version 1.1.4a (from version 1.1.3a)
+DECEMBER 20, 2017 changelog for standfire version 1.1.4a (from version 1.1.3a)
 
 
 FUNCTIONALITY
@@ -786,3 +794,17 @@ changes implemented since version 1.1.0. Therefore, the entire /docs/_build
 directory was replaced. To access the documentation open the index.html file
 found in /docs/_build/
 
+
+JANUARY 4, 2018 Changes:
+
+Updated the Sphinx congiguration script (conf.py) to fix a problem with the 
+generation of help documents on the Read The Docs (RTD) website.
+
+RTD can't import modules that depend on C libraries. In STANDFIRE's case
+this was causing a problem when lidar.py tries to import anything from osgeo
+(e.g. ogr or gdal). Therefore we needed to 'mock out' these imports.
+
+-Added a class to conf.py (Mock) that mocks up osgeo submodules.
+-Rebuilt documentation with Sphinx (..docs/_build directory).
+-Rebuilt documentation on the RTD website:
+	http://standfire.readthedocs.io/en/latest/index.html
